@@ -1,0 +1,14 @@
+{
+  "name": "<%= appname %>",
+  "version": "0.0.0",
+  "dependencies": {
+    "modernizr": "2.6.2",
+    "angular": "1.2.x",
+    "angular-route": "1.2.x",
+    "bootstrap-sass-official": "3.1.1"
+  },
+  "devDependencies": {},
+  "resolutions": {
+    "angular": "1.2.x"
+  }
+}
