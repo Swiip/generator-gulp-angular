@@ -1,6 +1,4 @@
-# generator-gulp-angular [![Build Status](https://secure.travis-ci.org/Swiip/generator-gulp-angular.png?branch=master)](https://travis-ci.org/Swiip/generator-gulp-angular)
-
-> [Yeoman](http://yeoman.io) generator
+# generator-gulp-angular
 
 Offers you a Yeoman generator to initiate a Web application with the following workflow:
 
@@ -12,49 +10,32 @@ Offers you a Yeoman generator to initiate a Web application with the following w
 
 <img height="100" align="left" src="https://raw.github.com/gulpjs/artwork/master/gulp.png">
 
+<br  style="clear:both;">
+
 ## Why generator-gulp-angular ?
 
 This generator aims to takes the best from others generators like generator-angular, ngTailor and generator-gulp-webapp to offers the best workflow to start an application with AngularJS powered by Gulp!
 
 generator-gulp-angular scaffolds out an Angularjs application with a full featured gulpfile.js wich offers all the tasks for a modern Web development.
 
-## Getting Started
+## Usage
 
-### What is Yeoman?
-
-Trick question. It's not a thing. It's this guy:
-
-![](http://i.imgur.com/JHaAlBJ.png)
-
-Basically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.
-
-Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
-
+**TODO** Install `generator-gulp-angular`:
 ```
-$ npm install -g yo
+npm install -g generator-angular
 ```
 
-### Yeoman Generators
-
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
-
-To install generator-gulp-angular from npm, run:
-
+Make a new directory, and `cd` into it:
 ```
-$ npm install -g generator-gulp-angular
+mkdir my-new-project && cd $_
 ```
 
-Finally, initiate the generator:
-
+Run `yo gulp-angular`, optionally passing an app name:
 ```
-$ yo gulp-angular
+yo gulp-angular [app-name]
 ```
 
-### Getting To Know Yeoman
-
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
-
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
+Run `gulp` for building and `gulp serve` for preview
 
 ## Directory structure
 
