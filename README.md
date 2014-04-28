@@ -10,7 +10,7 @@ Offers you a Yeoman generator to initiate a Web application with the following w
 
 <img height="100" align="left" src="https://raw.github.com/gulpjs/artwork/master/gulp.png">
 
-<br  style="clear:both;">
+<br><br><br><br>
 
 ## Why generator-gulp-angular ?
 
