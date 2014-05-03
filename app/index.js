@@ -44,47 +44,17 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
   },
 
   app: function () {
-    var directories = [
-      'app',
-      'app/images',
-      'app/partials',
-      'app/scripts',
-      'app/scripts/main',
-      'app/styles'
-    ]
+    var files = require('./files')
 
-    var copyFiles = [
-      'app/favicon.ico',
-      'app/404.html',
-      'app/images/yeoman.png',
-      'app/partials/main.html',
-      'app/styles/main.scss'
-    ];
-
-    var templateFiles = [
-      'package.json',
-      'bower.json',
-      'gulpfile.js',
-      'app/index.html',
-      'app/scripts/main/main-ctrl.js'
-    ];
-
-    var configFiles = [
-      'gitignore',
-      'editorconfig',
-      'jshintrc',
-      'bowerrc'
-    ];
-
-    directories.forEach(function(directory) {
+    files.directories.forEach(function(directory) {
       this.mkdir(directory);
     }.bind(this));
 
-    copyFiles.forEach(function(file) {
+    files.copies.forEach(function(file) {
       this.copy(file, file);
     }.bind(this));
 
-    templateFiles.forEach(function(file) {
+    files.templates.forEach(function(file) {
       var basename = path.basename(file);
       var source = file.replace(basename, '_' + basename);
       this.template(source, file);
@@ -92,7 +62,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
 
     this.template('app/scripts/_appname.js', 'app/scripts/' + this.appname + '.js')
 
-    configFiles.forEach(function(file) {
+    files.dots.forEach(function(file) {
       this.copy(file, '.' + file);
     }.bind(this));
   }

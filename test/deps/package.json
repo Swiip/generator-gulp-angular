@@ -1,5 +1,5 @@
 {
-  "name": "<%= appname %>",
+  "name": "temp",
   "version": "0.0.0",
   "dependencies": {},
   "devDependencies": {
@@ -27,7 +27,7 @@
     "jshint-stylish": "^0.1.5",
     "opn": "^0.1.1",
     "wiredep": "^1.4.3",
-    "gulp-karma": "0.0.4",
+    "gulp-karma": "^0.0.4",
     "karma-jasmine": "^0.1.5",
     "karma-phantomjs-launcher": "^0.1.4"
   },

@@ -1,0 +1,37 @@
+{
+  "directories": [
+    "app",
+    "app/images",
+    "app/partials",
+    "app/scripts",
+    "app/scripts/main",
+    "app/styles",
+    "test",
+    "test/conf",
+    "test/unit",
+    "test/e2e",
+    "test/scripts"
+  ],
+  "copies": [
+    "app/favicon.ico",
+    "app/404.html",
+    "app/images/yeoman.png",
+    "app/partials/main.html",
+    "app/styles/main.scss",
+    "test/conf/karma.conf.js"
+  ],
+  "templates": [
+    "package.json",
+    "bower.json",
+    "gulpfile.js",
+    "app/index.html",
+    "app/scripts/main/main-ctrl.js",
+    "test/unit/main.js"
+  ],
+  "dots": [
+    "gitignore",
+    "editorconfig",
+    "jshintrc",
+    "bowerrc"
+  ]
+}

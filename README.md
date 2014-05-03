@@ -47,7 +47,7 @@ But I think keeping first division by file type: scripts, styles, partials.
 * useref
 * ngMin
 * uglify
-* cssmin
+* csso
 * rev
 * watch
 * connect
