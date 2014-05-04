@@ -20,9 +20,9 @@ generator-gulp-angular scaffolds out an Angularjs application with a full featur
 
 ## Usage
 
-**TODO** Install `generator-gulp-angular`:
+Install `generator-gulp-angular`:
 ```
-npm install -g generator-angular
+npm install -g generator-gulp-angular
 ```
 
 Make a new directory, and `cd` into it:
@@ -75,6 +75,18 @@ But I think keeping first division by file type: scripts, styles, partials.
 
 * Initial commit
 * Scaffolds a working directory but with no options
+
+## TODO, target 0.1.0
+
+* Split gulpfile in pieces
+* Be able to serve dev files but also dist (serve & protractor)
+* Setup protractor
+  * **DONE** Write valid protractor test
+  * **DONE** Make connect stop after protractor test has finished
+  * Use phantom with protractor
+* **DONE** Move test conf from `test/conf` to `test`
+* **DONE** Delete uncomited files from `test/scripts` (everything must be usable though gulp)
+* Find a way to automaticaly resolve `test/deps`
 
 ## License
 

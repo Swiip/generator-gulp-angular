@@ -18,7 +18,9 @@
     "app/images/yeoman.png",
     "app/partials/main.html",
     "app/styles/main.scss",
-    "test/conf/karma.conf.js"
+    "test/karma.conf.js",
+    "test/protractor.conf.js",
+    "test/e2e/main.js"
   ],
   "templates": [
     "package.json",

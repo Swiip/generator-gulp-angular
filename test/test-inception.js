@@ -81,4 +81,10 @@ describe('gulp-angular generator', function () {
 
     return this.run({}, 100000, ['test']).should.be.fulfilled.notify(done);
   });
+
+  it('should pass gulp protractor task', function (done) {
+    this.app.options['skip-install'] = true;
+
+    return this.run({}, 100000, ['protractor']).should.be.fulfilled.notify(done);
+  });
 });

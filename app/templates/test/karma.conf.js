@@ -1,7 +1,7 @@
 module.exports = function(config){
 
   config.set({
-    basePath : '../..', //!\\ Ignored through gulp-karma //!\\
+    basePath : '..', //!\\ Ignored through gulp-karma //!\\
 
     files : [ //!\\ Ignored through gulp-karma //!\\
         'app/bower_components/angular/angular.js',

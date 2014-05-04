@@ -29,7 +29,9 @@
     "wiredep": "^1.4.3",
     "gulp-karma": "0.0.4",
     "karma-jasmine": "^0.1.5",
-    "karma-phantomjs-launcher": "^0.1.4"
+    "karma-phantomjs-launcher": "^0.1.4",
+    "gulp-protractor": "0.0.7",
+    "protractor": "~0.22.0"
   },
   "engines": {
     "node": ">=0.10.0"

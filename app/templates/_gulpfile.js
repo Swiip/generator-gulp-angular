@@ -5,6 +5,8 @@ var gulp = require('gulp');
 // load plugins
 var $ = require('gulp-load-plugins')();
 
+var server;
+
 gulp.task('styles', function () {
     return gulp.src('app/styles/main.scss')
         .pipe($.rubySass({ style: 'expanded' }))
@@ -78,7 +80,7 @@ gulp.task('connect', function () {
         .use(connect.static('.tmp'))
         .use(connect.directory('app'));
 
-    require('http').createServer(app)
+    server = require('http').createServer(app)
         .listen(9000)
         .on('listening', function () {
             console.log('Started connect web server on http://localhost:9000');
@@ -138,11 +140,42 @@ gulp.task('test', function() {
 
   return gulp.src(testFiles)
     .pipe($.karma({
-      configFile: 'test/conf/karma.conf.js',
+      configFile: 'test/karma.conf.js',
       action: 'run'
     }))
     .on('error', function(err) {
       // Make sure failed tests cause gulp to exit non-zero
       throw err;
+    });
+});
+
+// Downloads the selenium webdriver
+gulp.task('webdriver-update', $.protractor.webdriver_update);
+
+gulp.task('webdriver-standalone', $.protractor.webdriver_standalone);
+
+gulp.task('e2e-server', ['build'], function(done) {
+	var app = express();
+	app.use(express.static(__dirname + '/dist/'));
+	server = app.listen(9001, done);
+});
+
+gulp.task('protractor', ['webdriver-update', 'connect'], function(done) {
+  var testFiles = [
+    'test/e2e/**/*.js'
+  ]
+
+  gulp.src(testFiles)
+    .pipe($.protractor.protractor({
+      configFile: 'test/protractor.conf.js',
+    }))
+    .on('error', function(err) {
+      // Make sure failed tests cause gulp to exit non-zero
+      throw err;
+    })
+    .on('end', function() {
+      // Close connect server to and gulp connect task
+      server.close();
+      done();
     });
 });
