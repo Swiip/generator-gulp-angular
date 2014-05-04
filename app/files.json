@@ -1,5 +1,6 @@
 {
   "directories": [
+    "gulp",
     "app",
     "app/images",
     "app/partials",
@@ -13,6 +14,12 @@
     "test/scripts"
   ],
   "copies": [
+    "gulp/build.js",
+    "gulp/e2e-tests.js",
+    "gulp/server.js",
+    "gulp/unit-tests.js",
+    "gulp/watch.js",
+    "gulp/wiredep.js",
     "app/favicon.ico",
     "app/404.html",
     "app/images/yeoman.png",

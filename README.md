@@ -78,7 +78,8 @@ But I think keeping first division by file type: scripts, styles, partials.
 
 ## TODO, target 0.1.0
 
-* Split gulpfile in pieces
+* **DONE** Split gulpfile in pieces
+  * **DONE** Document each ones
 * Be able to serve dev files but also dist (serve & protractor)
 * Setup protractor
   * **DONE** Write valid protractor test
@@ -87,6 +88,8 @@ But I think keeping first division by file type: scripts, styles, partials.
 * **DONE** Move test conf from `test/conf` to `test`
 * **DONE** Delete uncomited files from `test/scripts` (everything must be usable though gulp)
 * Find a way to automaticaly resolve `test/deps`
+* Add principal goals in documentation
+* Remember to test the whole process, not only the unit tests
 
 ## License
 

@@ -31,7 +31,8 @@
     "karma-jasmine": "^0.1.5",
     "karma-phantomjs-launcher": "^0.1.4",
     "gulp-protractor": "0.0.7",
-    "protractor": "~0.22.0"
+    "protractor": "~0.22.0",
+    "require-dir": "~0.1.0"
   },
   "engines": {
     "node": ">=0.10.0"
