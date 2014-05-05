@@ -9,7 +9,7 @@ gulp.task('webdriver-update', $.protractor.webdriver_update);
 
 gulp.task('webdriver-standalone', $.protractor.webdriver_standalone);
 
-gulp.task('protractor', ['webdriver-update', 'connect'], function(done) {
+gulp.task('protractor-only', ['webdriver-update'], function(done) {
   var testFiles = [
     'test/e2e/**/*.js'
   ]
@@ -28,3 +28,7 @@ gulp.task('protractor', ['webdriver-update', 'connect'], function(done) {
       done();
     });
 });
+
+gulp.task('protractor', ['connect:src', 'protractor-only']);
+gulp.task('protractor:src', ['connect:src', 'protractor-only']);
+gulp.task('protractor:dist', ['connect:dist', 'protractor-only']);

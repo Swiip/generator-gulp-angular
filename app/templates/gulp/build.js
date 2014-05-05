@@ -40,6 +40,12 @@ gulp.task('html', ['styles', 'scripts'], function () {
         .pipe($.size());
 });
 
+gulp.task('partials', function () {
+  return gulp.src('app/partials/**/*.html')
+      .pipe(gulp.dest('dist/partials'))
+      .pipe($.size());
+});
+
 gulp.task('images', function () {
     return gulp.src('app/images/**/*')
         .pipe($.cache($.imagemin({
@@ -63,4 +69,4 @@ gulp.task('clean', function () {
     return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
 });
 
-gulp.task('build', ['html', 'images', 'fonts']);
+gulp.task('build', ['html', 'partials', 'images', 'fonts']);
