@@ -99,7 +99,7 @@ But I think keeping first division by file type: scripts, styles, partials.
 * **DONE** Move test conf from `test/conf` to `test`
 * **DONE** Delete uncomited files from `test/scripts` (everything must be usable though gulp)
 * **DONE** Find a way to automaticaly resolve `test/deps`
-* Find a better way to redirect gulp logs (spawn stdout)
+* **DONE** Find a better way to redirect gulp logs (spawn stdout)
 * **DONE** Add principal goals in documentation
 * Remember to test the whole process, not only the unit tests
 

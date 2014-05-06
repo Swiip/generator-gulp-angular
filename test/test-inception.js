@@ -26,17 +26,10 @@ describe('gulp-angular generator', function () {
         var promiseLinkNode = Q.nfcall(fs.symlink, path.join(depsDir, 'node_modules'), path.join(tempDir, 'node_modules'));
         var promiseLinkBower = Q.nfcall(fs.symlink, path.join(depsDir, 'bower_components'), path.join(tempDir, 'app/bower_components'));
         Q.all([promiseLinkNode, promiseLinkBower]).then(function() {
-          var process = spawn('gulp', tasks);
-
-          process.stdout.on('data', function(data) {
-            console.log(data.toString());
-          });
-
-          process.stderr.on('data', function(data) {
-            console.log(data.toString().red);
-          });
-
-          process.on('exit', function(returnCode) {
+          var gulpProcess = spawn('gulp', tasks);
+          gulpProcess.stdout.pipe(process.stdout);
+          gulpProcess.stderr.pipe(process.stderr);
+          gulpProcess.on('exit', function(returnCode) {
             if(returnCode == 0) {
               deferred.resolve();
             } else {
