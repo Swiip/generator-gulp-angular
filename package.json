@@ -14,7 +14,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "pretest": "cd test/deps && npm install && node ../../node_modules/bower/bin/bower install",
+    "pretest": "cd test/deps && npm install && bower install",
     "test": "mocha -g protractor -i"
   },
   "files": [

@@ -4,4 +4,6 @@ node_js:
 before_install:
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'generator-gulp-angular' ]; then cd .. && eval "mv $currentfolder generator-gulp-angular" && cd generator-gulp-angular; fi
-
+  - gem install sass
+  - gem install compass
+  - npm install -g bower
