@@ -101,7 +101,7 @@ But I think keeping first division by file type: scripts, styles, partials.
 * watch in front of serve or the oposit?
 * Find a way to automaticaly resolve `test/deps`
 * Find a better way to redirect gulp logs (spawn stdout)
-* Add principal goals in documentation
+* **DONE** Add principal goals in documentation
 * Remember to test the whole process, not only the unit tests
 
 ## License
