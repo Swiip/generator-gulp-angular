@@ -82,26 +82,18 @@ But I think keeping first division by file type: scripts, styles, partials.
 
 ## Changelog
 
+### 0.1.0
+
+* Add unit test with karma and e2e test with protractor
+* Split gulp configuration in multiple files
+* Create 'inception' test which generate files and try gulp tasks on it
+* Add ability to serve dist files and run e2e test on dist files
+* Still no options
+
 ### 0.0.1
 
 * Initial commit
 * Scaffolds a working directory but with no options and no tests
-
-## TODO, target 0.1.0
-
-* **DONE** Split gulpfile in pieces
-  * **DONE** Document each ones
-* **DONE** Be able to serve dev files but also dist (serve & protractor)
-* **DONE** Setup protractor
-  * **DONE** Write valid protractor test
-  * **DONE** Make connect stop after protractor test has finished
-  * **DONE** Use phantom with protractor
-* **DONE** Move test conf from `test/conf` to `test`
-* **DONE** Delete uncomited files from `test/scripts` (everything must be usable though gulp)
-* **DONE** Find a way to automaticaly resolve `test/deps`
-* **DONE** Find a better way to redirect gulp logs (spawn stdout)
-* **DONE** Add principal goals in documentation
-* Remember to test the whole process, not only the unit tests
 
 ## License
 
