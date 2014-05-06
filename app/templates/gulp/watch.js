@@ -4,7 +4,7 @@ var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('watch', ['connect', 'serve'], function () {
+gulp.task('watch', ['serve'], function () {
     var server = $.livereload();
 
     // watch for changes

@@ -40,7 +40,7 @@ yo gulp-angular [app-name]
 ### Use Gulp tasks
 
 * `gulp` or `gulp build` to build an optimized version of your application in `/dist`
-* `gulp serve` to launch a server with livereload capacities on your source files
+* `gulp watch` to launch a server with livereload capacities on your source files
 * `gulp serve:dist` to launch a server on your optimized application
 * `gulp wiredep` to fill bower dependencies in your `.html` file(s)
 * `gulp test` to launch your unit tests with Karma
@@ -98,7 +98,6 @@ But I think keeping first division by file type: scripts, styles, partials.
   * **DONE** Use phantom with protractor
 * **DONE** Move test conf from `test/conf` to `test`
 * **DONE** Delete uncomited files from `test/scripts` (everything must be usable though gulp)
-* watch in front of serve or the oposit?
 * **DONE** Find a way to automaticaly resolve `test/deps`
 * Find a better way to redirect gulp logs (spawn stdout)
 * **DONE** Add principal goals in documentation
