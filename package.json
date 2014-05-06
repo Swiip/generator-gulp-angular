@@ -15,7 +15,7 @@
   },
   "scripts": {
     "pretest": "cd test/deps && npm install && node ../../node_modules/bower/bin/bower install",
-    "test": "mocha"
+    "test": "mocha -g protractor -i"
   },
   "files": [
     "app"

@@ -1,4 +1,4 @@
-# generator-gulp-angular
+# generator-gulp-angular [![Build Status](https://secure.travis-ci.org/Swiip/generator-gulp-angular.svg?branch=master)](http://travis-ci.org/Swiip/generator-gulp-angular)
 
 Offers you a Yeoman generator to initiate a Web application with the following workflow:
 
