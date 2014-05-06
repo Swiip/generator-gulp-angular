@@ -82,6 +82,10 @@ But I think keeping first division by file type: scripts, styles, partials.
 
 ## Changelog
 
+### 0.1.1
+
+* Adding Travis CI
+
 ### 0.1.0
 
 * Add unit test with karma and e2e test with protractor
