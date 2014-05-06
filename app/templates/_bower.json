@@ -7,7 +7,9 @@
     "angular-route": "1.2.x",
     "bootstrap-sass-official": "3.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "angular-mocks": "1.2.x"
+  },
   "resolutions": {
     "angular": "1.2.x"
   }
