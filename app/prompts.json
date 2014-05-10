@@ -1,0 +1,78 @@
+{
+  "mode": {
+    "type": "list",
+    "name": "mode",
+    "message": "You can choose between 2 majors modes:",
+    "choices": [
+      {
+        "name": "Fast mode: Generate a standard project with default options",
+        "value": "fast"
+      },
+      {
+        "name": "Advanced mode: Ask you for all choices to make while creating your project",
+        "value": "advanced"
+      }
+    ]
+  },
+  "advanced": [
+    {
+      "type": "checkbox",
+      "name": "angularModules",
+      "message": "Which Angular's modules would you want to have? (ngRoute and ngResource will be addressed after)",
+      "choices": [
+        {
+          "value": "ngAnimate",
+          "name": "angular-animate.js (enable animation features)",
+          "checked": true
+        },
+        {
+          "value": "ngCookies",
+          "name": "angular-cookies.js (handle cookie management)",
+          "checked": true
+        },
+        {
+          "value": "ngTouch",
+          "name": "angular-touch.js (for mobile development)",
+          "checked": true
+        },
+        {
+          "value": "ngSanitize",
+          "name": "angular-sanitize.js (to securely parse and manipulate HTML)",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "name": "jQuery",
+      "message": "Would you need jQuery or perhaps Zepto?",
+      "choices": [
+        {
+          "value": {
+            "name": "jquery",
+            "version": "1.9.x"
+          },
+          "name": "jQuery 1.9.x (last version supporting IE6, 7 and 8)"
+        },
+        {
+          "value": {
+            "name": "jquery",
+            "version": "2.0.x"
+          },
+          "name": "jQuery 2.0.x (new version, lighter, IE9+)"
+        },
+        {
+          "value": {
+            "name": "zeptojs",
+            "version": "1.1.x"
+          },
+          "name": "ZeptoJS (jQuery compatible but very much lighter)"
+        },
+        {
+          "value": null,
+          "name": "None (Angular will work on it's own jqLite)"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "mode": "fast"
+  },
+  {
+    "mode": "advanced",
+    "angularModules": ["ngAnimate"],
+    "jQuery": {
+      "name": "jquery",
+      "version": "2.0.x"
+    }
+  }
+]

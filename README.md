@@ -62,7 +62,7 @@ But I think keeping first division by file type: scripts, styles, partials.
 * watch
 * connect
 * jshint
-* **TODO** image optimization
+* image optimization
 * **TODO** lazy
 * **TODO** browser sync
 * Unit test
@@ -70,8 +70,10 @@ But I think keeping first division by file type: scripts, styles, partials.
 * **TODO** partials bundeling in js
 
 ## Questions the generator will asks
-* **TODO** jQuery: jQuery, Zepto, none
-* **TODO** Angular modules: resources, animate...
+* jQuery: jQuery, Zepto, none
+* Angular modules: animate...
+* **TODO** Resource handler: ngResource, Restangular, none.
+* **TODO** Router: ngRoute, UI Router, none.
 * **TODO** Angular UI modules: Bootstrap, Router, Utils...
 * **TODO** CSS Framework: Bootstrap with CSS, sass or less.
 * **TODO** CSS preprocessor: less, sass, none

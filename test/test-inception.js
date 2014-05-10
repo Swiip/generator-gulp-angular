@@ -7,11 +7,14 @@ var assert = require('assert');
 var fs = require('fs');
 var Q = require('q');
 var colors = require('colors');
+var async = require('async');
 
-var chai = require("chai");
-var chaiAsPromised = require("chai-as-promised");
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 chai.should();
+
+var mockPrompts = require('./mock-prompts')
 
 describe('gulp-angular generator', function () {
   var tempDir = path.join(__dirname, 'temp');
@@ -26,9 +29,7 @@ describe('gulp-angular generator', function () {
         var promiseLinkNode = Q.nfcall(fs.symlink, path.join(depsDir, 'node_modules'), path.join(tempDir, 'node_modules'));
         var promiseLinkBower = Q.nfcall(fs.symlink, path.join(depsDir, 'bower_components'), path.join(tempDir, 'app/bower_components'));
         Q.all([promiseLinkNode, promiseLinkBower]).then(function() {
-          var gulpProcess = spawn('gulp', tasks);
-          gulpProcess.stdout.pipe(process.stdout);
-          gulpProcess.stderr.pipe(process.stderr);
+          var gulpProcess = spawn('gulp', tasks, {stdio: 'inherit'});
           gulpProcess.on('exit', function(returnCode) {
             if(returnCode == 0) {
               deferred.resolve();
@@ -58,26 +59,35 @@ describe('gulp-angular generator', function () {
   });
 
   it('should pass gulp build task', function (done) {
-    /*helpers.mockPrompt(this.app, {
-      'someOption': true
-    });*/
     this.app.options['skip-install'] = true;
 
-    this.run({}, 100000, ['build']).should.be.fulfilled.notify(done);
+    async.eachSeries(mockPrompts, function(mockPrompt, callback) {
+      helpers.mockPrompt(this.app, mockPrompt);
+      helpers.testDirectory(tempDir, function (err) {
+        this.run({}, 100000, ['build']).should.be.fulfilled.notify(callback);
+      }.bind(this));
+    }.bind(this), done);
   });
 
   it('should pass gulp test task', function (done) {
-    /*helpers.mockPrompt(this.app, {
-      'someOption': true
-    });*/
     this.app.options['skip-install'] = true;
 
-    return this.run({}, 100000, ['test']).should.be.fulfilled.notify(done);
+    async.eachSeries(mockPrompts, function(mockPrompt, callback) {
+      helpers.mockPrompt(this.app, mockPrompt);
+      helpers.testDirectory(tempDir, function (err) {
+        this.run({}, 100000, ['test']).should.be.fulfilled.notify(callback);
+      }.bind(this));
+    }.bind(this), done);
   });
 
   it('should pass gulp protractor task', function (done) {
     this.app.options['skip-install'] = true;
 
-    return this.run({}, 100000, ['protractor']).should.be.fulfilled.notify(done);
+    async.eachSeries(mockPrompts, function(mockPrompt, callback) {
+      helpers.mockPrompt(this.app, mockPrompt);
+      helpers.testDirectory(tempDir, function (err) {
+        this.run({}, 100000, ['protractor']).should.be.fulfilled.notify(callback);
+      }.bind(this));
+    }.bind(this), done);
   });
 });

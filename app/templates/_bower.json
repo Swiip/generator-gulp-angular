@@ -3,14 +3,15 @@
   "version": "0.0.0",
   "dependencies": {
     "modernizr": "2.6.2",
-    "angular": "1.2.x",
-    "angular-route": "1.2.x",
+    "angular": "<%= angularVersion %>",
+    <%= bowerDependencies %>
+    "angular-route": "<%= angularVersion %>",
     "bootstrap-sass-official": "3.1.1"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.x"
+    "angular-mocks": "<%= angularVersion %>"
   },
   "resolutions": {
-    "angular": "1.2.x"
+    "angular": "<%= angularVersion %>"
   }
 }

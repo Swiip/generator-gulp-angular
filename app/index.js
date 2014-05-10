@@ -4,6 +4,9 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
+var yosay = require('yosay');
+
+var prompts = require('./prompts');
 
 var GulpAngularGenerator = yeoman.generators.Base.extend({
   init: function () {
@@ -13,38 +16,79 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     this.appname = this.appname || path.basename(process.cwd());
     this.appname = this._.camelize(this._.slugify(this._.humanize(this.appname)));
 
-    this.on('end', function () {
-      if (!this.options['skip-install']) {
-        this.installDependencies();
-      }
-    });
+    this.angularVersion = '1.2.x';
   },
 
-  askFor: function () {
-    //var done = this.async();
+  askForMode: function() {
+    var done = this.async();
 
     // have Yeoman greet the user
-    this.log(this.yeoman);
+    //this.log(this.yeoman);
 
-    // replace it with a short and sweet description of your generator
-    this.log(chalk.magenta('You\'re using the fantastic GulpAngular generator.'));
+    this.log(yosay('Welcome! You\'re using the fantastic generator for scaffolding an application with Angular and Gulp!'));
 
-    /*var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
-
-    this.prompt(prompts, function (props) {
-      this.someOption = props.someOption;
-
+    this.prompt([prompts.mode], function (props) {
+		  this.mode = props.mode;
       done();
-    }.bind(this));*/
+    }.bind(this));
+  },
+
+  advancedMode: function() {
+    if(this.mode === 'advanced') {
+      var done = this.async();
+
+      this.prompt(prompts.advanced, function (props) {
+        this.props = props;
+        done();
+      }.bind(this));
+    } else {
+      this.props = {
+        angularModules: [],
+        jQuery: 'jqLite'
+      }
+    }
+  },
+
+  compileProps: function() {
+    console.log('before compile', this.props)
+
+    this.model = {};
+
+    var angularModules = this._.chain(this.props.angularModules)
+      .map(this._.dasherize)
+      .map(function(module) {
+        return module.replace('ng', 'angular');
+      })
+      .map(function(module) {
+        return { name: module, version: this.angularVersion };
+      }.bind(this))
+      .value();
+
+    this.model.bowerDependencies = this._.flatten([this.props.jQuery, angularModules]);
+
+    this.model.modulesDependencies = this._.flatten(['ngRoute', this.props.angularModules]);
+
+    console.log('after compile', this.model);
+  },
+
+  formatData: function() {
+    this.bowerDependencies = this._.chain(this.model.bowerDependencies)
+      .filter(this._.isObject)
+      .map(function(dependency) {
+        return '"' + dependency.name + '" : "' + dependency.version + '",'
+      })
+      .value().join('\n    ');
+
+    this.modulesDependencies = this._.chain(this.model.modulesDependencies)
+      .filter(this._.isString)
+      .map(function(dependency) {
+        return "'" + dependency + "'"
+      })
+      .value().join(', ');
   },
 
   app: function () {
-    var files = require('./files')
+    var files = require('./files');
 
     files.directories.forEach(function(directory) {
       this.mkdir(directory);
@@ -65,6 +109,22 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     files.dots.forEach(function(file) {
       this.copy(file, '.' + file);
     }.bind(this));
+  },
+
+  installs: function() {
+    if (!this.options['skip-install']) {
+      var done = this.async();
+      this.installDependencies({ callback: done });
+    }
+  },
+
+  wiredep: function() {
+    //If installation is skipped, Gulp cannot be used
+    if (!this.options['skip-install']) {
+      var done = this.async();
+      var spawned = this.spawnCommand('gulp', ['wiredep']);
+      spawned.on('exit', done);
+    }
   }
 });
 

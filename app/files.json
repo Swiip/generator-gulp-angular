@@ -8,10 +8,8 @@
     "app/scripts/main",
     "app/styles",
     "test",
-    "test/conf",
     "test/unit",
-    "test/e2e",
-    "test/scripts"
+    "test/e2e"
   ],
   "copies": [
     "gulp/build.js",

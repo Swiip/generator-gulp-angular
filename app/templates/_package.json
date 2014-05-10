@@ -13,7 +13,7 @@
     "gulp-csso": "^0.2.6",
     "gulp-filter": "^0.4.1",
     "gulp-flatten": "^0.0.2",
-    "gulp-imagemin": "^0.2.0",
+    "gulp-imagemin": "^0.5.0",
     "gulp-jshint": "^1.5.3",
     "gulp-livereload": "^1.2.0",
     "gulp-load-plugins": "^0.5.0",
