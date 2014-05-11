@@ -63,23 +63,23 @@ But I think keeping first division by file type: scripts, styles, partials.
 * connect
 * jshint
 * image optimization
+* Unit test (karma)
+* e2e test (Protratctor)
+* **TODO** *0.2* partials bundeling in js
 * **TODO** lazy
 * **TODO** browser sync
-* Unit test
-* e2e test
-* **TODO** partials bundeling in js
 
 ## Questions the generator will asks
-* jQuery: jQuery, Zepto, none
-* Angular modules: animate...
-* **TODO** Resource handler: ngResource, Restangular, none.
-* **TODO** Router: ngRoute, UI Router, none.
-* **TODO** Angular UI modules: Bootstrap, Router, Utils...
-* **TODO** CSS Framework: Bootstrap with CSS, sass or less.
+* *0.2* jQuery: jQuery, Zepto, none
+* *0.2* Angular modules: animate, cookies, touch, sanitize
+* **TODO** *0.2* Resource handler: ngResource, Restangular, none.
+* **TODO** *0.2* Router: ngRoute, UI Router, none.
+* **TODO** *0.2* Angular UI modules: Bootstrap, Router, Utils...
+* **TODO** *0.2* CSS Framework: Bootstrap, SemanticUI, Fondation, None. (Will be impacted by the CSS preprocessor chosen)
 * **TODO** CSS preprocessor: less, sass, none
 * **TODO** JS preprocessor: CoffeeScript, TypeScript, ECMAScript6 (Traceur)
 * **TODO** HTML preprocessor: Jade ?
-* **TODO** *Script loader: Require, Browserify, ES6 with Require ?*
+* **TODO** Script loader: Require, Browserify, ES6 with Require?, none
 * **TODO** Test framework: Jasmine, Mocha, Qunit
 
 ## Changelog
