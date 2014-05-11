@@ -50,7 +50,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
   },
 
   compileProps: function() {
-    console.log('before compile', this.props)
+    //console.log('before compile', this.props)
 
     this.model = {};
 
@@ -68,7 +68,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
 
     this.model.modulesDependencies = this._.flatten(['ngRoute', this.props.angularModules]);
 
-    console.log('after compile', this.model);
+    //console.log('after compile', this.model);
   },
 
   formatData: function() {
@@ -119,7 +119,8 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
   },
 
   wiredep: function() {
-    //If installation is skipped, Gulp cannot be used
+    //If installation is skipped, Gulp wiredep cannot be used
+    //wiredep needs deps to be actualy here to work
     if (!this.options['skip-install']) {
       var done = this.async();
       var spawned = this.spawnCommand('gulp', ['wiredep']);

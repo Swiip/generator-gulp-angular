@@ -4,6 +4,7 @@
   "dependencies": {
     "modernizr": "2.6.2",
     "jquery": "2.0.x",
+    "zeptojs": "1.1.x",
     "angular": "1.2.x",
     "angular-animate": "1.2.x",
     "angular-cookies": "1.2.x",

@@ -25,6 +25,7 @@ describe('gulp-angular generator', function () {
       var deferred = Q.defer();
 
       this.timeout(timeout);
+
       this.app.run(options, function () {
         var promiseLinkNode = Q.nfcall(fs.symlink, path.join(depsDir, 'node_modules'), path.join(tempDir, 'node_modules'));
         var promiseLinkBower = Q.nfcall(fs.symlink, path.join(depsDir, 'bower_components'), path.join(tempDir, 'app/bower_components'));
@@ -53,41 +54,38 @@ describe('gulp-angular generator', function () {
       }
 
       this.app = helpers.createGenerator('gulp-angular:app', [ '../../app' ]);
+      this.app.options['skip-install'] = true;
 
       done();
     }.bind(this));
   });
 
-  it('should pass gulp build task', function (done) {
-    this.app.options['skip-install'] = true;
+  // I don't realize combination of prompts and gulp tasks
+  // because it prevent me to split in different tests
+  // and have precise result or be able to run only one
 
-    async.eachSeries(mockPrompts, function(mockPrompt, callback) {
-      helpers.mockPrompt(this.app, mockPrompt);
-      helpers.testDirectory(tempDir, function (err) {
-        this.run({}, 100000, ['build']).should.be.fulfilled.notify(callback);
-      }.bind(this));
-    }.bind(this), done);
+  it('should pass gulp build task in fast mode', function (done) {
+    helpers.mockPrompt(this.app, mockPrompts.fast);
+    this.run({}, 100000, ['build']).should.be.fulfilled.notify(done);
   });
 
-  it('should pass gulp test task', function (done) {
-    this.app.options['skip-install'] = true;
-
-    async.eachSeries(mockPrompts, function(mockPrompt, callback) {
-      helpers.mockPrompt(this.app, mockPrompt);
-      helpers.testDirectory(tempDir, function (err) {
-        this.run({}, 100000, ['test']).should.be.fulfilled.notify(callback);
-      }.bind(this));
-    }.bind(this), done);
+  it('should pass gulp test task in fast mode', function (done) {
+    helpers.mockPrompt(this.app, mockPrompts.fast);
+    this.run({}, 100000, ['test']).should.be.fulfilled.notify(done);
   });
 
-  it('should pass gulp protractor task', function (done) {
-    this.app.options['skip-install'] = true;
+  it('should pass gulp test task in medium mode', function (done) {
+    helpers.mockPrompt(this.app, mockPrompts.medium);
+    this.run({}, 100000, ['test']).should.be.fulfilled.notify(done);
+  });
 
-    async.eachSeries(mockPrompts, function(mockPrompt, callback) {
-      helpers.mockPrompt(this.app, mockPrompt);
-      helpers.testDirectory(tempDir, function (err) {
-        this.run({}, 100000, ['protractor']).should.be.fulfilled.notify(callback);
-      }.bind(this));
-    }.bind(this), done);
+  it('should pass gulp test task in full mode', function (done) {
+    helpers.mockPrompt(this.app, mockPrompts.full);
+    this.run({}, 100000, ['test']).should.be.fulfilled.notify(done);
+  });
+
+  it('should pass gulp protractor task in fast mode', function (done) {
+    helpers.mockPrompt(this.app, mockPrompts.fast);
+    this.run({}, 100000, ['protractor']).should.be.fulfilled.notify(done);
   });
 });
