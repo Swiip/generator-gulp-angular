@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "dependencies": {
     "modernizr": "2.6.2",
+    "jquery": "2.0.x",
     "angular": "1.2.x",
+    "angular-animate": "1.2.x",
+    "angular-cookies": "1.2.x",
+    "angular-touch": "1.2.x",
+    "angular-sanitize": "1.2.x",
     "angular-route": "1.2.x",
     "bootstrap-sass-official": "3.1.1"
   },

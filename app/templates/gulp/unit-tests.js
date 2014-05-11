@@ -4,14 +4,19 @@ var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')();
 
+var wiredep = require('wiredep');
+
 gulp.task('test', function() {
-  var testFiles = [
-    'app/bower_components/angular/angular.js',
-    'app/bower_components/angular-route/angular-route.js',
-    'app/bower_components/angular-mocks/angular-mocks.js',
+  var bowerDeps = wiredep({
+    directory: 'app/bower_components',
+    dependencies: true,
+    devDependencies: true
+  });
+
+  var testFiles = bowerDeps.js.concat([
     'app/scripts/**/*.js',
     'test/unit/**/*.js'
-  ]
+  ]);
 
   return gulp.src(testFiles)
     .pipe($.karma({
