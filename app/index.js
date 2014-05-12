@@ -44,7 +44,8 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     } else {
       this.props = {
         angularModules: [],
-        jQuery: 'jqLite'
+        jQuery: { name: null, version: null },
+        resource: { name: null, version: null, module: null }
       }
     }
   },
@@ -54,19 +55,27 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
 
     this.model = {};
 
-    var angularModules = this._.chain(this.props.angularModules)
-      .map(this._.dasherize)
-      .map(function(module) {
-        return module.replace('ng', 'angular');
-      })
-      .map(function(module) {
-        return { name: module, version: this.angularVersion };
-      }.bind(this))
-      .value();
+    var angularModules = this.props.angularModules.map(function(module) {
+      return module.module;
+    })
 
-    this.model.bowerDependencies = this._.flatten([this.props.jQuery, angularModules]);
+    this.model.bowerDependencies = this._.flatten([
+      this.props.jQuery,
+      this.props.angularModules,
+      this.props.resource
+    ]);
 
-    this.model.modulesDependencies = this._.flatten(['ngRoute', this.props.angularModules]);
+    this.model.modulesDependencies = this._.flatten([
+      'ngRoute',
+      angularModules,
+      this.props.resource.module
+    ]);
+
+    this.model.bowerDependencies.forEach(function(dependency) {
+      if(!this._.isString(dependency.version)) {
+        dependency.version = this.angularVersion;
+      }
+    }.bind(this));
 
     //console.log('after compile', this.model);
   },
@@ -74,6 +83,9 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
   formatData: function() {
     this.bowerDependencies = this._.chain(this.model.bowerDependencies)
       .filter(this._.isObject)
+      .filter(function(dependency) {
+        return this._.isString(dependency.name) && this._.isString(dependency.version);
+      }.bind(this))
       .map(function(dependency) {
         return '"' + dependency.name + '" : "' + dependency.version + '",'
       })
