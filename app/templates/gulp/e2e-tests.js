@@ -9,7 +9,7 @@ gulp.task('webdriver-update', $.protractor.webdriver_update);
 
 gulp.task('webdriver-standalone', $.protractor.webdriver_standalone);
 
-gulp.task('protractor-only', ['webdriver-update'], function(done) {
+gulp.task('protractor-only', ['webdriver-update', 'wiredep'], function(done) {
   var testFiles = [
     'test/e2e/**/*.js'
   ]

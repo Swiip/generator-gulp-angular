@@ -73,9 +73,8 @@ But I think keeping first division by file type: scripts, styles, partials.
 * *0.2* jQuery: jQuery, Zepto, none
 * *0.2* Angular modules: animate, cookies, touch, sanitize
 * *0.2* Resource handler: ngResource, Restangular, none.
-* **TODO** *0.2* Router: ngRoute, UI Router, none.
-* **TODO** *0.2* Angular UI modules: Bootstrap, Router, Utils...
-* **TODO** *0.2* CSS Framework: Bootstrap, SemanticUI, Fondation, None. (Will be impacted by the CSS preprocessor chosen)
+* *0.2* Router: ngRoute, UI Router, none.
+* **TODO** CSS Framework: Bootstrap, SemanticUI, Fondation, None. (Will be impacted by the CSS preprocessor chosen)
 * **TODO** CSS preprocessor: less, sass, none
 * **TODO** JS preprocessor: CoffeeScript, TypeScript, ECMAScript6 (Traceur)
 * **TODO** HTML preprocessor: Jade ?

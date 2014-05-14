@@ -3,7 +3,6 @@
     "gulp",
     "app",
     "app/images",
-    "app/partials",
     "app/scripts",
     "app/scripts/main",
     "app/styles",
@@ -21,7 +20,6 @@
     "app/favicon.ico",
     "app/404.html",
     "app/images/yeoman.png",
-    "app/partials/main.html",
     "app/styles/main.scss",
     "test/karma.conf.js",
     "test/protractor.conf.js",
@@ -40,5 +38,13 @@
     "editorconfig",
     "jshintrc",
     "bowerrc"
-  ]
+  ],
+  "router": {
+    "directories": [
+      "app/partials"
+    ],
+    "copies": [
+      "app/partials/main.html"
+    ]
+  }
 }

@@ -118,6 +118,36 @@
           "name": "None, $http is enough!"
         }
       ]
+    },
+    {
+      "type": "list",
+      "name": "router",
+      "message": "Would you like to use a router ?",
+      "choices": [
+        {
+          "value": {
+            "name": "angular-route",
+            "module": "ngRoute"
+          },
+          "name": "ngRoute, the official router"
+        },
+        {
+          "value": {
+            "name": "angular-ui-router",
+            "version": "0.2.x",
+            "module": "ui.router"
+          },
+          "name": "UI Router, flexible routing with nested views"
+        },
+        {
+          "value": {
+            "name": null,
+            "version": null,
+            "module": null
+          },
+          "name": "None"
+        }
+      ]
     }
   ]
 }
