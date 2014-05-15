@@ -11,7 +11,6 @@
     "test/e2e"
   ],
   "copies": [
-    "gulp/build.js",
     "gulp/e2e-tests.js",
     "gulp/server.js",
     "gulp/unit-tests.js",
@@ -29,6 +28,7 @@
     "package.json",
     "bower.json",
     "gulpfile.js",
+    "gulp/build.js",
     "app/index.html",
     "app/scripts/main/main-ctrl.js",
     "test/unit/main.js"

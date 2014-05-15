@@ -65,7 +65,7 @@ But I think keeping first division by file type: scripts, styles, partials.
 * image optimization
 * Unit test (karma)
 * e2e test (Protratctor)
-* **TODO** *0.2* partials bundeling in js
+* *0.2* ng html2js
 * **TODO** lazy
 * **TODO** browser sync
 

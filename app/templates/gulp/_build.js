@@ -19,11 +19,32 @@ gulp.task('scripts', function () {
         .pipe($.size());
 });
 
-gulp.task('html', ['styles', 'scripts'], function () {
+gulp.task('partials', function () {
+  return gulp.src('app/partials/**/*.html')
+      .pipe($.minifyHtml({
+        empty: true,
+        spare: true,
+        quotes: true
+      }))
+      .pipe($.ngHtml2js({
+        moduleName: "<%= appname %>",
+        prefix: "partials/"
+      }))
+      .pipe(gulp.dest(".tmp/partials"))
+      .pipe($.size());
+});
+
+gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     var jsFilter = $.filter('**/*.js');
     var cssFilter = $.filter('**/*.css');
 
     return gulp.src('app/*.html')
+        .pipe($.inject(gulp.src('.tmp/partials/**/*.js'), {
+          read: false,
+          starttag: '<!-- inject:partials -->',
+          addRootSlash: false,
+          ignorePath: '.tmp'
+        }))
         .pipe($.useref.assets())
         .pipe($.rev())
         .pipe(jsFilter)
@@ -38,12 +59,6 @@ gulp.task('html', ['styles', 'scripts'], function () {
         .pipe($.revReplace())
         .pipe(gulp.dest('dist'))
         .pipe($.size());
-});
-
-gulp.task('partials', function () {
-  return gulp.src('app/partials/**/*.html')
-      .pipe(gulp.dest('dist/partials'))
-      .pipe($.size());
 });
 
 gulp.task('images', function () {

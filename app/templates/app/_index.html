@@ -43,9 +43,11 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js scripts/main.js -->
+    <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="scripts/<%= appname %>.js"></script>
     <script src="scripts/main/main-ctrl.js"></script>
+    <!-- inject:partials -->
+    <!-- endinject -->
     <!-- endbuild -->
 
   </body>
