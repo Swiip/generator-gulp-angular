@@ -65,15 +65,15 @@ But I think keeping first division by file type: scripts, styles, partials.
 * image optimization
 * Unit test (karma)
 * e2e test (Protratctor)
-* *0.2* ng html2js
+* ng html2js
 * **TODO** lazy
 * **TODO** browser sync
 
 ## Questions the generator will asks
-* *0.2* jQuery: jQuery, Zepto, none
-* *0.2* Angular modules: animate, cookies, touch, sanitize
-* *0.2* Resource handler: ngResource, Restangular, none.
-* *0.2* Router: ngRoute, UI Router, none.
+* jQuery: jQuery, Zepto, none
+* Angular modules: animate, cookies, touch, sanitize
+* Resource handler: ngResource, Restangular, none.
+* Router: ngRoute, UI Router, none.
 * **TODO** CSS Framework: Bootstrap, SemanticUI, Fondation, None. (Will be impacted by the CSS preprocessor chosen)
 * **TODO** CSS preprocessor: less, sass, none
 * **TODO** JS preprocessor: CoffeeScript, TypeScript, ECMAScript6 (Traceur)
@@ -82,6 +82,14 @@ But I think keeping first division by file type: scripts, styles, partials.
 * **TODO** Test framework: Jasmine, Mocha, Qunit
 
 ## Changelog
+
+### 0.2.0
+
+* Convert HTML templates into JS and add them into the optimized bundle
+* Let you choose to use jQuery, Zepto or nothing (Angular's jqLite)
+* Ask for optional Angular modules: animate cookies, touch and sanitize
+* Resource handler: ngResource, Restangular, none.
+* Router: ngRoute, UI Router, none.
 
 ### 0.1.1
 
