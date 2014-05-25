@@ -83,6 +83,11 @@ But I think keeping first division by file type: scripts, styles, partials.
 
 ## Changelog
 
+### 0.2.1
+
+* Fix main.html missing with routing
+* Fix unit tests by ignoring bootstrap js files in wiredep
+
 ### 0.2.0
 
 * Convert HTML templates into JS and add them into the optimized bundle
