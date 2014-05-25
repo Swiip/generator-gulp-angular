@@ -88,4 +88,14 @@ describe('gulp-angular generator', function () {
     helpers.mockPrompt(this.app, mockPrompts.fast);
     this.run({}, 100000, ['protractor']).should.be.fulfilled.notify(done);
   });
+
+  it('should pass gulp protractor task in medium mode', function (done) {
+    helpers.mockPrompt(this.app, mockPrompts.medium);
+    this.run({}, 100000, ['protractor']).should.be.fulfilled.notify(done);
+  });
+
+  it('should pass gulp protractor task in full mode', function (done) {
+    helpers.mockPrompt(this.app, mockPrompts.full);
+    this.run({}, 100000, ['protractor']).should.be.fulfilled.notify(done);
+  });
 });
