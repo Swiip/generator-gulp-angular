@@ -128,8 +128,8 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     var getFiles = function(type) {
       var selection = files[type];
       this.optionalFiles.forEach(function(optional) {
-        if(this._.isArray(optional[type])) {
-          selection.concat(optional[type]);
+        if(this._.isArray(files[optional][type])) {
+          selection = selection.concat(files[optional][type]);
         }
       }.bind(this));
       return selection;
