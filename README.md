@@ -40,7 +40,7 @@ yo gulp-angular [app-name]
 ### Use Gulp tasks
 
 * `gulp` or `gulp build` to build an optimized version of your application in `/dist`
-* `gulp watch` to launch a server with livereload capacities on your source files
+* `gulp serve` to launch a browser sync server on your source files
 * `gulp serve:dist` to launch a server on your optimized application
 * `gulp wiredep` to fill bower dependencies in your `.html` file(s)
 * `gulp test` to launch your unit tests with Karma
@@ -66,8 +66,8 @@ But I think keeping first division by file type: scripts, styles, partials.
 * Unit test (karma)
 * e2e test (Protratctor)
 * ng html2js
+* browser sync
 * **TODO** lazy
-* **TODO** browser sync
 
 ## Questions the generator will asks
 * jQuery: jQuery, Zepto, none
@@ -82,6 +82,10 @@ But I think keeping first division by file type: scripts, styles, partials.
 * **TODO** Test framework: Jasmine, Mocha, Qunit
 
 ## Changelog
+
+### 0.3.0
+
+* Integration of Browser Sync as development server in place of a home made connect server
 
 ### 0.2.1
 

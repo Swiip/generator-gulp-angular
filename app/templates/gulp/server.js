@@ -4,37 +4,48 @@ var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('connect:src', function () {
-  var connect = require('connect');
-  var app = connect()
-    .use(require('connect-livereload')({ port: 35729 }))
-    .use(connect.static('app'))
-    .use(connect.static('.tmp'))
-    .use(connect.directory('app'));
+var browserSync = require('browser-sync');
+var httpProxy = require('http-proxy');
 
-  gulp.server = require('http').createServer(app)
-    .listen(9000)
-    .on('listening', function () {
-      console.log('Started connect web server on http://localhost:9000');
-    });
+/* This configuration allow you to configure browser sync to proxy your backend */
+var proxyTarget = 'http://server/context/'; // The location of your backend
+var proxyApiPrefix = 'api'; // The element in the URL which differentiate between API request and static file request
+
+var proxy = httpProxy.createProxyServer({
+  target: proxyTarget
 });
 
-gulp.task('connect:dist', function () {
-  var connect = require('connect');
-  var app = connect()
-    .use(connect.static('dist'));
+function proxyMiddleware(req, res, next) {
+  if (req.url.indexOf(proxyApiPrefix) != -1) {
+    proxy.web(req, res);
+  } else {
+    next();
+  }
+};
 
-  gulp.server = require('http').createServer(app)
-    .listen(9000)
-    .on('listening', function () {
-      console.log('Started connect web server for dist files on http://localhost:9000');
-    });
+function browserSyncInit(baseDir, files) {
+  browserSync.init(files, {
+    startPath: "/index.html",
+    server: {
+      baseDir: baseDir,
+      middleware: proxyMiddleware
+    }
+  });
+}
+
+gulp.task('serve', ['watch'], function() {
+  browserSyncInit([
+    'app',
+    '.tmp'
+  ], [
+    'app/*.html',
+    '.tmp/styles/**/*.css',
+    'app/scripts/**/*.js',
+    'app/partials/**/*.html',
+    'app/images/**/*'
+  ]);
 });
 
-gulp.task('serve', ['connect:src', 'styles'], function () {
-  require('opn')('http://localhost:9000');
-});
-
-gulp.task('serve:dist', ['connect:dist'], function () {
-    require('opn')('http://localhost:9000');
+gulp.task('serve:dist', ['build'], function() {
+  browserSyncInit('dist');
 });
