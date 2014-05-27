@@ -54,32 +54,43 @@ yo gulp-angular [app-name]
 But I think keeping first division by file type: scripts, styles, partials.
 
 ## Features included in the gulpfile
-* useref
-* ngMin
-* uglify
-* csso
-* rev
-* watch
-* connect
-* jshint
-* image optimization
-* Unit test (karma)
-* e2e test (Protratctor)
-* ng html2js
-* **TODO** lazy
-* **TODO** browser sync
+* *useref* : allow to configure your files in comments of your HTML file
+* *ngMin* : convert simple injection in complete syntax to be minificaction proof
+* *uglify* : optimize all your JavaScript
+* *csso* : optimize all your CSS
+* *rev* : add an hash in the files names to prevent all browsers cache problems
+* *watch* : watch your source files to recompile them automatically
+* *connect* : launch a dev HTTP server, can also be used on the dist files
+* *livereload* : the web server will reload every time the watch task detect a change
+* *jshint* : JavaScript code linter
+* *imagemin* : all your images will be optimized at build
+* *Unit test (karma)* : out of the box unit test configuration with karma
+* *e2e test (protratctor)* : out of the box e2e test configuration with protractor
+* *ngHtml2js* : all HTML partials will be converted in JS to be bundled in the application
+* **TODO** lazy : don't process files wich has not change as much as possible
+* **TODO** browsersync : replace livereload by browsersync
 
 ## Questions the generator will asks
-* jQuery: jQuery, Zepto, none
-* Angular modules: animate, cookies, touch, sanitize
-* Resource handler: ngResource, Restangular, none.
-* Router: ngRoute, UI Router, none.
-* **TODO** CSS Framework: Bootstrap, SemanticUI, Fondation, None. (Will be impacted by the CSS preprocessor chosen)
-* **TODO** CSS preprocessor: less, sass, none
+* *jQuery*: jQuery 1.x, 2.x, Zepto, none
+* *Angular modules*: animate, cookies, touch, sanitize
+* *Resource handler*: ngResource, Restangular, none.
+* *Router*: ngRoute, UI Router, none.
+* **TODO** *0.3* UI Framework: Bootstrap, SemanticUI, Foundation, none (Will be impacted by the CSS preprocessor chosen)
+* **TODO** *0.3* Boostrap directives : UI Bootstrap, Angular Strap, none (Only if Bootstrap has been chosen)
+* **TODO** *0.3* CSS preprocessor: less, sass, none
 * **TODO** JS preprocessor: CoffeeScript, TypeScript, ECMAScript6 (Traceur)
 * **TODO** HTML preprocessor: Jade ?
 * **TODO** Script loader: Require, Browserify, ES6 with Require?, none
 * **TODO** Test framework: Jasmine, Mocha, Qunit
+
+## TODO -> 0.3
+
+* UI framework
+* CSS preprocessor
+* Template for each CSS framework
+* Bootstrap directives
+* Update Modernizer
+* Documentation
 
 ## Changelog
 

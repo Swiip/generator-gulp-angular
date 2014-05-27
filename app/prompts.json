@@ -62,16 +62,16 @@
         {
           "value": {
             "name": "jquery",
-            "version": "1.9.x"
+            "version": "1.x.x"
           },
-          "name": "jQuery 1.9.x (last version supporting IE6, 7 and 8)"
+          "name": "jQuery 1.x (branch still supporting IE6, 7 and 8)"
         },
         {
           "value": {
             "name": "jquery",
-            "version": "2.0.x"
+            "version": "2.x.x"
           },
-          "name": "jQuery 2.0.x (new version, lighter, IE9+)"
+          "name": "jQuery 2.x (new version, lighter, IE9+)"
         },
         {
           "value": {
@@ -146,6 +146,41 @@
             "module": null
           },
           "name": "None"
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "name": "ui",
+      "message": "Which UI framework do you want ?",
+      "choices": [
+        {
+          "value": {
+            "name": "bootstrap-sass-official",
+            "version": "3.1.x"
+          },
+          "name": "Bootstrap, the one and only"
+        },
+        {
+          "value": {
+            "name": "semantic",
+            "version": "0.17.x"
+          },
+          "name": "Semantic UI, the UI framework with semantic vocabulary"
+        },
+        {
+          "value": {
+            "name": "foundation",
+            "version": "5.2.x"
+          },
+          "name": "Foundation"
+        },
+        {
+          "value": {
+            "name": null,
+            "version": null
+          },
+          "name": "None, I'm an hardcore designer"
         }
       ]
     }

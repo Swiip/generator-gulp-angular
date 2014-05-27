@@ -9,6 +9,7 @@ var yosay = require('yosay');
 var prompts = require('./prompts');
 
 var GulpAngularGenerator = yeoman.generators.Base.extend({
+  /* Initialization, evaluate appname */
   init: function () {
     this.pkg = require('../package.json');
 
@@ -19,11 +20,9 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     this.angularVersion = '1.2.x';
   },
 
+  /* Welcome, prompt fast or advanced */
   askForMode: function() {
     var done = this.async();
-
-    // have Yeoman greet the user
-    //this.log(this.yeoman);
 
     this.log(yosay('Welcome! You\'re using the fantastic generator for scaffolding an application with Angular and Gulp!'));
 
@@ -33,6 +32,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     }.bind(this));
   },
 
+  /* Handle advanced prompts or set default values */
   advancedMode: function() {
     if(this.mode === 'advanced') {
       var done = this.async();
@@ -46,11 +46,13 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
         angularModules: [],
         jQuery: { name: null, version: null },
         resource: { name: null, version: null, module: null },
-        router: { name: null, version: null, module: null }
+        router: { name: null, version: null, module: null },
+        ui: { name: 'bootstrap-sass-official', version: '3.1.x' }
       }
     }
   },
 
+  /* Compile choices in this.model */
   compileProps: function() {
     //console.log('before compile', this.props)
 
@@ -83,6 +85,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     //console.log('after compile', this.model);
   },
 
+  /* Format this.model in template values */
   formatData: function() {
     this.optionalFiles = [];
 
@@ -122,6 +125,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     }
   },
 
+  /* Process files */
   app: function () {
     var files = require('./files');
 
@@ -156,6 +160,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     }.bind(this));
   },
 
+  /* Install dependencies */
   installs: function() {
     if (!this.options['skip-install']) {
       var done = this.async();
@@ -163,9 +168,10 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     }
   },
 
+  /* Launch gulp-wiredep task */
   wiredep: function() {
     //If installation is skipped, Gulp wiredep cannot be used
-    //wiredep needs deps to be actualy here to work
+    //wiredep needs deps to be actualy there to work
     if (!this.options['skip-install']) {
       var done = this.async();
       var spawned = this.spawnCommand('gulp', ['wiredep']);
