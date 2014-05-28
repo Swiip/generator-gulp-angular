@@ -15,7 +15,7 @@ gulp.task('styles', function () {
 gulp.task('scripts', function () {
   return gulp.src('app/scripts/**/*.js')
     .pipe($.jshint())
-    .pipe($.jshint.reporter($.jshintStylish))
+    .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.size());
 });
 
