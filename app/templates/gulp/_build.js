@@ -28,7 +28,7 @@ gulp.task('partials', function () {
     }))
     .pipe($.ngHtml2js({
       moduleName: "<%= appname %>",
-      prefix: "partials/"
+      prefix: "/partials/"
     }))
     .pipe(gulp.dest(".tmp/partials"))
     .pipe($.size());
@@ -43,7 +43,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
       read: false,
       starttag: '<!-- inject:partials -->',
       addRootSlash: false,
-      ignorePath: '.tmp'
+      addPrefix: '../'
     }))
     .pipe($.useref.assets())
     .pipe($.rev())
@@ -52,6 +52,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe($.uglify())
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
+    .pipe($.replace('bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap','fonts'))
     .pipe($.csso())
     .pipe(cssFilter.restore())
     .pipe($.useref.restore())
