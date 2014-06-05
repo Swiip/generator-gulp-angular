@@ -83,9 +83,13 @@ But I think keeping first division by file type: scripts, styles, partials.
 
 ## Changelog
 
+### 0.3.1
+
+* Fix e2e tests to use BrowserSync as server. But no way to stop BrowserSync for now so the task never really ends.
+
 ### 0.3.0
 
-* Integration of Browser Sync as development server in place of a home made connect server
+* Integration of BrowserSync as development server in place of a home made connect server
 * Serve task is the entry point and launch the watch task
 
 ### 0.2.1
