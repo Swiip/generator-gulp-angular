@@ -2,8 +2,6 @@
 
 var gulp = require('gulp');
 
-var $ = require('gulp-load-plugins')();
-
 var browserSync = require('browser-sync');
 var httpProxy = require('http-proxy');
 
@@ -16,24 +14,28 @@ var proxy = httpProxy.createProxyServer({
 });
 
 function proxyMiddleware(req, res, next) {
-  if (req.url.indexOf(proxyApiPrefix) != -1) {
+  if (req.url.indexOf(proxyApiPrefix) !== -1) {
     proxy.web(req, res);
   } else {
     next();
   }
-};
+}
 
-function browserSyncInit(baseDir, files) {
+function browserSyncInit(baseDir, files, browser) {
+  browser = browser === undefined ? 'default' : browser;
+
   browserSync.init(files, {
-    startPath: "/index.html",
+    startPath: '/index.html',
     server: {
       baseDir: baseDir,
       middleware: proxyMiddleware
-    }
+    },
+    browser: browser
   });
+
 }
 
-gulp.task('serve', ['watch'], function() {
+gulp.task('serve', ['watch'], function () {
   browserSyncInit([
     'app',
     '.tmp'
@@ -46,6 +48,14 @@ gulp.task('serve', ['watch'], function() {
   ]);
 });
 
-gulp.task('serve:dist', ['build'], function() {
+gulp.task('serve:dist', ['build'], function () {
   browserSyncInit('dist');
+});
+
+gulp.task('serve:e2e', function () {
+  browserSyncInit(['app', '.tmp'], null, []);
+});
+
+gulp.task('serve:e2e-dist', ['watch'], function () {
+  browserSyncInit('dist', null, []);
 });

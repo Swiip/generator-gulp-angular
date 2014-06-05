@@ -30,11 +30,12 @@
     "gulp-karma": "0.0.4",
     "karma-jasmine": "^0.1.5",
     "karma-phantomjs-launcher": "^0.1.4",
-    "gulp-protractor": "0.0.7",
-    "protractor": "~0.22.0",
     "require-dir": "~0.1.0",
     "browser-sync": "~0.9.1",
-    "http-proxy": "~1.1.4"
+    "http-proxy": "~1.1.4",
+    "phantomjs": "~1.9.7-8",
+    "protractor": "~0.24.0",
+    "gulp-protractor": "0.0.7"
   },
   "engines": {
     "node": ">=0.10.0"
