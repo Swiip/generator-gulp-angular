@@ -19,6 +19,10 @@
     "router": {
       "name": "angular-route",
       "module": "ngRoute"
+    },
+    "ui": {
+      "name": "foundation",
+      "version": "5.2.x"
     }
   },
   "full": {
@@ -52,6 +56,10 @@
       "name": "angular-ui-router",
       "version": "0.2.x",
       "module": "ui.router"
+    },
+    "ui": {
+      "name": "bootstrap-sass-official",
+      "version": "3.1.x"
     }
   }
 }
