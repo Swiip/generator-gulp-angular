@@ -40,7 +40,7 @@ yo gulp-angular [app-name]
 ### Use Gulp tasks
 
 * `gulp` or `gulp build` to build an optimized version of your application in `/dist`
-* `gulp watch` to launch a server with livereload capacities on your source files
+* `gulp serve` to launch a browser sync server on your source files
 * `gulp serve:dist` to launch a server on your optimized application
 * `gulp wiredep` to fill bower dependencies in your `.html` file(s)
 * `gulp test` to launch your unit tests with Karma
@@ -66,9 +66,9 @@ But I think keeping first division by file type: scripts, styles, partials.
 * *imagemin* : all your images will be optimized at build
 * *Unit test (karma)* : out of the box unit test configuration with karma
 * *e2e test (protratctor)* : out of the box e2e test configuration with protractor
+* *browser sync* : full featured development web server with livereload and devices sync
 * *ngHtml2js* : all HTML partials will be converted in JS to be bundled in the application
 * **TODO** lazy : don't process files wich has not change as much as possible
-* **TODO** browsersync : replace livereload by browsersync
 
 ## Questions the generator will asks
 * *jQuery*: jQuery 1.x, 2.x, Zepto, none
@@ -93,6 +93,15 @@ But I think keeping first division by file type: scripts, styles, partials.
 * Documentation
 
 ## Changelog
+
+### 0.3.1
+
+* Fix e2e tests to use BrowserSync as server. But no way to stop BrowserSync for now so the task never really ends.
+
+### 0.3.0
+
+* Integration of BrowserSync as development server in place of a home made connect server
+* Serve task is the entry point and launch the watch task
 
 ### 0.2.1
 
