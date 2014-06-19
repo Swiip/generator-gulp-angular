@@ -28,7 +28,8 @@
     "chalk": "~0.4.0",
     "q": "~1.0.1",
     "yosay": "~0.1.0",
-    "async": "~0.8.0"
+    "async": "~0.8.0",
+    "lodash": "~2.4.1"
   },
   "devDependencies": {
     "mocha": "*",

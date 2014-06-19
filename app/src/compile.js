@@ -24,7 +24,7 @@ module.exports = function () {
     this.props.router.module
   ]);
 
-  console.log('compile bower', this.props, this.model.bowerDependencies);
+  //console.log('compile bower', this.props, this.model.bowerDependencies);
 
   //Add version number of Angular for all dependencies which has no version specified
   this.model.bowerDependencies.forEach(function (dependency) {

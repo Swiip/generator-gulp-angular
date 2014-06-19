@@ -22,7 +22,8 @@
     },
     "ui": {
       "name": "foundation",
-      "version": "5.2.x"
+      "version": "5.2.x",
+      "optional": "foundation"
     }
   },
   "full": {
@@ -59,7 +60,8 @@
     },
     "ui": {
       "name": "bootstrap-sass-official",
-      "version": "3.1.x"
+      "version": "3.1.x",
+      "optional": "bootstrap"
     }
   }
 }

@@ -21,16 +21,24 @@ module.exports = function () {
     })
     .value().join(', ');
 
+  /* router */
+  var partial = 'app/partials/__' + this.props.ui.optional + '.html';
+
+  if(this.props.router.module !== null) {
+    var copies = {};
+    copies[partial] = 'app/partials/main.html';
+    this.optionalFiles.push({copies: copies});
+    this.optionalFiles.push('router');
+  }
+
   if (this.props.router.module === 'ngRoute') {
     this.routerHtml = '<div ng-view></div>';
     this.routerJs = this.read('app/scripts/__ngroute.js', 'utf8');
-    this.optionalFiles.push('router');
   } else if (this.props.router.module === 'ui.router') {
     this.routerHtml = '<div ui-view></div>';
     this.routerJs = this.read('app/scripts/__uirouter.js', 'utf8');
-    this.optionalFiles.push('router');
   } else {
-    this.routerHtml = this.read('app/partials/main.html', 'utf8');
+    this.routerHtml = this.read(partial, 'utf8');
     this.routerHtml = this.routerHtml.replace(
       /^<div class="container">/,
       '<div class="container" ng-controller="MainCtrl">'
@@ -38,4 +46,11 @@ module.exports = function () {
     this.routerHtml = this.routerHtml.replace(/\n/g, '\n    ');
     this.routerJs = '';
   }
+
+  /* ui */
+  console.log('ui optional', this.props.ui);
+
+  var cssTranspiler = 'sass'; //stub
+
+  this.optionalFiles.push(this.props.ui.optional + '-' + cssTranspiler);
 };

@@ -157,28 +157,32 @@
         {
           "value": {
             "name": "bootstrap-sass-official",
-            "version": "3.1.x"
+            "version": "3.1.x",
+            "optional": "bootstrap"
           },
           "name": "Bootstrap, the one and only"
         },
         {
           "value": {
             "name": "semantic",
-            "version": "0.17.x"
+            "version": "0.17.x",
+            "optional": "semantic"
           },
           "name": "Semantic UI, the UI framework with semantic vocabulary"
         },
         {
           "value": {
             "name": "foundation",
-            "version": "5.2.x"
+            "version": "5.2.x",
+            "optional": "foundation"
           },
           "name": "Foundation"
         },
         {
           "value": {
             "name": null,
-            "version": null
+            "version": null,
+            "optional": "none"
           },
           "name": "None, I'm an hardcore designer"
         }

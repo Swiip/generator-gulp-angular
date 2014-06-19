@@ -3,24 +3,22 @@
 var path = require('path');
 var helpers = require('yeoman-generator').test;
 var spawn = require('child_process').spawn;
-var assert = require('assert');
 var fs = require('fs');
 var Q = require('q');
-var colors = require('colors');
-var async = require('async');
+require('colors');
 
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 chai.should();
 
-var mockPrompts = require('./mock-prompts')
+var mockPrompts = require('./mock-prompts');
 
 describe('gulp-angular generator', function () {
   var tempDir = path.join(__dirname, 'temp');
   var depsDir = path.join(__dirname, 'deps');
 
-  before(function() {
+  before(function () {
     this.run = function(options, timeout, tasks) {
       var deferred = Q.defer();
 
@@ -32,7 +30,7 @@ describe('gulp-angular generator', function () {
         Q.all([promiseLinkNode, promiseLinkBower]).then(function() {
           var gulpProcess = spawn('gulp', tasks, {stdio: 'inherit'});
           gulpProcess.on('exit', function(returnCode) {
-            if(returnCode == 0) {
+            if(returnCode === 0) {
               deferred.resolve();
             } else {
               deferred.reject('Gulp returned with error code ' + returnCode);

@@ -5,33 +5,55 @@ var path = require('path');
 
 /* Process files */
 module.exports = function () {
-  var getFiles = function (type) {
-    var selection = files[type];
-    this.optionalFiles.forEach(function (optional) {
-      if (this._.isArray(files[optional][type])) {
-        selection = selection.concat(files[optional][type]);
-      }
-    }.bind(this));
-    return selection;
-  }.bind(this);
+  var _ = this._;
+  var optionalFiles = this.optionalFiles;
 
-  getFiles('directories').forEach(function (directory) {
+  function toObject(data, type) {
+    if(_.isUndefined(data)) { return {}; }
+    if(!_.isArray(data)) { return data; }
+    var result = {};
+    data.forEach(function(element) {
+      if(type === 'templates') {
+        var basename = path.basename(element);
+        var source = element.replace(basename, '_' + basename);
+        result[source] = element;
+      } else if(type === 'dots') {
+        result[element] = '.' + element;
+      } else {
+        result[element] = element;
+      }
+    });
+    return result;
+  }
+
+  function getFiles(type) {
+    var selection = toObject(files[type], type);
+    optionalFiles.forEach(function (optional) {
+      if(_.isString(optional)) {
+        _.extend(selection, toObject(files[optional][type], type));
+      } else {
+        _.extend(selection, optional[type]);
+      }
+    });
+    //console.log('getFiles', type, 'return', selection);
+    return selection;
+  }
+
+  _.each(getFiles('directories'), function(directory) {
     this.mkdir(directory);
   }.bind(this));
 
-  getFiles('copies').forEach(function (file) {
-    this.copy(file, file);
+  _.each(getFiles('copies'), function(dest, src) {
+    this.copy(src, dest);
   }.bind(this));
 
-  getFiles('templates').forEach(function (file) {
-    var basename = path.basename(file);
-    var source = file.replace(basename, '_' + basename);
-    this.template(source, file);
+  _.each(getFiles('templates'), function(dest, src) {
+    this.template(src, dest);
   }.bind(this));
 
   this.template('app/scripts/_appname.js', 'app/scripts/' + this.appname + '.js');
 
-  getFiles('dots').forEach(function (file) {
-    this.copy(file, '.' + file);
+  _.each(getFiles('dots'), function(dest, src) {
+    this.copy(src, dest);
   }.bind(this));
 };
