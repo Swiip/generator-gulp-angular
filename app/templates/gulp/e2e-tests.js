@@ -25,10 +25,11 @@ gulp.task('protractor-only', ['webdriver-update', 'wiredep'], function (done) {
       throw err;
     })
     .on('end', function () {
-      // Close connect server to and gulp connect task
-      // Feature ignored because it's not possible to stop browser sync
-      // browserSync.close();
       done();
+
+      // Close browser sync server
+      // The feature not exists in browser sync so we kill the process
+      process.exit();
     });
 });
 
