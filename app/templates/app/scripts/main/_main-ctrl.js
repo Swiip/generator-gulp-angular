@@ -2,9 +2,11 @@
 
 angular.module('<%= appname %>')
   .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+    $scope.awesomeThings = [ {
+      title: 'AngularJS',
+      description: 'HTML enhanced for web apps!'
+    }, {
+      title: 'GulpJS',
+      description: 'The streaming build system'
+    } ];
   });
