@@ -1,14 +1,20 @@
 <div class="container">
-  <div class="header">
-    <ul class="nav nav-pills pull-right">
-      <li class="active"><a ng-href="#">Home</a></li>
-      <li><a ng-href="#">About</a></li>
-      <li><a ng-href="#">Contact</a></li>
-    </ul>
-    <h3 class="text-muted">gulp angular</h3>
-  </div>
 
-  <div class="jumbotron">
+  <nav class="navbar navbar-static-top navbar-inverse">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Gulp Angular</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+      <ul class="nav navbar-nav">
+        <li class="active"><a ng-href="#">Home</a></li>
+        <li><a ng-href="#">About</a></li>
+        <li><a ng-href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="jumbotron text-center">
     <h1>'Allo, 'Allo!</h1>
     <p class="lead">
       <img src="images/yeoman.png" alt="I'm Yeoman"><br>
@@ -17,28 +23,19 @@
     <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
   </div>
 
-  <div class="row marketing">
-    <h4>HTML5 Boilerplate</h4>
-    <p>
-      HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-    </p>
-
-    <h4>Angular</h4>
-    <p>
-      AngularJS is a toolset for building the framework most suited to your application development.
-    </p>
-
-    <h4>Karma</h4>
-    <p>
-      Spectacular Test Runner for JavaScript.
-    </p>
+  <div class="row">
+    <div class="col-md-12">
+      <div ng-repeat="awesomeThing in awesomeThings">
+        <h4>{{awesomeThing.title}}</h4>
+        <p>{{awesomeThing.description}}</p>
+      </div>
+    </div>
   </div>
 
-  <ul>
-    <li ng-repeat="awesomeThing in awesomeThings">{{awesomeThing}}</li>
-  </ul>
+  <hr>
 
   <div class="footer">
     <p>With ♥ from <a href="https://twitter.com/Swiip">@Swiip</a></p>
   </div>
+
 </div>

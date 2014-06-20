@@ -19,6 +19,8 @@
   "smarttabs": true,
   "white": true,
   "globals": {
+    /* Angular Mocks */
+    "inject",
     /* MOCHA */
     "describe": false,
     "it": false,
