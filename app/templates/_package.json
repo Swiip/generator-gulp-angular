@@ -35,7 +35,8 @@
     "http-proxy": "~1.1.4",
     "phantomjs": "~1.9.7-8",
     "protractor": "~0.24.0",
-    "gulp-protractor": "0.0.7"
+    "gulp-protractor": "0.0.7",
+    "uglify-save-license": "^0.4.1"
   },
   "engines": {
     "node": ">=0.10.0"
