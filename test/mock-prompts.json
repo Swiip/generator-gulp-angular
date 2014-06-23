@@ -21,9 +21,9 @@
       "module": "ngRoute"
     },
     "ui": {
-      "name": "foundation",
-      "version": "5.2.x",
-      "optional": "foundation"
+      "name": "semantic",
+      "version": "0.17.x",
+      "optional": "semantic"
     }
   },
   "full": {

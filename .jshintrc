@@ -20,7 +20,7 @@
   "white": true,
   "globals": {
     /* Angular Mocks */
-    "inject",
+    "inject": false,
     /* MOCHA */
     "describe": false,
     "it": false,
