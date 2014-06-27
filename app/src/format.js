@@ -36,14 +36,11 @@ module.exports = function () {
   });
 
   var technologiesCopies = _.map(this.model.technologies, function(key) {
-    console.log('kikoo', key, _.findWhere(techs, {key: key}));
     return 'app/images/' + _.findWhere(techs, {key: key}).logo;
   });
 
   this.technologies = JSON.stringify(technologiesContent, null, 2);
   this.technologies = this.technologies.replace(/\n/g, '\n    ');
-
-  console.log('technologiesCopies', technologiesCopies);
 
   this.optionalFiles.push({
     copies: technologiesCopies
