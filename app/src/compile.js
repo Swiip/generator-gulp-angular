@@ -35,6 +35,12 @@ module.exports = function () {
     this.props.router.module
   ]);
 
+  this.model.technologies = [
+    'angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor',
+    this.props.jQuery.name,
+    this.props.ui.key
+  ];
+
   //console.log('compile bower', this.props, this.model.bowerDependencies);
 
   //Add version number of Angular for all dependencies which has no version specified

@@ -1,5 +1,7 @@
 'use strict';
 
+var techs = require('../techs');
+
 /* Format this.model in template values */
 module.exports = function () {
   var _ = this._;
@@ -28,6 +30,23 @@ module.exports = function () {
       return "'" + dependency + "'";
     })
     .value().join(', ');
+
+  var technologiesContent = _.map(this.model.technologies, function(key) {
+    return _.findWhere(techs, {key: key});
+  });
+
+  var technologiesCopies = _.map(this.model.technologies, function(key) {
+    return 'app/images/' + _.findWhere(techs, {key: key}).logo;
+  });
+
+  this.technologies = JSON.stringify(technologiesContent, null, 2);
+  this.technologies = this.technologies.replace(/\n/g, '\n    ');
+
+  console.log('technologiesCopies', technologiesCopies);
+
+  this.optionalFiles.push({
+    copies: technologiesCopies
+  });
 
   /* router */
   var partial = 'app/partials/__' + this.props.ui.key + '.html';

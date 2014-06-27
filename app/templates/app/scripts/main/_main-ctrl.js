@@ -2,11 +2,8 @@
 
 angular.module('<%= appname %>')
   .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [ {
-      title: 'AngularJS',
-      description: 'HTML enhanced for web apps!'
-    }, {
-      title: 'GulpJS',
-      description: 'The streaming build system'
-    } ];
+    $scope.awesomeThings = <%= technologies %>;
+    angular.forEach($scope.awesomeThings, function(awesomeThing) {
+      awesomeThing.rank = Math.random();
+    });
   });

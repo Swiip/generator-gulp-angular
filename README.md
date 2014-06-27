@@ -60,8 +60,6 @@ But I think keeping first division by file type: scripts, styles, partials.
 * *csso* : optimize all your CSS
 * *rev* : add an hash in the files names to prevent all browsers cache problems
 * *watch* : watch your source files to recompile them automatically
-* *connect* : launch a dev HTTP server, can also be used on the dist files
-* *livereload* : the web server will reload every time the watch task detect a change
 * *jshint* : JavaScript code linter
 * *imagemin* : all your images will be optimized at build
 * *Unit test (karma)* : out of the box unit test configuration with karma

@@ -42,15 +42,5 @@
     "directories": [
       "app/partials"
     ]
-  },
-  "bootstrap-sass": {
-    "copies": {
-      "app/styles/__bootstrap.scss": "app/styles/main.scss"
-    }
-  },
-  "foundation-sass": {
-    "copies": {
-      "app/styles/__foundation.scss": "app/styles/main.scss"
-    }
   }
 }

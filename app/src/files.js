@@ -31,11 +31,13 @@ module.exports = function () {
     optionalFiles.forEach(function (optional) {
       if(_.isString(optional)) {
         _.extend(selection, toObject(files[optional][type], type));
+      } else if(_.isArray(optional[type])) {
+        _.extend(selection, toObject(optional[type], type));
       } else {
         _.extend(selection, optional[type]);
       }
     });
-    //console.log('getFiles', type, 'return', selection);
+    console.log('getFiles', type, 'return', selection);
     return selection;
   }
 
