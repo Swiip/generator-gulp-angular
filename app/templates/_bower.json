@@ -2,7 +2,7 @@
   "name": "<%= appname %>",
   "version": "0.0.0",
   "dependencies": {
-    "modernizr": "2.6.2",
+    "modernizr": "2.8.x",
     "angular": "<%= angularVersion %>",
     <%= bowerDependencies %>
   },
@@ -10,6 +10,7 @@
     "angular-mocks": "<%= angularVersion %>"
   },
   "resolutions": {
-    "angular": "<%= angularVersion %>"
+    "angular": "<%= angularVersion %>",
+    <%= bowerResolutions %>
   }
 }

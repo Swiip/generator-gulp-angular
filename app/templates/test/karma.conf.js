@@ -1,4 +1,6 @@
-module.exports = function(config){
+'use strict';
+
+module.exports = function(config) {
 
   config.set({
     basePath : '..', //!\\ Ignored through gulp-karma //!\\
@@ -21,5 +23,6 @@ module.exports = function(config){
         'karma-phantomjs-launcher',
         'karma-jasmine'
     ]
+  });
 
-})}
+};

@@ -158,33 +158,17 @@
           "value": {
             "name": "bootstrap-sass-official",
             "version": "3.1.x",
-            "optional": "bootstrap"
+            "key": "bootstrap"
           },
-          "name": "Bootstrap, the one and only"
-        },
-        {
-          "value": {
-            "name": "semantic",
-            "version": "0.17.x",
-            "optional": "semantic"
-          },
-          "name": "Semantic UI, the UI framework with semantic vocabulary"
+          "name": "Bootstrap, the most popular HTML, CSS, and JS framework"
         },
         {
           "value": {
             "name": "foundation",
             "version": "5.2.x",
-            "optional": "foundation"
+            "key": "foundation"
           },
-          "name": "Foundation"
-        },
-        {
-          "value": {
-            "name": null,
-            "version": null,
-            "optional": "none"
-          },
-          "name": "None, I'm an hardcore designer"
+            "name": "Foundation, The most advanced responsive front-end framework in the world\""
         }
       ]
     }

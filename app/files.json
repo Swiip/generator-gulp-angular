@@ -48,11 +48,6 @@
       "app/styles/__bootstrap.scss": "app/styles/main.scss"
     }
   },
-  "semantic-sass": {
-    "copies": {
-      "app/styles/__semantic.scss": "app/styles/main.scss"
-    }
-  },
   "foundation-sass": {
     "copies": {
       "app/styles/__foundation.scss": "app/styles/main.scss"

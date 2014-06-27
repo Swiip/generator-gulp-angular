@@ -2,27 +2,35 @@
 
 /* Format this.model in template values */
 module.exports = function () {
+  var _ = this._;
+
   this.optionalFiles = [];
 
-  this.bowerDependencies = this._.chain(this.model.bowerDependencies)
-    .filter(this._.isObject)
-    .filter(function (dependency) {
-      return this._.isString(dependency.name) && this._.isString(dependency.version);
-    }.bind(this))
-    .map(function (dependency) {
-      return '"' + dependency.name + '" : "' + dependency.version + '"';
-    })
-    .value().join(',\n    ');
+  function processBowerDependencies(deps) {
+    return _.chain(deps)
+      .filter(_.isObject)
+      .filter(function (dependency) {
+        return _.isString(dependency.name) && _.isString(dependency.version);
+      })
+      .map(function (dependency) {
+        return '"' + dependency.name + '" : "' + dependency.version + '"';
+      })
+      .value().join(',\n    ');
+  }
 
-  this.modulesDependencies = this._.chain(this.model.modulesDependencies)
-    .filter(this._.isString)
+  this.bowerDependencies = processBowerDependencies(this.model.bowerDependencies);
+
+  this.bowerResolutions = processBowerDependencies(this.model.bowerResolutions);
+
+  this.modulesDependencies = _.chain(this.model.modulesDependencies)
+    .filter(_.isString)
     .map(function (dependency) {
       return "'" + dependency + "'";
     })
     .value().join(', ');
 
   /* router */
-  var partial = 'app/partials/__' + this.props.ui.optional + '.html';
+  var partial = 'app/partials/__' + this.props.ui.key + '.html';
 
   if(this.props.router.module !== null) {
     var copies = {};
@@ -48,9 +56,12 @@ module.exports = function () {
   }
 
   /* ui */
-  console.log('ui optional', this.props.ui);
+  var cssTranspiler = 'scss'; //stub
 
-  var cssTranspiler = 'sass'; //stub
+  var styleSource = 'app/styles/__' + this.props.ui.key + '.' + cssTranspiler;
+  var styleDest = 'app/styles/main.' + cssTranspiler;
+  var styleCopies = {};
+  styleCopies[styleSource] = styleDest;
 
-  this.optionalFiles.push(this.props.ui.optional + '-' + cssTranspiler);
+  this.optionalFiles.push({ copies: styleCopies });
 };

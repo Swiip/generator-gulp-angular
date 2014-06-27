@@ -21,9 +21,9 @@
       "module": "ngRoute"
     },
     "ui": {
-      "name": "semantic",
-      "version": "0.17.x",
-      "optional": "semantic"
+      "name": "foundation",
+      "version": "5.2.x",
+      "key": "foundation"
     }
   },
   "full": {
@@ -61,7 +61,7 @@
     "ui": {
       "name": "bootstrap-sass-official",
       "version": "3.1.x",
-      "optional": "bootstrap"
+      "key": "bootstrap"
     }
   }
 }

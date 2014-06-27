@@ -10,12 +10,23 @@ module.exports = function () {
     return module.module;
   });
 
+  var modernizr = {
+    name: 'modernizr',
+    version: '2.8.x'
+  };
+
   this.model.bowerDependencies = this._.flatten([
+    modernizr,
     this.props.jQuery,
     this.props.angularModules,
     this.props.resource,
     this.props.router,
     this.props.ui
+  ]);
+
+  this.model.bowerResolutions = this._.flatten([
+    modernizr,
+    this.props.jQuery
   ]);
 
   this.model.modulesDependencies = this._.flatten([

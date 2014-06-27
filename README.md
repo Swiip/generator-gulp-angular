@@ -75,9 +75,9 @@ But I think keeping first division by file type: scripts, styles, partials.
 * *Angular modules*: animate, cookies, touch, sanitize
 * *Resource handler*: ngResource, Restangular, none.
 * *Router*: ngRoute, UI Router, none.
-* **TODO** *0.3* UI Framework: Bootstrap, SemanticUI, Foundation, none (Will be impacted by the CSS preprocessor chosen)
-* **TODO** *0.3* Boostrap directives : UI Bootstrap, Angular Strap, none (Only if Bootstrap has been chosen)
-* **TODO** *0.3* CSS preprocessor: less, sass, none
+* *UI Framework*: Bootstrap, Foundation (Will be impacted by the CSS preprocessor chosen)
+* **TODO** Boostrap directives : UI Bootstrap, Angular Strap, none (Only if Bootstrap has been chosen)
+* **TODO** CSS preprocessor: less, sass, none
 * **TODO** JS preprocessor: CoffeeScript, TypeScript, ECMAScript6 (Traceur)
 * **TODO** HTML preprocessor: Jade ?
 * **TODO** Script loader: Require, Browserify, ES6 with Require?, none
