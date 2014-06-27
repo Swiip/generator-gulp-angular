@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')();
+var saveLicense = require('uglify-save-license');
 
 gulp.task('styles', function () {
   return gulp.src('app/styles/main.scss')
@@ -49,7 +50,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe($.rev())
     .pipe(jsFilter)
     .pipe($.ngmin())
-    .pipe($.uglify())
+    .pipe($.uglify({preserveComments: saveLicense}))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
     .pipe($.replace('bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap','fonts'))

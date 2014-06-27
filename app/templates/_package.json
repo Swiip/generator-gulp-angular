@@ -36,7 +36,8 @@
     "phantomjs": "~1.9.7-8",
     "gulp-protractor": "0.0.7",
     "gulp-replace": "~0.3.0",
-    "protractor": "~0.24.2"
+    "protractor": "~0.24.2",
+    "uglify-save-license": "^0.4.1"
   },
   "engines": {
     "node": ">=0.10.0"
