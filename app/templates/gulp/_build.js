@@ -29,7 +29,7 @@ gulp.task('partials', function () {
     }))
     .pipe($.ngHtml2js({
       moduleName: "<%= appname %>",
-      prefix: "/partials/"
+      prefix: "partials/"
     }))
     .pipe(gulp.dest(".tmp/partials"))
     .pipe($.size());
