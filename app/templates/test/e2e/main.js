@@ -6,8 +6,10 @@ describe('The main view', function () {
     browser.get('http://localhost:3002');
   });
 
-  it('list 2 awesome things', function () {
-    expect(element.all(by.repeater('awesomeThing in awesomeThings')).count()).toBe(2);
+  it('list more than 5 awesome things', function () {
+    element.all(by.repeater('awesomeThing in awesomeThings')).count().then(function(count) {
+      expect(count > 5).toBeTruthy();
+    });
   });
 
 });

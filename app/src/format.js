@@ -27,7 +27,7 @@ module.exports = function () {
   this.modulesDependencies = _.chain(this.model.modulesDependencies)
     .filter(_.isString)
     .map(function (dependency) {
-      return "'" + dependency + "'";
+      return '\'' + dependency + '\'';
     })
     .value().join(', ');
 
@@ -40,6 +40,7 @@ module.exports = function () {
   });
 
   this.technologies = JSON.stringify(technologiesContent, null, 2);
+  this.technologies = this.technologies.replace(/"/g, '\'');
   this.technologies = this.technologies.replace(/\n/g, '\n    ');
 
   this.optionalFiles.push({

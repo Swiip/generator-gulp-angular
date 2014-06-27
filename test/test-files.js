@@ -15,8 +15,10 @@ describe('gulp-angular generator files', function () {
 
     files.call({
       _: _,
-      optionalFiles: ['router', 'foundation-sass', {
+      optionalFiles: ['router', {
         copies: {'app/partials/__foundation.html': 'app/partials/main.html'}
+      }, {
+        copies: ['app/images/angular.png']
       }],
       mkdir: function() { actualMkdir++; },
       copy: function() { actualCopy++; },
@@ -29,9 +31,9 @@ describe('gulp-angular generator files', function () {
 
     var expectedCopy =
       1 + //fixed : router partial
+      1 + //fixed : angular image
       data.copies.length +
-      data.dots.length +
-      _.keys(data['foundation-sass'].copies).length;
+      data.dots.length;
 
     var expectedTemplate =
       1 + //fixed : <appname>.js

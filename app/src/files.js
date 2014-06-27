@@ -37,7 +37,7 @@ module.exports = function () {
         _.extend(selection, optional[type]);
       }
     });
-    console.log('getFiles', type, 'return', selection);
+    //console.log('getFiles', type, 'return', selection);
     return selection;
   }
 

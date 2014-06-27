@@ -9,7 +9,7 @@ describe('controllers', function(){
   	scope = $rootScope.$new();
   }));
 
-  it('should define 2 awesome things', inject(function($controller) {
+  it('should define more than 5 awesome things', inject(function($controller) {
     expect(scope.awesomeThings).toBeUndefined();
 
     $controller('MainCtrl', {
@@ -17,6 +17,6 @@ describe('controllers', function(){
   	});
 
     expect(angular.isArray(scope.awesomeThings)).toBeTruthy();
-    expect(scope.awesomeThings.length).toBe(2);
+    expect(scope.awesomeThings.length > 5).toBeTruthy();
   }));
 });
