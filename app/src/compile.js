@@ -4,6 +4,8 @@
 module.exports = function () {
   //console.log('before compile', this.props)
 
+  var _ = this._;
+
   this.model = {};
 
   var angularModules = this.props.angularModules.map(function (module) {
@@ -15,7 +17,7 @@ module.exports = function () {
     version: '2.8.x'
   };
 
-  this.model.bowerDependencies = this._.flatten([
+  this.model.bowerDependencies = _.flatten([
     modernizr,
     this.props.jQuery,
     this.props.angularModules,
@@ -24,12 +26,12 @@ module.exports = function () {
     this.props.ui
   ]);
 
-  this.model.bowerResolutions = this._.flatten([
+  this.model.bowerResolutions = _.flatten([
     modernizr,
     this.props.jQuery
   ]);
 
-  this.model.modulesDependencies = this._.flatten([
+  this.model.modulesDependencies = _.flatten([
     angularModules,
     this.props.resource.module,
     this.props.router.module
@@ -41,11 +43,13 @@ module.exports = function () {
     this.props.ui.key
   ];
 
+  this.model.technologies = _.reject(this.model.technologies, _.isNull);
+
   //console.log('compile bower', this.props, this.model.bowerDependencies);
 
   //Add version number of Angular for all dependencies which has no version specified
   this.model.bowerDependencies.forEach(function (dependency) {
-    if (!this._.isString(dependency.version)) {
+    if (!_.isString(dependency.version)) {
       dependency.version = this.angularVersion;
     }
   }.bind(this));
