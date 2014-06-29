@@ -3,6 +3,7 @@
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
+var chalk = require('chalk');
 
 var prompts = require('./prompts');
 
@@ -22,7 +23,10 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
   askForMode: function () {
     var done = this.async();
 
-    this.log(yosay('Welcome! You\'re using the fantastic generator for scaffolding an application with Angular and Gulp!'));
+    this.log(yosay(
+      chalk.red('Welcome!') + '\n' +
+      chalk.yellow('You\'re using the fantastic generator for scaffolding an application with Angular and Gulp!')
+    ));
 
     this.prompt([prompts.mode], function (props) {
 		  this.mode = props.mode;
