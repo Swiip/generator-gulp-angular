@@ -28,7 +28,7 @@ gulp.task('protractor-only', ['webdriver-update', 'wiredep'], function (done) {
       done();
 
       // Close browser sync server
-      // The feature not exists in browser sync so we kill the process
+      browserSync.instance.cleanup();
       process.exit();
     });
 });

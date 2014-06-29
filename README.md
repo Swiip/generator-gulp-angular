@@ -22,6 +22,11 @@ generator-gulp-angular scaffolds out an Angularjs application with a full featur
 
 ### Create your project
 
+Install the required tools: `yo`, `gulp`, `bower`
+```
+npm install -g yo gulp bower
+```
+
 Install `generator-gulp-angular`:
 ```
 npm install -g generator-gulp-angular
@@ -81,14 +86,18 @@ But I think keeping first division by file type: scripts, styles, partials.
 * **TODO** Script loader: Require, Browserify, ES6 with Require?, none
 * **TODO** Test framework: Jasmine, Mocha, Qunit
 
-## TODO -> 0.3
+## TODO -> 0.4
 
 * UI framework
-* CSS preprocessor
-* Template for each CSS framework
-* Bootstrap directives
+* Template for each UI framework
 * Update Modernizer
 * Documentation
+
+## Known issue
+
+Protractor tests are not stable with PhantomJS, at least on my Mac. I've got unpredictable disconnections between webdriverjs and phantomjs.
+
+I tried many configurations for Protractor without success, any hint would be apreciated.
 
 ## Changelog
 

@@ -24,7 +24,7 @@ function proxyMiddleware(req, res, next) {
 function browserSyncInit(baseDir, files, browser) {
   browser = browser === undefined ? 'default' : browser;
 
-  browserSync.init(files, {
+  browserSync.instance = browserSync.init(files, {
     startPath: '/index.html',
     server: {
       baseDir: baseDir,

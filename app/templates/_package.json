@@ -31,7 +31,7 @@
     "karma-jasmine": "^0.1.5",
     "karma-phantomjs-launcher": "^0.1.4",
     "require-dir": "~0.1.0",
-    "browser-sync": "~0.9.1",
+    "browser-sync": "1.1.x",
     "http-proxy": "~1.1.4",
     "phantomjs": "~1.9.7-8",
     "gulp-protractor": "0.0.7",
