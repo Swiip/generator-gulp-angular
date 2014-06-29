@@ -4,11 +4,11 @@ Offers you a Yeoman generator to initiate a Web application with the following w
 
 <img height="100" align="left" src="https://raw.githubusercontent.com/yeoman/yeoman.io/master/app/assets/img/bullet-yo.gif">
 
-<img height="100" align="left" src="http://bower.io/img/bower-logo.png">
+<img height="100" align="left" src="https://raw.github.com/gulpjs/artwork/master/gulp.png">
 
 <img height="100" align="left" src="https://s3.amazonaws.com/media-p.slid.es/uploads/hugojosefson/images/86267/angularjs-logo.png">
 
-<img height="100" align="left" src="https://raw.github.com/gulpjs/artwork/master/gulp.png">
+<img height="100" align="left" src="http://bower.io/img/bower-logo.png">
 
 <br><br><br><br>
 
@@ -86,13 +86,6 @@ But I think keeping first division by file type: scripts, styles, partials.
 * **TODO** Script loader: Require, Browserify, ES6 with Require?, none
 * **TODO** Test framework: Jasmine, Mocha, Qunit
 
-## TODO -> 0.4
-
-* UI framework
-* Template for each UI framework
-* Update Modernizer
-* Documentation
-
 ## Known issue
 
 Protractor tests are not stable with PhantomJS, at least on my Mac. I've got unpredictable disconnections between webdriverjs and phantomjs.
@@ -100,6 +93,14 @@ Protractor tests are not stable with PhantomJS, at least on my Mac. I've got unp
 I tried many configurations for Protractor without success, any hint would be apreciated.
 
 ## Changelog
+
+### 0.4.0
+
+* Add option too choose between Foundation or Bootstrap as UI Framework
+* New welcome page presenting integrated technologies
+* Several package updates: `yosay`, `browsersync`, `modernizr`, `protractor`...
+* Some bug fixes: #6, #7, #8
+* Add some documentation
 
 ### 0.3.1
 
