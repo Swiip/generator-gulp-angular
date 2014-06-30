@@ -6,9 +6,9 @@ Offers you a Yeoman generator to initiate a Web application with the following w
 
 <img height="100" align="left" src="https://raw.github.com/gulpjs/artwork/master/gulp.png">
 
-<img height="100" align="left" src="https://s3.amazonaws.com/media-p.slid.es/uploads/hugojosefson/images/86267/angularjs-logo.png">
-
 <img height="100" align="left" src="http://bower.io/img/bower-logo.png">
+
+<img height="100" align="left" src="https://s3.amazonaws.com/media-p.slid.es/uploads/hugojosefson/images/86267/angularjs-logo.png">
 
 <br><br><br><br>
 
@@ -16,7 +16,9 @@ Offers you a Yeoman generator to initiate a Web application with the following w
 
 This generator aims to takes the best from others generators like generator-angular, ngTailor and generator-gulp-webapp to offers the best workflow to start an application with AngularJS powered by Gulp!
 
-generator-gulp-angular scaffolds out an Angularjs application with a full featured gulpfile.js wich offers all the tasks for a modern Web development.
+generator-gulp-angular scaffolds out an AngularJS application with a full featured gulpfile.js wich offers all the tasks for a modern Web development.
+
+I intent to propose a generator with more tools options than any other to ables users to immediatly start a project with the tools he likes like a specific UI framework or a JavaScript preprocessor...
 
 ## Usage
 
@@ -96,7 +98,7 @@ I tried many configurations for Protractor without success, any hint would be ap
 
 ### 0.4.0
 
-* Add option too choose between Foundation or Bootstrap as UI Framework
+* Add option to choose between Foundation or Bootstrap as UI Framework
 * New welcome page presenting integrated technologies
 * Several package updates: `yosay`, `browsersync`, `modernizr`, `protractor`...
 * Some bug fixes: #6, #7, #8
