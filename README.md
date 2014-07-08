@@ -14,11 +14,12 @@ Offers you a Yeoman generator to initiate a Web application with the following w
 
 ## Why generator-gulp-angular ?
 
-This generator aims to takes the best from others generators like generator-angular, ngTailor and generator-gulp-webapp to offers the best workflow to start an application with AngularJS powered by Gulp!
+This generator combines the best features of other generators like [generator-angular](https://github.com/yeoman/generator-angular), [ngTailor](https://github.com/lauterry/generator-ngtailor) and [generator-gulp-webapp](https://github.com/yeoman/generator-gulp-webapp) into an optimal workflow for starting applications with AngularJS powered by Gulp!
 
-generator-gulp-angular scaffolds out an AngularJS application with a full featured gulpfile.js wich offers all the tasks for a modern Web development.
+generator-gulp-angular scaffolds an AngularJS application with a full-featured gulpfile.js, giving you immediate out-of-the-box access to all tasks for modern web development.
 
-I intent to propose a generator with more tools options than any other to ables users to immediatly start a project with the tools he likes like a specific UI framework or a JavaScript preprocessor...
+
+My intention is to create a generator that gives users total control over their development toolbox so they can immediately start projects with their preferred tools, such as specific UI frameworks or JavaScript preprocessors.
 
 ## Usage
 
@@ -58,30 +59,30 @@ yo gulp-angular [app-name]
 
 [Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub)
 
-But I think keeping first division by file type: scripts, styles, partials.
+But I recommend keeping to a division by file type: scripts, styles, partials.
 
 ## Features included in the gulpfile
-* *useref* : allow to configure your files in comments of your HTML file
-* *ngMin* : convert simple injection in complete syntax to be minificaction proof
+* *useref* : allow configuration of your files in comments of your HTML file
+* *ngMin* : convert simple injection to complete syntax to be minification proof
 * *uglify* : optimize all your JavaScript
 * *csso* : optimize all your CSS
-* *rev* : add an hash in the files names to prevent all browsers cache problems
-* *watch* : watch your source files to recompile them automatically
+* *rev* : add a hash in the file names to prevent browser cache problems
+* *watch* : watch your source files and recompile them automatically
 * *jshint* : JavaScript code linter
 * *imagemin* : all your images will be optimized at build
 * *Unit test (karma)* : out of the box unit test configuration with karma
-* *e2e test (protratctor)* : out of the box e2e test configuration with protractor
-* *browser sync* : full featured development web server with livereload and devices sync
-* *ngHtml2js* : all HTML partials will be converted in JS to be bundled in the application
-* **TODO** lazy : don't process files wich has not change as much as possible
+* *e2e test (protractor)* : out of the box e2e test configuration with protractor
+* *browser sync* : full-featured development web server with livereload and devices sync
+* *ngHtml2js* : all HTML partials will be converted to JS to be bundled in the application
+* **TODO** lazy : don't process files which haven't changed when possible
 
-## Questions the generator will asks
+## Questions the generator will ask
 * *jQuery*: jQuery 1.x, 2.x, Zepto, none
 * *Angular modules*: animate, cookies, touch, sanitize
-* *Resource handler*: ngResource, Restangular, none.
-* *Router*: ngRoute, UI Router, none.
-* *UI Framework*: Bootstrap, Foundation (Will be impacted by the CSS preprocessor chosen)
-* **TODO** Boostrap directives : UI Bootstrap, Angular Strap, none (Only if Bootstrap has been chosen)
+* *Resource handler*: ngResource, Restangular, none
+* *Router*: ngRoute, UI Router, none
+* *UI Framework*: Bootstrap, Foundation (depends on the chosen CSS preprocessor)
+* **TODO** Bootstrap directives : UI Bootstrap, Angular Strap, none (only if you chose Bootstrap)
 * **TODO** CSS preprocessor: less, sass, none
 * **TODO** JS preprocessor: CoffeeScript, TypeScript, ECMAScript6 (Traceur)
 * **TODO** HTML preprocessor: Jade ?
@@ -90,9 +91,9 @@ But I think keeping first division by file type: scripts, styles, partials.
 
 ## Known issue
 
-Protractor tests are not stable with PhantomJS, at least on my Mac. I've got unpredictable disconnections between webdriverjs and phantomjs.
+Protractor tests are not stable with PhantomJS, at least not on my Mac. I'm getting unpredictable disconnections between webdriverjs and phantomjs.
 
-I tried many configurations for Protractor without success, any hint would be apreciated.
+I tried many configurations for Protractor without success, any hint would be appreciated.
 
 ## Changelog
 
