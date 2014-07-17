@@ -77,11 +77,7 @@ gulp.task('images', function () {
 });
 
 gulp.task('fonts', function () {
-  return gulp.src(mainBowerFiles({
-    paths: {
-        bowerDirectory: 'app/bower_components'
-    }
-  }))
+  return gulp.src(mainBowerFiles())
     .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
     .pipe($.flatten())
     .pipe(gulp.dest('dist/fonts'))
