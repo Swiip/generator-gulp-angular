@@ -4,6 +4,7 @@ var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')();
 var saveLicense = require('uglify-save-license');
+var mainBowerFiles = require('main-bower-files');
 
 gulp.task('styles', function () {
   return gulp.src('app/styles/main.scss')
@@ -76,7 +77,7 @@ gulp.task('images', function () {
 });
 
 gulp.task('fonts', function () {
-  return $.bowerFiles()
+  return gulp.src(mainBowerFiles())
     .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
     .pipe($.flatten())
     .pipe(gulp.dest('dist/fonts'))
