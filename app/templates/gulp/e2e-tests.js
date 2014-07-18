@@ -25,11 +25,9 @@ gulp.task('protractor-only', ['webdriver-update', 'wiredep'], function (done) {
       throw err;
     })
     .on('end', function () {
-      done();
-
       // Close browser sync server
-      browserSync.instance.cleanup();
-      process.exit();
+      browserSync.exit();
+      done();
     });
 });
 
