@@ -7,5 +7,5 @@
         controller: 'MainCtrl'
       });
 
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise('/');
   })
