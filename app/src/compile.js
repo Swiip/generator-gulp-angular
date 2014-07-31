@@ -41,7 +41,9 @@ module.exports = function () {
     'angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor',
     this.props.jQuery.name,
     this.props.ui.key
-  ];
+  ].filter(_.isString);
+
+  this.props.ui.key = this.props.ui.key || 'default';
 
   this.model.technologies = _.reject(this.model.technologies, _.isNull);
 
