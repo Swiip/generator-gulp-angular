@@ -2,7 +2,7 @@
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
-        url: "/",
+        url: '/',
         templateUrl: 'partials/main.html',
         controller: 'MainCtrl'
       });
