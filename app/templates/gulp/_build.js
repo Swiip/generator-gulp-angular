@@ -2,9 +2,9 @@
 
 var gulp = require('gulp');
 
-var $ = require('gulp-load-plugins')();
-var saveLicense = require('uglify-save-license');
-var mainBowerFiles = require('main-bower-files');
+var $ = require('gulp-load-plugins')({
+  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license']
+});
 
 gulp.task('styles', function () {
   return gulp.src('app/styles/main.scss')
@@ -52,7 +52,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe($.rev())
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
-    .pipe($.uglify({preserveComments: saveLicense}))
+    .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
     .pipe($.replace('bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap','fonts'))
@@ -77,7 +77,7 @@ gulp.task('images', function () {
 });
 
 gulp.task('fonts', function () {
-  return gulp.src(mainBowerFiles())
+  return gulp.src($.mainBowerFiles())
     .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
     .pipe($.flatten())
     .pipe(gulp.dest('dist/fonts'))
