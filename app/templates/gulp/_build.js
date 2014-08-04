@@ -30,10 +30,10 @@ gulp.task('partials', function () {
       quotes: true
     }))
     .pipe($.ngHtml2js({
-      moduleName: "<%= appname %>",
-      prefix: "partials/"
+      moduleName: '<%= appname %>',
+      prefix: 'partials/'
     }))
-    .pipe(gulp.dest(".tmp/partials"))
+    .pipe(gulp.dest('.tmp/partials'))
     .pipe($.size());
 });
 
@@ -85,7 +85,7 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('clean', function () {
-  return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
+  return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.rimraf());
 });
 
 gulp.task('build', ['html', 'partials', 'images', 'fonts']);
