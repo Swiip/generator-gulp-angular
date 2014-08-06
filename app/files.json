@@ -15,7 +15,6 @@
     "gulp/server.js",
     "gulp/unit-tests.js",
     "gulp/watch.js",
-    "gulp/wiredep.js",
     "app/favicon.ico",
     "app/404.html",
     "app/images/yeoman.png",
@@ -28,6 +27,7 @@
     "bower.json",
     "gulpfile.js",
     "gulp/build.js",
+    "gulp/wiredep.js",
     "app/index.html",
     "app/scripts/main/main-ctrl.js",
     "test/unit/main.js"

@@ -24,12 +24,21 @@ module.exports = function () {
 
   this.bowerResolutions = processBowerDependencies(this.model.bowerResolutions);
 
+  this.wiredepExclusions = _.chain(this.model.wiredepExclusions)
+    .filter(_.isString)
+    .map(function (dependency) {
+      return '\'' + dependency + '\'';
+    })
+    .value()
+    .join(', ');
+
   this.modulesDependencies = _.chain(this.model.modulesDependencies)
     .filter(_.isString)
     .map(function (dependency) {
       return '\'' + dependency + '\'';
     })
-    .value().join(', ');
+    .value()
+    .join(', ');
 
   var technologiesContent = _.map(this.model.technologies, function(key) {
     return _.findWhere(techs, {key: key});
