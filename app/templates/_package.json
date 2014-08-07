@@ -35,7 +35,7 @@
     "http-proxy": "^1.1",
     "gulp-protractor": "0.0.7",
     "gulp-plumber": "^0.6.3",
-    "protractor": "^1.0.0-rc5",
+    "protractor": "^1.0.0",
     "uglify-save-license": "^0.4.1"
   },
   "engines": {
