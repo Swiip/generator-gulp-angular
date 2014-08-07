@@ -97,6 +97,12 @@ I tried many configurations for Protractor without success, any hint would be ap
 
 ## Changelog
 
+### 0.4.1
+
+* Update lots of NPM deps which fixed some bugs
+* Add option of no UI framework
+* Thanks to @GlennGeenen @rajington @otaviosoares @wrseward @gregoirjopla
+
 ### 0.4.0
 
 * Add option to choose between Foundation or Bootstrap as UI Framework
@@ -104,10 +110,12 @@ I tried many configurations for Protractor without success, any hint would be ap
 * Several package updates: `yosay`, `browsersync`, `modernizr`, `protractor`...
 * Some bug fixes: #6, #7, #8
 * Add some documentation
+* Thanks to @shinnn
 
 ### 0.3.1
 
 * Fix e2e tests to use BrowserSync as server. But no way to stop BrowserSync for now so the task never really ends.
+* Thanks to @jbpionnier @KevinLlopart
 
 ### 0.3.0
 
