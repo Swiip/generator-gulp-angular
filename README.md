@@ -82,8 +82,8 @@ But I recommend keeping to a division by file type: scripts, styles, partials.
 * *Resource handler*: ngResource, Restangular, none
 * *Router*: ngRoute, UI Router, none
 * *UI Framework*: Bootstrap, Foundation, none (depends on the chosen CSS preprocessor)
+* *CSS pre-processor*: Less, Sass with Ruby and Node, none
 * **TODO** Bootstrap directives : UI Bootstrap, Angular Strap, none (only if you chose Bootstrap)
-* **TODO** CSS preprocessor: less, sass, none
 * **TODO** JS preprocessor: CoffeeScript, TypeScript, ECMAScript6 (Traceur)
 * **TODO** HTML preprocessor: Jade ?
 * **TODO** Script loader: Require, Browserify, ES6 with Require?, none

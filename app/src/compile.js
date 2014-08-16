@@ -49,9 +49,10 @@ module.exports = function () {
   this.model.technologies = [
     'angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor',
     this.props.jQuery.name,
-    this.props.ui.key
+    this.props.ui.key,
+    this.props.cssPreprocessor.key
   ].filter(_.isString).filter(function(tech) {
-    return tech !== 'default';
+    return tech !== 'default' && tech !== 'css';
   });
 
   this.model.technologies = _.reject(this.model.technologies, _.isNull);

@@ -52,7 +52,6 @@ module.exports = function () {
   });
 
   var technologiesCopies = _.map(this.model.technologies, function(key) {
-    console.log('key', key);
     return 'app/images/' + _.findWhere(techs, {key: key}).logo;
   });
 
