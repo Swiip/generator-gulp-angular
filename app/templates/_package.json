@@ -36,7 +36,7 @@
     "gulp-protractor": "0.0.7",
     "gulp-plumber": "^0.6.3",
     "protractor": "^1.0.0",
-    "uglify-save-license": "^0.4.1"
+    "uglify-save-license": "^0.4.1"<%= npmDependencies %>
   },
   "engines": {
     "node": ">=0.10.0"

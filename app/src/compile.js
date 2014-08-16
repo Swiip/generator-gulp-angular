@@ -17,6 +17,11 @@ module.exports = function () {
     version: '2.8.x'
   };
 
+  if(this.props.ui.key === 'bootstrap' &&
+      this.props.cssPreprocessor.extension !== 'scss') {
+    this.props.ui.name = 'bootstrap';
+  }
+
   this.model.bowerDependencies = _.flatten([
     modernizr,
     this.props.jQuery,
@@ -45,11 +50,27 @@ module.exports = function () {
     'angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor',
     this.props.jQuery.name,
     this.props.ui.key
-  ].filter(_.isString);
-
-  this.props.ui.key = this.props.ui.key || 'default';
+  ].filter(_.isString).filter(function(tech) {
+    return tech !== 'default';
+  });
 
   this.model.technologies = _.reject(this.model.technologies, _.isNull);
+
+  this.model.npmDependencies = _.extend({}, this.props.cssPreprocessor.npm);
+
+  this.model.vendorStylesPreprocessed = !( this.props.cssPreprocessor.extension === 'css' ||
+      this.props.cssPreprocessor.extension === 'less' && this.props.ui.key === 'foundation' );
+
+  if(this.model.vendorStylesPreprocessed) {
+    this.model.cssLinks = ['styles/vendor.css'];
+  } else {
+    this.model.cssLinks = [];
+    if(this.props.ui.key === 'bootstrap') {
+      this.model.cssLinks.push('bower_components/bootstrap/dist/css/bootstrap.css');
+    } else if(this.props.ui.key === 'foundation') {
+      this.model.cssLinks.push('bower_components/foundation/css/foundation.css');
+    }
+  }
 
   //console.log('compile bower', this.props, this.model.bowerDependencies);
 

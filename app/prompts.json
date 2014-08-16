@@ -157,7 +157,7 @@
         {
           "value": {
             "name": "bootstrap-sass-official",
-            "version": "3.1.x",
+            "version": "3.2.x",
             "key": "bootstrap"
           },
           "name": "Bootstrap, the most popular HTML, CSS, and JS framework"
@@ -165,7 +165,7 @@
         {
           "value": {
             "name": "foundation",
-            "version": "5.2.x",
+            "version": "5.3.x",
             "key": "foundation"
           },
             "name": "Foundation, The most advanced responsive front-end framework in the world\""
@@ -174,9 +174,54 @@
           "value": {
             "name": null,
             "version": null,
-            "key": null
+            "key": "default"
           },
           "name": "None"
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "name": "cssPreprocessor",
+      "message": "Which CSS preprocessor do you want?",
+      "choices": [
+        {
+          "value": {
+            "key": "ruby-sass",
+            "extension": "scss",
+            "npm": {
+              "gulp-ruby-sass": "^0.4.3"
+            }
+          },
+          "name": "Sass (Ruby)"
+        },
+        {
+          "value": {
+            "key": "node-sass",
+            "extension": "scss",
+            "npm": {
+              "gulp-sass": "^0.7.3"
+            }
+          },
+          "name": "Sass (Node)"
+        },
+        {
+          "value": {
+            "key": "less",
+            "extension": "less",
+            "npm": {
+              "gulp-less": "^1.3.3"
+            }
+          },
+          "name": "Less"
+        },
+        {
+          "value": {
+            "key": "css",
+            "extension": "css",
+            "npm": {}
+          },
+          "name": "None, only the good old CSS"
         }
       ]
     }

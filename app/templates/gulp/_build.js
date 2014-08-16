@@ -5,16 +5,7 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license']
 });
-
-gulp.task('styles', function () {
-  return gulp.src('app/styles/main.scss')
-    .pipe($.plumber())
-    .pipe($.rubySass({style: 'expanded'}))
-    .pipe($.autoprefixer('last 1 version'))
-    .pipe(gulp.dest('.tmp/styles'))
-    .pipe($.size());
-});
-
+<%= stylesBuild %>
 gulp.task('scripts', function () {
   return gulp.src('app/scripts/**/*.js')
     .pipe($.jshint())
@@ -37,7 +28,7 @@ gulp.task('partials', function () {
     .pipe($.size());
 });
 
-gulp.task('html', ['styles', 'scripts', 'partials'], function () {
+gulp.task('html', [<% if(stylesBuild) { %>'styles', <%}%>'scripts', 'partials'], function () {
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
 

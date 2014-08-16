@@ -40,11 +40,19 @@ module.exports = function () {
     .value()
     .join(', ');
 
+  this.npmDependencies = _.chain(this.model.npmDependencies)
+    .keys()
+    .map(function(key) {
+      return ',\n    "' + key + '": "' + this.model.npmDependencies[key] + '"';
+    }, this)
+    .value();
+
   var technologiesContent = _.map(this.model.technologies, function(key) {
     return _.findWhere(techs, {key: key});
   });
 
   var technologiesCopies = _.map(this.model.technologies, function(key) {
+    console.log('key', key);
     return 'app/images/' + _.findWhere(techs, {key: key}).logo;
   });
 
@@ -82,13 +90,30 @@ module.exports = function () {
     this.routerJs = '';
   }
 
-  /* ui */
-  var cssTranspiler = 'scss'; //stub
+  /* styles */
+  if(this.props.cssPreprocessor.key !== 'css') {
+    this.stylesBuild = '\n' + this.read('gulp/__' + this.props.cssPreprocessor.key + '.js', 'utf8');
+  } else {
+    this.stylesBuild = '';
+  }
 
-  var styleSource = 'app/styles/__' + this.props.ui.key + '.' + cssTranspiler;
-  var styleDest = 'app/styles/main.' + cssTranspiler;
+  this.cssLinks = _.map(this.model.cssLinks, function(cssLink) {
+    return '<link rel="stylesheet" href="' + cssLink + '">';
+  }).join('\n    ');
+
+  /* ui */
+  var styleMainSource = 'app/styles/__' + this.props.ui.key + '-main.' + this.props.cssPreprocessor.extension;
+  var styleMainDest = 'app/styles/main.' + this.props.cssPreprocessor.extension;
   var styleCopies = {};
-  styleCopies[styleSource] = styleDest;
+  styleCopies[styleMainSource] = styleMainDest;
+
+  if(this.model.vendorStylesPreprocessed) {
+    var styleVendorSource = 'app/styles/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
+    var styleVendorDest = 'app/styles/vendor.' + this.props.cssPreprocessor.extension;
+    styleCopies[styleVendorSource] = styleVendorDest;
+  }
 
   this.optionalFiles.push({ copies: styleCopies });
+
+
 };

@@ -1,0 +1,117 @@
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 1170px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 20px;
+  background-color: #222;
+}
+
+.navbar > a {
+  float: left;
+  color: lightgrey;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+  height: 50px;
+}
+
+.navbar ul {
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar ul li {
+  float: left;
+  position: relative;
+  display: block;
+}
+
+.navbar ul li a {
+  color: white;
+  position: relative;
+  display: block;
+  padding: 15px;
+  line-height: 20px;
+}
+
+.navbar ul li.active a {
+  background-color: black;
+}
+
+.jumbotron {
+  padding: 60px;
+  margin-bottom: 30px;
+  background-color: gainsboro;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  color: white;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+
+.col {
+  float: left;
+  width: 33.33%;
+  position: relative;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+
+.col .thumbnail {
+  height: 200px;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.col .thumbnail .caption {
+  padding: 9px;
+}
+
+.col .thumbnail img.pull-right {
+  width: 50px;
+}
+
+.pull-right {
+  float: right;
+}
+
+hr {
+  clear: both;
+}
