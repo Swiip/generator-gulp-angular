@@ -97,6 +97,12 @@ I tried many configurations for Protractor without success, any hint would be ap
 
 ## Changelog
 
+### 0.5.0
+
+* Add CSS preprocessor option: Sass with Node & Ruby, Less or none. Adapt itself with the UI framework
+* Add Angular version option : 1.2 or 1.3
+* Thanks to @adamshiervani
+
 ### 0.4.1
 
 * Update lots of NPM deps which fixed some bugs
