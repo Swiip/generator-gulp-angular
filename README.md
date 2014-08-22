@@ -63,7 +63,7 @@ But I recommend keeping to a division by file type: scripts, styles, partials.
 
 ## Features included in the gulpfile
 * *useref* : allow configuration of your files in comments of your HTML file
-* *ngMin* : convert simple injection to complete syntax to be minification proof
+* *ngAnnotate* : convert simple injection to complete syntax to be minification proof
 * *uglify* : optimize all your JavaScript
 * *csso* : optimize all your CSS
 * *rev* : add a hash in the file names to prevent browser cache problems
