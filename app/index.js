@@ -15,8 +15,6 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     this.argument('appname', { type: String, required: false });
     this.appname = this.appname || path.basename(process.cwd());
     this.appname = this._.camelize(this._.slugify(this._.humanize(this.appname)));
-
-    this.angularVersion = '1.2.x';
   },
 
   /* Welcome, prompt fast or advanced */
@@ -45,6 +43,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
       }.bind(this));
     } else {
       this.props = {
+        angularVersion: '1.2.x',
         angularModules: [],
         jQuery: { name: null, version: null },
         resource: { name: null, version: null, module: null },

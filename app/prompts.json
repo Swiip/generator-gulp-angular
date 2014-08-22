@@ -16,6 +16,21 @@
   },
   "advanced": [
     {
+      "type": "list",
+      "name": "angularVersion",
+      "message": "Which version of Angular do you want?",
+      "choices": [
+        {
+          "value": "1.2.x",
+          "name": "1.2.x (legacy)"
+        },
+        {
+          "value": "1.3.x",
+          "name": "1.3.x (latest but still in beta)"
+        }
+      ]
+    },
+    {
       "type": "checkbox",
       "name": "angularModules",
       "message": "Which Angular's modules would you want to have? (ngRoute and ngResource will be addressed after)",

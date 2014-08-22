@@ -6,6 +6,8 @@ module.exports = function () {
 
   var _ = this._;
 
+  this.angularVersion = this.props.angularVersion;
+
   this.model = {};
 
   var angularModules = this.props.angularModules.map(function (module) {

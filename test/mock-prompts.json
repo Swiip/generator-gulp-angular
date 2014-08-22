@@ -4,6 +4,7 @@
   },
   "medium": {
     "mode": "advanced",
+    "angularVersion" : "1.2.x",
     "angularModules": [ {
       "name": "angular-animate",
       "module": "ngAnimate"
@@ -33,6 +34,7 @@
   },
   "full": {
     "mode": "advanced",
+    "angularVersion": "1.3.x",
     "angularModules": [ {
       "name": "angular-animate",
       "module": "ngAnimate"
