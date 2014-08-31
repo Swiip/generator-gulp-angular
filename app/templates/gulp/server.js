@@ -7,17 +7,18 @@ var httpProxy = require('http-proxy');
 
 /* This configuration allow you to configure browser sync to proxy your backend */
 var proxyTarget = 'http://server/context/'; // The location of your backend
-var proxyApiPrefix = 'api'; // The element in the URL which differentiate between API request and static file request
 
 var proxy = httpProxy.createProxyServer({
   target: proxyTarget
 });
 
+/* proxyMiddleware forwards static files to BrowserSync server
+   and forwards dynamic requests to your real backend */
 function proxyMiddleware(req, res, next) {
-  if (req.url.indexOf(proxyApiPrefix) !== -1) {
-    proxy.web(req, res);
-  } else {
+  if (/\.(html|png|css|jpg|jpeg|gif|js|ico|xml|rss|txt)(\?(r|v|rel|rev)=[\-\.\w]*)?$/.test(req.url)) {
     next();
+  } else {
+    proxy.web(req, res);
   }
 }
 
