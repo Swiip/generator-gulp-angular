@@ -12,10 +12,10 @@ var proxy = httpProxy.createProxyServer({
   target: proxyTarget
 });
 
-/* proxyMiddleware forwards static files to BrowserSync server
+/* proxyMiddleware forwards static file requests to BrowserSync server
    and forwards dynamic requests to your real backend */
 function proxyMiddleware(req, res, next) {
-  if (/\.(html|png|css|jpg|jpeg|gif|js|ico|xml|rss|txt)(\?(r|v|rel|rev)=[\-\.\w]*)?$/.test(req.url)) {
+  if (/\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/.test(req.url)) {
     next();
   } else {
     proxy.web(req, res);
