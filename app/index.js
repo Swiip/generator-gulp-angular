@@ -34,6 +34,8 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
 
   /* Handle advanced prompts or set default values */
   advancedMode: function () {
+    var _ = this._;
+
     if (this.mode === 'advanced') {
       var done = this.async();
 
@@ -42,14 +44,23 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
         done();
       }.bind(this));
     } else {
+      var angularVersionPrompt = _.findWhere(prompts.advanced, {name: 'angularVersion'});
+      var angularVersion = angularVersionPrompt.choices[0];
+      var uiPrompt = _.findWhere(prompts.advanced, {name: 'ui'});
+      var ui = _.findWhere(uiPrompt.choices, {value: {key: 'bootstrap'}});
+      var cssPreprocessorPrompt = _.findWhere(prompts.advanced, {name: 'cssPreprocessor'});
+      var cssPreprocessor = _.find(cssPreprocessorPrompt.choices, function(choice) {
+        return choice.value.key === 'node-sass';
+      });
+
       this.props = {
-        angularVersion: '1.2.x',
+        angularVersion: angularVersion.value,
         angularModules: [],
         jQuery: { name: null, version: null },
         resource: { name: null, version: null, module: null },
         router: { name: null, version: null, module: null },
-        ui: { name: 'bootstrap-sass-official', version: '3.1.x', key: 'bootstrap' },
-        cssPreprocessor: { key: 'node-sass', extension: 'scss', npm: { 'gulp-sass': '^0.7.3' } }
+        ui: ui.value,
+        cssPreprocessor: cssPreprocessor.value
       };
     }
   },
