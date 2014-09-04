@@ -100,6 +100,8 @@ module.exports = function () {
     return '<link rel="stylesheet" href="' + cssLink + '">';
   }).join('\n    ');
 
+  this.styleExtension = this.props.cssPreprocessor.extension;
+
   /* ui */
   var styleMainSource = 'app/styles/__' + this.props.ui.key + '-main.' + this.props.cssPreprocessor.extension;
   var styleMainDest = 'app/styles/main.' + this.props.cssPreprocessor.extension;
