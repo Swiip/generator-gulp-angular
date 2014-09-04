@@ -180,7 +180,7 @@
         {
           "value": {
             "name": "foundation",
-            "version": "5.3.x",
+            "version": "5.4.x",
             "key": "foundation"
           },
             "name": "Foundation, \"The most advanced responsive front-end framework in the world\""
@@ -205,7 +205,7 @@
             "key": "ruby-sass",
             "extension": "scss",
             "npm": {
-              "gulp-ruby-sass": "^0.4.3"
+              "gulp-ruby-sass": "^0.7.1"
             }
           },
           "name": "Sass (Ruby), Original Syntactically Awesome StyleSheets (requires Ruby)"

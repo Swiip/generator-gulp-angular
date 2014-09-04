@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "modernizr": "2.8.2",
-    "jquery": "2.1.x",
+    "jquery": "2.x.x",
     "zeptojs": "1.1.x",
     "angular": "1.2.x",
     "angular-animate": "1.2.x",
@@ -16,7 +16,7 @@
     "angular-ui-router": "0.2.x",
     "bootstrap-sass-official": "3.2.x",
     "bootstrap": "3.2.x",
-    "foundation": "5.3.x"
+    "foundation": "5.4.x"
   },
   "devDependencies": {
     "angular-mocks": "1.2.x"
