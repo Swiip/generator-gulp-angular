@@ -91,7 +91,8 @@ module.exports = function () {
 
   /* styles */
   if(this.props.cssPreprocessor.key !== 'css') {
-    this.stylesBuild = '\n' + this.read('gulp/__' + this.props.cssPreprocessor.key + '.js', 'utf8');
+    this.stylesBuild = '\n' + this.read('gulp/__handleError.js', 'utf8') + '\n' +
+      this.read('gulp/__' + this.props.cssPreprocessor.key + '.js', 'utf8');
   } else {
     this.stylesBuild = '';
   }

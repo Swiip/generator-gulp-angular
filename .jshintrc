@@ -18,6 +18,7 @@
   "trailing": true,
   "smarttabs": true,
   "white": true,
+  "validthis": true,
   "globals": {
     /* Angular Mocks */
     "inject": false,
