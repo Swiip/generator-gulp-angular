@@ -117,5 +117,14 @@ module.exports = function () {
 
   this.optionalFiles.push({ copies: styleCopies });
 
+  this.replaceFontPath = '';
+  if(this.props.ui.key === 'bootstrap') {
+    if(this.props.cssPreprocessor.extension === 'scss') {
+      this.replaceFontPath = '\n    .pipe($.replace(\'bower_components/bootstrap-sass-official/assets/fonts/bootstrap\',\'fonts\'))';
+    }
+    if(this.props.cssPreprocessor.extension === 'less') {
+      this.replaceFontPath = '\n    .pipe($.replace(\'bower_components/bootstrap/fonts\',\'fonts\'))';
+    }
+  }
 
 };

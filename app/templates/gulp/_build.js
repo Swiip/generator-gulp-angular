@@ -31,6 +31,7 @@ gulp.task('partials', function () {
 gulp.task('html', [<% if(stylesBuild) { %>'styles', <%}%>'scripts', 'partials'], function () {
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
+  var assets;
 
   return gulp.src('app/*.html')
     .pipe($.inject(gulp.src('.tmp/partials/**/*.js'), {
@@ -39,17 +40,16 @@ gulp.task('html', [<% if(stylesBuild) { %>'styles', <%}%>'scripts', 'partials'],
       addRootSlash: false,
       addPrefix: '../'
     }))
-    .pipe($.useref.assets())
+    .pipe(assets = $.useref.assets())
     .pipe($.rev())
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
     .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
     .pipe(jsFilter.restore())
-    .pipe(cssFilter)
-    .pipe($.replace('bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap','fonts'))
+    .pipe(cssFilter)<%= replaceFontPath %>
     .pipe($.csso())
     .pipe(cssFilter.restore())
-    .pipe($.useref.restore())
+    .pipe(assets.restore())
     .pipe($.useref())
     .pipe($.revReplace())
     .pipe(gulp.dest('dist'))
