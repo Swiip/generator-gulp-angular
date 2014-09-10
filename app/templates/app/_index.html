@@ -9,6 +9,10 @@
 
     <!-- build:css({.tmp,app}) styles/vendor.css -->
     <%= cssLinks %>
+
+    <!-- bower:css -->
+    <!-- run `gulp wiredep` to automaticaly populate bower styles dependencies -->
+    <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:css({.tmp,app}) styles/main.css -->
@@ -38,14 +42,16 @@
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
-    <!-- run `gulp wiredep` to automaticaly populate bower dependencies -->
+    <!-- run `gulp wiredep` to automaticaly populate bower script dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="scripts/<%= appname %>.js"></script>
     <script src="scripts/main/main-ctrl.js"></script>
+
     <!-- inject:partials -->
+    <!-- angular templates will be automaticaly converted in js and inserted here -->
     <!-- endinject -->
     <!-- endbuild -->
 
