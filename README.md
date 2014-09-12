@@ -97,6 +97,15 @@ I tried many configurations for Protractor without success, any hint would be ap
 
 ## Changelog
 
+### 0.5.1
+
+* Restore CSS wiring with wiredep
+* Fix the fast mode which was using an old version of Bootstrap
+* Stabilization of the CSS preprocessor choices
+* Bunch of Node dependencies update
+* Fix #39, #41, #42, #44, #46, #49
+* Thanks to @marani
+
 ### 0.5.0
 
 * Add CSS preprocessor option: Sass with Node & Ruby, Less or none. Adapt itself with the UI framework
