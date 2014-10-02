@@ -29,6 +29,7 @@ gulp.task('partials', function () {
 });
 
 gulp.task('html', [<% if(stylesBuild) { %>'styles', <%}%>'scripts', 'partials'], function () {
+  var htmlFilter = $.filter('*.html');
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
   var assets;
@@ -52,6 +53,13 @@ gulp.task('html', [<% if(stylesBuild) { %>'styles', <%}%>'scripts', 'partials'],
     .pipe(assets.restore())
     .pipe($.useref())
     .pipe($.revReplace())
+    .pipe(htmlFilter)
+    .pipe($.minifyHtml({
+      empty: true,
+      spare: true,
+      quotes: true
+    }))
+    .pipe(htmlFilter.restore())
     .pipe(gulp.dest('dist'))
     .pipe($.size());
 });
