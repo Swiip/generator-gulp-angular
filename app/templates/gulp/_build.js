@@ -52,6 +52,11 @@ gulp.task('html', [<% if(stylesBuild) { %>'styles', <%}%>'scripts', 'partials'],
     .pipe(assets.restore())
     .pipe($.useref())
     .pipe($.revReplace())
+    .pipe($.minifyHtml({
+      empty: true,
+      spare: true,
+      quotes: true
+    }))
     .pipe(gulp.dest('dist'))
     .pipe($.size());
 });
