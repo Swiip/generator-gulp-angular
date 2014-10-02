@@ -12,10 +12,14 @@ var proxy = httpProxy.createProxyServer({
   target: proxyTarget
 });
 
+proxy.on('error', function(error) {
+  console.error('[Proxy]', error);
+});
+
 /* proxyMiddleware forwards static file requests to BrowserSync server
    and forwards dynamic requests to your real backend */
 function proxyMiddleware(req, res, next) {
-  if (/\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/.test(req.url)) {
+  if (/\.(html|css|scss|less|map|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/.test(req.url)) {
     next();
   } else {
     proxy.web(req, res);
