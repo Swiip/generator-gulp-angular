@@ -52,7 +52,7 @@ module.exports = function () {
   });
 
   var technologiesCopies = _.map(this.model.technologies, function(key) {
-    return 'app/images/' + _.findWhere(techs, {key: key}).logo;
+    return 'src/assets/images/' + _.findWhere(techs, {key: key}).logo;
   });
 
   this.technologies = JSON.stringify(technologiesContent, null, 2);
@@ -64,21 +64,21 @@ module.exports = function () {
   });
 
   /* router */
-  var partial = 'app/partials/__' + this.props.ui.key + '.html';
+  var partial = 'src/app/main/__' + this.props.ui.key + '.html';
 
   if(this.props.router.module !== null) {
     var copies = {};
-    copies[partial] = 'app/partials/main.html';
+    copies[partial] = 'src/app/main/main.html';
     this.optionalFiles.push({copies: copies});
     this.optionalFiles.push('router');
   }
 
   if (this.props.router.module === 'ngRoute') {
     this.routerHtml = '<div ng-view></div>';
-    this.routerJs = this.read('app/scripts/__ngroute.js', 'utf8');
+    this.routerJs = this.read('src/app/__ngroute.js', 'utf8');
   } else if (this.props.router.module === 'ui.router') {
     this.routerHtml = '<div ui-view></div>';
-    this.routerJs = this.read('app/scripts/__uirouter.js', 'utf8');
+    this.routerJs = this.read('src/app/__uirouter.js', 'utf8');
   } else {
     this.routerHtml = this.read(partial, 'utf8');
     this.routerHtml = this.routerHtml.replace(
@@ -104,14 +104,14 @@ module.exports = function () {
   this.styleExtension = this.props.cssPreprocessor.extension;
 
   /* ui */
-  var styleMainSource = 'app/styles/__' + this.props.ui.key + '-main.' + this.props.cssPreprocessor.extension;
-  var styleMainDest = 'app/styles/main.' + this.props.cssPreprocessor.extension;
+  var styleMainSource = 'src/app/main/__' + this.props.ui.key + '-main.' + this.props.cssPreprocessor.extension;
+  var styleMainDest = 'src/app/main/main.' + this.props.cssPreprocessor.extension;
   var styleCopies = {};
   styleCopies[styleMainSource] = styleMainDest;
 
   if(this.model.vendorStylesPreprocessed) {
-    var styleVendorSource = 'app/styles/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
-    var styleVendorDest = 'app/styles/vendor.' + this.props.cssPreprocessor.extension;
+    var styleVendorSource = 'src/app/main/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
+    var styleVendorDest = 'src/app/main/vendor.' + this.props.cssPreprocessor.extension;
     styleCopies[styleVendorSource] = styleVendorDest;
   }
 

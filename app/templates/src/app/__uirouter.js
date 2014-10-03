@@ -3,7 +3,7 @@
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'partials/main.html',
+        templateUrl: 'app/main/main.html',
         controller: 'MainCtrl'
       });
 

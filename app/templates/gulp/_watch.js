@@ -3,8 +3,8 @@
 var gulp = require('gulp');
 
 gulp.task('watch', ['wiredep'<% if(stylesBuild) { %>, 'styles'<% } %>] ,function () {
-<% if(stylesBuild) { %>  gulp.watch('app/styles/**/*.<%= styleExtension %>', ['styles']);
-<% } %>  gulp.watch('app/scripts/**/*.js', ['scripts']);
-  gulp.watch('app/images/**/*', ['images']);
+<% if(stylesBuild) { %>  gulp.watch('src/{app,components}/**/*.<%= styleExtension %>', ['styles']);
+<% } %>  gulp.watch('src/{app,components}/**/*.js', ['scripts']);
+  gulp.watch('src/assets/images/**/*', ['images']);
   gulp.watch('bower.json', ['wiredep']);
 });

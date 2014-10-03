@@ -1,8 +1,14 @@
 gulp.task('styles', function () {
-  return gulp.src('app/styles/*.less')
-    .pipe($.less())
+  return gulp.src('src/{app,components}/**/*.less')
+    .pipe($.less({
+      paths: [
+        'src/bower_components',
+        'src/app',
+        'src/components'
+      ]
+    }))
     .on('error', handleError)
     .pipe($.autoprefixer('last 1 version'))
-    .pipe(gulp.dest('.tmp/styles'))
+    .pipe(gulp.dest('.tmp'))
     .pipe($.size());
 });
