@@ -29,6 +29,7 @@
     "gulp/wiredep.js",
     "src/index.html",
     "src/app/main/main.controller.js",
+    "src/components/navbar/navbar.controller.js",
     "test/unit/main.js"
   ],
   "dots": [

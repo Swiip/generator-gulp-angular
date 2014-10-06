@@ -65,13 +65,16 @@ module.exports = function () {
 
   /* router */
   var partial = 'src/app/main/__' + this.props.ui.key + '.html';
+  var navbar  = 'src/components/navbar/__' + this.props.ui.key + '-navbar.html';
+
+  var copies = {};
+  copies[navbar] = 'src/components/navbar/navbar.html';
 
   if(this.props.router.module !== null) {
-    var copies = {};
     copies[partial] = 'src/app/main/main.html';
-    this.optionalFiles.push({copies: copies});
     this.optionalFiles.push('router');
   }
+  this.optionalFiles.push({copies: copies});
 
   if (this.props.router.module === 'ngRoute') {
     this.routerHtml = '<div ng-view></div>';
