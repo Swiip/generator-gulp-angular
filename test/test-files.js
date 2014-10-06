@@ -16,9 +16,9 @@ describe('gulp-angular generator files', function () {
     files.call({
       _: _,
       optionalFiles: ['router', {
-        copies: {'app/partials/__foundation.html': 'app/partials/main.html'}
+        copies: {'src/app/main/__foundation.html': 'src/app/main/main.html'}
       }, {
-        copies: ['app/images/angular.png']
+        copies: ['src/assets/images/angular.png']
       }],
       mkdir: function() { actualMkdir++; },
       copy: function() { actualCopy++; },
@@ -26,8 +26,7 @@ describe('gulp-angular generator files', function () {
     });
 
     var expectedMkdir =
-      data.directories.length +
-      data.router.directories.length;
+      data.directories.length;
 
     var expectedCopy =
       1 + //fixed : router partial
