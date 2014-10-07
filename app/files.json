@@ -1,11 +1,10 @@
 {
   "directories": [
     "gulp",
-    "app",
-    "app/images",
-    "app/scripts",
-    "app/scripts/main",
-    "app/styles",
+    "src",
+    "src/app",
+    "src/app/main",
+    "src/components",
     "test",
     "test/unit",
     "test/e2e"
@@ -14,9 +13,9 @@
     "gulp/e2e-tests.js",
     "gulp/server.js",
     "gulp/unit-tests.js",
-    "app/favicon.ico",
-    "app/404.html",
-    "app/images/yeoman.png",
+    "src/favicon.ico",
+    "src/404.html",
+    "src/assets/images/yeoman.png",
     "test/karma.conf.js",
     "test/protractor.conf.js",
     "test/e2e/main.js"
@@ -28,8 +27,9 @@
     "gulp/build.js",
     "gulp/watch.js",
     "gulp/wiredep.js",
-    "app/index.html",
-    "app/scripts/main/main-ctrl.js",
+    "src/index.html",
+    "src/app/main/main.controller.js",
+    "src/components/navbar/navbar.controller.js",
     "test/unit/main.js"
   ],
   "dots": [
@@ -40,7 +40,7 @@
   ],
   "router": {
     "directories": [
-      "app/partials"
+      "src"
     ]
   }
 }

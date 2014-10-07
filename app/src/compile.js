@@ -65,7 +65,7 @@ module.exports = function () {
       this.props.cssPreprocessor.extension === 'less' && this.props.ui.key === 'foundation' );
 
   if(this.model.vendorStylesPreprocessed) {
-    this.model.cssLinks = ['styles/vendor.css'];
+    this.model.cssLinks = ['app/main/vendor.css'];
   } else {
     this.model.cssLinks = [];
     if(this.props.ui.key === 'bootstrap') {

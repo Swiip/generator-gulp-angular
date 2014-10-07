@@ -2,7 +2,7 @@
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'partials/main.html',
+        templateUrl: 'app/main/main.html',
         controller: 'MainCtrl'
       })
       .otherwise({

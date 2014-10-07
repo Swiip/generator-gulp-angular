@@ -6,16 +6,16 @@ var gulp = require('gulp');
 gulp.task('wiredep', function () {
   var wiredep = require('wiredep').stream;
 
-  gulp.src('app/styles/*.scss')
+  gulp.src('src/{app,components}/*.scss')
     .pipe(wiredep({
-        directory: 'app/bower_components'
+        directory: 'src/bower_components'
     }))
-    .pipe(gulp.dest('app/styles'));
+    .pipe(gulp.dest('src'));
 
-  gulp.src('app/*.html')
+  gulp.src('src/*.html')
     .pipe(wiredep({
-      directory: 'app/bower_components',
+      directory: 'src/bower_components',
       exclude: [<%= wiredepExclusions %>]
     }))
-    .pipe(gulp.dest('app'));
+    .pipe(gulp.dest('src'));
 });
