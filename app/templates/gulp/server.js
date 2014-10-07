@@ -15,7 +15,7 @@ var proxy = httpProxy.createProxyServer({
 /* proxyMiddleware forwards static file requests to BrowserSync server
    and forwards dynamic requests to your real backend */
 function proxyMiddleware(req, res, next) {
-  if (/\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/.test(req.url)) {
+  if (/\.(html|css|js|png|jpg|jpeg|gif|ico|xml|rss|txt|eot|svg|ttf|woff|cur)(\?((r|v|rel|rev)=[\-\.\w]*)?)?$/.test(req.url)) {
     next();
   } else {
     proxy.web(req, res);
