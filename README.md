@@ -1,4 +1,5 @@
 # generator-gulp-angular [![Build Status](https://secure.travis-ci.org/Swiip/generator-gulp-angular.svg?branch=master)](http://travis-ci.org/Swiip/generator-gulp-angular)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Swiip/generator-gulp-angular?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Offers you a Yeoman generator to initiate a Web application with the following workflow:
 
