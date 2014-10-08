@@ -59,8 +59,6 @@ yo gulp-angular [app-name]
 
 [Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub)
 
-But I recommend keeping to a division by file type: scripts, styles, partials.
-
 ## Features included in the gulpfile
 * *useref* : allow configuration of your files in comments of your HTML file
 * *ngAnnotate* : convert simple injection to complete syntax to be minification proof

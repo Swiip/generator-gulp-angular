@@ -1,0 +1,18 @@
+<nav class="top-bar row" ng-controller="NavbarCtrl">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="https://github.com/Swiip/generator-gulp-angular">Gulp & Angular</a></h1>
+    </li>
+  </ul>
+
+  <section class="top-bar-section">
+    <ul class="right">
+      <li class="active"><a ng-href="#">Home</a></li>
+      <li><a ng-href="#">About</a></li>
+      <li><a ng-href="#">Contact</a></li>
+    </ul>
+    <ul class="left">
+      <li><a ng-href="#">Current date: {{ date | date:'yyyy-MM-dd' }}</a></li>
+    </ul>
+  </section>
+</nav>

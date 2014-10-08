@@ -26,7 +26,7 @@ describe('gulp-angular generator', function () {
 
       this.app.run(options, function () {
         var promiseLinkNode = Q.nfcall(fs.symlink, path.join(depsDir, 'node_modules'), path.join(tempDir, 'node_modules'));
-        var promiseLinkBower = Q.nfcall(fs.symlink, path.join(depsDir, 'bower_components'), path.join(tempDir, 'app/bower_components'));
+        var promiseLinkBower = Q.nfcall(fs.symlink, path.join(depsDir, 'bower_components'), path.join(tempDir, 'src/bower_components'));
         Q.all([promiseLinkNode, promiseLinkBower]).then(function() {
           var gulpProcess = spawn('gulp', tasks, {stdio: 'inherit'});
           gulpProcess.on('exit', function(returnCode) {

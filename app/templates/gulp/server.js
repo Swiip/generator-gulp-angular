@@ -22,15 +22,14 @@ function browserSyncInit(baseDir, files, browser) {
 
 gulp.task('serve', ['watch'], function () {
   browserSyncInit([
-    'app',
+    'src',
     '.tmp'
   ], [
-    'app/*.html',
-    'app/styles/**/*.css',
-    '.tmp/styles/**/*.css',
-    'app/scripts/**/*.js',
-    'app/partials/**/*.html',
-    'app/images/**/*'
+    '.tmp/{app,components}/**/*.css',
+    'src/assets/images/**/*',
+    'src/*.html',
+    'src/{app,components}/**/*.html',
+    'src/{app,components}/**/*.js'
   ]);
 });
 
@@ -39,7 +38,7 @@ gulp.task('serve:dist', ['build'], function () {
 });
 
 gulp.task('serve:e2e', function () {
-  browserSyncInit(['app', '.tmp'], null, []);
+  browserSyncInit(['src', '.tmp'], null, []);
 });
 
 gulp.task('serve:e2e-dist', ['watch'], function () {
