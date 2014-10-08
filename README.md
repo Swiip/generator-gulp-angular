@@ -95,6 +95,13 @@ I tried many configurations for Protractor without success, any hint would be ap
 
 ## Changelog
 
+### 0.6.0
+
+* **Breaking Change** Directory structure evolved to the recommendations from the Angular team. *Do not run this version of the generator on an existing project generated with a previous version*
+* Isolation of the proxy middleware, some fixes and disabling by default
+* Minifying HTML (index, not the partials)
+* Thanks to @intellix, @marani and special thanks to @zckrs wich join me as commiter
+
 ### 0.5.1
 
 * Restore CSS wiring with wiredep
