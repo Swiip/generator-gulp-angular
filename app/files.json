@@ -13,6 +13,7 @@
   "copies": [
     "gulp/e2e-tests.js",
     "gulp/server.js",
+    "gulp/proxy.js",
     "gulp/unit-tests.js",
     "app/favicon.ico",
     "app/404.html",
