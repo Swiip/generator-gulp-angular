@@ -1,6 +1,6 @@
 'use strict';
 
-var files = require('../files');
+var files = require('../files.json');
 var path = require('path');
 
 /* Process files */

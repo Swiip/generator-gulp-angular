@@ -1,4 +1,4 @@
-gulp.task('styles', function () {
+gulp.task('styles', ['wiredep'],  function () {
   return gulp.src('src/{app,components}/**/*.less')
     .pipe($.less({
       paths: [

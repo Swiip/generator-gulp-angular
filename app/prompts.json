@@ -1,244 +1,227 @@
-{
-  "mode": {
+[
+  {
     "type": "list",
-    "name": "mode",
-    "message": "You can choose between 2 majors modes:",
+    "name": "angularVersion",
+    "message": "Which version of Angular do you want?",
     "choices": [
       {
-        "name": "Fast mode: Generate a standard project with default options",
-        "value": "fast"
+        "value": "1.3.x",
+        "name": "1.3.x (latest)"
       },
       {
-        "name": "Advanced mode: Ask you for all choices to make while creating your project",
-        "value": "advanced"
+        "value": "1.2.x",
+        "name": "1.2.x (legacy 2013-11-08)"
       }
     ]
   },
-  "advanced": [
-    {
-      "type": "list",
-      "name": "angularVersion",
-      "message": "Which version of Angular do you want?",
-      "choices": [
-        {
-          "value": "1.2.x",
-          "name": "1.2.x (legacy)"
+  {
+    "type": "checkbox",
+    "name": "angularModules",
+    "message": "Which Angular's modules would you want to have? (ngRoute and ngResource will be addressed after)",
+    "choices": [
+      {
+        "value": {
+          "name": "angular-animate",
+          "module": "ngAnimate"
         },
-        {
-          "value": "1.3.x",
-          "name": "1.3.x (latest but still in beta)"
-        }
-      ]
-    },
-    {
-      "type": "checkbox",
-      "name": "angularModules",
-      "message": "Which Angular's modules would you want to have? (ngRoute and ngResource will be addressed after)",
-      "choices": [
-        {
-          "value": {
-            "name": "angular-animate",
-            "module": "ngAnimate"
-          },
-          "name": "angular-animate.js (enable animation features)",
-          "checked": true
+        "name": "angular-animate.js (enable animation features)",
+        "checked": true
+      },
+      {
+        "value": {
+          "name": "angular-cookies",
+          "module": "ngCookies"
         },
-        {
-          "value": {
-            "name": "angular-cookies",
-            "module": "ngCookies"
-          },
-          "name": "angular-cookies.js (handle cookie management)",
-          "checked": true
+        "name": "angular-cookies.js (handle cookie management)",
+        "checked": true
+      },
+      {
+        "value": {
+          "name": "angular-touch",
+          "module": "ngTouch"
         },
-        {
-          "value": {
-            "name": "angular-touch",
-            "module": "ngTouch"
-          },
-          "name": "angular-touch.js (for mobile development)",
-          "checked": true
+        "name": "angular-touch.js (for mobile development)",
+        "checked": true
+      },
+      {
+        "value": {
+          "name": "angular-sanitize",
+          "module": "ngSanitize"
         },
-        {
-          "value": {
-            "name": "angular-sanitize",
-            "module": "ngSanitize"
-          },
-          "name": "angular-sanitize.js (to securely parse and manipulate HTML)",
-          "checked": true
-        }
-      ]
-    },
-    {
-      "type": "list",
-      "name": "jQuery",
-      "message": "Would you need jQuery or perhaps Zepto?",
-      "choices": [
-        {
-          "value": {
-            "name": "jquery",
-            "version": "1.x.x"
-          },
-          "name": "jQuery 1.x (branch still supporting IE6, 7 and 8)"
+        "name": "angular-sanitize.js (to securely parse and manipulate HTML)",
+        "checked": true
+      }
+    ]
+  },
+  {
+    "type": "list",
+    "name": "jQuery",
+    "message": "Would you need jQuery or perhaps Zepto?",
+    "choices": [
+      {
+        "value": {
+          "name": "jquery",
+          "version": "1.x.x"
         },
-        {
-          "value": {
-            "name": "jquery",
-            "version": "2.x.x"
-          },
-          "name": "jQuery 2.x (new version, lighter, IE9+)"
+        "name": "jQuery 1.x (branch still supporting IE6, 7 and 8)"
+      },
+      {
+        "value": {
+          "name": "jquery",
+          "version": "2.x.x"
         },
-        {
-          "value": {
-            "name": "zeptojs",
-            "version": "1.1.x"
-          },
-          "name": "ZeptoJS (jQuery compatible but very much lighter)"
+        "name": "jQuery 2.x (new version, lighter, IE9+)"
+      },
+      {
+        "value": {
+          "name": "zeptojs",
+          "version": "1.1.x"
         },
-        {
-          "value": {
-            "name": null,
-            "version": null
-          },
-          "name": "None (Angular will work on it's own jqLite)"
-        }
-      ]
-    },
-    {
-      "type": "list",
-      "name": "resource",
-      "message": "Would you like to use a REST resource library?",
-      "choices": [
-        {
-          "value": {
-            "name": "angular-resource",
-            "module": "ngResource"
-          },
-          "name": "ngResource, the official support for RESTful services"
+        "name": "ZeptoJS (jQuery compatible but very much lighter)"
+      },
+      {
+        "value": {
+          "name": null,
+          "version": null
         },
-        {
-          "value": {
-            "name": "restangular",
-            "version": "1.3.x",
-            "module": "restangular"
-          },
-          "name": "Restangular, an alternative service to handles RESTful requests"
+        "name": "None (Angular will work on it's own jqLite)"
+      }
+    ]
+  },
+  {
+    "type": "list",
+    "name": "resource",
+    "message": "Would you like to use a REST resource library?",
+    "choices": [
+      {
+        "value": {
+          "name": "angular-resource",
+          "module": "ngResource"
         },
-        {
-          "value": {
-            "name": null,
-            "version": null,
-            "module": null
-          },
-          "name": "None, $http is enough!"
-        }
-      ]
-    },
-    {
-      "type": "list",
-      "name": "router",
-      "message": "Would you like to use a router ?",
-      "choices": [
-        {
-          "value": {
-            "name": "angular-route",
-            "module": "ngRoute"
-          },
-          "name": "ngRoute, the official router"
+        "name": "ngResource, the official support for RESTful services"
+      },
+      {
+        "value": {
+          "name": "restangular",
+          "version": "1.3.x",
+          "module": "restangular"
         },
-        {
-          "value": {
-            "name": "angular-ui-router",
-            "version": "0.2.x",
-            "module": "ui.router"
-          },
-          "name": "UI Router, flexible routing with nested views"
+        "name": "Restangular, an alternative service to handles RESTful requests"
+      },
+      {
+        "value": {
+          "name": null,
+          "version": null,
+          "module": null
         },
-        {
-          "value": {
-            "name": null,
-            "version": null,
-            "module": null
-          },
-          "name": "None"
-        }
-      ]
-    },
-    {
-      "type": "list",
-      "name": "ui",
-      "message": "Which UI framework do you want ?",
-      "choices": [
-        {
-          "value": {
-            "name": "bootstrap-sass-official",
-            "version": "3.2.x",
-            "key": "bootstrap"
-          },
-          "name": "Bootstrap, the most popular HTML, CSS, and JS framework"
+        "name": "None, $http is enough!"
+      }
+    ]
+  },
+  {
+    "type": "list",
+    "name": "router",
+    "message": "Would you like to use a router ?",
+    "choices": [
+      {
+        "value": {
+          "name": "angular-route",
+          "module": "ngRoute"
         },
-        {
-          "value": {
-            "name": "foundation",
-            "version": "5.4.x",
-            "key": "foundation"
-          },
-            "name": "Foundation, \"The most advanced responsive front-end framework in the world\""
+        "name": "ngRoute, the official router"
+      },
+      {
+        "value": {
+          "name": "angular-ui-router",
+          "version": "0.2.x",
+          "module": "ui.router"
         },
-        {
-          "value": {
-            "name": null,
-            "version": null,
-            "key": "default"
-          },
-          "name": "None"
-        }
-      ]
-    },
-    {
-      "type": "list",
-      "name": "cssPreprocessor",
-      "message": "Which CSS preprocessor do you want?",
-      "choices": [
-        {
-          "value": {
-            "key": "ruby-sass",
-            "extension": "scss",
-            "npm": {
-              "gulp-ruby-sass": "^0.7.1"
-            }
-          },
-          "name": "Sass (Ruby), Original Syntactically Awesome StyleSheets (requires Ruby)"
+        "name": "UI Router, flexible routing with nested views"
+      },
+      {
+        "value": {
+          "name": null,
+          "version": null,
+          "module": null
         },
-        {
-          "value": {
-            "key": "node-sass",
-            "extension": "scss",
-            "npm": {
-              "gulp-sass": "^0.7.3"
-            }
-          },
-          "name": "Sass (Node), Node.js binding to libsass, the C version of the popular stylesheet preprocessor, Sass."
+        "name": "None"
+      }
+    ]
+  },
+  {
+    "type": "list",
+    "name": "ui",
+    "message": "Which UI framework do you want ?",
+    "choices": [
+      {
+        "value": {
+          "name": "bootstrap-sass-official",
+          "version": "3.2.x",
+          "key": "bootstrap"
         },
-        {
-          "value": {
-            "key": "less",
-            "extension": "less",
-            "npm": {
-              "gulp-less": "^1.3.3"
-            }
-          },
-          "name": "Less, extends the CSS language, adding features that allow variables, mixins, functions and many other techniques."
+        "name": "Bootstrap, the most popular HTML, CSS, and JS framework"
+      },
+      {
+        "value": {
+          "name": "foundation",
+          "version": "5.4.x",
+          "key": "foundation"
         },
-        {
-          "value": {
-            "key": "css",
-            "extension": "css",
-            "npm": {}
-          },
-          "name": "None, only the good old CSS"
-        }
-      ]
-    }
-  ]
-}
+          "name": "Foundation, \"The most advanced responsive front-end framework in the world\""
+      },
+      {
+        "value": {
+          "name": null,
+          "version": null,
+          "key": "default"
+        },
+        "name": "None"
+      }
+    ]
+  },
+  {
+    "type": "list",
+    "name": "cssPreprocessor",
+    "message": "Which CSS preprocessor do you want?",
+    "choices": [
+      {
+        "value": {
+          "key": "node-sass",
+          "extension": "scss",
+          "npm": {
+            "gulp-sass": "^0.7.3"
+          }
+        },
+        "name": "Sass (Node), Node.js binding to libsass, the C version of the popular stylesheet preprocessor, Sass."
+      },
+      {
+        "value": {
+          "key": "ruby-sass",
+          "extension": "scss",
+          "npm": {
+            "gulp-ruby-sass": "^0.7.1"
+          }
+        },
+        "name": "Sass (Ruby), Original Syntactically Awesome StyleSheets (requires Ruby)"
+      },
+      {
+        "value": {
+          "key": "less",
+          "extension": "less",
+          "npm": {
+            "gulp-less": "^1.3.3"
+          }
+        },
+        "name": "Less, extends the CSS language, adding features that allow variables, mixins, functions and many other techniques."
+      },
+      {
+        "value": {
+          "key": "css",
+          "extension": "css",
+          "npm": {}
+        },
+        "name": "None, only the good old CSS"
+      }
+    ]
+  }
+]

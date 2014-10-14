@@ -3,6 +3,8 @@
 var path = require('path');
 var helpers = require('yeoman-generator').test;
 
+var mockPrompts = require('./mock-prompts');
+
 describe('gulp-angular generator', function () {
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
@@ -21,12 +23,11 @@ describe('gulp-angular generator', function () {
     var expected = [
       // add files you expect to exist here.
       '.jshintrc',
-      '.editorconfig'
+      '.editorconfig',
+      '.yo-rc.json'
     ];
 
-    helpers.mockPrompt(this.app, {
-      'someOption': true
-    });
+    helpers.mockPrompt(this.app, mockPrompts.fast);
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
       helpers.assertFile(expected);
