@@ -83,7 +83,7 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('clean', function () {
-  return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.del());
+  del(['.tmp', 'dist']);
 });
 
 gulp.task('build', ['html', 'partials', 'images', 'fonts']);
