@@ -2,10 +2,12 @@
 
 /* Compile choices in this.model */
 module.exports = function () {
-  //console.log('before compile', this.props)
 
   var _ = this._;
 
+  if (this.skipConfig) {
+    this.props = this.config.get('props');
+  }
   this.angularVersion = this.props.angularVersion;
 
   this.model = {};

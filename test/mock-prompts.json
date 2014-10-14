@@ -1,9 +1,56 @@
 {
   "fast": {
-    "mode": "fast"
+    "angularVersion": "1.3.x",
+    "angularModules": [
+      {
+        "name": "angular-animate",
+        "module": "ngAnimate",
+        "version": "1.3.x"
+      },
+      {
+        "name": "angular-cookies",
+        "module": "ngCookies",
+        "version": "1.3.x"
+      },
+      {
+        "name": "angular-touch",
+        "module": "ngTouch",
+        "version": "1.3.x"
+      },
+      {
+        "name": "angular-sanitize",
+        "module": "ngSanitize",
+        "version": "1.3.x"
+      }
+    ],
+    "jQuery": {
+      "name": "jquery",
+      "version": "1.x.x"
+    },
+    "resource": {
+      "name": "angular-resource",
+      "module": "ngResource",
+      "version": "1.3.x"
+    },
+    "router": {
+      "name": "angular-route",
+      "module": "ngRoute",
+      "version": "1.3.x"
+    },
+    "ui": {
+      "name": "bootstrap-sass-official",
+      "version": "3.2.x",
+      "key": "bootstrap"
+    },
+    "cssPreprocessor": {
+      "key": "node-sass",
+      "extension": "scss",
+      "npm": {
+        "gulp-sass": "^0.7.3"
+      }
+    }
   },
   "medium": {
-    "mode": "advanced",
     "angularVersion" : "1.2.x",
     "angularModules": [ {
       "name": "angular-animate",
@@ -33,7 +80,6 @@
     }
   },
   "full": {
-    "mode": "advanced",
     "angularVersion": "1.3.x",
     "angularModules": [ {
       "name": "angular-animate",
