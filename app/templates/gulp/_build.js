@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')({
-  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license']
+  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 <%= stylesBuild %>
 gulp.task('scripts', function () {
@@ -83,7 +83,7 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('clean', function () {
-  return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.rimraf());
+  return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.del());
 });
 
 gulp.task('build', ['html', 'partials', 'images', 'fonts']);
