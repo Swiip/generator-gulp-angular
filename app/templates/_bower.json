@@ -2,7 +2,7 @@
   "name": "<%= appname %>",
   "version": "0.0.0",
   "dependencies": {
-    "modernizr" : "2.8.x",
+    "modernizr": "2.8.x",
     "angular": "<%= angularVersion %>",
     <%= bowerDependencies %>
   },
