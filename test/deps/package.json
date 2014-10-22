@@ -33,7 +33,8 @@
     "require-dir": "^0.1.0",
     "browser-sync": "^1.3.6",
     "http-proxy": "^1.3.0",
-    "protractor": "^1.1.1",
+    "chalk": "^0.4.0",
+    "protractor": "^1.4.0",
     "uglify-save-license": "^0.4.1",
 
     "gulp-less": "^1.3.3",
