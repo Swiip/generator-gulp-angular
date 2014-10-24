@@ -10,7 +10,7 @@
     "angular-mocks": "<%= angularVersion %>"
   },
   "resolutions": {
-    "angular": "<%= angularVersion %>",
-    <%= bowerResolutions %>
+    "angular": "<%= angularVersion %>"<% if(bowerResolutions.length !== 0) { %>,
+    <%= bowerResolutions %><% } %>
   }
 }

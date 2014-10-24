@@ -16,18 +16,12 @@ module.exports = function () {
     return module.module;
   });
 
-  var modernizr = {
-    name: 'modernizr',
-    version: '2.8.x'
-  };
-
   if(this.props.ui.key === 'bootstrap' &&
       this.props.cssPreprocessor.extension !== 'scss') {
     this.props.ui.name = 'bootstrap';
   }
 
   this.model.bowerDependencies = _.flatten([
-    modernizr,
     this.props.jQuery,
     this.props.angularModules,
     this.props.resource,
@@ -36,7 +30,6 @@ module.exports = function () {
   ]);
 
   this.model.bowerResolutions = _.flatten([
-    modernizr,
     this.props.jQuery
   ]);
 
