@@ -82,8 +82,8 @@ gulp.task('fonts', function () {
     .pipe($.size());
 });
 
-gulp.task('clean', function () {
-  $.del(['.tmp', 'dist']);
+gulp.task('clean', function (done) {
+  $.del(['.tmp', 'dist'], done);
 });
 
 gulp.task('build', ['html', 'partials', 'images', 'fonts']);
