@@ -29,9 +29,9 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
 
     if(this.config.get('props')) {
       this.prompt([{
-        type: "confirm",
-        name: "skipConfig",
-        message: "Existing " + chalk.green('.yo-rc') + " configuration found, would you like to use it?",
+        type: 'confirm',
+        name: 'skipConfig',
+        message: 'Existing ' + chalk.green('.yo-rc') + ' configuration found, would you like to use it?',
         default: true,
       }], function (answers) {
         this.skipConfig = answers.skipConfig;
@@ -76,7 +76,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
   app: require('./src/files'),
 
   /* Install dependencies */
-  install: function () {
+  install: function () {
     this.installDependencies({
       skipInstall: this.options['skip-install']
     });

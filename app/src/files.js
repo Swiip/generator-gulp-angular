@@ -9,7 +9,7 @@ module.exports = function () {
   var optionalFiles = this.optionalFiles;
 
   function toObject(data, type) {
-    if(_.isUndefined(data)) { return {}; }
+    if(_.isUndefined(data)) { return {}; }
     if(!_.isArray(data)) { return data; }
     var result = {};
     data.forEach(function(element) {
