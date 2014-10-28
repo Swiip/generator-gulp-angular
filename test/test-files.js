@@ -35,7 +35,6 @@ describe('gulp-angular generator files', function () {
       data.dots.length;
 
     var expectedTemplate =
-      1 + //fixed : <appname>.js
       data.templates.length;
 
     actualMkdir.should.be.equal(expectedMkdir);
