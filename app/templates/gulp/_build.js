@@ -27,7 +27,7 @@ gulp.task('partials', function () {
     .pipe($.size());
 });
 
-gulp.task('html', [<% if(stylesBuild) { %>'styles', <%}%>'scripts', 'partials'], function () {
+gulp.task('html', [<% if(stylesBuild) { %>'styles', <% } else { %>'wiredep', <% } %>'scripts', 'partials'], function () {
   var htmlFilter = $.filter('*.html');
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');

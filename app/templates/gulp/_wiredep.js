@@ -8,14 +8,16 @@ gulp.task('wiredep', function () {
 
   gulp.src('src/{app,components}/*.scss')
     .pipe(wiredep({
-        directory: 'src/bower_components'
+      directory: 'bower_components',
+      ignorePath: /^\/|\.\.\//
     }))
     .pipe(gulp.dest('src'));
 
   gulp.src('src/*.html')
     .pipe(wiredep({
-      directory: 'src/bower_components',
-      exclude: [<%= wiredepExclusions %>]
+      directory: 'bower_components',
+      exclude: [<%= wiredepExclusions %>],
+      ignorePath: /^\/|\.\.\//
     }))
     .pipe(gulp.dest('src'));
 });
