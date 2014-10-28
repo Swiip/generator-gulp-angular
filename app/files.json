@@ -29,6 +29,7 @@
     "gulp/watch.js",
     "gulp/wiredep.js",
     "src/index.html",
+    "src/app/index.js",
     "src/app/main/main.controller.js",
     "src/components/navbar/navbar.controller.js",
     "test/unit/main.js"

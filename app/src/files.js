@@ -53,8 +53,6 @@ module.exports = function () {
     this.template(src, dest);
   }.bind(this));
 
-  this.template('src/app/_appname.js', 'src/app/' + this.appname + '.js');
-
   _.each(getFiles('dots'), function(dest, src) {
     this.copy(src, dest);
   }.bind(this));

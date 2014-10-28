@@ -107,8 +107,8 @@ module.exports = function () {
   this.styleExtension = this.props.cssPreprocessor.extension;
 
   /* ui */
-  var styleAppSource = 'src/app/__' + this.props.ui.key + '-app.' + this.props.cssPreprocessor.extension;
-  var styleAppDest = 'src/app/app.' + this.props.cssPreprocessor.extension;
+  var styleAppSource = 'src/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension;
+  var styleAppDest = 'src/app/index.' + this.props.cssPreprocessor.extension;
   var styleCopies = {};
   styleCopies[styleAppSource] = styleAppDest;
 
