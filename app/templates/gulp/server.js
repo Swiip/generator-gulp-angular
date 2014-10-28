@@ -2,7 +2,7 @@
 
 var gulp = require('gulp');
 
-var _ = require('lodash');
+var util = require('util');
 
 var browserSync = require('browser-sync');
 
@@ -12,7 +12,7 @@ function browserSyncInit(baseDir, files, browser) {
   browser = browser === undefined ? 'default' : browser;
 
   var routes = null;
-  if(baseDir === 'src' || (_.isArray(baseDir) && _.contains(baseDir, 'src'))) {
+  if(baseDir === 'src' || (util.isArray(baseDir) && baseDir.indexOf('src') !== -1)) {
     routes = {
       // Should be '/bower_components': '../bower_components'
       // Waiting for https://github.com/shakyShane/browser-sync/issues/308
