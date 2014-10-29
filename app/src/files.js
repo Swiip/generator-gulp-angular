@@ -9,7 +9,7 @@ module.exports = function () {
   var optionalFiles = this.optionalFiles;
 
   function toObject(data, type) {
-    if(_.isUndefined(data)) { return {}; }
+    if(_.isUndefined(data)) { return {}; }
     if(!_.isArray(data)) { return data; }
     var result = {};
     data.forEach(function(element) {
@@ -52,8 +52,6 @@ module.exports = function () {
   _.each(getFiles('templates'), function(dest, src) {
     this.template(src, dest);
   }.bind(this));
-
-  this.template('src/app/_appname.js', 'src/app/' + this.appname + '.js');
 
   _.each(getFiles('dots'), function(dest, src) {
     this.copy(src, dest);

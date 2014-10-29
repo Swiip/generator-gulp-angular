@@ -107,15 +107,17 @@ module.exports = function () {
   this.styleExtension = this.props.cssPreprocessor.extension;
 
   /* ui */
-  var styleMainSource = 'src/app/main/__' + this.props.ui.key + '-main.' + this.props.cssPreprocessor.extension;
-  var styleMainDest = 'src/app/main/main.' + this.props.cssPreprocessor.extension;
+  var styleAppSource = 'src/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension;
+  var styleAppDest = 'src/app/index.' + this.props.cssPreprocessor.extension;
   var styleCopies = {};
-  styleCopies[styleMainSource] = styleMainDest;
+  styleCopies[styleAppSource] = styleAppDest;
+  this.styleVendorPosition = '.';
 
   if(this.model.vendorStylesPreprocessed) {
-    var styleVendorSource = 'src/app/main/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
-    var styleVendorDest = 'src/app/main/vendor.' + this.props.cssPreprocessor.extension;
+    var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
+    var styleVendorDest = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
     styleCopies[styleVendorSource] = styleVendorDest;
+    this.styleVendorPosition = '{.tmp,app}';
   }
 
   this.optionalFiles.push({ copies: styleCopies });
