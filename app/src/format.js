@@ -111,11 +111,13 @@ module.exports = function () {
   var styleAppDest = 'src/app/index.' + this.props.cssPreprocessor.extension;
   var styleCopies = {};
   styleCopies[styleAppSource] = styleAppDest;
+  this.styleVendorPosition = '.';
 
   if(this.model.vendorStylesPreprocessed) {
     var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
     var styleVendorDest = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
     styleCopies[styleVendorSource] = styleVendorDest;
+    this.styleVendorPosition = '{.tmp,app}';
   }
 
   this.optionalFiles.push({ copies: styleCopies });
