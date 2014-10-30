@@ -96,82 +96,19 @@ I tried many configurations for Protractor without success, any hint would be ap
 
 ## Changelog
 
-### 0.6.0
+[All changes listed in the GitHub releases](https://github.com/Swiip/generator-gulp-angular/releases)
 
-* **Breaking Change** Directory structure evolved to the recommendations from the Angular team. *Do not run this version of the generator on an existing project generated with a previous version*
-* Isolation of the proxy middleware, some fixes and disabling by default
-* Minifying HTML (index, not the partials)
-* Thanks to @intellix, @marani and special thanks to @zckrs wich join me as commiter
+## Contribute
 
-### 0.5.1
+Like any other Open Source project, the best way to contribute is through opening GitHub issues.
+Bug or suggestions, everything is welcomed.
+To save time for both of us, just make sure the issue is in the scope of the generator, this question can be a little tricky on this particular project.
 
-* Restore CSS wiring with wiredep
-* Fix the fast mode which was using an old version of Bootstrap
-* Stabilization of the CSS preprocessor choices
-* Bunch of Node dependencies update
-* Fix #39, #41, #42, #44, #46, #49
-* Thanks to @marani
+If you have nothing to say but only feeling generous, there's a Gratipay.
 
-### 0.5.0
+[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png)](https://gratipay.com/Swiip/)
 
-* Add CSS preprocessor option: Sass with Node & Ruby, Less or none. Adapt itself with the UI framework
-* Add Angular version option : 1.2 or 1.3
-* Thanks to @adamshiervani
-
-### 0.4.1
-
-* Update lots of NPM deps which fixed some bugs
-* Add option of no UI framework
-* Thanks to @GlennGeenen @rajington @otaviosoares @wrseward @gregoirjopla
-
-### 0.4.0
-
-* Add option to choose between Foundation or Bootstrap as UI Framework
-* New welcome page presenting integrated technologies
-* Several package updates: `yosay`, `browsersync`, `modernizr`, `protractor`...
-* Some bug fixes: #6, #7, #8
-* Add some documentation
-* Thanks to @shinnn
-
-### 0.3.1
-
-* Fix e2e tests to use BrowserSync as server. But no way to stop BrowserSync for now so the task never really ends.
-* Thanks to @jbpionnier @KevinLlopart
-
-### 0.3.0
-
-* Integration of BrowserSync as development server in place of a home made connect server
-* Serve task is the entry point and launch the watch task
-
-### 0.2.1
-
-* Fix main.html missing with routing
-* Fix unit tests by ignoring bootstrap js files in wiredep
-
-### 0.2.0
-
-* Convert HTML templates into JS and add them into the optimized bundle
-* Let you choose to use jQuery, Zepto or nothing (Angular's jqLite)
-* Ask for optional Angular modules: animate cookies, touch and sanitize
-* Resource handler: ngResource, Restangular, none.
-* Router: ngRoute, UI Router, none.
-
-### 0.1.1
-
-* Adding Travis CI
-
-### 0.1.0
-
-* Add unit test with karma and e2e test with protractor
-* Split gulp configuration in multiple files
-* Create 'inception' test which generate files and try gulp tasks on it
-* Add ability to serve dist files and run e2e test on dist files
-* Still no options
-
-### 0.0.1
-
-* Initial commit
-* Scaffolds a working directory but with no options and no tests
+As I'm not anymore alone working on this project but we're not enough to bring up a real organization, the money will come to me and I will redistribute evenly between all the current contributors.
 
 ## License
 
