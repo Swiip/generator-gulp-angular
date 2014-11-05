@@ -64,9 +64,9 @@ module.exports = function () {
   } else {
     this.model.cssLinks = [];
     if(this.props.ui.key === 'bootstrap') {
-      this.model.cssLinks.push('bower_components/bootstrap/dist/css/bootstrap.css');
+      this.model.cssLinks.push('../bower_components/bootstrap/dist/css/bootstrap.css');
     } else if(this.props.ui.key === 'foundation') {
-      this.model.cssLinks.push('bower_components/foundation/css/foundation.css');
+      this.model.cssLinks.push('../bower_components/foundation/css/foundation.css');
     }
   }
 
