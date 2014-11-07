@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "dependencies": {
     "modernizr": "2.8.x",
-    "angular": "<%= angularVersion %>",
-    <%= bowerDependencies %>
+    "angular": "<%= angularVersion %>"<% if(bowerDependencies.length !== 0) { %>,
+    <%= bowerDependencies %><% } %>
   },
   "devDependencies": {
     "angular-mocks": "<%= angularVersion %>"

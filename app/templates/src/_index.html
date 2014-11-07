@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- build:css(<%= styleVendorPosition %>) styles/vendor.css -->
+    <!-- build:css({.tmp,src}) styles/vendor.css -->
     <%= cssLinks %>
 
     <!-- bower:css -->
@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="app/index.css">
     <!-- endbuild -->
 
-    <!-- build:js(.) scripts/modernizr.js -->
-    <script src="bower_components/modernizr/modernizr.js"></script>
+    <!-- build:js scripts/modernizr.js -->
+    <script src="../bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
   </head>
   <body>
@@ -40,13 +40,13 @@
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
 
-    <!-- build:js(.) scripts/vendor.js -->
+    <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <!-- run `gulp wiredep` to automaticaly populate bower script dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js({src,.tmp}) scripts/app.js -->
+    <!-- build:js({.tmp,src}) scripts/app.js -->
     <script src="app/index.js"></script>
     <script src="app/main/main.controller.js"></script>
     <script src="components/navbar/navbar.controller.js"></script>
