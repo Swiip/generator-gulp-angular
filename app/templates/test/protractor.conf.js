@@ -2,7 +2,7 @@
 exports.config = {
   // The address of a running selenium server.
   //seleniumAddress: 'http://localhost:4444/wd/hub',
-  seleniumServerJar: '../node_modules/protractor/selenium/selenium-server-standalone-2.43.1.jar', // Make use you check the version in the folder
+  //seleniumServerJar: deprecated, this should be set on node_modules/protractor/config.json
 
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
