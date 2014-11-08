@@ -33,10 +33,6 @@ module.exports = function () {
     this.props.jQuery
   ]);
 
-  this.model.wiredepExclusions = [
-    this.props.ui.name
-  ];
-
   this.model.modulesDependencies = _.flatten([
     angularModules,
     this.props.resource.module,
