@@ -10,6 +10,7 @@
     "test/e2e"
   ],
   "copies": [
+    "gulpfile.js",
     "gulp/e2e-tests.js",
     "gulp/server.js",
     "gulp/proxy.js",
@@ -24,7 +25,6 @@
   "templates": [
     "package.json",
     "bower.json",
-    "gulpfile.js",
     "gulp/build.js",
     "gulp/watch.js",
     "gulp/wiredep.js",

@@ -29,6 +29,7 @@ describe('gulp-angular generator', function () {
     // src/components/navbar/ directory
     'src/components/navbar/navbar.html',
 
+    // root directory
     '.bowerrc',
     '.editorconfig',
     '.gitignore',
@@ -40,7 +41,6 @@ describe('gulp-angular generator', function () {
   ];
 
   var expectedGulpContent = [
-    // GulpJS
     ['gulpfile.js', /gulp\.task\(\'default\'/],
     ['gulp/build.js', /gulp\.task\(\'styles\'/],
     ['gulp/build.js', /gulp\.task\(\'scripts\'/],
@@ -202,6 +202,7 @@ describe('gulp-angular generator', function () {
       });
     });
   });
+
   // Prompt #3: Which JavaScript library ?
   describe('with option: [jQuery 2.x.x]', function () {
     it('should add dependency for jQuery 2.x.x', function (done) {
@@ -511,7 +512,6 @@ describe('gulp-angular generator', function () {
       });
     });
   });
-
   describe('with option: [Bootstrap, Ruby SASS]', function () {
     it('should add dependency for Bootstrap with SASS', function (done) {
       var _ = gulpAngular._;
