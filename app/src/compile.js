@@ -16,8 +16,7 @@ module.exports = function () {
     return module.module;
   });
 
-  if(this.props.ui.key === 'bootstrap' &&
-      this.props.cssPreprocessor.extension !== 'scss') {
+  if(this.props.ui.key === 'bootstrap' && this.props.cssPreprocessor.extension !== 'scss') {
     this.props.ui.name = 'bootstrap';
   }
 

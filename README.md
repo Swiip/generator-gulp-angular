@@ -60,6 +60,38 @@ yo gulp-angular [app-name]
 
 [Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub)
 
+The root directory generated for a app with name `gulpAngular` :
+<pre>
+├──  src/
+│   ├──  app/
+│   │   ├──  main/
+│   │   │   ├──  main.controller.js
+│   │   │   └──  main.html
+│   │   └──  index.js
+│   │   └──  index.(css|less|scss)
+│   │   └──  vendor.(css|less|scss)
+│   ├──  assets/
+│   │   └──  images/
+│   ├──  components/
+│   │   └──  navbar/
+│   │   │   ├──  navbar.controller.js
+│   │   │   └──  navbar.html
+│   ├──  404.html
+│   ├──  favico.ico
+│   └──  index.html
+├──  gulp/
+├──  test/
+├──  bower_components/
+├──  nodes_modules/
+├──  .bowerrc
+├──  .editorconfig
+├──  .gitignore
+├──  .jshintrc
+├──  bower.json
+├──  gulpfile.js
+├──  package.json
+</pre>
+
 ## Features included in the gulpfile
 * *useref* : allow configuration of your files in comments of your HTML file
 * *ngAnnotate* : convert simple injection to complete syntax to be minification proof
