@@ -5,7 +5,29 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
-<%= stylesBuild %>
+<% if (props.cssPreprocessor.key !== 'css') { %>
+gulp.task('styles', ['wiredep'], function () {<% if (props.cssPreprocessor.key === 'less') { %>
+  return gulp.src('src/{app,components}/**/*.less')
+    .pipe($.less({
+      paths: [
+        'src/bower_components',
+        'src/app',
+        'src/components'
+      ]
+    }))<% } else if (props.cssPreprocessor.key === 'ruby-sass') { %>
+  return gulp.src('src/{app,components}/**/*.scss')
+    .pipe($.rubySass({style: 'expanded'}))<% } else if (props.cssPreprocessor.key === 'node-sass') { %>
+  return gulp.src('src/{app,components}/**/*.scss')
+    .pipe($.sass({style: 'expanded'}))<% } %>
+    .on('error', function handleError(err) {
+      console.error(err.toString());
+      this.emit('end');
+    })
+    .pipe($.autoprefixer('last 1 version'))
+    .pipe(gulp.dest('.tmp'))
+    .pipe($.size());
+});
+<% } %>
 gulp.task('scripts', function () {
   return gulp.src('src/{app,components}/**/*.js')
     .pipe($.jshint())
@@ -27,7 +49,7 @@ gulp.task('partials', function () {
     .pipe($.size());
 });
 
-gulp.task('html', [<% if(stylesBuild) { %>'styles', <% } else { %>'wiredep', <% } %>'scripts', 'partials'], function () {
+gulp.task('html', [<% if (props.cssPreprocessor.key !== 'css') { %>'styles', <% } else { %>'wiredep', <% } %>'scripts', 'partials'], function () {
   var htmlFilter = $.filter('*.html');
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');

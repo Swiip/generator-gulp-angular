@@ -6,54 +6,34 @@ var path = require('path');
 /* Process files */
 module.exports = function () {
   var _ = this._;
-  var optionalFiles = this.optionalFiles;
 
-  function toObject(data, type) {
-    if(_.isUndefined(data)) { return {}; }
-    if(!_.isArray(data)) { return data; }
-    var result = {};
-    data.forEach(function(element) {
-      if(type === 'templates') {
-        var basename = path.basename(element);
-        var source = element.replace(basename, '_' + basename);
-        result[source] = element;
-      } else if(type === 'dots') {
-        result[element] = '.' + element;
-      } else {
-        result[element] = element;
-      }
-    });
-    return result;
-  }
-
-  function getFiles(type) {
-    var selection = toObject(files[type], type);
-    optionalFiles.forEach(function (optional) {
-      if(_.isString(optional)) {
-        _.extend(selection, toObject(files[optional][type], type));
-      } else if(_.isArray(optional[type])) {
-        _.extend(selection, toObject(optional[type], type));
-      } else {
-        _.extend(selection, optional[type]);
-      }
-    });
-    //console.log('getFiles', type, 'return', selection);
-    return selection;
-  }
-
-  _.each(getFiles('directories'), function(directory) {
-    this.mkdir(directory);
+  // Copy static files
+  _.forEach(files.staticFiles, function(src) {
+    this.copy(src);
   }.bind(this));
 
-  _.each(getFiles('copies'), function(dest, src) {
-    this.copy(src, dest);
+  // Copy dot files
+  _.forEach(files.dotFiles, function(src) {
+    this.copy(src, '.' + src);
   }.bind(this));
 
-  _.each(getFiles('templates'), function(dest, src) {
-    this.template(src, dest);
+  // Copy files formatted (format.js) with options selected in prompt
+  _.forEach(this.technologiesLogoCopies, function(src) {
+    this.copy(src);
+  }.bind(this));
+  _.forEach(this.partialCopies, function(value, key) {
+    this.copy(key, value);
+  }.bind(this));
+  _.forEach(this.styleCopies, function(value, key) {
+    this.copy(key, value);
   }.bind(this));
 
-  _.each(getFiles('dots'), function(dest, src) {
-    this.copy(src, dest);
+  // Create files with templates
+  var basename;
+  var src;
+  _.forEach(files.templates, function(dest) {
+    basename = path.basename(dest);
+    src = dest.replace(basename, '_' + basename);
+    this.template(src, dest, this);
   }.bind(this));
 };

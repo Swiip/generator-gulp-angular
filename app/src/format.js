@@ -1,28 +1,12 @@
 'use strict';
 
-var techs = require('../techs');
+var techs = require('../techs.json');
 
 /* Format this.model in template values */
 module.exports = function () {
   var _ = this._;
 
-  this.optionalFiles = [];
-
-  function processBowerDependencies(deps) {
-    return _.chain(deps)
-      .filter(_.isObject)
-      .filter(function (dependency) {
-        return _.isString(dependency.name) && _.isString(dependency.version);
-      })
-      .map(function (dependency) {
-        return '"' + dependency.name + '" : "' + dependency.version + '"';
-      })
-      .value().join(',\n    ');
-  }
-
-  this.bowerDependencies = processBowerDependencies(this.model.bowerDependencies);
-
-  this.bowerResolutions = processBowerDependencies(this.model.bowerResolutions);
+  this.angularVersion = this.props.angularVersion;
 
   this.modulesDependencies = _.chain(this.model.modulesDependencies)
     .filter(_.isString)
@@ -32,41 +16,28 @@ module.exports = function () {
     .value()
     .join(', ');
 
-  this.npmDependencies = _.chain(this.model.npmDependencies)
-    .keys()
-    .map(function(key) {
-      return ',\n    "' + key + '": "' + this.model.npmDependencies[key] + '"';
-    }, this)
-    .value();
-
-  var technologiesContent = _.map(this.model.technologies, function(key) {
-    return _.findWhere(techs, {key: key});
+  var technologiesContent = _.map(this.model.technologies, function(value) {
+    return techs[value];
   });
 
-  var technologiesCopies = _.map(this.model.technologies, function(key) {
-    return 'src/assets/images/' + _.findWhere(techs, {key: key}).logo;
+  this.technologiesLogoCopies = _.map(this.model.technologies, function(value) {
+    return 'src/assets/images/' + techs[value].logo;
   });
 
   this.technologies = JSON.stringify(technologiesContent, null, 2);
   this.technologies = this.technologies.replace(/"/g, '\'');
   this.technologies = this.technologies.replace(/\n/g, '\n    ');
 
-  this.optionalFiles.push({
-    copies: technologiesCopies
-  });
-
   /* router */
-  var partial = 'src/app/main/__' + this.props.ui.key + '.html';
-  var navbar  = 'src/components/navbar/__' + this.props.ui.key + '-navbar.html';
+  this.partialCopies = {};
 
-  var copies = {};
-  copies[navbar] = 'src/components/navbar/navbar.html';
+  var navbarPartialSrc = 'src/components/navbar/__' + this.props.ui.key + '-navbar.html';
+  this.partialCopies[navbarPartialSrc] = 'src/components/navbar/navbar.html';
 
+  var routerPartialSrc = 'src/app/main/__' + this.props.ui.key + '.html';
   if(this.props.router.module !== null) {
-    copies[partial] = 'src/app/main/main.html';
-    this.optionalFiles.push('router');
+    this.partialCopies[routerPartialSrc] = 'src/app/main/main.html';
   }
-  this.optionalFiles.push({copies: copies});
 
   if (this.props.router.module === 'ngRoute') {
     this.routerHtml = '<div ng-view></div>';
@@ -75,7 +46,7 @@ module.exports = function () {
     this.routerHtml = '<div ui-view></div>';
     this.routerJs = this.read('src/app/__uirouter.js', 'utf8');
   } else {
-    this.routerHtml = this.read(partial, 'utf8');
+    this.routerHtml = this.read(routerPartialSrc, 'utf8');
     this.routerHtml = this.routerHtml.replace(
       /^<div class="container">/,
       '<div class="container" ng-controller="MainCtrl">'
@@ -84,33 +55,16 @@ module.exports = function () {
     this.routerJs = '';
   }
 
-  /* styles */
-  if(this.props.cssPreprocessor.key !== 'css') {
-    this.stylesBuild = '\n' + this.read('gulp/__handleError.js', 'utf8') + '\n' +
-      this.read('gulp/__' + this.props.cssPreprocessor.key + '.js', 'utf8');
-  } else {
-    this.stylesBuild = '';
-  }
-
-  this.cssLinks = _.map(this.model.cssLinks, function(cssLink) {
-    return '<link rel="stylesheet" href="' + cssLink + '">';
-  }).join('\n    ');
-
-  this.styleExtension = this.props.cssPreprocessor.extension;
-
   /* ui */
-  var styleAppSource = 'src/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension;
-  var styleAppDest = 'src/app/index.' + this.props.cssPreprocessor.extension;
-  var styleCopies = {};
-  styleCopies[styleAppSource] = styleAppDest;
+  this.styleCopies = {};
+
+  var styleAppSrc = 'src/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension;
+  this.styleCopies[styleAppSrc] = 'src/app/index.' + this.props.cssPreprocessor.extension;
 
   if(this.model.vendorStylesPreprocessed) {
     var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
-    var styleVendorDest = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
-    styleCopies[styleVendorSource] = styleVendorDest;
+    this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
   }
-
-  this.optionalFiles.push({ copies: styleCopies });
 
   this.replaceFontPath = '';
   if(this.props.ui.key === 'bootstrap') {

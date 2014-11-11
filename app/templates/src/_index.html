@@ -7,8 +7,10 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- build:css({.tmp,src}) styles/vendor.css -->
-    <%= cssLinks %>
+    <!-- build:css({.tmp,src}) styles/vendor.css --><% if (model.vendorStylesPreprocessed) { %>
+    <link rel="stylesheet" href="app/vendor.css"><% } else if (props.ui.key === 'bootstrap') { %>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"><% } else if (props.ui.key === 'foundation') { %>
+    <link rel="stylesheet" href="../bower_components/foundation/css/foundation.css"><% } %>
 
     <!-- bower:css -->
     <!-- run `gulp wiredep` to automaticaly populate bower styles dependencies -->

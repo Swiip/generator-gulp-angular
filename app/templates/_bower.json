@@ -2,15 +2,21 @@
   "name": "<%= appname %>",
   "version": "0.0.0",
   "dependencies": {
-    "modernizr": "2.8.x",
-    "angular": "<%= angularVersion %>"<% if(bowerDependencies.length !== 0) { %>,
-    <%= bowerDependencies %><% } %>
+    "modernizr": "2.8.x",<% if (props.jQuery.name !== null) { %>
+    "<%= props.jQuery.name %>": "<%= props.jQuery.version %>",<% } _.forEach(props.angularModules, function(module) { %>
+    "<%= module.name %>": "<%= angularVersion %>",<% }); if (props.resource.name === 'angular-resource') { %>
+    "angular-resource": "<%= angularVersion %>",<% } else if (props.resource.name === 'restangular') { %>
+    "restangular": "1.4.x",<% } if (props.router.name === 'angular-route') { %>
+    "angular-route": "<%= angularVersion %>",<% } else if (props.router.name === 'angular-ui-router') { %>
+    "angular-ui-router": "0.2.x",<% } if (props.ui.name !== null) { %>
+    "<%= props.ui.name %>": "<%= props.ui.version %>",<% } %>
+    "angular": "<%= angularVersion %>"
   },
   "devDependencies": {
     "angular-mocks": "<%= angularVersion %>"
   },
-  "resolutions": {
-    "angular": "<%= angularVersion %>"<% if(bowerResolutions.length !== 0) { %>,
-    <%= bowerResolutions %><% } %>
+  "resolutions": {<% if (props.jQuery.name !== null) { %>
+    "<%= props.jQuery.name %>": "<%= props.jQuery.version %>",<% } %>
+    "angular": "<%= angularVersion %>"
   }
 }
