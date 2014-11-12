@@ -61,7 +61,7 @@ module.exports = function () {
   var styleAppSrc = 'src/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension;
   this.styleCopies[styleAppSrc] = 'src/app/index.' + this.props.cssPreprocessor.extension;
 
-  if(this.model.vendorStylesPreprocessed) {
+  if(this.model.vendorStylesPreprocessed && this.props.ui.name !== null) {
     var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
     this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
   }
