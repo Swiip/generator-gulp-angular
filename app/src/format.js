@@ -28,7 +28,7 @@ module.exports = function () {
   this.technologies = this.technologies.replace(/"/g, '\'');
   this.technologies = this.technologies.replace(/\n/g, '\n    ');
 
-  /* router */
+  /* partial */
   this.partialCopies = {};
 
   var navbarPartialSrc = 'src/components/navbar/__' + this.props.ui.key + '-navbar.html';
@@ -39,6 +39,7 @@ module.exports = function () {
     this.partialCopies[routerPartialSrc] = 'src/app/main/main.html';
   }
 
+  /* router */
   if (this.props.router.module === 'ngRoute') {
     this.routerHtml = '<div ng-view></div>';
     this.routerJs = this.read('src/app/__ngroute.js', 'utf8');
@@ -51,6 +52,7 @@ module.exports = function () {
       /^<div class="container">/,
       '<div class="container" ng-controller="MainCtrl">'
     );
+
     this.routerHtml = this.routerHtml.replace(/\n/g, '\n    ');
     this.routerJs = '';
   }
