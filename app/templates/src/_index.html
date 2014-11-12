@@ -1,13 +1,13 @@
 <!doctype html>
-<html class="no-js" ng-app="<%= appname %>">
+<html class="no-js" ng-app="<%= appName %>">
   <head>
     <meta charset="utf-8">
-    <title>frontend</title>
+    <title><%= appName %></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <% if (props.ui.name !== null) { %>
-    <!-- build:css({.tmp,src}) styles/vendor.css --><% if (model.vendorStylesPreprocessed) { %>
+    <!-- build:css({.tmp,src}) styles/vendor.css --><% if (isVendorStylesPreprocessed) { %>
     <link rel="stylesheet" href="app/vendor.css"><% } else if (props.ui.key === 'bootstrap') { %>
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"><% } else if (props.ui.key === 'foundation') { %>
     <link rel="stylesheet" href="../bower_components/foundation/css/foundation.css"><% } %>

@@ -1,34 +1,58 @@
 'use strict';
 
-var techs = require('../techs.json');
-
-/* Format this.model in template values */
 module.exports = function () {
   var _ = this._;
 
-  this.angularVersion = this.props.angularVersion;
+  // Retrieve props stored in .yo-rc.json
+  if (this.skipConfig) {
+    this.props = this.config.get('props');
+  }
 
-  this.modulesDependencies = _.chain(this.model.modulesDependencies)
+  // Format list ngModules included in AngularJS DI
+  var ngModules = this.props.angularModules.map(function (module) {
+    return module.module;
+  });
+
+  ngModules = _.flatten([
+    ngModules,
+    this.props.resource.module,
+    this.props.router.module
+  ]);
+
+  this.modulesDependencies = _.chain(ngModules)
     .filter(_.isString)
     .map(function (dependency) {
       return '\'' + dependency + '\'';
     })
-    .value()
-    .join(', ');
+    .valueOf()
+    .join(', ')
+  ;
 
-  var technologiesContent = _.map(this.model.technologies, function(value) {
-    return techs[value];
+  // Format list techs used to generate app included in main view of sample
+  var listTechs = require('../techs.json');
+
+  var usedTechs = [
+    'angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor',
+    this.props.jQuery.name,
+    this.props.ui.key,
+    this.props.cssPreprocessor.key
+  ]
+    .filter(_.isString)
+    .filter(function(tech) {
+      return tech !== 'default' && tech !== 'css';
+    })
+  ;
+
+  var techsContent = _.map(usedTechs, function(value) {
+    return listTechs[value];
   });
 
-  this.technologiesLogoCopies = _.map(this.model.technologies, function(value) {
-    return 'src/assets/images/' + techs[value].logo;
+  this.technologies = JSON.stringify(techsContent, null, 2).replace(/"/g, '\'').replace(/\n/g, '\n    ');
+  this.technologiesLogoCopies = _.map(usedTechs, function(value) {
+    return 'src/assets/images/' + listTechs[value].logo;
   });
 
-  this.technologies = JSON.stringify(technologiesContent, null, 2);
-  this.technologies = this.technologies.replace(/"/g, '\'');
-  this.technologies = this.technologies.replace(/\n/g, '\n    ');
-
-  /* partial */
+  // Select partials relative to props.ui
   this.partialCopies = {};
 
   var navbarPartialSrc = 'src/components/navbar/__' + this.props.ui.key + '-navbar.html';
@@ -39,7 +63,7 @@ module.exports = function () {
     this.partialCopies[routerPartialSrc] = 'src/app/main/main.html';
   }
 
-  /* router */
+  // Compute routing relative to props.router
   if (this.props.router.module === 'ngRoute') {
     this.routerHtml = '<div ng-view></div>';
     this.routerJs = this.read('src/app/__ngroute.js', 'utf8');
@@ -57,25 +81,25 @@ module.exports = function () {
     this.routerJs = '';
   }
 
-  /* ui */
+  // Format choice UI Framework
+  if(this.props.ui.key === 'bootstrap' && this.props.cssPreprocessor.extension !== 'scss') {
+    this.props.ui.name = 'bootstrap';
+  }
+
   this.styleCopies = {};
 
   var styleAppSrc = 'src/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension;
   this.styleCopies[styleAppSrc] = 'src/app/index.' + this.props.cssPreprocessor.extension;
 
-  if(this.model.vendorStylesPreprocessed && this.props.ui.name !== null) {
+  // ## Special case for Foundation and LESS: Foundation dont have a LESS version so we include css
+  if ((this.props.cssPreprocessor.extension === 'less' && this.props.ui.key === 'foundation') || this.props.cssPreprocessor.extension === 'css') {
+    this.isVendorStylesPreprocessed = false;
+  } else {
+    this.isVendorStylesPreprocessed = true;
+  }
+
+  if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
     var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
     this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
   }
-
-  this.replaceFontPath = '';
-  if(this.props.ui.key === 'bootstrap') {
-    if(this.props.cssPreprocessor.extension === 'scss') {
-      this.replaceFontPath = '\n    .pipe($.replace(\'bower_components/bootstrap-sass-official/assets/fonts/bootstrap\',\'fonts\'))';
-    }
-    if(this.props.cssPreprocessor.extension === 'less') {
-      this.replaceFontPath = '\n    .pipe($.replace(\'bower_components/bootstrap/fonts\',\'fonts\'))';
-    }
-  }
-
 };

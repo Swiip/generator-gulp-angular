@@ -1,6 +1,6 @@
 'use strict';
 
-var files = require('../app/src/files');
+var files = require('../app/src/write');
 var data = require('../app/files.json');
 var _ = require('lodash');
 require('chai').should();

@@ -43,7 +43,7 @@ gulp.task('partials', function () {
       quotes: true
     }))
     .pipe($.ngHtml2js({
-      moduleName: '<%= appname %>'
+      moduleName: '<%= appName %>'
     }))
     .pipe(gulp.dest('.tmp'))
     .pipe($.size());
@@ -68,7 +68,9 @@ gulp.task('html', [<% if (props.cssPreprocessor.key !== 'css') { %>'styles', <% 
     .pipe($.ngAnnotate())
     .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
     .pipe(jsFilter.restore())
-    .pipe(cssFilter)<%= replaceFontPath %>
+    .pipe(cssFilter)<% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'scss') { %>
+    .pipe($.replace('bower_components/bootstrap-sass-official/assets/fonts/bootstrap','fonts'))<% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'less') { %>
+    .pipe($.replace('bower_components/bootstrap/fonts','fonts'))<% } %>
     .pipe($.csso())
     .pipe(cssFilter.restore())
     .pipe(assets.restore())
