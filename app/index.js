@@ -76,7 +76,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
   // Write files (copy, template)
   writeFiles: require('./src/write'),
 
-  /* Install dependencies */
+  // Install dependencies
   install: function () {
     this.installDependencies({
       skipInstall: this.options['skip-install'],
