@@ -6,7 +6,6 @@ var spawn = require('cross-spawn');
 
 var fs = require('fs');
 var Q = require('q');
-require('colors');
 
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
