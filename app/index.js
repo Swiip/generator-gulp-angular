@@ -8,20 +8,24 @@ var chalk = require('chalk');
 var prompts = require('./prompts.json');
 
 var GulpAngularGenerator = yeoman.generators.Base.extend({
-  /* Initialization, evaluate appname */
-  init: function () {
-    this.pkg = require('../package.json');
 
-    this.argument('appname', { type: String, required: false });
+  init: function () {
+    // Define the appname
+    this.argument('appname', {
+      type: String,
+      required: false
+    });
     this.appname = this.appname || path.basename(process.cwd());
     this.appname = this._.camelize(this._.slugify(this._.humanize(this.appname)));
   },
 
   info: function () {
-    this.log(yosay(
-      chalk.red('Welcome!') + '\n' +
-      chalk.yellow('You\'re using the fantastic generator for scaffolding an application with Angular and Gulp!')
-    ));
+    if (!this.options['skip-welcome-message']) {
+      this.log(yosay(
+        chalk.red('Welcome!') + '\n' +
+        chalk.yellow('You\'re using the fantastic generator for scaffolding an application with Angular and Gulp!')
+      ));
+    }
   },
 
   checkYoRc: function() {
@@ -78,7 +82,8 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
   /* Install dependencies */
   install: function () {
     this.installDependencies({
-      skipInstall: this.options['skip-install']
+      skipInstall: this.options['skip-install'],
+      skipMessage: this.options['skip-message']
     });
   }
 });
