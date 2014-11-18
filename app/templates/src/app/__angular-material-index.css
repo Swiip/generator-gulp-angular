@@ -1,0 +1,55 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
+
+html {
+  font-family: 'Roboto Slab', serif;
+}
+
+[layout=row] {
+  flex-direction: row;
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+.thumbnail {
+  height: 200px;
+}
+
+.thumbnail img.pull-right {
+  width: 50px;
+}
+
+md-toolbar.md-default-theme {
+  background-color: black;
+}
+
+section.jumbotron {
+  margin-bottom: 30px;
+  padding: 1px 30px;
+  background-color: #5aadbb;
+  text-align: center;
+
+  color: white;
+}
+
+section.jumbotron h1 {
+  font-size: 3em;
+}
+
+.techs {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.techs md-card {
+  width: 30%;
+}
+
+.techs md-card img.pull-right {
+  float: right;
+  width: 50px;
+}

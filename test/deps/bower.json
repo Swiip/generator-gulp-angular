@@ -12,6 +12,8 @@
     "angular-sanitize": "1.2.x",
     "angular-route": "1.2.x",
     "angular-resource": "1.2.x",
+    "angular-bootstrap": "0.12.x",
+    "angular-material": "0.5.x",
     "restangular": "1.3.x",
     "angular-ui-router": "0.2.x",
     "bootstrap-sass-official": "3.2.x",

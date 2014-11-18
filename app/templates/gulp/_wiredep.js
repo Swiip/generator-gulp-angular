@@ -8,8 +8,8 @@ gulp.task('wiredep', function () {
 
   return gulp.src('src/index.html')
     .pipe(wiredep({
-      directory: 'bower_components',
-      exclude: [/bootstrap-sass-official/, /bootstrap.js/<% if(props.cssPreprocessor.key !== 'css') { %>, /bootstrap.css/<% } %>],
+      directory: 'bower_components'<% if(wiredepExclusions.length > 0) { %>,
+      exclude: [<%= wiredepExclusions.join(', ') %>]<% } %>
     }))
     .pipe(gulp.dest('src'));
 });

@@ -90,6 +90,7 @@ describe('gulp-angular generator', function () {
         false,
         genOptions
       );
+
       gulpAngular.on('start', outputInTest.mute);
       gulpAngular.on('end', outputInTest.unmute);
 
@@ -97,7 +98,7 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass]', function () {
+  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass]', function () {
     // Default scenario: angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass
     it('should generate the expected files and their content', function (done) {
       helpers.mockPrompt(gulpAngular, prompt);
@@ -162,7 +163,7 @@ describe('gulp-angular generator', function () {
       var _ = gulpAngular._;
 
       helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        angularVersion: "1.2.x"
+        angularVersion: '1.2.x'
       }));
 
       gulpAngular.run({}, function() {
@@ -392,7 +393,8 @@ describe('gulp-angular generator', function () {
         ui: {
           "name": "foundation",
           "version": "5.4.x",
-          "key": "foundation"
+          "key": "foundation",
+          "module": null
         },
       }));
 
@@ -417,7 +419,8 @@ describe('gulp-angular generator', function () {
         ui: {
           "name": "foundation",
           "version": "5.4.x",
-          "key": "foundation"
+          "key": "foundation",
+          "module": null
         },
         cssPreprocessor: {
           "key": "ruby-sass",
@@ -449,7 +452,8 @@ describe('gulp-angular generator', function () {
         ui: {
           "name": "foundation",
           "version": "5.4.x",
-          "key": "foundation"
+          "key": "foundation",
+          "module": null
         },
         cssPreprocessor: {
           "key": "less",
@@ -483,7 +487,8 @@ describe('gulp-angular generator', function () {
         ui: {
           "name": "foundation",
           "version": "5.4.x",
-          "key": "foundation"
+          "key": "foundation",
+          "module": null
         },
         cssPreprocessor: {
           "key": "stylus",
@@ -517,7 +522,8 @@ describe('gulp-angular generator', function () {
         ui: {
           "name": "foundation",
           "version": "5.4.x",
-          "key": "foundation"
+          "key": "foundation",
+          "module": null
         },
         cssPreprocessor: {
           "key": "css",
@@ -555,7 +561,8 @@ describe('gulp-angular generator', function () {
         ui: {
           "name": "bootstrap-sass-official",
           "version": "3.2.x",
-          "key": "bootstrap"
+          "key": "bootstrap",
+          "module": null
         },
         cssPreprocessor: {
           "key": "ruby-sass",
@@ -591,7 +598,8 @@ describe('gulp-angular generator', function () {
         ui: {
           "name": "bootstrap",
           "version": "3.2.x",
-          "key": "bootstrap"
+          "key": "bootstrap",
+          "module": null
         },
         cssPreprocessor: {
           "key": "less",
@@ -627,7 +635,8 @@ describe('gulp-angular generator', function () {
         ui: {
           "name": "bootstrap",
           "version": "3.2.x",
-          "key": "bootstrap"
+          "key": "bootstrap",
+          "module": null
         },
         cssPreprocessor: {
           "key": "stylus",
@@ -663,7 +672,8 @@ describe('gulp-angular generator', function () {
         ui: {
           "name": "bootstrap",
           "version": "3.2.x",
-          "key": "bootstrap"
+          "key": "bootstrap",
+          "module": null
         },
         cssPreprocessor: {
           "key": "css",
@@ -694,6 +704,82 @@ describe('gulp-angular generator', function () {
           ['package.json', /"gulp-less": "\^1.3.3"/],
           ['package.json', /"gulp-sass": "\^0.7.3"/],
           ['package.json', /"gulp-ruby-sass": "\^0.7.1"/],
+        ]);
+
+        done();
+      });
+    });
+  });
+  describe('with option: [Bootstrap, UI Boostrap]', function () {
+    it('should add UI Bootstrap Bower and Angular module', function (done) {
+      var _ = gulpAngular._;
+
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
+        bootstrapComponents: {
+          "name": "angular-bootstrap",
+          "version": "0.12.x",
+          "key": "ui-bootstrap",
+          "module": "ui.bootstrap"
+        }
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file(expectedFile);
+
+        assert.fileContent([
+          ['bower.json', /"angular-bootstrap": "0.12.x"/],
+          ['src/app/index.js', /'ui.bootstrap'/]
+        ]);
+
+        done();
+      });
+    });
+  });
+  describe('with option: [Bootstrap, Standard Boostrap JS]', function () {
+    it('should add Bootstrap JS files', function (done) {
+      var _ = gulpAngular._;
+
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
+        bootstrapComponents: {
+          "name": null,
+          "version": null,
+          "key": "official",
+          "module": null
+        }
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file(expectedFile);
+
+        assert.noFileContent([
+          ['gulp/wiredep.js', /\/bootstrap.js\//]
+        ]);
+
+        done();
+      });
+    });
+  });
+  describe('with option: [Angular Material]', function () {
+    it('should add Angular Material Bower and Angular modules', function (done) {
+      var _ = gulpAngular._;
+
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
+        ui: {
+          "name": "angular-material",
+          "version": "0.5.x",
+          "key": "angular-material",
+          "module": "ngMaterial"
+        }
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file(expectedFile);
+
+        assert.noFile('src/app/vendor.*');
+
+        assert.fileContent([
+          ['bower.json', /"angular-material": "0.5.x"/],
+          ['src/app/index.js', /'ngMaterial'/]
         ]);
 
         done();
