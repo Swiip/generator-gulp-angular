@@ -1,15 +1,5 @@
 {
-  "directories": [
-    "gulp",
-    "src",
-    "src/app",
-    "src/app/main",
-    "src/components",
-    "test",
-    "test/unit",
-    "test/e2e"
-  ],
-  "copies": [
+  "staticFiles": [
     "gulpfile.js",
     "gulp/e2e-tests.js",
     "gulp/server.js",
@@ -22,27 +12,26 @@
     "test/protractor.conf.js",
     "test/e2e/main.js"
   ],
+  "dotFiles": [
+    "bowerrc",
+    "editorconfig",
+    "gitignore",
+    "jshintrc"
+  ],
   "templates": [
     "package.json",
     "bower.json",
+
     "gulp/build.js",
     "gulp/watch.js",
     "gulp/wiredep.js",
+
     "src/index.html",
+
     "src/app/index.js",
     "src/app/main/main.controller.js",
     "src/components/navbar/navbar.controller.js",
+
     "test/unit/main.js"
-  ],
-  "dots": [
-    "gitignore",
-    "editorconfig",
-    "jshintrc",
-    "bowerrc"
-  ],
-  "router": {
-    "directories": [
-      "src"
-    ]
-  }
+  ]
 }

@@ -2,6 +2,7 @@ language: node_js
 
 node_js:
   - '0.10'
+  - '0.11'
 
 before_install:
   - npm install -g npm@latest
@@ -9,5 +10,5 @@ before_install:
   - npm install -g gulp
   - npm install -g istanbul
 
-after_script:
+after_success:
   - npm run coveralls

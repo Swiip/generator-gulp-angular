@@ -10,13 +10,13 @@ var prompts = require('./prompts.json');
 var GulpAngularGenerator = yeoman.generators.Base.extend({
 
   init: function () {
-    // Define the appname
-    this.argument('appname', {
+    // Define the appName
+    this.argument('appName', {
       type: String,
       required: false
     });
-    this.appname = this.appname || path.basename(process.cwd());
-    this.appname = this._.camelize(this._.slugify(this._.humanize(this.appname)));
+    this.appName = this.appName || path.basename(process.cwd());
+    this.appName = this._.camelize(this._.slugify(this._.humanize(this.appName)));
   },
 
   info: function () {
@@ -67,19 +67,16 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     }
 
     this.config.set('props', this.props);
-    this.config.save();
+    this.config.forceSave();
   },
 
-  /* Compile choices in this.model */
-  compileProps: require('./src/compile'),
+  // Format props to template values
+  formatProps: require('./src/format'),
 
-  /* Format this.model in template values */
-  formatData: require('./src/format'),
+  // Write files (copy, template)
+  writeFiles: require('./src/write'),
 
-  /* Process files */
-  app: require('./src/files'),
-
-  /* Install dependencies */
+  // Install dependencies
   install: function () {
     this.installDependencies({
       skipInstall: this.options['skip-install'],

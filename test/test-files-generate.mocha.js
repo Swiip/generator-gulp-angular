@@ -136,14 +136,14 @@ describe('gulp-angular generator', function () {
 
           // Check bower.json
           ['bower.json', /"angular": "1.3.x"/],
-          ['bower.json', /"angular-animate" : "1.3.x"/],
-          ['bower.json', /"angular-cookies" : "1.3.x"/],
-          ['bower.json', /"angular-touch" : "1.3.x"/],
-          ['bower.json', /"angular-sanitize" : "1.3.x"/],
-          ['bower.json', /"jquery" : "1.x.x"/],
-          ['bower.json', /"angular-resource" : "1.3.x"/],
-          ['bower.json', /"angular-route" : "1.3.x"/],
-          ['bower.json', /"bootstrap-sass-official" : "3.2.x"/],
+          ['bower.json', /"angular-animate": "1.3.x"/],
+          ['bower.json', /"angular-cookies": "1.3.x"/],
+          ['bower.json', /"angular-touch": "1.3.x"/],
+          ['bower.json', /"angular-sanitize": "1.3.x"/],
+          ['bower.json', /"jquery": "1.x.x"/],
+          ['bower.json', /"angular-resource": "1.3.x"/],
+          ['bower.json', /"angular-route": "1.3.x"/],
+          ['bower.json', /"bootstrap-sass-official": "3.2.x"/],
 
           // Check package.json
           ['package.json', /"gulp-sass": "\^0.7.3"/],
@@ -193,10 +193,10 @@ describe('gulp-angular generator', function () {
           ['src/app/index.js', /'ngCookies'/],
           ['src/app/index.js', /'ngTouch'/],
           ['src/app/index.js', /'ngSanitize'/],
-          ['bower.json', /"angular-animate" :/],
-          ['bower.json', /"angular-cookies" :/],
-          ['bower.json', /"angular-touch" :/],
-          ['bower.json', /"angular-sanitize" :/],
+          ['bower.json', /"angular-animate":/],
+          ['bower.json', /"angular-cookies":/],
+          ['bower.json', /"angular-touch":/],
+          ['bower.json', /"angular-sanitize":/],
         ]);
         done();
       });
@@ -219,7 +219,7 @@ describe('gulp-angular generator', function () {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['bower.json', /"jquery" : "2.x.x"/]
+          ['bower.json', /"jquery": "2.x.x"/]
         ]));
         done();
       });
@@ -240,7 +240,7 @@ describe('gulp-angular generator', function () {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['bower.json', /"zeptojs" : "1.1.x"/]
+          ['bower.json', /"zeptojs": "1.1.x"/]
         ]));
         done();
       });
@@ -263,8 +263,8 @@ describe('gulp-angular generator', function () {
         assert.fileContent(expectedGulpContent);
 
         assert.noFileContent([
-          ['bower.json', /"jquery :"/],
-          ['bower.json', /"zeptojs :"/]
+          ['bower.json', /"jquery:"/],
+          ['bower.json', /"zeptojs:"/]
         ]);
         done();
       });
@@ -278,7 +278,7 @@ describe('gulp-angular generator', function () {
       helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
         resource: {
           "name": "restangular",
-          "version": "1.3.x",
+          "version": "1.4.x",
           "module": "restangular"
         },
       }));
@@ -288,7 +288,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/index.js', /'restangular'/],
-          ['bower.json', /"restangular" : "1.3.x"/],
+          ['bower.json', /"restangular": "1.4.x"/],
         ]));
 
         done();
@@ -315,8 +315,8 @@ describe('gulp-angular generator', function () {
         assert.noFileContent([
           ['src/app/index.js', /'ngResource'/],
           ['src/app/index.js', /'restangular'/],
-          ['bower.json', /"angular-resource" : "1.3.x"/],
-          ['bower.json', /"restangular" : "1.3.x"/],
+          ['bower.json', /"angular-resource": "1.3.x"/],
+          ['bower.json', /"restangular": "1.3.x"/],
         ]);
 
         done();
@@ -344,7 +344,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/index.js', /'ui.router'/],
-          ['bower.json', /"angular-ui-router" : "0.2.x"/],
+          ['bower.json', /"angular-ui-router": "0.2.x"/],
         ]));
 
         done();
@@ -373,8 +373,8 @@ describe('gulp-angular generator', function () {
         assert.noFileContent([
           ['src/app/index.js', /'ngRoute'/],
           ['src/app/index.js', /'ui.router'/],
-          ['bower.json', /"angular-route" : "1.3.x"/],
-          ['bower.json', /"angular-ui-router" : "0.2.x"/],
+          ['bower.json', /"angular-route": "1.3.x"/],
+          ['bower.json', /"angular-ui-router": "0.2.x"/],
         ]);
 
         done();
@@ -400,7 +400,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/vendor.scss', /\@import '..\/..\/bower_components\/foundation\/scss\/foundation';/],
-          ['bower.json', /"foundation" : "5.4.x"/],
+          ['bower.json', /"foundation": "5.4.x"/],
           ['package.json', /"gulp-sass": "\^0.7.3"/],
         ]));
 
@@ -432,7 +432,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/vendor.scss', /\@import '..\/..\/bower_components\/foundation\/scss\/foundation';/],
-          ['bower.json', /"foundation" : "5.4.x"/],
+          ['bower.json', /"foundation": "5.4.x"/],
           ['package.json', /"gulp-ruby-sass": "\^0.7.1"/],
         ]));
 
@@ -466,7 +466,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/foundation\/css\/foundation.css">/],
-          ['bower.json', /"foundation" : "5.4.x"/],
+          ['bower.json', /"foundation": "5.4.x"/],
           ['package.json', /"gulp-less": "\^1.3.3"/],
         ]));
 
@@ -500,13 +500,13 @@ describe('gulp-angular generator', function () {
 
         // assert.fileContent([].concat(expectedGulpContent, [
         //   ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/foundation\/css\/foundation.css">/],
-        //   ['bower.json', /"foundation" : "5.4.x"/],
+        //   ['bower.json', /"foundation": "5.4.x"/],
         // ]));
 
         // No Gulp task for style
         assert.fileContent([
           ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/foundation\/css\/foundation.css">/],
-          ['bower.json', /"foundation" : "5.4.x"/],
+          ['bower.json', /"foundation": "5.4.x"/],
         ]);
         done();
       });
@@ -540,7 +540,7 @@ describe('gulp-angular generator', function () {
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/vendor.scss', /\$icon-font-path: "\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
           ['src/app/vendor.scss', /\@import '\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap';/],
-          ['bower.json', /"bootstrap-sass-official" : "3.2.x"/],
+          ['bower.json', /"bootstrap-sass-official": "3.2.x"/],
           ['package.json', /"gulp-ruby-sass": "\^0.7.1"/],
         ]));
 
@@ -576,7 +576,7 @@ describe('gulp-angular generator', function () {
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/vendor.less', /@import '..\/..\/bower_components\/bootstrap\/less\/bootstrap.less';/],
           ['src/app/vendor.less', /\@icon-font-path: '\/bower_components\/bootstrap\/fonts\/';/],
-          ['bower.json', /"bootstrap" : "3.2.x"/],
+          ['bower.json', /"bootstrap": "3.2.x"/],
           ['package.json', /"gulp-less": "\^1.3.3"/],
         ]));
 
@@ -610,13 +610,13 @@ describe('gulp-angular generator', function () {
 
         // assert.fileContent([].concat(expectedGulpContent, [
         //   ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/bootstrap\/dist\/css\/bootstrap.css">/],
-        //   ['bower.json', /"bootstrap" : "3.2.x"/],
+        //   ['bower.json', /"bootstrap": "3.2.x"/],
         // ]));
 
         // No Gulp task for style
         assert.fileContent([
           ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/bootstrap\/dist\/css\/bootstrap.css">/],
-          ['bower.json', /"bootstrap" : "3.2.x"/],
+          ['bower.json', /"bootstrap": "3.2.x"/],
         ]);
 
         assert.noFileContent([

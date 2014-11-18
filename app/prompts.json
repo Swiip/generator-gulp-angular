@@ -61,30 +61,30 @@
       {
         "value": {
           "name": "jquery",
-          "version": "1.x.x"
+          "version": "1.11.x"
         },
-        "name": "jQuery 1.x (branch still supporting IE6, 7 and 8)"
+        "name": "jQuery 1.11.x (branch still supporting IE6, 7 and 8)"
       },
       {
         "value": {
           "name": "jquery",
-          "version": "2.x.x"
+          "version": "2.1.x"
         },
-        "name": "jQuery 2.x (new version, lighter, IE9+)"
+        "name": "jQuery 2.1.x (new version, lighter, IE9+)"
       },
       {
         "value": {
           "name": "zeptojs",
           "version": "1.1.x"
         },
-        "name": "ZeptoJS (jQuery compatible but very much lighter)"
+        "name": "ZeptoJS 1.1.x (jQuery compatible but very much lighter)"
       },
       {
         "value": {
           "name": null,
           "version": null
         },
-        "name": "None (Angular will work on it's own jqLite)"
+        "name": "None (Angular will use its own jqLite)"
       }
     ]
   },

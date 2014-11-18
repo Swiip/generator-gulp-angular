@@ -1,73 +1,69 @@
 'use strict';
 
-var techs = require('../techs');
-
-/* Format this.model in template values */
 module.exports = function () {
   var _ = this._;
 
-  this.optionalFiles = [];
-
-  function processBowerDependencies(deps) {
-    return _.chain(deps)
-      .filter(_.isObject)
-      .filter(function (dependency) {
-        return _.isString(dependency.name) && _.isString(dependency.version);
-      })
-      .map(function (dependency) {
-        return '"' + dependency.name + '" : "' + dependency.version + '"';
-      })
-      .value().join(',\n    ');
+  // Retrieve props stored in .yo-rc.json
+  if (this.skipConfig) {
+    this.props = this.config.get('props');
   }
 
-  this.bowerDependencies = processBowerDependencies(this.model.bowerDependencies);
+  // Format list ngModules included in AngularJS DI
+  var ngModules = this.props.angularModules.map(function (module) {
+    return module.module;
+  });
 
-  this.bowerResolutions = processBowerDependencies(this.model.bowerResolutions);
+  ngModules = _.flatten([
+    ngModules,
+    this.props.resource.module,
+    this.props.router.module
+  ]);
 
-  this.modulesDependencies = _.chain(this.model.modulesDependencies)
+  this.modulesDependencies = _.chain(ngModules)
     .filter(_.isString)
     .map(function (dependency) {
       return '\'' + dependency + '\'';
     })
-    .value()
-    .join(', ');
+    .valueOf()
+    .join(', ')
+  ;
 
-  this.npmDependencies = _.chain(this.model.npmDependencies)
-    .keys()
-    .map(function(key) {
-      return ',\n    "' + key + '": "' + this.model.npmDependencies[key] + '"';
-    }, this)
-    .value();
+  // Format list techs used to generate app included in main view of sample
+  var listTechs = require('../techs.json');
 
-  var technologiesContent = _.map(this.model.technologies, function(key) {
-    return _.findWhere(techs, {key: key});
+  var usedTechs = [
+    'angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor',
+    this.props.jQuery.name,
+    this.props.ui.key,
+    this.props.cssPreprocessor.key
+  ]
+    .filter(_.isString)
+    .filter(function(tech) {
+      return tech !== 'default' && tech !== 'css';
+    })
+  ;
+
+  var techsContent = _.map(usedTechs, function(value) {
+    return listTechs[value];
   });
 
-  var technologiesCopies = _.map(this.model.technologies, function(key) {
-    return 'src/assets/images/' + _.findWhere(techs, {key: key}).logo;
+  this.technologies = JSON.stringify(techsContent, null, 2).replace(/"/g, '\'').replace(/\n/g, '\n    ');
+  this.technologiesLogoCopies = _.map(usedTechs, function(value) {
+    return 'src/assets/images/' + listTechs[value].logo;
   });
 
-  this.technologies = JSON.stringify(technologiesContent, null, 2);
-  this.technologies = this.technologies.replace(/"/g, '\'');
-  this.technologies = this.technologies.replace(/\n/g, '\n    ');
+  // Select partials relative to props.ui
+  this.partialCopies = {};
 
-  this.optionalFiles.push({
-    copies: technologiesCopies
-  });
+  var navbarPartialSrc = 'src/components/navbar/__' + this.props.ui.key + '-navbar.html';
+  this.partialCopies[navbarPartialSrc] = 'src/components/navbar/navbar.html';
 
-  /* router */
-  var partial = 'src/app/main/__' + this.props.ui.key + '.html';
-  var navbar  = 'src/components/navbar/__' + this.props.ui.key + '-navbar.html';
-
-  var copies = {};
-  copies[navbar] = 'src/components/navbar/navbar.html';
-
+  var routerPartialSrc = 'src/app/main/__' + this.props.ui.key + '.html';
   if(this.props.router.module !== null) {
-    copies[partial] = 'src/app/main/main.html';
-    this.optionalFiles.push('router');
+    this.partialCopies[routerPartialSrc] = 'src/app/main/main.html';
   }
-  this.optionalFiles.push({copies: copies});
 
+  // Compute routing relative to props.router
   if (this.props.router.module === 'ngRoute') {
     this.routerHtml = '<div ng-view></div>';
     this.routerJs = this.read('src/app/__ngroute.js', 'utf8');
@@ -75,51 +71,35 @@ module.exports = function () {
     this.routerHtml = '<div ui-view></div>';
     this.routerJs = this.read('src/app/__uirouter.js', 'utf8');
   } else {
-    this.routerHtml = this.read(partial, 'utf8');
+    this.routerHtml = this.read(routerPartialSrc, 'utf8');
     this.routerHtml = this.routerHtml.replace(
       /^<div class="container">/,
       '<div class="container" ng-controller="MainCtrl">'
     );
+
     this.routerHtml = this.routerHtml.replace(/\n/g, '\n    ');
     this.routerJs = '';
   }
 
-  /* styles */
-  if(this.props.cssPreprocessor.key !== 'css') {
-    this.stylesBuild = '\n' + this.read('gulp/__handleError.js', 'utf8') + '\n' +
-      this.read('gulp/__' + this.props.cssPreprocessor.key + '.js', 'utf8');
+  // Format choice UI Framework
+  if(this.props.ui.key === 'bootstrap' && this.props.cssPreprocessor.extension !== 'scss') {
+    this.props.ui.name = 'bootstrap';
+  }
+
+  this.styleCopies = {};
+
+  var styleAppSrc = 'src/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension;
+  this.styleCopies[styleAppSrc] = 'src/app/index.' + this.props.cssPreprocessor.extension;
+
+  // ## Special case for Foundation and LESS: Foundation dont have a LESS version so we include css
+  if ((this.props.cssPreprocessor.extension === 'less' && this.props.ui.key === 'foundation') || this.props.cssPreprocessor.extension === 'css') {
+    this.isVendorStylesPreprocessed = false;
   } else {
-    this.stylesBuild = '';
+    this.isVendorStylesPreprocessed = true;
   }
 
-  this.cssLinks = _.map(this.model.cssLinks, function(cssLink) {
-    return '<link rel="stylesheet" href="' + cssLink + '">';
-  }).join('\n    ');
-
-  this.styleExtension = this.props.cssPreprocessor.extension;
-
-  /* ui */
-  var styleAppSource = 'src/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension;
-  var styleAppDest = 'src/app/index.' + this.props.cssPreprocessor.extension;
-  var styleCopies = {};
-  styleCopies[styleAppSource] = styleAppDest;
-
-  if(this.model.vendorStylesPreprocessed) {
+  if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
     var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
-    var styleVendorDest = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
-    styleCopies[styleVendorSource] = styleVendorDest;
+    this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
   }
-
-  this.optionalFiles.push({ copies: styleCopies });
-
-  this.replaceFontPath = '';
-  if(this.props.ui.key === 'bootstrap') {
-    if(this.props.cssPreprocessor.extension === 'scss') {
-      this.replaceFontPath = '\n    .pipe($.replace(\'bower_components/bootstrap-sass-official/assets/fonts/bootstrap\',\'fonts\'))';
-    }
-    if(this.props.cssPreprocessor.extension === 'less') {
-      this.replaceFontPath = '\n    .pipe($.replace(\'bower_components/bootstrap/fonts\',\'fonts\'))';
-    }
-  }
-
 };

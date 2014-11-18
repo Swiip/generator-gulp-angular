@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('<%= appname %>', [<%= modulesDependencies %>])<%= routerJs %>;
+angular.module('<%= appName %>', [<%= modulesDependencies %>])<%= routerJs %>;
