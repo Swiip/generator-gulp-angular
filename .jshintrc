@@ -28,6 +28,13 @@
     "before": false,
     "beforeEach": false,
     "after": false,
-    "afterEach": false
+    "afterEach": false,
+    /* PROTRACTOR */
+    "$": false,
+    "$$": false,
+    "browser": false,
+    "by": false,
+    "element": false,
+    "protractor": false
   }
 }
