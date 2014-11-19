@@ -8,9 +8,10 @@
     "src/favicon.ico",
     "src/404.html",
     "src/assets/images/yeoman.png",
-    "test/karma.conf.js",
-    "test/protractor.conf.js",
-    "test/e2e/main.js"
+    "karma.conf.js",
+    "protractor.conf.js",
+    "e2e/main.po.js",
+    "e2e/main.spec.js"
   ],
   "dotFiles": [
     "bowerrc",
@@ -29,9 +30,10 @@
     "src/index.html",
 
     "src/app/index.js",
-    "src/app/main/main.controller.js",
-    "src/components/navbar/navbar.controller.js",
 
-    "test/unit/main.js"
+    "src/app/main/main.controller.js",
+    "src/app/main/main.controller.spec.js",
+
+    "src/components/navbar/navbar.controller.js"
   ]
 }

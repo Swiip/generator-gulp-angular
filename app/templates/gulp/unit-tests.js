@@ -15,13 +15,12 @@ gulp.task('test', function() {
   });
 
   var testFiles = bowerDeps.js.concat([
-    'src/{app,components}/**/*.js',
-    'test/unit/**/*.js'
+    'src/{app,components}/**/*.js'
   ]);
 
   return gulp.src(testFiles)
     .pipe($.karma({
-      configFile: 'test/karma.conf.js',
+      configFile: 'karma.conf.js',
       action: 'run'
     }))
     .on('error', function(err) {

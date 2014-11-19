@@ -107,11 +107,12 @@ describe('gulp-angular generator', function () {
           // Option: Javascript
           'src/app/index.js',
           'src/app/main/main.controller.js',
+          'src/app/main/main.controller.spec.js',
           'src/components/navbar/navbar.controller.js',
-          'test/karma.conf.js',
-          'test/protractor.conf.js',
-          'test/e2e/main.js',
-          'test/unit/main.js',
+          'karma.conf.js',
+          'protractor.conf.js',
+          'e2e/main.po.js',
+          'e2e/main.spec.js',
 
           // Option: ngRoute
           'src/app/main/main.html',

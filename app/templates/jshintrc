@@ -20,6 +20,16 @@
   "white": true,
   "validthis": true,
   "globals": {
-    "angular": false
+    "angular": false,
+    // Angular Mocks
+    "inject": false,
+    // JASMINE
+    "describe": false,
+    "it": false,
+    "before": false,
+    "beforeEach": false,
+    "after": false,
+    "afterEach": false,
+    "expect": false
   }
 }

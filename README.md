@@ -66,6 +66,7 @@ The root directory generated for a app with name `gulpAngular` :
 │   ├──  app/
 │   │   ├──  main/
 │   │   │   ├──  main.controller.js
+│   │   │   ├──  main.controller.spec.js
 │   │   │   └──  main.html
 │   │   └──  index.js
 │   │   └──  index.(css|less|scss)
@@ -80,7 +81,7 @@ The root directory generated for a app with name `gulpAngular` :
 │   ├──  favico.ico
 │   └──  index.html
 ├──  gulp/
-├──  test/
+├──  e2e/
 ├──  bower_components/
 ├──  nodes_modules/
 ├──  .bowerrc
@@ -89,7 +90,9 @@ The root directory generated for a app with name `gulpAngular` :
 ├──  .jshintrc
 ├──  bower.json
 ├──  gulpfile.js
+├──  karma.conf.js
 ├──  package.json
+├──  protractor.conf.js
 </pre>
 
 ## Features included in the gulpfile
@@ -130,7 +133,16 @@ I tried many configurations for Protractor without success, any hint would be ap
 
 [All changes listed in the GitHub releases](https://github.com/Swiip/generator-gulp-angular/releases)
 
-## Contribute
+## Contributing
+
+**Style Guide:**
+Please brief yourself on [Idiomatic.js](https://github.com/rwldrn/idiomatic.js) style guide with two space indent  
+
+**Unit test:**
+Unit test are written in [Mocha](http://visionmedia.github.io/mocha/). Please add a unit test for every new feature or bug fix. `npm test` to run the test suite.  
+
+**Documentation:**
+Add documentation for every new feature, directory structure change. Feel free to send corrections or better docs!  
 
 Like any other Open Source project, the best way to contribute is through opening GitHub issues.
 Bug or suggestions, everything is welcomed.
