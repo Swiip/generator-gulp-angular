@@ -38,14 +38,16 @@ gulp.task('scripts', function () {
 gulp.task('partials', function () {
   return gulp.src('src/{app,components}/**/*.html')
     .pipe($.minifyHtml({
-      empty: true,
-      spare: true,
-      quotes: true
-    }))
-    .pipe($.ngHtml2js({
-      moduleName: '<%= appName %>'
-    }))
-    .pipe(gulp.dest('.tmp'))
+                         empty: true,
+                         spare: true,
+                         quotes: true
+                       }))
+    .pipe( $.ngTemplates({
+                           filename: 'partials.js',
+                           module: '<%= appName %>',
+                           standalone: false
+                         }))
+    .pipe(gulp.dest('.tmp/app'))
     .pipe($.size());
 });
 
