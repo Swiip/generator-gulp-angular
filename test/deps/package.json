@@ -39,7 +39,8 @@
 
     "gulp-less": "^1.3.3",
     "gulp-ruby-sass": "^0.4.3",
-    "gulp-sass": "^0.7.3"
+    "gulp-sass": "^0.7.3",
+    "gulp-stylus": "^1.3.3"
   },
   "engines": {
     "node": ">=0.10.0"

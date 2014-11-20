@@ -475,6 +475,40 @@ describe('gulp-angular generator', function () {
       });
     });
   });
+  describe('with option: [Foundation, Stylus]', function () {
+    it('should add dependency for Foundation with Stylus', function (done) {
+      var _ = gulpAngular._;
+
+      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+        ui: {
+          "name": "foundation",
+          "version": "5.4.x",
+          "key": "foundation"
+        },
+        cssPreprocessor: {
+          "key": "stylus",
+          "extension": "styl",
+          "npm": {
+            "gulp-stylus": "^1.3.3"
+          }
+        }
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file([].concat(expectedFile, [
+          'src/app/index.styl'
+        ]));
+
+        assert.fileContent([].concat(expectedGulpContent, [
+          ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/foundation\/css\/foundation.css">/],
+          ['bower.json', /"foundation": "5.4.x"/],
+          ['package.json', /"gulp-stylus": "\^1.3.3"/],
+        ]));
+
+        done();
+      });
+    });
+  });
   describe('with option: [Foundation, CSS]', function () {
     it('should add dependency for Foundation with CSS', function (done) {
       var _ = gulpAngular._;
@@ -579,6 +613,42 @@ describe('gulp-angular generator', function () {
           ['src/app/vendor.less', /\@icon-font-path: '\/bower_components\/bootstrap\/fonts\/';/],
           ['bower.json', /"bootstrap": "3.2.x"/],
           ['package.json', /"gulp-less": "\^1.3.3"/],
+        ]));
+
+        done();
+      });
+    });
+  });
+  describe('with option: [Bootstrap, Stylus]', function () {
+    it('should add dependency for Bootstrap with Stylus', function (done) {
+      var _ = gulpAngular._;
+
+      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+        ui: {
+          "name": "bootstrap",
+          "version": "3.2.x",
+          "key": "bootstrap"
+        },
+        cssPreprocessor: {
+          "key": "stylus",
+          "extension": "styl",
+          "npm": {
+            "gulp-stylus": "^1.3.3"
+          }
+        }
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file([].concat(expectedFile, [
+          'src/app/index.styl',
+        ]));
+
+        assert.noFile('src/app/vendor.*');
+
+        assert.fileContent([].concat(expectedGulpContent, [
+          ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/bootstrap\/dist\/css\/bootstrap.css">/],
+          ['bower.json', /"bootstrap": "3.2.x"/],
+          ['package.json', /"gulp-stylus": "\^1.3.3"/],
         ]));
 
         done();
