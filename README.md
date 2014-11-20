@@ -116,7 +116,7 @@ The root directory generated for a app with name `gulpAngular` :
 * *Resource handler*: ngResource, Restangular, none
 * *Router*: ngRoute, UI Router, none
 * *UI Framework*: Bootstrap, Foundation, none (depends on the chosen CSS preprocessor)
-* *CSS pre-processor*: Less, Sass with Ruby and Node, none
+* *CSS pre-processor*: Less, Sass with Ruby and Node, Stylus, none
 * **TODO** Bootstrap directives : UI Bootstrap, Angular Strap, none (only if you chose Bootstrap)
 * **TODO** JS preprocessor: CoffeeScript, TypeScript, ECMAScript6 (Traceur)
 * **TODO** HTML preprocessor: Jade ?
@@ -136,13 +136,13 @@ I tried many configurations for Protractor without success, any hint would be ap
 ## Contributing
 
 **Style Guide:**
-Please brief yourself on [Idiomatic.js](https://github.com/rwldrn/idiomatic.js) style guide with two space indent  
+Please brief yourself on [Idiomatic.js](https://github.com/rwldrn/idiomatic.js) style guide with two space indent
 
 **Unit test:**
-Unit test are written in [Mocha](http://visionmedia.github.io/mocha/). Please add a unit test for every new feature or bug fix. `npm test` to run the test suite.  
+Unit test are written in [Mocha](http://visionmedia.github.io/mocha/). Please add a unit test for every new feature or bug fix. `npm test` to run the test suite.
 
 **Documentation:**
-Add documentation for every new feature, directory structure change. Feel free to send corrections or better docs!  
+Add documentation for every new feature, directory structure change. Feel free to send corrections or better docs!
 
 Like any other Open Source project, the best way to contribute is through opening GitHub issues.
 Bug or suggestions, everything is welcomed.

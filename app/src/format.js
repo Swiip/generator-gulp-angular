@@ -92,7 +92,7 @@ module.exports = function () {
   this.styleCopies[styleAppSrc] = 'src/app/index.' + this.props.cssPreprocessor.extension;
 
   // ## Special case for Foundation and LESS: Foundation dont have a LESS version so we include css
-  if ((this.props.cssPreprocessor.extension === 'less' && this.props.ui.key === 'foundation') || this.props.cssPreprocessor.extension === 'css') {
+  if ((this.props.cssPreprocessor.extension === 'less' && this.props.ui.key === 'foundation') || this.props.cssPreprocessor.extension === 'css'  || this.props.cssPreprocessor.extension === 'styl') {
     this.isVendorStylesPreprocessed = false;
   } else {
     this.isVendorStylesPreprocessed = true;

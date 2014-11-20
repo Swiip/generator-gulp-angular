@@ -216,6 +216,16 @@
       },
       {
         "value": {
+          "key": "stylus",
+          "extension": "styl",
+          "npm": {
+            "gulp-stylus": "^1.3.3"
+          }
+        },
+        "name": "Stylus, supporting both an indented syntax and regular CSS style."
+      },
+      {
+        "value": {
           "key": "css",
           "extension": "css",
           "npm": {}
