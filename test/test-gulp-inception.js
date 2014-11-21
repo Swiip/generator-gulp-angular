@@ -3,6 +3,7 @@
 var path = require('path');
 var helpers = require('yeoman-generator').test;
 var spawn = require('cross-spawn');
+var _ = require('lodash');
 var outputInTest = require( './mute' );
 
 var fs = require('fs');
@@ -15,7 +16,8 @@ chai.use(require('chai-as-promised'));
 chai.use(require('chai-fs'));
 
 describe('gulp-angular generator', function () {
-  var mockPrompts;
+  var prompt = require('./mock-prompts.json');
+  var promptCase;
   var gulpAngular;
 
   var tempDir = path.join(__dirname, 'tempGulpAngular');
@@ -61,7 +63,7 @@ describe('gulp-angular generator', function () {
     // http://stackoverflow.com/a/9804910/2857943
     // require only reads the file once, following calls return the result from cache
     delete require.cache[require.resolve('./mock-prompts.json')];
-    mockPrompts = require('./mock-prompts.json');
+    prompt = require('./mock-prompts.json');
 
     helpers.testDirectory(tempDir, function (err) {
       if (err) {
@@ -87,7 +89,7 @@ describe('gulp-angular generator', function () {
   describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass]', function () {
 
      it('should pass gulp build', function () {
-      helpers.mockPrompt(gulpAngular, mockPrompts.default);
+      helpers.mockPrompt(gulpAngular, prompt);
 
       return this.run(100000, 'build').should.be.fulfilled.then(function () {
         assert.isFile(tempDirDist + '/index.html', 'File not exist');
@@ -102,31 +104,30 @@ describe('gulp-angular generator', function () {
     });
 
     it('should pass gulp test', function () {
-      helpers.mockPrompt(gulpAngular, mockPrompts.default);
+      helpers.mockPrompt(gulpAngular, prompt);
 
       return this.run(100000, 'test').should.be.fulfilled;
     });
 
     it('should pass gulp protractor', function () {
-      helpers.mockPrompt(gulpAngular, mockPrompts.default);
+      helpers.mockPrompt(gulpAngular, prompt);
 
       return this.run(100000, 'protractor').should.be.fulfilled;
     });
 
     it('should pass gulp protractor:dist', function () {
-      helpers.mockPrompt(gulpAngular, mockPrompts.default);
+      helpers.mockPrompt(gulpAngular, prompt);
 
       return this.run(100000, 'protractor:dist').should.be.fulfilled;
     });
   });
 
-  describe('with other promptCase: [angular 1.2.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, ruby-sass]', function () {
-    var promptCase;
+  describe('with other promptCase: [angular 1.2.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, CSS]', function () {
 
     before(function () {
-      promptCase = gulpAngular._.assign(mockPrompts.default, {
+      promptCase = _.assign(prompt, {
         angularVersion: "1.2.x",
-        angularModules: [],
+        // angularModules: [],
         jQuery: {
           "name": "jquery",
           "version": "2.x.x"
@@ -147,11 +148,9 @@ describe('gulp-angular generator', function () {
           "key": "foundation"
         },
         cssPreprocessor: {
-          "key": "ruby-sass",
-          "extension": "scss",
-          "npm": {
-            "gulp-ruby-sass": "^0.7.1"
-          }
+          "key": "css",
+          "extension": "css",
+          "npm": {}
         }
       });
     });
@@ -166,7 +165,6 @@ describe('gulp-angular generator', function () {
         assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
         assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
         assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/fonts', 'Directory not exist');
         assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
         assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
       });
@@ -191,12 +189,10 @@ describe('gulp-angular generator', function () {
     });
   });
 
-
   describe('with other promptCase: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, ZeptoJS 1.1.x, $http, Bootstrap, LESS]', function () {
-    var promptCase;
 
     before(function () {
-      promptCase = gulpAngular._.assign(mockPrompts.default, {
+      promptCase = _.assign(prompt, {
         jQuery: {
           "name": "zeptojs",
           "version": "1.1.x"
@@ -262,10 +258,9 @@ describe('gulp-angular generator', function () {
   });
 
   describe('with other promptCase: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, $http, Foundation, Stylus]', function () {
-    var promptCase;
 
     before(function () {
-      promptCase = gulpAngular._.assign(mockPrompts.default, {
+      promptCase = _.assign(prompt, {
         jQuery: {
           "name": null,
           "version": "1.1.x"
@@ -295,7 +290,6 @@ describe('gulp-angular generator', function () {
         assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
         assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
         assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/fonts', 'Directory not exist');
         assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
         assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
       });
@@ -319,5 +313,4 @@ describe('gulp-angular generator', function () {
       return this.run(100000, 'protractor:dist').should.be.fulfilled;
     });
   });
-
 });
