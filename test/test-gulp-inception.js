@@ -3,23 +3,25 @@
 var path = require('path');
 var helpers = require('yeoman-generator').test;
 var spawn = require('cross-spawn');
+var outputInTest = require( './mute' );
 
 var fs = require('fs');
 var Q = require('q');
 
 var chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
-chai.use(chaiAsPromised);
-chai.should();
-
-// http://stackoverflow.com/a/9804910/2857943
-// require only reads the file once, following calls return the result from cache
-delete require.cache[require.resolve('./mock-prompts.json')];
-var mockPrompts = require('./mock-prompts.json');
+var should = require('chai').should();
+var assert = require('chai').assert;
+chai.use(require('chai-as-promised'));
+chai.use(require('chai-fs'));
 
 describe('gulp-angular generator', function () {
+  var mockPrompts;
+  var gulpAngular;
+
   var tempDir = path.join(__dirname, 'tempGulpAngular');
   var depsDir = path.join(__dirname, 'deps');
+
+  var tempDirDist = tempDir + '/dist';
 
   var genOptions = {
     'skip-install': true,
@@ -28,12 +30,12 @@ describe('gulp-angular generator', function () {
   };
 
   before(function () {
-    this.run = function(options, timeout, task) {
+    this.run = function(timeout, task) {
       var deferred = Q.defer();
 
       this.timeout(timeout);
 
-      this.app.run(options, function () {
+      gulpAngular.run({}, function () {
         var promiseLinkNode = Q.nfcall(fs.symlink, path.join(depsDir, 'node_modules'), path.join(tempDir, 'node_modules'));
         var promiseLinkBower = Q.nfcall(fs.symlink, path.join(depsDir, 'bower_components'), path.join(tempDir, 'bower_components'));
         Q.all([promiseLinkNode, promiseLinkBower]).then(function() {
@@ -56,12 +58,17 @@ describe('gulp-angular generator', function () {
   });
 
   beforeEach(function (done) {
+    // http://stackoverflow.com/a/9804910/2857943
+    // require only reads the file once, following calls return the result from cache
+    delete require.cache[require.resolve('./mock-prompts.json')];
+    mockPrompts = require('./mock-prompts.json');
+
     helpers.testDirectory(tempDir, function (err) {
       if (err) {
-        return done(err);
+        done(err);
       }
 
-      this.app = helpers.createGenerator(
+      gulpAngular = helpers.createGenerator(
         'gulp-angular:app',
         [
           '../../app',
@@ -69,47 +76,468 @@ describe('gulp-angular generator', function () {
         false,
         genOptions
       );
+      gulpAngular.on('start', outputInTest.mute);
+      gulpAngular.on('end', outputInTest.unmute);
 
       done();
-    }.bind(this));
+    });
+
   });
 
-  // I don't realize combination of prompts and gulp tasks
-  // because it prevent me to split in different tests
-  // and have precise result or be able to run only one
+  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass]', function () {
 
-  it('should pass gulp build task in fast mode', function (done) {
-    helpers.mockPrompt(this.app, mockPrompts.fast);
-    this.run({}, 100000, 'build').should.be.fulfilled.notify(done);
+     it('should pass gulp build', function () {
+      helpers.mockPrompt(gulpAngular, mockPrompts.default);
+
+      return this.run(100000, 'build').should.be.fulfilled.then(function () {
+        assert.isFile(tempDirDist + '/index.html', 'File not exist');
+        assert.isFile(tempDirDist + '/404.html', 'File not exist');
+        assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
+        assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/fonts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
+      });
+    });
+
+    it('should pass gulp test', function () {
+      helpers.mockPrompt(gulpAngular, mockPrompts.default);
+
+      return this.run(100000, 'test').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor', function () {
+      helpers.mockPrompt(gulpAngular, mockPrompts.default);
+
+      return this.run(100000, 'protractor').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor:dist', function () {
+      helpers.mockPrompt(gulpAngular, mockPrompts.default);
+
+      return this.run(100000, 'protractor:dist').should.be.fulfilled;
+    });
   });
 
-  it('should pass gulp test task in fast mode', function (done) {
-    helpers.mockPrompt(this.app, mockPrompts.fast);
-    this.run({}, 100000, 'test').should.be.fulfilled.notify(done);
+  describe('with option: [angular 1.2.x]', function () {
+    var promptCase;
+
+    before(function () {
+      promptCase = gulpAngular._.assign(mockPrompts.default, {
+        angularVersion: "1.2.x"
+      });
+    });
+
+    it('should pass gulp build', function () {
+
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'build').should.be.fulfilled.then(function () {
+        assert.isFile(tempDirDist + '/index.html', 'File not exist');
+        assert.isFile(tempDirDist + '/404.html', 'File not exist');
+        assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
+        assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/fonts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
+      });
+    });
+
+    it('should pass gulp test', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'test').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor:dist', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor:dist').should.be.fulfilled;
+    });
   });
 
-  it('should pass gulp test task in medium mode', function (done) {
-    helpers.mockPrompt(this.app, mockPrompts.medium);
-    this.run({}, 100000, 'test').should.be.fulfilled.notify(done);
+  describe('without ngModules option', function () {
+    var promptCase;
+
+    before(function () {
+      promptCase = gulpAngular._.assign(mockPrompts.default, {
+        angularModules: []
+      });
+    });
+
+    it('should pass gulp build', function () {
+
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'build').should.be.fulfilled.then(function () {
+        assert.isFile(tempDirDist + '/index.html', 'File not exist');
+        assert.isFile(tempDirDist + '/404.html', 'File not exist');
+        assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
+        assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/fonts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
+      });
+    });
+
+    it('should pass gulp test', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'test').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor:dist', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor:dist').should.be.fulfilled;
+    });
   });
 
-  it('should pass gulp test task in full mode', function (done) {
-    helpers.mockPrompt(this.app, mockPrompts.full);
-    this.run({}, 100000, 'test').should.be.fulfilled.notify(done);
+  describe('with option: [jQuery 2.x.x]', function () {
+    var promptCase;
+
+    before(function () {
+      promptCase = gulpAngular._.assign(mockPrompts.default, {
+        jQuery: {
+          "name": "jquery",
+          "version": "2.x.x"
+        }
+      });
+    });
+
+    it('should pass gulp build', function () {
+
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'build').should.be.fulfilled.then(function () {
+        assert.isFile(tempDirDist + '/index.html', 'File not exist');
+        assert.isFile(tempDirDist + '/404.html', 'File not exist');
+        assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
+        assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/fonts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
+      });
+    });
+
+    it('should pass gulp test', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'test').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor:dist', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor:dist').should.be.fulfilled;
+    });
   });
 
-  it('should pass gulp protractor task in fast mode', function (done) {
-    helpers.mockPrompt(this.app, mockPrompts.fast);
-    this.run({}, 100000, 'protractor').should.be.fulfilled.notify(done);
+  describe('with option: [ZeptoJS 1.1.x]', function () {
+    var promptCase;
+
+    before(function () {
+      promptCase = gulpAngular._.assign(mockPrompts.default, {
+        jQuery: {
+          "name": "zeptojs",
+          "version": "1.1.x"
+        }
+      });
+    });
+
+    it('should pass gulp build', function () {
+
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'build').should.be.fulfilled.then(function () {
+        assert.isFile(tempDirDist + '/index.html', 'File not exist');
+        assert.isFile(tempDirDist + '/404.html', 'File not exist');
+        assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
+        assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/fonts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
+      });
+    });
+
+    it('should pass gulp test', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'test').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor:dist', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor:dist').should.be.fulfilled;
+    });
   });
 
-  it('should pass gulp protractor task in medium mode', function (done) {
-    helpers.mockPrompt(this.app, mockPrompts.medium);
-    this.run({}, 100000, 'protractor').should.be.fulfilled.notify(done);
+  describe('with option: [jqLite]', function () {
+    var promptCase;
+
+    before(function () {
+      promptCase = gulpAngular._.assign(mockPrompts.default, {
+        jQuery: {
+          "name": null,
+          "version": "1.1.x"
+        }
+      });
+    });
+
+    it('should pass gulp build', function () {
+
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'build').should.be.fulfilled.then(function () {
+        assert.isFile(tempDirDist + '/index.html', 'File not exist');
+        assert.isFile(tempDirDist + '/404.html', 'File not exist');
+        assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
+        assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/fonts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
+      });
+    });
+
+    it('should pass gulp test', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'test').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor:dist', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor:dist').should.be.fulfilled;
+    });
   });
 
-  it('should pass gulp protractor task in full mode', function (done) {
-    helpers.mockPrompt(this.app, mockPrompts.full);
-    this.run({}, 100000, 'protractor').should.be.fulfilled.notify(done);
+  describe('with option: [Restangular]', function () {
+    var promptCase;
+
+    before(function () {
+      promptCase = gulpAngular._.assign(mockPrompts.default, {
+        resource: {
+          "name": "restangular",
+          "version": "1.4.x",
+          "module": "restangular"
+        }
+      });
+    });
+
+    it('should pass gulp build', function () {
+
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'build').should.be.fulfilled.then(function () {
+        assert.isFile(tempDirDist + '/index.html', 'File not exist');
+        assert.isFile(tempDirDist + '/404.html', 'File not exist');
+        assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
+        assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/fonts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
+      });
+    });
+
+    it('should pass gulp test', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'test').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor:dist', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor:dist').should.be.fulfilled;
+    });
+  });
+
+  describe('with option: [$http]', function () {
+    var promptCase;
+
+    before(function () {
+      promptCase = gulpAngular._.assign(mockPrompts.default, {
+        resource: {
+          "name": null,
+          "version": "1.2.x",
+          "module": null
+        }
+      });
+    });
+
+    it('should pass gulp build', function () {
+
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'build').should.be.fulfilled.then(function () {
+        assert.isFile(tempDirDist + '/index.html', 'File not exist');
+        assert.isFile(tempDirDist + '/404.html', 'File not exist');
+        assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
+        assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/fonts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
+      });
+    });
+
+    it('should pass gulp test', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'test').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor:dist', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor:dist').should.be.fulfilled;
+    });
+  });
+
+  describe('with option: [UI Router]', function () {
+    var promptCase;
+
+    before(function () {
+      promptCase = gulpAngular._.assign(mockPrompts.default, {
+        router: {
+          "name": "angular-ui-router",
+          "version": "0.2.x",
+          "module": "ui.router"
+        }
+      });
+    });
+
+    it('should pass gulp build', function () {
+
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'build').should.be.fulfilled.then(function () {
+        assert.isFile(tempDirDist + '/index.html', 'File not exist');
+        assert.isFile(tempDirDist + '/404.html', 'File not exist');
+        assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
+        assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/fonts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
+      });
+    });
+
+    it('should pass gulp test', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'test').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor:dist', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor:dist').should.be.fulfilled;
+    });
+  });
+
+  describe('without router option', function () {
+    var promptCase;
+
+    before(function () {
+      promptCase = gulpAngular._.assign(mockPrompts.default, {
+        router: {
+          "name": null,
+          "version": "1.2.x",
+          "module": null
+        },
+      });
+    });
+
+    it('should pass gulp build', function () {
+
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'build').should.be.fulfilled.then(function () {
+        assert.isFile(tempDirDist + '/index.html', 'File not exist');
+        assert.isFile(tempDirDist + '/404.html', 'File not exist');
+        assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
+        assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/fonts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
+        assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
+      });
+    });
+
+    it('should pass gulp test', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'test').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor:dist', function () {
+      helpers.mockPrompt(gulpAngular, promptCase);
+
+      return this.run(100000, 'protractor:dist').should.be.fulfilled;
+    });
   });
 });

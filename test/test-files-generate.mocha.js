@@ -281,7 +281,7 @@ describe('gulp-angular generator', function () {
           "name": "restangular",
           "version": "1.4.x",
           "module": "restangular"
-        },
+        }
       }));
 
       gulpAngular.run({}, function() {
@@ -305,7 +305,7 @@ describe('gulp-angular generator', function () {
           "name": null,
           "version": "1.2.x",
           "module": null
-        },
+        }
       }));
 
       gulpAngular.run({}, function() {
@@ -331,11 +331,11 @@ describe('gulp-angular generator', function () {
       var _ = gulpAngular._;
 
       helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
-       router: {
+        router: {
           "name": "angular-ui-router",
           "version": "0.2.x",
           "module": "ui.router"
-        },
+        }
       }));
 
       gulpAngular.run({}, function() {
@@ -361,7 +361,7 @@ describe('gulp-angular generator', function () {
           "name": null,
           "version": "1.2.x",
           "module": null
-        },
+        }
       }));
 
       gulpAngular.run({}, function() {
