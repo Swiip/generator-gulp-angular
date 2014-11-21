@@ -19,7 +19,7 @@ gulp.task('styles', ['wiredep'], function () {<% if (props.cssPreprocessor.key =
     .pipe($.rubySass({style: 'expanded'}))<% } else if (props.cssPreprocessor.key === 'node-sass') { %>
   return gulp.src('src/{app,components}/**/*.scss')
     .pipe($.sass({style: 'expanded'}))<% } else if (props.cssPreprocessor.key === 'stylus') { %>
-  return gulp.src('src/{app,components}/**/*.scss')
+  return gulp.src('src/{app,components}/**/*.styl')
     .pipe($.stylus())<% } %>
     .on('error', function handleError(err) {
       console.error(err.toString());
