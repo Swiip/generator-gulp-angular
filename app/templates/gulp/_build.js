@@ -26,7 +26,7 @@ gulp.task('styles', ['wiredep'], function () {<% if (props.cssPreprocessor.key =
       this.emit('end');
     })
     .pipe($.autoprefixer('last 1 version'))
-    .pipe(gulp.dest('.tmp'))
+    .pipe(gulp.dest('.tmp/'))
     .pipe($.size());
 });
 <% } %>
@@ -44,10 +44,10 @@ gulp.task('partials', function () {
       spare: true,
       quotes: true
     }))
-    .pipe($.ngHtml2js({
-      moduleName: '<%= appName %>'
+    .pipe($.angularTemplatecache('templateCacheHtml.js', {
+      module: '<%= appName %>'
     }))
-    .pipe(gulp.dest('.tmp'))
+    .pipe(gulp.dest('src/app/'))
     .pipe($.size());
 });
 
@@ -58,11 +58,10 @@ gulp.task('html', [<% if (props.cssPreprocessor.key !== 'css') { %>'styles', <% 
   var assets;
 
   return gulp.src('src/*.html')
-    .pipe($.inject(gulp.src('.tmp/{app,components}/**/*.js'), {
-      read: false,
+    .pipe($.inject(gulp.src('src/app/templateCacheHtml.js', {read: false}), {
       starttag: '<!-- inject:partials -->',
-      addRootSlash: false,
-      addPrefix: '../'
+      ignorePath: 'src',
+      addRootSlash: false
     }))
     .pipe(assets = $.useref.assets())
     .pipe($.rev())
@@ -85,7 +84,7 @@ gulp.task('html', [<% if (props.cssPreprocessor.key !== 'css') { %>'styles', <% 
       quotes: true
     }))
     .pipe(htmlFilter.restore())
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('dist/'))
     .pipe($.size());
 });
 
@@ -96,7 +95,7 @@ gulp.task('images', function () {
       progressive: true,
       interlaced: true
     })))
-    .pipe(gulp.dest('dist/assets/images'))
+    .pipe(gulp.dest('dist/assets/images/'))
     .pipe($.size());
 });
 
@@ -104,18 +103,18 @@ gulp.task('fonts', function () {
   return gulp.src($.mainBowerFiles())
     .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
     .pipe($.flatten())
-    .pipe(gulp.dest('dist/fonts'))
+    .pipe(gulp.dest('dist/fonts/'))
     .pipe($.size());
 });
 
 gulp.task('misc', function () {
   return gulp.src('src/**/*.ico')
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('dist/'))
     .pipe($.size());
 });
 
 gulp.task('clean', function (done) {
-  $.del(['.tmp', 'dist'], done);
+  $.del(['src/app/templateCacheHtml.js', 'dist/', '.tmp/'], done);
 });
 
 gulp.task('build', ['html', 'images', 'fonts', 'misc']);
