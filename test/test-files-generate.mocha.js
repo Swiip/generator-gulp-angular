@@ -8,7 +8,7 @@ var outputInTest = require( './mute' );
 
 describe('gulp-angular generator', function () {
 
-  var mockPrompts;
+  var prompt = require('./mock-prompts.json');
   var gulpAngular;
   var folderName = 'tempGulpAngular';
 
@@ -75,7 +75,7 @@ describe('gulp-angular generator', function () {
     // http://stackoverflow.com/a/9804910/2857943
     // require only reads the file once, following calls return the result from cache
     delete require.cache[require.resolve('./mock-prompts.json')];
-    mockPrompts = require('./mock-prompts.json');
+    prompt = require('./mock-prompts.json');
 
     helpers.testDirectory(path.join(__dirname, folderName), function (err) {
       if (err) {
@@ -100,7 +100,7 @@ describe('gulp-angular generator', function () {
   describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass]', function () {
     // Default scenario: angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass
     it('should generate the expected files and their content', function (done) {
-      helpers.mockPrompt(gulpAngular, mockPrompts.default);
+      helpers.mockPrompt(gulpAngular, prompt);
 
       gulpAngular.run({}, function () {
         assert.file([].concat(expectedFile, [
@@ -161,7 +161,7 @@ describe('gulp-angular generator', function () {
     it('should add dependency for angular 1.2.x', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         angularVersion: "1.2.x"
       }));
 
@@ -180,7 +180,7 @@ describe('gulp-angular generator', function () {
   describe('without ngModules option', function () {
     it('should NOT add dependency for ngModules', function (done) {
       var _ = gulpAngular._;
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         angularModules: []
       }));
 
@@ -209,7 +209,7 @@ describe('gulp-angular generator', function () {
     it('should add dependency for jQuery 2.x.x', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         jQuery: {
           "name": "jquery",
           "version": "2.x.x"
@@ -230,7 +230,7 @@ describe('gulp-angular generator', function () {
     it('should add dependency for ZeptoJS 1.1.x', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         jQuery: {
           "name": "zeptojs",
           "version": "1.1.x"
@@ -251,7 +251,7 @@ describe('gulp-angular generator', function () {
     it('should NOT add dependency for jqLite', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         jQuery: {
           "name": null,
           "version": "1.1.x"
@@ -276,12 +276,12 @@ describe('gulp-angular generator', function () {
   describe('with option: [Restangular]', function () {
     it('should add dependency for Restangular', function (done) {
       var _ = gulpAngular._;
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         resource: {
           "name": "restangular",
           "version": "1.4.x",
           "module": "restangular"
-        },
+        }
       }));
 
       gulpAngular.run({}, function() {
@@ -300,12 +300,12 @@ describe('gulp-angular generator', function () {
     it('should NOT add dependency for $http', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         resource: {
           "name": null,
           "version": "1.2.x",
           "module": null
-        },
+        }
       }));
 
       gulpAngular.run({}, function() {
@@ -330,12 +330,12 @@ describe('gulp-angular generator', function () {
     it('should add dependency for UI Router', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
-       router: {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
+        router: {
           "name": "angular-ui-router",
           "version": "0.2.x",
           "module": "ui.router"
-        },
+        }
       }));
 
       gulpAngular.run({}, function() {
@@ -356,12 +356,12 @@ describe('gulp-angular generator', function () {
     it('should NOT add dependency', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         router: {
           "name": null,
           "version": "1.2.x",
           "module": null
-        },
+        }
       }));
 
       gulpAngular.run({}, function() {
@@ -388,7 +388,7 @@ describe('gulp-angular generator', function () {
     it('should add dependency for Foundation with SASS', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         ui: {
           "name": "foundation",
           "version": "5.4.x",
@@ -413,7 +413,7 @@ describe('gulp-angular generator', function () {
     it('should add dependency for Foundation with SASS', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         ui: {
           "name": "foundation",
           "version": "5.4.x",
@@ -445,7 +445,7 @@ describe('gulp-angular generator', function () {
     it('should add dependency for Foundation with LESS', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         ui: {
           "name": "foundation",
           "version": "5.4.x",
@@ -479,7 +479,7 @@ describe('gulp-angular generator', function () {
     it('should add dependency for Foundation with Stylus', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         ui: {
           "name": "foundation",
           "version": "5.4.x",
@@ -513,13 +513,13 @@ describe('gulp-angular generator', function () {
     it('should add dependency for Foundation with CSS', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         ui: {
           "name": "foundation",
           "version": "5.4.x",
           "key": "foundation"
         },
-          cssPreprocessor: {
+        cssPreprocessor: {
           "key": "css",
           "extension": "css",
           "npm": {}
@@ -551,7 +551,7 @@ describe('gulp-angular generator', function () {
     it('should add dependency for Bootstrap with SASS', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         ui: {
           "name": "bootstrap-sass-official",
           "version": "3.2.x",
@@ -587,7 +587,7 @@ describe('gulp-angular generator', function () {
     it('should add dependency for Bootstrap with LESS', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         ui: {
           "name": "bootstrap",
           "version": "3.2.x",
@@ -623,7 +623,7 @@ describe('gulp-angular generator', function () {
     it('should add dependency for Bootstrap with Stylus', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         ui: {
           "name": "bootstrap",
           "version": "3.2.x",
@@ -659,7 +659,7 @@ describe('gulp-angular generator', function () {
     it('should add dependency for Bootstrap with CSS', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         ui: {
           "name": "bootstrap",
           "version": "3.2.x",
@@ -707,7 +707,7 @@ describe('gulp-angular generator', function () {
     it('should', function (done) {
       var _ = gulpAngular._;
 
-      helpers.mockPrompt(gulpAngular, _.assign(mockPrompts.default, {
+      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
         // jQuery: {
         //   "name": null,
         //   "version": "1.1.x"
