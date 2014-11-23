@@ -61,9 +61,9 @@
       {
         "value": {
           "name": "jquery",
-          "version": "~1.11.0"
+          "version": "~1.11"
         },
-        "name": "jQuery 1.11.x (branch still supporting IE6, 7 and 8)"
+        "name": "jQuery 1.x (branch still supporting IE6, 7 and 8)"
       },
       {
         "value": {
