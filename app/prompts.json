@@ -68,9 +68,9 @@
       {
         "value": {
           "name": "jquery",
-          "version": "~2.1.0"
+          "version": "~2.1"
         },
-        "name": "jQuery 2.1.x (new version, lighter, IE9+)"
+        "name": "jQuery 2.x (new version, lighter, IE9+)"
       },
       {
         "value": {

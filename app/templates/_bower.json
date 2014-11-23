@@ -8,7 +8,7 @@
     "angular-resource": "<%= props.angularVersion %>",<% } else if (props.resource.name === 'restangular') { %>
     "restangular": "~1.4",<% } if (props.router.name === 'angular-route') { %>
     "angular-route": "<%= props.angularVersion %>",<% } else if (props.router.name === 'angular-ui-router') { %>
-    "angular-ui-router": "~0.2",<% } if(props.ui.name !== null) { %>
+    "angular-ui-router": "~0.2.0",<% } if(props.ui.name !== null) { %>
     "<%= props.ui.name %>": "<%= props.ui.version %>",<% } if(props.bootstrapComponents && props.bootstrapComponents.name !== null) { %>
     "<%= props.bootstrapComponents.name %>": "<%= props.bootstrapComponents.version %>",<% } %>
     "angular": "<%= props.angularVersion %>"
