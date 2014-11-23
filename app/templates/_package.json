@@ -32,8 +32,8 @@
     "gulp-stylus": "~1.3",<% } %>
     "main-bower-files": "~2.0",
     "jshint-stylish": "~0.4.0",
-    "wiredep": "~1.8.5",
-    "karma-jasmine": "~0.1.5",
+    "wiredep": "~1.8",
+    "karma-jasmine": "~0.2.0",
     "karma-phantomjs-launcher": "~0.1.4",
     "require-dir": "~0.1.0",
     "browser-sync": "~1.3",
