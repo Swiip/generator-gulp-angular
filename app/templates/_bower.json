@@ -2,13 +2,13 @@
   "name": "<%= appName %>",
   "version": "0.0.0",
   "dependencies": {
-    "modernizr": "2.8.x",<% if (props.jQuery.name !== null) { %>
+    "modernizr": "~2.8",<% if (props.jQuery.name !== null) { %>
     "<%= props.jQuery.name %>": "<%= props.jQuery.version %>",<% } _.forEach(props.angularModules, function(module) { %>
     "<%= module.name %>": "<%= props.angularVersion %>",<% }); if (props.resource.name === 'angular-resource') { %>
     "angular-resource": "<%= props.angularVersion %>",<% } else if (props.resource.name === 'restangular') { %>
-    "restangular": "1.4.x",<% } if (props.router.name === 'angular-route') { %>
+    "restangular": "~1.4",<% } if (props.router.name === 'angular-route') { %>
     "angular-route": "<%= props.angularVersion %>",<% } else if (props.router.name === 'angular-ui-router') { %>
-    "angular-ui-router": "0.2.x",<% } if(props.ui.name !== null) { %>
+    "angular-ui-router": "~0.2",<% } if(props.ui.name !== null) { %>
     "<%= props.ui.name %>": "<%= props.ui.version %>",<% } if(props.bootstrapComponents && props.bootstrapComponents.name !== null) { %>
     "<%= props.bootstrapComponents.name %>": "<%= props.bootstrapComponents.version %>",<% } %>
     "angular": "<%= props.angularVersion %>"
