@@ -3,4 +3,3 @@ bower_components/
 .sass-cache/
 .tmp/
 dist/
-src/app/templateCacheHtml.js

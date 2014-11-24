@@ -47,7 +47,7 @@ gulp.task('partials', function () {
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
       module: '<%= appName %>'
     }))
-    .pipe(gulp.dest('src/app/'))
+    .pipe(gulp.dest('.tmp/inject/'))
     .pipe($.size());
 });
 
@@ -58,9 +58,9 @@ gulp.task('html', [<% if (props.cssPreprocessor.key !== 'css') { %>'styles', <% 
   var assets;
 
   return gulp.src('src/*.html')
-    .pipe($.inject(gulp.src('src/app/templateCacheHtml.js', {read: false}), {
+    .pipe($.inject(gulp.src('.tmp/inject/templateCacheHtml.js', {read: false}), {
       starttag: '<!-- inject:partials -->',
-      ignorePath: 'src',
+      ignorePath: '.tmp',
       addRootSlash: false
     }))
     .pipe(assets = $.useref.assets())
@@ -114,7 +114,7 @@ gulp.task('misc', function () {
 });
 
 gulp.task('clean', function (done) {
-  $.del(['src/app/templateCacheHtml.js', 'dist/', '.tmp/'], done);
+  $.del(['dist/', '.tmp/'], done);
 });
 
 gulp.task('build', ['html', 'images', 'fonts', 'misc']);
