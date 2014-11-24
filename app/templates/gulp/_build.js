@@ -44,10 +44,12 @@ gulp.task('partials', function () {
       spare: true,
       quotes: true
     }))
-    .pipe($.ngHtml2js({
-      moduleName: '<%= appName %>'
+    .pipe( $.ngTemplates({
+      filename: 'partials.js',
+      module: '<%= appName %>',
+      standalone: false
     }))
-    .pipe(gulp.dest('.tmp'))
+    .pipe(gulp.dest('.tmp/app'))
     .pipe($.size());
 });
 
