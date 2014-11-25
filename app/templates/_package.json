@@ -3,43 +3,44 @@
   "version": "0.0.0",
   "dependencies": {},
   "devDependencies": {
-    "gulp": "^3.8.0",
-    "gulp-autoprefixer": "^0.0.6",
-    "gulp-cache": "^0.2.0",
-    "gulp-angular-templatecache": "^1.4.2",
-    "del": "^0.1.3",
-    "gulp-csso": "^0.2.6",
-    "gulp-filter": "^1.0.0",
-    "gulp-flatten": "^0.0.2",
-    "gulp-imagemin": "^1.0.0",
-    "gulp-jshint": "^1.8.0",
-    "gulp-load-plugins": "^0.6.0",
-    "gulp-size": "^1.1.0",
-    "gulp-uglify": "^1.0.0",
-    "gulp-useref": "^1.0.0",
-    "gulp-ng-annotate": "^0.3.0",
-    "gulp-replace": "^0.4.0",
-    "gulp-rev": "^1.1.0",
-    "gulp-rev-replace": "^0.3.0",
-    "gulp-minify-html": "^0.1.3",
-    "gulp-inject": "^1.0.0",
-    "gulp-protractor": "^0.0.11",
-    "gulp-karma": "^0.0.4",<% if (props.cssPreprocessor.key === 'node-sass') { %>
-    "gulp-sass": "^0.7.3",<% } else if (props.cssPreprocessor.key === 'ruby-sass') { %>
-    "gulp-ruby-sass": "^0.7.1",<% } else if (props.cssPreprocessor.key === 'less') { %>
-    "gulp-less": "^1.3.3",<% } else if (props.cssPreprocessor.key === 'stylus') { %>
-    "gulp-stylus": "^1.3.3",<% } %>
-    "main-bower-files": "^2.0.0",
-    "jshint-stylish": "^0.4.0",
-    "wiredep": "^1.8.5",
-    "karma-jasmine": "^0.1.5",
-    "karma-phantomjs-launcher": "^0.1.4",
-    "require-dir": "^0.1.0",
-    "browser-sync": "^1.3.6",
-    "http-proxy": "^1.3.0",
-    "chalk": "^0.4.0",
-    "protractor": "^1.4.0",
-    "uglify-save-license": "^0.4.1"
+    "gulp": "~3.8",
+    "gulp-autoprefixer": "~0.0.6",
+    "gulp-cache": "~0.2.0",
+    "gulp-angular-templatecache": "~1.4",
+    "del": "~0.1.3",
+    "gulp-csso": "~0.2.6",
+    "gulp-filter": "~1.0",
+    "gulp-flatten": "~0.0.2",
+    "gulp-imagemin": "~1.0",
+    "gulp-jshint": "~1.8",
+    "gulp-load-plugins": "~0.6.0",
+    "gulp-size": "~1.1",
+    "gulp-uglify": "~1.0",
+    "gulp-useref": "~1.0",
+    "gulp-ng-annotate": "~0.3.0",
+    "gulp-replace": "~0.4.0",
+    "gulp-rev": "~1.1",
+    "gulp-rev-replace": "~0.3.0",
+    "gulp-ng-html2js": "~0.1.6",
+    "gulp-minify-html": "~0.1.3",
+    "gulp-inject": "~1.0",
+    "gulp-protractor": "~0.0.11",
+    "gulp-karma": "~0.0.4",<% if (props.cssPreprocessor.key === 'node-sass') { %>
+    "gulp-sass": "~0.7.3",<% } else if (props.cssPreprocessor.key === 'ruby-sass') { %>
+    "gulp-ruby-sass": "~0.7.1",<% } else if (props.cssPreprocessor.key === 'less') { %>
+    "gulp-less": "~1.3",<% } else if (props.cssPreprocessor.key === 'stylus') { %>
+    "gulp-stylus": "~1.3",<% } %>
+    "main-bower-files": "~2.0",
+    "jshint-stylish": "~0.4.0",
+    "wiredep": "~1.8",
+    "karma-jasmine": "~0.2.0",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "require-dir": "~0.1.0",
+    "browser-sync": "~1.3",
+    "http-proxy": "~1.3",
+    "chalk": "~0.4.0",
+    "protractor": "~1.4",
+    "uglify-save-license": "~0.4.1"
   },
   "engines": {
     "node": ">=0.10.0"
