@@ -68,7 +68,7 @@
       {
         "value": {
           "name": "jquery",
-          "version": "~2.1"
+          "version": "~2.0"
         },
         "name": "jQuery 2.x (new version, lighter, IE9+)"
       },
@@ -103,7 +103,7 @@
       {
         "value": {
           "name": "restangular",
-          "version": "~1.3.0",
+          "version": "~1.4.0",
           "module": "restangular"
         },
         "name": "Restangular, an alternative service to handles RESTful requests"
