@@ -9,8 +9,7 @@
     <% if (props.ui.name !== null) { %>
     <!-- build:css({.tmp,src}) styles/vendor.css --><% if (isVendorStylesPreprocessed) { %>
     <link rel="stylesheet" href="app/vendor.css"><% } else if (props.ui.key === 'bootstrap') { %>
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"><% } else if (props.ui.key === 'foundation') { %>
-    <link rel="stylesheet" href="../bower_components/foundation/css/foundation.css"><% } %>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"><% } %>
     <!-- bower:css -->
     <!-- run `gulp wiredep` to automaticaly populate bower styles dependencies -->
     <!-- endbower -->

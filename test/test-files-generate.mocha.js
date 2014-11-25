@@ -470,7 +470,6 @@ describe('gulp-angular generator', function () {
         ]));
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/foundation\/css\/foundation.css">/],
           ['bower.json', /"foundation": "5.4.x"/],
           ['package.json', /"gulp-less": "\^1.3.3"/],
         ]));
@@ -505,7 +504,6 @@ describe('gulp-angular generator', function () {
         ]));
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/foundation\/css\/foundation.css">/],
           ['bower.json', /"foundation": "5.4.x"/],
           ['package.json', /"gulp-stylus": "\^1.3.3"/],
         ]));
@@ -546,7 +544,6 @@ describe('gulp-angular generator', function () {
 
         // No Gulp task for style
         assert.fileContent([
-          ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/foundation\/css\/foundation.css">/],
           ['bower.json', /"foundation": "5.4.x"/],
         ]);
         done();

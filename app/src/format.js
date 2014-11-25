@@ -110,12 +110,24 @@ module.exports = function () {
   var styleAppSrc = 'src/app/__' + uiFileKey + '-index.' + this.props.cssPreprocessor.extension;
   this.styleCopies[styleAppSrc] = 'src/app/index.' + this.props.cssPreprocessor.extension;
 
-  this.isVendorStylesPreprocessed = !(
-    this.props.cssPreprocessor.extension === 'css' ||
-    this.props.cssPreprocessor.extension === 'styl' ||
-    this.props.ui.key === 'angular-material' ||
-    this.props.cssPreprocessor.extension === 'less' && this.props.ui.key === 'foundation'
-  );
+  // There is 2 ways of dealing with vendor styles
+  // - If the vendor styles exist in the css preprocessor chosen,
+  //   the best is to include directly the source files
+  // - If not, the vendor styles are simply added as standard css links
+  //
+  // isVendorStylesPreprocessed defines which solution has to be used
+  // regarding the ui framework and the css preprocessor chosen.
+  this.isVendorStylesPreprocessed = false;
+
+  if(this.props.cssPreprocessor.extension === 'scss') {
+    if(this.props.ui.key === 'bootstrap' || this.props.ui.key === 'foundation') {
+      this.isVendorStylesPreprocessed = true;
+    }
+  } else if(this.props.cssPreprocessor.extension === 'less') {
+    if(this.props.ui.key === 'bootstrap') {
+      this.isVendorStylesPreprocessed = true;
+    }
+  }
 
   if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
     var styleVendorSource = 'src/app/__' + uiFileKey + '-vendor.' + this.props.cssPreprocessor.extension;
