@@ -16,7 +16,9 @@ module.exports = function () {
   ngModules = _.flatten([
     ngModules,
     this.props.resource.module,
-    this.props.router.module
+    this.props.router.module,
+    this.props.ui.module,
+    this.props.bootstrapComponents.module
   ]);
 
   this.modulesDependencies = _.chain(ngModules)
@@ -25,8 +27,7 @@ module.exports = function () {
       return '\'' + dependency + '\'';
     })
     .valueOf()
-    .join(', ')
-  ;
+    .join(', ');
 
   // Format list techs used to generate app included in main view of sample
   var listTechs = require('../techs.json');
@@ -35,30 +36,35 @@ module.exports = function () {
     'angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor',
     this.props.jQuery.name,
     this.props.ui.key,
+    this.props.bootstrapComponents.key,
     this.props.cssPreprocessor.key
   ]
     .filter(_.isString)
     .filter(function(tech) {
-      return tech !== 'default' && tech !== 'css';
-    })
-  ;
+      return tech !== 'default' && tech !== 'css' && tech !== 'official' && tech !== 'none';
+    });
 
   var techsContent = _.map(usedTechs, function(value) {
     return listTechs[value];
   });
 
-  this.technologies = JSON.stringify(techsContent, null, 2).replace(/"/g, '\'').replace(/\n/g, '\n    ');
+  this.technologies = JSON.stringify(techsContent, null, 2)
+    .replace(/'/g, '\\\'')
+    .replace(/"/g, '\'')
+    .replace(/\n/g, '\n    ');
   this.technologiesLogoCopies = _.map(usedTechs, function(value) {
     return 'src/assets/images/' + listTechs[value].logo;
   });
 
   // Select partials relative to props.ui
+  var uiFileKey = this.props.ui.key === 'ui-bootstrap' ? 'bootstrap' : this.props.ui.key;
+
   this.partialCopies = {};
 
-  var navbarPartialSrc = 'src/components/navbar/__' + this.props.ui.key + '-navbar.html';
+  var navbarPartialSrc = 'src/components/navbar/__' + uiFileKey + '-navbar.html';
   this.partialCopies[navbarPartialSrc] = 'src/components/navbar/navbar.html';
 
-  var routerPartialSrc = 'src/app/main/__' + this.props.ui.key + '.html';
+  var routerPartialSrc = 'src/app/main/__' + uiFileKey + '.html';
   if(this.props.router.module !== null) {
     this.partialCopies[routerPartialSrc] = 'src/app/main/main.html';
   }
@@ -81,25 +87,50 @@ module.exports = function () {
     this.routerJs = '';
   }
 
+  // Wiredep exclusions
+  this.wiredepExclusions = [];
+  if(this.props.bootstrapComponents.key !== 'official') {
+    if(this.props.cssPreprocessor.extension === 'scss') {
+      this.wiredepExclusions.push('/bootstrap-sass-official/');
+    } else {
+      this.wiredepExclusions.push('/bootstrap.js/');
+    }
+  }
+  if(this.props.cssPreprocessor.key !== 'css') {
+    this.wiredepExclusions.push('/bootstrap.css/');
+  }
+
   // Format choice UI Framework
-  if(this.props.ui.key === 'bootstrap' && this.props.cssPreprocessor.extension !== 'scss') {
+  if(this.props.ui.key.indexOf('bootstrap') !== -1 && this.props.cssPreprocessor.extension !== 'scss') {
     this.props.ui.name = 'bootstrap';
   }
 
   this.styleCopies = {};
 
-  var styleAppSrc = 'src/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension;
+  var styleAppSrc = 'src/app/__' + uiFileKey + '-index.' + this.props.cssPreprocessor.extension;
   this.styleCopies[styleAppSrc] = 'src/app/index.' + this.props.cssPreprocessor.extension;
 
-  // ## Special case for Foundation and LESS: Foundation dont have a LESS version so we include css
-  if ((this.props.cssPreprocessor.extension === 'less' && this.props.ui.key === 'foundation') || this.props.cssPreprocessor.extension === 'css'  || this.props.cssPreprocessor.extension === 'styl') {
-    this.isVendorStylesPreprocessed = false;
-  } else {
-    this.isVendorStylesPreprocessed = true;
+  // There is 2 ways of dealing with vendor styles
+  // - If the vendor styles exist in the css preprocessor chosen,
+  //   the best is to include directly the source files
+  // - If not, the vendor styles are simply added as standard css links
+  //
+  // isVendorStylesPreprocessed defines which solution has to be used
+  // regarding the ui framework and the css preprocessor chosen.
+  this.isVendorStylesPreprocessed = false;
+
+  if(this.props.cssPreprocessor.extension === 'scss') {
+    if(this.props.ui.key === 'bootstrap' || this.props.ui.key === 'foundation') {
+      this.isVendorStylesPreprocessed = true;
+    }
+  } else if(this.props.cssPreprocessor.extension === 'less') {
+    if(this.props.ui.key === 'bootstrap') {
+      this.isVendorStylesPreprocessed = true;
+    }
   }
 
   if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
-    var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
+    var styleVendorSource = 'src/app/__' + uiFileKey + '-vendor.' + this.props.cssPreprocessor.extension;
     this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
   }
 };

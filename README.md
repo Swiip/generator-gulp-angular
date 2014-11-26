@@ -107,7 +107,7 @@ The root directory generated for a app with name `gulpAngular` :
 * *Unit test (karma)* : out of the box unit test configuration with karma
 * *e2e test (protractor)* : out of the box e2e test configuration with protractor
 * *browser sync* : full-featured development web server with livereload and devices sync
-* *ngHtml2js* : all HTML partials will be converted to JS to be bundled in the application
+* *angular-templatecache* : all HTML partials will be converted to JS to be bundled in the application
 * **TODO** lazy : don't process files which haven't changed when possible
 
 ## Questions the generator will ask
@@ -115,10 +115,10 @@ The root directory generated for a app with name `gulpAngular` :
 * *Angular modules*: animate, cookies, touch, sanitize
 * *Resource handler*: ngResource, Restangular, none
 * *Router*: ngRoute, UI Router, none
-* *UI Framework*: Bootstrap, Foundation, none (depends on the chosen CSS preprocessor)
+* *UI Framework*: Bootstrap, Foundation, Angular Material, none (depends on the chosen CSS preprocessor)
 * *CSS pre-processor*: Less, Sass with Ruby and Node, Stylus, none
-* **TODO** Bootstrap directives : UI Bootstrap, Angular Strap, none (only if you chose Bootstrap)
-* **TODO** JS preprocessor: CoffeeScript, TypeScript, ECMAScript6 (Traceur)
+* *Bootstrap directives* : UI Bootstrap, Angular Strap, official Bootstrap JavaScript, none (only if you chose Bootstrap)
+* **TODO** JS preprocessor: CoffeeScript, TypeScript, ECMAScript6 (Traceur and 6to5)
 * **TODO** HTML preprocessor: Jade ?
 * **TODO** Script loader: Require, Browserify, ES6 with Require?, none
 * **TODO** Test framework: Jasmine, Mocha, Qunit

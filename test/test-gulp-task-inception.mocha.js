@@ -78,6 +78,7 @@ describe('gulp-angular generator', function () {
         false,
         genOptions
       );
+
       gulpAngular.on('start', outputInTest.mute);
       gulpAngular.on('end', outputInTest.unmute);
 
@@ -86,7 +87,7 @@ describe('gulp-angular generator', function () {
 
   });
 
-  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass]', function () {
+  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass]', function () {
 
      it('should pass gulp build', function () {
       helpers.mockPrompt(gulpAngular, prompt);
@@ -145,7 +146,8 @@ describe('gulp-angular generator', function () {
         ui: {
           "name": "foundation",
           "version": "5.4.x",
-          "key": "foundation"
+          "key": "foundation",
+          "module": null
         },
         cssPreprocessor: {
           "key": "css",
@@ -210,7 +212,14 @@ describe('gulp-angular generator', function () {
         ui: {
           "name": "bootstrap",
           "version": "3.2.x",
-          "key": "bootstrap"
+          "key": "bootstrap",
+          "module": null
+        },
+        bootstrapComponents: {
+          "name": "angular-bootstrap",
+          "version": "0.12.x",
+          "key": "ui-bootstrap",
+          "module": "ui.bootstrap"
         },
         cssPreprocessor: {
           "key": "less",
@@ -257,7 +266,7 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with other promptCase: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, $http, Foundation, Stylus]', function () {
+  describe('with other promptCase: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, $http, ngMaterial, Stylus]', function () {
 
     before(function () {
       promptCase = _.assign(prompt, {
@@ -266,9 +275,10 @@ describe('gulp-angular generator', function () {
           "version": "1.1.x"
         },
         ui: {
-          "name": "foundation",
-          "version": "5.4.x",
-          "key": "foundation"
+          "name": "angular-material",
+          "version": "0.5.x",
+          "key": "angular-material",
+          "module": "ngMaterial"
         },
         cssPreprocessor: {
           "key": "stylus",

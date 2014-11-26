@@ -39,7 +39,14 @@
   "ui": {
     "name": "bootstrap-sass-official",
     "version": "3.2.x",
-    "key": "bootstrap"
+    "key": "bootstrap",
+    "module": null
+  },
+  "bootstrapComponents": {
+    "name": "angular-bootstrap",
+    "version": "0.12.x",
+    "key": "ui-bootstrap",
+    "module": "ui.bootstrap"
   },
   "cssPreprocessor": {
     "key": "node-sass",

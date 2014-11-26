@@ -54,11 +54,24 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
 
     var done = this.async();
 
+    this._.findWhere(prompts, {name: 'bootstrapComponents'}).when = function(props) {
+      return props.ui.key === 'bootstrap';
+    };
+
     this.prompt(prompts, function (props) {
+      if(props.ui.key !== 'bootstrap') {
+        props.bootstrapComponents = {
+          name: null,
+          version: null,
+          key: null,
+          module: null
+        };
+      }
+
       this.props = props;
+
       done();
     }.bind(this));
-
   },
 
   saveSettings: function() {
