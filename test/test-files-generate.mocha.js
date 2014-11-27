@@ -399,7 +399,6 @@ describe('gulp-angular generator', function () {
         ]));
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/foundation\/css\/foundation.css">/],
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
           ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.npm['gulp-less'])]
         ]));
@@ -421,7 +420,6 @@ describe('gulp-angular generator', function () {
         ]));
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/foundation\/css\/foundation.css">/],
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
           ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.npm['gulp-stylus'])]
         ]));
@@ -446,7 +444,6 @@ describe('gulp-angular generator', function () {
 
         // No Gulp task for style
         assert.fileContent([
-          ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/foundation\/css\/foundation.css">/],
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)]
         ]);
         done();
@@ -541,7 +538,6 @@ describe('gulp-angular generator', function () {
 
         // No Gulp task for style
         assert.fileContent([
-          ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/bootstrap\/dist\/css\/bootstrap.css">/],
           ['bower.json', libRegexp('bootstrap', prompts.ui.values.bootstrap.version)]
         ]);
 
@@ -567,7 +563,7 @@ describe('gulp-angular generator', function () {
         assert.file(expectedFile);
 
         assert.fileContent([
-          ['bower.json', /"angular-bootstrap": "0.12.x"/],
+          ['bower.json', libRegexp('angular-bootstrap', prompts.bootstrapComponents.values['ui-bootstrap'].version)],
           ['src/app/index.js', /'ui.bootstrap'/]
         ]);
 
@@ -608,7 +604,7 @@ describe('gulp-angular generator', function () {
         assert.noFile('src/app/vendor.*');
 
         assert.fileContent([
-          ['bower.json', /"angular-material": "0.5.x"/],
+          ['bower.json', libRegexp('angular-material', prompts.ui.values['angular-material'].version)],
           ['src/app/index.js', /'ngMaterial'/]
         ]);
 

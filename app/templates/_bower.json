@@ -8,14 +8,9 @@
     "angular-resource": "<%= props.angularVersion %>",<% } else if (props.resource.name === 'restangular') { %>
     "restangular": "~1.4.0",<% } if (props.router.name === 'angular-route') { %>
     "angular-route": "<%= props.angularVersion %>",<% } else if (props.router.name === 'angular-ui-router') { %>
-<<<<<<< HEAD
     "angular-ui-router": "~0.2.13",<% } if(props.ui.name !== null) { %>
     "<%= props.ui.name %>": "<%= props.ui.version %>",<% } if(props.bootstrapComponents && props.bootstrapComponents.name !== null) { %>
     "<%= props.bootstrapComponents.name %>": "<%= props.bootstrapComponents.version %>",<% } %>
-=======
-    "angular-ui-router": "~0.2.13",<% } if (props.ui.name !== null) { %>
-    "<%= props.ui.name %>": "<%= props.ui.version %>",<% } %>
->>>>>>> reuse prompts values in the tests, fix #138
     "angular": "<%= props.angularVersion %>"
   },
   "devDependencies": {

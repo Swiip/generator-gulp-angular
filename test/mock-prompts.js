@@ -20,6 +20,7 @@ var questions = [
   'resource',
   'router',
   'ui',
+  'bootstrapComponents',
   'cssPreprocessor'
 ];
 

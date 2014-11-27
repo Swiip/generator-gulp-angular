@@ -78,8 +78,8 @@ describe('gulp-angular generator', function () {
         genOptions
       );
 
-      gulpAngular.on('start', outputInTest.mute);
-      gulpAngular.on('end', outputInTest.unmute);
+      //gulpAngular.on('start', outputInTest.mute);
+      //gulpAngular.on('end', outputInTest.unmute);
 
       done();
     });
@@ -177,7 +177,7 @@ describe('gulp-angular generator', function () {
         resource: prompts.resource.values.none,
         router: prompts.router.values.none,
         ui: prompts.ui.values.bootstrap,
-        bootstrapComponents: prompts.bootstrapComponents.values['ui-boostrap'],
+        bootstrapComponents: prompts.bootstrapComponents.values['ui-bootstrap'],
         cssPreprocessor: prompts.cssPreprocessor.values.less
       });
     });
