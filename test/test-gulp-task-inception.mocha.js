@@ -177,6 +177,7 @@ describe('gulp-angular generator', function () {
         resource: prompts.resource.values.none,
         router: prompts.router.values.none,
         ui: prompts.ui.values.bootstrap,
+        bootstrapComponents: prompts.bootstrapComponents.values['ui-bootstrap'],
         cssPreprocessor: prompts.cssPreprocessor.values.less
       });
     });

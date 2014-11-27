@@ -20,6 +20,7 @@ var questions = [
   'resource',
   'router',
   'ui',
+  'bootstrapComponents',
   'cssPreprocessor'
 ];
 
@@ -70,6 +71,10 @@ model.ui.choices.forEach(function(choice) {
   model.ui.values[choice.value.key] = choice.value;
 });
 
+model.bootstrapComponents.choices.forEach(function(choice) {
+  model.bootstrapComponents.values[choice.value.key] = choice.value;
+});
+
 model.cssPreprocessor.choices.forEach(function(choice) {
   model.cssPreprocessor.values[choice.value.key] = choice.value;
 });
@@ -83,15 +88,10 @@ module.exports = {
     resource: model.resource.values['angular-resource'],
     router: model.router.values['angular-route'],
     ui: model.ui.values.bootstrap,
+    bootstrapComponents: model.bootstrapComponents.values['ui-bootstrap'],
     cssPreprocessor: model.cssPreprocessor.values['node-sass']
   },
   libRegexp: function(name, version) {
     return new RegExp('"' + name + '": "' + version + '"');
   }
 };
-
-//console.log(module.exports);
-
-var prompts = model;
-
-console.log(module.exports.defaults);

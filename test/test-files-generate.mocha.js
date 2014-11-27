@@ -538,7 +538,6 @@ describe('gulp-angular generator', function () {
 
         // No Gulp task for style
         assert.fileContent([
-          ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/bootstrap\/dist\/css\/bootstrap.css">/],
           ['bower.json', libRegexp('bootstrap', prompts.ui.values.bootstrap.version)]
         ]);
 
@@ -562,7 +561,7 @@ describe('gulp-angular generator', function () {
         assert.file(expectedFile);
 
         assert.fileContent([
-          ['bower.json', /"angular-bootstrap": "0.12.x"/],
+          ['bower.json', libRegexp('angular-bootstrap', prompts.bootstrapComponents.values['ui-bootstrap'].version)],
           ['src/app/index.js', /'ui.bootstrap'/]
         ]);
 
@@ -599,7 +598,7 @@ describe('gulp-angular generator', function () {
         assert.noFile('src/app/vendor.*');
 
         assert.fileContent([
-          ['bower.json', /"angular-material": "0.5.x"/],
+          ['bower.json', libRegexp('angular-material', prompts.ui.values['angular-material'].version)],
           ['src/app/index.js', /'ngMaterial'/]
         ]);
 
