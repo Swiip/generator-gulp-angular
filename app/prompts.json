@@ -5,11 +5,11 @@
     "message": "Which version of Angular do you want?",
     "choices": [
       {
-        "value": "~1.3.0",
+        "value": "~1.3.4",
         "name": "1.3.x (latest)"
       },
       {
-        "value": "~1.2.0",
+        "value": "~1.2.27",
         "name": "1.2.x (legacy 2013-11-08)"
       }
     ]
@@ -61,21 +61,21 @@
       {
         "value": {
           "name": "jquery",
-          "version": "~1.11"
+          "version": "~1.11.1"
         },
         "name": "jQuery 1.x (branch still supporting IE6, 7 and 8)"
       },
       {
         "value": {
           "name": "jquery",
-          "version": "~2.0"
+          "version": "~2.1.1"
         },
         "name": "jQuery 2.x (new version, lighter, IE9+)"
       },
       {
         "value": {
           "name": "zeptojs",
-          "version": "~1.1.0"
+          "version": "~1.1.4"
         },
         "name": "ZeptoJS 1.1.x (jQuery compatible but very much lighter)"
       },
@@ -133,7 +133,7 @@
       {
         "value": {
           "name": "angular-ui-router",
-          "version": "~0.2.0",
+          "version": "~0.2.13",
           "module": "ui.router"
         },
         "name": "UI Router, flexible routing with nested views"
@@ -156,7 +156,7 @@
       {
         "value": {
           "name": "bootstrap-sass-official",
-          "version": "~3.2",
+          "version": "~3.3.1",
           "key": "bootstrap"
         },
         "name": "Bootstrap, the most popular HTML, CSS, and JS framework"
@@ -164,7 +164,7 @@
       {
         "value": {
           "name": "foundation",
-          "version": "~5.4.0",
+          "version": "~5.4.7",
           "key": "foundation"
         },
           "name": "Foundation, \"The most advanced responsive front-end framework in the world\""
@@ -189,7 +189,7 @@
           "key": "node-sass",
           "extension": "scss",
           "npm": {
-            "gulp-sass": "~0.7.3"
+            "gulp-sass": "~1.1.0"
           }
         },
         "name": "Sass (Node), Node.js binding to libsass, the C version of the popular stylesheet preprocessor, Sass."
@@ -209,7 +209,7 @@
           "key": "less",
           "extension": "less",
           "npm": {
-            "gulp-less": "~1.3"
+            "gulp-less": "~1.3.6"
           }
         },
         "name": "Less, extends the CSS language, adding features that allow variables, mixins, functions and many other techniques."
@@ -219,7 +219,7 @@
           "key": "stylus",
           "extension": "styl",
           "npm": {
-            "gulp-stylus": "~1.3"
+            "gulp-stylus": "~1.3.4"
           }
         },
         "name": "Stylus, supporting both an indented syntax and regular CSS style."

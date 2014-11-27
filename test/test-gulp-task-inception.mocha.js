@@ -10,13 +10,15 @@ var fs = require('fs');
 var Q = require('q');
 
 var chai = require('chai');
-var should = require('chai').should();
+require('chai').should();
 var assert = require('chai').assert;
 chai.use(require('chai-as-promised'));
 chai.use(require('chai-fs'));
 
 describe('gulp-angular generator', function () {
-  var prompt = require('./mock-prompts.json');
+  var mockPrompts = require('./mock-prompts.js');
+  var prompts = mockPrompts.prompts;
+  var defaults;
   var promptCase;
   var gulpAngular;
 
@@ -40,7 +42,7 @@ describe('gulp-angular generator', function () {
       gulpAngular.run({}, function () {
         var promiseLinkNode = Q.nfcall(fs.symlink, path.join(depsDir, 'node_modules'), path.join(tempDir, 'node_modules'));
         var promiseLinkBower = Q.nfcall(fs.symlink, path.join(depsDir, 'bower_components'), path.join(tempDir, 'bower_components'));
-        Q.all([promiseLinkNode, promiseLinkBower]).then(function() {
+        Q.all([promiseLinkNode, promiseLinkBower]).then(function() {
           var gulpProcess = spawn('node', ['node_modules/gulp/bin/gulp.js', task], {stdio: 'inherit'});
           gulpProcess.on('exit', function(returnCode) {
             if(returnCode === 0) {
@@ -60,10 +62,7 @@ describe('gulp-angular generator', function () {
   });
 
   beforeEach(function (done) {
-    // http://stackoverflow.com/a/9804910/2857943
-    // require only reads the file once, following calls return the result from cache
-    delete require.cache[require.resolve('./mock-prompts.json')];
-    prompt = require('./mock-prompts.json');
+    defaults = _.clone(mockPrompts.defaults);
 
     helpers.testDirectory(tempDir, function (err) {
       if (err) {
@@ -78,6 +77,7 @@ describe('gulp-angular generator', function () {
         false,
         genOptions
       );
+
       gulpAngular.on('start', outputInTest.mute);
       gulpAngular.on('end', outputInTest.unmute);
 
@@ -89,7 +89,7 @@ describe('gulp-angular generator', function () {
   describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass]', function () {
 
      it('should pass gulp build', function () {
-      helpers.mockPrompt(gulpAngular, prompt);
+      helpers.mockPrompt(gulpAngular, defaults);
 
       return this.run(100000, 'build').should.be.fulfilled.then(function () {
         assert.isFile(tempDirDist + '/index.html', 'File not exist');
@@ -104,19 +104,19 @@ describe('gulp-angular generator', function () {
     });
 
     it('should pass gulp test', function () {
-      helpers.mockPrompt(gulpAngular, prompt);
+      helpers.mockPrompt(gulpAngular, defaults);
 
       return this.run(100000, 'test').should.be.fulfilled;
     });
 
     it('should pass gulp protractor', function () {
-      helpers.mockPrompt(gulpAngular, prompt);
+      helpers.mockPrompt(gulpAngular, defaults);
 
       return this.run(100000, 'protractor').should.be.fulfilled;
     });
 
     it('should pass gulp protractor:dist', function () {
-      helpers.mockPrompt(gulpAngular, prompt);
+      helpers.mockPrompt(gulpAngular, defaults);
 
       return this.run(100000, 'protractor:dist').should.be.fulfilled;
     });
@@ -125,33 +125,13 @@ describe('gulp-angular generator', function () {
   describe('with other promptCase: [angular 1.2.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, CSS]', function () {
 
     before(function () {
-      promptCase = _.assign(prompt, {
-        angularVersion: "1.2.x",
-        // angularModules: [],
-        jQuery: {
-          "name": "jquery",
-          "version": "2.x.x"
-        },
-        resource: {
-          "name": "restangular",
-          "version": "1.4.x",
-          "module": "restangular"
-        },
-        router: {
-          "name": "angular-ui-router",
-          "version": "0.2.x",
-          "module": "ui.router"
-        },
-        ui: {
-          "name": "foundation",
-          "version": "5.4.x",
-          "key": "foundation"
-        },
-        cssPreprocessor: {
-          "key": "css",
-          "extension": "css",
-          "npm": {}
-        }
+      promptCase = _.assign(defaults, {
+        angularVersion: prompts.angularVersion.values['1.2'],
+        jQuery: prompts.jQuery.values['jquery 2'],
+        resource: prompts.resource.values.restangular,
+        router: prompts.router.values['angular-ui-router'],
+        ui: prompts.ui.values.foundation,
+        cssPreprocessor: prompts.cssPreprocessor.values.css
       });
     });
 
@@ -192,33 +172,12 @@ describe('gulp-angular generator', function () {
   describe('with other promptCase: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, ZeptoJS 1.1.x, $http, Bootstrap, LESS]', function () {
 
     before(function () {
-      promptCase = _.assign(prompt, {
-        jQuery: {
-          "name": "zeptojs",
-          "version": "1.1.x"
-        },
-        resource: {
-          "name": null,
-          "version": "1.2.x",
-          "module": null
-        },
-        router: {
-          "name": null,
-          "version": "1.2.x",
-          "module": null
-        },
-        ui: {
-          "name": "bootstrap",
-          "version": "3.2.x",
-          "key": "bootstrap"
-        },
-        cssPreprocessor: {
-          "key": "less",
-          "extension": "less",
-          "npm": {
-            "gulp-less": "^1.3.3"
-          }
-        }
+      promptCase = _.assign(defaults, {
+        jQuery: prompts.jQuery.values['zeptojs 1.1'],
+        resource: prompts.resource.values.none,
+        router: prompts.router.values.none,
+        ui: prompts.ui.values.bootstrap,
+        cssPreprocessor: prompts.cssPreprocessor.values.less
       });
     });
 
@@ -260,23 +219,10 @@ describe('gulp-angular generator', function () {
   describe('with other promptCase: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, $http, Foundation, Stylus]', function () {
 
     before(function () {
-      promptCase = _.assign(prompt, {
-        jQuery: {
-          "name": null,
-          "version": "1.1.x"
-        },
-        ui: {
-          "name": "foundation",
-          "version": "5.4.x",
-          "key": "foundation"
-        },
-        cssPreprocessor: {
-          "key": "stylus",
-          "extension": "styl",
-          "npm": {
-            "gulp-stylus": "^1.3.3"
-          }
-        }
+      promptCase = _.assign(defaults, {
+        jQuery: prompts.jQuery.values['jquery 1'],
+        ui: prompts.ui.values.foundation,
+        cssPreprocessor: prompts.cssPreprocessor.values.stylus
       });
     });
 
