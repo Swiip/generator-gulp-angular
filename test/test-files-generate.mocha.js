@@ -1,6 +1,7 @@
 /*global describe, beforeEach, it */
 'use strict';
 
+var _ = require('lodash');
 var path = require('path');
 var helpers = require('yeoman-generator').test;
 var assert = require('yeoman-generator').assert;
@@ -8,7 +9,11 @@ var outputInTest = require( './mute' );
 
 describe('gulp-angular generator', function () {
 
-  var prompt = require('./mock-prompts.json');
+  var mockPrompts = require('./mock-prompts.js');
+  var prompts = mockPrompts.prompts;
+  var defaults;
+  var libRegexp = mockPrompts.libRegexp;
+
   var gulpAngular;
   var folderName = 'tempGulpAngular';
 
@@ -72,10 +77,7 @@ describe('gulp-angular generator', function () {
   };
 
   beforeEach(function (done) {
-    // http://stackoverflow.com/a/9804910/2857943
-    // require only reads the file once, following calls return the result from cache
-    delete require.cache[require.resolve('./mock-prompts.json')];
-    prompt = require('./mock-prompts.json');
+    defaults = _.clone(mockPrompts.defaults);
 
     helpers.testDirectory(path.join(__dirname, folderName), function (err) {
       if (err) {
@@ -101,7 +103,7 @@ describe('gulp-angular generator', function () {
   describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass]', function () {
     // Default scenario: angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass
     it('should generate the expected files and their content', function (done) {
-      helpers.mockPrompt(gulpAngular, prompt);
+      helpers.mockPrompt(gulpAngular, defaults);
 
       gulpAngular.run({}, function () {
         assert.file([].concat(expectedFile, [
@@ -137,18 +139,18 @@ describe('gulp-angular generator', function () {
           ['src/app/vendor.scss', /\@import '\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap';/],
 
           // Check bower.json
-          ['bower.json', /"angular": "1.3.x"/],
-          ['bower.json', /"angular-animate": "1.3.x"/],
-          ['bower.json', /"angular-cookies": "1.3.x"/],
-          ['bower.json', /"angular-touch": "1.3.x"/],
-          ['bower.json', /"angular-sanitize": "1.3.x"/],
-          ['bower.json', /"jquery": "1.x.x"/],
-          ['bower.json', /"angular-resource": "1.3.x"/],
-          ['bower.json', /"angular-route": "1.3.x"/],
-          ['bower.json', /"bootstrap-sass-official": "3.2.x"/],
+          ['bower.json', libRegexp('angular', prompts.angularVersion.values['1.3'])],
+          ['bower.json', libRegexp('angular-animate', prompts.angularVersion.values['1.3'])],
+          ['bower.json', libRegexp('angular-cookies', prompts.angularVersion.values['1.3'])],
+          ['bower.json', libRegexp('angular-touch', prompts.angularVersion.values['1.3'])],
+          ['bower.json', libRegexp('angular-sanitize', prompts.angularVersion.values['1.3'])],
+          ['bower.json', libRegexp('jquery', prompts.jQuery.values['jquery 2'].version)],
+          ['bower.json', libRegexp('angular-resource', prompts.angularVersion.values['1.3'])],
+          ['bower.json', libRegexp('angular-route', prompts.angularVersion.values['1.3'])],
+          ['bower.json', libRegexp('bootstrap-sass-official', prompts.ui.values.bootstrap.version)],
 
           // Check package.json
-          ['package.json', /"gulp-sass": "\^0.7.3"/],
+          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])]
         ]));
 
 
@@ -160,17 +162,15 @@ describe('gulp-angular generator', function () {
   // Prompt #1: Which version of Angular ?
   describe('with option: [angular 1.2.x]', function () {
     it('should add dependency for angular 1.2.x', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        angularVersion: '1.2.x'
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        'angularVersion': prompts.angularVersion.values['1.2']
       }));
 
       gulpAngular.run({}, function() {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['bower.json', /"angular": "1.2.x"/]
+          ['bower.json', libRegexp('angular', prompts.angularVersion.values['1.2'])]
         ]));
         done();
       });
@@ -180,8 +180,7 @@ describe('gulp-angular generator', function () {
   // Prompt #2:  Which Angular's modules ?
   describe('without ngModules option', function () {
     it('should NOT add dependency for ngModules', function (done) {
-      var _ = gulpAngular._;
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
         angularModules: []
       }));
 
@@ -208,20 +207,15 @@ describe('gulp-angular generator', function () {
   // Prompt #3: Which JavaScript library ?
   describe('with option: [jQuery 2.x.x]', function () {
     it('should add dependency for jQuery 2.x.x', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        jQuery: {
-          "name": "jquery",
-          "version": "2.x.x"
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        jQuery: prompts.jQuery.values['jquery 2']
       }));
 
       gulpAngular.run({}, function() {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['bower.json', /"jquery": "2.x.x"/]
+          ['bower.json', libRegexp('jquery', prompts.jQuery.values['jquery 2'].version)]
         ]));
         done();
       });
@@ -229,20 +223,15 @@ describe('gulp-angular generator', function () {
   });
   describe('with option: [ZeptoJS 1.1.x]', function () {
     it('should add dependency for ZeptoJS 1.1.x', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        jQuery: {
-          "name": "zeptojs",
-          "version": "1.1.x"
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        jQuery: prompts.jQuery.values['zeptojs 1.1']
       }));
 
       gulpAngular.run({}, function() {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['bower.json', /"zeptojs": "1.1.x"/]
+          ['bower.json', libRegexp('zeptojs', prompts.jQuery.values['zeptojs 1.1'].version)]
         ]));
         done();
       });
@@ -250,13 +239,8 @@ describe('gulp-angular generator', function () {
   });
   describe('with option: [jqLite]', function () {
     it('should NOT add dependency for jqLite', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        jQuery: {
-          "name": null,
-          "version": "1.1.x"
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        jQuery: prompts.jQuery.values.none
       }));
 
       gulpAngular.run({}, function() {
@@ -276,13 +260,8 @@ describe('gulp-angular generator', function () {
   // Prompt #4: Which Angular's modules for RESTful resource interaction ?
   describe('with option: [Restangular]', function () {
     it('should add dependency for Restangular', function (done) {
-      var _ = gulpAngular._;
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        resource: {
-          "name": "restangular",
-          "version": "1.4.x",
-          "module": "restangular"
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        resource: prompts.resource.values.restangular
       }));
 
       gulpAngular.run({}, function() {
@@ -290,23 +269,18 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/index.js', /'restangular'/],
-          ['bower.json', /"restangular": "1.4.x"/],
+          ['bower.json', libRegexp('restangular', prompts.resource.values.restangular.version)]
         ]));
 
         done();
       });
     });
   });
+
   describe('with option: [$http]', function () {
     it('should NOT add dependency for $http', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        resource: {
-          "name": null,
-          "version": "1.2.x",
-          "module": null
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        resource: prompts.resource.values.none
       }));
 
       gulpAngular.run({}, function() {
@@ -317,8 +291,8 @@ describe('gulp-angular generator', function () {
         assert.noFileContent([
           ['src/app/index.js', /'ngResource'/],
           ['src/app/index.js', /'restangular'/],
-          ['bower.json', /"angular-resource": "1.3.x"/],
-          ['bower.json', /"restangular": "1.3.x"/],
+          ['bower.json', libRegexp('angular-resource', prompts.resource.values['angular-resource'].version)],
+          ['bower.json', libRegexp('restangular', prompts.resource.values.restangular.version)]
         ]);
 
         done();
@@ -329,14 +303,8 @@ describe('gulp-angular generator', function () {
   // Prompt #5: Which Angular's modules for routing ?
   describe('with option: [UI Router]', function () {
     it('should add dependency for UI Router', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        router: {
-          "name": "angular-ui-router",
-          "version": "0.2.x",
-          "module": "ui.router"
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        router: prompts.router.values['angular-ui-router']
       }));
 
       gulpAngular.run({}, function() {
@@ -346,7 +314,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/index.js', /'ui.router'/],
-          ['bower.json', /"angular-ui-router": "0.2.x"/],
+          ['bower.json', libRegexp('angular-ui-router', prompts.router.values['angular-ui-router'].version)]
         ]));
 
         done();
@@ -355,14 +323,8 @@ describe('gulp-angular generator', function () {
   });
   describe('without router option', function () {
     it('should NOT add dependency', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        router: {
-          "name": null,
-          "version": "1.2.x",
-          "module": null
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        router: prompts.router.values.none
       }));
 
       gulpAngular.run({}, function() {
@@ -375,8 +337,8 @@ describe('gulp-angular generator', function () {
         assert.noFileContent([
           ['src/app/index.js', /'ngRoute'/],
           ['src/app/index.js', /'ui.router'/],
-          ['bower.json', /"angular-route": "1.3.x"/],
-          ['bower.json', /"angular-ui-router": "0.2.x"/],
+          ['bower.json', libRegexp('angular-route', prompts.router.values['angular-route'].version)],
+          ['bower.json', libRegexp('angular-ui-router', prompts.router.values['angular-ui-router'].version)]
         ]);
 
         done();
@@ -387,15 +349,8 @@ describe('gulp-angular generator', function () {
   // Prompt #6: Which UI framework ?
   describe('with option: [Foundation, Node SASS]', function () {
     it('should add dependency for Foundation with SASS', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        ui: {
-          "name": "foundation",
-          "version": "5.4.x",
-          "key": "foundation",
-          "module": null
-        },
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values.foundation
       }));
 
       gulpAngular.run({}, function() {
@@ -403,8 +358,8 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/vendor.scss', /\@import '..\/..\/bower_components\/foundation\/scss\/foundation';/],
-          ['bower.json', /"foundation": "5.4.x"/],
-          ['package.json', /"gulp-sass": "\^0.7.3"/],
+          ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
+          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])]
         ]));
 
         done();
@@ -413,22 +368,9 @@ describe('gulp-angular generator', function () {
   });
   describe('with option: [Foundation, Ruby SASS]', function () {
     it('should add dependency for Foundation with SASS', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        ui: {
-          "name": "foundation",
-          "version": "5.4.x",
-          "key": "foundation",
-          "module": null
-        },
-        cssPreprocessor: {
-          "key": "ruby-sass",
-          "extension": "scss",
-          "npm": {
-            "gulp-ruby-sass": "^0.7.1"
-          }
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values.foundation,
+        cssPreprocessor: prompts.cssPreprocessor.values['ruby-sass']
       }));
 
       gulpAngular.run({}, function() {
@@ -436,8 +378,8 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/vendor.scss', /\@import '..\/..\/bower_components\/foundation\/scss\/foundation';/],
-          ['bower.json', /"foundation": "5.4.x"/],
-          ['package.json', /"gulp-ruby-sass": "\^0.7.1"/],
+          ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
+          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].npm['gulp-ruby-sass'])]
         ]));
 
         done();
@@ -446,22 +388,9 @@ describe('gulp-angular generator', function () {
   });
   describe('with option: [Foundation, LESS]', function () {
     it('should add dependency for Foundation with LESS', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        ui: {
-          "name": "foundation",
-          "version": "5.4.x",
-          "key": "foundation",
-          "module": null
-        },
-        cssPreprocessor: {
-          "key": "less",
-          "extension": "less",
-          "npm": {
-            "gulp-less": "^1.3.3"
-          }
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values.foundation,
+        cssPreprocessor: prompts.cssPreprocessor.values.less
       }));
 
       gulpAngular.run({}, function() {
@@ -470,8 +399,8 @@ describe('gulp-angular generator', function () {
         ]));
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['bower.json', /"foundation": "5.4.x"/],
-          ['package.json', /"gulp-less": "\^1.3.3"/],
+          ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
+          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.npm['gulp-less'])]
         ]));
 
         done();
@@ -480,22 +409,9 @@ describe('gulp-angular generator', function () {
   });
   describe('with option: [Foundation, Stylus]', function () {
     it('should add dependency for Foundation with Stylus', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        ui: {
-          "name": "foundation",
-          "version": "5.4.x",
-          "key": "foundation",
-          "module": null
-        },
-        cssPreprocessor: {
-          "key": "stylus",
-          "extension": "styl",
-          "npm": {
-            "gulp-stylus": "^1.3.3"
-          }
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values.foundation,
+        cssPreprocessor: prompts.cssPreprocessor.values.stylus
       }));
 
       gulpAngular.run({}, function() {
@@ -504,8 +420,8 @@ describe('gulp-angular generator', function () {
         ]));
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['bower.json', /"foundation": "5.4.x"/],
-          ['package.json', /"gulp-stylus": "\^1.3.3"/],
+          ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
+          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.npm['gulp-stylus'])]
         ]));
 
         done();
@@ -514,20 +430,9 @@ describe('gulp-angular generator', function () {
   });
   describe('with option: [Foundation, CSS]', function () {
     it('should add dependency for Foundation with CSS', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        ui: {
-          "name": "foundation",
-          "version": "5.4.x",
-          "key": "foundation",
-          "module": null
-        },
-        cssPreprocessor: {
-          "key": "css",
-          "extension": "css",
-          "npm": {}
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values.foundation,
+        cssPreprocessor: prompts.cssPreprocessor.values.css
       }));
 
       gulpAngular.run({}, function() {
@@ -537,14 +442,9 @@ describe('gulp-angular generator', function () {
 
         assert.noFile('src/app/vendor.*');
 
-        // assert.fileContent([].concat(expectedGulpContent, [
-        //   ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/foundation\/css\/foundation.css">/],
-        //   ['bower.json', /"foundation": "5.4.x"/],
-        // ]));
-
         // No Gulp task for style
         assert.fileContent([
-          ['bower.json', /"foundation": "5.4.x"/],
+          ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)]
         ]);
         done();
       });
@@ -552,22 +452,9 @@ describe('gulp-angular generator', function () {
   });
   describe('with option: [Bootstrap, Ruby SASS]', function () {
     it('should add dependency for Bootstrap with SASS', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        ui: {
-          "name": "bootstrap-sass-official",
-          "version": "3.2.x",
-          "key": "bootstrap",
-          "module": null
-        },
-        cssPreprocessor: {
-          "key": "ruby-sass",
-          "extension": "scss",
-          "npm": {
-            "gulp-ruby-sass": "^0.7.1"
-          }
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values.bootstrap,
+        cssPreprocessor: prompts.cssPreprocessor.values['ruby-sass']
       }));
 
       gulpAngular.run({}, function() {
@@ -579,8 +466,8 @@ describe('gulp-angular generator', function () {
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/vendor.scss', /\$icon-font-path: "\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
           ['src/app/vendor.scss', /\@import '\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap';/],
-          ['bower.json', /"bootstrap-sass-official": "3.2.x"/],
-          ['package.json', /"gulp-ruby-sass": "\^0.7.1"/],
+          ['bower.json', libRegexp('bootstrap-sass-official', prompts.ui.values.bootstrap.version)],
+          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].npm['gulp-ruby-sass'])],
         ]));
 
         done();
@@ -589,22 +476,9 @@ describe('gulp-angular generator', function () {
   });
   describe('with option: [Bootstrap, LESS]', function () {
     it('should add dependency for Bootstrap with LESS', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        ui: {
-          "name": "bootstrap",
-          "version": "3.2.x",
-          "key": "bootstrap",
-          "module": null
-        },
-        cssPreprocessor: {
-          "key": "less",
-          "extension": "less",
-          "npm": {
-            "gulp-less": "^1.3.3"
-          }
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values.bootstrap,
+        cssPreprocessor: prompts.cssPreprocessor.values.less
       }));
 
       gulpAngular.run({}, function() {
@@ -616,8 +490,8 @@ describe('gulp-angular generator', function () {
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/vendor.less', /@import '..\/..\/bower_components\/bootstrap\/less\/bootstrap.less';/],
           ['src/app/vendor.less', /\@icon-font-path: '\/bower_components\/bootstrap\/fonts\/';/],
-          ['bower.json', /"bootstrap": "3.2.x"/],
-          ['package.json', /"gulp-less": "\^1.3.3"/],
+          ['bower.json', libRegexp('bootstrap', prompts.ui.values.bootstrap.version)],
+          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.npm['gulp-less'])]
         ]));
 
         done();
@@ -626,22 +500,9 @@ describe('gulp-angular generator', function () {
   });
   describe('with option: [Bootstrap, Stylus]', function () {
     it('should add dependency for Bootstrap with Stylus', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        ui: {
-          "name": "bootstrap",
-          "version": "3.2.x",
-          "key": "bootstrap",
-          "module": null
-        },
-        cssPreprocessor: {
-          "key": "stylus",
-          "extension": "styl",
-          "npm": {
-            "gulp-stylus": "^1.3.3"
-          }
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values.bootstrap,
+        cssPreprocessor: prompts.cssPreprocessor.values.stylus
       }));
 
       gulpAngular.run({}, function() {
@@ -653,8 +514,8 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/bootstrap\/dist\/css\/bootstrap.css">/],
-          ['bower.json', /"bootstrap": "3.2.x"/],
-          ['package.json', /"gulp-stylus": "\^1.3.3"/],
+          ['bower.json', libRegexp('bootstrap', prompts.ui.values.bootstrap.version)],
+          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.npm['gulp-stylus'])]
         ]));
 
         done();
@@ -663,20 +524,9 @@ describe('gulp-angular generator', function () {
   });
   describe('with option: [Bootstrap, CSS]', function () {
     it('should add dependency for Bootstrap with CSS', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        ui: {
-          "name": "bootstrap",
-          "version": "3.2.x",
-          "key": "bootstrap",
-          "module": null
-        },
-        cssPreprocessor: {
-          "key": "css",
-          "extension": "css",
-          "npm": {}
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values.bootstrap,
+        cssPreprocessor: prompts.cssPreprocessor.values.css
       }));
 
       gulpAngular.run({}, function() {
@@ -686,21 +536,15 @@ describe('gulp-angular generator', function () {
 
         assert.noFile('src/app/vendor.*');
 
-        // assert.fileContent([].concat(expectedGulpContent, [
-        //   ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/bootstrap\/dist\/css\/bootstrap.css">/],
-        //   ['bower.json', /"bootstrap": "3.2.x"/],
-        // ]));
-
         // No Gulp task for style
         assert.fileContent([
-          ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/bootstrap\/dist\/css\/bootstrap.css">/],
-          ['bower.json', /"bootstrap": "3.2.x"/],
+          ['bower.json', libRegexp('bootstrap', prompts.ui.values.bootstrap.version)]
         ]);
 
         assert.noFileContent([
-          ['package.json', /"gulp-less": "\^1.3.3"/],
-          ['package.json', /"gulp-sass": "\^0.7.3"/],
-          ['package.json', /"gulp-ruby-sass": "\^0.7.1"/],
+          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.npm['gulp-less'])],
+          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])],
+          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].npm['gulp-ruby-sass'])]
         ]);
 
         done();
@@ -709,22 +553,15 @@ describe('gulp-angular generator', function () {
   });
   describe('with option: [Bootstrap, UI Boostrap]', function () {
     it('should add UI Bootstrap Bower and Angular module', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        bootstrapComponents: {
-          "name": "angular-bootstrap",
-          "version": "0.12.x",
-          "key": "ui-bootstrap",
-          "module": "ui.bootstrap"
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        bootstrapComponents: prompts.bootstrapComponents.values['ui-bootstrap']
       }));
 
       gulpAngular.run({}, function() {
         assert.file(expectedFile);
 
         assert.fileContent([
-          ['bower.json', /"angular-bootstrap": "0.12.x"/],
+          ['bower.json', libRegexp('angular-bootstrap', prompts.bootstrapComponents.values['ui-bootstrap'].version)],
           ['src/app/index.js', /'ui.bootstrap'/]
         ]);
 
@@ -734,15 +571,8 @@ describe('gulp-angular generator', function () {
   });
   describe('with option: [Bootstrap, Standard Boostrap JS]', function () {
     it('should add Bootstrap JS files', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        bootstrapComponents: {
-          "name": null,
-          "version": null,
-          "key": "official",
-          "module": null
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        bootstrapComponents: prompts.bootstrapComponents.values.official
       }));
 
       gulpAngular.run({}, function() {
@@ -758,15 +588,8 @@ describe('gulp-angular generator', function () {
   });
   describe('with option: [Angular Material]', function () {
     it('should add Angular Material Bower and Angular modules', function (done) {
-      var _ = gulpAngular._;
-
-      helpers.mockPrompt(gulpAngular, _.assign(prompt, {
-        ui: {
-          "name": "angular-material",
-          "version": "0.5.x",
-          "key": "angular-material",
-          "module": "ngMaterial"
-        }
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values['angular-material']
       }));
 
       gulpAngular.run({}, function() {
@@ -775,7 +598,7 @@ describe('gulp-angular generator', function () {
         assert.noFile('src/app/vendor.*');
 
         assert.fileContent([
-          ['bower.json', /"angular-material": "0.5.x"/],
+          ['bower.json', libRegexp('angular-material', prompts.ui.values['angular-material'].version)],
           ['src/app/index.js', /'ngMaterial'/]
         ]);
 
