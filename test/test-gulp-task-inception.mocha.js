@@ -78,8 +78,8 @@ describe('gulp-angular generator', function () {
         genOptions
       );
 
-      gulpAngular.on('start', outputInTest.mute);
-      gulpAngular.on('end', outputInTest.unmute);
+      // gulpAngular.on('start', outputInTest.mute);
+      // gulpAngular.on('end', outputInTest.unmute);
 
       done();
     });
