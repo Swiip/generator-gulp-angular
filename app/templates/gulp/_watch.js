@@ -2,12 +2,9 @@
 
 var gulp = require('gulp');
 
-gulp.task('watch', ['wiredep', 'injector:css', 'injector:js'] ,function () {<% if (props.cssPreprocessor.key === 'less') { %>
-  gulp.watch('src/{app,components}/**/*.less', ['injector:css']);<% } else if (props.cssPreprocessor.key === 'node-sass' || props.cssPreprocessor.key === 'ruby-sass') { %>
-  gulp.watch('src/{app,components}/**/*.scss', ['injector:css']);<% } else if (props.cssPreprocessor.key === 'stylus') { %>
-  gulp.watch('src/{app,components}/**/*.styl', ['injector:css']);<% } else { %>
-  gulp.watch('src/{app,components}/**/*.css', ['injector:css']);<% } %>
-  gulp.watch('src/{app,components}/**/*.js', ['injector:js']);
+gulp.task('watch', ['wiredep', 'injector:css', 'injector:js'] ,function () {<% if (props.cssPreprocessor.key !== 'none') { %>
+  gulp.watch('src/{app,components}/**/*.<%= props.cssPreprocessor.extension %>', ['injector:css']);<% } %>
+  gulp.watch('src/{app,components}/**/*.<%= props.jsPreprocessor.extension %>', ['injector:js']);
   gulp.watch('src/assets/images/**/*', ['images']);
   gulp.watch('bower.json', ['wiredep']);
 });

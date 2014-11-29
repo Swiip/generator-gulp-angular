@@ -108,6 +108,12 @@
         "url": "http://learnboost.github.io/stylus/",
         "description": "Stylus is a revolutionary new language, providing an efficient, dynamic, and expressive way to generate CSS. Supporting both an indented syntax and regular CSS style.",
         "logo": "stylus.png"
+    },
+    "coffee": {
+        "key": "coffee",
+        "title": "CoffeeScript",
+        "url": "http://coffeescript.org/",
+        "description": "CoffeeScript, \"a little language that compiles into JavaScript\".",
+        "logo": "coffeescript.png"
     }
 }
-

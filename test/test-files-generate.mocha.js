@@ -151,7 +151,7 @@ describe('gulp-angular generator', function () {
           ['bower.json', libRegexp('bootstrap-sass-official', prompts.ui.values.bootstrap.version)],
 
           // Check package.json
-          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])],
+          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)],
 
           // Check wiredep css exclusion.
           ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
@@ -364,7 +364,8 @@ describe('gulp-angular generator', function () {
           ['src/app/vendor.scss', /@import '..\/..\/bower_components\/foundation\/scss\/foundation';/],
           ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
-          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])],
+
+          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)],
           ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]));
 
@@ -389,7 +390,8 @@ describe('gulp-angular generator', function () {
           ['src/app/vendor.scss', /@import '..\/..\/bower_components\/foundation\/scss\/foundation';/],
           ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
-          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].npm['gulp-ruby-sass'])],
+
+          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].version)],
           ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]));
 
@@ -413,8 +415,7 @@ describe('gulp-angular generator', function () {
         assert.fileContent([].concat(expectedGulpContent, [
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
           ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
-          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.npm['gulp-less'])],
-
+          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.version)],
           ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]));
 
@@ -438,7 +439,7 @@ describe('gulp-angular generator', function () {
         assert.fileContent([].concat(expectedGulpContent, [
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
           ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
-          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.npm['gulp-stylus'])],
+          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.version)],
           ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]));
 
@@ -520,7 +521,7 @@ describe('gulp-angular generator', function () {
           ['src/app/vendor.scss', /\$icon-font-path: "\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
           ['src/app/vendor.scss', /@import '\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap';/],
           ['bower.json', libRegexp('bootstrap-sass-official', prompts.ui.values.bootstrap.version)],
-          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].npm['gulp-ruby-sass'])],
+          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].version)],
           ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
         ]));
 
@@ -545,7 +546,7 @@ describe('gulp-angular generator', function () {
           ['src/app/vendor.less', /@import '..\/..\/bower_components\/bootstrap\/less\/bootstrap.less';/],
           ['src/app/vendor.less', /@icon-font-path: '\/bower_components\/bootstrap\/fonts\/';/],
           ['bower.json', libRegexp('bootstrap', prompts.ui.values.bootstrap.version)],
-          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.npm['gulp-less'])],
+          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.version)],
           ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
         ]));
 
@@ -570,7 +571,7 @@ describe('gulp-angular generator', function () {
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/bootstrap\/dist\/css\/bootstrap.css">/],
           ['bower.json', libRegexp('bootstrap', prompts.ui.values.bootstrap.version)],
-          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.npm['gulp-stylus'])],
+          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.version)],
           ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
         ]));
 
@@ -598,9 +599,9 @@ describe('gulp-angular generator', function () {
         ]);
 
         assert.noFileContent([
-          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.npm['gulp-less'])],
-          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])],
-          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].npm['gulp-ruby-sass'])],
+          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.version)],
+          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)],
+          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].version)],
           ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
         ]);
 
@@ -666,7 +667,7 @@ describe('gulp-angular generator', function () {
   describe('with option: [None UI Framework, Node SASS]', function () {
     it('should add index style', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
-        ui: prompts.ui.values['none'],
+        ui: prompts.ui.values.none,
         cssPreprocessor: prompts.cssPreprocessor.values['node-sass']
       }));
 
@@ -687,7 +688,7 @@ describe('gulp-angular generator', function () {
   describe('with option: [None UI Framework, Ruby SASS]', function () {
     it('should add index style', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
-        ui: prompts.ui.values['none'],
+        ui: prompts.ui.values.none,
         cssPreprocessor: prompts.cssPreprocessor.values['ruby-sass']
       }));
 
@@ -708,8 +709,8 @@ describe('gulp-angular generator', function () {
   describe('with option: [None UI Framework, LESS]', function () {
     it('should add index style', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
-        ui: prompts.ui.values['none'],
-        cssPreprocessor: prompts.cssPreprocessor.values['less']
+        ui: prompts.ui.values.none,
+        cssPreprocessor: prompts.cssPreprocessor.values.less
       }));
 
       gulpAngular.run({}, function() {
@@ -717,7 +718,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           // Check package.json
-          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values['less'].npm['gulp-less'])]
+          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.version)]
         ]));
 
         assert.noFile('src/app/vendor.*');
@@ -729,8 +730,8 @@ describe('gulp-angular generator', function () {
   describe('with option: [None UI Framework, Stylus]', function () {
     it('should add index style', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
-        ui: prompts.ui.values['none'],
-        cssPreprocessor: prompts.cssPreprocessor.values['stylus']
+        ui: prompts.ui.values.none,
+        cssPreprocessor: prompts.cssPreprocessor.values.stylus
       }));
 
       gulpAngular.run({}, function() {
@@ -738,7 +739,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           // Check package.json
-          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values['stylus'].npm['gulp-stylus'])]
+          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.version)]
         ]));
 
         assert.noFile('src/app/vendor.*');
@@ -750,8 +751,8 @@ describe('gulp-angular generator', function () {
   describe('with option: [None UI Framework, CSS]', function () {
     it('should add index style', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
-        ui: prompts.ui.values['none'],
-        cssPreprocessor: prompts.cssPreprocessor.values['css']
+        ui: prompts.ui.values.none,
+        cssPreprocessor: prompts.cssPreprocessor.values.css
       }));
 
       gulpAngular.run({}, function() {

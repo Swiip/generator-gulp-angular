@@ -2,7 +2,6 @@
   "staticFiles": [
     "gulpfile.js",
     "gulp/e2e-tests.js",
-    "gulp/server.js",
     "gulp/proxy.js",
     "gulp/unit-tests.js",
     "src/favicon.ico",
@@ -27,14 +26,10 @@
     "gulp/build.js",
     "gulp/watch.js",
     "gulp/wiredep.js",
+    "gulp/server.js",
 
     "src/index.html",
 
-    "src/app/index.js",
-
-    "src/app/main/main.controller.js",
-    "src/app/main/main.controller.spec.js",
-
-    "src/components/navbar/navbar.controller.js"
+    "src/app/main/main.controller.spec.js"
   ]
 }

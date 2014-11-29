@@ -84,6 +84,10 @@ model.cssPreprocessor.choices.forEach(function(choice) {
   model.cssPreprocessor.values[choice.value.key] = choice.value;
 });
 
+model.jsPreprocessor.choices.forEach(function(choice) {
+  model.jsPreprocessor.values[choice.value.key] = choice.value;
+});
+
 module.exports = {
   prompts: model,
   defaults: {
@@ -94,8 +98,9 @@ module.exports = {
     router: model.router.values['angular-route'],
     ui: model.ui.values.bootstrap,
     bootstrapComponents: model.bootstrapComponents.values['ui-bootstrap'],
-    foundationComponents: model.foundationComponents.values['none'],
-    cssPreprocessor: model.cssPreprocessor.values['node-sass']
+    foundationComponents: model.foundationComponents.values.none,
+    cssPreprocessor: model.cssPreprocessor.values['node-sass'],
+    jsPreprocessor: model.jsPreprocessor.values['6to5']
   },
   libRegexp: function(name, version) {
     return new RegExp('"' + name + '": "' + version + '"');

@@ -28,6 +28,9 @@ module.exports = function () {
   _.forEach(this.styleCopies, function(value, key) {
     this.fs.copy(this.templatePath(key),  this.destinationPath(value));
   }.bind(this));
+  _.forEach(this.srcTemplates, function(value, key) {
+    this.template(key, value);
+  }.bind(this));
 
   // Create files with templates
   var basename;

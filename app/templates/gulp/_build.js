@@ -5,7 +5,7 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
-<% if (props.cssPreprocessor.key !== 'css') { %>
+<% if (props.cssPreprocessor.key !== 'none') { %>
 gulp.task('styles', ['wiredep', 'injector:css:preprocessor'], function () {<% if (props.cssPreprocessor.key === 'less') { %>
   return gulp.src(['src/app/index.less', 'src/app/vendor.less'])
     .pipe($.less({
@@ -72,13 +72,21 @@ gulp.task('injector:css'<% if (props.cssPreprocessor.key !== 'css') { %>, ['styl
     .pipe(gulp.dest('src/'));
 });
 
-gulp.task('jshint', function () {
+gulp.task('scripts', function () {<% if (props.jsPreprocessor.key === 'none') { %>
   return gulp.src('src/{app,components}/**/*.js')
     .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'));
+    .pipe($.jshint.reporter('jshint-stylish'));<% } if (props.jsPreprocessor.key === 'coffee') { %>
+  return gulp.src('src/{app,components}/**/*.coffee')
+    .pipe($.coffee())<% } if (props.jsPreprocessor.key !== 'none') { %>
+    .on('error', function handleError(err) {
+      console.error(err.toString());
+      this.emit('end');
+    })
+    .pipe(gulp.dest('.tmp/'))
+    .pipe($.size());<% } %>
 });
 
-gulp.task('injector:js', ['jshint', 'injector:css'], function () {
+gulp.task('injector:js', ['scripts', 'injector:css'], function () {
   return gulp.src('src/index.html')
     .pipe($.inject(gulp.src([
         'src/{app,components}/**/*.js',
