@@ -29,22 +29,38 @@ gulp.task('styles', ['wiredep'], function () {<% if (props.cssPreprocessor.key =
     .pipe(gulp.dest('.tmp/'))
     .pipe($.size());
 });
+
 <% } %>
-gulp.task('scripts:lint', function () {
+gulp.task('injector:css'<% if (props.cssPreprocessor.key !== 'css') { %>, ['styles']<% } else { %>, ['wiredep']<% } %>, function () {
+  return gulp.src('src/index.html')
+    .pipe($.inject(gulp.src([<% if (props.cssPreprocessor.key !== 'css') { %>
+        ".tmp/{app,components}/**/*.css",
+        '!.tmp/app/vendor.css'<% } else { %>
+        "src/{app,components}/**/*.css"<% } %>
+      ], {read: false}), {
+      starttag: '<!-- injector:css -->',<% if (props.cssPreprocessor.key !== 'css') { %>
+      ignorePath: '.tmp',<% } else { %>
+      ignorePath: 'src',<% } %>
+      addRootSlash: false
+    }))
+    .pipe(gulp.dest("src"));
+});
+
+gulp.task('jshint', function () {
   return gulp.src('src/{app,components}/**/*.js')
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.size());
 });
 
-gulp.task('scripts:injector', ['scripts:lint'], function () {
+gulp.task('injector:js', ['jshint'], function () {
   return gulp.src('src/index.html')
     .pipe($.inject(gulp.src([
         "src/{app,components}/**/*.js",
         '!src/{app,components}/**/*.spec.js',
         '!src/{app,components}/**/*.mock.js'
       ], {read: false}), {
-      starttag: '<!-- injector:scripts -->',
+      starttag: '<!-- injector:js -->',
       ignorePath: 'src',
       addRootSlash: false
     }))
@@ -66,7 +82,7 @@ gulp.task('partials', function () {
     .pipe($.size());
 });
 
-gulp.task('html', [<% if (props.cssPreprocessor.key !== 'css') { %>'styles', <% } else { %>'wiredep', <% } %>'scripts:injector', 'partials'], function () {
+gulp.task('html', ['wiredep', 'injector:css', 'injector:js', 'partials'], function () {
   var htmlFilter = $.filter('*.html');
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
