@@ -12,34 +12,22 @@ module.exports = function () {
 
   // Compute folder path, based on user's answer & files.json, 
   // into this.files dictionary
-  var files = require('../files.json');
-  this.copies = [];
+  var folders = require('../files.json');
   
   // Short hand variables for appPath, the place to copy angular public files
-  var appPathSource = 'src';              // as in templates/src, where to copy from
-  var appPathDest = this.props.appPath;   // as answered by user, where to copy to
+  var appPathSource = 'src';              // as in templates/src, app folder to copy from
+  var appPathDest = this.props.appPath;   // as answered by user, app folder to copy to
 
-  // copies: 
-  // a dictionary of key-value, with key being folder name, 
-  // value contains its data 
-  // 
-  // copies
-  //   app
-  //     src
-  //     dest
-  //     templates: defined in files.js, or below
-  //     static: defined in files.js
-  //     dotfiles: defined in files.js
-  //   root
-  //     src
-  //     dest
-  //     templates:  
-  //     static: 
-  //     dotfiles: 
-  this.files = files;
-  for (var key in this.files) {
-    folder = this.files[key];
-    if (key === 'app') 
+  this.copies = [];
+  // this.copies is an array of files
+  // to be copied, each is an object:
+  // {
+  //   src: string 
+  //   dest: string 
+  // }
+  for (var name in folders) {
+    var folder = folders[name];
+    if (name === 'app') 
       folder.dest = appPathDest;
 
     folder.staticFiles.forEach(function(fileDir) {
@@ -110,15 +98,11 @@ module.exports = function () {
     .replace(/'/g, '\\\'')
     .replace(/"/g, '\'')
     .replace(/\n/g, '\n    ');
-  // this.technologiesLogoCopies = _.map(usedTechs, function(value) {
-  //   return {
-  //     'src/assets/images/' + listTechs[value].logo;
-  // });
-  usedTechs.angular.forEach(tech, function(usedTech) {
-    return {
-      src: appPathSource + '/assets/images/' + listTechs(value).logo,
-      dest: appPathDest + '/assets/images/' + listTechs(value).logo
-    }
+  usedTechs.forEach(function(usedTech) {
+    this.copies.push({
+      src: appPathSource + '/assets/images/' + listTechs(usedTech).logo,
+      dest: appPathDest + '/assets/images/' + listTechs(usedTech).logo
+    });
   });
 
   // Select partials relative to props.ui
@@ -126,8 +110,6 @@ module.exports = function () {
 
   this.partialCopies = {};
 
-  // var navbarPartialSrc = 'src/components/navbar/__' + uiFileKey + '-navbar.html';
-  // this.partialCopies[navbarPartialSrc] = 'src/components/navbar/navbar.html';
   this.copies.push({
     src: appPathSource + '/components/navbar/__' + uiFileKey + '-navbar.html',
     dest: appPathDest + '/components/navbar/navbar.html'
@@ -135,7 +117,6 @@ module.exports = function () {
 
   var routerPartialSrc = 'src/app/main/__' + uiFileKey + '.html';
   if(this.props.router.module !== null) {
-    // this.partialCopies[routerPartialSrc] = 'src/app/main/main.html';
     this.copies.push({
       src: appPathSource + '/app/main/__' + uiFileKey + '.html',
       dest: appPathDest + '/app/main/main.html'
@@ -180,8 +161,6 @@ module.exports = function () {
 
   this.styleCopies = {};
 
-  // var styleAppSrc = 'src/app/__' + uiFileKey + '-index.' + this.props.cssPreprocessor.extension;
-  // this.styleCopies[styleAppSrc] = appPath + '/app/index.' + this.props.cssPreprocessor.extension;
   this.copies.push({
     src: appPathSource + '/app/__' + uiFileKey + '-index.' + this.props.cssPreprocessor.extension,
     dest: appPathDest + '/app/index.' + this.props.cssPreprocessor.extension
@@ -207,8 +186,6 @@ module.exports = function () {
   }
 
   if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
-    // var styleVendorSource = 'src/app/__' + uiFileKey + '-vendor.' + this.props.cssPreprocessor.extension;
-    // this.styleCopies[styleVendorSource] = appPath + '/app/vendor.' + this.props.cssPreprocessor.extension;
     this.copies.push({
       src: appPathSource + '/app/__' + uiFileKey + '-vendor.' + this.props.cssPreprocessor.extension,
       dest: appPathDest + '/app/vendor.' + this.props.cssPreprocessor.extension
