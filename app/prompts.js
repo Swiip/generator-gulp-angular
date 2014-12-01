@@ -1,4 +1,8 @@
-[
+"use strict";
+
+var slash = require('slash');
+
+module.exports = [
   {
     "type": "list",
     "name": "angularVersion",
@@ -194,6 +198,12 @@
   {
     "type": "list",
     "name": "bootstrapComponents",
+    "when": function(answers) {
+      for (var name in answers) 
+        if (name === 'ui' && answers[name].name === 'bootstrap-sass-official')
+          return true;
+      return false;
+    },
     "message": "How do you want to implements your Bootstrap components?",
     "choices": [
       {
@@ -288,5 +298,16 @@
         "name": "None, only the good old CSS"
       }
     ]
+  },
+  {
+    "type": "input",
+    "name": "appPath",
+    "message": "Where to set up Angular app path? \n (with respect to current yo directory)",
+    "default": "src",
+    "validate": function(answerStr) {
+      // Check valid folder path: no \ / ? <> : * % and not empty
+      console.log('validating answer str', answerStr);
+      return /^[^\\/?%*:|<>]+$/.test((slash(answerStr).split('/')).join(''));
+    }
   }
-]
+];

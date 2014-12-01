@@ -5,7 +5,7 @@ var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
 
-var prompts = require('./prompts.json');
+var prompts = require('./prompts.js');
 
 var GulpAngularGenerator = yeoman.generators.Base.extend({
 
@@ -54,9 +54,9 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
 
     var done = this.async();
 
-    this._.findWhere(prompts, {name: 'bootstrapComponents'}).when = function(props) {
-      return props.ui.key === 'bootstrap';
-    };
+    // this._.findWhere(prompts, {name: 'bootstrapComponents'}).when = function(props) {
+    //   return props.ui.key === 'bootstrap';
+    // };
 
     this.prompt(prompts, function (props) {
       if(props.ui.key !== 'bootstrap') {

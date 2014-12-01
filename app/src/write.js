@@ -6,15 +6,15 @@ var path = require('path');
 /* Process files */
 module.exports = function () {
   var _ = this._;
-
+  
   // Copy static files
-  _.forEach(files.staticFiles, function(src) {
-    this.copy(src);
+  _.forEach(this.files.staticFiles, function(file) {
+    this.copy(file.src, file.dist);
   }.bind(this));
 
   // Copy dot files
-  _.forEach(files.dotFiles, function(src) {
-    this.copy(src, '.' + src);
+  _.forEach(this.files.dotFiles, function(file) {
+    this.copy(file.src, file.dist);
   }.bind(this));
 
   // Copy files formatted (format.js) with options selected in prompt
@@ -31,7 +31,7 @@ module.exports = function () {
   // Create files with templates
   var basename;
   var src;
-  _.forEach(files.templates, function(dest) {
+  _.forEach(this.files.templates, function(dest) {
     basename = path.basename(dest);
     src = dest.replace(basename, '_' + basename);
     this.template(src, dest, this);
