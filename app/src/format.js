@@ -1,14 +1,20 @@
 'use strict';
 
+var path = require('path');
+
 /* Generate global template variables from props */
 module.exports = function () {
   var _ = this._;
-  var appPathSource = 'src';
 
   // Retrieve props stored in .yo-rc.json
   if (this.skipConfig) {
     this.props = this.config.get('props');
   }
+
+  var appPathSource = 'src';
+
+  // Compute relative path from appPath to bower_components
+  this.appToBower = path.relative(this.props.appPath, '');
 
   // Format list ngModules included in AngularJS DI
   var ngModules = this.props.angularModules.map(function (module) {

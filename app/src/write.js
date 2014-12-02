@@ -11,12 +11,12 @@ module.exports = function () {
   // into this.files dictionary
   var folders = require('../files.json');
   
-  // Short hand variables for appPath, the place to copy angular public files
-  var appPathSource = 'src';              // in templates/src, app folder to copy from
-  var appPathDest = this.props.appPath;   // answered by user, app folder to copy to
+  // Short hand variables for appPaths, the place to copy angular public files
+  var appPathSource = 'src';
+  var appPathDest = this.props.appPath;
 
   // copies is an array of a pair of source-dest path,
-  // each element is as below
+  // each element is an object:
   // {
   //   src: string 
   //   dest: string 
@@ -49,7 +49,7 @@ module.exports = function () {
       copies.push({
         src: folder.src + fileDir.replace(baseName, '_' + baseName),
         dest: folder.dest + fileDir,
-        template: true
+        isTemplate: true
       });
     }.bind(this));
   }
@@ -88,13 +88,14 @@ module.exports = function () {
   if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
     copies.push({
       src: appPathSource + '/app/__' + uiFileKey + '-vendor.' + this.props.cssPreprocessor.extension,
-      dest: appPathDest + '/app/vendor.' + this.props.cssPreprocessor.extension
+      dest: appPathDest + '/app/vendor.' + this.props.cssPreprocessor.extension,
+      isTemplate: true
     });
   }
 
   // Perform copy action
   _.forEach(copies, function(file) {
-    if (file.template)
+    if (file.isTemplate)
       this.template(file.src, file.dest);
     else
       this.copy(file.src, file.dest);
