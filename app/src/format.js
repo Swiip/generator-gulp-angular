@@ -65,7 +65,7 @@ module.exports = function () {
   var uiFileKey = this.props.ui.key === 'ui-bootstrap' ? 'bootstrap' : this.props.ui.key;
   
   if (this.props.router.module === 'ngRoute') {
-    this.routerHtml = '</*div*/ ng-view></div>';
+    this.routerHtml = '<div ng-view></div>';
     this.routerJs = this.read(appPathSource + '/app/__ngroute.js', 'utf8');
   } else if (this.props.router.module === 'ui.router') {
     this.routerHtml = '<div ui-view></div>';
