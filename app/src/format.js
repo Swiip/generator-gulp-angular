@@ -1,57 +1,13 @@
 'use strict';
 
-var path = require('path');
-
+/* Generate global template variables from props */
 module.exports = function () {
   var _ = this._;
+  var appPathSource = 'src';
 
   // Retrieve props stored in .yo-rc.json
   if (this.skipConfig) {
     this.props = this.config.get('props');
-  }
-
-  // Compute folder path, based on user's answer & files.json, 
-  // into this.files dictionary
-  var folders = require('../files.json');
-  
-  // Short hand variables for appPath, the place to copy angular public files
-  var appPathSource = 'src';              // as in templates/src, app folder to copy from
-  var appPathDest = this.props.appPath;   // as answered by user, app folder to copy to
-
-  this.copies = [];
-  // this.copies is an array of files
-  // to be copied, each is an object:
-  // {
-  //   src: string 
-  //   dest: string 
-  // }
-  for (var name in folders) {
-    var folder = folders[name];
-    if (name === 'app') 
-      folder.dest = appPathDest;
-
-    folder.staticFiles.forEach(function(fileDir) {
-      this.copies.push({
-        src: folder.src + fileDir,
-        dest: folder.dest + fileDir
-      });
-    }.bind(this));
-
-    folder.dotFiles.forEach(function(fileDir) {
-      var baseName = path.basename(fileDir);
-      this.copies.push({
-        src: folder.src + fileDir,
-        dest: folder.dest + fileDir.replace(baseName, '.' + baseName)
-      });
-    }.bind(this));
-
-    folder.templates.forEach(function(fileDir) {
-      var baseName = path.basename(fileDir);
-      this.copies.push({
-        src: folder.src + fileDir.replace(baseName, '_' + baseName),
-        dest: folder.dest + fileDir
-      });
-    }.bind(this));
   }
 
   // Format list ngModules included in AngularJS DI
@@ -78,7 +34,7 @@ module.exports = function () {
   // Format list techs used to generate app included in main view of sample
   var listTechs = require('../techs.json');
   
-  var usedTechs = [
+  this.usedTechs = [
     'angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor',
     this.props.jQuery.name,
     this.props.ui.key,
@@ -90,7 +46,7 @@ module.exports = function () {
       return tech !== 'default' && tech !== 'css' && tech !== 'official' && tech !== 'none';
     });
 
-  var techsContent = _.map(usedTechs, function(value) {
+  var techsContent = _.map(this.usedTechs, function(value) {
     return listTechs[value];
   });
 
@@ -98,32 +54,10 @@ module.exports = function () {
     .replace(/'/g, '\\\'')
     .replace(/"/g, '\'')
     .replace(/\n/g, '\n    ');
-  usedTechs.forEach(function(usedTech) {
-    this.copies.push({
-      src: appPathSource + '/assets/images/' + listTechs(usedTech).logo,
-      dest: appPathDest + '/assets/images/' + listTechs(usedTech).logo
-    });
-  });
-
-  // Select partials relative to props.ui
-  var uiFileKey = this.props.ui.key === 'ui-bootstrap' ? 'bootstrap' : this.props.ui.key;
-
-  this.partialCopies = {};
-
-  this.copies.push({
-    src: appPathSource + '/components/navbar/__' + uiFileKey + '-navbar.html',
-    dest: appPathDest + '/components/navbar/navbar.html'
-  });
-
-  var routerPartialSrc = 'src/app/main/__' + uiFileKey + '.html';
-  if(this.props.router.module !== null) {
-    this.copies.push({
-      src: appPathSource + '/app/main/__' + uiFileKey + '.html',
-      dest: appPathDest + '/app/main/main.html'
-    });
-  }
 
   // Compute routing relative to props.router
+  var uiFileKey = this.props.ui.key === 'ui-bootstrap' ? 'bootstrap' : this.props.ui.key;
+  
   if (this.props.router.module === 'ngRoute') {
     this.routerHtml = '</*div*/ ng-view></div>';
     this.routerJs = this.read(appPathSource + '/app/__ngroute.js', 'utf8');
@@ -131,7 +65,7 @@ module.exports = function () {
     this.routerHtml = '<div ui-view></div>';
     this.routerJs = this.read(appPathSource + '/app/__uirouter.js', 'utf8');
   } else {
-    this.routerHtml = this.read(routerPartialSrc, 'utf8');
+    this.routerHtml = this.read(appPathSource + '/app/main/__' + uiFileKey + '.html', 'utf8');
     this.routerHtml = this.routerHtml.replace(
       /^<div class="container">/,
       '<div class="container" ng-controller="MainCtrl">'
@@ -159,13 +93,6 @@ module.exports = function () {
     this.props.ui.name = 'bootstrap';
   }
 
-  this.styleCopies = {};
-
-  this.copies.push({
-    src: appPathSource + '/app/__' + uiFileKey + '-index.' + this.props.cssPreprocessor.extension,
-    dest: appPathDest + '/app/index.' + this.props.cssPreprocessor.extension
-  });
-
   // There is 2 ways of dealing with vendor styles
   // - If the vendor styles exist in the css preprocessor chosen,
   //   the best is to include directly the source files
@@ -183,12 +110,5 @@ module.exports = function () {
     if(this.props.ui.key === 'bootstrap') {
       this.isVendorStylesPreprocessed = true;
     }
-  }
-
-  if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
-    this.copies.push({
-      src: appPathSource + '/app/__' + uiFileKey + '-vendor.' + this.props.cssPreprocessor.extension,
-      dest: appPathDest + '/app/vendor.' + this.props.cssPreprocessor.extension
-    });
   }
 };

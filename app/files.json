@@ -1,7 +1,7 @@
 {
   "app": {
-    "src": "src",
-    "dest": "src",
+    "src": "src/",
+    "dest": "src/",
     "staticFiles": [
       "favicon.ico",
       "404.html",
@@ -48,7 +48,7 @@
       "gulp/build.js",
       "gulp/watch.js",
       "gulp/wiredep.js",
-      "gulp/config/paths.js",
+      "gulp/config/paths.js"
     ]
   } 
 }

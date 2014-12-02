@@ -4,6 +4,25 @@ var slash = require('slash');
 
 module.exports = [
   {
+    "type": "input",
+    "name": "appPath",
+    "message": "What will be Angular app path? \n (with respect to current yo directory)",
+    "default": "src",
+    "validate": function(answerStr) {
+      // Check valid folder path: 
+      //   no \ / ? <> : * % and not empty
+      //   not start with dot . or slash
+      //   not end with slash /
+      answerStr = answerStr.trim();
+      return /^[^\\/?%*:|<>]+$/.test(slash(answerStr).split('/').join('')) &&
+        !(/^[\/.]+/.test(answerStr)) && 
+        !(/^\/$/.test(answerStr));
+    },
+    "filer": function(answerStr) {
+      return answerStr.trim();
+    }
+  },
+  {
     "type": "list",
     "name": "angularVersion",
     "message": "Which version of Angular do you want?",
@@ -298,16 +317,5 @@ module.exports = [
         "name": "None, only the good old CSS"
       }
     ]
-  },
-  {
-    "type": "input",
-    "name": "appPath",
-    "message": "Where to set up Angular app path? \n (with respect to current yo directory)",
-    "default": "src",
-    "validate": function(answerStr) {
-      // Check valid folder path: no \ / ? <> : * % and not empty
-      console.log('validating answer str', answerStr);
-      return /^[^\\/?%*:|<>]+$/.test((slash(answerStr).split('/')).join(''));
-    }
   }
 ];
