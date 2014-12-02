@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
 var slash = require('slash');
 
 module.exports = [
   {
-    "type": "input",
-    "name": "appPath",
-    "message": "What will be Angular app path? \n (with respect to current yo directory)",
-    "default": "src",
-    "validate": function(answerStr) {
+    type: 'input',
+    name: 'appPath',
+    message: 'What will be Angular app path? \n (with respect to current yo directory)',
+    'default': 'src',
+    validate: function(answerStr) {
       // Check valid folder path: 
       //   no \ / ? <> : * % and not empty
       //   not start with dot . or slash
@@ -18,303 +18,303 @@ module.exports = [
         !(/^[\/.]+/.test(answerStr)) && 
         !(/^\/$/.test(answerStr));
     },
-    "filer": function(answerStr) {
+    filter: function(answerStr) {
       return answerStr.trim();
     }
   },
   {
-    "type": "list",
-    "name": "angularVersion",
-    "message": "Which version of Angular do you want?",
-    "choices": [
+    type: 'list',
+    name: 'angularVersion',
+    message: 'Which version of Angular do you want?',
+    choices: [
       {
-        "value": "~1.3.4",
-        "name": "1.3.x (latest)"
+        value: '~1.3.4',
+        name: '1.3.x (latest)'
       },
       {
-        "value": "~1.2.27",
-        "name": "1.2.x (legacy 2013-11-08)"
+        value: '~1.2.27',
+        name: '1.2.x (legacy 2013-11-08)'
       }
     ]
   },
   {
-    "type": "checkbox",
-    "name": "angularModules",
-    "message": "Which Angular's modules would you want to have? (ngRoute and ngResource will be addressed after)",
-    "choices": [
+    type: 'checkbox',
+    name: 'angularModules',
+    message: 'Which Angular\'s modules would you want to have? (ngRoute and ngResource will be addressed after)',
+    choices: [
       {
-        "value": {
-          "name": "angular-animate",
-          "module": "ngAnimate"
+        value: {
+          name: 'angular-animate',
+          module: 'ngAnimate'
         },
-        "name": "angular-animate.js (enable animation features)",
-        "checked": true
+        name: 'angular-animate.js (enable animation features)',
+        checked: true
       },
       {
-        "value": {
-          "name": "angular-cookies",
-          "module": "ngCookies"
+        value: {
+          name: 'angular-cookies',
+          module: 'ngCookies'
         },
-        "name": "angular-cookies.js (handle cookie management)",
-        "checked": true
+        name: 'angular-cookies.js (handle cookie management)',
+        checked: true
       },
       {
-        "value": {
-          "name": "angular-touch",
-          "module": "ngTouch"
+        value: {
+          name: 'angular-touch',
+          module: 'ngTouch'
         },
-        "name": "angular-touch.js (for mobile development)",
-        "checked": true
+        name: 'angular-touch.js (for mobile development)',
+        checked: true
       },
       {
-        "value": {
-          "name": "angular-sanitize",
-          "module": "ngSanitize"
+        value: {
+          name: 'angular-sanitize',
+          module: 'ngSanitize'
         },
-        "name": "angular-sanitize.js (to securely parse and manipulate HTML)",
-        "checked": true
+        name: 'angular-sanitize.js (to securely parse and manipulate HTML)',
+        checked: true
       }
     ]
   },
   {
-    "type": "list",
-    "name": "jQuery",
-    "message": "Would you need jQuery or perhaps Zepto?",
-    "choices": [
+    type: 'list',
+    name: 'jQuery',
+    message: 'Would you need jQuery or perhaps Zepto?',
+    choices: [
       {
-        "value": {
-          "name": "jquery",
-          "version": "~1.11.1"
+        value: {
+          name: 'jquery',
+          version: '~1.11.1'
         },
-        "name": "jQuery 1.x (branch still supporting IE6, 7 and 8)"
+        name: 'jQuery 1.x (branch still supporting IE6, 7 and 8)'
       },
       {
-        "value": {
-          "name": "jquery",
-          "version": "~2.1.1"
+        value: {
+          name: 'jquery',
+          version: '~2.1.1'
         },
-        "name": "jQuery 2.x (new version, lighter, IE9+)"
+        name: 'jQuery 2.x (new version, lighter, IE9+)'
       },
       {
-        "value": {
-          "name": "zeptojs",
-          "version": "~1.1.4"
+        value: {
+          name: 'zeptojs',
+          version: '~1.1.4'
         },
-        "name": "ZeptoJS 1.1.x (jQuery compatible but very much lighter)"
+        name: 'ZeptoJS 1.1.x (jQuery compatible but very much lighter)'
       },
       {
-        "value": {
-          "name": null,
-          "version": null
+        value: {
+          name: null,
+          version: null
         },
-        "name": "None (Angular will use its own jqLite)"
+        name: 'None (Angular will use its own jqLite)'
       }
     ]
   },
   {
-    "type": "list",
-    "name": "resource",
-    "message": "Would you like to use a REST resource library?",
-    "choices": [
+    type: 'list',
+    name: 'resource',
+    message: 'Would you like to use a REST resource library?',
+    choices: [
       {
-        "value": {
-          "name": "angular-resource",
-          "module": "ngResource"
+        value: {
+          name: 'angular-resource',
+          module: 'ngResource'
         },
-        "name": "ngResource, the official support for RESTful services"
+        name: 'ngResource, the official support for RESTful services'
       },
       {
-        "value": {
-          "name": "restangular",
-          "version": "~1.4.0",
-          "module": "restangular"
+        value: {
+          name: 'restangular',
+          version: '~1.4.0',
+          module: 'restangular'
         },
-        "name": "Restangular, an alternative service to handles RESTful requests"
+        name: 'Restangular, an alternative service to handles RESTful requests'
       },
       {
-        "value": {
-          "name": null,
-          "version": null,
-          "module": null
+        value: {
+          name: null,
+          version: null,
+          module: null
         },
-        "name": "None, $http is enough!"
+        name: 'None, $http is enough!'
       }
     ]
   },
   {
-    "type": "list",
-    "name": "router",
-    "message": "Would you like to use a router ?",
-    "choices": [
+    type: 'list',
+    name: 'router',
+    message: 'Would you like to use a router ?',
+    choices: [
       {
-        "value": {
-          "name": "angular-route",
-          "module": "ngRoute"
+        value: {
+          name: 'angular-route',
+          module: 'ngRoute'
         },
-        "name": "ngRoute, the official router"
+        name: 'ngRoute, the official router'
       },
       {
-        "value": {
-          "name": "angular-ui-router",
-          "version": "~0.2.13",
-          "module": "ui.router"
+        value: {
+          name: 'angular-ui-router',
+          version: '~0.2.13',
+          module: 'ui.router'
         },
-        "name": "UI Router, flexible routing with nested views"
+        name: 'UI Router, flexible routing with nested views'
       },
       {
-        "value": {
-          "name": null,
-          "version": null,
-          "module": null
+        value: {
+          name: null,
+          version: null,
+          module: null
         },
-        "name": "None"
+        name: 'None'
       }
     ]
   },
   {
-    "type": "list",
-    "name": "ui",
-    "message": "Which UI framework do you want?",
-    "choices": [
+    type: 'list',
+    name: 'ui',
+    message: 'Which UI framework do you want?',
+    choices: [
       {
-        "value": {
-          "name": "bootstrap-sass-official",
-          "version": "~3.3.1",
-          "key": "bootstrap",
-          "module": null
+        value: {
+          name: 'bootstrap-sass-official',
+          version: '~3.3.1',
+          key: 'bootstrap',
+          module: null
         },
-        "name": "Bootstrap, the most popular HTML, CSS, and JS framework"
+        name: 'Bootstrap, the most popular HTML, CSS, and JS framework'
       },
       {
-        "value": {
-          "name": "foundation",
-          "version": "~5.4.7",
-          "key": "foundation",
-          "module": null
+        value: {
+          name: 'foundation',
+          version: '~5.4.7',
+          key: 'foundation',
+          module: null
         },
-        "name": "Foundation, \"The most advanced responsive front-end framework in the world\""
+        name: 'Foundation, \'The most advanced responsive front-end framework in the world\''
       },
       {
-        "value": {
-          "name": "angular-material",
-          "version": "~0.5.1",
-          "key": "angular-material",
-          "module": "ngMaterial"
+        value: {
+          name: 'angular-material',
+          version: '~0.5.1',
+          key: 'angular-material',
+          module: 'ngMaterial'
         },
-        "name": "Angular Material, the reference implementation of the Google's Material Design specification"
+        name: 'Angular Material, the reference implementation of the Google\'s Material Design specification'
       },
       {
-        "value": {
-          "key": "none",
-          "name": null,
-          "version": null,
-          "module": null
+        value: {
+          key: 'none',
+          name: null,
+          version: null,
+          module: null
         },
-        "name": "None"
+        name: 'None'
       }
     ]
   },
   {
-    "type": "list",
-    "name": "bootstrapComponents",
-    "when": function(answers) {
+    type: 'list',
+    name: 'bootstrapComponents',
+    when: function(answers) {
       for (var name in answers) 
         if (name === 'ui' && answers[name].name === 'bootstrap-sass-official')
           return true;
       return false;
     },
-    "message": "How do you want to implements your Bootstrap components?",
-    "choices": [
+    message: 'How do you want to implements your Bootstrap components?',
+    choices: [
       {
-        "value": {
-          "name": "angular-bootstrap",
-          "version": "0.12.x",
-          "key": "ui-bootstrap",
-          "module": "ui.bootstrap"
+        value: {
+          name: 'angular-bootstrap',
+          version: '0.12.x',
+          key: 'ui-bootstrap',
+          module: 'ui.bootstrap'
         },
-        "name": "Angular UI Bootstrap, Bootstrap components written in pure AngularJS by the AngularUI Team"
+        name: 'Angular UI Bootstrap, Bootstrap components written in pure AngularJS by the AngularUI Team'
       },
       {
-        "value": {
-          "name": "angular-strap",
-          "version": "2.1.x",
-          "key": "angular-strap",
-          "module": "mgcrea.ngStrap"
+        value: {
+          name: 'angular-strap',
+          version: '2.1.x',
+          key: 'angular-strap',
+          module: 'mgcrea.ngStrap'
         },
-        "name": "AngularStrap, AngularJS 1.2+ native directives for Bootstrap 3"
+        name: 'AngularStrap, AngularJS 1.2+ native directives for Bootstrap 3'
       },
       {
-        "value": {
-          "name": null,
-          "version": null,
-          "key": "official",
-          "module": null
+        value: {
+          name: null,
+          version: null,
+          key: 'official',
+          module: null
         },
-        "name": "The official jQuery implementation of Bootstrap"
+        name: 'The official jQuery implementation of Bootstrap'
       },
       {
-        "value": {
-          "name": null,
-          "version": null,
-          "key": "none",
-          "module": null
+        value: {
+          name: null,
+          version: null,
+          key: 'none',
+          module: null
         },
-        "name": "No JavaScript, just CSS"
+        name: 'No JavaScript, just CSS'
       }
     ]
   },
   {
-    "type": "list",
-    "name": "cssPreprocessor",
-    "message": "Which CSS preprocessor do you want?",
-    "choices": [
+    type: 'list',
+    name: 'cssPreprocessor',
+    message: 'Which CSS preprocessor do you want?',
+    choices: [
       {
-        "value": {
-          "key": "node-sass",
-          "extension": "scss",
-          "npm": {
-            "gulp-sass": "~1.1.0"
+        value: {
+          key: 'node-sass',
+          extension: 'scss',
+          npm: {
+            'gulp-sass': '~1.1.0'
           }
         },
-        "name": "Sass (Node), Node.js binding to libsass, the C version of the popular stylesheet preprocessor, Sass."
+        name: 'Sass (Node), Node.js binding to libsass, the C version of the popular stylesheet preprocessor, Sass.'
       },
       {
-        "value": {
-          "key": "ruby-sass",
-          "extension": "scss",
-          "npm": {
-            "gulp-ruby-sass": "~0.7.1"
+        value: {
+          key: 'ruby-sass',
+          extension: 'scss',
+          npm: {
+            'gulp-ruby-sass': '~0.7.1'
           }
         },
-        "name": "Sass (Ruby), Original Syntactically Awesome StyleSheets (requires Ruby)"
+        name: 'Sass (Ruby), Original Syntactically Awesome StyleSheets (requires Ruby)'
       },
       {
-        "value": {
-          "key": "less",
-          "extension": "less",
-          "npm": {
-            "gulp-less": "~1.3.6"
+        value: {
+          key: 'less',
+          extension: 'less',
+          npm: {
+            'gulp-less': '~1.3.6'
           }
         },
-        "name": "Less, extends the CSS language, adding features that allow variables, mixins, functions and many other techniques."
+        name: 'Less, extends the CSS language, adding features that allow variables, mixins, functions and many other techniques.'
       },
       {
-        "value": {
-          "key": "stylus",
-          "extension": "styl",
-          "npm": {
-            "gulp-stylus": "~1.3.4"
+        value: {
+          key: 'stylus',
+          extension: 'styl',
+          npm: {
+            'gulp-stylus': '~1.3.4'
           }
         },
-        "name": "Stylus, supporting both an indented syntax and regular CSS style."
+        name: 'Stylus, supporting both an indented syntax and regular CSS style.'
       },
       {
-        "value": {
-          "key": "css",
-          "extension": "css",
-          "npm": {}
+        value: {
+          key: 'css',
+          extension: 'css',
+          npm: {}
         },
-        "name": "None, only the good old CSS"
+        name: 'None, only the good old CSS'
       }
     ]
   }
