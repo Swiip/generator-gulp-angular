@@ -11,7 +11,7 @@ describe('gulp-angular generator', function () {
 
   var mockPrompts = require('./mock-prompts.js');
   var prompts = mockPrompts.prompts;
-  var defaults;
+  var defaults = _.clone(mockPrompts.defaults);
   var libRegexp = mockPrompts.libRegexp;
 
   var gulpAngular;
@@ -48,7 +48,7 @@ describe('gulp-angular generator', function () {
   var expectedGulpContent = [
     ['gulpfile.js', /gulp\.task\(\'default\'/],
     ['gulp/build.js', /gulp\.task\(\'styles\'/],
-    ['gulp/build.js', /gulp\.task\(\'scripts\'/],
+    ['gulp/build.js', /gulp\.task\(\'jshint\'/],
     ['gulp/build.js', /gulp\.task\(\'partials\'/],
     ['gulp/build.js', /gulp\.task\(\'html\'/],
     ['gulp/build.js', /gulp\.task\(\'images\'/],
@@ -93,8 +93,8 @@ describe('gulp-angular generator', function () {
         genOptions
       );
 
-      // gulpAngular.on('start', outputInTest.mute);
-      // gulpAngular.on('end', outputInTest.unmute);
+      gulpAngular.on('start', outputInTest.mute);
+      gulpAngular.on('end', outputInTest.unmute);
 
       done();
     });

@@ -13,12 +13,11 @@ var chai = require('chai');
 require('chai').should();
 var assert = require('chai').assert;
 chai.use(require('chai-as-promised'));
-chai.use(require('chai-fs'));
 
 describe('gulp-angular generator', function () {
   var mockPrompts = require('./mock-prompts.js');
   var prompts = mockPrompts.prompts;
-  var defaults;
+  var defaults = _.clone(mockPrompts.defaults);
   var promptCase;
   var gulpAngular;
 
@@ -78,8 +77,8 @@ describe('gulp-angular generator', function () {
         genOptions
       );
 
-      // gulpAngular.on('start', outputInTest.mute);
-      // gulpAngular.on('end', outputInTest.unmute);
+      gulpAngular.on('start', outputInTest.mute);
+      gulpAngular.on('end', outputInTest.unmute);
 
       done();
     });
@@ -92,14 +91,14 @@ describe('gulp-angular generator', function () {
       helpers.mockPrompt(gulpAngular, defaults);
 
       return this.run(100000, 'build').should.be.fulfilled.then(function () {
-        assert.isFile(tempDirDist + '/index.html', 'File not exist');
-        assert.isFile(tempDirDist + '/404.html', 'File not exist');
-        assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
-        assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/fonts', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/index.html').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/404.html').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/favicon.ico').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/assets').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/assets/images').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/fonts').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/scripts').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/styles').isDirectory(), 'Directory not exist');
       });
     });
 
@@ -140,13 +139,13 @@ describe('gulp-angular generator', function () {
       helpers.mockPrompt(gulpAngular, promptCase);
 
       return this.run(100000, 'build').should.be.fulfilled.then(function () {
-        assert.isFile(tempDirDist + '/index.html', 'File not exist');
-        assert.isFile(tempDirDist + '/404.html', 'File not exist');
-        assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
-        assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/index.html').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/404.html').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/favicon.ico').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/assets').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/assets/images').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/scripts').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/styles').isDirectory(), 'Directory not exist');
       });
     });
 
@@ -187,14 +186,14 @@ describe('gulp-angular generator', function () {
       helpers.mockPrompt(gulpAngular, promptCase);
 
       return this.run(100000, 'build').should.be.fulfilled.then(function () {
-        assert.isFile(tempDirDist + '/index.html', 'File not exist');
-        assert.isFile(tempDirDist + '/404.html', 'File not exist');
-        assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
-        assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/fonts', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/index.html').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/404.html').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/favicon.ico').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/assets').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/assets/images').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/fonts').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/scripts').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/styles').isDirectory(), 'Directory not exist');
       });
     });
 
@@ -232,13 +231,13 @@ describe('gulp-angular generator', function () {
       helpers.mockPrompt(gulpAngular, promptCase);
 
       return this.run(100000, 'build').should.be.fulfilled.then(function () {
-        assert.isFile(tempDirDist + '/index.html', 'File not exist');
-        assert.isFile(tempDirDist + '/404.html', 'File not exist');
-        assert.isFile(tempDirDist + '/favicon.ico', 'File not exist');
-        assert.isDirectory(tempDirDist + '/assets', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/assets/images', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/scripts', 'Directory not exist');
-        assert.isDirectory(tempDirDist + '/styles', 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/index.html').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/404.html').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/favicon.ico').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/assets').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/assets/images').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/scripts').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/styles').isDirectory(), 'Directory not exist');
       });
     });
 
