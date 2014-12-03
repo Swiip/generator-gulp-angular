@@ -10,7 +10,7 @@ var config = require('require-dir')('./config');
 
 <% if (props.cssPreprocessor.key !== 'css') { %>
 gulp.task('styles', ['wiredep'], function () {<% if (props.cssPreprocessor.key === 'less') { %>
-  return gulp.src(paths.app + '{app,components}/**/*.less')
+  return gulp.src(config.paths.app + '/{app,components}/**/*.less')
     .pipe($.less({
       paths: [
         config.paths.app + '/bower_components',
