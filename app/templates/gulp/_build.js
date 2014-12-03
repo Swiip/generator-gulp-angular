@@ -65,8 +65,7 @@ gulp.task('injector:css'<% if (props.cssPreprocessor.key !== 'css') { %>, ['styl
         ".tmp/{app,components}/**/*.css",
         '!.tmp/app/vendor.css'<% } else { %>
         "src/{app,components}/**/*.css"<% } %>
-      ], {read: false}), {
-      starttag: '<!-- injector:css -->',<% if (props.cssPreprocessor.key !== 'css') { %>
+      ], {read: false}), {<% if (props.cssPreprocessor.key !== 'css') { %>
       ignorePath: '.tmp',<% } else { %>
       ignorePath: 'src',<% } %>
       addRootSlash: false
@@ -88,7 +87,6 @@ gulp.task('injector:js', ['jshint', 'injector:css'], function () {
         '!src/{app,components}/**/*.spec.js',
         '!src/{app,components}/**/*.mock.js'
       ], {read: false}), {
-      starttag: '<!-- injector:js -->',
       ignorePath: 'src',
       addRootSlash: false
     }))
