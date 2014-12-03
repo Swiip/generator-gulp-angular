@@ -5,21 +5,24 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
+
+var config = require('require-dir')('./config');
+
 <% if (props.cssPreprocessor.key !== 'css') { %>
 gulp.task('styles', ['wiredep'], function () {<% if (props.cssPreprocessor.key === 'less') { %>
-  return gulp.src('src/{app,components}/**/*.less')
+  return gulp.src(config.paths.app + '/{app,components}/**/*.less')
     .pipe($.less({
       paths: [
-        'src/bower_components',
-        'src/app',
-        'src/components'
+        config.paths.app + '/bower_components',
+        config.paths.app + '/app',
+        config.paths.app + '/components'
       ]
     }))<% } else if (props.cssPreprocessor.key === 'ruby-sass') { %>
-  return gulp.src('src/{app,components}/**/*.scss')
+  return gulp.src(config.paths.app + '/{app,components}/**/*.scss')
     .pipe($.rubySass({style: 'expanded'}))<% } else if (props.cssPreprocessor.key === 'node-sass') { %>
-  return gulp.src('src/{app,components}/**/*.scss')
+  return gulp.src(config.paths.app + '/{app,components}/**/*.scss')
     .pipe($.sass({style: 'expanded'}))<% } else if (props.cssPreprocessor.key === 'stylus') { %>
-  return gulp.src('src/{app,components}/**/*.styl')
+  return gulp.src(config.paths.app + '/{app,components}/**/*.styl')
     .pipe($.stylus())<% } %>
     .on('error', function handleError(err) {
       console.error(err.toString());
@@ -31,14 +34,14 @@ gulp.task('styles', ['wiredep'], function () {<% if (props.cssPreprocessor.key =
 });
 <% } %>
 gulp.task('scripts', function () {
-  return gulp.src('src/{app,components}/**/*.js')
+  return gulp.src(config.paths.app + '/{app,components}/**/*.js')
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.size());
 });
 
 gulp.task('partials', function () {
-  return gulp.src('src/{app,components}/**/*.html')
+  return gulp.src(config.paths.app + '/{app,components}/**/*.html')
     .pipe($.minifyHtml({
       empty: true,
       spare: true,
@@ -57,7 +60,7 @@ gulp.task('html', [<% if (props.cssPreprocessor.key !== 'css') { %>'styles', <% 
   var cssFilter = $.filter('**/*.css');
   var assets;
 
-  return gulp.src('src/*.html')
+  return gulp.src(config.paths.app + '/*.html')
     .pipe($.inject(gulp.src('.tmp/inject/templateCacheHtml.js', {read: false}), {
       starttag: '<!-- inject:partials -->',
       ignorePath: '.tmp',
@@ -89,7 +92,7 @@ gulp.task('html', [<% if (props.cssPreprocessor.key !== 'css') { %>'styles', <% 
 });
 
 gulp.task('images', function () {
-  return gulp.src('src/assets/images/**/*')
+  return gulp.src(config.paths.app + '/assets/images/**/*')
     .pipe($.cache($.imagemin({
       optimizationLevel: 3,
       progressive: true,
@@ -108,7 +111,7 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('misc', function () {
-  return gulp.src('src/**/*.ico')
+  return gulp.src(config.paths.app + '/**/*.ico')
     .pipe(gulp.dest('dist/'))
     .pipe($.size());
 });

@@ -1,39 +1,54 @@
 {
-  "staticFiles": [
-    "gulpfile.js",
-    "gulp/e2e-tests.js",
-    "gulp/server.js",
-    "gulp/proxy.js",
-    "gulp/unit-tests.js",
-    "src/favicon.ico",
-    "src/404.html",
-    "src/assets/images/yeoman.png",
-    "karma.conf.js",
-    "protractor.conf.js",
-    "e2e/main.po.js",
-    "e2e/main.spec.js"
-  ],
-  "dotFiles": [
-    "bowerrc",
-    "editorconfig",
-    "gitignore",
-    "jshintrc"
-  ],
-  "templates": [
-    "package.json",
-    "bower.json",
+  "app": {
+    "src": "src/",
+    "dest": "src/",
+    "staticFiles": [
+      "favicon.ico",
+      "404.html",
+      "assets/images/yeoman.png"
+    ],
 
-    "gulp/build.js",
-    "gulp/watch.js",
-    "gulp/wiredep.js",
+    "dotFiles": [],
 
-    "src/index.html",
+    "templates": [
+      "index.html",
+      "app/index.js",
+      "app/main/main.controller.js",
+      "app/main/main.controller.spec.js",
+      "components/navbar/navbar.controller.js"
+    ]
+  },
 
-    "src/app/index.js",
+  "root": {
+    "src": "",
+    "dest": "",
+    "staticFiles": [
+      "gulpfile.js",
+      "gulp/e2e-tests.js",
+      "gulp/server.js",
+      "gulp/proxy.js",
+      "gulp/unit-tests.js",
+      "karma.conf.js",
+      "protractor.conf.js",
+      "e2e/main.po.js",
+      "e2e/main.spec.js"
+    ],
+    
+    "dotFiles": [
+      "bowerrc",
+      "editorconfig",
+      "gitignore",
+      "jshintrc"
+    ],
 
-    "src/app/main/main.controller.js",
-    "src/app/main/main.controller.spec.js",
+    "templates": [
+      "package.json",
+      "bower.json",
 
-    "src/components/navbar/navbar.controller.js"
-  ]
+      "gulp/build.js",
+      "gulp/watch.js",
+      "gulp/wiredep.js",
+      "gulp/config/paths.js"
+    ]
+  } 
 }
