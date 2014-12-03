@@ -81,7 +81,7 @@ gulp.task('jshint', function () {
     .pipe($.size());
 });
 
-gulp.task('injector:js', ['jshint'], function () {
+gulp.task('injector:js', ['jshint', 'injector:css'], function () {
   return gulp.src('src/index.html')
     .pipe($.inject(gulp.src([
         "src/{app,components}/**/*.js",
