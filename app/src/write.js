@@ -9,23 +9,24 @@ module.exports = function () {
 
   // Copy static files
   _.forEach(files.staticFiles, function(src) {
-    this.copy(src);
+    this.fs.copy(this.templatePath(src),  this.destinationPath(src));
+
   }.bind(this));
 
   // Copy dot files
   _.forEach(files.dotFiles, function(src) {
-    this.copy(src, '.' + src);
+    this.fs.copy(this.templatePath(src),  this.destinationPath('.' + src));
   }.bind(this));
 
   // Copy files formatted (format.js) with options selected in prompt
   _.forEach(this.technologiesLogoCopies, function(src) {
-    this.copy(src);
+    this.fs.copy(this.templatePath(src),  this.destinationPath(src));
   }.bind(this));
   _.forEach(this.partialCopies, function(value, key) {
-    this.copy(key, value);
+    this.fs.copy(this.templatePath(key),  this.destinationPath(value));
   }.bind(this));
   _.forEach(this.styleCopies, function(value, key) {
-    this.copy(key, value);
+    this.fs.copy(this.templatePath(key),  this.destinationPath(value));
   }.bind(this));
 
   // Create files with templates
@@ -34,6 +35,6 @@ module.exports = function () {
   _.forEach(files.templates, function(dest) {
     basename = path.basename(dest);
     src = dest.replace(basename, '_' + basename);
-    this.template(src, dest, this);
+    this.fs.copyTpl(this.templatePath(src),  this.destinationPath(dest), this)
   }.bind(this));
 };
