@@ -17,7 +17,9 @@
     <% } %>
 
     <!-- build:css({.tmp,src}) styles/app.css -->
-    <link rel="stylesheet" href="app/index.css">
+    <!-- inject:css -->
+    <!-- css files will be automaticaly insert here -->
+    <!-- endinject -->
     <!-- endbuild -->
 
     <!-- build:js scripts/modernizr.js -->
@@ -48,9 +50,9 @@
     <!-- endbuild -->
 
     <!-- build:js({.tmp,src}) scripts/app.js -->
-    <script src="app/index.js"></script>
-    <script src="app/main/main.controller.js"></script>
-    <script src="components/navbar/navbar.controller.js"></script>
+    <!-- inject:js -->
+    <!-- js files will be automaticaly insert here -->
+    <!-- endinject -->
 
     <!-- inject:partials -->
     <!-- angular templates will be automaticaly converted in js and inserted here -->
