@@ -14,8 +14,12 @@ describe('gulp-angular generator files', function () {
 
     files.call({
       _: _,
-      copy: function() { actualCopy++; },
-      template: function() { actualTemplate++; }
+      fs: {
+        copy: function() { actualCopy++; },
+        copyTpl: function() { actualTemplate++; }
+      },
+      templatePath: function (string) { return string; },
+      destinationPath: function (string) { return string; }
     });
 
     var expectedCopy =
