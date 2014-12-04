@@ -34,7 +34,7 @@ module.exports = function () {
         src: folder.src + fileDir,
         dest: folder.dest + fileDir
       });
-    }.bind(this));
+    });
 
     folder.dotFiles.forEach(function(fileDir) {
       var baseName = path.basename(fileDir);
@@ -42,7 +42,7 @@ module.exports = function () {
         src: folder.src + fileDir,
         dest: folder.dest + fileDir.replace(baseName, '.' + baseName)
       });
-    }.bind(this));
+    });
 
     folder.templates.forEach(function(fileDir) {
       var baseName = path.basename(fileDir);
@@ -51,7 +51,7 @@ module.exports = function () {
         dest: folder.dest + fileDir,
         isTemplate: true
       });
-    }.bind(this));
+    });
   }
 
   // Copy used techs logo
@@ -62,7 +62,7 @@ module.exports = function () {
       src: appPathSource + '/assets/images/' + listTechs[value].logo,
       dest: appPathDest + '/assets/images/' + listTechs[value].logo
     });
-  }.bind(this));
+  });
 
   // Copy partials relative to props.ui 
   var uiFileKey = this.props.ui.key === 'ui-bootstrap' ? 'bootstrap' : this.props.ui.key;

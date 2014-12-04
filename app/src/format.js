@@ -98,7 +98,7 @@ module.exports = function () {
   if(this.props.ui.key.indexOf('bootstrap') !== -1 && this.props.cssPreprocessor.extension !== 'scss') {
     this.props.ui.name = 'bootstrap';
   }
-
+  
   // There is 2 ways of dealing with vendor styles
   // - If the vendor styles exist in the css preprocessor chosen,
   //   the best is to include directly the source files
