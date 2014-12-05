@@ -153,7 +153,49 @@ describe('gulp-angular generator', function () {
           ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])]
         ]));
 
+        done();
+      });
+    });
+  });
 
+  // Prompt #0: What Angular app path ?
+  describe('with app path: [path/to/public/folder]', function() {
+    it('should copy angular app to \'path/to/public/folder\'', function(done) {
+      var appPath = 'path/to/public/folder';
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        'appPath': appPath
+      }));
+
+      gulpAngular.run({}, function() {
+        var expectedFiles = _.map([].concat(expectedFile, [
+          // Option: Javascript
+          'src/app/index.js',
+          'src/app/main/main.controller.js',
+          'src/app/main/main.controller.spec.js',
+          'src/components/navbar/navbar.controller.js',
+          'karma.conf.js',
+          'protractor.conf.js',
+          'e2e/main.po.js',
+          'e2e/main.spec.js',
+
+          // Option: ngRoute
+          'src/app/main/main.html',
+
+          // Option: Sass (Node)
+          'src/app/index.scss',
+          'src/app/vendor.scss',
+        ]), function(filePath) {
+          if (filePath.indexOf('src') === 0) 
+            return filePath.replace('src', appPath);
+          else 
+            return filePath;
+        });
+        assert.file(expectedFiles);
+
+        assert.fileContent([
+          [appPath + '/app/vendor.scss', /\$icon-font-path: "\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
+          [appPath + '/app/vendor.scss', /\@import '\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap';/],
+        ]);
         done();
       });
     });

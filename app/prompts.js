@@ -1,25 +1,37 @@
 'use strict';
 
 var slash = require('slash');
+var _ = require('lodash');
 
-module.exports = [
+var questions = [
   {
     type: 'input',
     name: 'appPath',
-    message: 'What will be Angular app path? \n (with respect to current yo directory)',
+    message: 'What will be Angular app path? (with respect to current yo directory)',
     'default': 'src',
     validate: function(answerStr) {
       // Check valid folder path: 
-      //   no \ / ? <> : * % and not empty
-      //   not start with dot . or slash
-      //   not end with slash /
-      answerStr = answerStr.trim();
-      return /^[^\\/?%*:|<>]+$/.test(slash(answerStr).split('/').join('')) &&
-        !(/^[\/.]+/.test(answerStr)) && 
-        !(/^\/$/.test(answerStr));
+      //   does not contain empty folder /a/b//c
+      //   does not start with . or / or ~
+      //   does not contain ..
+      answerStr = _.findWhere(questions, {name: 'appPath'}).filter(answerStr);
+      var noEmptyFolder = true;
+      answerStr.split('/').forEach(function(folderName) {
+        if (folderName.length === 0) {
+          noEmptyFolder = false;
+        }
+      });
+      return noEmptyFolder && 
+        !(/^[\.\/~]+/.test(answerStr)) &&
+        !(/\.\./.test(answerStr));
     },
     filter: function(answerStr) {
-      return answerStr.trim();
+      // Remove trailing slash, whitespace
+      var result = answerStr.trim();
+      if (result.charAt(result.length - 1) === '/' || 
+          result.charAt(result.length - 1) === '\\')
+        result = result.substring(0, result.length - 1);
+      return result;
     }
   },
   {
@@ -319,3 +331,5 @@ module.exports = [
     ]
   }
 ];
+
+module.exports = questions;
