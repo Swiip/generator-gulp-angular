@@ -56,15 +56,12 @@ module.exports = function () {
     return 'src/assets/images/' + listTechs[value].logo;
   });
 
-  // Select partials relative to props.ui
-  var uiFileKey = this.props.ui.key === 'ui-bootstrap' ? 'bootstrap' : this.props.ui.key;
-
   this.partialCopies = {};
 
-  var navbarPartialSrc = 'src/components/navbar/__' + uiFileKey + '-navbar.html';
+  var navbarPartialSrc = 'src/components/navbar/__' + this.props.ui.key + '-navbar.html';
   this.partialCopies[navbarPartialSrc] = 'src/components/navbar/navbar.html';
 
-  var routerPartialSrc = 'src/app/main/__' + uiFileKey + '.html';
+  var routerPartialSrc = 'src/app/main/__' + this.props.ui.key + '.html';
   if(this.props.router.module !== null) {
     this.partialCopies[routerPartialSrc] = 'src/app/main/main.html';
   }
@@ -107,7 +104,7 @@ module.exports = function () {
 
   this.styleCopies = {};
 
-  var styleAppSrc = 'src/app/__' + uiFileKey + '-index.' + this.props.cssPreprocessor.extension;
+  var styleAppSrc = 'src/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension;
   this.styleCopies[styleAppSrc] = 'src/app/index.' + this.props.cssPreprocessor.extension;
 
   // There is 2 ways of dealing with vendor styles
@@ -130,7 +127,7 @@ module.exports = function () {
   }
 
   if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
-    var styleVendorSource = 'src/app/__' + uiFileKey + '-vendor.' + this.props.cssPreprocessor.extension;
+    var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
     this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
   }
 };
