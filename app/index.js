@@ -69,18 +69,10 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
       }
 
       this.props = props;
+      this.config.set('props', this.props);
 
       done();
     }.bind(this));
-  },
-
-  saveSettings: function() {
-    if (this.skipConfig) {
-      return ;
-    }
-
-    this.config.set('props', this.props);
-    this.config.forceSave();
   },
 
   // Format props to template values
