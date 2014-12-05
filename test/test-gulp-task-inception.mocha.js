@@ -77,7 +77,7 @@ describe('gulp-angular generator', function () {
         genOptions
       );
 
-      gulpAngular.on('start', outputInTest.mute);
+      gulpAngular.on('run', outputInTest.mute);
       gulpAngular.on('end', outputInTest.unmute);
 
       done();
