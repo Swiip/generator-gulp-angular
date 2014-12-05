@@ -182,7 +182,7 @@
       },
       {
         "value": {
-          "key": "none",
+          "key": "default",
           "name": null,
           "version": null,
           "module": null
