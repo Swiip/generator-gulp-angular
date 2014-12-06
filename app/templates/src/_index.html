@@ -7,23 +7,23 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <% if (props.ui.name !== null) { %>
-    <!-- build:css({.tmp,src}) styles/vendor.css --><% if (isVendorStylesPreprocessed) { %>
+    <!-- build:css({.tmp,<%= props.appPath %>}) styles/vendor.css --><% if (isVendorStylesPreprocessed) { %>
     <link rel="stylesheet" href="app/vendor.css"><% } else if (props.ui.key === 'bootstrap') { %>
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"><% } %>
+    <link rel="stylesheet" href="<%= appToBower %>/bower_components/bootstrap/dist/css/bootstrap.css"><% } %>
     <!-- bower:css -->
     <!-- run `gulp wiredep` to automaticaly populate bower styles dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
     <% } %>
 
-    <!-- build:css({.tmp,src}) styles/app.css -->
+    <!-- build:css({.tmp,<%= props.appPath %>}) styles/app.css -->
     <!-- inject:css -->
     <!-- css files will be automaticaly insert here -->
     <!-- endinject -->
     <!-- endbuild -->
 
     <!-- build:js scripts/modernizr.js -->
-    <script src="../bower_components/modernizr/modernizr.js"></script>
+    <script src="<%= appToBower %>/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
   </head>
   <body>
@@ -49,7 +49,7 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js({.tmp,src}) scripts/app.js -->
+    <!-- build:js({.tmp,<%= props.appPath %>}) scripts/app.js -->
     <!-- inject:js -->
     <!-- js files will be automaticaly insert here -->
     <!-- endinject -->

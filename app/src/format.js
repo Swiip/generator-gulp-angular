@@ -1,5 +1,8 @@
 'use strict';
 
+var path = require('path');
+
+/* Generate global template variables from props */
 module.exports = function () {
   var _ = this._;
 
@@ -7,6 +10,11 @@ module.exports = function () {
   if (this.skipConfig) {
     this.props = this.config.get('props');
   }
+
+  var appPathSource = 'src';
+
+  // Compute relative path from appPath to bower_components
+  this.appToBower = path.relative(this.props.appPath, '');
 
   // Format list ngModules included in AngularJS DI
   var ngModules = this.props.angularModules.map(function (module) {
@@ -31,8 +39,8 @@ module.exports = function () {
 
   // Format list techs used to generate app included in main view of sample
   var listTechs = require('../techs.json');
-
-  var usedTechs = [
+  
+  this.usedTechs = [
     'angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor',
     this.props.jQuery.name,
     this.props.ui.key,
@@ -44,7 +52,7 @@ module.exports = function () {
       return tech !== 'default' && tech !== 'css' && tech !== 'official' && tech !== 'none';
     });
 
-  var techsContent = _.map(usedTechs, function(value) {
+  var techsContent = _.map(this.usedTechs, function(value) {
     return listTechs[value];
   });
 
@@ -52,29 +60,18 @@ module.exports = function () {
     .replace(/'/g, '\\\'')
     .replace(/"/g, '\'')
     .replace(/\n/g, '\n    ');
-  this.technologiesLogoCopies = _.map(usedTechs, function(value) {
-    return 'src/assets/images/' + listTechs[value].logo;
-  });
-
-  this.partialCopies = {};
-
-  var navbarPartialSrc = 'src/components/navbar/__' + this.props.ui.key + '-navbar.html';
-  this.partialCopies[navbarPartialSrc] = 'src/components/navbar/navbar.html';
-
-  var routerPartialSrc = 'src/app/main/__' + this.props.ui.key + '.html';
-  if(this.props.router.module !== null) {
-    this.partialCopies[routerPartialSrc] = 'src/app/main/main.html';
-  }
 
   // Compute routing relative to props.router
+  var uiFileKey = this.props.ui.key === 'ui-bootstrap' ? 'bootstrap' : this.props.ui.key;
+  
   if (this.props.router.module === 'ngRoute') {
     this.routerHtml = '<div ng-view></div>';
-    this.routerJs = this.read('src/app/__ngroute.js', 'utf8');
+    this.routerJs = this.read(appPathSource + '/app/__ngroute.js', 'utf8');
   } else if (this.props.router.module === 'ui.router') {
     this.routerHtml = '<div ui-view></div>';
-    this.routerJs = this.read('src/app/__uirouter.js', 'utf8');
+    this.routerJs = this.read(appPathSource + '/app/__uirouter.js', 'utf8');
   } else {
-    this.routerHtml = this.read(routerPartialSrc, 'utf8');
+    this.routerHtml = this.read(appPathSource + '/app/main/__' + uiFileKey + '.html', 'utf8');
     this.routerHtml = this.routerHtml.replace(
       /^<div class="container">/,
       '<div class="container" ng-controller="MainCtrl">'
@@ -102,11 +99,6 @@ module.exports = function () {
     this.props.ui.name = 'bootstrap';
   }
 
-  this.styleCopies = {};
-
-  var styleAppSrc = 'src/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension;
-  this.styleCopies[styleAppSrc] = 'src/app/index.' + this.props.cssPreprocessor.extension;
-
   // There is 2 ways of dealing with vendor styles
   // - If the vendor styles exist in the css preprocessor chosen,
   //   the best is to include directly the source files
@@ -124,10 +116,5 @@ module.exports = function () {
     if(this.props.ui.key === 'bootstrap') {
       this.isVendorStylesPreprocessed = true;
     }
-  }
-
-  if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
-    var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
-    this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
   }
 };

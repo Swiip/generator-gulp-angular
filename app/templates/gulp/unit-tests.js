@@ -6,6 +6,8 @@ var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep');
 
+var config = require('require-dir')('./config');
+
 gulp.task('test', function() {
   var bowerDeps = wiredep({
     directory: 'bower_components',
@@ -15,7 +17,7 @@ gulp.task('test', function() {
   });
 
   var testFiles = bowerDeps.js.concat([
-    'src/{app,components}/**/*.js'
+    config.paths.app + '/{app,components}/**/*.js'
   ]);
 
   return gulp.src(testFiles)

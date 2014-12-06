@@ -1,40 +1,102 @@
 'use strict';
 
-var files = require('../files.json');
 var path = require('path');
 
-/* Process files */
+/* Generate file names and copy files based on props */
 module.exports = function () {
   var _ = this._;
+  var copies = [];
 
-  // Copy static files
-  _.forEach(files.staticFiles, function(src) {
-    this.fs.copy(this.templatePath(src),  this.destinationPath(src));
+  // Compute folder path, based on user's answer & files.json, 
+  // into this.files dictionary
+  var folders = require('../files.json');
+  
+  // Short hand variables for appPaths, the place to copy angular public files
+  var appPathSource = 'src';
+  var appPathDest = this.props.appPath;
 
-  }.bind(this));
+  // copies is an array of a pair of source-dest path,
+  // each element is an object:
+  // {
+  //   src: string 
+  //   dest: string 
+  // }
+  copies = [];
+  
+  // Copy files defined inside files.js
+  for (var name in folders) {
+    var folder = folders[name];
+    if (name === 'app') 
+      folder.dest = appPathDest + '/';
 
-  // Copy dot files
-  _.forEach(files.dotFiles, function(src) {
-    this.fs.copy(this.templatePath(src),  this.destinationPath('.' + src));
-  }.bind(this));
+    folder.staticFiles.forEach(function(fileDir) {
+      copies.push({
+        src: folder.src + fileDir,
+        dest: folder.dest + fileDir
+      });
+    });
 
-  // Copy files formatted (format.js) with options selected in prompt
-  _.forEach(this.technologiesLogoCopies, function(src) {
-    this.fs.copy(this.templatePath(src),  this.destinationPath(src));
-  }.bind(this));
-  _.forEach(this.partialCopies, function(value, key) {
-    this.fs.copy(this.templatePath(key),  this.destinationPath(value));
-  }.bind(this));
-  _.forEach(this.styleCopies, function(value, key) {
-    this.fs.copy(this.templatePath(key),  this.destinationPath(value));
-  }.bind(this));
+    folder.dotFiles.forEach(function(fileDir) {
+      var baseName = path.basename(fileDir);
+      copies.push({
+        src: folder.src + fileDir,
+        dest: folder.dest + fileDir.replace(baseName, '.' + baseName)
+      });
+    });
 
-  // Create files with templates
-  var basename;
-  var src;
-  _.forEach(files.templates, function(dest) {
-    basename = path.basename(dest);
-    src = dest.replace(basename, '_' + basename);
-    this.fs.copyTpl(this.templatePath(src),  this.destinationPath(dest), this)
-  }.bind(this));
+    folder.templates.forEach(function(fileDir) {
+      var baseName = path.basename(fileDir);
+      copies.push({
+        src: folder.src + fileDir.replace(baseName, '_' + baseName),
+        dest: folder.dest + fileDir,
+        isTemplate: true
+      });
+    });
+  }
+
+  // Copy used techs logo
+  var listTechs = require('../techs.json');
+
+  this.usedTechs.forEach(function(value) {
+    copies.push({
+      src: appPathSource + '/assets/images/' + listTechs[value].logo,
+      dest: appPathDest + '/assets/images/' + listTechs[value].logo
+    });
+  });
+
+  // Copy partials relative to props.ui 
+
+  copies.push({
+    src: appPathSource + '/components/navbar/__' + this.props.ui.key + '-navbar.html',
+    dest: appPathDest + '/components/navbar/navbar.html'
+  });
+  
+  if(this.props.router.module !== null) {
+    copies.push({
+      src: appPathSource + '/app/main/__' + this.props.ui.key + '.html',
+      dest: appPathDest + '/app/main/main.html'
+    });
+  }
+  
+  // Copy styles relative to props.cssPreprocessor.extension
+  copies.push({
+    src: appPathSource + '/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension,
+    dest: appPathDest + '/app/index.' + this.props.cssPreprocessor.extension
+  });
+
+  if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
+    copies.push({
+      src: appPathSource + '/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension,
+      dest: appPathDest + '/app/vendor.' + this.props.cssPreprocessor.extension,
+      isTemplate: true
+    });
+  }
+
+  // Perform copy action
+  _.forEach(copies, function(file) {
+    if (file.isTemplate)
+      this.fs.copyTpl(this.templatePath(file.src),  this.destinationPath(file.dest), this);
+    else
+      this.fs.copy(this.templatePath(file.src),  this.destinationPath(file.dest));
+  }, this);
 };

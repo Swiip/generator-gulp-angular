@@ -11,9 +11,10 @@
 
 var _ = require('lodash');
 
-var prompts = require('../app/prompts.json');
+var prompts = require('../app/prompts.js');
 
-var questions = [
+var questionNames = [
+  'appPath',
   'angularVersion',
   'angularModules',
   'jQuery',
@@ -26,9 +27,11 @@ var questions = [
 
 var model = {};
 
-questions.forEach(function(question) {
-  model[question] = {
-    choices: _.findWhere(prompts, {name: question}).choices,
+questionNames.forEach(function(questionName) {
+  var question = _.findWhere(prompts, {name: questionName});
+  model[questionName] = {
+    choices: question.choices,
+    'default': question['default'],
     values: {}
   };
 });
@@ -82,6 +85,7 @@ model.cssPreprocessor.choices.forEach(function(choice) {
 module.exports = {
   prompts: model,
   defaults: {
+    appPath: model.appPath['default'],
     angularVersion: model.angularVersion.values['1.3'],
     angularModules: _.pluck(model.angularModules.choices, 'value'),
     jQuery: model.jQuery.values['jquery 2'],
