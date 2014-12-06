@@ -153,7 +153,6 @@ describe('gulp-angular generator', function () {
           ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])]
         ]));
 
-
         done();
       });
     });
@@ -601,6 +600,106 @@ describe('gulp-angular generator', function () {
           ['bower.json', libRegexp('angular-material', prompts.ui.values['angular-material'].version)],
           ['src/app/index.js', /'ngMaterial'/]
         ]);
+
+        done();
+      });
+    });
+  });
+  describe('with option: [None UI Framework, Node SASS]', function () {
+    it('should add index style', function (done) {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values['none'],
+        cssPreprocessor: prompts.cssPreprocessor.values['node-sass']
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file(expectedFile);
+
+        assert.fileContent([].concat(expectedGulpContent, [
+          // Check package.json
+          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])]
+        ]));
+
+        assert.noFile('src/app/vendor.*');
+
+        done();
+      });
+    });
+  });
+  describe('with option: [None UI Framework, Ruby SASS]', function () {
+    it('should add index style', function (done) {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values['none'],
+        cssPreprocessor: prompts.cssPreprocessor.values['ruby-sass']
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file(expectedFile);
+
+        assert.fileContent([].concat(expectedGulpContent, [
+          // Check package.json
+          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].npm['gulp-ruby-sass'])]
+        ]));
+
+        assert.noFile('src/app/vendor.*');
+
+        done();
+      });
+    });
+  });
+  describe('with option: [None UI Framework, LESS]', function () {
+    it('should add index style', function (done) {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values['none'],
+        cssPreprocessor: prompts.cssPreprocessor.values['less']
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file(expectedFile);
+
+        assert.fileContent([].concat(expectedGulpContent, [
+          // Check package.json
+          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values['less'].npm['gulp-less'])]
+        ]));
+
+        assert.noFile('src/app/vendor.*');
+
+        done();
+      });
+    });
+  });
+  describe('with option: [None UI Framework, Stylus]', function () {
+    it('should add index style', function (done) {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values['none'],
+        cssPreprocessor: prompts.cssPreprocessor.values['stylus']
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file(expectedFile);
+
+        assert.fileContent([].concat(expectedGulpContent, [
+          // Check package.json
+          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values['stylus'].npm['gulp-stylus'])]
+        ]));
+
+        assert.noFile('src/app/vendor.*');
+
+        done();
+      });
+    });
+  });
+  describe('with option: [None UI Framework, CSS]', function () {
+    it('should add index style', function (done) {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values['none'],
+        cssPreprocessor: prompts.cssPreprocessor.values['css']
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file(expectedFile);
+
+        assert.noFile('src/app/vendor.*');
 
         done();
       });
