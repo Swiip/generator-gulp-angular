@@ -16,7 +16,7 @@
   "repository": "Swiip/generator-gulp-angular",
   "scripts": {
     "pretest": "cd test/deps && npm install && bower install",
-    "test": "mocha -g protractor -i",
+    "test": "mocha",
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha -- -g protractor -i && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- ./test/*.js"
   },
