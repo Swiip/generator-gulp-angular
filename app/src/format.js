@@ -90,11 +90,12 @@ module.exports = function () {
     if(this.props.cssPreprocessor.extension === 'scss') {
       this.wiredepExclusions.push('/bootstrap-sass-official/');
     } else {
-      this.wiredepExclusions.push('/bootstrap.js/');
+      this.wiredepExclusions.push('/bootstrap\\.js/');
     }
   }
   if(this.props.cssPreprocessor.key !== 'css') {
-    this.wiredepExclusions.push('/bootstrap.css/');
+    this.wiredepExclusions.push('/bootstrap\\.css/');
+    this.wiredepExclusions.push('/foundation\\.css/');
   }
 
   // Format choice UI Framework
