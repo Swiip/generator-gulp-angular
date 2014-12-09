@@ -21,6 +21,7 @@ var questions = [
   'router',
   'ui',
   'bootstrapComponents',
+  'foundationComponents',
   'cssPreprocessor'
 ];
 
@@ -73,6 +74,10 @@ model.ui.choices.forEach(function(choice) {
 
 model.bootstrapComponents.choices.forEach(function(choice) {
   model.bootstrapComponents.values[choice.value.key] = choice.value;
+});
+
+model.foundationComponents.choices.forEach(function(choice) {
+  model.foundationComponents.values[choice.value.key] = choice.value;
 });
 
 model.cssPreprocessor.choices.forEach(function(choice) {

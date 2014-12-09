@@ -121,7 +121,7 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with other promptCase: [angular 1.2.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, CSS]', function () {
+  describe('with other promptCase: [angular 1.2.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, angular-foundation, CSS]', function () {
 
     before(function () {
       promptCase = _.assign(defaults, {
@@ -130,6 +130,7 @@ describe('gulp-angular generator', function () {
         resource: prompts.resource.values.restangular,
         router: prompts.router.values['angular-ui-router'],
         ui: prompts.ui.values.foundation,
+        foundationComponents: prompts.foundationComponents.values['angular-foundation'],
         cssPreprocessor: prompts.cssPreprocessor.values.css
       });
     });
@@ -221,7 +222,7 @@ describe('gulp-angular generator', function () {
     before(function () {
       promptCase = _.assign(defaults, {
         jQuery: prompts.jQuery.values['jquery 1'],
-        ui: prompts.ui.values.foundation,
+        ui: prompts.ui.values['angular-material'],
         cssPreprocessor: prompts.cssPreprocessor.values.stylus
       });
     });

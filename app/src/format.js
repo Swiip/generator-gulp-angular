@@ -18,7 +18,8 @@ module.exports = function () {
     this.props.resource.module,
     this.props.router.module,
     this.props.ui.module,
-    this.props.bootstrapComponents.module
+    this.props.bootstrapComponents.module,
+    this.props.foundationComponents.module
   ]);
 
   this.modulesDependencies = _.chain(ngModules)
@@ -37,6 +38,7 @@ module.exports = function () {
     this.props.jQuery.name,
     this.props.ui.key,
     this.props.bootstrapComponents.key,
+    this.props.foundationComponents.key,
     this.props.cssPreprocessor.key
   ]
     .filter(_.isString)
@@ -86,16 +88,29 @@ module.exports = function () {
 
   // Wiredep exclusions
   this.wiredepExclusions = [];
-  if(this.props.bootstrapComponents.key !== 'official') {
-    if(this.props.cssPreprocessor.extension === 'scss') {
-      this.wiredepExclusions.push('/bootstrap-sass-official/');
-    } else {
-      this.wiredepExclusions.push('/bootstrap\\.js/');
+  if (this.props.ui.key === 'bootstrap') {
+    if(this.props.bootstrapComponents.key !== 'official') {
+
+      if(this.props.cssPreprocessor.extension === 'scss') {
+        this.wiredepExclusions.push('/bootstrap-sass-official/');
+      } else {
+        this.wiredepExclusions.push('/bootstrap\\.js/');
+      }
     }
-  }
-  if(this.props.cssPreprocessor.key !== 'css') {
-    this.wiredepExclusions.push('/bootstrap\\.css/');
-    this.wiredepExclusions.push('/foundation\\.css/');
+
+    if(this.props.cssPreprocessor.key !== 'css') {
+      this.wiredepExclusions.push('/bootstrap\\.css/');
+    }
+
+  } else if (this.props.ui.key === 'foundation') {
+
+    if(this.props.foundationComponents.key !== 'official') {
+      this.wiredepExclusions.push('/foundation\\.js/');
+    }
+
+    if(this.props.cssPreprocessor.key !== 'css') {
+      this.wiredepExclusions.push('/foundation\\.css/');
+    }
   }
 
   // Format choice UI Framework

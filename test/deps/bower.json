@@ -13,6 +13,7 @@
     "angular-route": "~1.3.4",
     "angular-resource": "~1.3.4",
     "angular-bootstrap": "~0.12.0",
+    "angular-foundation": "~0.5.1",
     "angular-material": "~0.5.1",
     "restangular": "~1.4.0",
     "angular-ui-router": "~0.2.13",
