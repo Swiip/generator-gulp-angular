@@ -58,13 +58,13 @@ gulp.task('injector:css:preprocessor', function () {<% if (props.cssPreprocessor
     .pipe(gulp.dest('src/app/'));
 });
 <% } %>
-gulp.task('injector:css'<% if (props.cssPreprocessor.key !== 'css') { %>, ['styles']<% } else { %>, ['wiredep']<% } %>, function () {
+gulp.task('injector:css'<% if (props.cssPreprocessor.key !== 'none') { %>, ['styles']<% } else { %>, ['wiredep']<% } %>, function () {
   return gulp.src('src/index.html')
-    .pipe($.inject(gulp.src([<% if (props.cssPreprocessor.key !== 'css') { %>
+    .pipe($.inject(gulp.src([<% if (props.cssPreprocessor.key !== 'none') { %>
         '.tmp/{app,components}/**/*.css',
         '!.tmp/app/vendor.css'<% } else { %>
         'src/{app,components}/**/*.css'<% } %>
-      ], {read: false}), {<% if (props.cssPreprocessor.key !== 'css') { %>
+      ], {read: false}), {<% if (props.cssPreprocessor.key !== 'none') { %>
       ignorePath: '.tmp',<% } else { %>
       ignorePath: 'src',<% } %>
       addRootSlash: false
@@ -88,12 +88,15 @@ gulp.task('scripts', function () {<% if (props.jsPreprocessor.key === 'none') { 
 
 gulp.task('injector:js', ['scripts', 'injector:css'], function () {
   return gulp.src('src/index.html')
-    .pipe($.inject(gulp.src([
-        'src/{app,components}/**/*.js',
-        '!src/{app,components}/**/*.spec.js',
-        '!src/{app,components}/**/*.mock.js'
-      ]).pipe($.angularFilesort()), {
-      ignorePath: 'src',
+    .pipe($.inject(gulp.src([<% if (props.jsPreprocessor.key === 'none') { %>
+      'src/{app,components}/**/*.js',
+      '!src/{app,components}/**/*.spec.js',
+      '!src/{app,components}/**/*.mock.js'<% } else { %>
+      '{src,.tmp}/{app,components}/**/*.js',
+      '!{src,.tmp}/{app,components}/**/*.spec.js',
+      '!{src,.tmp}/{app,components}/**/*.mock.js'<% } %>
+    ]).pipe($.angularFilesort()), {
+      ignorePath: ['src', '.tmp'],
       addRootSlash: false
     }))
     .pipe(gulp.dest('src/'));
