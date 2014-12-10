@@ -376,5 +376,48 @@
         "name": "TypeScript, a typed superset of JavaScript that compiles to plain JavaScript."
       }
     ]
+  },
+  {
+    "type": "checkbox",
+    "name": "htmlPreprocessors",
+    "message": "Which html template engine would you want to have?",
+    "choices": [
+      {
+        "value": {
+          "key": "jade",
+          "consolidate": ["jade", {"pretty": "  "}],
+          "extension": "jade",
+          "npm": {
+            "jade": "~1.8.1"
+          }
+        },
+        "name": "Jade (*.jade)",
+        "checked": true
+      },
+      {
+        "value": {
+          "key": "haml",
+          "consolidate": ["hamljs"],
+          "extension": "haml",
+          "npm": {
+            "hamljs": "~0.6.2"
+          }
+        },
+        "name": "Haml (*.haml)",
+        "checked": false
+      },
+      {
+        "value": {
+          "key": "handlebars",
+          "consolidate": ["handlebars"],
+          "extension": "hbs",
+          "npm": {
+            "handlebars": "~2.0.0"
+          }
+        },
+        "name": "Handlebars (*.hbs)",
+        "checked": false
+      }
+    ]
   }
 ]

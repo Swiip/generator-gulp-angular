@@ -106,7 +106,7 @@ gulp.task('browserify', ['scripts'], function () {
 
 gulp.task('injector:js', ['browserify', 'injector:css'], function () {<% } else { %>
 gulp.task('injector:js', ['scripts', 'injector:css'], function () {<% } %>
-  return gulp.src('src/index.html')
+  return gulp.src(['src/index.html', '.tmp/index.html'])
     .pipe($.inject(gulp.src([<% if (props.jsPreprocessor.key === 'none') { %>
       'src/{app,components}/**/*.js',<% } else if (props.jsPreprocessor.extension === 'js') { %>
       '.tmp/{app,components}/**/*.js',<% } else { %>
@@ -124,8 +124,8 @@ gulp.task('injector:js', ['scripts', 'injector:css'], function () {<% } %>
     .pipe(gulp.dest('src/'));
 });
 
-gulp.task('partials', function () {
-  return gulp.src('src/{app,components}/**/*.html')
+gulp.task('partials', <% if (!_.isEmpty(props.htmlPreprocessors)) { %>['consolidate'], <% } %>function () {
+  return gulp.src(['src/{app,components}/**/*.html', '.tmp/{app,components}/**/*.html'])
     .pipe($.minifyHtml({
       empty: true,
       spare: true,
@@ -143,7 +143,7 @@ gulp.task('html', ['wiredep', 'injector:css', 'injector:js', 'partials'], functi
   var cssFilter = $.filter('**/*.css');
   var assets;
 
-  return gulp.src('src/*.html')
+  return gulp.src(['src/*.html', '.tmp/*.html'])
     .pipe($.inject(gulp.src('.tmp/inject/templateCacheHtml.js', {read: false}), {
       starttag: '<!-- inject:partials -->',
       ignorePath: '.tmp',
