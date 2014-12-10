@@ -329,6 +329,7 @@
         "value": {
           "key": "none",
           "extension": "js",
+          "srcExtension": "js",
           "module": null,
           "version": null
         },
@@ -338,6 +339,7 @@
         "value": {
           "key": "coffee",
           "extension": "coffee",
+          "srcExtension": "coffee",
           "module": "gulp-coffee",
           "version": "~2.2.0"
         },
@@ -347,6 +349,7 @@
         "value": {
           "key": "traceur",
           "extension": "js",
+          "srcExtension": "es6",
           "module": "gulp-traceur",
           "version": "~0.14.1"
         },
@@ -356,6 +359,7 @@
         "value": {
           "key": "6to5",
           "extension": "js",
+          "srcExtension": "es6",
           "module": "gulp-6to5",
           "version": "~1.0.2"
         },
@@ -365,6 +369,7 @@
         "value": {
           "key": "typescript",
           "extension": "ts",
+          "srcExtension": "ts",
           "module": "gulp-typescript",
           "version": "~2.3.0"
         },

@@ -161,7 +161,7 @@ module.exports = function () {
   files.forEach(function(file) {
     var basename = path.basename(file);
     var dest = file + '.' + this.props.jsPreprocessor.extension;
-    var src = dest.replace(basename, '_' + basename);
+    var src = file.replace(basename, '_' + basename) + '.' + this.props.jsPreprocessor.srcExtension;
     this.srcTemplates[src] = dest;
   }, this);
 };

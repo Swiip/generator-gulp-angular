@@ -72,29 +72,42 @@ gulp.task('injector:css'<% if (props.cssPreprocessor.key !== 'none') { %>, ['sty
     .pipe(gulp.dest('src/'));
 });
 
-gulp.task('scripts', function () {<% if (props.jsPreprocessor.key === 'none') { %>
+gulp.task('scripts', function () {<% if (props.jsPreprocessor.extension === 'js') { %>
   return gulp.src('src/{app,components}/**/*.js')
     .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'));<% } if (props.jsPreprocessor.key === 'coffee') { %>
+    .pipe($.jshint.reporter('jshint-stylish'))<% } if (props.jsPreprocessor.key === 'coffee') { %>
   return gulp.src('src/{app,components}/**/*.coffee')
-    .pipe($.coffee())<% } if (props.jsPreprocessor.key !== 'none') { %>
+    .pipe($.coffee())<% } if (props.jsPreprocessor.key === '6to5') { %>
+    .pipe($['6to5']())<% } if (props.jsPreprocessor.key !== 'none') { %>
     .on('error', function handleError(err) {
       console.error(err.toString());
       this.emit('end');
     })
-    .pipe(gulp.dest('.tmp/'))
-    .pipe($.size());<% } %>
+    .pipe(gulp.dest('.tmp/<%= props.jsPreprocessor.key %>'))
+    .pipe($.size())<% } %>;
+});
+<% if (props.jsPreprocessor.srcExtension === 'es6') { %>
+gulp.task('browserify', ['scripts'], function () {
+  return gulp.src('.tmp/<%= props.jsPreprocessor.key %>/app/index.js', { read: false })
+  .pipe($.browserify())
+  .on('error', function handleError(err) {
+    console.error(err.toString());
+    this.emit('end');
+  })
+  .pipe(gulp.dest('.tmp/app'))
+  .pipe($.size());
 });
 
-gulp.task('injector:js', ['scripts', 'injector:css'], function () {
+gulp.task('injector:js', ['browserify', 'injector:css'], function () {
+<% } else { %>
+gulp.task('injector:js', ['scripts', 'injector:css'], function () {<% } %>
   return gulp.src('src/index.html')
     .pipe($.inject(gulp.src([<% if (props.jsPreprocessor.key === 'none') { %>
-      'src/{app,components}/**/*.js',
+      'src/{app,components}/**/*.js',<% } else if (props.jsPreprocessor.extension === 'js') { %>
+      '.tmp/{app,components}/**/*.js',<% } else { %>
+      '{src,.tmp}/{app,components}/**/*.js',<% } %>
       '!src/{app,components}/**/*.spec.js',
-      '!src/{app,components}/**/*.mock.js'<% } else { %>
-      '{src,.tmp}/{app,components}/**/*.js',
-      '!{src,.tmp}/{app,components}/**/*.spec.js',
-      '!{src,.tmp}/{app,components}/**/*.mock.js'<% } %>
+      '!src/{app,components}/**/*.mock.js'
     ]).pipe($.angularFilesort()), {
       ignorePath: ['src', '.tmp'],
       addRootSlash: false

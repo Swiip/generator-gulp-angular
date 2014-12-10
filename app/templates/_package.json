@@ -26,7 +26,8 @@
     "gulp-protractor": "~0.0.11",
     "gulp-karma": "~0.0.4",<% if (props.cssPreprocessor.key !== 'none') { %>
     "<%= props.cssPreprocessor.module %>": "<%= props.cssPreprocessor.version %>",<% } if (props.jsPreprocessor.key !== 'none') { %>
-    "<%= props.jsPreprocessor.module %>": "<%= props.jsPreprocessor.version %>",<% } %>
+    "<%= props.jsPreprocessor.module %>": "<%= props.jsPreprocessor.version %>",<% } if (props.jsPreprocessor.srcExtension === 'es6') { %>
+    "gulp-browserify": "~0.5.0",<% } %>  
     "main-bower-files": "~2.4.0",
     "jshint-stylish": "~1.0.0",
     "wiredep": "~2.2.0",
