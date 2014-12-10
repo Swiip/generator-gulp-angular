@@ -25,7 +25,7 @@ gulp.task('styles', ['wiredep', 'injector:css:preprocessor'], function () {<% if
       console.error(err.toString());
       this.emit('end');
     })
-    .pipe($.autoprefixer('last 1 version'))
+    .pipe($.autoprefixer())
     .pipe(gulp.dest('.tmp/app/'));
 });
 
@@ -78,7 +78,8 @@ gulp.task('scripts', function () {<% if (props.jsPreprocessor.extension === 'js'
     .pipe($.jshint.reporter('jshint-stylish'))<% } if (props.jsPreprocessor.key === 'coffee') { %>
   return gulp.src('src/{app,components}/**/*.coffee')
     .pipe($.coffee())<% } if (props.jsPreprocessor.key === '6to5') { %>
-    .pipe($['6to5']())<% } if (props.jsPreprocessor.key !== 'none') { %>
+    .pipe($['6to5']())<% } if (props.jsPreprocessor.key === 'traceur') { %>
+    .pipe($.traceur())<% } if (props.jsPreprocessor.key !== 'none') { %>
     .on('error', function handleError(err) {
       console.error(err.toString());
       this.emit('end');

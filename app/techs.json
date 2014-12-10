@@ -118,5 +118,11 @@
         "url": "https://github.com/6to5/6to5",
         "description": "Turns ES6+ code into vanilla ES5, so you can use next generation features today.",
         "logo": "6to5.png"
+    },
+    "traceur": {
+        "title": "ES6 (Traceur)",
+        "url": "https://github.com/google/traceur-compiler",
+        "description": "A JavaScript.next-to-JavaScript-of-today compiler that allows you to use features from the future today.",
+        "logo": "traceur.png"
     }
 }
