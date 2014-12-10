@@ -5,7 +5,6 @@
   "devDependencies": {
     "gulp": "~3.8.10",
     "gulp-autoprefixer": "~2.0.0",
-    "gulp-cache": "~0.2.4",
     "gulp-angular-filesort": "~1.0.4",
     "gulp-angular-templatecache": "~1.4.2",
     "del": "~0.1.3",
