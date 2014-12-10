@@ -59,7 +59,7 @@ describe('gulp-angular generator', function () {
     ['gulp/unit-tests.js', /gulp\.task\(\'test\'/],
     ['gulp/e2e-tests.js', /gulp\.task\(\'webdriver-update\'/],
     ['gulp/e2e-tests.js', /gulp\.task\(\'webdriver-standalone\'/],
-    ['gulp/e2e-tests.js', /gulp\.task\(\'protractor-only\'/],
+    ['gulp/e2e-tests.js', /function runProtractor()/],
     ['gulp/e2e-tests.js', /gulp\.task\(\'protractor:src\'/],
     ['gulp/e2e-tests.js', /gulp\.task\(\'protractor:dist\'/],
     ['gulp/server.js', /gulp\.task\(\'serve\'/],
