@@ -168,4 +168,9 @@ module.exports = function () {
     var src = file.replace(basename, '_' + basename) + '.' + this.props.jsPreprocessor.srcExtension;
     this.srcTemplates[src] = dest;
   }, this);
+
+  this.lintConfCopies = [];
+  if(this.props.jsPreprocessor.key === 'coffee') {
+    this.lintConfCopies.push('coffeelint.json');
+  }
 };

@@ -77,6 +77,8 @@ gulp.task('scripts', function () {<% if (props.jsPreprocessor.extension === 'js'
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))<% } if (props.jsPreprocessor.key === 'coffee') { %>
   return gulp.src('src/{app,components}/**/*.coffee')
+    .pipe($.coffeelint())
+    .pipe($.coffeelint.reporter())
     .pipe($.coffee())<% } if (props.jsPreprocessor.key === '6to5') { %>
     .pipe($['6to5']())<% } if (props.jsPreprocessor.key === 'traceur') { %>
     .pipe($.traceur())<% } if (props.jsPreprocessor.key !== 'none') { %>
