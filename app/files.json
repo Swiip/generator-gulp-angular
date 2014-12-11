@@ -10,7 +10,6 @@
     "src/assets/images/yeoman.png",
     "karma.conf.js",
     "protractor.conf.js",
-    "e2e/main.po.js",
     "e2e/main.spec.js"
   ],
   "dotFiles": [
@@ -23,6 +22,8 @@
     "package.json",
     "bower.json",
 
+    "e2e/main.po.js",
+    
     "gulp/build.js",
     "gulp/watch.js",
     "gulp/wiredep.js",
