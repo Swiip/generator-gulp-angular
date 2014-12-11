@@ -63,7 +63,7 @@ describe('gulp-angular generator', function () {
   });
 
   beforeEach(function (done) {
-    var defaults = JSON.parse(JSON.stringify(mockPrompts.defaults));
+    defaults = JSON.parse(JSON.stringify(mockPrompts.defaults));
 
     helpers.testDirectory(tempDir, function (err) {
       if (err) {
@@ -123,7 +123,7 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with other promptCase: [angular 1.2.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, angular-foundation, CSS]', function () {
+  describe('with other promptCase: [angular 1.2.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, angular-foundation, CSS, Coffee]', function () {
 
     before(function () {
       promptCase = _.assign(defaults, {
@@ -133,7 +133,8 @@ describe('gulp-angular generator', function () {
         router: prompts.router.values['angular-ui-router'],
         ui: prompts.ui.values.foundation,
         foundationComponents: prompts.foundationComponents.values['angular-foundation'],
-        cssPreprocessor: prompts.cssPreprocessor.values.css
+        cssPreprocessor: prompts.cssPreprocessor.values.none,
+        jsPreprocessor: prompts.jsPreprocessor.values.coffee
       });
     });
 
@@ -171,7 +172,7 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with other promptCase: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, ZeptoJS 1.1.x, $http, Bootstrap, LESS]', function () {
+  describe('with other promptCase: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, ZeptoJS 1.1.x, $http, Bootstrap, LESS, Standard JS]', function () {
 
     before(function () {
       promptCase = _.assign(defaults, {
@@ -180,7 +181,8 @@ describe('gulp-angular generator', function () {
         router: prompts.router.values.none,
         ui: prompts.ui.values.bootstrap,
         bootstrapComponents: prompts.bootstrapComponents.values['ui-bootstrap'],
-        cssPreprocessor: prompts.cssPreprocessor.values.less
+        cssPreprocessor: prompts.cssPreprocessor.values.less,
+        jsPreprocessor: prompts.jsPreprocessor.values.none
       });
     });
 

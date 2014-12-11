@@ -101,7 +101,7 @@ module.exports = function () {
       }
     }
 
-    if(this.props.cssPreprocessor.key !== 'css') {
+    if(this.props.cssPreprocessor.key !== 'none') {
       this.wiredepExclusions.push('/bootstrap\\.css/');
     }
 
@@ -111,9 +111,13 @@ module.exports = function () {
       this.wiredepExclusions.push('/foundation\\.js/');
     }
 
-    if(this.props.cssPreprocessor.key !== 'css') {
+    if(this.props.cssPreprocessor.key !== 'none') {
       this.wiredepExclusions.push('/foundation\\.css/');
     }
+  }
+  if(this.props.cssPreprocessor.key !== 'none') {
+    this.wiredepExclusions.push('/bootstrap\\.css/');
+    this.wiredepExclusions.push('/foundation\\.css/');
   }
 
   // Format choice UI Framework

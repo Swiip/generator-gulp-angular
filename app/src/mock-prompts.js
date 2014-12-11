@@ -22,7 +22,8 @@ var questions = [
   'ui',
   'bootstrapComponents',
   'foundationComponents',
-  'cssPreprocessor'
+  'cssPreprocessor',
+  'jsPreprocessor'
 ];
 
 var model = {};

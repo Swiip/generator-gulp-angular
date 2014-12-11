@@ -83,8 +83,9 @@ gulp.task('scripts', function () {<% if (props.jsPreprocessor.extension === 'js'
     .on('error', function handleError(err) {
       console.error(err.toString());
       this.emit('end');
-    })
-    .pipe(gulp.dest('.tmp/<%= props.jsPreprocessor.key %>'))
+    })<% if (props.jsPreprocessor.srcExtension === 'es6') { %>
+    .pipe(gulp.dest('.tmp/<%= props.jsPreprocessor.key %>'))<% } else if (props.jsPreprocessor.key !== 'none') { %>
+    .pipe(gulp.dest('.tmp/'))<%} %>
     .pipe($.size())<% } %>;
 });
 <% if (props.jsPreprocessor.srcExtension === 'es6') { %>
@@ -99,8 +100,7 @@ gulp.task('browserify', ['scripts'], function () {
   .pipe($.size());
 });
 
-gulp.task('injector:js', ['browserify', 'injector:css'], function () {
-<% } else { %>
+gulp.task('injector:js', ['browserify', 'injector:css'], function () {<% } else { %>
 gulp.task('injector:js', ['scripts', 'injector:css'], function () {<% } %>
   return gulp.src('src/index.html')
     .pipe($.inject(gulp.src([<% if (props.jsPreprocessor.key === 'none') { %>

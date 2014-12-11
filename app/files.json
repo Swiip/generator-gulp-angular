@@ -3,7 +3,6 @@
     "gulpfile.js",
     "gulp/e2e-tests.js",
     "gulp/proxy.js",
-    "gulp/unit-tests.js",
     "src/favicon.ico",
     "src/404.html",
     "src/assets/images/yeoman.png",
@@ -27,6 +26,7 @@
     "gulp/watch.js",
     "gulp/wiredep.js",
     "gulp/server.js",
+    "gulp/unit-tests.js",
 
     "src/index.html",
 
