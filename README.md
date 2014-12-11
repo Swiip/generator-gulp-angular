@@ -135,24 +135,7 @@ I tried many configurations for Protractor without success, any hint would be ap
 
 ## Contributing
 
-**Style Guide:**
-Please brief yourself on [Idiomatic.js](https://github.com/rwldrn/idiomatic.js) style guide with two space indent
-
-**Unit test:**
-Unit test are written in [Mocha](http://visionmedia.github.io/mocha/). Please add a unit test for every new feature or bug fix. `npm test` to run the test suite.
-
-**Documentation:**
-Add documentation for every new feature, directory structure change. Feel free to send corrections or better docs!
-
-Like any other Open Source project, the best way to contribute is through opening GitHub issues.
-Bug or suggestions, everything is welcomed.
-To save time for both of us, just make sure the issue is in the scope of the generator, this question can be a little tricky on this particular project.
-
-If you have nothing to say but only feeling generous, there's a Gratipay.
-
-[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png)](https://gratipay.com/Swiip/)
-
-As I'm not anymore alone working on this project but we're not enough to bring up a real organization, the money will come to me and I will redistribute evenly between all the current contributors.
+[Guidelines](CONTRIBUTING.md)
 
 ## License
 
