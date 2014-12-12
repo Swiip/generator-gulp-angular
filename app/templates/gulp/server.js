@@ -49,10 +49,10 @@ gulp.task('serve:dist', ['build'], function () {
   browserSyncInit('dist');
 });
 
-gulp.task('serve:e2e', function () {
+gulp.task('serve:e2e', ['wiredep', 'injector:js', 'injector:css'], function () {
   browserSyncInit(['src', '.tmp'], null, []);
 });
 
-gulp.task('serve:e2e-dist', ['watch'], function () {
+gulp.task('serve:e2e-dist', ['build'], function () {
   browserSyncInit('dist', null, []);
 });
