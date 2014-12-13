@@ -41,6 +41,12 @@
         "description": "The most advanced responsive front-end framework in the world.",
         "logo": "foundation.png"
     },
+    "angular-foundation": {
+      "title": "Angular Foundation",
+      "url": "http://pineconellc.github.io/angular-foundation/",
+      "description": "A set of native AngularJS directives based on Foundation's markup and CSS",
+      "logo": "angular-foundation.png"
+    },
     "gulp": {
         "title": "GulpJS",
         "url": "http://gulpjs.com/",

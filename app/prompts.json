@@ -236,6 +236,40 @@
   },
   {
     "type": "list",
+    "name": "foundationComponents",
+    "message": "How do you want to implements your Foundation components?",
+    "choices": [
+      {
+        "value": {
+          "name": "angular-foundation",
+          "version": "~0.5.1",
+          "key": "angular-foundation",
+          "module": "mm.foundation"
+        },
+        "name": "Angular Foundation, a set of native AngularJS directives based on Foundation's markup and CSS"
+      },
+      {
+        "value": {
+          "name": null,
+          "version": null,
+          "key": "official",
+          "module": null
+        },
+        "name": "The official jQuery implementation of Foundation"
+      },
+      {
+        "value": {
+          "name": null,
+          "version": null,
+          "key": "none",
+          "module": null
+        },
+        "name": "No JavaScript, just CSS"
+      }
+    ]
+  },
+  {
+    "type": "list",
     "name": "cssPreprocessor",
     "message": "Which CSS preprocessor do you want?",
     "choices": [

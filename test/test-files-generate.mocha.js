@@ -46,27 +46,27 @@ describe('gulp-angular generator', function () {
   ];
 
   var expectedGulpContent = [
-    ['gulpfile.js', /gulp\.task\(\'default\'/],
-    ['gulp/build.js', /gulp\.task\(\'styles\'/],
-    ['gulp/build.js', /gulp\.task\(\'jshint\'/],
-    ['gulp/build.js', /gulp\.task\(\'partials\'/],
-    ['gulp/build.js', /gulp\.task\(\'html\'/],
-    ['gulp/build.js', /gulp\.task\(\'images\'/],
-    ['gulp/build.js', /gulp\.task\(\'fonts\'/],
-    ['gulp/build.js', /gulp\.task\(\'misc\'/],
-    ['gulp/build.js', /gulp\.task\(\'clean\'/],
-    ['gulp/build.js', /gulp\.task\(\'build\'/],
-    ['gulp/unit-tests.js', /gulp\.task\(\'test\'/],
-    ['gulp/e2e-tests.js', /gulp\.task\(\'webdriver-update\'/],
-    ['gulp/e2e-tests.js', /gulp\.task\(\'webdriver-standalone\'/],
-    ['gulp/e2e-tests.js', /gulp\.task\(\'protractor:src\'/],
-    ['gulp/e2e-tests.js', /gulp\.task\(\'protractor:dist\'/],
-    ['gulp/server.js', /gulp\.task\(\'serve\'/],
-    ['gulp/server.js', /gulp\.task\(\'serve:dist\'/],
-    ['gulp/server.js', /gulp\.task\(\'serve:e2e\'/],
-    ['gulp/server.js', /gulp\.task\(\'serve:e2e-dist\'/],
-    ['gulp/watch.js', /gulp\.task\(\'watch\'/],
-    ['gulp/wiredep.js', /gulp\.task\(\'wiredep\'/],
+    ['gulpfile.js', /gulp\.task\('default'/],
+    ['gulp/build.js', /gulp\.task\('styles'/],
+    ['gulp/build.js', /gulp\.task\('jshint'/],
+    ['gulp/build.js', /gulp\.task\('partials'/],
+    ['gulp/build.js', /gulp\.task\('html'/],
+    ['gulp/build.js', /gulp\.task\('images'/],
+    ['gulp/build.js', /gulp\.task\('fonts'/],
+    ['gulp/build.js', /gulp\.task\('misc'/],
+    ['gulp/build.js', /gulp\.task\('clean'/],
+    ['gulp/build.js', /gulp\.task\('build'/],
+    ['gulp/unit-tests.js', /gulp\.task\('test'/],
+    ['gulp/e2e-tests.js', /gulp\.task\('webdriver-update'/],
+    ['gulp/e2e-tests.js', /gulp\.task\('webdriver-standalone'/],
+    ['gulp/e2e-tests.js', /gulp\.task\('protractor:src'/],
+    ['gulp/e2e-tests.js', /gulp\.task\('protractor:dist'/],
+    ['gulp/server.js', /gulp\.task\('serve'/],
+    ['gulp/server.js', /gulp\.task\('serve:dist'/],
+    ['gulp/server.js', /gulp\.task\('serve:e2e'/],
+    ['gulp/server.js', /gulp\.task\('serve:e2e-dist'/],
+    ['gulp/watch.js', /gulp\.task\('watch'/],
+    ['gulp/wiredep.js', /gulp\.task\('wiredep'/],
   ];
 
   var genOptions = {
@@ -348,10 +348,11 @@ describe('gulp-angular generator', function () {
   });
 
   // Prompt #6: Which UI framework ?
-  describe('with option: [Foundation, Node SASS]', function () {
+  describe('with option: [Foundation, angular-foundation, Node SASS]', function () {
     it('should add dependency for Foundation with SASS', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
-        ui: prompts.ui.values.foundation
+        ui: prompts.ui.values.foundation,
+        foundationComponents: prompts.foundationComponents.values['angular-foundation']
       }));
 
       gulpAngular.run({}, function() {
@@ -359,6 +360,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/vendor.scss', /@import '..\/..\/bower_components\/foundation\/scss\/foundation';/],
+          ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
           ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])],
           ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
@@ -370,10 +372,11 @@ describe('gulp-angular generator', function () {
       });
     });
   });
-  describe('with option: [Foundation, Ruby SASS]', function () {
+  describe('with option: [Foundation, angular-foundation, Ruby SASS]', function () {
     it('should add dependency for Foundation with SASS', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
         ui: prompts.ui.values.foundation,
+        foundationComponents: prompts.foundationComponents.values['angular-foundation'],
         cssPreprocessor: prompts.cssPreprocessor.values['ruby-sass']
       }));
 
@@ -382,6 +385,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/vendor.scss', /@import '..\/..\/bower_components\/foundation\/scss\/foundation';/],
+          ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
           ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].npm['gulp-ruby-sass'])],
           ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
@@ -391,10 +395,11 @@ describe('gulp-angular generator', function () {
       });
     });
   });
-  describe('with option: [Foundation, LESS]', function () {
+  describe('with option: [Foundation, angular-foundation, LESS]', function () {
     it('should add dependency for Foundation with LESS', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
         ui: prompts.ui.values.foundation,
+        foundationComponents: prompts.foundationComponents.values['angular-foundation'],
         cssPreprocessor: prompts.cssPreprocessor.values.less
       }));
 
@@ -405,7 +410,9 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
+          ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
           ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.npm['gulp-less'])],
+
           ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]));
 
@@ -413,10 +420,11 @@ describe('gulp-angular generator', function () {
       });
     });
   });
-  describe('with option: [Foundation, Stylus]', function () {
+  describe('with option: [Foundation, angular-foundation, Stylus]', function () {
     it('should add dependency for Foundation with Stylus', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
         ui: prompts.ui.values.foundation,
+        foundationComponents: prompts.foundationComponents.values['angular-foundation'],
         cssPreprocessor: prompts.cssPreprocessor.values.stylus
       }));
 
@@ -427,6 +435,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
+          ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
           ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.npm['gulp-stylus'])],
           ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]));
@@ -435,10 +444,11 @@ describe('gulp-angular generator', function () {
       });
     });
   });
-  describe('with option: [Foundation, CSS]', function () {
+  describe('with option: [Foundation, angular-foundation, CSS]', function () {
     it('should add dependency for Foundation with CSS', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
         ui: prompts.ui.values.foundation,
+        foundationComponents: prompts.foundationComponents.values['angular-foundation'],
         cssPreprocessor: prompts.cssPreprocessor.values.css
       }));
 
@@ -451,10 +461,40 @@ describe('gulp-angular generator', function () {
 
         // No Gulp task for style
         assert.fileContent([
-          ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)]
+          ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
+          ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)]
         ]);
         // No Gulp task for style
         assert.noFileContent([
+          ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
+        ]);
+        done();
+      });
+    });
+  });
+  describe('with option: [Foundation, Official, CSS]', function () {
+    it('should not add angular-foundation', function (done) {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        ui: prompts.ui.values.foundation,
+        cssPreprocessor: prompts.cssPreprocessor.values.css,
+        foundationComponents: prompts.foundationComponents.values.official
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file([].concat(expectedFile, [
+          'src/app/index.css',
+        ]));
+
+        assert.noFile('src/app/vendor.*');
+
+        // No Gulp task for style
+        assert.fileContent([
+          ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
+        ]);
+
+        // No Gulp task for style
+        assert.noFileContent([
+          ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
           ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]);
         done();
