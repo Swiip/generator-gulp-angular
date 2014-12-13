@@ -94,6 +94,7 @@ module.exports = {
     router: model.router.values['angular-route'],
     ui: model.ui.values.bootstrap,
     bootstrapComponents: model.bootstrapComponents.values['ui-bootstrap'],
+    foundationComponents: model.foundationComponents.values['none'],
     cssPreprocessor: model.cssPreprocessor.values['node-sass']
   },
   libRegexp: function(name, version) {
