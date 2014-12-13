@@ -1,5 +1,11 @@
-# generator-gulp-angular [![Build Status](https://secure.travis-ci.org/Swiip/generator-gulp-angular.svg?branch=master)](http://travis-ci.org/Swiip/generator-gulp-angular)
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Swiip/generator-gulp-angular?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# generator-gulp-angular 
+
+[![Build Status](https://secure.travis-ci.org/Swiip/generator-gulp-angular.svg?branch=master)](http://travis-ci.org/Swiip/generator-gulp-angular)
+[![Coverage Status](http://img.shields.io/coveralls/eleven-labs/generator-gulp-angular.svg?style=flat)](https://coveralls.io/r/eleven-labs/generator-gulp-angular?branch=master)
+[![Dependencies](http://img.shields.io/david/eleven-labs/generator-gulp-angular.svg?style=flat)](https://david-dm.org/eleven-labs/generator-gulp-angular)
+[![NPM Version](http://img.shields.io/npm/v/generator-gulp-angular.svg?style=flat)](https://www.npmjs.org/package/generator-gulp-angular) [![Download Month](http://img.shields.io/npm/dm/gulp-css-base64.svg?style=flat)](https://www.npmjs.org/package/gulp-css-base64)
+[![Gitter](http://img.shields.io/badge/Gitter-room-green.svg?style=flat)](https://gitter.im/Swiip/generator-gulp-angular)
+[![Gratipay](http://img.shields.io/gratipay/Swiip.svg?style=flat)](https://gratipay.com/Swiip/)
 
 Offers you a Yeoman generator to initiate a Web application with the following workflow:
 
