@@ -26,12 +26,21 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
         chalk.yellow('You\'re using the fantastic generator for scaffolding an application with Angular and Gulp!')
       ));
     }
+    if (this.options['default']) {
+      var mockPrompts = require('./src/mock-prompts.js');
+      this.config.set('props', mockPrompts.defaults);
+
+      this.log('__________________________');
+      this.log('You use ' + chalk.green('--default') + ' option:');
+      this.log('\t* angular 1.3.x\n\t* ngAnimate\n\t* ngCookies\n\t* ngTouch\n\t* ngSanitize\n\t* jQuery 1.x.x\n\t* ngResource\n\t* ngRoute\n\t* bootstrap\n\t* ui-bootstrap\n\t* node-sass');
+      this.log('__________________________\n');
+    }
   },
 
   checkYoRc: function() {
     var cb = this.async();
 
-    if(this.config.get('props')) {
+    if(this.config.get('props') && !this.options['default']) {
       this.prompt([{
         type: 'confirm',
         name: 'skipConfig',
@@ -48,7 +57,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
   },
 
   askQuestions: function () {
-    if (this.skipConfig) {
+    if (this.skipConfig || this.options['default']) {
       return ;
     }
 

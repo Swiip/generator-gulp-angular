@@ -4,7 +4,7 @@ module.exports = function () {
   var _ = this._;
 
   // Retrieve props stored in .yo-rc.json
-  if (this.skipConfig) {
+  if (this.skipConfig || this.options['default']) {
     this.props = this.config.get('props');
   }
 

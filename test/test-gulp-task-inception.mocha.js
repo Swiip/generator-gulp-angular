@@ -15,9 +15,11 @@ var assert = require('chai').assert;
 chai.use(require('chai-as-promised'));
 
 describe('gulp-angular generator', function () {
-  var mockPrompts = require('./mock-prompts.js');
-  var prompts = mockPrompts.prompts;
-  var defaults = _.clone(mockPrompts.defaults);
+  var mockPrompts = require('../app/src/mock-prompts.js');
+
+  var prompts = JSON.parse(JSON.stringify(mockPrompts.prompts));
+  var defaults = JSON.parse(JSON.stringify(mockPrompts.defaults));
+
   var promptCase;
   var gulpAngular;
 
@@ -61,7 +63,7 @@ describe('gulp-angular generator', function () {
   });
 
   beforeEach(function (done) {
-    defaults = _.clone(mockPrompts.defaults);
+    var defaults = JSON.parse(JSON.stringify(mockPrompts.defaults));
 
     helpers.testDirectory(tempDir, function (err) {
       if (err) {

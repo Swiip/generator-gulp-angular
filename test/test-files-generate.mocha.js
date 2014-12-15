@@ -9,9 +9,11 @@ var outputInTest = require( './mute' );
 
 describe('gulp-angular generator', function () {
 
-  var mockPrompts = require('./mock-prompts.js');
-  var prompts = mockPrompts.prompts;
-  var defaults = _.clone(mockPrompts.defaults);
+  var mockPrompts = require('../app/src/mock-prompts.js');
+
+  var prompts = JSON.parse(JSON.stringify(mockPrompts.prompts));
+  var defaults = JSON.parse(JSON.stringify(mockPrompts.defaults));
+
   var libRegexp = mockPrompts.libRegexp;
 
   var gulpAngular;
@@ -76,7 +78,7 @@ describe('gulp-angular generator', function () {
   };
 
   beforeEach(function (done) {
-    defaults = _.clone(mockPrompts.defaults);
+    defaults = JSON.parse(JSON.stringify(mockPrompts.defaults));
 
     helpers.testDirectory(path.join(__dirname, folderName), function (err) {
       if (err) {
