@@ -1,20 +1,26 @@
 /*global describe, beforeEach, it */
 'use strict';
 
-var _ = require('lodash');
 var path = require('path');
 var helpers = require('yeoman-generator').test;
 var assert = require('yeoman-generator').assert;
+var outputInTest = require( './mute' );
 
 describe('gulp-angular generator', function () {
 
   var mockPrompts = require('./mock-prompts.js');
-  var prompts = mockPrompts.prompts;
-  var defaults = _.clone(mockPrompts.defaults);
+  var prompts = JSON.parse(JSON.stringify(mockPrompts.prompts));
   var libRegexp = mockPrompts.libRegexp;
 
   var gulpAngular;
   var folderName = 'tempGulpAngular';
+
+  var genOptions = {
+    'skip-install': true,
+    'skip-welcome-message': true,
+    'skip-message': true,
+    'default': true
+  };
 
   var expectedFile = [
     // gulp/ directory
@@ -68,74 +74,85 @@ describe('gulp-angular generator', function () {
     ['gulp/wiredep.js', /gulp\.task\('wiredep'/],
   ];
 
+  before(function (done) {
+
+    helpers.testDirectory(path.join(__dirname, folderName), function (err) {
+      if (err) {
+        done(err);
+      }
+
+      gulpAngular = helpers.createGenerator(
+        'gulp-angular:app',
+        [
+          '../../app',
+        ],
+        false,
+        genOptions
+      );
+
+      gulpAngular.on('run', outputInTest.mute);
+      gulpAngular.on('end', outputInTest.unmute);
+
+      done();
+    });
+  });
 
   describe('with --default option', function () {
     it('should generate the expected files and their content', function (done) {
-      var genOptions = {
-        'skip-install': true,
-        'skip-welcome-message': true,
-        'skip-message': true,
-        'default': true
-      };
 
-      helpers.run(path.join( __dirname, '../app'))
-        .inDir(path.join( __dirname, folderName))
-        .withOptions(genOptions)
-        .on('end', function () {
-          assert.file([].concat(expectedFile, [
-            // Option: Javascript
-            'src/app/index.js',
-            'src/app/main/main.controller.js',
-            'src/app/main/main.controller.spec.js',
-            'src/components/navbar/navbar.controller.js',
-            'karma.conf.js',
-            'protractor.conf.js',
-            'e2e/main.po.js',
-            'e2e/main.spec.js',
+      gulpAngular.run({}, function () {
+        assert.file([].concat(expectedFile, [
+          // Option: Javascript
+          'src/app/index.js',
+          'src/app/main/main.controller.js',
+          'src/app/main/main.controller.spec.js',
+          'src/components/navbar/navbar.controller.js',
+          'karma.conf.js',
+          'protractor.conf.js',
+          'e2e/main.po.js',
+          'e2e/main.spec.js',
 
-            // Option: ngRoute
-            'src/app/main/main.html',
+          // Option: ngRoute
+          'src/app/main/main.html',
 
-            // Option: Sass (Node)
-            'src/app/index.scss',
-            'src/app/vendor.scss',
-          ]));
+          // Option: Sass (Node)
+          'src/app/index.scss',
+          'src/app/vendor.scss',
+        ]));
 
-          assert.fileContent([].concat(expectedGulpContent, [
-            // Check src/app/index.js
-            ['src/app/index.js', /'ngAnimate'/],
-            ['src/app/index.js', /'ngCookies'/],
-            ['src/app/index.js', /'ngTouch'/],
-            ['src/app/index.js', /'ngSanitize'/],
-            ['src/app/index.js', /'ngResource'/],
-            ['src/app/index.js', /'ngRoute'/],
+        assert.fileContent([].concat(expectedGulpContent, [
+          // Check src/app/index.js
+          ['src/app/index.js', /'ngAnimate'/],
+          ['src/app/index.js', /'ngCookies'/],
+          ['src/app/index.js', /'ngTouch'/],
+          ['src/app/index.js', /'ngSanitize'/],
+          ['src/app/index.js', /'ngResource'/],
+          ['src/app/index.js', /'ngRoute'/],
 
-            // Check src/app/vendor.scss
-            ['src/app/vendor.scss', /\$icon-font-path: "\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
-            ['src/app/vendor.scss', /@import '\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap';/],
+          // Check src/app/vendor.scss
+          ['src/app/vendor.scss', /\$icon-font-path: "\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
+          ['src/app/vendor.scss', /@import '\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap';/],
 
-            // Check bower.json
-            ['bower.json', libRegexp('angular', prompts.angularVersion.values['1.3'])],
-            ['bower.json', libRegexp('angular-animate', prompts.angularVersion.values['1.3'])],
-            ['bower.json', libRegexp('angular-cookies', prompts.angularVersion.values['1.3'])],
-            ['bower.json', libRegexp('angular-touch', prompts.angularVersion.values['1.3'])],
-            ['bower.json', libRegexp('angular-sanitize', prompts.angularVersion.values['1.3'])],
-            ['bower.json', libRegexp('jquery', prompts.jQuery.values['jquery 2'].version)],
-            ['bower.json', libRegexp('angular-resource', prompts.angularVersion.values['1.3'])],
-            ['bower.json', libRegexp('angular-route', prompts.angularVersion.values['1.3'])],
-            ['bower.json', libRegexp('bootstrap-sass-official', prompts.ui.values.bootstrap.version)],
+          // Check bower.json
+          ['bower.json', libRegexp('angular', prompts.angularVersion.values['1.3'])],
+          ['bower.json', libRegexp('angular-animate', prompts.angularVersion.values['1.3'])],
+          ['bower.json', libRegexp('angular-cookies', prompts.angularVersion.values['1.3'])],
+          ['bower.json', libRegexp('angular-touch', prompts.angularVersion.values['1.3'])],
+          ['bower.json', libRegexp('angular-sanitize', prompts.angularVersion.values['1.3'])],
+          ['bower.json', libRegexp('jquery', prompts.jQuery.values['jquery 2'].version)],
+          ['bower.json', libRegexp('angular-resource', prompts.angularVersion.values['1.3'])],
+          ['bower.json', libRegexp('angular-route', prompts.angularVersion.values['1.3'])],
+          ['bower.json', libRegexp('bootstrap-sass-official', prompts.ui.values.bootstrap.version)],
 
-            // Check package.json
-            ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])],
+          // Check package.json
+          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])],
 
-            // Check wiredep css exclusion.
-            ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
-          ]));
+          // Check wiredep css exclusion.
+          ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
+        ]));
 
-          done();
-        })
-      ;
-
+        done();
+      });
     });
   });
 });

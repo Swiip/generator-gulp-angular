@@ -29,6 +29,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     if (this.options['default']) {
       var mockPrompts = require('../test/mock-prompts.js');
       this.config.set('props', mockPrompts.defaults);
+
       this.log('You use default option: angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass')
     }
   },
