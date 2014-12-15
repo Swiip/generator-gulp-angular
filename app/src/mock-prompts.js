@@ -11,7 +11,7 @@
 
 var _ = require('lodash');
 
-var prompts = require('../app/prompts.json');
+var prompts = require('../prompts.json');
 
 var questions = [
   'angularVersion',

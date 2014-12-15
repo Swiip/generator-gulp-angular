@@ -8,7 +8,7 @@ var outputInTest = require( './mute' );
 
 describe('gulp-angular generator', function () {
 
-  var mockPrompts = require('./mock-prompts.js');
+  var mockPrompts = require('../app/src/mock-prompts.js');
   var prompts = JSON.parse(JSON.stringify(mockPrompts.prompts));
   var libRegexp = mockPrompts.libRegexp;
 
