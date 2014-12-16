@@ -87,7 +87,7 @@ describe('gulp-angular generator', function () {
 
   });
 
-  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass]', function () {
+  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass, 6to5]', function () {
 
      it('should pass gulp build', function () {
       helpers.mockPrompt(gulpAngular, defaults);
@@ -221,13 +221,14 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with other promptCase: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, $http, ngMaterial, Stylus]', function () {
+  describe('with other promptCase: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, $http, ngMaterial, Stylus, TypeScript]', function () {
 
     before(function () {
       promptCase = _.assign(defaults, {
         jQuery: prompts.jQuery.values['jquery 1'],
         ui: prompts.ui.values['angular-material'],
-        cssPreprocessor: prompts.cssPreprocessor.values.stylus
+        cssPreprocessor: prompts.cssPreprocessor.values.stylus,
+        jsPreprocessor: prompts.jsPreprocessor.values.typescript
       });
     });
 

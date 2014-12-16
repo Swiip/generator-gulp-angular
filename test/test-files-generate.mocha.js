@@ -799,7 +799,8 @@ describe('gulp-angular generator', function () {
         assert.fileContent([].concat(expectedGulpContent, [
           ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'scripts\'.*\]/],
           ['gulp/build.js', /gulp\.task\(\'injector:js\'[^\n]*\n[^\n]*\n[^\n]*\n[^\n]*\'{src,\.tmp}\/{app,components}\/\*\*\/\*\.js\'/],
-          ['package.json', /gulp-coffee/]
+          ['package.json', /gulp-coffee/],
+          ['package.json', /gulp-coffeelint/]
         ]));
 
         assert.noFileContent([
@@ -833,7 +834,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with option: [Traceur]', function () {
-    it('should add browerify and gulp-traceur', function (done) {
+    it('should add browerify and gulp-traceur and traceur-runtime', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
         jsPreprocessor: prompts.jsPreprocessor.values.traceur
       }));
@@ -846,8 +847,34 @@ describe('gulp-angular generator', function () {
           ['gulp/build.js', /gulp\.task\(\'browserify\'/],
           ['gulp/build.js', /gulp\.task\(\'injector:js\'[^\n]*\n[^\n]*\n[^\n]*\n[^\n]*\'\.tmp\/{app,components}\/\*\*\/\*\.js\'/],
           ['package.json', /gulp-traceur/],
-          ['package.json', /gulp-browserify/]
+          ['package.json', /gulp-browserify/],
+          ['bower.json', /traceur-runtime/]
         ]));
+
+        done();
+      });
+    });
+  });
+  describe('with option: [TypeScript]', function () {
+    it('should not add browerify and gulp-typescript and dt-angular', function (done) {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        jsPreprocessor: prompts.jsPreprocessor.values.typescript
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file(expectedFile);
+
+        assert.fileContent([].concat(expectedGulpContent, [
+          ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'scripts\'.*\]/],
+          ['gulp/build.js', /gulp\.task\(\'injector:js\'[^\n]*\n[^\n]*\n[^\n]*\n[^\n]*\'{src,\.tmp}\/{app,components}\/\*\*\/\*\.js\'/],
+          ['package.json', /gulp-typescript/],
+          ['bower.json', /dt-angular/]
+        ]));
+
+        assert.noFileContent([
+          ['gulp/build.js', /gulp\.task\(\'browserify\'/],
+          ['package.json', /gulp-browserify/]
+        ]);
 
         done();
       });

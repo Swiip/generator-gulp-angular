@@ -75,13 +75,15 @@ gulp.task('injector:css'<% if (props.cssPreprocessor.key !== 'none') { %>, ['sty
 gulp.task('scripts', function () {<% if (props.jsPreprocessor.extension === 'js') { %>
   return gulp.src('src/{app,components}/**/*.js')
     .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))<% } if (props.jsPreprocessor.key === 'coffee') { %>
+    .pipe($.jshint.reporter('jshint-stylish'))<% } if (props.jsPreprocessor.key === '6to5') { %>
+    .pipe($['6to5']())<% } if (props.jsPreprocessor.key === 'traceur') { %>
+    .pipe($.traceur())<% } if (props.jsPreprocessor.key === 'coffee') { %>
   return gulp.src('src/{app,components}/**/*.coffee')
     .pipe($.coffeelint())
     .pipe($.coffeelint.reporter())
-    .pipe($.coffee())<% } if (props.jsPreprocessor.key === '6to5') { %>
-    .pipe($['6to5']())<% } if (props.jsPreprocessor.key === 'traceur') { %>
-    .pipe($.traceur())<% } if (props.jsPreprocessor.key !== 'none') { %>
+    .pipe($.coffee())<% } if (props.jsPreprocessor.key === 'typescript') { %>
+  return gulp.src('src/{app,components}/**/*.ts')
+    .pipe($.typescript())<% } if (props.jsPreprocessor.key !== 'none') { %>
     .on('error', function handleError(err) {
       console.error(err.toString());
       this.emit('end');
@@ -93,13 +95,13 @@ gulp.task('scripts', function () {<% if (props.jsPreprocessor.extension === 'js'
 <% if (props.jsPreprocessor.srcExtension === 'es6') { %>
 gulp.task('browserify', ['scripts'], function () {
   return gulp.src('.tmp/<%= props.jsPreprocessor.key %>/app/index.js', { read: false })
-  .pipe($.browserify())
-  .on('error', function handleError(err) {
-    console.error(err.toString());
-    this.emit('end');
-  })
-  .pipe(gulp.dest('.tmp/app'))
-  .pipe($.size());
+    .pipe($.browserify())
+    .on('error', function handleError(err) {
+      console.error(err.toString());
+      this.emit('end');
+    })
+    .pipe(gulp.dest('.tmp/app'))
+    .pipe($.size());
 });
 
 gulp.task('injector:js', ['browserify', 'injector:css'], function () {<% } else { %>
@@ -110,9 +112,13 @@ gulp.task('injector:js', ['scripts', 'injector:css'], function () {<% } %>
       '.tmp/{app,components}/**/*.js',<% } else { %>
       '{src,.tmp}/{app,components}/**/*.js',<% } %>
       '!src/{app,components}/**/*.spec.js',
-      '!src/{app,components}/**/*.mock.js'
+      '!src/{app,components}/**/*.mock.js'<% if (props.jsPreprocessor.key === 'none') { %>
     ]).pipe($.angularFilesort()), {
-      ignorePath: ['src', '.tmp'],
+      ignorePath: 'src',<% } else if (props.jsPreprocessor.srcExtension === 'es6') { %>
+    ]), {
+      ignorePath: '.tmp',<% } else { %>
+    ]).pipe($.angularFilesort()), {
+      ignorePath: ['src', '.tmp'],<% } %>
       addRootSlash: false
     }))
     .pipe(gulp.dest('src/'));

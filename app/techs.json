@@ -124,5 +124,11 @@
         "url": "https://github.com/google/traceur-compiler",
         "description": "A JavaScript.next-to-JavaScript-of-today compiler that allows you to use features from the future today.",
         "logo": "traceur.png"
+    },
+    "typescript": {
+        "title": "TypeScript",
+        "url": "http://www.typescriptlang.org/",
+        "description": "TypeScript, a typed superset of JavaScript that compiles to plain JavaScript.",
+        "logo": "typescript.png"
     }
 }

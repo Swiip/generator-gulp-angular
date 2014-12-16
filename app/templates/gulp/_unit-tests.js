@@ -20,6 +20,10 @@ gulp.task('test', ['scripts'], function() { <% } %>
     'src/{app,components}/**/*.js'<% } else if (props.jsPreprocessor.extension === 'js') { %>
     '.tmp/app/index.js',
     'src/{app,components}/**/*.spec.js',
+    'src/{app,components}/**/*.mock.js'<% } else if (props.jsPreprocessor.key === 'typescript') { %>
+    '.tmp/{app,components}/**/!(index).js',
+    '.tmp/{app,components}/**/index.js',
+    'src/{app,components}/**/*.spec.js',
     'src/{app,components}/**/*.mock.js'<% } else { %>
     '.tmp/{app,components}/**/*.js',
     'src/{app,components}/**/*.spec.js',
