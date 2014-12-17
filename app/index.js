@@ -38,6 +38,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
         chalk.yellow('You\'re using the fantastic generator for scaffolding an application with Angular and Gulp!')
       ));
     }
+
     if (this.options['default']) {
       var mockPrompts = require('./src/mock-prompts.js');
       var mockOptions = require('./src/mock-options.js');
@@ -137,6 +138,33 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
       }
 
       this.props = this._.merge(this.props, props);
+      this.config.set('props', this.props);
+
+      done();
+    }.bind(this));
+  },
+
+  askAdvancedQuestions: function () {
+    if (this.skipConfig || !this.options['advanced']) {
+      return ;
+    }
+
+    var done = this.async();
+
+    this.prompt({
+      "type": "checkbox",
+      "name": "advancedFeatures",
+      "message": "Do you want include these features?",
+      "choices": [
+        {
+          "value": "modernizr",
+          "name": "Modernizr: the feature detection library for HTML5/CSS3",
+          "checked": false
+        }
+      ]
+    }, function (props) {
+
+      this.props.advancedFeatures = props.advancedFeatures;
       this.config.set('props', this.props);
 
       done();
