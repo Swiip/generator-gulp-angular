@@ -24,9 +24,11 @@ module.exports = function () {
     appToBower: path.relative(this.props.paths.src, '')
   };
 
+  this.includeModernizr = false;
+  this.imageMin = false;
   if (this.options['advanced']) {
-    this.includeModernizr = this.props.advancedFeatures.indexOf('modernizr') >= 0 ? true : false;
-    this.imageMin = this.props.advancedFeatures.indexOf('imagemin') >= 0 ? true : false;
+    this.includeModernizr = (this.props.advancedFeatures.indexOf('modernizr') >= 0);
+    this.imageMin = (this.props.advancedFeatures.indexOf('imagemin') >= 0);
   }
 
   // Format list ngModules included in AngularJS DI
