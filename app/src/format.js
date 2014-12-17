@@ -26,6 +26,7 @@ module.exports = function () {
 
   if (this.options['advanced']) {
     this.includeModernizr = this.props.advancedFeatures.indexOf('modernizr') >= 0 ? true : false;
+    this.imageMin = this.props.advancedFeatures.indexOf('imagemin') >= 0 ? true : false;
   }
 
   // Format list ngModules included in AngularJS DI

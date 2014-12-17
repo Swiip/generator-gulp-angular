@@ -160,6 +160,11 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
           "value": "modernizr",
           "name": "Modernizr: the feature detection library for HTML5/CSS3",
           "checked": false
+        },
+        {
+          "value": "imagemin",
+          "name": "gulp-imagemin: minify PNG, JPEG, GIF and SVG images with imagemin",
+          "checked": false
         }
       ]
     }, function (props) {
