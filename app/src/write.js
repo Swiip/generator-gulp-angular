@@ -10,7 +10,6 @@ module.exports = function () {
   // Copy static files
   _.forEach(files.staticFiles, function(src) {
     this.fs.copy(this.templatePath(src),  this.destinationPath(src));
-
   }.bind(this));
 
   // Copy dot files
@@ -28,6 +27,12 @@ module.exports = function () {
   _.forEach(this.styleCopies, function(value, key) {
     this.fs.copy(this.templatePath(key),  this.destinationPath(value));
   }.bind(this));
+  _.forEach(this.srcTemplates, function(value, key) {
+    this.template(key, value);
+  }.bind(this));
+  _.forEach(this.lintConfCopies, function(src) {
+    this.fs.copy(this.templatePath(src),  this.destinationPath(src));
+  }.bind(this));
 
   // Create files with templates
   var basename;
@@ -35,6 +40,6 @@ module.exports = function () {
   _.forEach(files.templates, function(dest) {
     basename = path.basename(dest);
     src = dest.replace(basename, '_' + basename);
-    this.fs.copyTpl(this.templatePath(src),  this.destinationPath(dest), this)
+    this.fs.copyTpl(this.templatePath(src),  this.destinationPath(dest), this);
   }.bind(this));
 };

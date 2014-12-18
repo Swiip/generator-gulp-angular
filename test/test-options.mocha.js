@@ -53,7 +53,7 @@ describe('gulp-angular generator', function () {
   var expectedGulpContent = [
     ['gulpfile.js', /gulp\.task\('default'/],
     ['gulp/build.js', /gulp\.task\('styles'/],
-    ['gulp/build.js', /gulp\.task\('jshint'/],
+    ['gulp/build.js', /gulp\.task\('scripts'/],
     ['gulp/build.js', /gulp\.task\('partials'/],
     ['gulp/build.js', /gulp\.task\('html'/],
     ['gulp/build.js', /gulp\.task\('images'/],
@@ -145,7 +145,7 @@ describe('gulp-angular generator', function () {
           ['bower.json', libRegexp('bootstrap-sass-official', prompts.ui.values.bootstrap.version)],
 
           // Check package.json
-          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])],
+          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)],
 
           // Check wiredep css exclusion.
           ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]

@@ -11,7 +11,9 @@
     "angular-ui-router": "~0.2.13",<% } if(props.ui.name !== null) { %>
     "<%= props.ui.name %>": "<%= props.ui.version %>",<% } if(props.bootstrapComponents && props.bootstrapComponents.name !== null) { %>
     "<%= props.bootstrapComponents.name %>": "<%= props.bootstrapComponents.version %>",<% } if(props.foundationComponents && props.foundationComponents.name !== null) { %>
-    "<%= props.foundationComponents.name %>": "<%= props.foundationComponents.version %>",<% } %>
+    "<%= props.foundationComponents.name %>": "<%= props.foundationComponents.version %>",<% } if(props.jsPreprocessor.key === 'traceur') { %>
+    "traceur-runtime": "~0.0.74",<% } if(props.jsPreprocessor.key === 'typescript') { %>
+    "dt-angular": "~1.2.16",<% } %>
     "angular": "<%= props.angularVersion %>"
   },
   "devDependencies": {

@@ -1,5 +1,7 @@
 'use strict';
 
+var path = require('path');
+
 module.exports = function () {
   var _ = this._;
 
@@ -39,7 +41,8 @@ module.exports = function () {
     this.props.ui.key,
     this.props.bootstrapComponents.key,
     this.props.foundationComponents.key,
-    this.props.cssPreprocessor.key
+    this.props.cssPreprocessor.key,
+    this.props.jsPreprocessor.key
   ]
     .filter(_.isString)
     .filter(function(tech) {
@@ -71,10 +74,10 @@ module.exports = function () {
   // Compute routing relative to props.router
   if (this.props.router.module === 'ngRoute') {
     this.routerHtml = '<div ng-view></div>';
-    this.routerJs = this.read('src/app/__ngroute.js', 'utf8');
+    this.routerJs = this.read('src/app/__ngroute.' + this.props.jsPreprocessor.extension, 'utf8');
   } else if (this.props.router.module === 'ui.router') {
     this.routerHtml = '<div ui-view></div>';
-    this.routerJs = this.read('src/app/__uirouter.js', 'utf8');
+    this.routerJs = this.read('src/app/__uirouter.' + this.props.jsPreprocessor.extension, 'utf8');
   } else {
     this.routerHtml = this.read(routerPartialSrc, 'utf8');
     this.routerHtml = this.routerHtml.replace(
@@ -98,7 +101,7 @@ module.exports = function () {
       }
     }
 
-    if(this.props.cssPreprocessor.key !== 'css') {
+    if(this.props.cssPreprocessor.key !== 'none') {
       this.wiredepExclusions.push('/bootstrap\\.css/');
     }
 
@@ -108,9 +111,13 @@ module.exports = function () {
       this.wiredepExclusions.push('/foundation\\.js/');
     }
 
-    if(this.props.cssPreprocessor.key !== 'css') {
+    if(this.props.cssPreprocessor.key !== 'none') {
       this.wiredepExclusions.push('/foundation\\.css/');
     }
+  }
+  if(this.props.cssPreprocessor.key !== 'none') {
+    this.wiredepExclusions.push('/bootstrap\\.css/');
+    this.wiredepExclusions.push('/foundation\\.css/');
   }
 
   // Format choice UI Framework
@@ -145,5 +152,25 @@ module.exports = function () {
   if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
     var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
     this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
+  }
+
+  //JS Preprocessor files
+  var files = [
+    'src/app/index',
+    'src/app/main/main.controller',
+    'src/components/navbar/navbar.controller'
+  ];
+
+  this.srcTemplates = {};
+  files.forEach(function(file) {
+    var basename = path.basename(file);
+    var dest = file + '.' + this.props.jsPreprocessor.extension;
+    var src = file.replace(basename, '_' + basename) + '.' + this.props.jsPreprocessor.srcExtension;
+    this.srcTemplates[src] = dest;
+  }, this);
+
+  this.lintConfCopies = [];
+  if(this.props.jsPreprocessor.key === 'coffee') {
+    this.lintConfCopies.push('coffeelint.json');
   }
 };

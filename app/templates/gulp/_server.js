@@ -14,8 +14,6 @@ function browserSyncInit(baseDir, files, browser) {
   var routes = null;
   if(baseDir === 'src' || (util.isArray(baseDir) && baseDir.indexOf('src') !== -1)) {
     routes = {
-      // Should be '/bower_components': '../bower_components'
-      // Waiting for https://github.com/shakyShane/browser-sync/issues/308
       '/bower_components': 'bower_components'
     };
   }
@@ -34,14 +32,14 @@ function browserSyncInit(baseDir, files, browser) {
 
 gulp.task('serve', ['watch'], function () {
   browserSyncInit([
-    'src',
-    '.tmp'
+    '.tmp',
+    'src'
   ], [
-    '.tmp/{app,components}/**/*.css',
+    '<% if(props.cssPreprocessor.key === 'none') { %>src<% } else { %>.tmp<% } %>/{app,components}/**/*.css',
+    '<% if(props.jsPreprocessor.key === 'none') { %>src<% } else { %>.tmp<% } %>/{app,components}/**/*.js',
     'src/assets/images/**/*',
     'src/*.html',
-    'src/{app,components}/**/*.html',
-    'src/{app,components}/**/*.js'
+    'src/{app,components}/**/*.html'
   ]);
 });
 

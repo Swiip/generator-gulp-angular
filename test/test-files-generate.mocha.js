@@ -50,7 +50,7 @@ describe('gulp-angular generator', function () {
   var expectedGulpContent = [
     ['gulpfile.js', /gulp\.task\('default'/],
     ['gulp/build.js', /gulp\.task\('styles'/],
-    ['gulp/build.js', /gulp\.task\('jshint'/],
+    ['gulp/build.js', /gulp\.task\('scripts'/],
     ['gulp/build.js', /gulp\.task\('partials'/],
     ['gulp/build.js', /gulp\.task\('html'/],
     ['gulp/build.js', /gulp\.task\('images'/],
@@ -68,7 +68,7 @@ describe('gulp-angular generator', function () {
     ['gulp/server.js', /gulp\.task\('serve:e2e'/],
     ['gulp/server.js', /gulp\.task\('serve:e2e-dist'/],
     ['gulp/watch.js', /gulp\.task\('watch'/],
-    ['gulp/wiredep.js', /gulp\.task\('wiredep'/],
+    ['gulp/wiredep.js', /gulp\.task\('wiredep'/]
   ];
 
   var genOptions = {
@@ -101,8 +101,8 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass]', function () {
-    // Default scenario: angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass
+  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass, Standard JS]', function () {
+    // Default scenario: angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass, standard js
     it('should generate the expected files and their content', function (done) {
       helpers.mockPrompt(gulpAngular, defaults);
 
@@ -125,6 +125,11 @@ describe('gulp-angular generator', function () {
           'src/app/index.scss',
           'src/app/vendor.scss',
         ]));
+
+        assert.noFile([
+          'src/**/*.ts',
+          'src/**/*.coffee'
+        ]);
 
         assert.fileContent([].concat(expectedGulpContent, [
           // Check src/app/index.js
@@ -151,7 +156,7 @@ describe('gulp-angular generator', function () {
           ['bower.json', libRegexp('bootstrap-sass-official', prompts.ui.values.bootstrap.version)],
 
           // Check package.json
-          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])],
+          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)],
 
           // Check wiredep css exclusion.
           ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
@@ -364,7 +369,8 @@ describe('gulp-angular generator', function () {
           ['src/app/vendor.scss', /@import '..\/..\/bower_components\/foundation\/scss\/foundation';/],
           ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
-          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])],
+
+          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)],
           ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]));
 
@@ -389,7 +395,8 @@ describe('gulp-angular generator', function () {
           ['src/app/vendor.scss', /@import '..\/..\/bower_components\/foundation\/scss\/foundation';/],
           ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
-          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].npm['gulp-ruby-sass'])],
+
+          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].version)],
           ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]));
 
@@ -413,8 +420,7 @@ describe('gulp-angular generator', function () {
         assert.fileContent([].concat(expectedGulpContent, [
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
           ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
-          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.npm['gulp-less'])],
-
+          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.version)],
           ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]));
 
@@ -438,7 +444,7 @@ describe('gulp-angular generator', function () {
         assert.fileContent([].concat(expectedGulpContent, [
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
           ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
-          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.npm['gulp-stylus'])],
+          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.version)],
           ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]));
 
@@ -451,7 +457,7 @@ describe('gulp-angular generator', function () {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
         ui: prompts.ui.values.foundation,
         foundationComponents: prompts.foundationComponents.values['angular-foundation'],
-        cssPreprocessor: prompts.cssPreprocessor.values.css
+        cssPreprocessor: prompts.cssPreprocessor.values.none
       }));
 
       gulpAngular.run({}, function() {
@@ -478,7 +484,7 @@ describe('gulp-angular generator', function () {
     it('should not add angular-foundation', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
         ui: prompts.ui.values.foundation,
-        cssPreprocessor: prompts.cssPreprocessor.values.css,
+        cssPreprocessor: prompts.cssPreprocessor.values.none,
         foundationComponents: prompts.foundationComponents.values.official
       }));
 
@@ -520,7 +526,7 @@ describe('gulp-angular generator', function () {
           ['src/app/vendor.scss', /\$icon-font-path: "\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
           ['src/app/vendor.scss', /@import '\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap';/],
           ['bower.json', libRegexp('bootstrap-sass-official', prompts.ui.values.bootstrap.version)],
-          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].npm['gulp-ruby-sass'])],
+          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].version)],
           ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
         ]));
 
@@ -545,7 +551,7 @@ describe('gulp-angular generator', function () {
           ['src/app/vendor.less', /@import '..\/..\/bower_components\/bootstrap\/less\/bootstrap.less';/],
           ['src/app/vendor.less', /@icon-font-path: '\/bower_components\/bootstrap\/fonts\/';/],
           ['bower.json', libRegexp('bootstrap', prompts.ui.values.bootstrap.version)],
-          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.npm['gulp-less'])],
+          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.version)],
           ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
         ]));
 
@@ -570,7 +576,7 @@ describe('gulp-angular generator', function () {
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/bootstrap\/dist\/css\/bootstrap.css">/],
           ['bower.json', libRegexp('bootstrap', prompts.ui.values.bootstrap.version)],
-          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.npm['gulp-stylus'])],
+          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.version)],
           ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
         ]));
 
@@ -582,7 +588,7 @@ describe('gulp-angular generator', function () {
     it('should add dependency for Bootstrap with CSS', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
         ui: prompts.ui.values.bootstrap,
-        cssPreprocessor: prompts.cssPreprocessor.values.css
+        cssPreprocessor: prompts.cssPreprocessor.values.none
       }));
 
       gulpAngular.run({}, function() {
@@ -598,10 +604,10 @@ describe('gulp-angular generator', function () {
         ]);
 
         assert.noFileContent([
-          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.npm['gulp-less'])],
-          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])],
-          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].npm['gulp-ruby-sass'])],
-          ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
+          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.version)],
+          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)],
+          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].version)],
+          ['gulp/wiredep.js', /exclude:.*\/bootstrap\\\.css\/.*/]
         ]);
 
         done();
@@ -636,7 +642,7 @@ describe('gulp-angular generator', function () {
         assert.file(expectedFile);
 
         assert.noFileContent([
-          ['gulp/wiredep.js', /\/bootstrap.js\//]
+          ['gulp/wiredep.js', /\/bootstrap\\\.js\//]
         ]);
 
         done();
@@ -666,7 +672,7 @@ describe('gulp-angular generator', function () {
   describe('with option: [None UI Framework, Node SASS]', function () {
     it('should add index style', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
-        ui: prompts.ui.values['none'],
+        ui: prompts.ui.values.none,
         cssPreprocessor: prompts.cssPreprocessor.values['node-sass']
       }));
 
@@ -675,7 +681,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           // Check package.json
-          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].npm['gulp-sass'])]
+          ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)]
         ]));
 
         assert.noFile('src/app/vendor.*');
@@ -687,7 +693,7 @@ describe('gulp-angular generator', function () {
   describe('with option: [None UI Framework, Ruby SASS]', function () {
     it('should add index style', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
-        ui: prompts.ui.values['none'],
+        ui: prompts.ui.values.none,
         cssPreprocessor: prompts.cssPreprocessor.values['ruby-sass']
       }));
 
@@ -696,7 +702,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           // Check package.json
-          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].npm['gulp-ruby-sass'])]
+          ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].version)]
         ]));
 
         assert.noFile('src/app/vendor.*');
@@ -708,8 +714,8 @@ describe('gulp-angular generator', function () {
   describe('with option: [None UI Framework, LESS]', function () {
     it('should add index style', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
-        ui: prompts.ui.values['none'],
-        cssPreprocessor: prompts.cssPreprocessor.values['less']
+        ui: prompts.ui.values.none,
+        cssPreprocessor: prompts.cssPreprocessor.values.less
       }));
 
       gulpAngular.run({}, function() {
@@ -717,7 +723,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           // Check package.json
-          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values['less'].npm['gulp-less'])]
+          ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.version)]
         ]));
 
         assert.noFile('src/app/vendor.*');
@@ -729,8 +735,8 @@ describe('gulp-angular generator', function () {
   describe('with option: [None UI Framework, Stylus]', function () {
     it('should add index style', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
-        ui: prompts.ui.values['none'],
-        cssPreprocessor: prompts.cssPreprocessor.values['stylus']
+        ui: prompts.ui.values.none,
+        cssPreprocessor: prompts.cssPreprocessor.values.stylus
       }));
 
       gulpAngular.run({}, function() {
@@ -738,7 +744,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           // Check package.json
-          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values['stylus'].npm['gulp-stylus'])]
+          ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.version)]
         ]));
 
         assert.noFile('src/app/vendor.*');
@@ -750,14 +756,177 @@ describe('gulp-angular generator', function () {
   describe('with option: [None UI Framework, CSS]', function () {
     it('should add index style', function (done) {
       helpers.mockPrompt(gulpAngular, _.assign(defaults, {
-        ui: prompts.ui.values['none'],
-        cssPreprocessor: prompts.cssPreprocessor.values['css']
+        ui: prompts.ui.values.none,
+        cssPreprocessor: prompts.cssPreprocessor.values.none
       }));
 
       gulpAngular.run({}, function() {
         assert.file(expectedFile);
 
         assert.noFile('src/app/vendor.*');
+
+        done();
+      });
+    });
+  });
+  describe('with option: [None JS Preprocessor]', function () {
+    it('should not add browerify and inject js files from src', function (done) {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        jsPreprocessor: prompts.jsPreprocessor.values.none
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file(expectedFile);
+
+        assert.noFile([
+          'src/**/*.ts',
+          'src/**/*.coffee'
+        ]);
+
+        assert.fileContent([].concat(expectedGulpContent, [
+          ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'scripts\'.*\]/],
+          ['gulp/build.js', /\$\.inject.*\n\s*'src\/{app,components}\/\*\*\/\*\.js'/]
+        ]));
+
+        assert.noFileContent([
+          ['gulp/build.js', /gulp\.task\(\'browserify\'/],
+          ['package.json', /gulp-browserify/]
+        ]);
+
+        done();
+      });
+    });
+  });
+  describe('with option: [CoffeeScript]', function () {
+    it('should not add browerify and add gulp-coffee', function (done) {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        jsPreprocessor: prompts.jsPreprocessor.values.coffee
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file([].concat(expectedFile, [
+          'src/app/index.coffee',
+          'src/app/main/main.controller.coffee',
+          'src/components/navbar/navbar.controller.coffee'
+        ]));
+
+        assert.noFile([
+          'src/app/index.js',
+          'src/app/main/main.controller.js',
+          'src/components/navbar/navbar.controller.js',
+          'src/**/*.ts'
+        ]);
+
+        assert.fileContent([].concat(expectedGulpContent, [
+          ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'scripts\'.*\]/],
+          ['gulp/build.js', /\$\.inject.*\n\s*'{src,\.tmp}\/{app,components}\/\*\*\/\*\.js'/],
+          ['package.json', /gulp-coffee/],
+          ['package.json', /gulp-coffeelint/]
+        ]));
+
+        assert.noFileContent([
+          ['gulp/build.js', /gulp\.task\(\'browserify\'/],
+          ['package.json', /gulp-browserify/]
+        ]);
+
+        done();
+      });
+    });
+  });
+  describe('with option: [6to5]', function () {
+    it('should add browerify and gulp-6to5', function (done) {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        jsPreprocessor: prompts.jsPreprocessor.values['6to5']
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file([].concat(expectedFile, [
+          'src/app/index.js',
+          'src/app/main/main.controller.js',
+          'src/components/navbar/navbar.controller.js'
+        ]));
+
+        assert.noFile([
+          'src/**/*.coffee',
+          'src/**/*.ts'
+        ]);
+
+        assert.fileContent([].concat(expectedGulpContent, [
+          ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'browserify\'.*\]/],
+          ['gulp/build.js', /gulp\.task\(\'browserify\'/],
+          ['gulp/build.js', /\$\.inject.*\n\s*'\.tmp\/{app,components}\/\*\*\/\*\.js'/],
+          ['package.json', /gulp-6to5/],
+          ['package.json', /gulp-browserify/]
+        ]));
+
+        done();
+      });
+    });
+  });
+  describe('with option: [Traceur]', function () {
+    it('should add browerify and gulp-traceur and traceur-runtime', function (done) {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        jsPreprocessor: prompts.jsPreprocessor.values.traceur
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file(expectedFile);
+
+        assert.file([].concat(expectedFile, [
+          'src/app/index.js',
+          'src/app/main/main.controller.js',
+          'src/components/navbar/navbar.controller.js'
+        ]));
+
+        assert.noFile([
+          'src/**/*.coffee',
+          'src/**/*.ts'
+        ]);
+
+        assert.fileContent([].concat(expectedGulpContent, [
+          ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'browserify\'.*\]/],
+          ['gulp/build.js', /gulp\.task\(\'browserify\'/],
+          ['gulp/build.js', /\$\.inject.*\n\s*'\.tmp\/{app,components}\/\*\*\/\*\.js'/],
+          ['package.json', /gulp-traceur/],
+          ['package.json', /gulp-browserify/],
+          ['bower.json', /traceur-runtime/]
+        ]));
+
+        done();
+      });
+    });
+  });
+  describe('with option: [TypeScript]', function () {
+    it('should not add browerify and gulp-typescript and dt-angular', function (done) {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        jsPreprocessor: prompts.jsPreprocessor.values.typescript
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file([].concat(expectedFile, [
+          'src/app/index.ts',
+          'src/app/main/main.controller.ts',
+          'src/components/navbar/navbar.controller.ts'
+        ]));
+
+        assert.noFile([
+          'src/app/index.js',
+          'src/app/main/main.controller.js',
+          'src/components/navbar/navbar.controller.js',
+          'src/**/*.coffee'
+        ]);
+
+        assert.fileContent([].concat(expectedGulpContent, [
+          ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'scripts\'.*\]/],
+          ['gulp/build.js', /\$\.inject.*\n\s*'{src,\.tmp}\/{app,components}\/\*\*\/\*\.js'/],
+          ['package.json', /gulp-typescript/],
+          ['bower.json', /dt-angular/]
+        ]));
+
+        assert.noFileContent([
+          ['gulp/build.js', /gulp\.task\(\'browserify\'/],
+          ['package.json', /gulp-browserify/]
+        ]);
 
         done();
       });

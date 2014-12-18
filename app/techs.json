@@ -96,18 +96,39 @@
         "logo": "node-sass.png"
     },
     "less": {
-        "key": "less",
         "title": "Less",
         "url": "http://lesscss.org/",
         "description": "Less extends the CSS language, adding features that allow variables, mixins, functions and many other techniques.",
         "logo": "less.png"
     },
     "stylus": {
-        "key": "stylus",
         "title": "Stylus",
         "url": "http://learnboost.github.io/stylus/",
         "description": "Stylus is a revolutionary new language, providing an efficient, dynamic, and expressive way to generate CSS. Supporting both an indented syntax and regular CSS style.",
         "logo": "stylus.png"
+    },
+    "coffee": {
+        "title": "CoffeeScript",
+        "url": "http://coffeescript.org/",
+        "description": "CoffeeScript, \"a little language that compiles into JavaScript\".",
+        "logo": "coffeescript.png"
+    },
+    "6to5": {
+        "title": "ES6 (6to5)",
+        "url": "https://github.com/6to5/6to5",
+        "description": "Turns ES6+ code into vanilla ES5, so you can use next generation features today.",
+        "logo": "6to5.png"
+    },
+    "traceur": {
+        "title": "ES6 (Traceur)",
+        "url": "https://github.com/google/traceur-compiler",
+        "description": "A JavaScript.next-to-JavaScript-of-today compiler that allows you to use features from the future today.",
+        "logo": "traceur.png"
+    },
+    "typescript": {
+        "title": "TypeScript",
+        "url": "http://www.typescriptlang.org/",
+        "description": "TypeScript, a typed superset of JavaScript that compiles to plain JavaScript.",
+        "logo": "typescript.png"
     }
 }
-
