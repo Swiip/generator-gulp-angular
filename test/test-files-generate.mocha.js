@@ -101,8 +101,8 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass]', function () {
-    // Default scenario: angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass
+  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass, Standard JS]', function () {
+    // Default scenario: angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass, standard js
     it('should generate the expected files and their content', function (done) {
       helpers.mockPrompt(gulpAngular, defaults);
 
@@ -125,6 +125,11 @@ describe('gulp-angular generator', function () {
           'src/app/index.scss',
           'src/app/vendor.scss',
         ]));
+
+        assert.noFile([
+          'src/**/*.ts',
+          'src/**/*.coffee'
+        ]);
 
         assert.fileContent([].concat(expectedGulpContent, [
           // Check src/app/index.js
@@ -773,9 +778,14 @@ describe('gulp-angular generator', function () {
       gulpAngular.run({}, function() {
         assert.file(expectedFile);
 
+        assert.noFile([
+          'src/**/*.ts',
+          'src/**/*.coffee'
+        ]);
+
         assert.fileContent([].concat(expectedGulpContent, [
           ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'scripts\'.*\]/],
-          ['gulp/build.js', /gulp\.task\(\'injector:js\'[^\n]*\n[^\n]*\n[^\n]*\n[^\n]*\'src\/{app,components}\/\*\*\/\*\.js\'/]
+          ['gulp/build.js', /\$\.inject.*\n\s*'src\/{app,components}\/\*\*\/\*\.js'/]
         ]));
 
         assert.noFileContent([
@@ -794,11 +804,22 @@ describe('gulp-angular generator', function () {
       }));
 
       gulpAngular.run({}, function() {
-        assert.file(expectedFile);
+        assert.file([].concat(expectedFile, [
+          'src/app/index.coffee',
+          'src/app/main/main.controller.coffee',
+          'src/components/navbar/navbar.controller.coffee'
+        ]));
+
+        assert.noFile([
+          'src/app/index.js',
+          'src/app/main/main.controller.js',
+          'src/components/navbar/navbar.controller.js',
+          'src/**/*.ts'
+        ]);
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'scripts\'.*\]/],
-          ['gulp/build.js', /gulp\.task\(\'injector:js\'[^\n]*\n[^\n]*\n[^\n]*\n[^\n]*\'{src,\.tmp}\/{app,components}\/\*\*\/\*\.js\'/],
+          ['gulp/build.js', /\$\.inject.*\n\s*'{src,\.tmp}\/{app,components}\/\*\*\/\*\.js'/],
           ['package.json', /gulp-coffee/],
           ['package.json', /gulp-coffeelint/]
         ]));
@@ -819,12 +840,21 @@ describe('gulp-angular generator', function () {
       }));
 
       gulpAngular.run({}, function() {
-        assert.file(expectedFile);
+        assert.file([].concat(expectedFile, [
+          'src/app/index.js',
+          'src/app/main/main.controller.js',
+          'src/components/navbar/navbar.controller.js'
+        ]));
+
+        assert.noFile([
+          'src/**/*.coffee',
+          'src/**/*.ts'
+        ]);
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'browserify\'.*\]/],
           ['gulp/build.js', /gulp\.task\(\'browserify\'/],
-          ['gulp/build.js', /gulp\.task\(\'injector:js\'[^\n]*\n[^\n]*\n[^\n]*\n[^\n]*\'\.tmp\/{app,components}\/\*\*\/\*\.js\'/],
+          ['gulp/build.js', /\$\.inject.*\n\s*'\.tmp\/{app,components}\/\*\*\/\*\.js'/],
           ['package.json', /gulp-6to5/],
           ['package.json', /gulp-browserify/]
         ]));
@@ -842,10 +872,21 @@ describe('gulp-angular generator', function () {
       gulpAngular.run({}, function() {
         assert.file(expectedFile);
 
+        assert.file([].concat(expectedFile, [
+          'src/app/index.js',
+          'src/app/main/main.controller.js',
+          'src/components/navbar/navbar.controller.js'
+        ]));
+
+        assert.noFile([
+          'src/**/*.coffee',
+          'src/**/*.ts'
+        ]);
+
         assert.fileContent([].concat(expectedGulpContent, [
           ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'browserify\'.*\]/],
           ['gulp/build.js', /gulp\.task\(\'browserify\'/],
-          ['gulp/build.js', /gulp\.task\(\'injector:js\'[^\n]*\n[^\n]*\n[^\n]*\n[^\n]*\'\.tmp\/{app,components}\/\*\*\/\*\.js\'/],
+          ['gulp/build.js', /\$\.inject.*\n\s*'\.tmp\/{app,components}\/\*\*\/\*\.js'/],
           ['package.json', /gulp-traceur/],
           ['package.json', /gulp-browserify/],
           ['bower.json', /traceur-runtime/]
@@ -862,11 +903,22 @@ describe('gulp-angular generator', function () {
       }));
 
       gulpAngular.run({}, function() {
-        assert.file(expectedFile);
+        assert.file([].concat(expectedFile, [
+          'src/app/index.ts',
+          'src/app/main/main.controller.ts',
+          'src/components/navbar/navbar.controller.ts'
+        ]));
+
+        assert.noFile([
+          'src/app/index.js',
+          'src/app/main/main.controller.js',
+          'src/components/navbar/navbar.controller.js',
+          'src/**/*.coffee'
+        ]);
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'scripts\'.*\]/],
-          ['gulp/build.js', /gulp\.task\(\'injector:js\'[^\n]*\n[^\n]*\n[^\n]*\n[^\n]*\'{src,\.tmp}\/{app,components}\/\*\*\/\*\.js\'/],
+          ['gulp/build.js', /\$\.inject.*\n\s*'{src,\.tmp}\/{app,components}\/\*\*\/\*\.js'/],
           ['package.json', /gulp-typescript/],
           ['bower.json', /dt-angular/]
         ]));

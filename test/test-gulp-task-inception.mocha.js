@@ -87,7 +87,7 @@ describe('gulp-angular generator', function () {
 
   });
 
-  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass, 6to5]', function () {
+  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass]', function () {
 
      it('should pass gulp build', function () {
       helpers.mockPrompt(gulpAngular, defaults);
@@ -172,7 +172,7 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with other promptCase: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, ZeptoJS 1.1.x, $http, Bootstrap, LESS, Standard JS]', function () {
+  describe('with other promptCase: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, ZeptoJS 1.1.x, $http, Bootstrap, LESS, ES6 with 6to5]', function () {
 
     before(function () {
       promptCase = _.assign(defaults, {
@@ -182,7 +182,7 @@ describe('gulp-angular generator', function () {
         ui: prompts.ui.values.bootstrap,
         bootstrapComponents: prompts.bootstrapComponents.values['ui-bootstrap'],
         cssPreprocessor: prompts.cssPreprocessor.values.less,
-        jsPreprocessor: prompts.jsPreprocessor.values.none
+        jsPreprocessor: prompts.jsPreprocessor.values['6to5']
       });
     });
 

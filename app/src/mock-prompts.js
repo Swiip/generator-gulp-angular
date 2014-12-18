@@ -101,7 +101,7 @@ module.exports = {
     bootstrapComponents: model.bootstrapComponents.values['ui-bootstrap'],
     foundationComponents: model.foundationComponents.values.none,
     cssPreprocessor: model.cssPreprocessor.values['node-sass'],
-    jsPreprocessor: model.jsPreprocessor.values['6to5']
+    jsPreprocessor: model.jsPreprocessor.values.none
   },
   libRegexp: function(name, version) {
     return new RegExp('"' + name + '": "' + version + '"');
