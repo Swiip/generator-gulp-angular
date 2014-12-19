@@ -1,6 +1,7 @@
 {
   "name": "generator-gulp-angular",
   "version": "0.7.3",
+  "preferGlobal": true,
   "description": "Yeoman generator for AngularJS with GulpJS",
   "keywords": "yeoman-generator, angular, gulp",
   "license": "MIT",
