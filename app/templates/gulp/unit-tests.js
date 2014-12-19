@@ -31,5 +31,5 @@ function runTests (singleRun, done) {
 
 gulp.task('test', function (done) { runTests(true /* singleRun */, done) });
 
-gulp.task('autotest', function (done) { runTests(false /* singleRun */, done) });
+gulp.task('test:auto', function (done) { runTests(false /* singleRun */, done) });
 
