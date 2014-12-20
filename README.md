@@ -1,4 +1,4 @@
-# generator-gulp-angular 
+# generator-gulp-angular
 
 [![Build Status](https://img.shields.io/travis/Swiip/generator-gulp-angular.svg?style=flat)](http://travis-ci.org/Swiip/generator-gulp-angular)
 [![Coverage Status](http://img.shields.io/coveralls/eleven-labs/generator-gulp-angular.svg?style=flat)](https://coveralls.io/r/eleven-labs/generator-gulp-angular?branch=master)
@@ -123,11 +123,11 @@ The root directory generated for a app with name `gulpAngular` :
 * *Resource handler*: ngResource, Restangular, none
 * *Router*: ngRoute, UI Router, none
 * *UI Framework*: Bootstrap, Foundation, Angular Material, none (depends on the chosen CSS preprocessor)
+* *UI directives* : UI Bootstrap, Angular Strap, official Bootstrap JavaScript, Angular Foundation, official Foundation JavaScript, none (depends on the UI framework)
 * *CSS pre-processor*: Less, Sass with Ruby and Node, Stylus, none
-* *Bootstrap directives* : UI Bootstrap, Angular Strap, official Bootstrap JavaScript, none (only if you chose Bootstrap)
-* **TODO** JS preprocessor: CoffeeScript, TypeScript, ECMAScript6 (Traceur and 6to5)
-* **TODO** HTML preprocessor: Jade ?
-* **TODO** Script loader: Require, Browserify, ES6 with Require?, none
+* *JS preprocessor*: CoffeeScript, TypeScript, ECMAScript 6 (Traceur and 6to5), none
+* **TODO** HTML preprocessor: Jade, Haml, Handlebars, none
+* **TODO** Script loader: Require, Browserify, none
 * **TODO** Test framework: Jasmine, Mocha, Qunit
 
 ## Known issue
