@@ -48,7 +48,7 @@ gulp.task('serve:dist', ['build'], function () {
 });
 
 gulp.task('serve:e2e', ['wiredep', 'injector:js', 'injector:css'], function () {
-  browserSyncInit(['src', '.tmp'], null, []);
+  browserSyncInit(['.tmp', 'src'], null, []);
 });
 
 gulp.task('serve:e2e-dist', ['build'], function () {
