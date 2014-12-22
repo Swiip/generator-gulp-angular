@@ -1,0 +1,6 @@
+Description:
+  Creates a new Angular controller
+Example:
+  yo gulp-angular:controller Thing [--dest="/path/to/whatever" --coffee --component]
+This will create:
+  src/app/thing/controllers/thing-ctrl.js
