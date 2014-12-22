@@ -130,5 +130,26 @@
         "url": "http://www.typescriptlang.org/",
         "description": "TypeScript, a typed superset of JavaScript that compiles to plain JavaScript.",
         "logo": "typescript.png"
+    },
+    "jade": {
+      "key": "jade",
+      "title": "Jade",
+      "url": "http://jade-lang.com/",
+      "description": "Jade is a high performance template engine heavily influenced by Haml and implemented with JavaScript for node.",
+      "logo": "jade.png"
+    },
+    "haml": {
+      "key": "haml",
+      "title": "HAML",
+      "url": "http://haml.info/",
+      "description": "Beautiful, DRY, well-indented, clear markup: templating haiku.",
+      "logo": "haml.png"
+    },
+    "handlebars": {
+      "key": "handlebars",
+      "title": "Handlebars",
+      "url": "http://handlebarsjs.com/",
+      "description": "Handlebars provides the power necessary to let you build semantic templates effectively with no frustration.",
+      "logo": "handlebars.png"
     }
 }

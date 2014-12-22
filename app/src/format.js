@@ -49,6 +49,10 @@ module.exports = function () {
       return tech !== 'default' && tech !== 'css' && tech !== 'official' && tech !== 'none';
     });
 
+  _.forEach(this.props.htmlPreprocessors, function(preprocessor) {
+    usedTechs.push(preprocessor.key);
+  });
+
   var techsContent = _.map(usedTechs, function(value) {
     return listTechs[value];
   });
@@ -173,4 +177,25 @@ module.exports = function () {
   if(this.props.jsPreprocessor.key === 'coffee') {
     this.lintConfCopies.push('coffeelint.json');
   }
+
+  function dependencyString(dep, version) {
+    return '"' + dep + '": ' + '"' + version + '"';
+  }
+
+  this.consolidateExtensions = [];
+
+  this.npmDevDependencies = [];
+  this.consolidateParameters = [];
+
+  // Adding npm dev dependencies
+  _.forEach(this.props.htmlPreprocessors, function(preprocessor) {
+    _.forEach(preprocessor.npm, function(version, dep) {
+      this.npmDevDependencies.push(dependencyString(dep, version));
+    }.bind(this));
+    this.consolidateParameters.push(
+      JSON.stringify(preprocessor.consolidate).
+        replace(/"/g,'\'')); // Replace " with ' and assume this won't break anything.
+    this.consolidateExtensions.push(preprocessor.extension);
+  }.bind(this));
+
 };

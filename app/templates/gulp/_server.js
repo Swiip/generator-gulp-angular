@@ -38,6 +38,8 @@ gulp.task('serve', ['watch'], function () {
     '<% if(props.cssPreprocessor.key === 'none') { %>src<% } else { %>.tmp<% } %>/{app,components}/**/*.css',
     '<% if(props.jsPreprocessor.key === 'none') { %>src<% } else { %>.tmp<% } %>/{app,components}/**/*.js',
     'src/assets/images/**/*',
+    '.tmp/*.html',
+    '.tmp/{app,components}/**/*.html',
     'src/*.html',
     'src/{app,components}/**/*.html'
   ]);

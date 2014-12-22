@@ -23,6 +23,7 @@
     "e2e/main.po.js",
     
     "gulp/build.js",
+    "gulp/consolidate.js",
     "gulp/watch.js",
     "gulp/wiredep.js",
     "gulp/server.js",

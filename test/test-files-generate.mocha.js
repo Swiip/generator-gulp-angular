@@ -22,6 +22,7 @@ describe('gulp-angular generator', function () {
   var expectedFile = [
     // gulp/ directory
     'gulp/build.js',
+    'gulp/consolidate.js',
     'gulp/e2e-tests.js',
     'gulp/proxy.js',
     'gulp/server.js',
@@ -101,8 +102,8 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass, Standard JS]', function () {
-    // Default scenario: angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass, standard js
+  describe('with default options: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass, Standard JS, Jade]', function () {
+    // Default scenario: angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass, standard js, jade
     it('should generate the expected files and their content', function (done) {
       helpers.mockPrompt(gulpAngular, defaults);
 
@@ -154,6 +155,10 @@ describe('gulp-angular generator', function () {
           ['bower.json', libRegexp('angular-resource', prompts.angularVersion.values['1.3'])],
           ['bower.json', libRegexp('angular-route', prompts.angularVersion.values['1.3'])],
           ['bower.json', libRegexp('bootstrap-sass-official', prompts.ui.values.bootstrap.version)],
+
+          // Check consolidate
+          ['gulp/build.js', /gulp\.task\('partials'.*?'consolidate'/],
+          ['gulp/consolidate.js', /'jade'/],
 
           // Check package.json
           ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)],
@@ -926,6 +931,49 @@ describe('gulp-angular generator', function () {
         assert.noFileContent([
           ['gulp/build.js', /gulp\.task\(\'browserify\'/],
           ['package.json', /gulp-browserify/]
+        ]);
+
+        done();
+      });
+    });
+  });
+
+  describe('with option: [No HTML Preprocessor]', function () {
+    it('should not have consolidate gulp task', function (done) {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        htmlPreprocessors: []
+      }));
+
+      gulpAngular.run({}, function() {
+        var expectedFileClone = _.clone(expectedFile);
+        assert.file(expectedFileClone);
+
+        assert.noFileContent([
+          ['gulp/build.js', /gulp\.task\('partials'.*?'consolidate'/],
+          ['gulp/consolidate.js', /'jade'/],
+          ['gulp/consolidate.js', /'hamljs'/],
+          ['gulp/consolidate.js', /'handlebars'/]
+        ]);
+
+        done();
+      });
+    });
+  });
+
+  describe('with option: [All HTML Preprocessors]', function () {
+    it('should have consolidate gulp task', function (done) {
+      helpers.mockPrompt(gulpAngular, _.assign(defaults, {
+        htmlPreprocessors: _.map(prompts.htmlPreprocessors.choices, function(c) {return c.value;})
+      }));
+
+      gulpAngular.run({}, function() {
+        assert.file(expectedFile);
+
+        assert.fileContent([
+          ['gulp/build.js', /gulp\.task\('partials'.*?'consolidate'/],
+          ['gulp/consolidate.js', /'jade'/],
+          ['gulp/consolidate.js', /'hamljs'/],
+          ['gulp/consolidate.js', /'handlebars'/]
         ]);
 
         done();
