@@ -19,6 +19,7 @@ module <%= appName %> {
   }
 
   export class MainCtrl {
+    /* @ngInject */
     constructor ($scope: IMainScope) {
       var awesomeThings = <%= technologies %>;
 

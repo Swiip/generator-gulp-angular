@@ -1,8 +1,12 @@
 'use strict';
 /*jshint esnext: true */
 
-export default class NavbarCtrl {
+class NavbarCtrl {
   constructor ($scope) {
     $scope.date = new Date();
   }
 }
+
+NavbarCtrl.$inject = ['$scope'];
+
+export default NavbarCtrl;

@@ -1,7 +1,7 @@
 'use strict';
 /*jshint esnext: true */
 
-export default class MainCtrl {
+class MainCtrl {
   constructor ($scope) {
     $scope.awesomeThings = <%= technologies %>;
     $scope.awesomeThings.forEach(function(awesomeThing) {
@@ -9,3 +9,7 @@ export default class MainCtrl {
     });
   }
 }
+
+MainCtrl.$inject = ['$scope'];
+
+export default MainCtrl;
