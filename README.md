@@ -60,6 +60,7 @@ yo gulp-angular [app-name]
 * `gulp serve:dist` to launch a server on your optimized application
 * `gulp wiredep` to fill bower dependencies in your `.html` file(s)
 * `gulp test` to launch your unit tests with Karma
+* `gulp test:auto` to launch your unit tests with Karma in watch mode
 * `gulp protractor` to launch your e2e tests with Protractor
 * `gulp protractor:dist` to launch your e2e tests with Protractor on the dist files
 
