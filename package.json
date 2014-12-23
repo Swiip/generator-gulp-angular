@@ -1,6 +1,6 @@
 {
   "name": "generator-gulp-angular",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "preferGlobal": true,
   "description": "Yeoman generator for AngularJS with GulpJS",
   "keywords": "yeoman-generator, angular, gulp",
