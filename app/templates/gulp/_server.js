@@ -8,11 +8,13 @@ var browserSync = require('browser-sync');
 
 var middleware = require('./proxy');
 
+var paths = require('../.yo-rc.json')['generator-gulp-angular'].props.paths;
+
 function browserSyncInit(baseDir, files, browser) {
   browser = browser === undefined ? 'default' : browser;
 
   var routes = null;
-  if(baseDir === 'src' || (util.isArray(baseDir) && baseDir.indexOf('src') !== -1)) {
+  if(baseDir === paths.src || (util.isArray(baseDir) && baseDir.indexOf(paths.src) !== -1)) {
     routes = {
       '/bower_components': 'bower_components'
     };
@@ -32,27 +34,27 @@ function browserSyncInit(baseDir, files, browser) {
 
 gulp.task('serve', ['watch'], function () {
   browserSyncInit([
-    '.tmp',
-    'src'
+    paths.tmp,
+    paths.src
   ], [
-    '<% if(props.cssPreprocessor.key === 'none') { %>src<% } else { %>.tmp<% } %>/{app,components}/**/*.css',
-    '<% if(props.jsPreprocessor.key === 'none') { %>src<% } else { %>.tmp<% } %>/{app,components}/**/*.js',
-    'src/assets/images/**/*',
-    '.tmp/*.html',
-    '.tmp/{app,components}/**/*.html',
-    'src/*.html',
-    'src/{app,components}/**/*.html'
+    <% if(props.cssPreprocessor.key === 'none') { %>paths.src<% } else { %>paths.tmp<% } %> + '/{app,components}/**/*.css',
+    <% if(props.jsPreprocessor.key === 'none') { %>paths.src<% } else { %>paths.tmp<% } %> + '/{app,components}/**/*.js',
+    paths.src + '/assets/images/**/*',
+    paths.tmp + '/*.html',
+    paths.tmp + '/{app,components}/**/*.html',
+    paths.src + '/*.html',
+    paths.src + '/{app,components}/**/*.html'
   ]);
 });
 
 gulp.task('serve:dist', ['build'], function () {
-  browserSyncInit('dist');
+  browserSyncInit(paths.dist);
 });
 
 gulp.task('serve:e2e', ['wiredep', 'injector:js', 'injector:css'], function () {
-  browserSyncInit(['.tmp', 'src'], null, []);
+  browserSyncInit([paths.tmp, paths.src], null, []);
 });
 
 gulp.task('serve:e2e-dist', ['build'], function () {
-  browserSyncInit('dist', null, []);
+  browserSyncInit(paths.dist, null, []);
 });

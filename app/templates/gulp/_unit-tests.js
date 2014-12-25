@@ -6,6 +6,8 @@ var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep');
 
+var paths = require('../.yo-rc.json')['generator-gulp-angular'].props.paths;
+
 function runTests (singleRun, done) {
   var bowerDeps = wiredep({
     directory: 'bower_components',
@@ -15,20 +17,20 @@ function runTests (singleRun, done) {
   });
 
   var testFiles = bowerDeps.js.concat([ <% if (props.jsPreprocessor.key === 'none') { %>
-    'src/{app,components}/**/*.js' <%
+    paths.src + '/{app,components}/**/*.js' <%
   } else if (props.jsPreprocessor.extension === 'js') { %>
-    '.tmp/app/index.js',
-    'src/{app,components}/**/*.spec.js',
-    'src/{app,components}/**/*.mock.js' <%
+    paths.tmp + '/app/index.js',
+    paths.src + '/{app,components}/**/*.spec.js',
+    paths.src + '/{app,components}/**/*.mock.js' <%
   } else if (props.jsPreprocessor.key === 'typescript') { %>
-    '.tmp/{app,components}/**/!(index).js',
-    '.tmp/{app,components}/**/index.js',
-    'src/{app,components}/**/*.spec.js',
-    'src/{app,components}/**/*.mock.js' <%
+    paths.tmp + '/{app,components}/**/!(index).js',
+    paths.tmp + '/{app,components}/**/index.js',
+    paths.src + '/{app,components}/**/*.spec.js',
+    paths.src + '/{app,components}/**/*.mock.js' <%
   } else { %>
-    '.tmp/{app,components}/**/*.js',
-    'src/{app,components}/**/*.spec.js',
-    'src/{app,components}/**/*.mock.js' <%
+    paths.tmp + '/{app,components}/**/*.js',
+    paths.src + '/{app,components}/**/*.spec.js',
+    paths.src + '/{app,components}/**/*.mock.js' <%
   } %>
   ]);
 

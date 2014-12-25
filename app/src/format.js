@@ -12,6 +12,18 @@ module.exports = function () {
     this.props = this.config.get('props');
   }
 
+  // Format appName
+  this.appName = this.appName || path.basename(process.cwd());
+  this.appName = this._.camelize(this._.slugify(this._.humanize(this.appName)));
+
+  // Format paths
+  // this.props.paths stores pairs of source:dest folder
+  // this.computedPaths stores relative path between 
+  // pairs of paths in this.props.paths
+  this.computedPaths = {
+    appToBower: path.relative(this.props.paths.src, '')
+  };
+
   // Format list ngModules included in AngularJS DI
   var ngModules = this.props.angularModules.map(function (module) {
     return module.module;
@@ -220,5 +232,4 @@ module.exports = function () {
         replace(/"/g,'\'')); // Replace " with ' and assume this won't break anything.
     this.consolidateExtensions.push(preprocessor.extension);
   }.bind(this));
-
 };

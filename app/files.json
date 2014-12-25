@@ -1,5 +1,9 @@
 {
   "staticFiles": [
+    ".bowerrc",
+    ".editorconfig",
+    ".jshintrc",
+
     "gulpfile.js",
     "gulp/e2e-tests.js",
     "gulp/proxy.js",
@@ -10,13 +14,9 @@
     "protractor.conf.js",
     "e2e/main.spec.js"
   ],
-  "dotFiles": [
-    "bowerrc",
-    "editorconfig",
-    "gitignore",
-    "jshintrc"
-  ],
   "templates": [
+    ".gitignore",
+
     "package.json",
     "bower.json",
 

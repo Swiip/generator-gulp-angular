@@ -37,7 +37,7 @@ Please add unit tests for every new feature or bug fix and make sure all tests p
   | (3) `test-options.mocha.js` | Test default options. 
   | (4) `mute.js` | Mute Yeoman during tests. 
   | (5) `test-import-gen.js` | Test generator directory. 
-  | (6) `test-write-files.js` | Test number of files in generated app. 
+  | (6) `test-utils.js` | Unit tests for utils.js. 
 
 **Style Guide**  
 Please brief yourself on [Idiomatic.js](https://github.com/rwldrn/idiomatic.js) style guide with two space indent.

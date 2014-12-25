@@ -1,0 +1,66 @@
+[
+  {
+    "name": "app-path",
+    "type": "String",
+    "required": false,
+    "desc": "Angular app folder, relative to cwd",
+    "defaults": "src",
+    "save": true
+  },
+  { 
+    "name" : "dist-path", 
+    "type": "String",
+    "required": false,
+    "desc": "Build destination folder, relative to cwd",
+    "defaults": "dist",
+    "save": true
+  },
+  {  
+    "name": "e2e-path", 
+    "type": "String",
+    "required": false,
+    "desc": "e2e test specs folder, relative to cwd",
+    "defaults": "e2e",
+    "save": true
+  },
+  {
+    "name": "tmp-path",
+    "type": "String",
+    "required": false,
+    "desc": "temp build folder serving preprocessed files, relative to cwd",
+    "defaults": ".tmp",
+    "save": true
+  },
+  {
+    "name": "skip-install",
+    "type": "Boolean",
+    "required": false,
+    "desc": "skip npm install and bower install after project generated",
+    "defaults": false,
+    "save": false
+  },
+  {
+    "name": "skip-welcome-message",
+    "type": "Boolean",
+    "required": false,
+    "desc": "skip yo welcome message",
+    "defaults": false,
+    "save": false
+  },
+  {
+    "name": "skip-message",
+    "type": "Boolean",
+    "required": false,
+    "desc": "skip install message",
+    "defaults": false,
+    "save": false
+  },
+  {
+    "name": "default",
+    "type": "Boolean",
+    "required": false,
+    "desc": "Use default configurations",
+    "defaults": false,
+    "save": false
+  }
+]
