@@ -10,7 +10,7 @@ gulp.task('styles', ['wiredep', 'injector:css:preprocessor'], function () {<% if
   return gulp.src(['src/app/index.less', 'src/app/vendor.less'])
     .pipe($.less({
       paths: [
-        'src/bower_components',
+        'bower_components',
         'src/app',
         'src/components'
       ]
