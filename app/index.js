@@ -14,12 +14,13 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
   constructor: function () {
     yeoman.generators.Base.apply(this, arguments);
 
-    // Define the appName
+    // Define arguments
     this.argument('appName', {
       type: String,
       required: false
     });
 
+    // Define options
     options.forEach(function(option) {
       this.option(option.name, {
         type: global[option.type],

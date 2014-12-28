@@ -17,9 +17,9 @@ module.exports = function () {
   this.appName = this._.camelize(this._.slugify(this._.humanize(this.appName)));
 
   // Format paths
-  // this.props.paths stores pairs of source:dest folder
-  // this.computedPaths stores relative path between 
-  // pairs of paths in this.props.paths
+  //  - this.props.paths stores pairs of source:dest folder
+  //  - this.computedPaths stores relative path between 
+  //    pairs of paths in this.props.paths
   this.computedPaths = {
     appToBower: path.relative(this.props.paths.src, '')
   };
@@ -167,12 +167,7 @@ module.exports = function () {
     }
   }
 
-  if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
-    var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
-    this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
-  }
-
-  //JS Preprocessor files
+  // Template files
   this.srcTemplates = {};
   files.templates.forEach(function(file) {
     var basename = path.basename(file);
@@ -191,6 +186,12 @@ module.exports = function () {
     this.srcTemplates[src] = dest;
   }, this);
 
+  if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
+    var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
+    this.srcTemplates[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
+  }
+
+  // Static files
   this.staticFiles = {};
   files.staticFiles.forEach(function(file) {
     var src = file;
