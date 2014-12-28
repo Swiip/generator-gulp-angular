@@ -35,8 +35,15 @@ gulp.task('serve', ['watch'], function () {
     '.tmp',
     'src'
   ], [
-    '<% if(props.cssPreprocessor.key === 'none') { %>src<% } else { %>.tmp<% } %>/{app,components}/**/*.css',
-    '<% if(props.jsPreprocessor.key === 'none') { %>src<% } else { %>.tmp<% } %>/{app,components}/**/*.js',
+<% if(props.cssPreprocessor.key === 'none') { %>
+    'src/{app,components}/**/*.css',
+<% } else { %>
+    '.tmp/{app,components}/**/*.css',
+<% } if(props.jsPreprocessor.key === 'none') { %>
+    'src/{app,components}/**/*.js',
+<% } else { %>
+    '.tmp/{app,components}/**/*.js',
+<% } %>
     'src/assets/images/**/*',
     '.tmp/*.html',
     '.tmp/{app,components}/**/*.html',

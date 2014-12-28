@@ -17,12 +17,16 @@ describe('gulp-angular generator files', function () {
       staticFiles: data.staticFiles,
       _: _,
       fs: {
-        copy: function() { actualCopy++; },
-        copyTpl: function() { actualTemplate++; }
+        copy: function(src, dest, options) {
+          if(_.isObject(options) && _.isFunction(options.process)) {
+            actualTemplate++;
+          } else {
+            actualCopy++;
+          }
+        }
       },
       templatePath: function (string) { return string; },
-      destinationPath: function (string) { return string; },
-      template: function (key, val) { actualTemplate++; }
+      destinationPath: function (string) { return string; }
     });
 
     var expectedCopy =
@@ -34,6 +38,7 @@ describe('gulp-angular generator files', function () {
 
     actualCopy.should.be.equal(expectedCopy);
     actualTemplate.should.be.equal(expectedTemplate);
+    
   });
 
 });

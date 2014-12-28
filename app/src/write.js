@@ -1,11 +1,16 @@
 'use strict';
 
 var files = require('../files.json');
-var path = require('path');
 
 /* Process files */
 module.exports = function () {
   var _ = this._;
+
+  var data = this;
+
+  function process(content) {
+    return _.template(content.toString().replace(/\n<%/g, '<%'), data);
+  }
 
   // Copy dot files
   _.forEach(files.dotFiles, function(src) {
@@ -26,7 +31,7 @@ module.exports = function () {
     this.fs.copy(this.templatePath(key),  this.destinationPath(value));
   }.bind(this));
   _.forEach(this.srcTemplates, function(value, key) {
-    this.template(key, value);
+    this.fs.copy(this.templatePath(key),  this.destinationPath(value), { process: process });
   }.bind(this));
   _.forEach(this.lintConfCopies, function(src) {
     this.fs.copy(this.templatePath(src),  this.destinationPath(src));
