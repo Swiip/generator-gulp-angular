@@ -1,6 +1,8 @@
 'use strict';
 
 var path = require('path');
+var files = require('../files.json');
+var fs = require('fs');
 
 module.exports = function () {
   var _ = this._;
@@ -159,18 +161,39 @@ module.exports = function () {
   }
 
   //JS Preprocessor files
-  var files = [
-    'src/app/index',
-    'src/app/main/main.controller',
-    'src/components/navbar/navbar.controller'
-  ];
-
   this.srcTemplates = {};
-  files.forEach(function(file) {
+  files.templates.forEach(function(file) {
     var basename = path.basename(file);
-    var dest = file + '.' + this.props.jsPreprocessor.extension;
-    var src = file.replace(basename, '_' + basename) + '.' + this.props.jsPreprocessor.srcExtension;
+    var src = file.replace(basename, '_' + basename);
+    var dest = file;
+
+    var isJsPreprocessor = src.match(/\.js$/) && fs.existsSync(this.sourceRoot() + '/' + src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension));
+
+    if(isJsPreprocessor) {
+      src = src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
+    }
+    if(isJsPreprocessor) {
+      dest = dest.replace(/\.js$/, '.' + this.props.jsPreprocessor.extension);
+    }
+
     this.srcTemplates[src] = dest;
+  }, this);
+
+  this.staticFiles = {};
+  files.staticFiles.forEach(function(file) {
+    var src = file;
+    var dest = file;
+
+    var isJsPreprocessor = src.match(/\.js$/) && fs.existsSync(this.sourceRoot() + '/' + src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension));
+
+    if(isJsPreprocessor) {
+      src = src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
+    }
+    if(isJsPreprocessor) {
+      dest = dest.replace(/\.js$/, '.' + this.props.jsPreprocessor.extension);
+    }
+
+    this.staticFiles[src] = dest;
   }, this);
 
   this.lintConfCopies = [];

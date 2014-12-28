@@ -28,9 +28,10 @@
     "gulp/wiredep.js",
     "gulp/server.js",
     "gulp/unit-tests.js",
-
+    "src/app/index.js",
     "src/index.html",
-
-    "src/app/main/main.controller.spec.js"
+    "src/app/main/main.controller.js",
+    "src/app/main/main.controller.spec.js",
+    "src/components/navbar/navbar.controller.js"
   ]
 }
