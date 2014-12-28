@@ -16,22 +16,23 @@ function runTests (singleRun, done) {
     devDependencies: true
   });
 
-  var testFiles = bowerDeps.js.concat([ <% if (props.jsPreprocessor.key === 'none') { %>
-    paths.src + '/{app,components}/**/*.js' <%
-  } else if (props.jsPreprocessor.extension === 'js') { %>
+  var testFiles = bowerDeps.js.concat([
+<% if (props.jsPreprocessor.key === 'none') { %>
+    paths.src + '/{app,components}/**/*.js'
+<% } else if (props.jsPreprocessor.extension === 'js') { %>
     paths.tmp + '/app/index.js',
     paths.src + '/{app,components}/**/*.spec.js',
-    paths.src + '/{app,components}/**/*.mock.js' <%
-  } else if (props.jsPreprocessor.key === 'typescript') { %>
+    paths.src + '/{app,components}/**/*.mock.js'
+<% } else if (props.jsPreprocessor.key === 'typescript') { %>
     paths.tmp + '/{app,components}/**/!(index).js',
     paths.tmp + '/{app,components}/**/index.js',
     paths.src + '/{app,components}/**/*.spec.js',
-    paths.src + '/{app,components}/**/*.mock.js' <%
-  } else { %>
+    paths.src + '/{app,components}/**/*.mock.js'
+<% } else { %>
     paths.tmp + '/{app,components}/**/*.js',
     paths.src + '/{app,components}/**/*.spec.js',
-    paths.src + '/{app,components}/**/*.mock.js' <%
-  } %>
+    paths.src + '/{app,components}/**/*.mock.js'
+<% } %>
   ]);
 
   gulp.src(testFiles)
@@ -46,12 +47,12 @@ function runTests (singleRun, done) {
 }
 
 <% if (props.jsPreprocessor.key === 'none') { %>
-  gulp.task('test', function (done) { runTests(true /* singleRun */, done) });
-  gulp.task('test:auto', function (done) { runTests(false /* singleRun */, done) });
+gulp.task('test', function (done) { runTests(true /* singleRun */, done) });
+gulp.task('test:auto', function (done) { runTests(false /* singleRun */, done) });
 <% } else if (props.jsPreprocessor.extension === 'js') { %>
-  gulp.task('test', ['browserify'], function (done) { runTests(true /* singleRun */, done) });
-  gulp.task('test:auto', ['browserify'], function (done) { runTests(false /* singleRun */, done) });
+gulp.task('test', ['browserify'], function (done) { runTests(true /* singleRun */, done) });
+gulp.task('test:auto', ['browserify'], function (done) { runTests(false /* singleRun */, done) });
 <% } else { %>
-  gulp.task('test', ['scripts'], function (done) { runTests(true /* singleRun */, done) });
-  gulp.task('test:auto', ['scripts'], function (done) { runTests(false /* singleRun */, done) });
+gulp.task('test', ['scripts'], function (done) { runTests(true /* singleRun */, done) });
+gulp.task('test:auto', ['scripts'], function (done) { runTests(false /* singleRun */, done) });
 <% } %>

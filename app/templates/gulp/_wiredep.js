@@ -10,8 +10,10 @@ gulp.task('wiredep', function () {
 
   return gulp.src(paths.src + '/index.html')
     .pipe(wiredep({
-      directory: 'bower_components'<% if(wiredepExclusions.length > 0) { %>,
-      exclude: [<%= wiredepExclusions.join(', ') %>]<% } %>
+      directory: 'bower_components'
+<% if(wiredepExclusions.length > 0) { %>,
+      exclude: [<%= wiredepExclusions.join(', ') %>]
+<% } %>
     }))
     .pipe(gulp.dest(paths.src));
 });
