@@ -6,7 +6,7 @@ var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep');
 
-var paths = require('../.yo-rc.json')['generator-gulp-angular'].props.paths;
+var paths = gulp.paths;
 
 function runTests (singleRun, done) {
   var bowerDeps = wiredep({

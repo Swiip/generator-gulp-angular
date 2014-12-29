@@ -4,7 +4,6 @@
     ".editorconfig",
     ".jshintrc",
 
-    "gulpfile.js",
     "gulp/e2e-tests.js",
     "gulp/proxy.js",
     "src/favicon.ico",
@@ -22,6 +21,7 @@
 
     "e2e/main.po.js",
     
+    "gulpfile.js",
     "gulp/build.js",
     "gulp/consolidate.js",
     "gulp/watch.js",

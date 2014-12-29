@@ -6,7 +6,7 @@ var $ = require('gulp-load-plugins')();
 
 var browserSync = require('browser-sync');
 
-var paths = require('../.yo-rc.json')['generator-gulp-angular'].props.paths;
+var paths = gulp.paths;
 
 // Downloads the selenium webdriver
 gulp.task('webdriver-update', $.protractor.webdriver_update);

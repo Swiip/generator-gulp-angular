@@ -2,7 +2,7 @@
 
 var gulp = require('gulp');
 
-var paths = require('../.yo-rc.json')['generator-gulp-angular'].props.paths;
+var paths = gulp.paths;
 
 gulp.task('watch', [<% if (!_.isEmpty(props.htmlPreprocessors)) { %>'consolidate', <% } %>'wiredep', 'injector:css', 'injector:js'] ,function () {
   gulp.watch(paths.src + '/{app,components}/**/*.<%= props.cssPreprocessor.extension %>', ['injector:css']);<% if (props.jsPreprocessor.extension === 'js') { %>
