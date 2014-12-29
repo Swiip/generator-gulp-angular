@@ -18,7 +18,7 @@ module.exports = function () {
 
   // Format paths
   //  - this.props.paths stores pairs of source:dest folder
-  //  - this.computedPaths stores relative path between 
+  //  - this.computedPaths stores relative path between
   //    pairs of paths in this.props.paths
   this.computedPaths = {
     appToBower: path.relative(this.props.paths.src, '')
@@ -167,47 +167,37 @@ module.exports = function () {
     }
   }
 
-  // Template files
-  this.srcTemplates = {};
-  files.templates.forEach(function(file) {
-    var basename = path.basename(file);
-    var src = file.replace(basename, '_' + basename);
-    var dest = file;
-
-    var isJsPreprocessor = src.match(/\.js$/) && fs.existsSync(this.sourceRoot() + '/' + src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension));
-
-    if(isJsPreprocessor) {
-      src = src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
-    }
-    if(isJsPreprocessor) {
-      dest = dest.replace(/\.js$/, '.' + this.props.jsPreprocessor.extension);
-    }
-
-    this.srcTemplates[src] = dest;
-  }, this);
-
   if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
     var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
-    this.srcTemplates[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
+    this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
   }
 
-  // Static files
-  this.staticFiles = {};
-  files.staticFiles.forEach(function(file) {
-    var src = file;
-    var dest = file;
+  //JS Preprocessor files
+  function resolvePaths(template) {
+    return function(filesObject, file) {
+      var src = file, dest = file;
 
-    var isJsPreprocessor = src.match(/\.js$/) && fs.existsSync(this.sourceRoot() + '/' + src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension));
+      if(template) {
+        var basename = path.basename(file);
+        src = file.replace(basename, '_' + basename);
+      }
 
-    if(isJsPreprocessor) {
-      src = src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
-    }
-    if(isJsPreprocessor) {
-      dest = dest.replace(/\.js$/, '.' + this.props.jsPreprocessor.extension);
-    }
+      if(src.match(/\.js$/)) {
+        var preprocessorFile = this.sourceRoot() + '/' + src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
+        if(fs.existsSync(preprocessorFile)) {
+          src = src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
+          dest = dest.replace(/\.js$/, '.' + this.props.jsPreprocessor.extension);
+        }
+      }
 
-    this.staticFiles[src] = dest;
-  }, this);
+      filesObject[src] = dest;
+      return filesObject;
+    };
+  }
+
+  this.srcTemplates = files.templates.reduce(resolvePaths(true).bind(this), {});
+
+  this.staticFiles = files.staticFiles.reduce(resolvePaths(false).bind(this), {});
 
   this.lintConfCopies = [];
   if(this.props.jsPreprocessor.key === 'coffee') {
