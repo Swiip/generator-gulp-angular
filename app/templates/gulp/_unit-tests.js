@@ -4,6 +4,7 @@ var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')();
 
+var merge = require('merge-stream');
 var wiredep = require('wiredep');
 
 function runTests (singleRun, done) {
@@ -14,7 +15,8 @@ function runTests (singleRun, done) {
     devDependencies: true
   });
 
-  var testFiles = bowerDeps.js.concat([ <% if (props.jsPreprocessor.key === 'none') { %>
+  var testFiles = gulp.src(bowerDeps.js);
+  var srcFiles = gulp.src([ <% if (props.jsPreprocessor.key === 'none') { %>
     'src/{app,components}/**/*.js' <%
   } else if (props.jsPreprocessor.extension === 'js') { %>
     '.tmp/app/index.js',
@@ -30,9 +32,9 @@ function runTests (singleRun, done) {
     'src/{app,components}/**/*.spec.js',
     'src/{app,components}/**/*.mock.js' <%
   } %>
-  ]);
+  ]).pipe($.angularFilesort());
 
-  gulp.src(testFiles)
+  merge(testFiles, srcFiles)
     .pipe($.karma({
       configFile: 'karma.conf.js',
       action: (singleRun)? 'run': 'watch'
