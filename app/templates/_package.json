@@ -32,6 +32,7 @@
     "gulp-angular-filesort": "~1.0.4",<% } if(props.jsPreprocessor.key === 'coffee') { %>
     "gulp-coffeelint": "~0.4.0",<% } %>
     "main-bower-files": "~2.4.0",
+    "merge-stream": "~0.1.6",
     "jshint-stylish": "~1.0.0",
     "wiredep": "~2.2.0",
     "karma-jasmine": "~0.3.1",
