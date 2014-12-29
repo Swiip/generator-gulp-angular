@@ -161,40 +161,31 @@ module.exports = function () {
   }
 
   //JS Preprocessor files
-  this.srcTemplates = {};
-  files.templates.forEach(function(file) {
-    var basename = path.basename(file);
-    var src = file.replace(basename, '_' + basename);
-    var dest = file;
+  function resolvePaths(template) {
+    return function(filesObject, file) {
+      var src = file, dest = file;
 
-    var isJsPreprocessor = src.match(/\.js$/) && fs.existsSync(this.sourceRoot() + '/' + src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension));
+      if(template) {
+        var basename = path.basename(file);
+        src = file.replace(basename, '_' + basename);
+      }
 
-    if(isJsPreprocessor) {
-      src = src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
-    }
-    if(isJsPreprocessor) {
-      dest = dest.replace(/\.js$/, '.' + this.props.jsPreprocessor.extension);
-    }
+      if(src.match(/\.js$/)) {
+        var preprocessorFile = this.sourceRoot() + '/' + src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
+        if(fs.existsSync(preprocessorFile)) {
+          src = src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
+          dest = dest.replace(/\.js$/, '.' + this.props.jsPreprocessor.extension);
+        }
+      }
 
-    this.srcTemplates[src] = dest;
-  }, this);
+      filesObject[src] = dest;
+      return filesObject;
+    };
+  }
 
-  this.staticFiles = {};
-  files.staticFiles.forEach(function(file) {
-    var src = file;
-    var dest = file;
+  this.srcTemplates = files.templates.reduce(resolvePaths(true).bind(this), {});
 
-    var isJsPreprocessor = src.match(/\.js$/) && fs.existsSync(this.sourceRoot() + '/' + src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension));
-
-    if(isJsPreprocessor) {
-      src = src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
-    }
-    if(isJsPreprocessor) {
-      dest = dest.replace(/\.js$/, '.' + this.props.jsPreprocessor.extension);
-    }
-
-    this.staticFiles[src] = dest;
-  }, this);
+  this.staticFiles = files.staticFiles.reduce(resolvePaths(false).bind(this), {});
 
   this.lintConfCopies = [];
   if(this.props.jsPreprocessor.key === 'coffee') {
