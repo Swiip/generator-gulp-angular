@@ -19,15 +19,19 @@ describe('gulp-angular generator', function () {
   var mockOptions = require('../app/src/mock-options.js');
 
   var prompts = JSON.parse(JSON.stringify(mockPrompts.prompts));
-  var defaultPrompts;
+
+  var defaultPrompts = mockPrompts.defaults;
+  var defaultOptions = mockOptions.defaults;
+
+  var promptCase;
   var optionCase;
+
   var skipOptions = {
     'skip-install': true,
     'skip-welcome-message': true,
     'skip-message': true
   };
 
-  var promptCase;
   var gulpAngular;
 
   var tempDir = path.join(__dirname, 'tempGulpAngular');
@@ -64,8 +68,6 @@ describe('gulp-angular generator', function () {
   });
 
   beforeEach(function (done) {
-    defaultPrompts = JSON.parse(JSON.stringify(mockPrompts.defaults));
-
     helpers.testDirectory(tempDir, function (err) {
       if (err) {
         done(err);
@@ -79,6 +81,7 @@ describe('gulp-angular generator', function () {
         false,
         optionCase
       );
+      helpers.mockPrompt(gulpAngular, promptCase);
 
       gulpAngular.on('run', outputInTest.mute);
       gulpAngular.on('end', outputInTest.unmute);
@@ -89,14 +92,14 @@ describe('gulp-angular generator', function () {
 
   describe('with default paths config: [src, dist, e2e, .tmp]' + 
     '\n    with default prompts: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass]', function () {
+      
     before(function() {
-      optionCase = _.assign(JSON.parse(JSON.stringify(mockOptions.defaults)), skipOptions);
+      promptCase = _.assign(_.cloneDeep(defaultPrompts));
+      optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       tempDirDist = tempDir + '/' + optionCase['dist-path'];
     });
 
     it('should pass gulp build', function () {
-      helpers.mockPrompt(gulpAngular, defaultPrompts);
-
       return this.run(100000, 'build').should.be.fulfilled.then(function () {
         assert.ok(fs.statSync(tempDirDist + '/index.html').isFile(), 'File not exist');
         assert.ok(fs.statSync(tempDirDist + '/404.html').isFile(), 'File not exist');
@@ -110,20 +113,14 @@ describe('gulp-angular generator', function () {
     });
 
     it('should pass gulp test', function () {
-      helpers.mockPrompt(gulpAngular, defaultPrompts);
-
       return this.run(100000, 'test').should.be.fulfilled;
     });
 
     it('should pass gulp protractor', function () {
-      helpers.mockPrompt(gulpAngular, defaultPrompts);
-
       return this.run(100000, 'protractor').should.be.fulfilled;
     });
 
     it('should pass gulp protractor:dist', function () {
-      helpers.mockPrompt(gulpAngular, defaultPrompts);
-
       return this.run(100000, 'protractor:dist').should.be.fulfilled;
     });
   });
@@ -132,7 +129,7 @@ describe('gulp-angular generator', function () {
     '\n    with other prompts: [angular 1.2.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, angular-foundation, CSS, Coffee]', function () {
 
     before(function () {
-      promptCase = _.assign(defaultPrompts, {
+      promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         angularVersion: prompts.angularVersion.values['1.2'],
         jQuery: prompts.jQuery.values['jquery 2'],
         resource: prompts.resource.values.restangular,
@@ -143,7 +140,7 @@ describe('gulp-angular generator', function () {
         jsPreprocessor: prompts.jsPreprocessor.values.coffee
       });
 
-      optionCase = _.assign(JSON.parse(JSON.stringify(mockOptions.defaults)), skipOptions);
+      optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
 
       tempDirDist = tempDir + '/' + optionCase['dist-path'];
     });
@@ -186,7 +183,7 @@ describe('gulp-angular generator', function () {
     '\n    with other prompts: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, ZeptoJS 1.1.x, $http, Bootstrap, LESS, ES6 with 6to5]', function () {
 
     before(function () {
-      promptCase = _.assign(defaultPrompts, {
+      promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         jQuery: prompts.jQuery.values['zeptojs 1.1'],
         resource: prompts.resource.values.none,
         router: prompts.router.values.none,
@@ -196,15 +193,12 @@ describe('gulp-angular generator', function () {
         jsPreprocessor: prompts.jsPreprocessor.values['6to5']
       });
 
-      optionCase = _.assign(JSON.parse(JSON.stringify(mockOptions.defaults)), skipOptions);
+      optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
 
       tempDirDist = tempDir + '/' + optionCase['dist-path'];
     });
 
     it('should pass gulp build', function () {
-
-      helpers.mockPrompt(gulpAngular, promptCase);
-
       return this.run(100000, 'build').should.be.fulfilled.then(function () {
         assert.ok(fs.statSync(tempDirDist + '/index.html').isFile(), 'File not exist');
         assert.ok(fs.statSync(tempDirDist + '/404.html').isFile(), 'File not exist');
@@ -218,20 +212,14 @@ describe('gulp-angular generator', function () {
     });
 
     it('should pass gulp test', function () {
-      helpers.mockPrompt(gulpAngular, promptCase);
-
       return this.run(100000, 'test').should.be.fulfilled;
     });
 
     it('should pass gulp protractor', function () {
-      helpers.mockPrompt(gulpAngular, promptCase);
-
       return this.run(100000, 'protractor').should.be.fulfilled;
     });
 
     it('should pass gulp protractor:dist', function () {
-      helpers.mockPrompt(gulpAngular, promptCase);
-
       return this.run(100000, 'protractor:dist').should.be.fulfilled;
     });
   });
@@ -240,22 +228,19 @@ describe('gulp-angular generator', function () {
     '\n    with other prompts: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, $http, ngMaterial, Stylus, TypeScript]', function () {
 
     before(function () {
-      promptCase = _.assign(defaultPrompts, {
+      promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         jQuery: prompts.jQuery.values['jquery 1'],
         ui: prompts.ui.values['angular-material'],
         cssPreprocessor: prompts.cssPreprocessor.values.stylus,
         jsPreprocessor: prompts.jsPreprocessor.values.typescript
       });
 
-      optionCase = _.assign(JSON.parse(JSON.stringify(mockOptions.defaults)), skipOptions);
+      optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
 
       tempDirDist = tempDir + '/' + optionCase['dist-path'];
     });
 
     it('should pass gulp build', function () {
-
-      helpers.mockPrompt(gulpAngular, promptCase);
-
       return this.run(100000, 'build').should.be.fulfilled.then(function () {
         assert.ok(fs.statSync(tempDirDist + '/index.html').isFile(), 'File not exist');
         assert.ok(fs.statSync(tempDirDist + '/404.html').isFile(), 'File not exist');
@@ -268,20 +253,14 @@ describe('gulp-angular generator', function () {
     });
 
     it('should pass gulp test', function () {
-      helpers.mockPrompt(gulpAngular, promptCase);
-
       return this.run(100000, 'test').should.be.fulfilled;
     });
 
     it('should pass gulp protractor', function () {
-      helpers.mockPrompt(gulpAngular, promptCase);
-
       return this.run(100000, 'protractor').should.be.fulfilled;
     });
 
     it('should pass gulp protractor:dist', function () {
-      helpers.mockPrompt(gulpAngular, promptCase);
-
       return this.run(100000, 'protractor:dist').should.be.fulfilled;
     });
   });
@@ -289,7 +268,9 @@ describe('gulp-angular generator', function () {
   describe('with other paths config: [src:src/angular/app e2e:tests/e2e dist:target/build/folder tmp:.tmp/folder]' + 
     '\n    with default prompts: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass]', function () {
     before(function () {
-      optionCase = _.assign(JSON.parse(JSON.stringify(mockOptions.defaults)), 
+      promptCase = _.cloneDeep(defaultPrompts);
+
+      optionCase = _.assign(_.cloneDeep(defaultOptions), 
         _.merge({
           'app-path': 'src/angular/app',
           'dist-path': 'target/build/folder',
@@ -301,8 +282,6 @@ describe('gulp-angular generator', function () {
     });
 
     it('should pass gulp build', function () {
-      helpers.mockPrompt(gulpAngular, defaultPrompts);
-
       return this.run(100000, 'build').should.be.fulfilled.then(function () {
         assert.ok(fs.statSync(tempDirDist + '/index.html').isFile(), 'File not exist');
         assert.ok(fs.statSync(tempDirDist + '/404.html').isFile(), 'File not exist');
@@ -316,20 +295,14 @@ describe('gulp-angular generator', function () {
     });
 
     it('should pass gulp test', function () {
-      helpers.mockPrompt(gulpAngular, defaultPrompts);
-
       return this.run(100000, 'test').should.be.fulfilled;
     });
 
     it('should pass gulp protractor', function () {
-      helpers.mockPrompt(gulpAngular, defaultPrompts);
-
       return this.run(100000, 'protractor').should.be.fulfilled;
     });
 
     it('should pass gulp protractor:dist', function () {
-      helpers.mockPrompt(gulpAngular, defaultPrompts);
-
       return this.run(100000, 'protractor:dist').should.be.fulfilled;
     });
   });
