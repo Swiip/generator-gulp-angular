@@ -87,6 +87,8 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     }
 
     ['app-path', 'dist-path', 'e2e-path', 'tmp-path'].forEach(function (name) {
+      if (utils.isAbsolutePath(this.options[name]))
+        this.env.error(name + ' must be a relative path');
       this.options[name] = utils.normalizePath(this.options[name]);
     }.bind(this));
 

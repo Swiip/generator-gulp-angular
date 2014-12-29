@@ -4,13 +4,27 @@ var path = require('path');
 var _ = require('lodash');
 
 /**
- * Turn str into simplest form & relative to cwd
- * example: ./path/to//some/folder/ will be reduced to path/to/some/folder
+ * Turn str into simplest form, remove trailing slash
+ * example: ./path/to//some/folder/ will be normalized to to path/to/some/folder
  * @param  {String} str 
  * @return {String} 
  */
 function normalizePath(str) {
-  return path.relative(process.cwd(), path.join(process.cwd(), str));
+  var trailingSlash;
+  if (path.sep === '/') 
+    trailingSlash = new RegExp(path.sep + '$');
+  else 
+    trailingSlash = new RegExp(path.sep + path.sep + '$');
+  return path.normalize(str).replace(trailingSlash, '');
+}
+
+/**
+ * Check if string is absolute path
+ * @param  {String} str 
+ * @return {Boolean} 
+ */
+function isAbsolutePath(str) {
+  return path.resolve(str) === normalizePath(str);
 }
 
 /**
@@ -37,6 +51,7 @@ function replacePrefix(filePath, folderPairs) {
 }
 
 module.exports = {
+  isAbsolutePath: isAbsolutePath,
   normalizePath: normalizePath,
   replacePrefix: replacePrefix
 };

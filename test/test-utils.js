@@ -1,16 +1,24 @@
 'use strict';
 
 var utils = require('../app/src/utils');
+var path = require('path');
 require('chai').should();
 
 describe('gulp-angular generator utils', function () {
   describe('normalizePath', function() {
     it('should return simplest form of given relative path to cwd', function () {
-      utils.normalizePath('/path/to/folder').should.be.equal('path/to/folder');
-      utils.normalizePath('/path//to/folder').should.be.equal('path/to/folder');
-      utils.normalizePath('/path/to/folder/').should.be.equal('path/to/folder');
-      utils.normalizePath('./path/to/folder/').should.be.equal('path/to/folder');
-      utils.normalizePath('./../').should.be.equal('..');
+      utils.normalizePath('path' + path.sep + path.sep + 'to' + path.sep + 'folder' + path.sep).should.be.equal(['path', 'to' , 'folder'].join(path.sep));
+      utils.normalizePath('..' + path.sep).should.be.equal('..');
+    });
+  });
+
+  describe('isAbsolutePath', function() {
+    it('should return true for absolute path', function() {
+      utils.isAbsolutePath(path.sep + 'some' + path.sep + 'folder').should.be.equal(true);
+    });
+    
+    it('should return false for relative path', function() {
+      utils.isAbsolutePath(['some', 'relative', 'folder'].join(path.sep)).should.be.equal(false);
     });
   });
 
