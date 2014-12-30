@@ -7,7 +7,7 @@ require('chai').should();
 describe('gulp-angular generator utils', function () {
   describe('normalizePath', function() {
     it('should return simplest form of given relative path to cwd', function () {
-      utils.normalizePath('path' + path.sep + path.sep + 'to' + path.sep + 'folder' + path.sep).should.be.equal(['path', 'to' , 'folder'].join(path.sep));
+      utils.normalizePath('path' + path.sep + path.sep + 'to' + path.sep + 'folder' + path.sep).should.be.equal('path/to/folder');
       utils.normalizePath('..' + path.sep).should.be.equal('..');
     });
   });

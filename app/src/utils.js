@@ -2,12 +2,15 @@
 
 var path = require('path');
 var _ = require('lodash');
+var slash = require('slash');
 
 /**
  * Turn str into simplest form, remove trailing slash
- * example: ./path/to//some/folder/ will be normalized to to path/to/some/folder
- * @param  {String} str 
- * @return {String} 
+ * example: 
+ * './path/to//some/folder/' (unix) will be normalized to 'path/to/some/folder' 
+ * 'path\\to\\some\\folder\\' (windows) will be normalized to 'path/to/some/folder'
+ * @param  {String} str, can be unix style path ('/') or windows style path ('\\')
+ * @return {String} normalized unix style path
  */
 function normalizePath(str) {
   var trailingSlash;
@@ -15,16 +18,16 @@ function normalizePath(str) {
     trailingSlash = new RegExp(path.sep + '$');
   else 
     trailingSlash = new RegExp(path.sep + path.sep + '$');
-  return path.normalize(str).replace(trailingSlash, '');
+  return slash(path.normalize(str).replace(trailingSlash, ''));
 }
 
 /**
  * Check if string is absolute path
- * @param  {String} str 
- * @return {Boolean} 
+ * @param  {String} str, can be unix style path ('/') or windows style path ('\\')
+ * @return {Boolean} true if string is absolute path
  */
 function isAbsolutePath(str) {
-  return path.resolve(str) === normalizePath(str);
+  return slash(path.resolve(str)) === normalizePath(str);
 }
 
 /**
