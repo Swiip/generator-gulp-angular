@@ -64,7 +64,7 @@ yo gulp-angular [app-name]
 * `--skip-welcome-message` skip yo welcome messages, default is `false` (not skip)
 * `--skip-message` skip install messages, default is `false` (not skip)
 
-All paths configuration are stored in `.yo-rc.json`. Gulp files read from there to get path data. Change `paths` in `.yo-rc.json` if you want to config paths after the app is generated.
+All paths configuration are stored in `gulpfile.js`. Change `gulp.paths` in `gulpfile.js` if you want to config paths after the app is generated.
 
 ### Use Gulp tasks
 
