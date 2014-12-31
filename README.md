@@ -53,6 +53,19 @@ Run `yo gulp-angular`, optionally passing an app name:
 yo gulp-angular [app-name]
 ```
 
+### Yo options 
+`yo gulp-angular --help` or `yo gulp-angular -h` for help. All options are not required. If not provided, default values will be used.
+
+* `--app-path='src'` customize Angular's app folder, relative to cwd, default is `src`
+* `--dist-path='dist'` customize build target folder, relative to cwd, default is `dist`
+* `--e2e-path='e2e'` customize e2e test specs folder, relative to cwd, default is `e2e`
+* `--tmp-path='.tmp'` customize pre-processing temp folder, relative to cwd, default is `.tmp`
+* `--skip-install` do not run `bower install` and `npm install` after generating the app, default is `false` (not skip)
+* `--skip-welcome-message` skip yo welcome messages, default is `false` (not skip)
+* `--skip-message` skip install messages, default is `false` (not skip)
+
+All paths configuration are stored in `gulpfile.js`. Change `gulp.paths` in `gulpfile.js` if you want to config paths after the app is generated.
+
 ### Use Gulp tasks
 
 * `gulp` or `gulp build` to build an optimized version of your application in `/dist`

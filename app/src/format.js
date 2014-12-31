@@ -12,6 +12,18 @@ module.exports = function () {
     this.props = this.config.get('props');
   }
 
+  // Format appName
+  this.appName = this.appName || path.basename(process.cwd());
+  this.appName = this._.camelize(this._.slugify(this._.humanize(this.appName)));
+
+  // Format paths
+  //  - this.props.paths stores pairs of source:dest folder
+  //  - this.computedPaths stores relative path between 
+  //    pairs of paths in this.props.paths
+  this.computedPaths = {
+    appToBower: path.relative(this.props.paths.src, '')
+  };
+
   // Format list ngModules included in AngularJS DI
   var ngModules = this.props.angularModules.map(function (module) {
     return module.module;
@@ -155,12 +167,7 @@ module.exports = function () {
     }
   }
 
-  if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
-    var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
-    this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
-  }
-
-  //JS Preprocessor files
+  // Template files
   this.srcTemplates = {};
   files.templates.forEach(function(file) {
     var basename = path.basename(file);
@@ -179,6 +186,12 @@ module.exports = function () {
     this.srcTemplates[src] = dest;
   }, this);
 
+  if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
+    var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
+    this.srcTemplates[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
+  }
+
+  // Static files
   this.staticFiles = {};
   files.staticFiles.forEach(function(file) {
     var src = file;
@@ -220,5 +233,4 @@ module.exports = function () {
         replace(/"/g,'\'')); // Replace " with ' and assume this won't break anything.
     this.consolidateExtensions.push(preprocessor.extension);
   }.bind(this));
-
 };

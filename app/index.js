@@ -6,17 +6,29 @@ var yosay = require('yosay');
 var chalk = require('chalk');
 
 var prompts = require('./prompts.json');
+var options = require('./options.json');
+var utils = require('./src/utils.js');
 
 var GulpAngularGenerator = yeoman.generators.Base.extend({
 
-  init: function () {
-    // Define the appName
+  constructor: function () {
+    yeoman.generators.Base.apply(this, arguments);
+
+    // Define arguments
     this.argument('appName', {
       type: String,
       required: false
     });
-    this.appName = this.appName || path.basename(process.cwd());
-    this.appName = this._.camelize(this._.slugify(this._.humanize(this.appName)));
+
+    // Define options
+    options.forEach(function(option) {
+      this.option(option.name, {
+        type: global[option.type],
+        required: option.required,
+        desc: option.desc,
+        defaults: option.defaults
+      });
+    }.bind(this));
   },
 
   info: function () {
@@ -28,11 +40,24 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     }
     if (this.options['default']) {
       var mockPrompts = require('./src/mock-prompts.js');
-      this.config.set('props', mockPrompts.defaults);
+      var mockOptions = require('./src/mock-options.js');
+      var savableOptionsDefaults = this._.filter(mockOptions.defaults, function(value, name) {
+        return this._.find(options, { name: name }).save;
+      }.bind(this));
+      this.props = {
+        paths: {
+          src: mockOptions.defaults['app-path'],
+          dist: mockOptions.defaults['dist-path'],
+          e2e: mockOptions.defaults['e2e-path'],
+          tmp: mockOptions.defaults['tmp-path']
+        }
+      }
+      this.config.set('props', this._.merge(this.props, mockPrompts.defaults));
 
       this.log('__________________________');
       this.log('You use ' + chalk.green('--default') + ' option:');
       this.log('\t* angular 1.3.x\n\t* ngAnimate\n\t* ngCookies\n\t* ngTouch\n\t* ngSanitize\n\t* jQuery 1.x.x\n\t* ngResource\n\t* ngRoute\n\t* bootstrap\n\t* ui-bootstrap\n\t* node-sass');
+      this.log('\n\t* --app-path=\'src\'\n\t* --dist-path=\'dist\'\n\t* --e2e-path=\'e2e\'\n\t* --tmp-path=\'.tmp\'');
       this.log('__________________________\n');
     }
   },
@@ -53,6 +78,27 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
       }.bind(this));
     } else {
       cb();
+    }
+  },
+
+  retrieveOptions: function() {
+    if (this.skipConfig || this.options['default']) {
+      return;
+    }
+
+    ['app-path', 'dist-path', 'e2e-path', 'tmp-path'].forEach(function (name) {
+      if (utils.isAbsolutePath(this.options[name]))
+        this.env.error(name + ' must be a relative path');
+      this.options[name] = utils.normalizePath(this.options[name]);
+    }.bind(this));
+
+    this.props = {
+      paths: {
+        src: this.options['app-path'],
+        dist: this.options['dist-path'],
+        e2e: this.options['e2e-path'],
+        tmp: this.options['tmp-path']
+      }
     }
   },
 
@@ -90,7 +136,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
         };
       }
 
-      this.props = props;
+      this.props = this._.merge(this.props, props);
       this.config.set('props', this.props);
 
       done();

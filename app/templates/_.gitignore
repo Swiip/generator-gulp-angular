@@ -1,0 +1,5 @@
+node_modules/
+bower_components/
+.sass-cache/
+<%= props.paths.tmp %>/
+<%= props.paths.dist %>/

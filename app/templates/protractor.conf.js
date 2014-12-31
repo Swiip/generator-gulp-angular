@@ -1,3 +1,7 @@
+'use strict';
+
+var paths = require('./.yo-rc.json')['generator-gulp-angular'].props.paths;
+
 // An example configuration file.
 exports.config = {
   // The address of a running selenium server.
@@ -11,7 +15,7 @@ exports.config = {
 
   // Spec patterns are relative to the current working directly when
   // protractor is called.
-  specs: ['e2e/**/*.js'],
+  specs: [paths.e2e + '/**/*.js'],
 
   // Options to be passed to Jasmine-node.
   jasmineNodeOpts: {

@@ -1,7 +1,8 @@
 # Gulp Tasks
 
 Because the `gulpfile.js` was becoming enormous and because I hate huge files, this
-directory contains all the gulp tasks splited by purposes.
+directory contains all the gulp tasks splited by purposes. `gulpfiles.js` passes path 
+configuration to gulp tasks through `gulp.paths`.
 
 ## build.js
 
