@@ -2,174 +2,14 @@
 
 var gulp = require('gulp');
 
+var paths = gulp.paths;
+
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
-var paths = gulp.paths;
-
-<% if (props.cssPreprocessor.key !== 'none') { %>
-gulp.task('styles', ['wiredep', 'injector:css:preprocessor'], function () {
-  return gulp.src([paths.src + '/app/index.less', paths.src + '/app/vendor.less'])
-<%   if (props.cssPreprocessor.key === 'less') { %>
-  return gulp.src([paths.src + '/app/index.less', paths.src + '/app/vendor.less'])
-    .pipe($.less({
-      paths: [
-        'bower_components',
-        paths.src + '/app',
-        paths.src + '/components'
-      ]
-    }))
-<%   } else if (props.cssPreprocessor.key === 'ruby-sass') { %>
-  return gulp.src([paths.src + '/app/index.scss', paths.src + '/app/vendor.scss'])
-    .pipe($.rubySass({style: 'expanded'}))
-<%   } else if (props.cssPreprocessor.key === 'node-sass') { %>
-  return gulp.src([paths.src + '/app/index.scss', paths.src + '/app/vendor.scss'])
-    .pipe($.sass({style: 'expanded'}))
-<%   } else if (props.cssPreprocessor.key === 'stylus') { %>
-  return gulp.src([paths.src + '/app/index.styl', paths.src + '/app/vendor.styl'])
-    .pipe($.stylus())
-<%   } %>
-    .on('error', function handleError(err) {
-      console.error(err.toString());
-      this.emit('end');
-    })
-    .pipe($.autoprefixer())
-    .pipe(gulp.dest(paths.tmp + '/app/'));
-});
-
-gulp.task('injector:css:preprocessor', function () {
-<%   if (props.cssPreprocessor.key === 'less') { %>
-  return gulp.src(paths.src + '/app/index.less')
-    .pipe($.inject(gulp.src([
-      paths.src + '/{app,components}/**/*.less',
-      '!' + paths.src + '/app/index.less',
-      '!' + paths.src + '/app/vendor.less'
-<%   } else if (props.cssPreprocessor.key === 'ruby-sass' || props.cssPreprocessor.key === 'node-sass') { %>
-  return gulp.src(paths.src + '/app/index.scss')
-    .pipe($.inject(gulp.src([
-      paths.src + '/{app,components}/**/*.scss',
-      '!' + paths.src + '/app/index.scss',
-      '!' + paths.src + '/app/vendor.scss'
-<%   } else if (props.cssPreprocessor.key === 'stylus') { %>
-  return gulp.src(paths.src + '/app/index.styl')
-    .pipe($.inject(gulp.src([
-        paths.src + '/{app,components}/**/*.styl',
-        '!' + paths.src + '/app/index.styl',
-        '!' + paths.src + '/app/vendor.styl'
-<%   } %>
-      ], { read: false }), {
-      transform: function(filePath) {
-        filePath = filePath.replace(paths.src + '/app/', '');
-        filePath = filePath.replace(paths.src + '/components/', '../components/');
-        return '@import \'' + filePath + '\';';
-      },
-      starttag: '// injector',
-      endtag: '// endinjector',
-      addRootSlash: false
-    }))
-    .pipe(gulp.dest(paths.src + '/app/'));
-});
-<% } %>
-
-<% if (props.cssPreprocessor.key !== 'none') { %>
-gulp.task('injector:css', ['styles'], function () {
-<% } else { %>
-gulp.task('injector:css', ['wiredep'], function () {
-<% } %>
-  return gulp.src(paths.src + '/index.html')
-    .pipe($.inject(gulp.src([
-<% if (props.cssPreprocessor.key !== 'none') { %>
-        paths.tmp + '/{app,components}/**/*.css',
-        '!' + paths.tmp + '/app/vendor.css'
-<% } else { %>
-        path.src + '/{app,components}/**/*.css'
-<% } %>
-      ], {read: false}), {
-<% if (props.cssPreprocessor.key !== 'none') { %>
-      ignorePath: path.tmp,
-<% } else { %>
-      ignorePath: path.src,
-<% } %>
-      addRootSlash: false
-    }))
-    .pipe(gulp.dest(paths.src + '/'));
-});
-
-gulp.task('scripts', function () {
-<% if (props.jsPreprocessor.extension === 'js') { %>
-  return gulp.src(paths.src + '/{app,components}/**/*.js')
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
-<% } if (props.jsPreprocessor.key === '6to5') { %>
-    .pipe($['6to5']())
-<% } if (props.jsPreprocessor.key === 'traceur') { %>
-    .pipe($.traceur())
-<% } if (props.jsPreprocessor.key === 'coffee') { %>
-  return gulp.src(paths.src + '/{app,components}/**/*.coffee')
-    .pipe($.coffeelint())
-    .pipe($.coffeelint.reporter())
-    .pipe($.coffee())
-<% } if (props.jsPreprocessor.key === 'typescript') { %>
-  return gulp.src(paths.src + '/{app,components}/**/*.ts')
-    .pipe($.typescript())
-<% } if (props.jsPreprocessor.key !== 'none') { %>
-    .on('error', function handleError(err) {
-      console.error(err.toString());
-      this.emit('end');
-    })
-<%   if (props.jsPreprocessor.srcExtension === 'es6') { %>
-    .pipe(gulp.dest(paths.tmp + '/<%= props.jsPreprocessor.key %>'))
-<%   } else if (props.jsPreprocessor.key !== 'none') { %>
-    .pipe(gulp.dest(paths.tmp + '/'))
-<%   } %>
-    .pipe($.size())
-<% } %>;
-});
-
-<% if (props.jsPreprocessor.srcExtension === 'es6') { %>
-gulp.task('browserify', ['scripts'], function () {
-  return gulp.src(paths.tmp + '/<%= props.jsPreprocessor.key %>/app/index.js', { read: false })
-    .pipe($.browserify())
-    .on('error', function handleError(err) {
-      console.error(err.toString());
-      this.emit('end');
-    })
-    .pipe(gulp.dest(paths.tmp + '/app'))
-    .pipe($.size());
-});
-
-gulp.task('injector:js', ['browserify', 'injector:css'], function () {
-<% } else { %>
-gulp.task('injector:js', ['scripts', 'injector:css'], function () {
-<% } %>
-  return gulp.src([path.src + '/index.html', path.tmp '/index.html'])
-    .pipe($.inject(gulp.src([
-<% if (props.jsPreprocessor.key === 'none') { %>
-      path.src + '/{app,components}/**/*.js',
-<% } else if (props.jsPreprocessor.extension === 'js') { %>
-      path.tmp + '/{app,components}/**/*.js',
-<% } else { %>
-      '{' + path.src + ',' + path.tmp + '}/{app,components}/**/*.js',
-<% } %>
-      '!' + path.src + '/{app,components}/**/*.spec.js',
-      '!' + path.src + '/{app,components}/**/*.mock.js'
-<% if (props.jsPreprocessor.key === 'none') { %>
-    ]).pipe($.angularFilesort()), {
-      ignorePath: paths.src,
-<% } else if (props.jsPreprocessor.srcExtension === 'es6') { %>
-    ]), {
-      ignorePath: path.tmp,
-<% } else { %>
-      ignorePath: [paths.src, paths.tmp],
-<% } %>
-      addRootSlash: false
-    }))
-    .pipe(gulp.dest(paths.src + '/'));
-});
-
 <% if (!_.isEmpty(props.htmlPreprocessors)) { %>
-gulp.task('partials', ['consolidate'], function () {
+gulp.task('partials', ['markups'], function () {
 <% } else { %>
 gulp.task('partials', function () {
 <% } %>
@@ -182,21 +22,24 @@ gulp.task('partials', function () {
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
       module: '<%= appName %>'
     }))
-    .pipe(gulp.dest(paths.tmp + '/inject/'));
+    .pipe(gulp.dest(paths.tmp + '/partials/'));
 });
 
-gulp.task('html', ['wiredep', 'injector:css', 'injector:js', 'partials'], function () {
+gulp.task('html', ['inject', 'partials'], function () {
+  var partialsInjectFile = gulp.src(paths.tmp + '/partials/templateCacheHtml.js', { read: false });
+  var partialsInjectOptions = {
+    starttag: '<!-- inject:partials -->',
+    ignorePath: paths.tmp + '/partials',
+    addRootSlash: false
+  };
+
   var htmlFilter = $.filter('*.html');
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
   var assets;
 
-  return gulp.src([paths.src + '/*.html', paths.tmp + '/*.html'])
-    .pipe($.inject(gulp.src(paths.tmp + '/inject/templateCacheHtml.js', {read: false}), {
-      starttag: '<!-- inject:partials -->',
-      ignorePath: paths.tmp,
-      addRootSlash: false
-    }))
+  return gulp.src(paths.tmp + '/serve/*.html')
+    .pipe($.inject(partialsInjectFile, partialsInjectOptions))
     .pipe(assets = $.useref.assets())
     .pipe($.rev())
     .pipe(jsFilter)

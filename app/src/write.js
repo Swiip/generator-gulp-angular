@@ -2,7 +2,6 @@
 
 var utils = require('./utils');
 var files = require('../files.json');
-var path = require('path');
 
 /* Process files */
 module.exports = function () {
@@ -13,33 +12,43 @@ module.exports = function () {
     return _.template(content.toString().replace(/\n<%/g, '<%'), data);
   }
 
+  var copy = function copy(src, dest, processing) {
+    dest = utils.replacePrefix(dest, this.props.paths);
+    try {
+      if(processing) {
+        this.fs.copy(this.templatePath(src), this.destinationPath(dest), { process: process });
+      } else {
+        this.fs.copy(this.templatePath(src), this.destinationPath(dest));
+      }
+    } catch (error) {
+      console.error('Template processing error on file', src);
+      throw error;
+    }
+  }.bind(this);
+
   // Copy dot files
   _.forEach(files.dotFiles, function(src) {
-    this.fs.copy(this.templatePath(src),  this.destinationPath('.' + src));
-  }.bind(this));
+    copy(src, '.' + src);
+  });
 
   // Copy files formatted (format.js) with options selected in prompt
-  _.forEach(this.staticFiles, function(value, key) {
-    var dest = utils.replacePrefix(value, this.props.paths);
-    this.fs.copy(this.templatePath(key),  this.destinationPath(dest));
-  }.bind(this));
+  _.forEach(this.staticFiles, function(dest, src) {
+    copy(src, dest);
+  });
+
   _.forEach(this.technologiesLogoCopies, function(src) {
-    var dest = utils.replacePrefix(src, this.props.paths);
-    this.fs.copy(this.templatePath(src),  this.destinationPath(dest));
-  }.bind(this));
-  _.forEach(this.partialCopies, function(value, key) {
-    var dest = utils.replacePrefix(value, this.props.paths);
-    this.fs.copy(this.templatePath(key),  this.destinationPath(dest));
-  }.bind(this));
-  _.forEach(this.styleCopies, function(value, key) {
-    var dest = utils.replacePrefix(value, this.props.paths);
-    this.fs.copy(this.templatePath(key),  this.destinationPath(dest));
-  }.bind(this));
-  _.forEach(this.srcTemplates, function(value, key) {
-    var dest = utils.replacePrefix(value, this.props.paths);
-    this.fs.copy(this.templatePath(key),  this.destinationPath(dest), { process: process });
-  }.bind(this));
+    copy(src, src);
+  });
+  _.forEach(this.partialCopies, function(dest, src) {
+    copy(src, dest);
+  });
+  _.forEach(this.styleCopies, function(dest, src) {
+    copy(src, dest, true);
+  });
+  _.forEach(this.srcTemplates, function(dest, src) {
+    copy(src, dest, true);
+  });
   _.forEach(this.lintConfCopies, function(src) {
-    this.fs.copy(this.templatePath(src),  this.destinationPath(src));
-  }.bind(this));
+    copy(src, src);
+  });
 };

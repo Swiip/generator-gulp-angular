@@ -20,16 +20,16 @@ function runTests (singleRun, done) {
 <% if (props.jsPreprocessor.key === 'none') { %>
     paths.src + '/{app,components}/**/*.js'
 <% } else if (props.jsPreprocessor.extension === 'js') { %>
-    paths.tmp + '/app/index.js',
+    paths.tmp + '/serve/app/index.js',
     paths.src + '/{app,components}/**/*.spec.js',
     paths.src + '/{app,components}/**/*.mock.js'
 <% } else if (props.jsPreprocessor.key === 'typescript') { %>
-    paths.tmp + '/{app,components}/**/!(index).js',
-    paths.tmp + '/{app,components}/**/index.js',
+    paths.tmp + '/serve/{app,components}/**/!(index).js',
+    paths.tmp + '/serve/{app,components}/**/index.js',
     paths.src + '/{app,components}/**/*.spec.js',
     paths.src + '/{app,components}/**/*.mock.js'
 <% } else { %>
-    paths.tmp + '/{app,components}/**/*.js',
+    paths.tmp + '/serve/{app,components}/**/*.js',
     paths.src + '/{app,components}/**/*.spec.js',
     paths.src + '/{app,components}/**/*.mock.js'
 <% } %>

@@ -6,8 +6,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
 <% if (props.ui.name !== null) { %>
-    <!-- build:css({<%= props.paths.tmp %>,<%= props.paths.src %>}) styles/vendor.css -->
+    <!-- build:css({<%= props.paths.tmp %>/serve,<%= props.paths.src %>}) styles/vendor.css -->
 <%   if (isVendorStylesPreprocessed) { %>
     <link rel="stylesheet" href="app/vendor.css">
 <%   } else if (props.ui.key === 'bootstrap') { %>
@@ -19,13 +20,13 @@
     <!-- endbuild -->
 <% } %>
 
-    <!-- build:css({<%= props.paths.tmp %>,<%= props.paths.src %>}) styles/app.css -->
+    <!-- build:css({<%= props.paths.tmp %>/serve,<%= props.paths.src %>}) styles/app.css -->
     <!-- inject:css -->
     <!-- css files will be automaticaly insert here -->
     <!-- endinject -->
     <!-- endbuild -->
 
-    <!-- build:js scripts/modernizr.js -->
+    <!-- build:js(<%= props.paths.src %>) scripts/modernizr.js -->
     <script src="<%= computedPaths.appToBower %>/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
   </head>
@@ -46,13 +47,13 @@
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
 
-    <!-- build:js scripts/vendor.js -->
+    <!-- build:js(<%= props.paths.src %>) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- run `gulp wiredep` to automaticaly populate bower script dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js({<%= props.paths.tmp %>,<%= props.paths.src %>}) scripts/app.js -->
+    <!-- build:js({<%= props.paths.tmp %>/serve,<%= props.paths.tmp %>/partials,<%= props.paths.src %>}) scripts/app.js -->
     <!-- inject:js -->
     <!-- js files will be automaticaly insert here -->
     <!-- endinject -->

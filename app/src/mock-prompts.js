@@ -90,6 +90,10 @@ model.jsPreprocessor.choices.forEach(function(choice) {
   model.jsPreprocessor.values[choice.value.key] = choice.value;
 });
 
+model.htmlPreprocessors.choices.forEach(function(choice) {
+  model.htmlPreprocessors.values[choice.value.key] = choice.value;
+});
+
 module.exports = {
   prompts: model,
   defaults: {
@@ -103,9 +107,7 @@ module.exports = {
     foundationComponents: model.foundationComponents.values.none,
     cssPreprocessor: model.cssPreprocessor.values['node-sass'],
     jsPreprocessor: model.jsPreprocessor.values.none,
-    htmlPreprocessors: _.filter(_.pluck(model.htmlPreprocessors.choices, 'value'), function(v) {
-      return v.key === 'jade';
-    })
+    htmlPreprocessors: []
   },
   libRegexp: function(name, version) {
     return new RegExp('"' + name + '": "' + version + '"');

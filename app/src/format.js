@@ -172,6 +172,24 @@ module.exports = function () {
     this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
   }
 
+  var templateFiles = files.templates;
+
+  if(this.props.cssPreprocessor.key === 'none') {
+    templateFiles = _.reject(templateFiles, function(path) {
+      return /styles\.js/.test(path);
+    });
+  }
+  if(this.props.jsPreprocessor.key === 'none') {
+    templateFiles = _.reject(templateFiles, function(path) {
+      return /scripts\.js/.test(path);
+    });
+  }
+  if(_.isEmpty(this.props.htmlPreprocessors)) {
+    templateFiles = _.reject(templateFiles, function(path) {
+      return /markups\.js/.test(path);
+    });
+  }
+
   //JS Preprocessor files
   function resolvePaths(template) {
     return function(filesObject, file) {
@@ -195,7 +213,7 @@ module.exports = function () {
     };
   }
 
-  this.srcTemplates = files.templates.reduce(resolvePaths(true).bind(this), {});
+  this.srcTemplates = templateFiles.reduce(resolvePaths(true).bind(this), {});
 
   this.staticFiles = files.staticFiles.reduce(resolvePaths(false).bind(this), {});
 
