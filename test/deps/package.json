@@ -51,7 +51,8 @@
     "gulp-browserify": "~0.5.0",
     "jade": "~1.8.1",
     "hamljs": "~0.6.2",
-    "handlebars": "~2.0.0"
+    "handlebars": "~2.0.0",
+    "qrcode-terminal": "~0.9.5"
   },
   "engines": {
     "node": ">=0.10.0"

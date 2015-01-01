@@ -41,6 +41,7 @@
     "http-proxy": "~1.7.0",
     "chalk": "~0.5.1",
     "protractor": "~1.4.0",
+    "qrcode-terminal": "~0.9.5",
     "uglify-save-license": "~0.4.1"<% if(npmDevDependencies.length > 0) { %>,<% } %>
     <%= npmDevDependencies.join(',\n    ') %>
   },
