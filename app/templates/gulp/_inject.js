@@ -8,8 +8,6 @@ var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep').stream;
 
-
-
 <%  // inject task dependencies computation
     var injectTaskDeps = [];
     if (props.cssPreprocessor.key !== 'none') {

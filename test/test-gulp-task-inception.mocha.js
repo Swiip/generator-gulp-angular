@@ -126,7 +126,7 @@ describe('gulp-angular generator', function () {
   });
 
   describe('with default paths config: [src, dist, e2e, .tmp]' +
-    '\n    with other prompts: [angular 1.2.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, angular-foundation, CSS, Coffee]', function () {
+    '\n    with other prompts: [angular 1.2.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, angular-foundation, CSS, Coffee, Jade]', function () {
 
     before(function () {
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
@@ -137,7 +137,8 @@ describe('gulp-angular generator', function () {
         ui: prompts.ui.values.foundation,
         foundationComponents: prompts.foundationComponents.values['angular-foundation'],
         cssPreprocessor: prompts.cssPreprocessor.values.none,
-        jsPreprocessor: prompts.jsPreprocessor.values.coffee
+        jsPreprocessor: prompts.jsPreprocessor.values.coffee,
+        htmlPreprocessor: prompts.htmlPreprocessor.values.jade
       });
 
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
@@ -190,7 +191,8 @@ describe('gulp-angular generator', function () {
         ui: prompts.ui.values.bootstrap,
         bootstrapComponents: prompts.bootstrapComponents.values['ui-bootstrap'],
         cssPreprocessor: prompts.cssPreprocessor.values.less,
-        jsPreprocessor: prompts.jsPreprocessor.values['6to5']
+        jsPreprocessor: prompts.jsPreprocessor.values['6to5'],
+        htmlPreprocessor: prompts.htmlPreprocessor.values.haml
       });
 
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
@@ -232,7 +234,8 @@ describe('gulp-angular generator', function () {
         jQuery: prompts.jQuery.values['jquery 1'],
         ui: prompts.ui.values['angular-material'],
         cssPreprocessor: prompts.cssPreprocessor.values.stylus,
-        jsPreprocessor: prompts.jsPreprocessor.values.typescript
+        jsPreprocessor: prompts.jsPreprocessor.values.typescript,
+        htmlPreprocessor: prompts.htmlPreprocessor.values.handlebars
       });
 
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);

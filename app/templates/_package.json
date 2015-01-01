@@ -25,12 +25,20 @@
     "gulp-minify-html": "~0.1.7",
     "gulp-inject": "~1.0.2",
     "gulp-protractor": "~0.0.11",
-    "gulp-karma": "~0.0.4",<% if (props.cssPreprocessor.key !== 'none') { %>
-    "<%= props.cssPreprocessor.module %>": "<%= props.cssPreprocessor.version %>",<% } if (props.jsPreprocessor.key !== 'none') { %>
-    "<%= props.jsPreprocessor.module %>": "<%= props.jsPreprocessor.version %>",<% } if (props.jsPreprocessor.srcExtension === 'es6') { %>
-    "gulp-browserify": "~0.5.0",<% } else { %>
-    "gulp-angular-filesort": "~1.0.4",<% } if(props.jsPreprocessor.key === 'coffee') { %>
-    "gulp-coffeelint": "~0.4.0",<% } %>
+    "gulp-karma": "~0.0.4",
+<% if (props.cssPreprocessor.key !== 'none') { %>
+    "<%= props.cssPreprocessor.module %>": "<%= props.cssPreprocessor.version %>",
+<% } if (props.jsPreprocessor.key !== 'none') { %>
+    "<%= props.jsPreprocessor.module %>": "<%= props.jsPreprocessor.version %>",
+<% } if (props.jsPreprocessor.srcExtension === 'es6') { %>
+    "gulp-browserify": "~0.5.0",
+<% } else { %>
+    "gulp-angular-filesort": "~1.0.4",
+<% } if (props.jsPreprocessor.key === 'coffee') { %>
+    "gulp-coffeelint": "~0.4.0",
+<% } if (props.htmlPreprocessor.key !== 'none') { %>
+    "<%= props.htmlPreprocessor.module %>": "<%= props.htmlPreprocessor.version %>",
+<% } %>
     "main-bower-files": "~2.4.0",
     "jshint-stylish": "~1.0.0",
     "wiredep": "~2.2.0",
@@ -41,8 +49,7 @@
     "http-proxy": "~1.7.0",
     "chalk": "~0.5.1",
     "protractor": "~1.4.0",
-    "uglify-save-license": "~0.4.1"<% if(npmDevDependencies.length > 0) { %>,<% } %>
-    <%= npmDevDependencies.join(',\n    ') %>
+    "uglify-save-license": "~0.4.1"
   },
   "engines": {
     "node": ">=0.10.0"

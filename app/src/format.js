@@ -184,7 +184,7 @@ module.exports = function () {
       return /scripts\.js/.test(path);
     });
   }
-  if(_.isEmpty(this.props.htmlPreprocessors)) {
+  if(this.props.htmlPreprocessor.key === 'none') {
     templateFiles = _.reject(templateFiles, function(path) {
       return /markups\.js/.test(path);
     });
@@ -221,24 +221,4 @@ module.exports = function () {
   if(this.props.jsPreprocessor.key === 'coffee') {
     this.lintConfCopies.push('coffeelint.json');
   }
-
-  function dependencyString(dep, version) {
-    return '"' + dep + '": ' + '"' + version + '"';
-  }
-
-  this.consolidateExtensions = [];
-
-  this.npmDevDependencies = [];
-  this.consolidateParameters = [];
-
-  // Adding npm dev dependencies
-  _.forEach(this.props.htmlPreprocessors, function(preprocessor) {
-    _.forEach(preprocessor.npm, function(version, dep) {
-      this.npmDevDependencies.push(dependencyString(dep, version));
-    }.bind(this));
-    this.consolidateParameters.push(
-      JSON.stringify(preprocessor.consolidate).
-        replace(/"/g,'\'')); // Replace " with ' and assume this won't break anything.
-    this.consolidateExtensions.push(preprocessor.extension);
-  }.bind(this));
 };

@@ -13,7 +13,10 @@ gulp.task('partials', ['markups'], function () {
 <% } else { %>
 gulp.task('partials', function () {
 <% } %>
-  return gulp.src([paths.src + '/{app,components}/**/*.html', paths.tmp + '/{app,components}/**/*.html'])
+  return gulp.src([
+    paths.src + '/{app,components}/**/*.html',
+    paths.tmp + '/{app,components}/**/*.html'
+  ])
     .pipe($.minifyHtml({
       empty: true,
       spare: true,

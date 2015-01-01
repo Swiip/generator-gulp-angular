@@ -378,45 +378,45 @@
     ]
   },
   {
-    "type": "checkbox",
-    "name": "htmlPreprocessors",
-    "message": "Which html template engine would you want to have?",
+    "type": "list",
+    "name": "htmlPreprocessor",
+    "message": "Which html template engine would you want?",
     "choices": [
       {
         "value": {
-          "key": "jade",
-          "consolidate": ["jade", {"pretty": "  "}],
-          "extension": "jade",
-          "npm": {
-            "jade": "~1.8.1"
-          }
+          "key": "none",
+          "extension": "html",
+          "module": null,
+          "version": null
         },
-        "name": "Jade (*.jade)",
-        "checked": true
+        "name": "None, I like to code in standard HTML."
+      },
+      {
+        "value": {
+          "key": "jade",
+          "extension": "jade",
+          "module": "jade",
+          "version": "~1.8.1"
+        },
+        "name": "Jade (*.jade)"
       },
       {
         "value": {
           "key": "haml",
-          "consolidate": ["hamljs"],
           "extension": "haml",
-          "npm": {
-            "hamljs": "~0.6.2"
-          }
+          "module": "hamljs",
+          "version": "~0.6.2"
         },
-        "name": "Haml (*.haml)",
-        "checked": false
+        "name": "Haml (*.haml)"
       },
       {
         "value": {
           "key": "handlebars",
-          "consolidate": ["handlebars"],
           "extension": "hbs",
-          "npm": {
-            "handlebars": "~2.0.0"
-          }
+          "module": "handlebars",
+          "version": "~2.0.0"
         },
-        "name": "Handlebars (*.hbs)",
-        "checked": false
+        "name": "Handlebars (*.hbs)"
       }
     ]
   }
