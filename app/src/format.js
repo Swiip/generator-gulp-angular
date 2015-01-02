@@ -107,6 +107,19 @@ module.exports = function () {
     this.routerJs = '';
   }
 
+  // inject task dependencies computation
+  this.injectTaskDeps = [];
+  if (this.props.cssPreprocessor.key !== 'none') {
+    this.injectTaskDeps.push('\'styles\'');
+  }
+  if (this.props.jsPreprocessor.key !== 'none') {
+    if (this.props.jsPreprocessor.extension === 'js') {
+      this.injectTaskDeps.push('\'browserify\'');
+    } else {
+      this.injectTaskDeps.push('\'scripts\'');
+    }
+  }
+
   // Wiredep exclusions
   this.wiredepExclusions = [];
   if (this.props.ui.key === 'bootstrap') {

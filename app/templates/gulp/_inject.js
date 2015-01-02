@@ -8,20 +8,6 @@ var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep').stream;
 
-<%  // inject task dependencies computation
-    var injectTaskDeps = [];
-    if (props.cssPreprocessor.key !== 'none') {
-      injectTaskDeps.push('\'styles\'');
-    }
-    if (props.jsPreprocessor.key !== 'none') {
-      if (props.jsPreprocessor.extension === 'js') {
-        injectTaskDeps.push('\'browserify\'');
-      } else {
-        injectTaskDeps.push('\'scripts\'');
-      }
-    }
-%>
-
 <% if (_.isEmpty(injectTaskDeps)) { %>
 gulp.task('inject', function () {
 <% } else { %>

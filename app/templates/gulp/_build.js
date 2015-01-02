@@ -8,10 +8,10 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
-<% if (!_.isEmpty(props.htmlPreprocessors)) { %>
-gulp.task('partials', ['markups'], function () {
-<% } else { %>
+<% if (props.htmlPreprocessor.key === 'none') { %>
 gulp.task('partials', function () {
+<% } else { %>
+gulp.task('partials', ['markups'], function () {
 <% } %>
   return gulp.src([
     paths.src + '/{app,components}/**/*.html',
