@@ -6,6 +6,8 @@ var util = require('util');
 
 var browserSync = require('browser-sync');
 
+var qrcode = require('qrcode-terminal');
+
 var middleware = require('./proxy');
 
 var paths = gulp.paths;
@@ -28,6 +30,8 @@ function browserSyncInit(baseDir, files, browser) {
       routes: routes
     },
     browser: browser
+  }, function(err, bs) {
+    qrcode.generate(bs.options.urls.external);
   });
 
 }

@@ -13,18 +13,17 @@
     <!-- bower:css -->
     <!-- run `gulp wiredep` to automaticaly populate bower styles dependencies -->
     <!-- endbower -->
-    <!-- endbuild -->
-    <% } %>
+    <!-- endbuild --><% } %>
 
     <!-- build:css({<%= props.paths.tmp %>,<%= props.paths.src %>}) styles/app.css -->
     <!-- inject:css -->
     <!-- css files will be automaticaly insert here -->
     <!-- endinject -->
-    <!-- endbuild -->
+    <!-- endbuild --><% if (includeModernizr) { %>
 
     <!-- build:js scripts/modernizr.js -->
     <script src="<%= computedPaths.appToBower %>/bower_components/modernizr/modernizr.js"></script>
-    <!-- endbuild -->
+    <!-- endbuild --><% } %>
   </head>
   <body>
     <!--[if lt IE 10]>

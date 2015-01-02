@@ -177,12 +177,12 @@ gulp.task('html', ['wiredep', 'injector:css', 'injector:js', 'partials'], functi
 });
 
 gulp.task('images', function () {
-  return gulp.src(paths.src + '/assets/images/**/*')
+  return gulp.src(paths.src + '/assets/images/**/*')<% if (imageMin) { %>
     .pipe($.imagemin({
       optimizationLevel: 3,
       progressive: true,
       interlaced: true
-    }))
+    }))<% } %>
     .pipe(gulp.dest(paths.dist + '/assets/images/'));
 });
 

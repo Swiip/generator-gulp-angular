@@ -18,11 +18,20 @@ module.exports = function () {
 
   // Format paths
   //  - this.props.paths stores pairs of source:dest folder
-  //  - this.computedPaths stores relative path between 
+  //  - this.computedPaths stores relative path between
   //    pairs of paths in this.props.paths
   this.computedPaths = {
     appToBower: path.relative(this.props.paths.src, '')
   };
+
+  this.includeModernizr = false;
+  this.imageMin = false;
+  this.qrCode = false;
+  if (this.props.advancedFeatures) {
+    this.includeModernizr = (this.props.advancedFeatures.indexOf('modernizr') >= 0);
+    this.imageMin = (this.props.advancedFeatures.indexOf('imagemin') >= 0);
+    this.qrCode = (this.props.advancedFeatures.indexOf('qrCode') >= 0);
+  }
 
   // Format list ngModules included in AngularJS DI
   var ngModules = this.props.angularModules.map(function (module) {

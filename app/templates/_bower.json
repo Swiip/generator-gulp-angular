@@ -1,8 +1,8 @@
 {
   "name": "<%= appName %>",
   "version": "0.0.0",
-  "dependencies": {
-    "modernizr": "~2.8.3",<% if (props.jQuery.name !== null) { %>
+  "dependencies": {<% if (includeModernizr) { %>
+    "modernizr": "~2.8.3",<% } if (props.jQuery.name !== null) { %>
     "<%= props.jQuery.name %>": "<%= props.jQuery.version %>",<% } _.forEach(props.angularModules, function(module) { %>
     "<%= module.name %>": "<%= props.angularVersion %>",<% }); if (props.resource.name === 'angular-resource') { %>
     "angular-resource": "<%= props.angularVersion %>",<% } else if (props.resource.name === 'restangular') { %>
