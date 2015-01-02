@@ -165,6 +165,11 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
           "value": "imagemin",
           "name": "gulp-imagemin: minify PNG, JPEG, GIF and SVG images with imagemin",
           "checked": false
+        },
+        {
+          "value": "qrcode",
+          "name": "QRCode: display a qrcode in terminal with 'gulp serve'",
+          "checked": false
         }
       ]
     }, function (props) {
