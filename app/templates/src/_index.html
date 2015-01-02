@@ -24,11 +24,11 @@
     <!-- inject:css -->
     <!-- css files will be automaticaly insert here -->
     <!-- endinject -->
-    <!-- endbuild -->
+    <!-- endbuild --><% if (includeModernizr) { %>
 
     <!-- build:js(<%= props.paths.src %>) scripts/modernizr.js -->
     <script src="<%= computedPaths.appToBower %>/bower_components/modernizr/modernizr.js"></script>
-    <!-- endbuild -->
+    <!-- endbuild --><% } %>
   </head>
   <body>
     <!--[if lt IE 10]>
