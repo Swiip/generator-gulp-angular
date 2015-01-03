@@ -19,6 +19,11 @@ gulp.task('scripts', function () {
     .pipe($.coffeelint())
     .pipe($.coffeelint.reporter())
     .pipe($.coffee())
+<% } if (props.jsPreprocessor.key === 'livescript') { %>
+    .pipe($.livescript({bare: true}))
+    .pipe($.wrap('(function(){\n\'use strict\';\n<%= "\<%= contents %\>" %>\n})();'))
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('jshint-stylish'))
 <% } if (props.jsPreprocessor.key === 'typescript') { %>
     .pipe($.typescript())
 <% } %>
