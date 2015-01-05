@@ -65,16 +65,13 @@ module.exports = function () {
     this.props.bootstrapComponents.key,
     this.props.foundationComponents.key,
     this.props.cssPreprocessor.key,
-    this.props.jsPreprocessor.key
+    this.props.jsPreprocessor.key,
+    this.props.htmlPreprocessor.key
   ]
     .filter(_.isString)
     .filter(function(tech) {
       return tech !== 'default' && tech !== 'css' && tech !== 'official' && tech !== 'none';
     });
-
-  _.forEach(this.props.htmlPreprocessors, function(preprocessor) {
-    usedTechs.push(preprocessor.key);
-  });
 
   var techsContent = _.map(usedTechs, function(value) {
     return listTechs[value];
