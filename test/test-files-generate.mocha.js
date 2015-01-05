@@ -1059,7 +1059,7 @@ describe('gulp-angular generator', function () {
         assert.fileContent([
           ['gulp/build.js', /gulp\.task\('partials', \['markups'\]/],
           ['gulp/markups.js', /gulp\.task\('markups'/],
-          ['gulp/markups.js', /return gulp\.src\(paths\.src \+ '\/{app, components}\/\*\*\/\*\.jade'\)/],
+          ['gulp/markups.js', /return gulp\.src\(paths\.src \+ '\/{app,components}\/\*\*\/\*\.jade'\)/],
           ['gulp/markups.js', /\.pipe\(\$\.consolidate\('jade'/],
           ['gulp/watch.js', /gulp\.watch\(paths\.src \+ '\/{app,components}\/\*\*\/\*\.jade', \['markups'\]\);/]
         ]);
