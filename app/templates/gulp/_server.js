@@ -8,9 +8,11 @@ var util = require('util');
 
 var browserSync = require('browser-sync');
 
-var qrcode = require('qrcode-terminal');
-
 var middleware = require('./proxy');
+<% if(qrCode) { %>
+
+var qrcode = require('qrcode-terminal');
+<% } %>
 
 function browserSyncInit(baseDir, files, browser) {
   browser = browser === undefined ? 'default' : browser;
@@ -30,10 +32,13 @@ function browserSyncInit(baseDir, files, browser) {
       routes: routes
     },
     browser: browser
+<% if(qrCode) { %>
   }, function(err, bs) {
     qrcode.generate(bs.options.urls.external);
   });
-
+<% } else { %>
+  });
+<% } %>
 }
 
 gulp.task('serve', ['watch'], function () {
