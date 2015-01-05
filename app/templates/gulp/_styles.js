@@ -40,12 +40,15 @@ gulp.task('styles', function () {
     addRootSlash: false
   };
 
-  var indexFilter = $.filter(paths.src + '/app/index.<%= props.cssPreprocessor.extension %>');
+  var indexFilter = $.filter('index.<%= props.cssPreprocessor.extension %>');
 
   return gulp.src([
     paths.src + '/app/index.<%= props.cssPreprocessor.extension %>',
     paths.src + '/app/vendor.<%= props.cssPreprocessor.extension %>'
   ])
+    .pipe(indexFilter)
+    .pipe($.inject(injectFiles, injectOptions))
+    .pipe(indexFilter.restore())
 <% if (props.cssPreprocessor.key === 'less') { %>
     .pipe($.less())
 <% } else if (props.cssPreprocessor.key === 'ruby-sass') { %>
@@ -55,13 +58,11 @@ gulp.task('styles', function () {
 <% } else if (props.cssPreprocessor.key === 'stylus') { %>
     .pipe($.stylus())
 <% } %>
+
+  .pipe($.autoprefixer())
     .on('error', function handleError(err) {
       console.error(err.toString());
       this.emit('end');
     })
-    .pipe($.autoprefixer())
-    .pipe(indexFilter)
-    .pipe($.inject(injectFiles, injectOptions))
-    .pipe(indexFilter.restore())
     .pipe(gulp.dest(paths.tmp + '/serve/app/'));
 });
