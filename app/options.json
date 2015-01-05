@@ -7,16 +7,16 @@
     "defaults": "src",
     "save": true
   },
-  { 
-    "name" : "dist-path", 
+  {
+    "name" : "dist-path",
     "type": "String",
     "required": false,
     "desc": "Build destination folder, relative to cwd",
     "defaults": "dist",
     "save": true
   },
-  {  
-    "name": "e2e-path", 
+  {
+    "name": "e2e-path",
     "type": "String",
     "required": false,
     "desc": "e2e test specs folder, relative to cwd",
@@ -59,8 +59,16 @@
     "name": "default",
     "type": "Boolean",
     "required": false,
-    "desc": "Use default configurations",
+    "desc": "use default configurations",
     "defaults": false,
     "save": false
+  },
+  {
+    "name": "advanced",
+    "type": "Boolean",
+    "required": false,
+    "desc": "prompt for advanced additional features",
+    "defaults": false,
+    "save": true
   }
 ]

@@ -63,6 +63,9 @@ yo gulp-angular [app-name]
 * `--skip-install` do not run `bower install` and `npm install` after generating the app, default is `false` (not skip)
 * `--skip-welcome-message` skip yo welcome messages, default is `false` (not skip)
 * `--skip-message` skip install messages, default is `false` (not skip)
+* `--default` use default configurations, default is `false`
+* `--advanced` prompt for advanced additional features, default is `false`
+
 
 All paths configuration are stored in `gulpfile.js`. Change `gulp.paths` in `gulpfile.js` if you want to config paths after the app is generated.
 
