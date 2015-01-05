@@ -116,6 +116,19 @@ module.exports = function () {
     this.routerJs = '';
   }
 
+  // inject task dependencies computation
+  this.injectTaskDeps = [];
+  if (this.props.cssPreprocessor.key !== 'none') {
+    this.injectTaskDeps.push('\'styles\'');
+  }
+  if (this.props.jsPreprocessor.key !== 'none') {
+    if (this.props.jsPreprocessor.extension === 'js') {
+      this.injectTaskDeps.push('\'browserify\'');
+    } else {
+      this.injectTaskDeps.push('\'scripts\'');
+    }
+  }
+
   // Wiredep exclusions
   this.wiredepExclusions = [];
   if (this.props.ui.key === 'bootstrap') {
@@ -176,70 +189,58 @@ module.exports = function () {
     }
   }
 
-  // Template files
-  this.srcTemplates = {};
-  files.templates.forEach(function(file) {
-    var basename = path.basename(file);
-    var src = file.replace(basename, '_' + basename);
-    var dest = file;
-
-    var isJsPreprocessor = src.match(/\.js$/) && fs.existsSync(this.sourceRoot() + '/' + src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension));
-
-    if(isJsPreprocessor) {
-      src = src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
-    }
-    if(isJsPreprocessor) {
-      dest = dest.replace(/\.js$/, '.' + this.props.jsPreprocessor.extension);
-    }
-
-    this.srcTemplates[src] = dest;
-  }, this);
-
   if(this.isVendorStylesPreprocessed && this.props.ui.name !== null) {
     var styleVendorSource = 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension;
-    this.srcTemplates[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
+    this.styleCopies[styleVendorSource] = 'src/app/vendor.' + this.props.cssPreprocessor.extension;
   }
 
-  // Static files
-  this.staticFiles = {};
-  files.staticFiles.forEach(function(file) {
-    var src = file;
-    var dest = file;
+  var templateFiles = files.templates;
 
-    var isJsPreprocessor = src.match(/\.js$/) && fs.existsSync(this.sourceRoot() + '/' + src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension));
+  if(this.props.cssPreprocessor.key === 'none') {
+    templateFiles = _.reject(templateFiles, function(path) {
+      return /styles\.js/.test(path);
+    });
+  }
+  if(this.props.jsPreprocessor.key === 'none') {
+    templateFiles = _.reject(templateFiles, function(path) {
+      return /scripts\.js/.test(path);
+    });
+  }
+  if(this.props.htmlPreprocessor.key === 'none') {
+    templateFiles = _.reject(templateFiles, function(path) {
+      return /markups\.js/.test(path);
+    });
+  }
 
-    if(isJsPreprocessor) {
-      src = src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
-    }
-    if(isJsPreprocessor) {
-      dest = dest.replace(/\.js$/, '.' + this.props.jsPreprocessor.extension);
-    }
+  //JS Preprocessor files
+  function resolvePaths(template) {
+    return function(filesObject, file) {
+      var src = file, dest = file;
 
-    this.staticFiles[src] = dest;
-  }, this);
+      if(template) {
+        var basename = path.basename(file);
+        src = file.replace(basename, '_' + basename);
+      }
+
+      if(src.match(/\.js$/)) {
+        var preprocessorFile = this.sourceRoot() + '/' + src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
+        if(fs.existsSync(preprocessorFile)) {
+          src = src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
+          dest = dest.replace(/\.js$/, '.' + this.props.jsPreprocessor.extension);
+        }
+      }
+
+      filesObject[src] = dest;
+      return filesObject;
+    };
+  }
+
+  this.srcTemplates = templateFiles.reduce(resolvePaths(true).bind(this), {});
+
+  this.staticFiles = files.staticFiles.reduce(resolvePaths(false).bind(this), {});
 
   this.lintConfCopies = [];
   if(this.props.jsPreprocessor.key === 'coffee') {
     this.lintConfCopies.push('coffeelint.json');
   }
-
-  function dependencyString(dep, version) {
-    return '"' + dep + '": ' + '"' + version + '"';
-  }
-
-  this.consolidateExtensions = [];
-
-  this.npmDevDependencies = [];
-  this.consolidateParameters = [];
-
-  // Adding npm dev dependencies
-  _.forEach(this.props.htmlPreprocessors, function(preprocessor) {
-    _.forEach(preprocessor.npm, function(version, dep) {
-      this.npmDevDependencies.push(dependencyString(dep, version));
-    }.bind(this));
-    this.consolidateParameters.push(
-      JSON.stringify(preprocessor.consolidate).
-        replace(/"/g,'\'')); // Replace " with ' and assume this won't break anything.
-    this.consolidateExtensions.push(preprocessor.extension);
-  }.bind(this));
 };

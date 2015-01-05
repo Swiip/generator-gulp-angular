@@ -20,12 +20,14 @@
     "bower.json",
 
     "e2e/main.po.js",
-    
+
     "gulpfile.js",
     "gulp/build.js",
-    "gulp/consolidate.js",
+    "gulp/inject.js",
+    "gulp/markups.js",
+    "gulp/scripts.js",
+    "gulp/styles.js",
     "gulp/watch.js",
-    "gulp/wiredep.js",
     "gulp/server.js",
     "gulp/unit-tests.js",
     "src/app/index.js",

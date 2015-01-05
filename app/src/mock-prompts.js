@@ -24,7 +24,7 @@ var questions = [
   'foundationComponents',
   'cssPreprocessor',
   'jsPreprocessor',
-  'htmlPreprocessors'
+  'htmlPreprocessor'
 ];
 
 var model = {};
@@ -90,6 +90,10 @@ model.jsPreprocessor.choices.forEach(function(choice) {
   model.jsPreprocessor.values[choice.value.key] = choice.value;
 });
 
+model.htmlPreprocessor.choices.forEach(function(choice) {
+  model.htmlPreprocessor.values[choice.value.key] = choice.value;
+});
+
 module.exports = {
   prompts: model,
   defaults: {
@@ -103,9 +107,7 @@ module.exports = {
     foundationComponents: model.foundationComponents.values.none,
     cssPreprocessor: model.cssPreprocessor.values['node-sass'],
     jsPreprocessor: model.jsPreprocessor.values.none,
-    htmlPreprocessors: _.filter(_.pluck(model.htmlPreprocessors.choices, 'value'), function(v) {
-      return v.key === 'jade';
-    })
+    htmlPreprocessor: model.htmlPreprocessor.values.none
   },
   libRegexp: function(name, version) {
     return new RegExp('"' + name + '": "' + version + '"');

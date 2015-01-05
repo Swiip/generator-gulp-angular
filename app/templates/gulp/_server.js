@@ -2,6 +2,8 @@
 
 var gulp = require('gulp');
 
+var paths = gulp.paths;
+
 var util = require('util');
 
 var browserSync = require('browser-sync');
@@ -9,8 +11,6 @@ var browserSync = require('browser-sync');
 var qrcode = require('qrcode-terminal');
 
 var middleware = require('./proxy');
-
-var paths = gulp.paths;
 
 function browserSyncInit(baseDir, files, browser) {
   browser = browser === undefined ? 'default' : browser;
@@ -38,14 +38,21 @@ function browserSyncInit(baseDir, files, browser) {
 
 gulp.task('serve', ['watch'], function () {
   browserSyncInit([
-    paths.tmp,
+    paths.tmp + '/serve',
     paths.src
   ], [
-    <% if(props.cssPreprocessor.key === 'none') { %>paths.src<% } else { %>paths.tmp<% } %> + '/{app,components}/**/*.css',
-    <% if(props.jsPreprocessor.key === 'none') { %>paths.src<% } else { %>paths.tmp<% } %> + '/{app,components}/**/*.js',
-    paths.src + '/assets/images/**/*',
-    paths.tmp + '/*.html',
-    paths.tmp + '/{app,components}/**/*.html',
+<% if(props.cssPreprocessor.key === 'none') { %>
+    paths.src + '/{app,components}/**/*.css',
+<% } else { %>
+    paths.tmp + '/serve/{app,components}/**/*.css',
+<% } if(props.jsPreprocessor.key === 'none') { %>
+    paths.src + '/{app,components}/**/*.js',
+<% } else { %>
+    paths.tmp + '/serve/{app,components}/**/*.js',
+<% } %>
+    paths.src + 'src/assets/images/**/*',
+    paths.tmp + '/serve/*.html',
+    paths.tmp + '/serve/{app,components}/**/*.html',
     paths.src + '/*.html',
     paths.src + '/{app,components}/**/*.html'
   ]);
@@ -55,8 +62,8 @@ gulp.task('serve:dist', ['build'], function () {
   browserSyncInit(paths.dist);
 });
 
-gulp.task('serve:e2e', ['wiredep', 'injector:js', 'injector:css'], function () {
-  browserSyncInit([paths.tmp, paths.src], null, []);
+gulp.task('serve:e2e', ['inject'], function () {
+  browserSyncInit([paths.tmp + '/serve', paths.src], null, []);
 });
 
 gulp.task('serve:e2e-dist', ['build'], function () {

@@ -25,12 +25,12 @@ describe('gulp-angular generator', function () {
   var expectedFile = [
     // gulp/ directory
     'gulp/build.js',
-    'gulp/e2e-tests.js',
+    'gulp/inject.js',
+    'gulp/watch.js',
     'gulp/proxy.js',
     'gulp/server.js',
     'gulp/unit-tests.js',
-    'gulp/watch.js',
-    'gulp/wiredep.js',
+    'gulp/e2e-tests.js',
 
     // src/ directory
     'src/favicon.ico',
@@ -52,8 +52,6 @@ describe('gulp-angular generator', function () {
 
   var expectedGulpContent = [
     ['gulpfile.js', /gulp\.task\('default'/],
-    ['gulp/build.js', /gulp\.task\('styles'/],
-    ['gulp/build.js', /gulp\.task\('scripts'/],
     ['gulp/build.js', /gulp\.task\('partials'/],
     ['gulp/build.js', /gulp\.task\('html'/],
     ['gulp/build.js', /gulp\.task\('images'/],
@@ -61,6 +59,8 @@ describe('gulp-angular generator', function () {
     ['gulp/build.js', /gulp\.task\('misc'/],
     ['gulp/build.js', /gulp\.task\('clean'/],
     ['gulp/build.js', /gulp\.task\('build'/],
+    ['gulp/inject.js', /gulp\.task\('inject'/],
+    ['gulp/watch.js', /gulp\.task\('watch'/],
     ['gulp/unit-tests.js', /gulp\.task\('test'/],
     ['gulp/e2e-tests.js', /gulp\.task\('webdriver-update'/],
     ['gulp/e2e-tests.js', /gulp\.task\('webdriver-standalone'/],
@@ -69,9 +69,7 @@ describe('gulp-angular generator', function () {
     ['gulp/server.js', /gulp\.task\('serve'/],
     ['gulp/server.js', /gulp\.task\('serve:dist'/],
     ['gulp/server.js', /gulp\.task\('serve:e2e'/],
-    ['gulp/server.js', /gulp\.task\('serve:e2e-dist'/],
-    ['gulp/watch.js', /gulp\.task\('watch'/],
-    ['gulp/wiredep.js', /gulp\.task\('wiredep'/],
+    ['gulp/server.js', /gulp\.task\('serve:e2e-dist'/]
   ];
 
   before(function (done) {
@@ -148,7 +146,7 @@ describe('gulp-angular generator', function () {
           ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)],
 
           // Check wiredep css exclusion.
-          ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
+          ['gulp/inject.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
         ]));
 
         done();

@@ -34,8 +34,6 @@ describe('gulp-angular generator', function () {
 
   var expectedGulpContent = [
     ['gulpfile.js', /gulp\.task\('default'/],
-    ['gulp/build.js', /gulp\.task\('styles'/],
-    ['gulp/build.js', /gulp\.task\('scripts'/],
     ['gulp/build.js', /gulp\.task\('partials'/],
     ['gulp/build.js', /gulp\.task\('html'/],
     ['gulp/build.js', /gulp\.task\('images'/],
@@ -43,7 +41,10 @@ describe('gulp-angular generator', function () {
     ['gulp/build.js', /gulp\.task\('misc'/],
     ['gulp/build.js', /gulp\.task\('clean'/],
     ['gulp/build.js', /gulp\.task\('build'/],
+    ['gulp/inject.js', /gulp\.task\('inject'/],
+    ['gulp/watch.js', /gulp\.task\('watch'/],
     ['gulp/unit-tests.js', /gulp\.task\('test'/],
+    ['gulp/unit-tests.js', /gulp\.task\('test:auto'/],
     ['gulp/e2e-tests.js', /gulp\.task\('webdriver-update'/],
     ['gulp/e2e-tests.js', /gulp\.task\('webdriver-standalone'/],
     ['gulp/e2e-tests.js', /gulp\.task\('protractor:src'/],
@@ -51,22 +52,19 @@ describe('gulp-angular generator', function () {
     ['gulp/server.js', /gulp\.task\('serve'/],
     ['gulp/server.js', /gulp\.task\('serve:dist'/],
     ['gulp/server.js', /gulp\.task\('serve:e2e'/],
-    ['gulp/server.js', /gulp\.task\('serve:e2e-dist'/],
-    ['gulp/watch.js', /gulp\.task\('watch'/],
-    ['gulp/wiredep.js', /gulp\.task\('wiredep'/]
+    ['gulp/server.js', /gulp\.task\('serve:e2e-dist'/]
   ];
 
   beforeEach(function (done) {
     expectedFile = [
       // gulp/ directory
       'gulp/build.js',
-      'gulp/consolidate.js',
-      'gulp/e2e-tests.js',
+      'gulp/inject.js',
+      'gulp/watch.js',
       'gulp/proxy.js',
       'gulp/server.js',
       'gulp/unit-tests.js',
-      'gulp/watch.js',
-      'gulp/wiredep.js',
+      'gulp/e2e-tests.js',
 
       // src/ directory
       'src/favicon.ico',
@@ -108,9 +106,9 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with default config: [src, dist, e2e, .tmp] [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass, Standard JS, Jade]', function () {
+  describe('with default config: [src, dist, e2e, .tmp] [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass, Standard JS, No HTML preprocessor]', function () {
     // Default scenario: angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, node-sass, standard js, jade
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.cloneDeep(defaultPrompts);
     });
@@ -165,25 +163,26 @@ describe('gulp-angular generator', function () {
           ['bower.json', libRegexp('angular-route', prompts.angularVersion.values['1.3'])],
           ['bower.json', libRegexp('bootstrap-sass-official', prompts.ui.values.bootstrap.version)],
 
-          // Check consolidate
-          ['gulp/build.js', /gulp\.task\('partials'.*?'consolidate'/],
-          ['gulp/consolidate.js', /'jade'/],
-
           // Check package.json
           ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)],
 
           // Check wiredep css exclusion.
-          ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
+          ['gulp/inject.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
+        ]));
+
+        assert.noFileContent([].concat([
+          // Check no markups
+          ['gulp/build.js', /gulp\.task\('partials'.*?'markups'/]
         ]));
 
         done();
       });
     });
   });
-  
+
   // Prompt #1: Which version of Angular ?
   describe('with prompt: [angular 1.2.x]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         'angularVersion': prompts.angularVersion.values['1.2']
@@ -204,7 +203,7 @@ describe('gulp-angular generator', function () {
 
   // Prompt #2:  Which Angular's modules ?
   describe('without ngModules option', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         angularModules: []
@@ -234,7 +233,7 @@ describe('gulp-angular generator', function () {
 
   // Prompt #3: Which JavaScript library ?
   describe('with prompt: [jQuery 2.x.x]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         jQuery: prompts.jQuery.values['jquery 2']
@@ -253,7 +252,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [ZeptoJS 1.1.x]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         jQuery: prompts.jQuery.values['zeptojs 1.1']
@@ -272,7 +271,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [jqLite]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         jQuery: prompts.jQuery.values.none
@@ -296,7 +295,7 @@ describe('gulp-angular generator', function () {
 
   // Prompt #4: Which Angular's modules for RESTful resource interaction ?
   describe('with prompt: [Restangular]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         resource: prompts.resource.values.restangular
@@ -318,7 +317,7 @@ describe('gulp-angular generator', function () {
   });
 
   describe('with prompt: [$http]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         resource: prompts.resource.values.none
@@ -345,7 +344,7 @@ describe('gulp-angular generator', function () {
 
   // Prompt #5: Which Angular's modules for routing ?
   describe('with prompt: [UI Router]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         router: prompts.router.values['angular-ui-router']
@@ -368,7 +367,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('without router option', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         router: prompts.router.values.none
@@ -397,7 +396,7 @@ describe('gulp-angular generator', function () {
 
   // Prompt #6: Which UI framework ?
   describe('with prompt: [Foundation, angular-foundation, Node SASS]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.foundation,
@@ -407,7 +406,9 @@ describe('gulp-angular generator', function () {
 
     it('should add dependency for Foundation with SASS', function (done) {
       gulpAngular.run({}, function() {
-        assert.file(expectedFile);
+        assert.file([].concat(expectedFile, [
+          'gulp/styles.js',
+        ]));
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['src/app/vendor.scss', /@import '..\/..\/bower_components\/foundation\/scss\/foundation';/],
@@ -415,17 +416,15 @@ describe('gulp-angular generator', function () {
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
 
           ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)],
-          ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
+          ['gulp/inject.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]));
-
-
 
         done();
       });
     });
   });
   describe('with prompt: [Foundation, angular-foundation, Ruby SASS]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.foundation,
@@ -444,7 +443,7 @@ describe('gulp-angular generator', function () {
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
 
           ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].version)],
-          ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
+          ['gulp/inject.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]));
 
         done();
@@ -452,7 +451,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [Foundation, angular-foundation, LESS]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.foundation,
@@ -471,7 +470,7 @@ describe('gulp-angular generator', function () {
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
           ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
           ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.version)],
-          ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
+          ['gulp/inject.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]));
 
         done();
@@ -479,7 +478,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [Foundation, angular-foundation, Stylus]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.foundation,
@@ -498,7 +497,7 @@ describe('gulp-angular generator', function () {
           ['bower.json', libRegexp('foundation', prompts.ui.values.foundation.version)],
           ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
           ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.version)],
-          ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
+          ['gulp/inject.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]));
 
         done();
@@ -506,7 +505,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [Foundation, angular-foundation, CSS]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.foundation,
@@ -530,14 +529,14 @@ describe('gulp-angular generator', function () {
         ]);
         // No Gulp task for style
         assert.noFileContent([
-          ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
+          ['gulp/inject.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]);
         done();
       });
     });
   });
   describe('with prompt: [Foundation, Official, CSS]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.foundation,
@@ -562,14 +561,14 @@ describe('gulp-angular generator', function () {
         // No Gulp task for style
         assert.noFileContent([
           ['bower.json', libRegexp('angular-foundation', prompts.foundationComponents.values['angular-foundation'].version)],
-          ['gulp/wiredep.js', /exclude:.*?\/foundation\\\.css\/.*?/]
+          ['gulp/inject.js', /exclude:.*?\/foundation\\\.css\/.*?/]
         ]);
         done();
       });
     });
   });
   describe('with prompt: [Bootstrap, Ruby SASS]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.bootstrap,
@@ -589,7 +588,7 @@ describe('gulp-angular generator', function () {
           ['src/app/vendor.scss', /@import '\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap';/],
           ['bower.json', libRegexp('bootstrap-sass-official', prompts.ui.values.bootstrap.version)],
           ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].version)],
-          ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
+          ['gulp/inject.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
         ]));
 
         done();
@@ -597,7 +596,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [Bootstrap, LESS]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.bootstrap,
@@ -617,7 +616,7 @@ describe('gulp-angular generator', function () {
           ['src/app/vendor.less', /@icon-font-path: '\/bower_components\/bootstrap\/fonts\/';/],
           ['bower.json', libRegexp('bootstrap', prompts.ui.values.bootstrap.version)],
           ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.version)],
-          ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
+          ['gulp/inject.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
         ]));
 
         done();
@@ -625,7 +624,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [Bootstrap, Stylus]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.bootstrap,
@@ -645,7 +644,7 @@ describe('gulp-angular generator', function () {
           ['src/index.html', /<link rel="stylesheet" href="..\/bower_components\/bootstrap\/dist\/css\/bootstrap.css">/],
           ['bower.json', libRegexp('bootstrap', prompts.ui.values.bootstrap.version)],
           ['package.json', libRegexp('gulp-stylus', prompts.cssPreprocessor.values.stylus.version)],
-          ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
+          ['gulp/inject.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
         ]));
 
         done();
@@ -653,7 +652,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [Bootstrap, CSS]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.bootstrap,
@@ -678,7 +677,7 @@ describe('gulp-angular generator', function () {
           ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.version)],
           ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)],
           ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].version)],
-          ['gulp/wiredep.js', /exclude:.*\/bootstrap\\\.css\/.*/]
+          ['gulp/inject.js', /exclude:.*\/bootstrap\\\.css\/.*/]
         ]);
 
         done();
@@ -686,7 +685,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [Bootstrap, UI Boostrap]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         bootstrapComponents: prompts.bootstrapComponents.values['ui-bootstrap']
@@ -707,7 +706,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [Bootstrap, Standard Boostrap JS]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         bootstrapComponents: prompts.bootstrapComponents.values.official
@@ -719,7 +718,7 @@ describe('gulp-angular generator', function () {
         assert.file(expectedFile);
 
         assert.noFileContent([
-          ['gulp/wiredep.js', /\/bootstrap\\\.js\//]
+          ['gulp/inject.js', /\/bootstrap\\\.js\//]
         ]);
 
         done();
@@ -727,7 +726,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [Angular Material]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values['angular-material']
@@ -750,7 +749,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [None UI Framework, Node SASS]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.none,
@@ -774,7 +773,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [None UI Framework, Ruby SASS]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.none,
@@ -798,7 +797,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [None UI Framework, LESS]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.none,
@@ -822,7 +821,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [None UI Framework, Stylus]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.none,
@@ -846,7 +845,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [None UI Framework, CSS]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         ui: prompts.ui.values.none,
@@ -865,7 +864,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [None JS Preprocessor]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         jsPreprocessor: prompts.jsPreprocessor.values.none
@@ -882,8 +881,8 @@ describe('gulp-angular generator', function () {
         ]);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'scripts\'.*\]/],
-          ['gulp/build.js', /\$\.inject.*\n\s*paths\.src\s\+\s'\/{app,components}\/\*\*\/\*\.js'/]
+          ['gulp/inject.js', /gulp\.task\(\'inject\', \[\'styles\'\]/],
+          ['gulp/inject.js', /paths\.src \+ '\/{app,components}\/\*\*\/\*\.js'/]
         ]));
 
         assert.noFileContent([
@@ -896,7 +895,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [CoffeeScript]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         jsPreprocessor: prompts.jsPreprocessor.values.coffee
@@ -919,8 +918,8 @@ describe('gulp-angular generator', function () {
         ]);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'scripts\'.*\]/],
-          ['gulp/build.js', /\$\.inject.*\n\s*'{'\s\+\spaths\.src\s\+\s','\s\+\spaths\.tmp\s\+\s'}\/{app,components}\/\*\*\/\*\.js'/],
+          ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'scripts'\]/],
+          ['gulp/inject.js', /'{' \+ paths\.src \+ ',' \+ paths\.tmp \+ '\/serve}\/{app,components}\/\*\*\/\*\.js',/],
           ['package.json', /gulp-coffee/],
           ['package.json', /gulp-coffeelint/]
         ]));
@@ -935,7 +934,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [6to5]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         jsPreprocessor: prompts.jsPreprocessor.values['6to5']
@@ -956,9 +955,9 @@ describe('gulp-angular generator', function () {
         ]);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'browserify\'.*\]/],
-          ['gulp/build.js', /gulp\.task\(\'browserify\'/],
-          ['gulp/build.js', /\$\.inject.*\n\s*paths\.tmp\s\+\s'\/{app,components}\/\*\*\/\*\.js'/],
+          ['gulp/scripts.js', /gulp\.task\(\'browserify\'/],
+          ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'browserify'\]/],
+          ['gulp/inject.js', /paths\.tmp \+ '\/serve\/{app,components}\/\*\*\/\*\.js',/],
           ['package.json', /gulp-6to5/],
           ['package.json', /gulp-browserify/]
         ]));
@@ -968,7 +967,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [Traceur]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         jsPreprocessor: prompts.jsPreprocessor.values.traceur
@@ -991,9 +990,9 @@ describe('gulp-angular generator', function () {
         ]);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'browserify\'.*\]/],
-          ['gulp/build.js', /gulp\.task\(\'browserify\'/],
-          ['gulp/build.js', /\$\.inject.*\n\s*paths\.tmp\s\+\s'\/{app,components}\/\*\*\/\*\.js'/],
+          ['gulp/scripts.js', /gulp\.task\(\'browserify\'/],
+          ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'browserify'\]/],
+          ['gulp/inject.js', /paths\.tmp \+ '\/serve\/{app,components}\/\*\*\/\*\.js',/],
           ['package.json', /gulp-traceur/],
           ['package.json', /gulp-browserify/],
           ['bower.json', /traceur-runtime/]
@@ -1004,7 +1003,7 @@ describe('gulp-angular generator', function () {
     });
   });
   describe('with prompt: [TypeScript]', function () {
-    before(function() { 
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
         jsPreprocessor: prompts.jsPreprocessor.values.typescript
@@ -1027,8 +1026,8 @@ describe('gulp-angular generator', function () {
         ]);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['gulp/build.js', /gulp\.task\(\'injector:js\', \[\'scripts\'.*\]/],
-          ['gulp/build.js', /\$\.inject.*\n\s*'{'\s\+\spaths\.src\s\+\s','\s\+\spaths\.tmp\s\+\s'}\/{app,components}\/\*\*\/\*\.js'/],
+          ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'scripts'\]/],
+          ['gulp/inject.js', /'{' \+ paths\.src \+ ',' \+ paths\.tmp \+ '\/serve}\/{app,components}\/\*\*\/\*\.js',/],
           ['package.json', /gulp-typescript/],
           ['bower.json', /dt-angular/]
         ]));
@@ -1043,48 +1042,26 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with prompt: [No HTML Preprocessor]', function () {
-    before(function() { 
+  describe('with prompt: [Jade HTML Preprocessor]', function () {
+    before(function() {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
-        htmlPreprocessors: []
+        htmlPreprocessor: prompts.htmlPreprocessor.values.jade
       });
     });
 
     it('should not have consolidate gulp task', function (done) {
       gulpAngular.run({}, function() {
-        var expectedFileClone = _.clone(expectedFile);
-        assert.file(expectedFileClone);
-
-        assert.noFileContent([
-          ['gulp/build.js', /gulp\.task\('partials'.*?'consolidate'/],
-          ['gulp/consolidate.js', /'jade'/],
-          ['gulp/consolidate.js', /'hamljs'/],
-          ['gulp/consolidate.js', /'handlebars'/]
-        ]);
-
-        done();
-      });
-    });
-  });
-
-  describe('with prompt: [All HTML Preprocessors]', function () {
-    before(function() { 
-      optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
-      promptCase = _.assign(_.cloneDeep(defaultPrompts), {
-        htmlPreprocessors: _.map(prompts.htmlPreprocessors.choices, function(c) {return c.value;})
-      });
-    });
-
-    it('should have consolidate gulp task', function (done) {
-      gulpAngular.run({}, function() {
-        assert.file(expectedFile);
+        assert.file([].concat(_.clone(expectedFile), [
+          'gulp/markups.js'
+        ]));
 
         assert.fileContent([
-          ['gulp/build.js', /gulp\.task\('partials'.*?'consolidate'/],
-          ['gulp/consolidate.js', /'jade'/],
-          ['gulp/consolidate.js', /'hamljs'/],
-          ['gulp/consolidate.js', /'handlebars'/]
+          ['gulp/build.js', /gulp\.task\('partials', \['markups'\]/],
+          ['gulp/markups.js', /gulp\.task\('markups'/],
+          ['gulp/markups.js', /return gulp\.src\(paths\.src \+ '\/{app, components}\/\*\*\/\*\.jade'\)/],
+          ['gulp/markups.js', /\.pipe\(\$\.consolidate\('jade'/],
+          ['gulp/watch.js', /gulp\.watch\(paths\.src \+ '\/{app,components}\/\*\*\/\*\.jade', \['markups'\]\);/]
         ]);
 
         done();
@@ -1094,7 +1071,7 @@ describe('gulp-angular generator', function () {
 
   describe('with paths: [src:path/to/public e2e:path/to/e2e/test dist:path/to/dist tmp:.tmp/folder]', function () {
     before(function() {
-      optionCase = _.assign(_.cloneDeep(defaultOptions), 
+      optionCase = _.assign(_.cloneDeep(defaultOptions),
         _.merge({
           'app-path': 'path/to/public',
           'dist-path': 'path/to/dist',
@@ -1161,15 +1138,11 @@ describe('gulp-angular generator', function () {
           ['bower.json', libRegexp('angular-route', prompts.angularVersion.values['1.3'])],
           ['bower.json', libRegexp('bootstrap-sass-official', prompts.ui.values.bootstrap.version)],
 
-          // Check consolidate
-          ['gulp/build.js', /gulp\.task\('partials'.*?'consolidate'/],
-          ['gulp/consolidate.js', /'jade'/],
-
           // Check package.json
           ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)],
 
           // Check wiredep css exclusion.
-          ['gulp/wiredep.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
+          ['gulp/inject.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
         ]));
 
         done();

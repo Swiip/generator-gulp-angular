@@ -18,7 +18,7 @@ describe('gulp-angular generator', function () {
   var mockPrompts = require('../app/src/mock-prompts.js');
   var mockOptions = require('../app/src/mock-options.js');
 
-  var prompts = JSON.parse(JSON.stringify(mockPrompts.prompts));
+  var prompts = mockPrompts.prompts;
 
   var defaultPrompts = mockPrompts.defaults;
   var defaultOptions = mockOptions.defaults;
@@ -90,9 +90,9 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with default paths config: [src, dist, e2e, .tmp]' + 
+  describe('with default paths config: [src, dist, e2e, .tmp]' +
     '\n    with default prompts: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass]', function () {
-      
+
     before(function() {
       promptCase = _.assign(_.cloneDeep(defaultPrompts));
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
@@ -125,8 +125,8 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with default paths config: [src, dist, e2e, .tmp]' + 
-    '\n    with other prompts: [angular 1.2.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, angular-foundation, CSS, Coffee]', function () {
+  describe('with default paths config: [src, dist, e2e, .tmp]' +
+    '\n    with other prompts: [angular 1.2.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, angular-foundation, CSS, Coffee, Jade]', function () {
 
     before(function () {
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
@@ -137,7 +137,8 @@ describe('gulp-angular generator', function () {
         ui: prompts.ui.values.foundation,
         foundationComponents: prompts.foundationComponents.values['angular-foundation'],
         cssPreprocessor: prompts.cssPreprocessor.values.none,
-        jsPreprocessor: prompts.jsPreprocessor.values.coffee
+        jsPreprocessor: prompts.jsPreprocessor.values.coffee,
+        htmlPreprocessor: prompts.htmlPreprocessor.values.jade
       });
 
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
@@ -179,7 +180,7 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with default paths config: [src, dist, e2e, .tmp]' + 
+  describe('with default paths config: [src, dist, e2e, .tmp]' +
     '\n    with other prompts: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, ZeptoJS 1.1.x, $http, Bootstrap, LESS, ES6 with 6to5]', function () {
 
     before(function () {
@@ -190,7 +191,8 @@ describe('gulp-angular generator', function () {
         ui: prompts.ui.values.bootstrap,
         bootstrapComponents: prompts.bootstrapComponents.values['ui-bootstrap'],
         cssPreprocessor: prompts.cssPreprocessor.values.less,
-        jsPreprocessor: prompts.jsPreprocessor.values['6to5']
+        jsPreprocessor: prompts.jsPreprocessor.values['6to5'],
+        htmlPreprocessor: prompts.htmlPreprocessor.values.haml
       });
 
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
@@ -224,7 +226,7 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with default paths config: [src, dist, e2e, .tmp]' + 
+  describe('with default paths config: [src, dist, e2e, .tmp]' +
     '\n    with other prompts: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, $http, ngMaterial, Stylus, TypeScript]', function () {
 
     before(function () {
@@ -232,7 +234,8 @@ describe('gulp-angular generator', function () {
         jQuery: prompts.jQuery.values['jquery 1'],
         ui: prompts.ui.values['angular-material'],
         cssPreprocessor: prompts.cssPreprocessor.values.stylus,
-        jsPreprocessor: prompts.jsPreprocessor.values.typescript
+        jsPreprocessor: prompts.jsPreprocessor.values.typescript,
+        htmlPreprocessor: prompts.htmlPreprocessor.values.handlebars
       });
 
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
@@ -265,12 +268,12 @@ describe('gulp-angular generator', function () {
     });
   });
 
-  describe('with other paths config: [src:src/angular/app e2e:tests/e2e dist:target/build/folder tmp:.tmp/folder]' + 
+  describe('with other paths config: [src:src/angular/app e2e:tests/e2e dist:target/build/folder tmp:.tmp/folder]' +
     '\n    with default prompts: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass]', function () {
     before(function () {
       promptCase = _.cloneDeep(defaultPrompts);
 
-      optionCase = _.assign(_.cloneDeep(defaultOptions), 
+      optionCase = _.assign(_.cloneDeep(defaultOptions),
         _.merge({
           'app-path': 'src/angular/app',
           'dist-path': 'target/build/folder',
