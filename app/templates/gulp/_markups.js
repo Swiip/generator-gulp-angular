@@ -11,7 +11,7 @@ gulp.task('markups', function() {
     path.extname = '.html';
   }
 
-  return gulp.src(paths.src + '/{app, components}/**/*.<%= props.htmlPreprocessor.extension %>')
+  return gulp.src(paths.src + '/{app,components}/**/*.<%= props.htmlPreprocessor.extension %>')
 <% if (props.htmlPreprocessor.key === 'jade') { %>
     .pipe($.consolidate('jade', { pretty: '  ' }))
 <% } else if (props.htmlPreprocessor.key === 'haml') { %>
@@ -20,5 +20,5 @@ gulp.task('markups', function() {
     .pipe($.consolidate('handlebars'))
 <% } %>
     .pipe($.rename(renameToHtml))
-    .pipe(gulp.dest(paths.tmp + '/serve/app/'));
+    .pipe(gulp.dest(paths.tmp + '/serve/'));
 });
