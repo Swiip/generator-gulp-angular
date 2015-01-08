@@ -174,7 +174,7 @@
       {
         "value": {
           "name": "angular-material",
-          "version": "~0.5.1",
+          "version": "~0.6.0",
           "key": "angular-material",
           "module": "ngMaterial"
         },
