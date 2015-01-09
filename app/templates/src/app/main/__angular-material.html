@@ -1,8 +1,9 @@
 <div layout="vertical" layout-fill>
-
-  <header ng-include="'components/navbar/navbar.html'"></header>
-
   <md-content>
+    <md-toolbar>
+      <header ng-include="'components/navbar/navbar.html'"></header>
+    </md-toolbar>
+
     <section class="jumbotron">
       <h1>'Allo, 'Allo!</h1>
       <p class="lead">
@@ -24,12 +25,13 @@
         </div>
       </md-card>
     </div>
+    <footer>
+      <md-toolbar layout="row" layout-align="center center">
+        <p>With ♥ from <a href="https://twitter.com/Swiip">@Swiip</a></p>
+      </md-toolbar>
+    </footer>
   </md-content>
 
-  <footer>
-    <md-toolbar layout="row" layout-align="center center">
-      <p>With ♥ from <a href="https://twitter.com/Swiip">@Swiip</a></p>
-    </md-toolbar>
-  </footer>
+
 
 </div>
