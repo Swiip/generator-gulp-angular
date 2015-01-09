@@ -4,7 +4,7 @@ var gulp = require('gulp');
 
 var paths = gulp.paths;
 
-<% if (props.htmlPreprocessor.extension === 'none') { %>
+<% if (props.htmlPreprocessor.key === 'none') { %>
 gulp.task('watch', ['inject'], function () {
 <% } else { %>
 gulp.task('watch', ['markups', 'inject'], function () {
@@ -17,7 +17,7 @@ gulp.task('watch', ['markups', 'inject'], function () {
 <% } %>
     'bower.json'
   ], ['inject']);
-<% if (props.htmlPreprocessor.extension !== 'none') { %>
+<% if (props.htmlPreprocessor.key !== 'none') { %>
   gulp.watch(paths.src + '/{app,components}/**/*.<%= props.htmlPreprocessor.extension %>', ['markups']);
 <% } %>
 });
