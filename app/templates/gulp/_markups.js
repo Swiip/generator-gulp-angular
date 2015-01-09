@@ -19,6 +19,10 @@ gulp.task('markups', function() {
 <% } else if (props.htmlPreprocessor.key === 'handlebars') { %>
     .pipe($.consolidate('handlebars'))
 <% } %>
+    .on('error', function handleError(err) {
+      console.error(err.toString());
+      this.emit('end');
+    })
     .pipe($.rename(renameToHtml))
     .pipe(gulp.dest(paths.tmp + '/serve/'));
 });
