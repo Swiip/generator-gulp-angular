@@ -167,7 +167,10 @@ describe('gulp-angular generator', function () {
           ['package.json', libRegexp('gulp-sass', prompts.cssPreprocessor.values['node-sass'].version)],
 
           // Check wiredep css exclusion.
-          ['gulp/inject.js', /exclude:.*?\/bootstrap\\\.css\/.*?/]
+          ['gulp/inject.js', /exclude:.*?\/bootstrap\\\.css\/.*?/],
+
+          // Check font-path replace in html
+          ['gulp/build.js', /\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap/]
         ]));
 
         assert.noFileContent([].concat([
