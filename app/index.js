@@ -6,6 +6,7 @@ var yosay = require('yosay');
 var chalk = require('chalk');
 
 var prompts = require('./prompts.json');
+var promptsAdvanced = require('./prompts-advanced.json');
 var options = require('./options.json');
 var utils = require('./src/utils.js');
 
@@ -151,28 +152,7 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
 
     var done = this.async();
 
-    this.prompt({
-      "type": "checkbox",
-      "name": "advancedFeatures",
-      "message": "Do you want include these features?",
-      "choices": [
-        {
-          "value": "modernizr",
-          "name": "Modernizr: the feature detection library for HTML5/CSS3",
-          "checked": false
-        },
-        {
-          "value": "imagemin",
-          "name": "gulp-imagemin: minify PNG, JPEG, GIF and SVG images with imagemin",
-          "checked": false
-        },
-        {
-          "value": "qrcode",
-          "name": "QRCode: display a qrcode in terminal with 'gulp serve'",
-          "checked": false
-        }
-      ]
-    }, function (props) {
+    this.prompt(promptsAdvanced, function (props) {
 
       this.props.advancedFeatures = props.advancedFeatures;
       this.config.set('props', this.props);
