@@ -10,6 +10,7 @@ gulp.task('watch', ['inject'], function () {
 gulp.task('watch', ['markups', 'inject'], function () {
 <% } %>
   gulp.watch([
+    paths.src + '/*.html',
     paths.src + '/{app,components}/**/*.<%= props.cssPreprocessor.extension %>',
     paths.src + '/{app,components}/**/*.js',
 <% if (props.jsPreprocessor.extension !== 'js') { %>
