@@ -32,9 +32,13 @@ gulp.task('inject', [<%= injectTaskDeps.join(', ') %>], function () {
     '{' + paths.src + ',' + paths.tmp + '/serve}/{app,components}/**/*.js',
 <% } %>
     '!' + paths.src + '/{app,components}/**/*.spec.js',
-    '!' + paths.src + '/{app,components}/**/*.mock.js'
-<% if (props.jsPreprocessor.srcExtension !== 'es6') { %>
-  ]).pipe($.angularFilesort());
+    '!' + paths.src + '/{app,components}/**/*.mock.js',
+<% if (props.translateComponents === 'gettext') { %>
+    paths.tmp + '/serve/app/gettext/**/*.js',
+<% }
+%><% if (props.jsPreprocessor.srcExtension !== 'es6') { %>
+  ])
+  .pipe($.angularFilesort());
 <% } else { %>
   ], { read: false });
 <% } %>

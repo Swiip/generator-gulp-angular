@@ -6,18 +6,37 @@
     "choices": [
       {
         "value": "modernizr",
-        "name": "Modernizr: the feature detection library for HTML5/CSS3",
+        "name": "Modernizr: the feature detection library for HTML5/CSS3.",
         "checked": false
       },
       {
         "value": "imagemin",
-        "name": "gulp-imagemin: minify PNG, JPEG, GIF and SVG images with imagemin",
+        "name": "gulp-imagemin: minify PNG, JPEG, GIF and SVG images with imagemin.",
         "checked": false
       },
       {
         "value": "qrcode",
-        "name": "QRCode: display a qrcode in terminal with 'gulp serve'",
+        "name": "QRCode: display a qrcode in terminal with 'gulp serve'.",
         "checked": false
+      }
+    ]
+  },
+  {
+    "type": "list",
+    "name": "translateComponents",
+    "message": "Which translation component would you want?",
+    "choices": [
+      {
+        "value": "none",
+        "name": "None, I don't won't to translate my application."
+      },
+      {
+        "value": "translate",
+        "name": "angular-translate, I want to translate my application right in a JS file."
+      },
+      {
+        "value": "gettext",
+        "name": "angular-gettext, I want to translate my application in PO/POT files using advanced translation tools (POEdit, Pootle, ...)."
       }
     ]
   }

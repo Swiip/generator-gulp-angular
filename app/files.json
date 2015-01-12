@@ -29,11 +29,14 @@
     "gulp/styles.js",
     "gulp/watch.js",
     "gulp/server.js",
+    "gulp/gettext.js",
     "gulp/unit-tests.js",
     "src/app/index.js",
     "src/index.html",
     "src/app/main/main.controller.js",
     "src/app/main/main.controller.spec.js",
-    "src/components/navbar/navbar.controller.js"
+    "src/components/navbar/navbar.controller.js",
+    "src/app/gettext/gettext.config.js",
+    "src/app/translate/translate.js"
   ]
 }

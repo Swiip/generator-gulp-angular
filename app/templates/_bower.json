@@ -13,7 +13,9 @@
     "<%= props.bootstrapComponents.name %>": "<%= props.bootstrapComponents.version %>",<% } if(props.foundationComponents && props.foundationComponents.name !== null) { %>
     "<%= props.foundationComponents.name %>": "<%= props.foundationComponents.version %>",<% } if(props.jsPreprocessor.key === 'traceur') { %>
     "traceur-runtime": "~0.0.74",<% } if(props.jsPreprocessor.key === 'typescript') { %>
-    "dt-angular": "~1.2.16",<% } %>
+    "dt-angular": "~1.2.16",<% } if (props.translateComponents === 'gettext') { %>
+    "angular-gettext": "~2.0.0",<% } else if (props.translateComponents === 'translate') { %>
+    "angular-translate": "~2.5.2",<% } %>
     "angular": "<%= props.angularVersion %>"
   },
   "devDependencies": {

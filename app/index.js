@@ -146,15 +146,14 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
   },
 
   askAdvancedQuestions: function () {
-    if (this.skipConfig || !this.options['advanced']) {
+    if (this.skipConfig || !this.options.advanced) {
       return ;
     }
 
     var done = this.async();
 
     this.prompt(promptsAdvanced, function (props) {
-
-      this.props.advancedFeatures = props.advancedFeatures;
+      this.props = this._.merge(this.props, props);
       this.config.set('props', this.props);
 
       done();

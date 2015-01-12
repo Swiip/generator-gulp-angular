@@ -47,6 +47,12 @@ module.exports = function () {
     this.props.foundationComponents.module
   ]);
 
+  if (this.props.translateComponents === 'translate') {
+    ngModules.push('pascalprecht.translate');
+  } else if (this.props.translateComponents === 'gettext') {
+    ngModules.push('gettext');
+  }
+
   this.modulesDependencies = _.chain(ngModules)
     .filter(_.isString)
     .map(function (dependency) {
@@ -66,12 +72,23 @@ module.exports = function () {
     this.props.foundationComponents.key,
     this.props.cssPreprocessor.key,
     this.props.jsPreprocessor.key,
-    this.props.htmlPreprocessor.key
+    this.props.htmlPreprocessor.key,
+    this.props.translateComponents
   ]
     .filter(_.isString)
     .filter(function(tech) {
       return tech !== 'default' && tech !== 'css' && tech !== 'official' && tech !== 'none';
     });
+
+  this.technologiesLogoCopies = _.map(usedTechs, function(value) {
+    var logo = listTechs[value].logo;
+    if (!logo) {
+      // If no logo is defined, use the angular one.
+      logo = listTechs.angular.logo;
+      listTechs[value].logo = logo;
+    }
+    return 'src/assets/images/' + logo;
+  });
 
   var techsContent = _.map(usedTechs, function(value) {
     return listTechs[value];
@@ -81,9 +98,6 @@ module.exports = function () {
     .replace(/'/g, '\\\'')
     .replace(/"/g, '\'')
     .replace(/\n/g, '\n    ');
-  this.technologiesLogoCopies = _.map(usedTechs, function(value) {
-    return 'src/assets/images/' + listTechs[value].logo;
-  });
 
   this.partialCopies = {};
 
@@ -192,6 +206,7 @@ module.exports = function () {
   }
 
   var templateFiles = files.templates;
+  var staticFiles = files.staticFiles;
 
   if(this.props.cssPreprocessor.key === 'none') {
     templateFiles = _.reject(templateFiles, function(path) {
@@ -204,8 +219,18 @@ module.exports = function () {
     });
   }
   if(this.props.htmlPreprocessor.key === 'none') {
-    templateFiles = _.reject(templateFiles, function(path) {
+    templateFiles = _.reject(templateFiles, function (path) {
       return /markups\.js/.test(path);
+    });
+  }
+  if(this.props.translateComponents !== 'translate') {
+    templateFiles = _.reject(templateFiles, function (path) {
+      return /translate\.js/.test(path);
+    });
+  }
+  if(this.props.translateComponents !== 'gettext') {
+    templateFiles = _.reject(templateFiles, function (path) {
+      return /gettext\.config\..+/.test(path) || /gettext\.js/.test(path);
     });
   }
 
@@ -234,7 +259,7 @@ module.exports = function () {
 
   this.srcTemplates = templateFiles.reduce(resolvePaths(true).bind(this), {});
 
-  this.staticFiles = files.staticFiles.reduce(resolvePaths(false).bind(this), {});
+  this.staticFiles = staticFiles.reduce(resolvePaths(false).bind(this), {});
 
   this.lintConfCopies = [];
   if(this.props.jsPreprocessor.key === 'coffee') {
