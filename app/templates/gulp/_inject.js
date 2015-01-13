@@ -23,6 +23,10 @@ gulp.task('inject', [<%= injectTaskDeps.join(', ') %>], function () {
 <% } %>
   ], { read: false });
 
+<% if (props.jsPreprocessor.srcExtension === 'ts') { %>
+  var sortOutput = require('../' + paths.tmp + '/sortOutput.json');
+<% } %>
+
   var injectScripts = gulp.src([
 <% if (props.jsPreprocessor.key === 'none') { %>
     paths.src + '/{app,components}/**/*.js',
@@ -33,8 +37,12 @@ gulp.task('inject', [<%= injectTaskDeps.join(', ') %>], function () {
 <% } %>
     '!' + paths.src + '/{app,components}/**/*.spec.js',
     '!' + paths.src + '/{app,components}/**/*.mock.js'
-<% if (props.jsPreprocessor.srcExtension !== 'es6') { %>
-  ]).pipe($.angularFilesort());
+<% if (props.jsPreprocessor.srcExtension === 'ts') { %>
+  ], { read: false })
+  .pipe($.order(sortOutput, {base: paths.tmp + '/serve'}));
+<% } else if (props.jsPreprocessor.srcExtension !== 'es6') { %>
+  ])
+  .pipe($.angularFilesort());
 <% } else { %>
   ], { read: false });
 <% } %>
