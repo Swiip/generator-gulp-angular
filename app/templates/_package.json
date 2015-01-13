@@ -32,6 +32,7 @@
     "<%= props.cssPreprocessor.module %>": "<%= props.cssPreprocessor.version %>",
 <% } if (props.jsPreprocessor.key !== 'none') { %>
     "<%= props.jsPreprocessor.module %>": "<%= props.jsPreprocessor.version %>",
+    "gulp-sourcemaps": "~1.3.0",
 <% } if (props.jsPreprocessor.srcExtension === 'es6') { %>
     "gulp-browserify": "~0.5.0",
 <% } else { %>
