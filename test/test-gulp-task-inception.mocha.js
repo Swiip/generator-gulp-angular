@@ -243,6 +243,10 @@ describe('gulp-angular generator', function () {
       tempDirDist = tempDir + '/' + optionCase['dist-path'];
     });
 
+    it('should pass gulp tsd', function () {
+      return this.run(100000, 'tsd').should.be.fulfilled;
+    });
+
     it('should pass gulp build', function () {
       return this.run(100000, 'build').should.be.fulfilled.then(function () {
         assert.ok(fs.statSync(tempDirDist + '/index.html').isFile(), 'File not exist');

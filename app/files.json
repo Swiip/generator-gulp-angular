@@ -6,6 +6,7 @@
 
     "gulp/e2e-tests.js",
     "gulp/proxy.js",
+    "gulp/tsd.js",
     "src/favicon.ico",
     "src/404.html",
     "src/assets/images/yeoman.png",

@@ -93,7 +93,9 @@ gulp.task('misc', function () {
     .pipe(gulp.dest(paths.dist + '/'));
 });
 
-gulp.task('clean', function (done) {
+gulp.task('clean'
+<% if (props.jsPreprocessor.key === 'typescript') { %>, ['tsd:purge']
+<% } %>, function (done) {
   $.del([paths.dist + '/', paths.tmp + '/'], done);
 });
 

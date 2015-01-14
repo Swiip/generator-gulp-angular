@@ -192,6 +192,7 @@ module.exports = function () {
   }
 
   var templateFiles = files.templates;
+  var staticFiles = files.staticFiles;
 
   if(this.props.cssPreprocessor.key === 'none') {
     templateFiles = _.reject(templateFiles, function(path) {
@@ -201,6 +202,11 @@ module.exports = function () {
   if(this.props.jsPreprocessor.key === 'none') {
     templateFiles = _.reject(templateFiles, function(path) {
       return /scripts\.js/.test(path);
+    });
+  }
+  if(this.props.jsPreprocessor.key !== 'typescript') {
+    staticFiles = _.reject(staticFiles, function(path) {
+      return /tsd\.js/.test(path);
     });
   }
   if(this.props.htmlPreprocessor.key === 'none') {
@@ -234,7 +240,7 @@ module.exports = function () {
 
   this.srcTemplates = templateFiles.reduce(resolvePaths(true).bind(this), {});
 
-  this.staticFiles = files.staticFiles.reduce(resolvePaths(false).bind(this), {});
+  this.staticFiles = staticFiles.reduce(resolvePaths(false).bind(this), {});
 
   this.lintConfCopies = [];
   if(this.props.jsPreprocessor.key === 'coffee') {
