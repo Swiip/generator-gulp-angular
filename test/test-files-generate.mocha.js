@@ -907,7 +907,8 @@ describe('gulp-angular generator', function () {
         assert.file([].concat(expectedFile, [
           'src/app/index.coffee',
           'src/app/main/main.controller.coffee',
-          'src/components/navbar/navbar.controller.coffee'
+          'src/components/navbar/navbar.controller.coffee',
+          'coffeelint.json'
         ]));
 
         assert.noFile([
@@ -1016,7 +1017,8 @@ describe('gulp-angular generator', function () {
           'src/app/index.ts',
           'src/app/main/main.controller.ts',
           'src/components/navbar/navbar.controller.ts',
-          'gulp/tsd.js'
+          'gulp/tsd.js',
+          'tslint.json'
         ]));
 
         assert.noFile([

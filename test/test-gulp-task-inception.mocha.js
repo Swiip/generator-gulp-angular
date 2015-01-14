@@ -244,7 +244,11 @@ describe('gulp-angular generator', function () {
     });
 
     it('should pass gulp tsd', function () {
-      return this.run(100000, 'tsd').should.be.fulfilled;
+      return this.run(100000, 'tsd').should.be.fulfilled.then(function () {
+        assert.ok(fs.statSync('tsd.json').isFile(), 'File not exist');
+        assert.ok(fs.statSync('typings/tsd.d.ts').isFile(), 'File not exist');
+        assert.ok(fs.statSync('typings/angularjs/angular.d.ts').isFile(), 'File not exist');
+      });
     });
 
     it('should pass gulp build', function () {

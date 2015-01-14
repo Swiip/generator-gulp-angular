@@ -1,5 +1,5 @@
 
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
     $stateProvider
       .state('home', {
         url: '/',

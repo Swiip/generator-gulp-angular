@@ -246,4 +246,7 @@ module.exports = function () {
   if(this.props.jsPreprocessor.key === 'coffee') {
     this.lintConfCopies.push('coffeelint.json');
   }
+  if(this.props.jsPreprocessor.key === 'typescript') {
+    this.lintConfCopies.push('tslint.json');
+  }
 };
