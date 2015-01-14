@@ -5,7 +5,7 @@
   "description": "Yeoman generator for AngularJS with GulpJS",
   "keywords": "yeoman-generator, angular, gulp",
   "license": "MIT",
-  "author": "Matthieu Lux <matthieu.lux@gmail.com> (https://github.com/Swiip)",
+  "author": "Matthieu Lux & Mehdy Dara",
   "contributors": [
     "Matthieu Lux <matthieu.lux@gmail.com> (https://github.com/Swiip)",
     "Mehdy Dara <mdara@eleven-labs.com> (http://eleven-labs.com/)"
