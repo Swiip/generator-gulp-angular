@@ -374,6 +374,16 @@
           "version": "~2.3.0"
         },
         "name": "TypeScript, a typed superset of JavaScript that compiles to plain JavaScript."
+      },
+      {
+        "value": {
+          "key": "livescript",
+          "extension": "ls",
+          "srcExtension": "ls",
+          "module": "gulp-livescript",
+          "version": "~2.2.1"
+        },
+        "name": "LiveScript, \"a language which compiles to JavaScript\"."
       }
     ]
   },

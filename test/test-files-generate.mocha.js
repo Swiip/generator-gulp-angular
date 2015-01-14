@@ -1150,6 +1150,40 @@ describe('gulp-angular generator', function () {
     });
   });
 
+  describe('with prompt: [Livescript]', function () {
+    before(function() {
+      optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
+      promptCase = _.assign(_.cloneDeep(defaultPrompts), {
+        jsPreprocessor: prompts.jsPreprocessor.values['livescript']
+      });
+    });
+
+    it('should add dependency for Livescript (Remove the .ls in expectedFileLs if the corresponding template .js/.ls does not exist any more)', function (done) {
+      gulpAngular.run({}, function() {
+        var expectedFileLs = [
+          'src/app/index.ls',
+          "src/app/main/main.controller.ls",
+          "src/components/navbar/navbar.controller.ls"
+        ];
+
+        var expectedNoJsFiles = [];
+        for(var eachFile in expectedFileLs) {
+          expectedNoJsFiles.push(eachFile.replace(/\.ls$/, '.js'));
+        }
+
+        assert.file(expectedFileLs);
+
+        assert.noFile(expectedNoJsFiles);
+
+        assert.fileContent([
+          ['package.json', libRegexp('gulp-livescript', prompts.jsPreprocessor.values['livescript'].version)]
+        ]);
+
+        done();
+      });
+    });
+  });
+
   // For future case
   /*
   describe('with prompt: []', function () {

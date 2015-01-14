@@ -151,5 +151,12 @@
       "url": "http://handlebarsjs.com/",
       "description": "Handlebars provides the power necessary to let you build semantic templates effectively with no frustration.",
       "logo": "handlebars.png"
+    },
+    "livescript": {
+        "key": "livescript",
+        "title": "LiveScript",
+        "url": "http://livescript.net/",
+        "description": "LiveScript is a language which compiles to JavaScript.",
+        "logo": "livescript.png"
     }
 }
