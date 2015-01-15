@@ -9,7 +9,7 @@ module.exports = function () {
   var data = this;
 
   function process(content) {
-    return _.template(content.toString().replace(/\n<%![-=]]/g, '<%'), data);
+    return _.template(content.toString().replace(/\n<%([^-=])/g, '<%$1'), data);
   }
 
   var copy = function copy(src, dest, processing) {
