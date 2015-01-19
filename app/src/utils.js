@@ -6,17 +6,17 @@ var slash = require('slash');
 
 /**
  * Turn str into simplest form, remove trailing slash
- * example: 
- * './path/to//some/folder/' (unix) will be normalized to 'path/to/some/folder' 
+ * example:
+ * './path/to//some/folder/' (unix) will be normalized to 'path/to/some/folder'
  * 'path\\to\\some\\folder\\' (windows) will be normalized to 'path/to/some/folder'
  * @param  {String} str, can be unix style path ('/') or windows style path ('\\')
  * @return {String} normalized unix style path
  */
 function normalizePath(str) {
   var trailingSlash;
-  if (path.sep === '/') 
+  if (path.sep === '/')
     trailingSlash = new RegExp(path.sep + '$');
-  else 
+  else
     trailingSlash = new RegExp(path.sep + path.sep + '$');
   return slash(path.normalize(str).replace(trailingSlash, ''));
 }
@@ -41,16 +41,19 @@ function isAbsolutePath(str) {
  */
 function replacePrefix(filePath, folderPairs) {
   var bestMatch = '';
+
   _.forEach(folderPairs, function(destFolder, sourceFolder) {
     if (filePath.indexOf(sourceFolder) === 0 && sourceFolder.length > bestMatch.length) {
       bestMatch = sourceFolder;
     }
   });
 
-  if (bestMatch.length)
+  if (bestMatch.length) {
     return filePath.replace(bestMatch, folderPairs[bestMatch]);
-  else
+  }
+  else {
     return filePath;
+  }
 }
 
 module.exports = {
