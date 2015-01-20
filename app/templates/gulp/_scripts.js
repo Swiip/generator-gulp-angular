@@ -11,6 +11,8 @@ gulp.task('scripts', function () {
 <% if (props.jsPreprocessor.extension === 'js') { %>
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
+<% } if (props.jsPreprocessor.key !== 'none') { %>
+    .pipe($.sourcemaps.init())
 <% } if (props.jsPreprocessor.key === '6to5') { %>
     .pipe($['6to5']())
 <% } if (props.jsPreprocessor.key === 'traceur') { %>
@@ -21,7 +23,8 @@ gulp.task('scripts', function () {
     .pipe($.coffee())
 <% } if (props.jsPreprocessor.key === 'typescript') { %>
     .pipe($.typescript())
-<% } %>
+<% } if (props.jsPreprocessor.key !== 'none') { %>
+    .pipe($.sourcemaps.write())<% } %>
     .on('error', function handleError(err) {
       console.error(err.toString());
       this.emit('end');
