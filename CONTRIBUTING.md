@@ -59,7 +59,7 @@ Must be one of the following:
 
 ### Donations
 
-If you like this project, if you want a faster developpement, if you feel generous, donation is a great way to motivate us more.
+If you like this project, if you want a faster development, if you feel generous, donation is a great way to motivate us more.
 
 [![Gratipay](http://img.shields.io/gratipay/Swiip.svg?style=flat)](https://gratipay.com/Swiip/)
 [![Paypal](http://img.shields.io/badge/paypal-donate-yellow.svg?style=flat)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FWGV3KKGH2D4S)
