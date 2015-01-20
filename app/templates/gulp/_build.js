@@ -51,9 +51,9 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
 <% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'scss') { %>
-    .pipe($.replace('<%= computedPaths.appToBower %>/bootstrap-sass-official/assets/fonts/bootstrap', 'fonts'))
+    .pipe($.replace('../<%= computedPaths.appToBower %>/bower_components/bootstrap-sass-official/assets/fonts/bootstrap', 'fonts'))
 <% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'less') { %>
-    .pipe($.replace('<%= computedPaths.appToBower %>/bootstrap/fonts', 'fonts'))
+    .pipe($.replace('../<%= computedPaths.appToBower %>/bower_components/bootstrap/fonts', 'fonts'))
 <% } %>
     .pipe($.csso())
     .pipe(cssFilter.restore())
