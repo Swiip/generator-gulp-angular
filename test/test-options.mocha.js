@@ -128,7 +128,7 @@ describe('gulp-angular generator', function () {
           ['src/app/index.js', /'ngRoute'/],
 
           // Check src/app/vendor.scss
-          ['src/app/vendor.scss', /\$icon-font-path: "\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
+          ['src/app/vendor.scss', /\$icon-font-path: "\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
           ['src/app/vendor.scss', /@import '\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap';/],
 
           // Check bower.json
