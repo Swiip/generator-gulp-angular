@@ -4,11 +4,9 @@ var gulp = require('gulp');
 
 var paths = gulp.paths;
 
-<% if (props.htmlPreprocessor.key === 'none') { %>
-gulp.task('watch', ['inject'], function () {
-<% } else { %>
-gulp.task('watch', ['markups', 'inject'], function () {
-<% } %>
+gulp.task('watch', ['inject'
+<% if (props.htmlPreprocessor.key !== 'none') {%>,'markups'<% } %>
+<% if (props.translateComponents === 'gettext') {%>,'gettext'<% } %>], function () {
   gulp.watch([
     paths.src + '/*.html',
     paths.src + '/{app,components}/**/*.<%= props.cssPreprocessor.extension %>',
@@ -20,5 +18,12 @@ gulp.task('watch', ['markups', 'inject'], function () {
   ], ['inject']);
 <% if (props.htmlPreprocessor.key !== 'none') { %>
   gulp.watch(paths.src + '/{app,components}/**/*.<%= props.htmlPreprocessor.extension %>', ['markups']);
+<% } %>
+<% if (props.translateComponents === 'gettext') { %>
+  gulp.watch([
+    paths.src + '/*.html', paths.src + '/{app,components}/**/*.html',
+    paths.tmp + '/serve/*.html', paths.tmp + '/serve/{app,components}/**/*.html'
+  ], ['gettext:extract']);
+  gulp.watch(paths.src + '/app/gettext/**/*.po', ['gettext:compile']);
 <% } %>
 });

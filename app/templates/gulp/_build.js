@@ -28,7 +28,9 @@ gulp.task('partials', ['markups'], function () {
     .pipe(gulp.dest(paths.tmp + '/partials/'));
 });
 
-gulp.task('html', ['inject', 'partials'], function () {
+gulp.task('html', ['inject'
+<% if (props.translateComponents === 'gettext') {%>, 'gettext:compile'
+<% } %>, 'partials'], function () {
   var partialsInjectFile = gulp.src(paths.tmp + '/partials/templateCacheHtml.js', { read: false });
   var partialsInjectOptions = {
     starttag: '<!-- inject:partials -->',

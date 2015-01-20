@@ -151,5 +151,18 @@
       "url": "http://handlebarsjs.com/",
       "description": "Handlebars provides the power necessary to let you build semantic templates effectively with no frustration.",
       "logo": "handlebars.png"
+    },
+    "translate": {
+      "key": "translate",
+      "title": "Angular Translate",
+      "url": "http://angular-translate.github.io/",
+      "description": "i18n for your Angular apps, made easy.",
+      "logo": "angular-translate.png"
+    },
+    "gettext": {
+      "key": "gettext",
+      "title": "Angular Gettext",
+      "url": "https://angular-gettext.rocketeer.be/",
+      "description": "Super-simple translation support for Angular.JS."
     }
 }

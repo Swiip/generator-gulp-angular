@@ -53,7 +53,11 @@
     "jade": "~1.8.1",
     "hamljs": "~0.6.2",
     "handlebars": "~2.0.0",
-    "qrcode-terminal": "~0.9.5"
+    "qrcode-terminal": "~0.9.5",
+    "gulp-angular-gettext": "~2.1.0",
+    "gulp-extend": "~0.2.0",
+    "gulp-wrap": "~0.8.0"
+
   },
   "engines": {
     "node": ">=0.10.0"

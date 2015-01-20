@@ -131,7 +131,8 @@ The root directory generated for a app with name `gulpAngular` :
 * *Unit test (karma)* : out of the box unit test configuration with karma
 * *e2e test (protractor)* : out of the box e2e test configuration with protractor
 * *browser sync* : full-featured development web server with livereload and devices sync
-* *angular-templatecache* : all HTML partials will be converted to JS to be bundled in the application
+* *angular-templatecache* : all HTML partials will be converted to JS and automatically bundled in the application
+* *gettext* : extract strings to [gettext](https://angular-gettext.rocketeer.be/) `POT` template file and generate JavaScript from `PO` translated files
 * **TODO** lazy : don't process files which haven't changed when possible
 
 ## Questions the generator will ask
@@ -146,6 +147,11 @@ The root directory generated for a app with name `gulpAngular` :
 * *HTML preprocessor*: Jade, Haml, Handlebars, none
 * **TODO** Script loader: Require, Browserify, none
 * **TODO** Test framework: Jasmine, Mocha, Qunit
+
+### --advanced option
+
+* *Advanced features*: modernizr, imagemin, qrcode
+* *Translate module*: [angular-translate](http://angular-translate.github.io/), [angular-gettext](https://angular-gettext.rocketeer.be/), none
 
 ## Known issue
 

@@ -38,6 +38,7 @@ describe('gulp-angular generator', function () {
   var depsDir = path.join(__dirname, 'deps');
 
   var tempDirDist;
+  var tempDirTmp;
 
   before(function () {
     this.run = function(timeout, task) {
@@ -241,6 +242,52 @@ describe('gulp-angular generator', function () {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
 
       tempDirDist = tempDir + '/' + optionCase['dist-path'];
+    });
+
+    it('should pass gulp build', function () {
+      return this.run(100000, 'build').should.be.fulfilled.then(function () {
+        assert.ok(fs.statSync(tempDirDist + '/index.html').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/404.html').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/favicon.ico').isFile(), 'File not exist');
+        assert.ok(fs.statSync(tempDirDist + '/assets').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/assets/images').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/scripts').isDirectory(), 'Directory not exist');
+        assert.ok(fs.statSync(tempDirDist + '/styles').isDirectory(), 'Directory not exist');
+      });
+    });
+
+    it('should pass gulp test', function () {
+      return this.run(100000, 'test').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor', function () {
+      return this.run(100000, 'protractor').should.be.fulfilled;
+    });
+
+    it('should pass gulp protractor:dist', function () {
+      return this.run(100000, 'protractor:dist').should.be.fulfilled;
+    });
+  });
+
+  describe('with default paths config: [src, dist, e2e, .tmp]' +
+  '\n    with other prompts: [gettext]', function () {
+
+    before(function () {
+      promptCase = _.assign(_.cloneDeep(defaultPrompts), {
+        translateComponents: 'gettext'
+      });
+
+      optionCase = _.assign(_.cloneDeep(defaultOptions),
+        _.merge({
+          'advanced': true
+        }, skipOptions));
+
+      tempDirTmp = tempDir + '/' + optionCase['tmp-path'];
+      tempDirDist = tempDir + '/' + optionCase['dist-path'];
+    });
+
+    it('should pass gulp gettext', function () {
+      return this.run(100000, 'gettext').should.be.fulfilled;
     });
 
     it('should pass gulp build', function () {

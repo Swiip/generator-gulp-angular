@@ -41,6 +41,10 @@
     "gulp-coffeelint": "~0.4.0",
 <% } if (props.htmlPreprocessor.key !== 'none') { %>
     "<%= props.htmlPreprocessor.module %>": "<%= props.htmlPreprocessor.version %>",
+<% } if (props.translateComponents === 'gettext') { %>
+"gulp-angular-gettext": "^2.1.0",
+"gulp-extend": "^0.2.0",
+"gulp-wrap": "^0.8.0",
 <% } %>
     "main-bower-files": "~2.4.0",
     "jshint-stylish": "~1.0.0",
