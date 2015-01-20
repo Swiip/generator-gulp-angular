@@ -149,7 +149,7 @@ describe('gulp-angular generator', function () {
           ['src/app/index.js', /'ngRoute'/],
 
           // Check src/app/vendor.scss
-          ['src/app/vendor.scss', /\$icon-font-path: "\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
+          ['src/app/vendor.scss', /\$icon-font-path: "\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
           ['src/app/vendor.scss', /@import '\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap';/],
 
           // Check bower.json
@@ -170,7 +170,7 @@ describe('gulp-angular generator', function () {
           ['gulp/inject.js', /exclude:.*?\/bootstrap\\\.css\/.*?/],
 
           // Check font-path replace in html
-          ['gulp/build.js', /\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap/]
+          ['gulp/build.js', /\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\//]
         ]));
 
         assert.noFileContent([].concat([
@@ -587,7 +587,7 @@ describe('gulp-angular generator', function () {
         ]));
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['src/app/vendor.scss', /\$icon-font-path: "\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
+          ['src/app/vendor.scss', /\$icon-font-path: "\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
           ['src/app/vendor.scss', /@import '\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap';/],
           ['bower.json', libRegexp('bootstrap-sass-official', prompts.ui.values.bootstrap.version)],
           ['package.json', libRegexp('gulp-ruby-sass', prompts.cssPreprocessor.values['ruby-sass'].version)],
@@ -615,7 +615,7 @@ describe('gulp-angular generator', function () {
         ]));
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['src/app/vendor.less', /@import '..\/..\/bower_components\/bootstrap\/less\/bootstrap.less';/],
+          ['src/app/vendor.less', /@import '\.\.\/\.\.\/bower_components\/bootstrap\/less\/bootstrap\.less';/],
           ['src/app/vendor.less', /@icon-font-path: '\/bower_components\/bootstrap\/fonts\/';/],
           ['bower.json', libRegexp('bootstrap', prompts.ui.values.bootstrap.version)],
           ['package.json', libRegexp('gulp-less', prompts.cssPreprocessor.values.less.version)],
@@ -1127,7 +1127,7 @@ describe('gulp-angular generator', function () {
           [optionCase['app-path'] + '/app/index.js', /'ngRoute'/],
 
           // Check src/app/vendor.scss
-          [optionCase['app-path'] + '/app/vendor.scss', /\$icon-font-path: "\.\.\/\.\.\/\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
+          [optionCase['app-path'] + '/app/vendor.scss', /\$icon-font-path: "\/bower_components\/bootstrap-sass-official\/assets\/fonts\/bootstrap\/";/],
           [optionCase['app-path'] + '/app/vendor.scss', /@import '\.\.\/\.\.\/\.\.\/\.\.\/bower_components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap';/],
 
           // Check bower.json
