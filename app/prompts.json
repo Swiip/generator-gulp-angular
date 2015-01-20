@@ -371,7 +371,7 @@
           "extension": "ts",
           "srcExtension": "ts",
           "module": "gulp-typescript",
-          "version": "~2.3.0"
+          "version": "~2.4.0"
         },
         "name": "TypeScript, a typed superset of JavaScript that compiles to plain JavaScript."
       }

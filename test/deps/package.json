@@ -48,7 +48,7 @@
     "gulp-coffeelint": "~0.4.0",
     "gulp-traceur": "~0.14.1",
     "gulp-6to5": "~1.0.2",
-    "gulp-typescript": "~2.3.0",
+    "gulp-typescript": "~2.4.0",
     "gulp-tslint": "~1.4.1",
     "gulp-to-json": "~1.0.1",
     "gulp-order": "~1.1.1",
