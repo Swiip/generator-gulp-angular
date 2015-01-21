@@ -208,6 +208,10 @@ module.exports = function () {
     staticFiles = _.reject(staticFiles, function(path) {
       return /tsd\.js/.test(path);
     });
+
+    templateFiles = _.reject(templateFiles, function(path) {
+      return /tsd\.json/.test(path);
+    });
   }
   if(this.props.htmlPreprocessor.key === 'none') {
     templateFiles = _.reject(templateFiles, function(path) {

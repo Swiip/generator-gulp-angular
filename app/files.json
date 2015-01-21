@@ -19,6 +19,7 @@
 
     "package.json",
     "bower.json",
+    "tsd.json",
 
     "e2e/main.po.js",
 
