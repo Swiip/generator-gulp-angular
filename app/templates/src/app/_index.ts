@@ -1,10 +1,13 @@
-/// <reference path="../../bower_components/dt-angular/angular.d.ts" />
+/// <reference path="../../<%= props.paths.tmp %>/typings/tsd.d.ts" />
 
-'use strict';
+/// <reference path="main/main.controller.ts" />
+/// <reference path="../components/navbar/navbar.controller.ts" />
 
 module <%= appName %> {
+  'use strict';
+
   angular.module('<%= appName %>', [<%= modulesDependencies %>])
     .controller('MainCtrl', MainCtrl)
     .controller('NavbarCtrl', NavbarCtrl)
-    <%= routerJs %>;
+<%= routerJs %>;
 }

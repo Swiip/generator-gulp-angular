@@ -907,7 +907,8 @@ describe('gulp-angular generator', function () {
         assert.file([].concat(expectedFile, [
           'src/app/index.coffee',
           'src/app/main/main.controller.coffee',
-          'src/components/navbar/navbar.controller.coffee'
+          'src/components/navbar/navbar.controller.coffee',
+          'coffeelint.json'
         ]));
 
         assert.noFile([
@@ -1010,12 +1011,14 @@ describe('gulp-angular generator', function () {
       });
     });
 
-    it('should not add browerify and gulp-typescript and dt-angular', function (done) {
+    it('should not add browserify, but gulp-typescript and tsd gulpfile', function (done) {
       gulpAngular.run({}, function() {
         assert.file([].concat(expectedFile, [
           'src/app/index.ts',
           'src/app/main/main.controller.ts',
-          'src/components/navbar/navbar.controller.ts'
+          'src/components/navbar/navbar.controller.ts',
+          'gulp/tsd.js',
+          'tslint.json'
         ]));
 
         assert.noFile([
@@ -1029,7 +1032,8 @@ describe('gulp-angular generator', function () {
           ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'scripts'\]/],
           ['gulp/inject.js', /'{' \+ paths\.src \+ ',' \+ paths\.tmp \+ '\/serve}\/{app,components}\/\*\*\/\*\.js',/],
           ['package.json', /gulp-typescript/],
-          ['bower.json', /dt-angular/]
+          ['gulp/build.js', /gulp\.task\('clean', \['tsd:purge']/],
+          ['gulp/scripts.js', /gulp\.task\('scripts', \['tsd:install']/]
         ]));
 
         assert.noFileContent([

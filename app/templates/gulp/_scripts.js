@@ -1,12 +1,20 @@
 'use strict';
 
 var gulp = require('gulp');
-
+<% if (props.jsPreprocessor.key === 'typescript') { %>
+var mkdirp = require('mkdirp');
+<% } %>
 var paths = gulp.paths;
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('scripts', function () {
+gulp.task('scripts',
+<% if (props.jsPreprocessor.key === 'typescript') { %> ['tsd:install'],
+<% } %> function () {
+<% if (props.jsPreprocessor.key === 'typescript') { %>
+  mkdirp.sync(paths.tmp);
+<% } %>
+
   return gulp.src(paths.src + '/{app,components}/**/*.<%= props.jsPreprocessor.extension %>')
 <% if (props.jsPreprocessor.extension === 'js') { %>
     .pipe($.jshint())
@@ -22,19 +30,26 @@ gulp.task('scripts', function () {
     .pipe($.coffeelint.reporter())
     .pipe($.coffee())
 <% } if (props.jsPreprocessor.key === 'typescript') { %>
-    .pipe($.typescript())
-<% } if (props.jsPreprocessor.key !== 'none') { %>
-    .pipe($.sourcemaps.write())<% } %>
+    .pipe($.tslint())
+    .pipe($.tslint.report('prose', {emitError: false}))
+    .pipe($.typescript({sortOutput: true}))
+<% } %>
     .on('error', function handleError(err) {
       console.error(err.toString());
       this.emit('end');
     })
+<% if (props.jsPreprocessor.key !== 'none') { %>
+    .pipe($.sourcemaps.write())
+<% } %>
+<% if (props.jsPreprocessor.key === 'typescript') { %>
+    .pipe($.toJson({filename: paths.tmp + '/sortOutput.json', relative:true}))
+<% } %>
 <% if (props.jsPreprocessor.srcExtension === 'es6') { %>
     .pipe(gulp.dest(paths.tmp + '/<%= props.jsPreprocessor.key %>'))
 <% } else if (props.jsPreprocessor.key !== 'none') { %>
     .pipe(gulp.dest(paths.tmp + '/serve/'))
 <% } %>
-    .pipe($.size())
+    .pipe($.size());
 });
 
 <% if (props.jsPreprocessor.srcExtension === 'es6') { %>

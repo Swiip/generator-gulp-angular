@@ -1,6 +1,5 @@
-'use strict';
-
 module <%= appName %> {
+  'use strict';
 
   interface INavbarScope extends ng.IScope {
     date: Date
