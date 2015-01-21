@@ -10,10 +10,16 @@ var options = {
   dist: '<%= props.paths.dist %>',
   tmp: '<%= props.paths.tmp %>',
   e2e: '<%= props.paths.e2e %>',
-  errorHandler: function(title) {
+  failOnLintErrors: true,
+  failOnCompileErrors: true,
+  errorHandler: function(title, error) {
     return function(err) {
       gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
-      this.emit('end');
+      if (error) {
+        throw err;
+      } else {
+        this.emit('end');
+      }
     };
   }
 };
@@ -25,5 +31,5 @@ wrench.readdirSyncRecursive('./gulp').filter(function(file) {
 });
 
 gulp.task('default', ['clean'], function () {
-    gulp.start('build');
+  gulp.start('build');
 });

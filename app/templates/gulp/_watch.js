@@ -8,6 +8,8 @@ module.exports = function(options) {
 <% } else { %>
   gulp.task('watch', ['markups', 'inject'], function () {
 <% } %>
+    options.failOnLintErrors = false;
+    options.failOnCompileErrors = false;
     gulp.watch([
       options.src + '/*.html',
       options.src + '/{app,components}/**/*.<%= props.cssPreprocessor.extension %>',

@@ -92,10 +92,10 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.key = 'babel';
     model.props.jsPreprocessor.extension = 'js';
     result = scripts(model);
+    result.should.match(/gulp\.src\(options\.src \+ '[^\s]*\.js'\)/);
     result.should.match(/browserify\(\{ debug: true \}\)/);
     result.should.match(/\.add\('\.\/' \+ options\.src \+ '\/app\/index\.js'\)/);
     result.should.match(/\.transform\(babelify\)/);
-    result.should.not.match(/gulp\.src/);
     result.should.not.match(/traceur/);
     result.should.not.match(/coffee/);
     result.should.not.match(/typescript/);

@@ -9,5 +9,7 @@ module <%= appName %> {
   angular.module('<%= appName %>', [<%= modulesDependencies %>])
     .controller('MainCtrl', MainCtrl)
     .controller('NavbarCtrl', NavbarCtrl)
-    <%= routerJs %>;
+<% if (routerJs) { %>
+    <%= routerJs.trim() %>
+<% } %>;
 }

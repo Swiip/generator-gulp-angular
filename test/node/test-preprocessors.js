@@ -22,7 +22,6 @@ describe('gulp-angular generator preprocessors script', function () {
 
     generator.files = [
       { src: 'gulp/styles.js' },
-      { src: 'gulp/scripts.js' },
       { src: 'gulp/markups.js' },
       { src: 'gulp/tsd.js' },
       { src: 'tsd.json' }
@@ -47,13 +46,14 @@ describe('gulp-angular generator preprocessors script', function () {
   });
 
   describe('compute dependencies for the gulp inject task', function() {
-    it('should be empty if no preprocessors', function() {
+    it('should be scripts if no preprocessors', function() {
       generator.props = {
         cssPreprocessor: { key: 'none' },
         jsPreprocessor: { key: 'none' }
       };
       generator.computeInjectTaskDeps();
-      generator.injectTaskDeps.length.should.be.equal(0);
+      generator.injectTaskDeps.length.should.be.equal(1);
+      generator.injectTaskDeps[0].should.be.equal('\'scripts\'');
     });
 
     it('should be styles and scripts when there is preprocessors', function() {
@@ -67,7 +67,7 @@ describe('gulp-angular generator preprocessors script', function () {
       generator.injectTaskDeps[1].should.be.equal('\'scripts\'');
     });
 
-    it('should be browseridy for traceur', function() {
+    it('should be browserify for traceur', function() {
       generator.props = {
         cssPreprocessor: { key: 'none' },
         jsPreprocessor: { key: 'traceur' }
@@ -96,7 +96,7 @@ describe('gulp-angular generator preprocessors script', function () {
         htmlPreprocessor: { key: 'not none' }
       };
       generator.rejectFiles();
-      generator.files.length.should.be.equal(5);
+      generator.files.length.should.be.equal(4);
     });
   });
 
@@ -106,7 +106,7 @@ describe('gulp-angular generator preprocessors script', function () {
         jsPreprocessor: { key: 'coffee' }
       };
       generator.lintCopies();
-      generator.files[5].src.should.match(/coffeelint/);
+      generator.files[4].src.should.match(/coffeelint/);
     });
 
     it('should add tslint for typescript preprocessor', function() {
@@ -114,7 +114,7 @@ describe('gulp-angular generator preprocessors script', function () {
         jsPreprocessor: { key: 'typescript' }
       };
       generator.lintCopies();
-      generator.files[5].src.should.match(/tslint/);
+      generator.files[4].src.should.match(/tslint/);
     });
   });
 
