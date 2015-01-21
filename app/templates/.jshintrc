@@ -30,6 +30,10 @@
     "beforeEach": false,
     "after": false,
     "afterEach": false,
-    "expect": false
+    "expect": false,
+    // Protractor
+    "browser": false,
+    "element": false,
+    "by": false
   }
 }
