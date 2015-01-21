@@ -8,7 +8,7 @@ var wiredep = require('wiredep');
 
 var paths = gulp.paths;
 
-function runTests (singleRun, done) {
+function runTests (singleRun) {
   var bowerDeps = wiredep({
     directory: 'bower_components',
     exclude: ['bootstrap-sass-official'],
@@ -35,24 +35,22 @@ function runTests (singleRun, done) {
 <% } %>
   ]);
 
-  gulp.src(testFiles)
+  return gulp.src(testFiles)
     .pipe($.karma({
       configFile: 'karma.conf.js',
       action: (singleRun)? 'run': 'watch'
     }))
-    .on('error', function (err) {
-      // Make sure failed tests cause gulp to exit non-zero
-      throw err;
-    });
 }
 
-<% if (props.jsPreprocessor.key === 'none') { %>
-gulp.task('test', function (done) { runTests(true /* singleRun */, done) });
-gulp.task('test:auto', function (done) { runTests(false /* singleRun */, done) });
-<% } else if (props.jsPreprocessor.key === 'traceur') { %>
-gulp.task('test', ['browserify'], function (done) { runTests(true /* singleRun */, done) });
-gulp.task('test:auto', ['browserify'], function (done) { runTests(false /* singleRun */, done) });
-<% } else { %>
-gulp.task('test', ['scripts'], function (done) { runTests(true /* singleRun */, done) });
-gulp.task('test:auto', ['scripts'], function (done) { runTests(false /* singleRun */, done) });
+gulp.task('test',
+<% if (props.jsPreprocessor.key !== 'none') { %>
+<% if (props.jsPreprocessor.extension === 'traceur') {%> ['browserify'],
+<% } else { %> ['scripts'],
 <% } %>
+<% } %> runTests.bind(this, true));
+gulp.task('test:auto',
+<% if (props.jsPreprocessor.key !== 'none') { %>
+<% if (props.jsPreprocessor.key === 'traceur') {%> ['browserify'],
+<% } else { %> ['scripts'],
+<% } %>
+<% } %> runTests.bind(this, false));
