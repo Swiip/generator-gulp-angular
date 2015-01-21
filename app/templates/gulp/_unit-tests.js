@@ -49,7 +49,7 @@ function runTests (singleRun, done) {
 <% if (props.jsPreprocessor.key === 'none') { %>
 gulp.task('test', function (done) { runTests(true /* singleRun */, done) });
 gulp.task('test:auto', function (done) { runTests(false /* singleRun */, done) });
-<% } else if (props.jsPreprocessor.extension === 'js') { %>
+<% } else if (props.jsPreprocessor.key === 'traceur') { %>
 gulp.task('test', ['browserify'], function (done) { runTests(true /* singleRun */, done) });
 gulp.task('test:auto', ['browserify'], function (done) { runTests(false /* singleRun */, done) });
 <% } else { %>
