@@ -45,7 +45,7 @@ describe('gulp-angular generator', function () {
 
       this.timeout(timeout);
 
-      gulpAngular.run({}, function () {
+      gulpAngular.run(function () {
         var promiseLinkNode = Q.nfcall(fs.symlink, path.join(depsDir, 'node_modules'), path.join(tempDir, 'node_modules'));
         var promiseLinkBower = Q.nfcall(fs.symlink, path.join(depsDir, 'bower_components'), path.join(tempDir, 'bower_components'));
         Q.all([promiseLinkNode, promiseLinkBower]).then(function() {
