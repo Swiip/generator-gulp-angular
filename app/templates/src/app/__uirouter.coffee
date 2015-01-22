@@ -1,5 +1,5 @@
 
-  .config ($stateProvider, $urlRouterProvider) ->
+  fonction ($stateProvider, $urlRouterProvider) ->
     $stateProvider
       .state "home",
         url: "/",

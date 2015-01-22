@@ -1,9 +1,14 @@
-'use strict';
+(function () {
+    'use strict';
 
-angular.module('<%= appName %>')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = <%= technologies %>;
-    angular.forEach($scope.awesomeThings, function(awesomeThing) {
-      awesomeThing.rank = Math.random();
-    });
-  });
+    function MainCtrl($scope) {        
+        $scope.awesomeThings = <%= technologies %>;
+        angular.forEach($scope.awesomeThings, function(awesomeThing) {
+          awesomeThing.rank = Math.random();
+        });     
+    }
+
+    angular
+        .module('<%= appName %>')
+        .controller('MainCtrl', MainCtrl);
+})();
