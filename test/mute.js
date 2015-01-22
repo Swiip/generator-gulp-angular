@@ -24,7 +24,7 @@ var _writesOut = [];
 var _writesErr = [];
 
 // Mute
-module.exports.mute = function() {
+module.exports.mute = function () {
   fixtureOut.capture(function onWrite(string, encoding, fd) {
     _writesOut.push({
       string: string
@@ -46,13 +46,13 @@ module.exports.mute = function() {
 };
 
 // Unmute
-module.exports.unmute = function() {
+module.exports.unmute = function () {
   fixtureOut.release();
   fixtureErr.release();
 };
 
 // Return the output that was captured
-module.exports.getMutedWrites = function() {
+module.exports.getMutedWrites = function () {
   return {
     out: _writesOut,
     err: _writesErr
