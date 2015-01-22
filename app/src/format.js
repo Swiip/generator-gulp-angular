@@ -119,7 +119,7 @@ module.exports = function () {
     this.injectTaskDeps.push('\'styles\'');
   }
   if (this.props.jsPreprocessor.key !== 'none') {
-    if (this.props.jsPreprocessor.extension === 'js') {
+    if (this.props.jsPreprocessor.key === 'traceur') {
       this.injectTaskDeps.push('\'browserify\'');
     } else {
       this.injectTaskDeps.push('\'scripts\'');
