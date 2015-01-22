@@ -114,7 +114,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should generate the expected files and their content', function (done) {
-      gulpAngular.run({}, function () {
+      gulpAngular.run(function () {
         assert.file([].concat(expectedFile, [
           // Option: Javascript
           'src/app/index.js',
@@ -193,7 +193,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add dependency for angular 1.2.x', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
@@ -214,7 +214,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should NOT add dependency for ngModules', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.fileContent(expectedGulpContent);
@@ -244,7 +244,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add dependency for jQuery 2.x.x', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
@@ -263,7 +263,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add dependency for ZeptoJS 1.1.x', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
@@ -282,7 +282,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should NOT add dependency for jqLite', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.fileContent(expectedGulpContent);
@@ -306,7 +306,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add dependency for Restangular', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
@@ -328,7 +328,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should NOT add dependency for $http', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.fileContent(expectedGulpContent);
@@ -355,7 +355,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add dependency for UI Router', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file([].concat(expectedFile, [
           'src/app/main/main.html',
         ]));
@@ -378,7 +378,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should NOT add dependency', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.noFile('src/app/main/main.html');
@@ -408,7 +408,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add dependency for Foundation with SASS', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file([].concat(expectedFile, [
           'gulp/styles.js',
         ]));
@@ -437,7 +437,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add dependency for Foundation with SASS', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
@@ -464,7 +464,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add dependency for Foundation with LESS', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file([].concat(expectedFile, [
           'src/app/index.less'
         ]));
@@ -491,7 +491,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add dependency for Foundation with Stylus', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file([].concat(expectedFile, [
           'src/app/index.styl'
         ]));
@@ -518,7 +518,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add dependency for Foundation with CSS', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file([].concat(expectedFile, [
           'src/app/index.css',
         ]));
@@ -549,7 +549,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should not add angular-foundation', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file([].concat(expectedFile, [
           'src/app/index.css',
         ]));
@@ -580,7 +580,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add dependency for Bootstrap with SASS', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file([].concat(expectedFile, [
           'src/app/index.scss',
           'src/app/vendor.scss',
@@ -608,7 +608,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add dependency for Bootstrap with LESS', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file([].concat(expectedFile, [
           'src/app/index.less',
           'src/app/vendor.less',
@@ -636,7 +636,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add dependency for Bootstrap with Stylus', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file([].concat(expectedFile, [
           'src/app/index.styl',
         ]));
@@ -664,7 +664,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add dependency for Bootstrap with CSS', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file([].concat(expectedFile, [
           'src/app/index.css',
         ]));
@@ -696,7 +696,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add UI Bootstrap Bower and Angular module', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.fileContent([
@@ -717,7 +717,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add Bootstrap JS files', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.noFileContent([
@@ -737,7 +737,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add Angular Material Bower and Angular modules', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.noFile('src/app/vendor.*');
@@ -761,7 +761,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add index style', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
@@ -785,7 +785,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add index style', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
@@ -809,7 +809,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add index style', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
@@ -833,7 +833,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add index style', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
@@ -857,7 +857,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add index style', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.noFile('src/app/vendor.*');
@@ -875,7 +875,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should not add browerify and inject js files from src', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.noFile([
@@ -906,7 +906,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should not add browerify and add gulp-coffee', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file([].concat(expectedFile, [
           'src/app/index.coffee',
           'src/app/main/main.controller.coffee',
@@ -946,7 +946,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add browerify and gulp-6to5', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file([].concat(expectedFile, [
           'src/app/index.js',
           'src/app/main/main.controller.js',
@@ -979,7 +979,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should add browerify and gulp-traceur and traceur-runtime', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.file([].concat(expectedFile, [
@@ -1015,7 +1015,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should not add browserify, but gulp-typescript and tsd gulpfile', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file([].concat(expectedFile, [
           'src/app/index.ts',
           'src/app/main/main.controller.ts',
@@ -1058,7 +1058,7 @@ describe('gulp-angular generator', function () {
     });
 
     it('should not have consolidate gulp task', function (done) {
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file([].concat(_.clone(expectedFile), [
           'gulp/markups.js'
         ]));
@@ -1096,7 +1096,7 @@ describe('gulp-angular generator', function () {
         return file;
       });
 
-      gulpAngular.run({}, function () {
+      gulpAngular.run(function () {
         assert.file([].concat(expectedFile, [
           // Option: Javascript
           optionCase['app-path'] + '/app/index.js',
@@ -1170,7 +1170,7 @@ describe('gulp-angular generator', function () {
         // }
       }));
 
-      gulpAngular.run({}, function() {
+      gulpAngular.run(function() {
         assert.file(expectedFile);
 
         assert.fileContent(expectedGulpContent);
