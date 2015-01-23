@@ -45,10 +45,10 @@ describe('axi-dtsi-gulp-angular generator', function () {
 
       this.timeout(timeout);
 
-      gulpAngular.run({}, function () {
+      gulpAngular.run(function () {
         var promiseLinkNode = Q.nfcall(fs.symlink, path.join(depsDir, 'node_modules'), path.join(tempDir, 'node_modules'));
         var promiseLinkBower = Q.nfcall(fs.symlink, path.join(depsDir, 'bower_components'), path.join(tempDir, 'bower_components'));
-        Q.all([promiseLinkNode, promiseLinkBower]).then(function() {
+        Q.all([promiseLinkNode, promiseLinkBower]).then(function () {
           var gulpProcess = spawn('node', ['node_modules/gulp/bin/gulp.js', task], {stdio: 'inherit'});
           gulpProcess.on('exit', function(returnCode) {
             if(returnCode === 0) {
@@ -83,8 +83,8 @@ describe('axi-dtsi-gulp-angular generator', function () {
       );
       helpers.mockPrompt(gulpAngular, promptCase);
 
-      gulpAngular.on('run', outputInTest.mute);
-      gulpAngular.on('end', outputInTest.unmute);
+      // gulpAngular.on('run', outputInTest.mute);
+      // gulpAngular.on('end', outputInTest.unmute);
 
       done();
     });
@@ -93,7 +93,7 @@ describe('axi-dtsi-gulp-angular generator', function () {
   describe('with default paths config: [src, dist, e2e, .tmp]' +
     '\n    with default prompts: [angular 1.3.x, ngAnimate, ngCookies, ngTouch, ngSanitize, jQuery 1.x.x, ngResource, ngRoute, bootstrap, ui-bootstrap, node-sass]', function () {
 
-    before(function() {
+    before(function () {
       promptCase = _.assign(_.cloneDeep(defaultPrompts));
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       tempDirDist = tempDir + '/' + optionCase['dist-path'];
