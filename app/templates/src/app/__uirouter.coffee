@@ -1,5 +1,4 @@
-
-  fonction ($stateProvider, $urlRouterProvider) ->
+fonction ($stateProvider, $urlRouterProvider) ->
     $stateProvider
       .state "home",
         url: "/",

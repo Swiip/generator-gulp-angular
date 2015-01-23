@@ -184,20 +184,20 @@ describe('axi-dtsi-gulp-angular generator', function () {
   });
 
   // Prompt #1: Which version of Angular ?
-  describe('with prompt: [angular 1.2.x]', function () {
+  describe('with prompt: [angular 1.3.x]', function () {
     before(function () {
       optionCase = _.assign(_.cloneDeep(defaultOptions), skipOptions);
       promptCase = _.assign(_.cloneDeep(defaultPrompts), {
-        'angularVersion': prompts.angularVersion.values['1.2']
+        'angularVersion': prompts.angularVersion.values['1.3']
       });
     });
 
-    it('should add dependency for angular 1.2.x', function (done) {
+    it('should add dependency for angular 1.3.x', function (done) {
       gulpAngular.run(function () {
         assert.file(expectedFile);
 
         assert.fileContent([].concat(expectedGulpContent, [
-          ['bower.json', libRegexp('angular', prompts.angularVersion.values['1.2'])]
+          ['bower.json', libRegexp('angular', prompts.angularVersion.values['1.3'])]
         ]));
         done();
       });
