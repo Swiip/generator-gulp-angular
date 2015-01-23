@@ -98,7 +98,7 @@ describe('axi-dtsi-gulp-angular generator', function () {
   describe('with --default option', function () {
     it('should generate the expected files and their content', function (done) {
 
-      gulpAngular.run({}, function () {
+      gulpAngular.run(function () {
         assert.file([].concat(expectedFile, [
           // Option: Javascript
           'src/app/index.js',
