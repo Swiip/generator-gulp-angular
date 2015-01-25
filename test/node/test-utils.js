@@ -1,14 +1,29 @@
 'use strict';
 
-var utils = require('../app/src/utils');
-var path = require('path');
 require('chai').should();
+
+var path = require('path');
+
+var utils = require('../../app/src/utils');
 
 describe('gulp-angular generator utils', function () {
   describe('normalizePath', function () {
+    var realSep;
+
+    before(function() {
+      realSep = path.sep;
+    });
+
+    after(function() {
+      path.sep = realSep;
+    });
+
     it('should return simplest form of given relative path to cwd', function () {
+      path.sep = '/';
       utils.normalizePath('path' + path.sep + path.sep + 'to' + path.sep + 'folder' + path.sep).should.be.equal('path/to/folder');
       utils.normalizePath('..' + path.sep).should.be.equal('..');
+      path.sep = '\\';
+      utils.normalizePath('path\\to\\folder\\').should.be.equal('path/to/folder');
     });
   });
 

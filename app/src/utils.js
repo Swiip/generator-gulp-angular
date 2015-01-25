@@ -14,10 +14,11 @@ var slash = require('slash');
  */
 function normalizePath(str) {
   var trailingSlash;
-  if (path.sep === '/')
+  if (path.sep === '/') {
     trailingSlash = new RegExp(path.sep + '$');
-  else
+  } else {
     trailingSlash = new RegExp(path.sep + path.sep + '$');
+  }
   return slash(path.normalize(str).replace(trailingSlash, ''));
 }
 
