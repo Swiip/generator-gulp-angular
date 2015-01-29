@@ -1,20 +1,21 @@
 {
-  "name": "generator-gulp-angular",
-  "version": "0.9.1",
+  "name": "generator-axi-dtsi-gulp-angular",
+  "version": "0.9.2",
   "preferGlobal": true,
-  "description": "Yeoman generator for AngularJS with GulpJS",
-  "keywords": "yeoman-generator, angular, gulp",
+  "description": "Yeoman generator for AngularJS with GulpJS modified by Axi/DTSI/GNC",
+  "keywords": "yeoman-generator, angular, gulp, axi, dtsi, gnc",
   "license": "MIT",
   "author": "Matthieu Lux & Mehdy Dara",
   "contributors": [
     "Matthieu Lux <matthieu.lux@gmail.com> (https://github.com/Swiip)",
-    "Mehdy Dara <mdara@eleven-labs.com> (http://eleven-labs.com/)"
+    "Mehdy Dara <mdara@eleven-labs.com> (http://eleven-labs.com/)",
+    "DTSI Axi <axi@gouv.nc> (https://github.com/axi-dtsi)"
   ],
   "files": [
     "app"
   ],
   "main": "app/index.js",
-  "repository": "Swiip/generator-gulp-angular",
+  "repository": "axi-dtsi/generator-gulp-angular",
   "scripts": {
     "pretest": "cd test/deps && npm install && bower install",
     "test": "mocha -g protractor -i",

@@ -20,11 +20,11 @@ Offers you a Yeoman generator to initiate a Web application with the following w
 
 <br><br><br><br>
 
-## Why generator-gulp-angular ?
+## Why generator-axi-dtsi-gulp-angular ?
 
 This generator combines the best features of other generators like [generator-angular](https://github.com/yeoman/generator-angular), [ngTailor](https://github.com/lauterry/generator-ngtailor) and [generator-gulp-webapp](https://github.com/yeoman/generator-gulp-webapp) into an optimal workflow for starting applications with AngularJS powered by Gulp!
 
-generator-gulp-angular scaffolds an AngularJS application with a full-featured gulpfile.js, giving you immediate out-of-the-box access to all tasks for modern web development.
+generator-axi-dtsi-gulp-angular scaffolds an AngularJS application with a full-featured gulpfile.js, giving you immediate out-of-the-box access to all tasks for modern web development.
 
 
 My intention is to create a generator that gives users total control over their development toolbox so they can immediately start projects with their preferred tools, such as specific UI frameworks or JavaScript preprocessors.
@@ -38,9 +38,9 @@ Install the required tools: `yo`, `gulp`, `bower`
 npm install -g yo gulp bower
 ```
 
-Install `generator-gulp-angular`:
+Install `generator-axi-dtsi-gulp-angular`:
 ```
-npm install -g generator-gulp-angular
+npm install -g generator-axi-dtsi-gulp-angular
 ```
 
 Make a new directory, and `cd` into it:
@@ -48,13 +48,13 @@ Make a new directory, and `cd` into it:
 mkdir my-new-project && cd $_
 ```
 
-Run `yo gulp-angular`, optionally passing an app name:
+Run `yo axi-dtsi-gulp-angular`, optionally passing an app name:
 ```
-yo gulp-angular [app-name]
+yo axi-dtsi-gulp-angular [app-name]
 ```
 
-### Yo options
-`yo gulp-angular --help` or `yo gulp-angular -h` for help. All options are not required. If not provided, default values will be used.
+### Yo options 
+`yo axi-dtsi-gulp-angular --help` or `yo axi-dtsi-gulp-angular -h` for help. All options are not required. If not provided, default values will be used.
 
 * `--app-path='src'` customize Angular's app folder, relative to cwd, default is `src`
 * `--dist-path='dist'` customize build target folder, relative to cwd, default is `dist`
@@ -155,7 +155,7 @@ I tried many configurations for Protractor without success, any hint would be ap
 
 ## Changelog
 
-[All changes listed in the GitHub releases](https://github.com/Swiip/generator-gulp-angular/releases)
+[All changes listed in the GitHub releases](https://github.com/axi-dtsi/generator-gulp-angular/releases)
 
 ## Contributing
 

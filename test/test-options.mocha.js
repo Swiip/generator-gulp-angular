@@ -6,7 +6,7 @@ var helpers = require('yeoman-generator').test;
 var assert = require('yeoman-generator').assert;
 var outputInTest = require( './mute' );
 
-describe('gulp-angular generator', function () {
+describe('axi-dtsi-gulp-angular generator', function () {
 
   var mockPrompts = require('../app/src/mock-prompts.js');
   var prompts = JSON.parse(JSON.stringify(mockPrompts.prompts));
@@ -80,7 +80,7 @@ describe('gulp-angular generator', function () {
       }
 
       gulpAngular = helpers.createGenerator(
-        'gulp-angular:app',
+        'axi-dtsi-gulp-angular:app',
         [
           '../../app',
         ],
