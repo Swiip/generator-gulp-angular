@@ -50,7 +50,7 @@ gulp.task('styles', function () {
     .pipe($.inject(injectFiles, injectOptions))
     .pipe(indexFilter.restore())
 <% if (props.cssPreprocessor.key === 'less') { %>
-    .pipe($.less())
+    .pipe($.less(lessOptions))
 <% } else if (props.cssPreprocessor.key === 'ruby-sass') { %>
     .pipe($.rubySass(sassOptions))
 <% } else if (props.cssPreprocessor.key === 'node-sass') { %>
