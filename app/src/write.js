@@ -4,6 +4,11 @@ var utils = require('./utils');
 
 var _ = require('lodash');
 
+/**
+ * Process content with data with _.template
+ * Add a home made preprocessing which removes lines where there is only a
+ * template instruction
+ */
 function processor(data) {
   return function process(content) {
     return _.template(content.toString().replace(/\n<%([^-=])/g, '<%$1'), data);
@@ -12,10 +17,16 @@ function processor(data) {
 
 module.exports = function(GulpAngularGenerator) {
 
+  /**
+   * Write computed props in the .yo-rc.json
+   */
   GulpAngularGenerator.prototype.writeYoRc = function writeYoRc() {
     this.config.set('props', this.props);
   };
 
+  /**
+   * Pass through each files and actually copy them
+   */
   GulpAngularGenerator.prototype.writeFiles = function writeFiles() {
     var process = processor(this);
 
@@ -34,6 +45,9 @@ module.exports = function(GulpAngularGenerator) {
     }, this);
   };
 
+  /**
+   * Launch npm and bower installs unless they are skipped
+   */
   GulpAngularGenerator.prototype.install = function install() {
     this.installDependencies({
       skipInstall: this.options['skip-install'],

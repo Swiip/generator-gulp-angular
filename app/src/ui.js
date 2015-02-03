@@ -2,21 +2,26 @@
 
 module.exports = function(GulpAngularGenerator) {
 
+  /**
+   * Change the ui framework module name for bootstrap
+   * The Bower package to use is different if sass or another css preprocessor
+   */
   GulpAngularGenerator.prototype.handleBootstrapVersion = function handleBootstrapVersion() {
-    // Format choice UI Framework
     if(this.props.ui.key.indexOf('bootstrap') !== -1 && this.props.cssPreprocessor.extension !== 'scss') {
       this.props.ui.name = 'bootstrap';
     }
   };
 
+  /**
+   * There is 2 ways of dealing with vendor styles
+   * - If the vendor styles exist in the css preprocessor chosen,
+   *   the best is to include directly the source files
+   * - If not, the vendor styles are simply added as standard css links
+   *
+   * isVendorStylesPreprocessed defines which solution has to be used
+   * regarding the ui framework and the css preprocessor chosen
+   */
   GulpAngularGenerator.prototype.vendorStyles = function vendorStyles() {
-    // There is 2 ways of dealing with vendor styles
-    // - If the vendor styles exist in the css preprocessor chosen,
-    //   the best is to include directly the source files
-    // - If not, the vendor styles are simply added as standard css links
-    //
-    // isVendorStylesPreprocessed defines which solution has to be used
-    // regarding the ui framework and the css preprocessor chosen.
     this.isVendorStylesPreprocessed = false;
 
     if(this.props.cssPreprocessor.extension === 'scss') {
@@ -30,6 +35,10 @@ module.exports = function(GulpAngularGenerator) {
     }
   };
 
+  /**
+   * Add files of the navbar and the main view depending on the ui framework
+   * and the css preprocessor
+   */
   GulpAngularGenerator.prototype.uiFiles = function uiFiles() {
     this.files.push({
       src: 'src/components/navbar/__' + this.props.ui.key + '-navbar.html',
@@ -60,8 +69,10 @@ module.exports = function(GulpAngularGenerator) {
     }
   };
 
+  /**
+   * Compute wiredep exclusions depending on the props
+   */
   GulpAngularGenerator.prototype.computeWiredepExclusions = function computeWiredepExclusions() {
-    // Wiredep exclusions
     this.wiredepExclusions = [];
     if (this.props.ui.key === 'bootstrap') {
       if(this.props.bootstrapComponents.key !== 'official') {

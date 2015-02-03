@@ -4,6 +4,11 @@ var path = require('path');
 
 var files = require('../files.json');
 
+/**
+ * Take a template file path and create a copy description object
+ * Add an _ to the file's basename if it's a template
+ * Look for the js preprocessor equivalent file and use it if exist
+ */
 function resolvePaths(template) {
   return function(file) {
     var src = file, dest = file;
@@ -31,6 +36,10 @@ function resolvePaths(template) {
 
 module.exports = function(GulpAngularGenerator) {
 
+  /**
+   * Prepare all files from files.json and add them to `this.files` as
+   * copy description object
+   */
   GulpAngularGenerator.prototype.prepareFiles = function prepareFiles() {
 
     this.files = []

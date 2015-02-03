@@ -10,8 +10,10 @@ function rejectWithRegexp(regexp) {
 
 module.exports = function(GulpAngularGenerator) {
 
+  /**
+   * Compute gulp inject task dependencies depending on js and css preprocessors
+   */
   GulpAngularGenerator.prototype.computeInjectTaskDeps = function computeInjectTaskDeps() {
-    // inject task dependencies computation
     this.injectTaskDeps = [];
     if (this.props.cssPreprocessor.key !== 'none') {
       this.injectTaskDeps.push('\'styles\'');
@@ -26,6 +28,11 @@ module.exports = function(GulpAngularGenerator) {
     }
   };
 
+  /**
+   * Reject files from files.json
+   * Some important files are listed in the files.json even if they are not needed
+   * depending on options. This step reject these files.
+   */
   GulpAngularGenerator.prototype.rejectFiles = function rejectFiles() {
       if(this.props.cssPreprocessor.key === 'none') {
         rejectWithRegexp.call(this, /styles\.js/);
@@ -45,6 +52,9 @@ module.exports = function(GulpAngularGenerator) {
       }
   };
 
+  /**
+   * Copy additional lint files if needed
+   */
   GulpAngularGenerator.prototype.lintCopies = function lintCopies() {
     if(this.props.jsPreprocessor.key === 'coffee') {
       this.files.push({

@@ -15,6 +15,9 @@ function logChoice(prompt, prop) {
 
 module.exports = function(GulpAngularGenerator) {
 
+  /**
+   * Check if the default option is set, if it is, use defaults props and log them
+   */
   GulpAngularGenerator.prototype.defaultOption = function defaultOption() {
     if (this.options['default']) {
       this.props = _.merge(this.props, mockPrompts.defaults);
@@ -37,6 +40,9 @@ module.exports = function(GulpAngularGenerator) {
     }
   };
 
+  /**
+   * Check if there is a .yo-rc.json and ask for using it
+   */
   GulpAngularGenerator.prototype.checkYoRc = function checkYoRc() {
     var done = this.async();
 
@@ -61,6 +67,11 @@ module.exports = function(GulpAngularGenerator) {
     }
   };
 
+  /**
+   * Ask all questions from prompts.json
+   * Add conditional tests on those depending on first resonses
+   * Complete responses with null answers for questions not asked
+   */
   GulpAngularGenerator.prototype.askQuestions = function askQuestions() {
     if (this.skipConfig || this.options['default']) {
       return;
@@ -101,6 +112,9 @@ module.exports = function(GulpAngularGenerator) {
     }.bind(this));
   };
 
+  /**
+   * If the option is set, ask for advanced questions
+   */
   GulpAngularGenerator.prototype.askAdvancedQuestions = function askAdvancedQuestions() {
     this.includeModernizr = false;
     this.imageMin = false;

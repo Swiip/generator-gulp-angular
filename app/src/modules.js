@@ -4,9 +4,10 @@ var _ = require('lodash');
 
 module.exports = function(GulpAngularGenerator) {
 
+  /**
+   * Compute Angular's module to load and format the dependency list to insert
+   */
   GulpAngularGenerator.prototype.computeModules = function computeModules() {
-
-    // Format list ngModules included in AngularJS DI
     var ngModules = this.props.angularModules.map(function (module) {
       return module.module;
     });

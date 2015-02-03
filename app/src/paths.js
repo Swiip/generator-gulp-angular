@@ -9,6 +9,9 @@ var pathOptions = ['app-path', 'dist-path', 'e2e-path', 'tmp-path'];
 
 module.exports = function(GulpAngularGenerator) {
 
+  /**
+   * Check paths options to refuse absolutes ones and normalize them
+   */
   GulpAngularGenerator.prototype.checkPaths = function checkPaths() {
     pathOptions.forEach(function (name) {
       if (utils.isAbsolutePath(this.options[name])) {
@@ -18,6 +21,9 @@ module.exports = function(GulpAngularGenerator) {
     }, this);
   };
 
+  /**
+   * Create the paths object from options and add them to props
+   */
   GulpAngularGenerator.prototype.storePaths = function storePaths() {
     this.props = _.merge(this.props, {
       paths: {
@@ -29,6 +35,9 @@ module.exports = function(GulpAngularGenerator) {
     });
   };
 
+  /**
+   * Compute paths deductible from the first ones
+   */
   GulpAngularGenerator.prototype.computePaths = function computePaths() {
     this.computedPaths = {
       appToBower: path.relative(this.props.paths.src, '')

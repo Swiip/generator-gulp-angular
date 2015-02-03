@@ -1,6 +1,5 @@
 'use strict';
 
-var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
@@ -19,6 +18,9 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     this.props = {};
   },
 
+  /**
+   * Shows yeoman says his greatings unless the skip option is set
+   */
   info: function () {
     if (!this.options['skip-welcome-message']) {
       this.log(yosay(
