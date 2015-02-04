@@ -17,9 +17,9 @@
   "repository": "Swiip/generator-gulp-angular",
   "scripts": {
     "pretest": "cd test/deps && npm install && bower install",
-    "test": "mocha -g protractor -i",
-    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha -- -g protractor -i && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- ./test/*.js"
+    "test": "mocha test/node test -g protractor -i",
+    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha -- test test/node -g protractor -i && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- test test/node"
   },
   "dependencies": {
     "chalk": "~0.5.1",
@@ -38,7 +38,9 @@
     "istanbul": "~0.3.0",
     "mocha": "~2.0.0",
     "mocha-lcov-reporter": "0.0.1",
-    "q": "~1.1.2"
+    "q": "~1.1.2",
+    "sinon": "^1.12.2",
+    "sinon-chai": "^2.6.0"
   },
   "peerDependencies": {
     "yo": ">=1.0.0"

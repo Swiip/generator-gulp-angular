@@ -25,7 +25,7 @@ var _writesErr = [];
 
 // Mute
 module.exports.mute = function () {
-  fixtureOut.capture(function onWrite(string, encoding, fd) {
+  fixtureOut.capture(function onWrite(string) {
     _writesOut.push({
       string: string
     });
@@ -35,7 +35,7 @@ module.exports.mute = function () {
   });
 
 
-  fixtureErr.capture(function onWrite(string, encoding, fd) {
+  fixtureErr.capture(function onWrite(string) {
     _writesErr.push({
       string: string
     });
