@@ -82,16 +82,30 @@ gulp.task('images', function () {
     .pipe(gulp.dest(paths.dist + '/assets/images/'));
 });
 
-gulp.task('fonts', function () {
-  var customFonts = gulp.src(paths.src + '/assets/fonts/**/*')
+gulp.task('fonts:tmp', function() {
+  return gulp.src($.mainBowerFiles(), {base: 'bower_components'})
+    .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
+    .pipe($.rename(function(path) {
+      var fontsIndex = path.dirname.indexOf('fonts');
+      if (fontsIndex > 0) {
+        // Keep folder structure from fonts directory
+        path.dirname = path.dirname.substring(fontsIndex + 5);
+        path.dirname  = (path.dirname.length && path.dirname [0] === '/') ? path.dirname .slice(1) : path.dirname;
+      } else {
+        path.dirname = '';
+      }
+    }))
+    .pipe(gulp.dest(paths.tmp + '/serve/fonts/'));
+});
+
+gulp.task('fonts', ['fonts:tmp'], function () {
+  var srcFonts = gulp.src(paths.src + '/assets/fonts/**/*')
     .pipe(gulp.dest(paths.dist + '/assets/fonts/'));
 
-  var bowerFonts = gulp.src($.mainBowerFiles())
-    .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
-    .pipe($.flatten())
+  var tmpFonts = gulp.src(paths.tmp + '/serve/fonts/**/*')
     .pipe(gulp.dest(paths.dist + '/fonts/'));
 
-  return merge(customFonts, bowerFonts);
+  return merge(srcFonts, tmpFonts);
 });
 
 gulp.task('misc', function () {

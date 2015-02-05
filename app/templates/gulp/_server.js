@@ -41,7 +41,7 @@ function browserSyncInit(baseDir, files, browser) {
 <% } %>
 }
 
-gulp.task('serve', ['watch'], function () {
+gulp.task('serve', ['watch', 'fonts:tmp'], function () {
   browserSyncInit([
     paths.tmp + '/serve',
     paths.src
@@ -55,7 +55,9 @@ gulp.task('serve', ['watch'], function () {
 <% } else { %>
     paths.tmp + '/serve/{app,components}/**/*.js',
 <% } %>
-    paths.src + 'src/assets/images/**/*',
+    paths.src + '/assets/images/**/*',
+    paths.src + '/assets/fonts/**/*',
+    paths.tmp + '/serve/fonts/**/*',
     paths.tmp + '/serve/*.html',
     paths.tmp + '/serve/{app,components}/**/*.html',
     paths.src + '/{app,components}/**/*.html'
