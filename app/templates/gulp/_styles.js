@@ -58,7 +58,7 @@ gulp.task('styles', function () {
 <% } else if (props.cssPreprocessor.key === 'stylus') { %>
     .pipe($.stylus())
 <% } %>
-
+  .pipe($.ignore.exclude('*.map'))
   .pipe($.autoprefixer())
     .on('error', function handleError(err) {
       console.error(err.toString());
