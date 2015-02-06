@@ -55,7 +55,7 @@ gulp.task('serve', ['watch'], function () {
 <% } else { %>
     paths.tmp + '/serve/{app,components}/**/*.js',
 <% } %>
-    paths.src + 'src/assets/images/**/*',
+    paths.src + '/assets/images/**/*',
     paths.tmp + '/serve/*.html',
     paths.tmp + '/serve/{app,components}/**/*.html',
     paths.src + '/{app,components}/**/*.html'
