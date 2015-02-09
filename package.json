@@ -40,7 +40,8 @@
     "mocha-lcov-reporter": "0.0.1",
     "q": "~1.1.2",
     "sinon": "^1.12.2",
-    "sinon-chai": "^2.6.0"
+    "sinon-chai": "^2.6.0",
+    "wrench": "^1.5.8"
   },
   "peerDependencies": {
     "yo": ">=1.0.0"

@@ -2,8 +2,6 @@
 
 var gulp = require('gulp');
 
-var paths = gulp.paths;
-
 var util = require('util');
 
 var browserSync = require('browser-sync');
@@ -11,41 +9,44 @@ var browserSync = require('browser-sync');
 var spa = require("browser-sync-spa");
 
 var middleware = require('./proxy');
-<% if(qrCode) { %>
 
-var qrcode = require('qrcode-terminal');
-<% } %>
+module.exports = function(options) {
+  <% if(qrCode) { %>
 
-function browserSyncInit(baseDir, files, browser) {
-  browser = browser === undefined ? 'default' : browser;
+  var qrcode = require('qrcode-terminal');
+  <% } %>
 
-  var routes = null;
-  if(baseDir === paths.src || (util.isArray(baseDir) && baseDir.indexOf(paths.src) !== -1)) {
-    routes = {
-      '/bower_components': 'bower_components'
-    };
+  function browserSyncInit(baseDir, files, browser) {
+    browser = browser === undefined ? 'default' : browser;
+
+    var routes = null;
+    if(baseDir === options.src || (util.isArray(baseDir) && baseDir.indexOf(options.src) !== -1)) {
+      routes = {
+        '/bower_components': 'bower_components'
+      };
+    }
+
+    browserSync.instance = browserSync.init(files, {
+      startPath: '/',
+      server: {
+        baseDir: baseDir,
+        middleware: middleware,
+        routes: routes
+      },
+      browser: browser
+  <% if(qrCode) { %>
+    }, function(err, bs) {
+      qrcode.generate(bs.options.urls.external);
+    });
+  <% } else { %>
+    });
+  <% } %>
   }
 
   browserSync.use(spa({
-    selector: "[ng-app]" // Only needed for angular apps
+    selector: '[ng-app]'// Only needed for angular apps
   }));
 
-  browserSync.instance = browserSync.init(files, {
-    startPath: '/',
-    server: {
-      baseDir: baseDir,
-      middleware: middleware,
-      routes: routes
-    },
-    browser: browser
-<% if(qrCode) { %>
-  }, function(err, bs) {
-    qrcode.generate(bs.options.urls.external);
-  });
-<% } else { %>
-  });
-<% } %>
-}
 
 gulp.task('serve', ['watch'], function () {
   browserSyncInit([
@@ -68,14 +69,15 @@ gulp.task('serve', ['watch'], function () {
   ]);
 });
 
-gulp.task('serve:dist', ['build'], function () {
-  browserSyncInit(paths.dist);
-});
+  gulp.task('serve:dist', ['build'], function () {
+    browserSyncInit(options.dist);
+  });
 
-gulp.task('serve:e2e', ['inject'], function () {
-  browserSyncInit([paths.tmp + '/serve', paths.src], null, []);
-});
+  gulp.task('serve:e2e', ['inject'], function () {
+    browserSyncInit([options.tmp + '/serve', options.src], null, []);
+  });
 
-gulp.task('serve:e2e-dist', ['build'], function () {
-  browserSyncInit(paths.dist, null, []);
-});
+  gulp.task('serve:e2e-dist', ['build'], function () {
+    browserSyncInit(options.dist, null, []);
+  });
+};
