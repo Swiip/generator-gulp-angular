@@ -2,6 +2,6 @@
   "version": "v4",
   "repo": "borisyankov/DefinitelyTyped",
   "ref": "master",
-  "path": "<%= props.paths.tmp%>/typings",
-  "bundle": "<%= props.paths.tmp%>/typings/tsd.d.ts"
+  "path": "<%= props.paths.tmp %>/typings",
+  "bundle": "<%= props.paths.tmp %>/typings/tsd.d.ts"
 }

@@ -17,7 +17,7 @@ program
   .command('deps')
   .description('take dependencies file descriptions and prepare them for tests')
   .action(function() {
-    console.log('Preparing dependencies description files');
+    console.log('Preparing dependencies description files...');
     return templateTools.deps().then(function() {
       console.log('Done');
     });

@@ -16,10 +16,10 @@
   "main": "app/index.js",
   "repository": "Swiip/generator-gulp-angular",
   "scripts": {
-    "pretest": "node test/template-cli.js prepare && node test/template-cli.js deps && cd test/deps && npm install && bower install",
-    "test": "mocha test/node test/template -g protractor -i",
-    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/node test/template -g protractor -i && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/node test/template"
+    "pretest": "node test/template-cli.js prepare && node test/template-cli.js deps && cd test/tmp/deps && npm install && bower install",
+    "test": "mocha test/** -ig protractor",
+    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/** -ig protractor && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -- test/**"
   },
   "config": {
     "blanket": {

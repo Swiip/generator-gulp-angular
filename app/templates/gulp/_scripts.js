@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = require('gulp');
-
 <% if (props.jsPreprocessor.key === 'typescript') { %>
 var mkdirp = require('mkdirp');
 <% } if (props.jsPreprocessor.srcExtension === 'es6') { %>

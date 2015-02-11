@@ -16,8 +16,7 @@ gulp.task('styles', function () {
       paths.src + '/components'
     ]
   };
-<% } %>
-<% if (props.cssPreprocessor.extension === 'scss') { %>
+<% } if (props.cssPreprocessor.extension === 'scss') { %>
   var sassOptions = {
     style: 'expanded'
   };

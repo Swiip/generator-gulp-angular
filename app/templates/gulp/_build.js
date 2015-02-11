@@ -53,7 +53,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(cssFilter)
 <% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'scss') { %>
     .pipe($.replace('/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/', '../fonts/'))
-<% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'less') { %>
+<% } if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'less') { %>
     .pipe($.replace('/bower_components/bootstrap/fonts/', '../fonts/'))
 <% } %>
     .pipe($.csso())
@@ -73,12 +73,14 @@ gulp.task('html', ['inject', 'partials'], function () {
 });
 
 gulp.task('images', function () {
-  return gulp.src(paths.src + '/assets/images/**/*')<% if (imageMin) { %>
+  return gulp.src(paths.src + '/assets/images/**/*')
+<% if (imageMin) { %>
     .pipe($.imagemin({
       optimizationLevel: 3,
       progressive: true,
       interlaced: true
-    }))<% } %>
+    }))
+<% } %>
     .pipe(gulp.dest(paths.dist + '/assets/images/'));
 });
 

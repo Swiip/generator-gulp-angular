@@ -133,7 +133,7 @@
       },
       {
         "value": {
-          "name": null,
+          "key": "none",
           "module": null
         },
         "name": "None"

@@ -26,9 +26,9 @@
     "angular-route": "<%= props.angularVersion %>",
 <% } if (props.router.key === 'ui-router') { %>
     "angular-ui-router": "~0.2.13",
-<% } if(props.ui.key === 'boostrap' && props.cssPreprocessor.extension === 'scss') { %>
+<% } if(props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'scss') { %>
     "bootstrap-sass-official": "~3.3.1",
-<% } if(props.ui.key === 'boostrap' && props.cssPreprocessor.extension !== 'scss') { %>
+<% } if(props.ui.key === 'bootstrap' && props.cssPreprocessor.extension !== 'scss') { %>
     "bootstrap": "~3.3.1",
 <% } if(props.ui.key === 'foundation') { %>
     "foundation": "~5.4.7",

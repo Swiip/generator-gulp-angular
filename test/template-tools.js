@@ -9,11 +9,10 @@ var beautify = require('js-beautify').js_beautify;
 var q = require('q');
 var readdir = require('recursive-readdir');
 
-var templatesDir = './app/templates/';
-var depsDir = './test/tmp/deps/';
-var compiledTemplatesDir = './test/tmp/templates/';
+var templatesDir = path.join(__dirname, '../app/templates/');
+var depsDir = path.join(__dirname, 'tmp/deps/');
+var compiledTemplatesDir = path.join(__dirname, 'tmp/templates/');
 var compiledTemplatesSuffix = '-template.js';
-var relativePathFromScriptToRoot = '../';
 var sourceHeader = 'var _ = require(\'lodash\');\nmodule.exports = ';
 
 function compile(fileName) {
@@ -25,21 +24,28 @@ function compile(fileName) {
     q.nfcall(mkdirp, destinationDir),
     q.nfcall(fs.readFile, sourceFilePath)
   ]).then(function(results) {
-    var sourceContent = sourceHeader + beautify(_.template(results[1]).source, { indent_size: 2 });
+    var content = results[1].toString().replace(/\n<%([^-=])/g, '<%$1');
+    var sourceContent = sourceHeader + beautify(_.template(content).source, { indent_size: 2 })
+      // Underscore / Lodash templates have some inexistance checks
+      // It doesn't help tests and breaks covertures stats
+      // These fex regexp removes these checks for the tests
+      .replace(/function print\(\) {[\s\S]*?}/, '')
+      .replace(/obj \|\| \(obj = {}\);/, '')
+      .replace(/\(\(__t = (\(.*?\))\) == null \? '' : __t\)/g, '$1');
     return q.nfcall(fs.writeFile, destinationFilePath, sourceContent);
   });
 }
 
 /**
- * Recompile the module but in a istanbul context, only the previous version will be instrumented
+ * Recompile the module but in an istanbul context, only the previous version will be instrumented
  * If the file didn't exists before, no coverage will happening
  */
 function load(fileName) {
-  var destinationFilePath = compiledTemplatesDir + fileName + compiledTemplatesSuffix;
+  var destinationFilePath = path.join(compiledTemplatesDir, fileName + compiledTemplatesSuffix);
 
   return compile(fileName)
     .then(function() {
-      return require(relativePathFromScriptToRoot + destinationFilePath);
+      return require(destinationFilePath);
     });
 }
 
@@ -48,7 +54,7 @@ function prepare() {
     .then(function(files) {
       return q.all(files.filter(function(file) {
         var basename = path.basename(file);
-        return /^_/.test(basename);
+        return /^_[^_]/.test(basename);
       }).map(function(file) {
         return path.relative(templatesDir, file);
       }).map(function(file) {
