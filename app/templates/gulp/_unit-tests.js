@@ -44,7 +44,7 @@ function runTests (singleRun) {
 
 gulp.task('test',
 <% if (props.jsPreprocessor.key !== 'none') { %>
-<% if (props.jsPreprocessor.extension === 'traceur') {%> ['browserify'],
+<% if (props.jsPreprocessor.key === 'traceur') {%> ['browserify'],
 <% } else { %> ['scripts'],
 <% } %>
 <% } %> runTests.bind(this, true));

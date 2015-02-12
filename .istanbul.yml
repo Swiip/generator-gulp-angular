@@ -2,7 +2,7 @@ verbose: false
 instrumentation:
     root: .
     default-excludes: false
-    excludes: [node_modules/**, test/*, test/node/**, test/template/**]
+    excludes: [node_modules/**, test/*, test/node/**, test/template/**, test/inception/**]
     embed-source: false
     variable: __coverage__
     compact: true

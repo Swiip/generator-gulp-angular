@@ -54,18 +54,18 @@ describe('gulp-angular unit tests template', function () {
   it('should select the right deps for the test tasks', function() {
     model.props.jsPreprocessor.key = 'none';
     var result = unitTests(model);
-    result.should.match(/task\('test', function/);
-    result.should.match(/task\('test:auto', function/);
+    result.should.match(/task\('test', runTests\./);
+    result.should.match(/task\('test:auto', runTests\./);
 
     model.props.jsPreprocessor.key = 'traceur';
     result = unitTests(model);
-    result.should.match(/task\('test', \['browserify'\], function/);
-    result.should.match(/task\('test:auto', \['browserify'\], function/);
+    result.should.match(/task\('test', \['browserify'\], runTests\./);
+    result.should.match(/task\('test:auto', \['browserify'\], runTests\./);
 
     model.props.jsPreprocessor.key = 'not traceur';
     result = unitTests(model);
-    result.should.match(/task\('test', \['scripts'\], function/);
-    result.should.match(/task\('test:auto', \['scripts'\], function/);
+    result.should.match(/task\('test', \['scripts'\], runTests\./);
+    result.should.match(/task\('test:auto', \['scripts'\], runTests\./);
   });
 
 });
