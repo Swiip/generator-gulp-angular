@@ -8,6 +8,8 @@ var util = require('util');
 
 var browserSync = require('browser-sync');
 
+var spa = require("browser-sync-spa");
+
 var middleware = require('./proxy');
 <% if(qrCode) { %>
 
@@ -23,6 +25,10 @@ function browserSyncInit(baseDir, files, browser) {
       '/bower_components': 'bower_components'
     };
   }
+
+  browserSync.use(spa({
+    selector: "[ng-app]" // Only needed for angular apps
+  }));
 
   browserSync.instance = browserSync.init(files, {
     startPath: '/',
