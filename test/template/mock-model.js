@@ -25,6 +25,7 @@ module.exports = function() {
     isVendorStylesPreprocessed: false,
     injectTaskDeps: null,
     wiredepExclusions: [],
+    processedFileExtension: null,
     includeModernizr: false,
     imageMin: false,
     qrCode: false

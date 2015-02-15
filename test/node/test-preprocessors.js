@@ -29,6 +29,23 @@ describe('gulp-angular generator preprocessors script', function () {
     ];
   });
 
+  describe('compute file extension processed by the generator', function() {
+    it('should clean up the list and join with ,', function() {
+      generator.props = {
+        cssPreprocessor: { extension: null },
+        jsPreprocessor: { extension: 'js' },
+        htmlPreprocessor: { extension: 'jade' }
+      };
+      generator.imageMin = true;
+      generator.computeProcessedFileExtension();
+      generator.processedFileExtension.should.be.equal('html,css,js,jade,jpg,png,gif,svg');
+
+      generator.imageMin = false;
+      generator.computeProcessedFileExtension();
+      generator.processedFileExtension.should.be.equal('html,css,js,jade');
+    });
+  });
+
   describe('compute dependencies for the gulp inject task', function() {
     it('should be empty if no preprocessors', function() {
       generator.props = {

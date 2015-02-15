@@ -11,6 +11,28 @@ function rejectWithRegexp(regexp) {
 module.exports = function(GulpAngularGenerator) {
 
   /**
+   * List files extension processed by the generator
+   */
+  GulpAngularGenerator.prototype.computeProcessedFileExtension = function computeProcessedFileExtension() {
+    this.processedFileExtension = [
+      'html',
+      'css',
+      'js',
+      this.props.cssPreprocessor.extension,
+      this.props.jsPreprocessor.extension,
+      this.props.htmlPreprocessor.extension
+    ];
+    if (this.imageMin) {
+      this.processedFileExtension = this.processedFileExtension.concat(['jpg', 'png', 'gif', 'svg']);
+    }
+    this.processedFileExtension = _.chain(this.processedFileExtension)
+      .uniq()
+      .filter(_.isString)
+      .value()
+      .join(',');
+  };
+
+  /**
    * Compute gulp inject task dependencies depending on js and css preprocessors
    */
   GulpAngularGenerator.prototype.computeInjectTaskDeps = function computeInjectTaskDeps() {

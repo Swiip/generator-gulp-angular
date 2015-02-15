@@ -71,41 +71,46 @@ module.exports = function(options) {
       .pipe(gulp.dest(options.dist + '/'))
       .pipe($.size({ title: options.dist + '/', showFiles: true }));
   });
-
+<% if (imageMin) { %>
   gulp.task('images', function () {
     return gulp.src(options.src + '/assets/images/**/*')
-<% if (imageMin) { %>
       .pipe($.imagemin({
         optimizationLevel: 3,
         progressive: true,
         interlaced: true
       }))
-<% } %>
       .pipe(gulp.dest(options.dist + '/assets/images/'));
   });
+<% } %>
 
+  // Only applies for fonts from bower dependencies
+  // Custom fonts are handled by the "other" task
   gulp.task('fonts', function () {
-    var customFonts = gulp.src(options.src + '/assets/fonts/**/*')
-      .pipe(gulp.dest(options.dist + '/assets/fonts/'));
-
-    var bowerFonts = gulp.src($.mainBowerFiles())
+    return gulp.src($.mainBowerFiles())
       .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
       .pipe($.flatten())
       .pipe(gulp.dest(options.dist + '/fonts/'));
-
-    return merge(customFonts, bowerFonts);
   });
 
-  gulp.task('misc', function () {
-    return gulp.src(options.src + '/**/*.ico')
+  gulp.task('other', function () {
+    return gulp.src([
+      options.src + '/**/*',
+      '!' + options.src + '/**/*.{<%= processedFileExtension %>}'
+    ])
       .pipe(gulp.dest(options.dist + '/'));
   });
 
-  gulp.task('clean'
-<% if (props.jsPreprocessor.key === 'typescript') { %>, ['tsd:purge']
-<% } %>, function (done) {
+<% if (props.jsPreprocessor.key === 'typescript') { %>
+  gulp.task('clean', ['tsd:purge'], function (done) {
+<% } else { %>
+  gulp.task('clean', function (done) {
+<% } %>
     $.del([options.dist + '/', options.tmp + '/'], done);
   });
 
-  gulp.task('build', ['html', 'images', 'fonts', 'misc']);
+<% if (imageMin) { %>
+  gulp.task('build', ['html', 'images', 'fonts', 'other']);
+<% } else { %>
+  gulp.task('build', ['html', 'fonts', 'other']);
+<% } %>
 };
