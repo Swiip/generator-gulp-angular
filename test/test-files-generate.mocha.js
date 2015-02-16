@@ -885,7 +885,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['gulp/inject.js', /gulp\.task\(\'inject\', \[\'styles\'\]/],
-          ['gulp/inject.js', /paths\.src \+ '\/{app,components}\/\*\*\/\*\.js'/]
+          ['gulp/inject.js', /options\.src \+ '\/{app,components}\/\*\*\/\*\.js'/]
         ]));
 
         assert.noFileContent([
@@ -923,7 +923,7 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'scripts'\]/],
-          ['gulp/inject.js', /'{' \+ paths\.src \+ ',' \+ paths\.tmp \+ '\/serve}\/{app,components}\/\*\*\/\*\.js',/],
+          ['gulp/inject.js', /'{' \+ options\.src \+ ',' \+ options\.tmp \+ '\/serve}\/{app,components}\/\*\*\/\*\.js',/],
           ['package.json', /gulp-coffee/],
           ['package.json', /gulp-coffeelint/]
         ]));
@@ -961,7 +961,7 @@ describe('gulp-angular generator', function () {
         assert.fileContent([].concat(expectedGulpContent, [
           ['gulp/scripts.js', /gulp\.task\(\'scripts\'/],
           ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'scripts'\]/],
-          ['gulp/inject.js', /paths\.tmp \+ '\/serve\/{app,components}\/\*\*\/\*\.js',/],
+          ['gulp/inject.js', /options\.tmp \+ '\/serve\/{app,components}\/\*\*\/\*\.js',/],
           ['package.json', /browserify/],
           ['package.json', /6to5ify/],
           ['package.json', /vinyl-buffer/],
@@ -998,7 +998,7 @@ describe('gulp-angular generator', function () {
         assert.fileContent([].concat(expectedGulpContent, [
           ['gulp/scripts.js', /gulp\.task\(\'browserify\'/],
           ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'browserify'\]/],
-          ['gulp/inject.js', /paths\.tmp \+ '\/serve\/{app,components}\/\*\*\/\*\.js',/],
+          ['gulp/inject.js', /options\.tmp \+ '\/serve\/{app,components}\/\*\*\/\*\.js',/],
           ['package.json', /browserify/],
           ['package.json', /vinyl-buffer/],
           ['package.json', /vinyl-source-stream/],
@@ -1036,9 +1036,9 @@ describe('gulp-angular generator', function () {
 
         assert.fileContent([].concat(expectedGulpContent, [
           ['gulp/inject.js', /gulp\.task\('inject', \['styles', 'scripts'\]/],
-          ['gulp/inject.js', /'{' \+ paths\.src \+ ',' \+ paths\.tmp \+ '\/serve}\/{app,components}\/\*\*\/\*\.js',/],
+          ['gulp/inject.js', /'{' \+ options\.src \+ ',' \+ options\.tmp \+ '\/serve}\/{app,components}\/\*\*\/\*\.js',/],
           ['package.json', /gulp-typescript/],
-          ['gulp/build.js', /gulp\.task\('clean', \['tsd:purge']/],
+          /*['gulp/build.js', /gulp\.task\('clean', \['tsd:purge']/],*/
           ['gulp/scripts.js', /gulp\.task\('scripts', \['tsd:install']/]
         ]));
 
@@ -1069,9 +1069,9 @@ describe('gulp-angular generator', function () {
         assert.fileContent([
           ['gulp/build.js', /gulp\.task\('partials', \['markups'\]/],
           ['gulp/markups.js', /gulp\.task\('markups'/],
-          ['gulp/markups.js', /return gulp\.src\(paths\.src \+ '\/{app,components}\/\*\*\/\*\.jade'\)/],
+          ['gulp/markups.js', /return gulp\.src\(options\.src \+ '\/{app,components}\/\*\*\/\*\.jade'\)/],
           ['gulp/markups.js', /\.pipe\(\$\.consolidate\('jade'/],
-          ['gulp/watch.js', /gulp\.watch\(paths\.src \+ '\/{app,components}\/\*\*\/\*\.jade', \['markups'\]\);/]
+          ['gulp/watch.js', /gulp\.watch\(options\.src \+ '\/{app,components}\/\*\*\/\*\.jade', \['markups'\]\);/]
         ]);
 
         done();

@@ -71,7 +71,8 @@
 <% if (qrCode) { %>
     "qrcode-terminal": "~0.9.5",
 <% } %>
-    "uglify-save-license": "~0.4.1"
+    "uglify-save-license": "~0.4.1",
+    "wrench": "^1.5.8"
   },
   "engines": {
     "node": ">=0.10.0"
