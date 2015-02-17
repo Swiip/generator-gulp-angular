@@ -8,11 +8,11 @@ var $ = require('gulp-load-plugins')({
 });
 
 module.exports = function(options) {
-  <% if (props.htmlPreprocessor.key === 'none') { %>
+<% if (props.htmlPreprocessor.key === 'none') { %>
   gulp.task('partials', function () {
-  <% } else { %>
+<% } else { %>
   gulp.task('partials', ['markups'], function () {
-  <% } %>
+<% } %>
     return gulp.src([
       options.src + '/{app,components}/**/*.html',
       options.tmp + '/serve/{app,components}/**/*.html'
@@ -50,11 +50,11 @@ module.exports = function(options) {
       .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
       .pipe(jsFilter.restore())
       .pipe(cssFilter)
-  <% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'scss') { %>
+<% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'scss') { %>
       .pipe($.replace('/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/', '../fonts/'))
-  <% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'less') { %>
+<% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'less') { %>
       .pipe($.replace('/bower_components/bootstrap/fonts/', '../fonts/'))
-  <% } %>
+<% } %>
       .pipe($.csso())
       .pipe(cssFilter.restore())
       .pipe(assets.restore())
@@ -72,12 +72,14 @@ module.exports = function(options) {
   });
 
   gulp.task('images', function () {
-    return gulp.src(options.src + '/assets/images/**/*')<% if (imageMin) { %>
+    return gulp.src(options.src + '/assets/images/**/*')
+<% if (imageMin) { %>
       .pipe($.imagemin({
         optimizationLevel: 3,
         progressive: true,
         interlaced: true
-      }))<% } %>
+      }))
+<% } %>
       .pipe(gulp.dest(options.dist + '/assets/images/'));
   });
 
@@ -99,8 +101,8 @@ module.exports = function(options) {
   });
 
   gulp.task('clean'
-  <% if (props.jsPreprocessor.key === 'typescript') { %>, ['tsd:purge']
-  <% } %>, function (done) {
+<% if (props.jsPreprocessor.key === 'typescript') { %>, ['tsd:purge']
+<% } %>, function (done) {
     $.del([options.dist + '/', options.tmp + '/'], done);
   });
 

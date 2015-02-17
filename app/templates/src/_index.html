@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-<% if (props.ui.name !== null) { %>
+<% if (props.ui.key !== 'none') { %>
     <!-- build:css({<%= props.paths.tmp %>/serve,<%= props.paths.src %>}) styles/vendor.css -->
 <%   if (isVendorStylesPreprocessed) { %>
     <link rel="stylesheet" href="app/vendor.css">
@@ -24,11 +24,13 @@
     <!-- inject:css -->
     <!-- css files will be automaticaly insert here -->
     <!-- endinject -->
-    <!-- endbuild --><% if (includeModernizr) { %>
+    <!-- endbuild -->
+<% if (includeModernizr) { %>
 
     <!-- build:js(<%= props.paths.src %>) scripts/modernizr.js -->
     <script src="<%= computedPaths.appToBower %>/bower_components/modernizr/modernizr.js"></script>
-    <!-- endbuild --><% } %>
+    <!-- endbuild -->
+<% } %>
   </head>
   <body>
     <!--[if lt IE 10]>

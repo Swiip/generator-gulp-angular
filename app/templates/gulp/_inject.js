@@ -7,44 +7,44 @@ var $ = require('gulp-load-plugins')();
 var wiredep = require('wiredep').stream;
 
 module.exports = function(options) {
-  <% if (_.isEmpty(injectTaskDeps)) { %>
+<% if (_.isEmpty(injectTaskDeps)) { %>
   gulp.task('inject', function () {
-  <% } else { %>
+<% } else { %>
   gulp.task('inject', [<%= injectTaskDeps.join(', ') %>], function () {
-  <% } %>
+<% } %>
 
     var injectStyles = gulp.src([
-  <% if (props.cssPreprocessor.key !== 'none') { %>
+<% if (props.cssPreprocessor.key !== 'none') { %>
       options.tmp + '/serve/{app,components}/**/*.css',
       '!' + options.tmp + '/serve/app/vendor.css'
-  <% } else { %>
+<% } else { %>
       options.src + '/{app,components}/**/*.css'
-  <% } %>
+<% } %>
     ], { read: false });
 
-  <% if (props.jsPreprocessor.srcExtension === 'ts') { %>
+<% if (props.jsPreprocessor.srcExtension === 'ts') { %>
     var sortOutput = require('../' + options.tmp + '/sortOutput.json');
-  <% } %>
+<% } %>
 
     var injectScripts = gulp.src([
-  <% if (props.jsPreprocessor.key === 'none') { %>
+<% if (props.jsPreprocessor.key === 'none') { %>
       options.src + '/{app,components}/**/*.js',
-  <% } else if (props.jsPreprocessor.extension === 'js') { %>
+<% } else if (props.jsPreprocessor.extension === 'js') { %>
       options.tmp + '/serve/{app,components}/**/*.js',
-  <% } else { %>
+<% } else { %>
       '{' + options.src + ',' + options.tmp + '/serve}/{app,components}/**/*.js',
-  <% } %>
+<% } %>
       '!' + options.src + '/{app,components}/**/*.spec.js',
       '!' + options.src + '/{app,components}/**/*.mock.js'
-  <% if (props.jsPreprocessor.srcExtension === 'ts') { %>
+<% if (props.jsPreprocessor.srcExtension === 'ts') { %>
     ], { read: false })
     .pipe($.order(sortOutput, {base: options.tmp + '/serve'}));
-  <% } else if (props.jsPreprocessor.srcExtension !== 'es6') { %>
+<% } else if (props.jsPreprocessor.srcExtension !== 'es6') { %>
     ])
     .pipe($.angularFilesort());
-  <% } else { %>
+<% } else { %>
     ], { read: false });
-  <% } %>
+<% } %>
 
     var injectOptions = {
       ignorePath: [options.src, options.tmp + '/serve'],
@@ -53,9 +53,9 @@ module.exports = function(options) {
 
     var wiredepOptions = {
       directory: 'bower_components'
-  <% if(wiredepExclusions.length > 0) { %>,
+<% if(wiredepExclusions.length > 0) { %>,
       exclude: [<%= wiredepExclusions.join(', ') %>]
-  <% } %>
+<% } %>
     };
 
     return gulp.src(options.src + '/*.html')

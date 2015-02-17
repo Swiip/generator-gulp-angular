@@ -6,7 +6,7 @@ var $ = require('gulp-load-plugins')();
 
 module.exports = function(options) {
   gulp.task('styles', function () {
-  <% if (props.cssPreprocessor.key === 'less') { %>
+<% if (props.cssPreprocessor.key === 'less') { %>
     var lessOptions = {
       options: [
         'bower_components',
@@ -14,12 +14,11 @@ module.exports = function(options) {
         options.src + '/components'
       ]
     };
-  <% } %>
-  <% if (props.cssPreprocessor.extension === 'scss') { %>
+<% } if (props.cssPreprocessor.extension === 'scss') { %>
     var sassOptions = {
       style: 'expanded'
     };
-  <% } %>
+<% } %>
 
     var injectFiles = gulp.src([
       options.src + '/{app,components}/**/*.<%= props.cssPreprocessor.extension %>',
@@ -47,15 +46,15 @@ module.exports = function(options) {
       .pipe(indexFilter)
       .pipe($.inject(injectFiles, injectOptions))
       .pipe(indexFilter.restore())
-  <% if (props.cssPreprocessor.key === 'less') { %>
+<% if (props.cssPreprocessor.key === 'less') { %>
       .pipe($.less(lessOptions))
-  <% } else if (props.cssPreprocessor.key === 'ruby-sass') { %>
+<% } else if (props.cssPreprocessor.key === 'ruby-sass') { %>
       .pipe($.rubySass(sassOptions))
-  <% } else if (props.cssPreprocessor.key === 'node-sass') { %>
+<% } else if (props.cssPreprocessor.key === 'node-sass') { %>
       .pipe($.sass(sassOptions))
-  <% } else if (props.cssPreprocessor.key === 'stylus') { %>
+<% } else if (props.cssPreprocessor.key === 'stylus') { %>
       .pipe($.stylus())
-  <% } %>
+<% } %>
 
     .pipe($.autoprefixer())
       .on('error', function handleError(err) {

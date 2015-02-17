@@ -11,13 +11,13 @@ module.exports = function(options) {
     }
 
     return gulp.src(options.src + '/{app,components}/**/*.<%= props.htmlPreprocessor.extension %>')
-  <% if (props.htmlPreprocessor.key === 'jade') { %>
+<% if (props.htmlPreprocessor.key === 'jade') { %>
       .pipe($.consolidate('jade', { basedir: options.src, doctype: 'html', pretty: '  ' }))
-  <% } else if (props.htmlPreprocessor.key === 'haml') { %>
+<% } else if (props.htmlPreprocessor.key === 'haml') { %>
       .pipe($.consolidate('hamljs'))
-  <% } else if (props.htmlPreprocessor.key === 'handlebars') { %>
+<% } else if (props.htmlPreprocessor.key === 'handlebars') { %>
       .pipe($.consolidate('handlebars'))
-  <% } %>
+<% } %>
       .on('error', function handleError(err) {
         console.error(err.toString());
         this.emit('end');

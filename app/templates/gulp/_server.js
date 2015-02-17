@@ -11,10 +11,10 @@ var spa = require("browser-sync-spa");
 var middleware = require('./proxy');
 
 module.exports = function(options) {
-  <% if(qrCode) { %>
+<% if(qrCode) { %>
 
   var qrcode = require('qrcode-terminal');
-  <% } %>
+<% } %>
 
   function browserSyncInit(baseDir, files, browser) {
     browser = browser === undefined ? 'default' : browser;
@@ -34,13 +34,13 @@ module.exports = function(options) {
         routes: routes
       },
       browser: browser
-  <% if(qrCode) { %>
+<% if(qrCode) { %>
     }, function(err, bs) {
       qrcode.generate(bs.options.urls.external);
     });
-  <% } else { %>
+<% } else { %>
     });
-  <% } %>
+<% } %>
   }
 
   browserSync.use(spa({
