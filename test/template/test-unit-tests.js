@@ -26,29 +26,29 @@ describe('gulp-angular unit tests template', function () {
   it('should add options for each css preprocessors', function() {
     model.props.jsPreprocessor.key = 'none';
     var result = unitTests(model);
-    result.should.match(/paths\.src \+ '[^\s]*\.js/);
+    result.should.match(/options\.src \+ '[^\s]*\.js/);
 
     model.props.jsPreprocessor.key = '6to5';
     model.props.jsPreprocessor.extension = 'js';
     result = unitTests(model);
-    result.should.match(/paths\.tmp \+ '\/serve\/app\/index\.js/);
-    result.should.match(/paths\.src \+ '[^\s]*spec\.js/);
-    result.should.match(/paths\.src \+ '[^\s]*mock\.js/);
+    result.should.match(/options\.tmp \+ '\/serve\/app\/index\.js/);
+    result.should.match(/options\.src \+ '[^\s]*spec\.js/);
+    result.should.match(/options\.src \+ '[^\s]*mock\.js/);
 
     model.props.jsPreprocessor.key = 'typescript';
     model.props.jsPreprocessor.extension = 'ts';
     result = unitTests(model);
-    result.should.match(/paths\.tmp \+ '\/serve[^\s]*!\(index\)\.js/);
-    result.should.match(/paths\.tmp \+ '\/serve[^\s]*index\.js/);
-    result.should.match(/paths\.src \+ '[^\s]*spec\.js/);
-    result.should.match(/paths\.src \+ '[^\s]*mock\.js/);
+    result.should.match(/options\.tmp \+ '\/serve[^\s]*!\(index\)\.js/);
+    result.should.match(/options\.tmp \+ '\/serve[^\s]*index\.js/);
+    result.should.match(/options\.src \+ '[^\s]*spec\.js/);
+    result.should.match(/options\.src \+ '[^\s]*mock\.js/);
 
     model.props.jsPreprocessor.key = 'coffee';
     model.props.jsPreprocessor.extension = 'coffee';
     result = unitTests(model);
-    result.should.match(/paths\.tmp \+ '\/serve[^\s]*\.js/);
-    result.should.match(/paths\.src \+ '[^\s]*spec\.js/);
-    result.should.match(/paths\.src \+ '[^\s]*mock\.js/);
+    result.should.match(/options\.tmp \+ '\/serve[^\s]*\.js/);
+    result.should.match(/options\.src \+ '[^\s]*spec\.js/);
+    result.should.match(/options\.src \+ '[^\s]*mock\.js/);
   });
 
   it('should select the right deps for the test tasks', function() {

@@ -4,21 +4,23 @@ var gulp = require('gulp');
 
 var paths = gulp.paths;
 
+module.exports = function(options) {
 <% if (props.htmlPreprocessor.key === 'none') { %>
-gulp.task('watch', ['inject'], function () {
+  gulp.task('watch', ['inject'], function () {
 <% } else { %>
-gulp.task('watch', ['markups', 'inject'], function () {
+  gulp.task('watch', ['markups', 'inject'], function () {
 <% } %>
-  gulp.watch([
-    paths.src + '/*.html',
-    paths.src + '/{app,components}/**/*.<%= props.cssPreprocessor.extension %>',
-    paths.src + '/{app,components}/**/*.js',
+    gulp.watch([
+      options.src + '/*.html',
+      options.src + '/{app,components}/**/*.<%= props.cssPreprocessor.extension %>',
+      options.src + '/{app,components}/**/*.js',
 <% if (props.jsPreprocessor.extension !== 'js') { %>
-    paths.src + '/{app,components}/**/*.<%= props.jsPreprocessor.extension %>',
+      options.src + '/{app,components}/**/*.<%= props.jsPreprocessor.extension %>',
 <% } %>
-    'bower.json'
-  ], ['inject']);
+      'bower.json'
+    ], ['inject']);
 <% if (props.htmlPreprocessor.key !== 'none') { %>
-  gulp.watch(paths.src + '/{app,components}/**/*.<%= props.htmlPreprocessor.extension %>', ['markups']);
+    gulp.watch(options.src + '/{app,components}/**/*.<%= props.htmlPreprocessor.extension %>', ['markups']);
 <% } %>
-});
+  });
+};

@@ -30,7 +30,7 @@ describe('gulp-angular markups template', function () {
 
     model.props.htmlPreprocessor.key = 'jade';
     result = markups(model);
-    result.should.match(/\$\.consolidate\('jade', \{ basedir: paths\.src, doctype: 'html', pretty: '  ' \}/);
+    result.should.match(/\$\.consolidate\('jade', \{ basedir: options\.src, doctype: 'html', pretty: '  ' \}/);
 
     model.props.htmlPreprocessor.key = 'haml';
     result = markups(model);

@@ -40,7 +40,7 @@ describe('gulp-angular watch template', function () {
 
     model.props.jsPreprocessor.extension = 'notjs';
     result = watch(model);
-    result.should.match(/paths\.src \+ '[^\s]*\.notjs'/);
+    result.should.match(/options\.src \+ '[^\s]*\.notjs'/);
   });
 
   it('should watch the html preprocessor extension files', function() {

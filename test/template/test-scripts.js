@@ -27,7 +27,7 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.key = 'none';
     model.props.jsPreprocessor.srcExtension = 'js';
     var result = scripts(model);
-    result.should.match(/require\('gulp'\);\n\nvar paths/);
+    result.should.match(/require\('gulp'\);\n\nvar \$/);
 
     model.props.jsPreprocessor.key = 'typescript';
     result = scripts(model);
@@ -58,7 +58,7 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.key = 'typescript';
     result = scripts(model);
     result.should.match(/gulp\.task\('scripts', \['tsd:install'\]/);
-    result.should.match(/mkdirp\.sync\(paths\.tmp\);/);
+    result.should.match(/mkdirp\.sync\(options\.tmp\);/);
   });
 
   it('should add the right js preprocessor process', function() {
@@ -72,7 +72,7 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.key = 'coffee';
     model.props.jsPreprocessor.extension = 'coffee';
     result = scripts(model);
-    result.should.match(/gulp\.src\(paths\.src \+ '[^\s]*\.coffee'\)/);
+    result.should.match(/gulp\.src\(options\.src \+ '[^\s]*\.coffee'\)/);
     result.should.match(/\$\.coffee\(/);
     result.should.match(/\$\.coffeelint\(/);
     result.should.not.match(/to5/);
@@ -82,7 +82,7 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.key = 'typescript';
     model.props.jsPreprocessor.extension = 'ts';
     result = scripts(model);
-    result.should.match(/gulp\.src\(paths\.src \+ '[^\s]*\.ts'\)/);
+    result.should.match(/gulp\.src\(options\.src \+ '[^\s]*\.ts'\)/);
     result.should.match(/\$\.tslint\(/);
     result.should.match(/\$\.typescript\(/);
     result.should.not.match(/to5/);
@@ -93,7 +93,7 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.extension = 'js';
     result = scripts(model);
     result.should.match(/browserify\(\{ debug: true \}\)/);
-    result.should.match(/\.add\('\.\/' \+ paths\.src \+ '\/app\/index\.js'\)/);
+    result.should.match(/\.add\('\.\/' \+ options\.src \+ '\/app\/index\.js'\)/);
     result.should.match(/\.transform\(to5ify\)/);
     result.should.not.match(/gulp\.src/);
     result.should.not.match(/traceur/);
@@ -103,7 +103,7 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.key = 'traceur';
     model.props.jsPreprocessor.extension = 'js';
     result = scripts(model);
-    result.should.match(/gulp\.src\(paths\.src \+ '[^\s]*\.js'\)/);
+    result.should.match(/gulp\.src\(options\.src \+ '[^\s]*\.js'\)/);
     result.should.match(/\$\.jshint\(/);
     result.should.match(/\$\.traceur\(/);
     result.should.match(/gulp\.task\('browserify', \['scripts'\]/);

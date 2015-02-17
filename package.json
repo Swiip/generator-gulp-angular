@@ -49,7 +49,8 @@
     "q": "^1.1.2",
     "recursive-readdir": "^1.2.1",
     "sinon": "^1.12.2",
-    "sinon-chai": "^2.6.0"
+    "sinon-chai": "^2.6.0",
+    "wrench": "^1.5.8"
   },
   "peerDependencies": {
     "yo": ">=1.0.0"

@@ -23,7 +23,7 @@
     "gulp-uglify": "~1.0.1",
     "gulp-useref": "~1.0.2",
     "gulp-util": "~3.0.2",
-    "gulp-ng-annotate": "~0.3.6",
+    "gulp-ng-annotate": "~0.5.2",
     "gulp-replace": "~0.5.0",
     "gulp-rename": "~1.2.0",
     "gulp-rev": "~2.0.1",
@@ -76,13 +76,15 @@
     "karma-phantomjs-launcher": "~0.1.4",
     "require-dir": "~0.1.0",
     "browser-sync": "~1.7.1",
+    "browser-sync-spa": "~1.0.1",
     "http-proxy": "~1.7.0",
     "chalk": "~0.5.1",
     "protractor": "~1.4.0",
 <% if (qrCode) { %>
     "qrcode-terminal": "~0.9.5",
 <% } %>
-    "uglify-save-license": "~0.4.1"
+    "uglify-save-license": "~0.4.1",
+    "wrench": "^1.5.8"
   },
   "engines": {
     "node": ">=0.10.0"
