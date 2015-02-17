@@ -363,7 +363,7 @@
           "module": "gulp-6to5",
           "version": "~1.0.2"
         },
-        "name": "ES6 (6to5), ECMAScript 6 compiled with 6to5 which requires no runtime."
+        "name": "ES6 (Babel formerly 6to5), ECMAScript 6 compiled with Babel which requires no runtime."
       },
       {
         "value": {
