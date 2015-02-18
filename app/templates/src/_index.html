@@ -55,7 +55,11 @@
     <!-- endbower -->
     <!-- endbuild -->
 
+<% if (props.jsPreprocessor.srcExtension === 'es6') { %>
+    <!-- build:js({<%= props.paths.tmp %>/serve,<%= props.paths.tmp %>/partials}) scripts/app.js -->
+<% } else { %>
     <!-- build:js({<%= props.paths.tmp %>/serve,<%= props.paths.tmp %>/partials,<%= props.paths.src %>}) scripts/app.js -->
+<% } %>
     <!-- inject:js -->
     <!-- js files will be automaticaly insert here -->
     <!-- endinject -->

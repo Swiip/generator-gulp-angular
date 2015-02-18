@@ -63,4 +63,4 @@ module.exports = function(options) {
       })
       .pipe(gulp.dest(options.tmp + '/serve/app/'));
   });
-}
+};

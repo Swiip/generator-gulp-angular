@@ -28,7 +28,7 @@ describe('gulp-angular unit tests template', function () {
     var result = unitTests(model);
     result.should.match(/options\.src \+ '[^\s]*\.js/);
 
-    model.props.jsPreprocessor.key = '6to5';
+    model.props.jsPreprocessor.key = 'babel';
     model.props.jsPreprocessor.extension = 'js';
     result = unitTests(model);
     result.should.match(/options\.tmp \+ '\/serve\/app\/index\.js/);

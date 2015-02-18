@@ -2,8 +2,6 @@
 
 var gulp = require('gulp');
 
-var paths = gulp.paths;
-
 module.exports = function(options) {
 <% if (props.htmlPreprocessor.key === 'none') { %>
   gulp.task('watch', ['inject'], function () {

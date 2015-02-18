@@ -33,19 +33,19 @@ describe('gulp-angular scripts template', function () {
     result = scripts(model);
     result.should.match(/require\('mkdirp'\);/);
     result.should.not.match(/browserify/);
-    result.should.not.match(/6to5ify/);
+    result.should.not.match(/babelify/);
 
-    model.props.jsPreprocessor.key = 'not 6to5';
+    model.props.jsPreprocessor.key = 'not babel';
     model.props.jsPreprocessor.srcExtension = 'es6';
     result = scripts(model);
     result.should.match(/require\('browserify'\);/);
     result.should.not.match(/mkdirp/);
-    result.should.not.match(/6to5ify/);
+    result.should.not.match(/babelify/);
 
-    model.props.jsPreprocessor.key = '6to5';
+    model.props.jsPreprocessor.key = 'babel';
     result = scripts(model);
     result.should.match(/require\('browserify'\);/);
-    result.should.match(/require\('6to5ify'\);/);
+    result.should.match(/require\('babelify'\);/);
     result.should.not.match(/mkdirp/);
   });
 
@@ -64,7 +64,7 @@ describe('gulp-angular scripts template', function () {
   it('should add the right js preprocessor process', function() {
     model.props.jsPreprocessor.key = 'none';
     var result = scripts(model);
-    result.should.not.match(/to5/);
+    result.should.not.match(/babel/);
     result.should.not.match(/coffee/);
     result.should.not.match(/traceur/);
     result.should.not.match(/typescript/);
@@ -75,7 +75,7 @@ describe('gulp-angular scripts template', function () {
     result.should.match(/gulp\.src\(options\.src \+ '[^\s]*\.coffee'\)/);
     result.should.match(/\$\.coffee\(/);
     result.should.match(/\$\.coffeelint\(/);
-    result.should.not.match(/to5/);
+    result.should.not.match(/babel/);
     result.should.not.match(/traceur/);
     result.should.not.match(/typescript/);
 
@@ -85,16 +85,16 @@ describe('gulp-angular scripts template', function () {
     result.should.match(/gulp\.src\(options\.src \+ '[^\s]*\.ts'\)/);
     result.should.match(/\$\.tslint\(/);
     result.should.match(/\$\.typescript\(/);
-    result.should.not.match(/to5/);
+    result.should.not.match(/babel/);
     result.should.not.match(/traceur/);
     result.should.not.match(/coffee/);
 
-    model.props.jsPreprocessor.key = '6to5';
+    model.props.jsPreprocessor.key = 'babel';
     model.props.jsPreprocessor.extension = 'js';
     result = scripts(model);
     result.should.match(/browserify\(\{ debug: true \}\)/);
     result.should.match(/\.add\('\.\/' \+ options\.src \+ '\/app\/index\.js'\)/);
-    result.should.match(/\.transform\(to5ify\)/);
+    result.should.match(/\.transform\(babelify\)/);
     result.should.not.match(/gulp\.src/);
     result.should.not.match(/traceur/);
     result.should.not.match(/coffee/);
@@ -107,7 +107,7 @@ describe('gulp-angular scripts template', function () {
     result.should.match(/\$\.jshint\(/);
     result.should.match(/\$\.traceur\(/);
     result.should.match(/gulp\.task\('browserify', \['scripts'\]/);
-    result.should.not.match(/to5/);
+    result.should.not.match(/babel/);
     result.should.not.match(/coffee/);
     result.should.not.match(/typescript/);
   });

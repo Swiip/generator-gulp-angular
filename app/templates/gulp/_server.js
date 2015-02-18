@@ -6,7 +6,7 @@ var util = require('util');
 
 var browserSync = require('browser-sync');
 
-var spa = require("browser-sync-spa");
+var spa = require('browser-sync-spa');
 
 var middleware = require('./proxy');
 
@@ -19,6 +19,8 @@ module.exports = function(options) {
   function browserSyncInit(baseDir, files, browser) {
     browser = browser === undefined ? 'default' : browser;
 
+    files = files ? files : [];
+
     var routes = null;
     if(baseDir === options.src || (util.isArray(baseDir) && baseDir.indexOf(options.src) !== -1)) {
       routes = {
@@ -26,13 +28,18 @@ module.exports = function(options) {
       };
     }
 
+    var server = {
+      baseDir: baseDir,
+      routes: routes
+    };
+
+    if(middleware.length > 0) {
+      server.middleware = middleware;
+    }
+
     browserSync.instance = browserSync.init(files, {
       startPath: '/',
-      server: {
-        baseDir: baseDir,
-        middleware: middleware,
-        routes: routes
-      },
+      server: server,
       browser: browser
 <% if(qrCode) { %>
     }, function(err, bs) {
@@ -50,22 +57,22 @@ module.exports = function(options) {
 
 gulp.task('serve', ['watch'], function () {
   browserSyncInit([
-    paths.tmp + '/serve',
-    paths.src
+    options.tmp + '/serve',
+    options.src
   ], [
 <% if(props.cssPreprocessor.key === 'none') { %>
-    paths.src + '/{app,components}/**/*.css',
+    options.src + '/{app,components}/**/*.css',
 <% } else { %>
-    paths.tmp + '/serve/{app,components}/**/*.css',
+    options.tmp + '/serve/{app,components}/**/*.css',
 <% } if(props.jsPreprocessor.key === 'none') { %>
-    paths.src + '/{app,components}/**/*.js',
+    options.src + '/{app,components}/**/*.js',
 <% } else { %>
-    paths.tmp + '/serve/{app,components}/**/*.js',
+    options.tmp + '/serve/{app,components}/**/*.js',
 <% } %>
-    paths.src + '/assets/images/**/*',
-    paths.tmp + '/serve/*.html',
-    paths.tmp + '/serve/{app,components}/**/*.html',
-    paths.src + '/{app,components}/**/*.html'
+    options.src + '/assets/images/**/*',
+    options.tmp + '/serve/*.html',
+    options.tmp + '/serve/{app,components}/**/*.html',
+    options.src + '/{app,components}/**/*.html'
   ]);
 });
 
