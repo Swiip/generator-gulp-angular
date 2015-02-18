@@ -50,22 +50,22 @@ module.exports = function(options) {
 
 gulp.task('serve', ['watch'], function () {
   browserSyncInit([
-    paths.tmp + '/serve',
-    paths.src
+    options.tmp + '/serve',
+    options.src
   ], [
 <% if(props.cssPreprocessor.key === 'none') { %>
-    paths.src + '/{app,components}/**/*.css',
+    options.src + '/{app,components}/**/*.css',
 <% } else { %>
-    paths.tmp + '/serve/{app,components}/**/*.css',
+    options.tmp + '/serve/{app,components}/**/*.css',
 <% } if(props.jsPreprocessor.key === 'none') { %>
-    paths.src + '/{app,components}/**/*.js',
+    options.src + '/{app,components}/**/*.js',
 <% } else { %>
-    paths.tmp + '/serve/{app,components}/**/*.js',
+    options.tmp + '/serve/{app,components}/**/*.js',
 <% } %>
-    paths.src + '/assets/images/**/*',
-    paths.tmp + '/serve/*.html',
-    paths.tmp + '/serve/{app,components}/**/*.html',
-    paths.src + '/{app,components}/**/*.html'
+    options.src + '/assets/images/**/*',
+    options.tmp + '/serve/*.html',
+    options.tmp + '/serve/{app,components}/**/*.html',
+    options.src + '/{app,components}/**/*.html'
   ]);
 });
 
