@@ -67,7 +67,7 @@ describe('gulp-angular generator inception tests', function () {
     });
   });
 
-  describe('with [ZeptoJS 1.1.x, $http, Bootstrap, LESS, ES6 with 6to5, hamljs]', function () {
+  describe('with [ZeptoJS 1.1.x, $http, Bootstrap, LESS, ES6 with Babel, hamljs]', function () {
     before(function() {
       return inception.prepare({}, {
         jQuery: prompts.jQuery.values['zeptojs 1.1'],
@@ -76,7 +76,7 @@ describe('gulp-angular generator inception tests', function () {
         ui: prompts.ui.values.bootstrap,
         bootstrapComponents: prompts.bootstrapComponents.values['ui-bootstrap'],
         cssPreprocessor: prompts.cssPreprocessor.values.less,
-        jsPreprocessor: prompts.jsPreprocessor.values['6to5'],
+        jsPreprocessor: prompts.jsPreprocessor.values['babel'],
         htmlPreprocessor: prompts.htmlPreprocessor.values.haml
       }).then(function(generator) {
         gulpAngular = generator;

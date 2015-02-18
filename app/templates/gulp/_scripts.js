@@ -7,8 +7,8 @@ var mkdirp = require('mkdirp');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
-<% } if (props.jsPreprocessor.key === '6to5') { %>
-var to5ify = require('6to5ify');
+<% } if (props.jsPreprocessor.key === 'babel') { %>
+var babelify = require('babelify');
 <% } %>
 
 var $ = require('gulp-load-plugins')();
@@ -21,7 +21,7 @@ module.exports = function(options) {
 <% } else { %>
   gulp.task('scripts', function () {
 <% } %>
-<% if (props.jsPreprocessor.key !== '6to5') { %>
+<% if (props.jsPreprocessor.key !== 'babel') { %>
     return gulp.src(options.src + '/{app,components}/**/*.<%= props.jsPreprocessor.extension %>')
 <%   if (props.jsPreprocessor.extension === 'js') { %>
       .pipe($.jshint())
@@ -57,7 +57,7 @@ module.exports = function(options) {
 <% } else { %>
     return browserify({ debug: true })
       .add('./' + options.src + '/app/index.js')
-      .transform(to5ify)
+      .transform(babelify)
       .bundle()
       .on('error', options.errorHandler('Browserify'))
       .pipe(source('index.js'))

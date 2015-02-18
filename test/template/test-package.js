@@ -80,7 +80,7 @@ describe('gulp-angular package template', function () {
     model.props.jsPreprocessor.srcExtension = 'js';
     var result = packageJson(model);
     result.should.not.match(/coffee/);
-    result.should.not.match(/6to5/);
+    result.should.not.match(/babel/);
     result.should.not.match(/traceur/);
     result.should.not.match(/typescript/);
 
@@ -89,15 +89,15 @@ describe('gulp-angular package template', function () {
     result = packageJson(model);
     result.should.match(/gulp-coffee"/);
     result.should.match(/gulp-coffeelint/);
-    result.should.not.match(/6to5/);
+    result.should.not.match(/babel/);
     result.should.not.match(/traceur/);
     result.should.not.match(/typescript/);
 
-    model.props.jsPreprocessor.key = '6to5';
+    model.props.jsPreprocessor.key = 'babel';
     model.props.jsPreprocessor.srcExtension = 'es6';
     result = packageJson(model);
     result.should.match(/browserify"/);
-    result.should.match(/6to5ify/);
+    result.should.match(/babelify/);
     result.should.not.match(/coffee/);
     result.should.not.match(/traceur/);
     result.should.not.match(/typescript/);
@@ -108,7 +108,7 @@ describe('gulp-angular package template', function () {
     result.should.match(/browserify"/);
     result.should.match(/gulp-traceur/);
     result.should.not.match(/coffee/);
-    result.should.not.match(/6to5/);
+    result.should.not.match(/babel/);
     result.should.not.match(/typescript/);
 
     model.props.jsPreprocessor.key = 'typescript';
@@ -118,7 +118,7 @@ describe('gulp-angular package template', function () {
     result.should.match(/gulp-tslint/);
     result.should.match(/tsd/);
     result.should.not.match(/coffee/);
-    result.should.not.match(/6to5/);
+    result.should.not.match(/babel/);
     result.should.not.match(/traceur/);
   });
 

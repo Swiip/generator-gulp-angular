@@ -113,11 +113,11 @@
         "description": "CoffeeScript, \"a little language that compiles into JavaScript\".",
         "logo": "coffeescript.png"
     },
-    "6to5": {
-        "title": "ES6 (6to5)",
-        "url": "https://github.com/6to5/6to5",
+    "babel": {
+        "title": "ES6 (Babel formerly 6to5)",
+        "url": "https://babeljs.io/",
         "description": "Turns ES6+ code into vanilla ES5, so you can use next generation features today.",
-        "logo": "6to5.png"
+        "logo": "babel.png"
     },
     "traceur": {
         "title": "ES6 (Traceur)",

@@ -6,7 +6,7 @@ var util = require('util');
 
 var browserSync = require('browser-sync');
 
-var spa = require("browser-sync-spa");
+var spa = require('browser-sync-spa');
 
 var middleware = require('./proxy');
 
@@ -19,6 +19,8 @@ module.exports = function(options) {
   function browserSyncInit(baseDir, files, browser) {
     browser = browser === undefined ? 'default' : browser;
 
+    files = files ? files : [];
+
     var routes = null;
     if(baseDir === options.src || (util.isArray(baseDir) && baseDir.indexOf(options.src) !== -1)) {
       routes = {
@@ -26,13 +28,18 @@ module.exports = function(options) {
       };
     }
 
+    var server = {
+      baseDir: baseDir,
+      routes: routes
+    };
+
+    if(middleware.length > 0) {
+      server.middleware = middleware;
+    }
+
     browserSync.instance = browserSync.init(files, {
       startPath: '/',
-      server: {
-        baseDir: baseDir,
-        middleware: middleware,
-        routes: routes
-      },
+      server: server,
       browser: browser
 <% if(qrCode) { %>
     }, function(err, bs) {

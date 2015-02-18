@@ -311,7 +311,7 @@
       },
       {
         "value": {
-          "key": "6to5",
+          "key": "babel",
           "extension": "js",
           "srcExtension": "es6"
         },
