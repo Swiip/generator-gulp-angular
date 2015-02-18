@@ -74,4 +74,15 @@ describe('gulp-angular index js template', function () {
     result.should.match(/<body>[\s\S]*router html content[\s\S]*<script>/);
   });
 
+  it('should not look in src folder for app.js with es6', function() {
+    model.props.paths.src = 'src';
+    model.props.jsPreprocessor.srcExtension = 'not es6';
+    var result = indexHtml(model);
+    result.should.match(/partials,src\}\) scripts\/app\.js -->/);
+
+    model.props.jsPreprocessor.srcExtension = 'es6';
+    result = indexHtml(model);
+    result.should.match(/partials\}\) scripts\/app\.js -->/);
+  });
+
 });
