@@ -47,13 +47,13 @@ module.exports = function(options) {
       .pipe($.inject(injectFiles, injectOptions))
       .pipe(indexFilter.restore())
 <% if (props.cssPreprocessor.key === 'less') { %>
-      .pipe($.less(lessOptions))
+      .pipe($.less(lessOptions)).on('error', options.errorHandler('Less'))
 <% } else if (props.cssPreprocessor.key === 'ruby-sass') { %>
-      .pipe($.rubySass(sassOptions))
+      .pipe($.rubySass(sassOptions)).on('error', options.errorHandler('RubySass'))
 <% } else if (props.cssPreprocessor.key === 'node-sass') { %>
-      .pipe($.sass(sassOptions))
+      .pipe($.sass(sassOptions)).on('error', options.errorHandler('Sass'))
 <% } else if (props.cssPreprocessor.key === 'stylus') { %>
-      .pipe($.stylus())
+      .pipe($.stylus()).on('error', options.errorHandler('Stylus'))
 <% } %>
 
     .pipe($.autoprefixer())
