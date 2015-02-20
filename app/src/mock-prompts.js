@@ -100,8 +100,5 @@ module.exports = {
     cssPreprocessor: model.cssPreprocessor.values['node-sass'],
     jsPreprocessor: model.jsPreprocessor.values.none,
     htmlPreprocessor: model.htmlPreprocessor.values.none
-  },
-  libRegexp: function(name, version) {
-    return new RegExp('"' + name + '": "' + version + '"');
   }
 };
