@@ -5,6 +5,11 @@ node_js:
   - '0.12'
   - iojs
 
+matrix:
+  fast_finish: true
+  allow_failures:
+    - node_js: iojs
+
 before_install:
   - npm install -g npm@latest
   - npm install -g bower
