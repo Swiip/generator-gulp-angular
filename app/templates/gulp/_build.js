@@ -65,7 +65,8 @@ module.exports = function(options) {
       .pipe($.minifyHtml({
         empty: true,
         spare: true,
-        quotes: true
+        quotes: true,
+        conditionals: true
       }))
       .pipe(htmlFilter.restore())
       .pipe(gulp.dest(options.dist + '/'))
