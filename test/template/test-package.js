@@ -101,6 +101,7 @@ describe('gulp-angular package template', function () {
     result.should.not.match(/coffee/);
     result.should.not.match(/traceur/);
     result.should.not.match(/typescript/);
+    result.should.not.match(/gulp-angular-filesort/);
 
     model.props.jsPreprocessor.key = 'traceur';
     model.props.jsPreprocessor.srcExtension = 'es6';
@@ -110,6 +111,7 @@ describe('gulp-angular package template', function () {
     result.should.not.match(/coffee/);
     result.should.not.match(/babel/);
     result.should.not.match(/typescript/);
+    result.should.not.match(/gulp-angular-filesort/);
 
     model.props.jsPreprocessor.key = 'typescript';
     model.props.jsPreprocessor.srcExtension = 'ts';

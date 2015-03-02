@@ -59,7 +59,7 @@
     "gulp-order": "~1.1.1",
     "mkdirp": "~0.5.0",
     "tsd": "~0.6.0-beta.5",
-<% } else { %>
+<% } else if (props.jsPreprocessor.srcExtension !== 'es6') { %>
     "gulp-angular-filesort": "~1.0.4",
 <% } if (props.htmlPreprocessor.key !== 'none') { %>
     "gulp-consolidate": "~0.1.2",
