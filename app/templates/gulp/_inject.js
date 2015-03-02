@@ -41,7 +41,7 @@ module.exports = function(options) {
     .pipe($.order(sortOutput, {base: options.tmp + '/serve'}));
 <% } else if (props.jsPreprocessor.srcExtension !== 'es6') { %>
     ])
-    .pipe($.angularFilesort());
+    .pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'));
 <% } else { %>
     ], { read: false });
 <% } %>
