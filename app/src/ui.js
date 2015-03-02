@@ -74,6 +74,9 @@ module.exports = function(GulpAngularGenerator) {
    */
   GulpAngularGenerator.prototype.computeWiredepExclusions = function computeWiredepExclusions() {
     this.wiredepExclusions = [];
+    if (this.props.jQuery.key === 'none') {
+      this.wiredepExclusions.push('/jquery/');
+    }
     if (this.props.ui.key === 'bootstrap') {
       if(this.props.bootstrapComponents.key !== 'official') {
         if(this.props.cssPreprocessor.extension === 'scss') {
