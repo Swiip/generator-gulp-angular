@@ -43,7 +43,7 @@ module.exports = function(options) {
       browser: browser
 <% if(qrCode) { %>
     }, function(err, bs) {
-      qrcode.generate(bs.options.urls.external);
+      qrcode.generate(bs.options.get('urls').get('external'));
     });
 <% } else { %>
     });
