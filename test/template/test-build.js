@@ -40,6 +40,7 @@ describe('gulp-angular build template', function () {
   });
 
   it('should replace bootstrap font paths', function() {
+    model.computedPaths.appToBower = 'appToBower'
     model.props.ui.key = 'none';
     model.props.cssPreprocessor.extension = 'css';
     var result = build(model);
@@ -48,11 +49,11 @@ describe('gulp-angular build template', function () {
     model.props.ui.key = 'bootstrap';
     model.props.cssPreprocessor.extension = 'scss';
     result = build(model);
-    result.should.match(/\$\.replace\('\/bower_components\/bootstrap-sass-official/);
+    result.should.match(/\$\.replace\('\.\.\/appToBower\/bower_components\/bootstrap-sass-official/);
 
     model.props.cssPreprocessor.extension = 'less';
     result = build(model);
-    result.should.match(/\$\.replace\('\/bower_components\/bootstrap\//);
+    result.should.match(/\$\.replace\('\.\.\/appToBower\/bower_components\/bootstrap\//);
   });
 
   it('should use image min if selected', function() {
