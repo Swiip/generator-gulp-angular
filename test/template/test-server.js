@@ -34,18 +34,4 @@ describe('gulp-angular server template', function () {
     result.should.match(/qrcode\.generate/);
   });
 
-  it('should watch files from src or tmp depending of preprocessors', function() {
-    model.props.cssPreprocessor.key = 'none';
-    model.props.jsPreprocessor.key = 'none';
-    var result = server(model);
-    result.should.match(/options\.src \+ '[^\s]*\.css'/);
-    result.should.match(/options\.src \+ '[^\s]*\.js'/);
-
-    model.props.cssPreprocessor.key = 'not none';
-    model.props.jsPreprocessor.key = 'not none';
-    result = server(model);
-    result.should.match(/options\.tmp \+ '\/serve[^\s]*\.css'/);
-    result.should.match(/options\.tmp \+ '\/serve[^\s]*\.js'/);
-  });
-
 });
