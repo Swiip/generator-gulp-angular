@@ -29,18 +29,15 @@ module.exports = function(options) {
 <%   } if (props.jsPreprocessor.key !== 'none') { %>
       .pipe($.sourcemaps.init())
 <%   } if (props.jsPreprocessor.key === 'traceur') { %>
-      .pipe($.traceur())
-      .on('error', options.errorHandler('Traceur'))
+      .pipe($.traceur()).on('error', options.errorHandler('Traceur'))
 <%   } if (props.jsPreprocessor.key === 'coffee') { %>
       .pipe($.coffeelint())
       .pipe($.coffeelint.reporter())
-      .pipe($.coffee())
-      .on('error', options.errorHandler('CoffeeScript'))
+      .pipe($.coffee()).on('error', options.errorHandler('CoffeeScript'))
 <%   } if (props.jsPreprocessor.key === 'typescript') { %>
       .pipe($.tslint())
       .pipe($.tslint.report('prose', { emitError: false }))
-      .pipe($.typescript({sortOutput: true}))
-      .on('error', options.errorHandler('TypeScript'))
+      .pipe($.typescript({sortOutput: true})).on('error', options.errorHandler('TypeScript'))
 <%   } %>
 <%   if (props.jsPreprocessor.key !== 'none') { %>
       .pipe($.sourcemaps.write())
@@ -58,8 +55,7 @@ module.exports = function(options) {
     return browserify({ debug: true })
       .add('./' + options.src + '/app/index.js')
       .transform(babelify)
-      .bundle()
-      .on('error', options.errorHandler('Browserify'))
+      .bundle().on('error', options.errorHandler('Browserify'))
       .pipe(source('index.js'))
       .pipe(buffer())
       .pipe($.sourcemaps.init({ loadMaps: true }))
@@ -72,8 +68,7 @@ module.exports = function(options) {
   gulp.task('browserify', ['scripts'], function () {
     return browserify({ debug: true })
       .add('./' + options.tmp + '/<%= props.jsPreprocessor.key %>/app/index.js')
-      .bundle()
-      .on('error', options.errorHandler('Browserify'))
+      .bundle().on('error', options.errorHandler('Browserify'))
       .pipe(source('index.js'))
       .pipe(buffer())
       .pipe($.sourcemaps.init({ loadMaps: true }))
