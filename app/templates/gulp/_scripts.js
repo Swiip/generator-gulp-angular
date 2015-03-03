@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var browserSync = require('browser-sync');
 <% if (props.jsPreprocessor.key === 'typescript') { %>
 var mkdirp = require('mkdirp');
 <% } if (props.jsPreprocessor.srcExtension === 'es6') { %>
@@ -50,6 +51,7 @@ module.exports = function(options) {
 <%   } else if (props.jsPreprocessor.key !== 'none') { %>
       .pipe(gulp.dest(options.tmp + '/serve/'))
 <%   } %>
+      .pipe(browserSync.reload({ stream: true }))
       .pipe($.size());
 <% } else { %>
     return browserify({ debug: true })
@@ -60,7 +62,9 @@ module.exports = function(options) {
       .pipe(buffer())
       .pipe($.sourcemaps.init({ loadMaps: true }))
       .pipe($.sourcemaps.write())
-      .pipe(gulp.dest(options.tmp + '/serve/app'));
+      .pipe(gulp.dest(options.tmp + '/serve/app'))
+      .pipe(browserSync.reload({ stream: true }))
+      .pipe($.size());
 <% } %>
   });
 
@@ -73,7 +77,9 @@ module.exports = function(options) {
       .pipe(buffer())
       .pipe($.sourcemaps.init({ loadMaps: true }))
       .pipe($.sourcemaps.write())
-      .pipe(gulp.dest(options.tmp + '/serve/app'));
+      .pipe(gulp.dest(options.tmp + '/serve/app'))
+      .pipe(browserSync.reload({ stream: true }))
+      .pipe($.size());
   });
 <% } %>
 };

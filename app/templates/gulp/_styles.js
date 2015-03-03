@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var browserSync = require('browser-sync');
 
 var $ = require('gulp-load-plugins')();
 
@@ -56,6 +57,7 @@ module.exports = function(options) {
     .pipe($.stylus()).on('error', options.errorHandler('Stylus'))
 <% } %>
     .pipe($.autoprefixer()).on('error', options.errorHandler('Autoprefixer'))
-    .pipe(gulp.dest(options.tmp + '/serve/app/'));
+    .pipe(gulp.dest(options.tmp + '/serve/app/'))
+    .pipe(browserSync.reload({ stream: true }));
   });
 };

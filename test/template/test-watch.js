@@ -33,14 +33,37 @@ describe('gulp-angular watch template', function () {
     result.should.match(/markups/);
   });
 
+  it('should watch the css preprocessor extension files and launch the styles task', function() {
+    model.props.cssPreprocessor.key = 'none';
+    model.props.cssPreprocessor.extension = 'css';
+    var result = watch(model);
+    result.should.match(/gulp\.watch\(.*\*\.css',/);
+    result.should.match(/browserSync\.reload/);
+
+    model.props.cssPreprocessor.key = 'notnone';
+    model.props.cssPreprocessor.extension = 'notcss';
+    result = watch(model);
+    result.should.match(/gulp\.watch\(\[\n.*\.css',\n.*\.notcss'\n.*\],/);
+    result.should.match(/gulp\.start\('styles'\);/);
+  });
+
   it('should watch the js preprocessor extension files', function() {
+    model.props.jsPreprocessor.key = 'none';
     model.props.jsPreprocessor.extension = 'js';
     var result = watch(model);
-    result.should.match(/gulp\.watch\(\[\n.*\n.*\n.*\n.*\n\s*\]/);
+    result.should.match(/gulp\.watch\(.*\*\.js',/);
+    result.should.match(/browserSync\.reload/);
 
+    model.props.jsPreprocessor.key = 'notnone';
     model.props.jsPreprocessor.extension = 'notjs';
     result = watch(model);
-    result.should.match(/options\.src \+ '[^\s]*\.notjs'/);
+    result.should.match(/gulp\.watch\(\[\n.*\.js',\n.*\.notjs'\n.*\],/);
+    result.should.match(/gulp\.start\('scripts'\);/);
+
+    model.props.jsPreprocessor.key = 'traceur';
+    model.props.jsPreprocessor.extension = 'js';
+    result = watch(model);
+    result.should.match(/gulp\.start\('browserify'\);/);
   });
 
   it('should watch the html preprocessor extension files', function() {

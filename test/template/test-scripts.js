@@ -27,7 +27,7 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.key = 'none';
     model.props.jsPreprocessor.srcExtension = 'js';
     var result = scripts(model);
-    result.should.match(/require\('gulp'\);\n\nvar \$/);
+    result.should.match(/var browserSync = require\('browser-sync'\);\n\nvar \$/);
 
     model.props.jsPreprocessor.key = 'typescript';
     result = scripts(model);

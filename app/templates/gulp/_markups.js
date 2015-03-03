@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var browserSync = require('browser-sync');
 
 var $ = require('gulp-load-plugins')();
 
@@ -23,6 +24,7 @@ module.exports = function(options) {
         this.emit('end');
       })
       .pipe($.rename(renameToHtml))
-      .pipe(gulp.dest(options.tmp + '/serve/'));
+      .pipe(gulp.dest(options.tmp + '/serve/'))
+      .pipe(browserSync.reload({ stream: true }));
   });
 };
