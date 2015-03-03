@@ -43,24 +43,19 @@ module.exports = function(options) {
       options.src + '/app/index.<%= props.cssPreprocessor.extension %>',
       options.src + '/app/vendor.<%= props.cssPreprocessor.extension %>'
     ])
-      .pipe(indexFilter)
-      .pipe($.inject(injectFiles, injectOptions))
-      .pipe(indexFilter.restore())
+    .pipe(indexFilter)
+    .pipe($.inject(injectFiles, injectOptions))
+    .pipe(indexFilter.restore())
 <% if (props.cssPreprocessor.key === 'less') { %>
-      .pipe($.less(lessOptions)).on('error', options.errorHandler('Less'))
+    .pipe($.less(lessOptions)).on('error', options.errorHandler('Less'))
 <% } else if (props.cssPreprocessor.key === 'ruby-sass') { %>
-      .pipe($.rubySass(sassOptions)).on('error', options.errorHandler('RubySass'))
+    .pipe($.rubySass(sassOptions)).on('error', options.errorHandler('RubySass'))
 <% } else if (props.cssPreprocessor.key === 'node-sass') { %>
-      .pipe($.sass(sassOptions)).on('error', options.errorHandler('Sass'))
+    .pipe($.sass(sassOptions)).on('error', options.errorHandler('Sass'))
 <% } else if (props.cssPreprocessor.key === 'stylus') { %>
-      .pipe($.stylus()).on('error', options.errorHandler('Stylus'))
+    .pipe($.stylus()).on('error', options.errorHandler('Stylus'))
 <% } %>
-
-    .pipe($.autoprefixer())
-      .on('error', function handleError(err) {
-        console.error(err.toString());
-        this.emit('end');
-      })
-      .pipe(gulp.dest(options.tmp + '/serve/app/'));
+    .pipe($.autoprefixer()).on('error', options.errorHandler('Autoprefixer'))
+    .pipe(gulp.dest(options.tmp + '/serve/app/'));
   });
 };
