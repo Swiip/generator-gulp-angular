@@ -1,7 +1,9 @@
 'use strict';
 
 var gulp = require('gulp');
+<% if (props.cssPreprocessor.key === 'none') { %>
 var browserSync = require('browser-sync');
+<% } %>
 
 function isOnlyChange(event) {
   return event.type === 'changed';
