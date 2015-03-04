@@ -47,13 +47,14 @@ describe('gulp-angular generator preprocessors script', function () {
   });
 
   describe('compute dependencies for the gulp inject task', function() {
-    it('should be empty if no preprocessors', function() {
+    it('should be scripts if no preprocessors', function() {
       generator.props = {
         cssPreprocessor: { key: 'none' },
         jsPreprocessor: { key: 'none' }
       };
       generator.computeInjectTaskDeps();
-      generator.injectTaskDeps.length.should.be.equal(0);
+      generator.injectTaskDeps.length.should.be.equal(1);
+      generator.injectTaskDeps[0].should.be.equal('\'scripts\'');
     });
 
     it('should be styles and scripts when there is preprocessors', function() {
@@ -67,7 +68,7 @@ describe('gulp-angular generator preprocessors script', function () {
       generator.injectTaskDeps[1].should.be.equal('\'scripts\'');
     });
 
-    it('should be browseridy for traceur', function() {
+    it('should be browserify for traceur', function() {
       generator.props = {
         cssPreprocessor: { key: 'none' },
         jsPreprocessor: { key: 'traceur' }
@@ -86,7 +87,7 @@ describe('gulp-angular generator preprocessors script', function () {
         htmlPreprocessor: { key: 'none' }
       };
       generator.rejectFiles();
-      generator.files.length.should.be.equal(0);
+      generator.files.length.should.be.equal(1);
     });
 
     it('should reject nothing if there is preprocessors including TypeScript', function() {

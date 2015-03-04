@@ -41,12 +41,10 @@ module.exports = function(GulpAngularGenerator) {
       this.injectTaskDeps.push('\'styles\'');
     }
 
-    if (this.props.jsPreprocessor.key !== 'none') {
-      if (this.props.jsPreprocessor.key === 'traceur') {
-        this.injectTaskDeps.push('\'browserify\'');
-      } else {
-        this.injectTaskDeps.push('\'scripts\'');
-      }
+    if (this.props.jsPreprocessor.key === 'traceur') {
+      this.injectTaskDeps.push('\'browserify\'');
+    } else {
+      this.injectTaskDeps.push('\'scripts\'');
     }
   };
 
@@ -58,10 +56,6 @@ module.exports = function(GulpAngularGenerator) {
   GulpAngularGenerator.prototype.rejectFiles = function rejectFiles() {
       if(this.props.cssPreprocessor.key === 'none') {
         rejectWithRegexp.call(this, /styles\.js/);
-      }
-
-      if(this.props.jsPreprocessor.key === 'none') {
-        rejectWithRegexp.call(this, /scripts\.js/);
       }
 
       if(this.props.jsPreprocessor.key !== 'typescript') {

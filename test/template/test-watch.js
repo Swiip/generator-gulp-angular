@@ -52,7 +52,7 @@ describe('gulp-angular watch template', function () {
     model.props.jsPreprocessor.extension = 'js';
     var result = watch(model);
     result.should.match(/gulp\.watch\(.*\*\.js',/);
-    result.should.match(/browserSync\.reload/);
+    result.should.match(/gulp\.start\('scripts'\);/);
 
     model.props.jsPreprocessor.key = 'notnone';
     model.props.jsPreprocessor.extension = 'notjs';
