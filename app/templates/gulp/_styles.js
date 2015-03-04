@@ -47,6 +47,7 @@ module.exports = function(options) {
     .pipe(indexFilter)
     .pipe($.inject(injectFiles, injectOptions))
     .pipe(indexFilter.restore())
+    .pipe($.sourcemaps.init())
 <% if (props.cssPreprocessor.key === 'less') { %>
     .pipe($.less(lessOptions)).on('error', options.errorHandler('Less'))
 <% } else if (props.cssPreprocessor.key === 'ruby-sass') { %>
@@ -57,6 +58,7 @@ module.exports = function(options) {
     .pipe($.stylus()).on('error', options.errorHandler('Stylus'))
 <% } %>
     .pipe($.autoprefixer()).on('error', options.errorHandler('Autoprefixer'))
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest(options.tmp + '/serve/app/'))
     .pipe(browserSync.reload({ stream: true }));
   });
