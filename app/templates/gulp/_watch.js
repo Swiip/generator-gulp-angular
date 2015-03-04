@@ -44,9 +44,7 @@ module.exports = function(options) {
     ], function(event) {
 <% } %>
       if(isOnlyChange(event)) {
-<% if (props.jsPreprocessor.key === 'none') { %>
-        browserSync.reload(event.path);
-<% } else if (props.jsPreprocessor.key !== 'traceur') { %>
+<% if (props.jsPreprocessor.key !== 'traceur') { %>
         gulp.start('scripts');
 <% } else { %>
         gulp.start('browserify');
