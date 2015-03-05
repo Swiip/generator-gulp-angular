@@ -35,17 +35,18 @@ module.exports = function(GulpAngularGenerator) {
   /**
    * Compute gulp inject task dependencies depending on js and css preprocessors
    */
-  GulpAngularGenerator.prototype.computeInjectTaskDeps = function computeInjectTaskDeps() {
-    this.injectTaskDeps = [];
-    if (this.props.cssPreprocessor.key !== 'none') {
-      this.injectTaskDeps.push('\'styles\'');
+  GulpAngularGenerator.prototype.computeWatchTaskDeps = function computeInjectTaskDeps() {
+    this.watchTaskDeps = [];
+
+    if (this.props.jsPreprocessor.srcExtension === 'es6') {
+      this.watchTaskDeps.push('\'scripts:watch\'');
     }
 
-    if (this.props.jsPreprocessor.key === 'traceur') {
-      this.injectTaskDeps.push('\'browserify\'');
-    } else {
-      this.injectTaskDeps.push('\'scripts\'');
+    if (this.props.htmlPreprocessor.key !== 'none') {
+      this.watchTaskDeps.push('\'markups\'');
     }
+
+    this.watchTaskDeps.push('\'inject\'');
   };
 
   /**

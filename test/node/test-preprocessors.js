@@ -46,36 +46,27 @@ describe('gulp-angular generator preprocessors script', function () {
     });
   });
 
-  describe('compute dependencies for the gulp inject task', function() {
-    it('should be scripts if no preprocessors', function() {
+  describe('compute dependencies for the gulp watch task', function() {
+    it('should be inject if no es6 or html prepro', function() {
       generator.props = {
-        cssPreprocessor: { key: 'none' },
-        jsPreprocessor: { key: 'none' }
+        jsPreprocessor: { srcExtension: 'notes6' },
+        htmlPreprocessor: { key: 'none' }
       };
-      generator.computeInjectTaskDeps();
-      generator.injectTaskDeps.length.should.be.equal(1);
-      generator.injectTaskDeps[0].should.be.equal('\'scripts\'');
+      generator.computeWatchTaskDeps();
+      generator.watchTaskDeps.length.should.be.equal(1);
+      generator.watchTaskDeps[0].should.be.equal('\'inject\'');
     });
 
-    it('should be styles and scripts when there is preprocessors', function() {
+    it('should be inject, scripts:watch and markups when needed', function() {
       generator.props = {
-        cssPreprocessor: { key: 'not none' },
-        jsPreprocessor: { key: 'not none' }
+        jsPreprocessor: { srcExtension: 'es6' },
+        htmlPreprocessor: { key: 'notnone' }
       };
-      generator.computeInjectTaskDeps();
-      generator.injectTaskDeps.length.should.be.equal(2);
-      generator.injectTaskDeps[0].should.be.equal('\'styles\'');
-      generator.injectTaskDeps[1].should.be.equal('\'scripts\'');
-    });
-
-    it('should be browserify for traceur', function() {
-      generator.props = {
-        cssPreprocessor: { key: 'none' },
-        jsPreprocessor: { key: 'traceur' }
-      };
-      generator.computeInjectTaskDeps();
-      generator.injectTaskDeps.length.should.be.equal(1);
-      generator.injectTaskDeps[0].should.be.equal('\'browserify\'');
+      generator.computeWatchTaskDeps();
+      generator.watchTaskDeps.length.should.be.equal(3);
+      generator.watchTaskDeps[0].should.be.equal('\'scripts:watch\'');
+      generator.watchTaskDeps[1].should.be.equal('\'markups\'');
+      generator.watchTaskDeps[2].should.be.equal('\'inject\'');
     });
   });
 

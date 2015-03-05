@@ -2,7 +2,6 @@
   "staticFiles": [
     ".bowerrc",
     ".editorconfig",
-    ".jshintrc",
 
     "gulp/e2e-tests.js",
     "gulp/proxy.js",
@@ -16,6 +15,7 @@
   ],
   "templates": [
     ".gitignore",
+    ".jshintrc",
 
     "package.json",
     "bower.json",

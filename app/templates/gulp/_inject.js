@@ -7,20 +7,18 @@ var $ = require('gulp-load-plugins')();
 var wiredep = require('wiredep').stream;
 
 module.exports = function(options) {
-<% if (_.isEmpty(injectTaskDeps)) { %>
-  gulp.task('inject', function () {
-<% } else { %>
-  gulp.task('inject', [<%= injectTaskDeps.join(', ') %>], function () {
-<% } %>
-
-    var injectStyles = gulp.src([
 <% if (props.cssPreprocessor.key !== 'none') { %>
+  gulp.task('inject', ['scripts', 'styles'], function () {
+    var injectStyles = gulp.src([
       options.tmp + '/serve/{app,components}/**/*.css',
       '!' + options.tmp + '/serve/app/vendor.css'
-<% } else { %>
-      options.src + '/{app,components}/**/*.css'
-<% } %>
     ], { read: false });
+<% } else { %>
+  gulp.task('inject', ['scripts'], function () {
+    var injectStyles = gulp.src([
+      options.src + '/{app,components}/**/*.css'
+    ], { read: false });
+<% } %>
 
 <% if (props.jsPreprocessor.srcExtension === 'ts') { %>
     var sortOutput = require('../' + options.tmp + '/sortOutput.json');

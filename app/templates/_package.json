@@ -45,13 +45,12 @@
     "gulp-coffee": "~2.3.1",
     "gulp-coffeelint": "~0.4.0",
 <% } if (props.jsPreprocessor.srcExtension === 'es6') { %>
-    "browserify": "~8.1.1",
-    "vinyl-buffer": "~1.0.0",
-    "vinyl-source-stream": "~1.0.0",
+    "gulp-webpack": "~1.2.0",
+    "jshint-loader": "~0.8.3",
 <% } if (props.jsPreprocessor.key === 'babel') { %>
-    "babelify": "~5.0.3",
+    "babel-loader": "~4.0.0",
 <% } if (props.jsPreprocessor.key === 'traceur') { %>
-    "gulp-traceur": "~0.17.0",
+    "traceur-loader": "~0.6.3",
 <% } if (props.jsPreprocessor.key === 'typescript') { %>
     "gulp-typescript": "~2.4.0",
     "gulp-tslint": "~1.4.1",

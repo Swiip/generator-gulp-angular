@@ -1,6 +1,8 @@
 {
   "node": true,
+<% if(props.jsPreprocessor.srcExtension === 'es6') { %>
   "esnext": true,
+<% } %>
   "bitwise": true,
   "camelcase": true,
   "curly": true,
