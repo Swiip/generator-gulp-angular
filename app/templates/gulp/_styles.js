@@ -39,6 +39,9 @@ module.exports = function(options) {
     };
 
     var indexFilter = $.filter('index.<%= props.cssPreprocessor.extension %>');
+<% if (props.cssPreprocessor.key === 'ruby-sass') { %>
+    var cssFilter = $.filter('**/*.css');
+<% } %>
 
     return gulp.src([
       options.src + '/app/index.<%= props.cssPreprocessor.extension %>',
@@ -47,16 +50,24 @@ module.exports = function(options) {
     .pipe(indexFilter)
     .pipe($.inject(injectFiles, injectOptions))
     .pipe(indexFilter.restore())
-<% if (props.cssPreprocessor.key === 'less') { %>
-    .pipe($.less(lessOptions)).on('error', options.errorHandler('Less'))
-<% } else if (props.cssPreprocessor.key === 'ruby-sass') { %>
+<% if (props.cssPreprocessor.key === 'ruby-sass') { %>
     .pipe($.rubySass(sassOptions)).on('error', options.errorHandler('RubySass'))
+    .pipe(cssFilter)
+    .pipe($.sourcemaps.init({ loadMaps: true }))
+<% } else { %>
+    .pipe($.sourcemaps.init())
+<% } if (props.cssPreprocessor.key === 'less') { %>
+    .pipe($.less(lessOptions)).on('error', options.errorHandler('Less'))
 <% } else if (props.cssPreprocessor.key === 'node-sass') { %>
     .pipe($.sass(sassOptions)).on('error', options.errorHandler('Sass'))
 <% } else if (props.cssPreprocessor.key === 'stylus') { %>
     .pipe($.stylus()).on('error', options.errorHandler('Stylus'))
 <% } %>
     .pipe($.autoprefixer()).on('error', options.errorHandler('Autoprefixer'))
+    .pipe($.sourcemaps.write())
+<% if (props.cssPreprocessor.key === 'ruby-sass') { %>
+    .pipe(cssFilter.restore())
+<% } %>
     .pipe(gulp.dest(options.tmp + '/serve/app/'))
     .pipe(browserSync.reload({ stream: true }));
   });
