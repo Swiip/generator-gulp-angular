@@ -33,7 +33,6 @@ describe('gulp-angular bower template', function () {
     result.should.match(/"angular-touch": "angular-test-version"/);
     result.should.match(/"angular-sanitize": "angular-test-version"/);
     result.should.match(/"angular-resource": "angular-test-version"/);
-    result.should.match(/"angular-route": "angular-test-version"/);
     result.should.match(/"angular": "angular-test-version"/);
   });
 

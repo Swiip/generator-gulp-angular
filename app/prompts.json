@@ -60,15 +60,15 @@
     "choices": [
       {
         "value": {
-          "key": "jquery1"
-        },
-        "name": "jQuery 1.x (branch still supporting IE6, 7 and 8)"
-      },
-      {
-        "value": {
           "key": "jquery2"
         },
         "name": "jQuery 2.x (new version, lighter, IE9+)"
+      },
+      {
+        "value": {
+          "key": "jquery1"
+        },
+        "name": "jQuery 1.x (branch still supporting IE6, 7 and 8)"
       },
       {
         "value": {
@@ -119,17 +119,17 @@
     "choices": [
       {
         "value": {
-          "key": "angular-route",
-          "module": "ngRoute"
-        },
-        "name": "ngRoute, the official router"
-      },
-      {
-        "value": {
           "key": "ui-router",
           "module": "ui.router"
         },
         "name": "UI Router, flexible routing with nested views"
+      },
+      {
+        "value": {
+          "key": "angular-route",
+          "module": "ngRoute"
+        },
+        "name": "ngRoute, the official router"
       },
       {
         "value": {
@@ -154,17 +154,17 @@
       },
       {
         "value": {
-          "key": "foundation",
-          "module": null
-        },
-        "name": "Foundation, \"The most advanced responsive front-end framework in the world\""
-      },
-      {
-        "value": {
           "key": "angular-material",
           "module": "ngMaterial"
         },
         "name": "Angular Material, the reference implementation of the Google's Material Design specification"
+      },
+      {
+        "value": {
+          "key": "foundation",
+          "module": null
+        },
+        "name": "Foundation, \"The most advanced responsive front-end framework in the world\""
       },
       {
         "value": {
@@ -295,11 +295,11 @@
       },
       {
         "value": {
-          "key": "coffee",
-          "extension": "coffee",
-          "srcExtension": "coffee"
+          "key": "babel",
+          "extension": "js",
+          "srcExtension": "es6"
         },
-        "name": "CoffeeScript, \"a little language that compiles into JavaScript\"."
+        "name": "ES6 (Babel formerly 6to5), ECMAScript 6 compiled with Babel which requires no runtime."
       },
       {
         "value": {
@@ -311,11 +311,11 @@
       },
       {
         "value": {
-          "key": "babel",
-          "extension": "js",
-          "srcExtension": "es6"
+          "key": "coffee",
+          "extension": "coffee",
+          "srcExtension": "coffee"
         },
-        "name": "ES6 (Babel formerly 6to5), ECMAScript 6 compiled with Babel which requires no runtime."
+        "name": "CoffeeScript, \"a little language that compiles into JavaScript\"."
       },
       {
         "value": {
