@@ -52,11 +52,11 @@ describe('gulp-angular index js template', function () {
     var result = indexJs(model);
     result.should.match(/\]\)test value;/);
     result = indexEs6(model);
-    result.should.match(/\n\s+test value;/);
+    result.should.match(/\ntest value;/);
     result = indexCoffee(model);
     result.should.match(/\]test value/);
     result = indexTs(model);
-    result.should.match(/\n\s+test value;/);
+    result.should.match(/\ntest value;/);
   });
 
 });

@@ -23,7 +23,7 @@ module.exports = function() {
     routerHtml: null,
     routerJs: null,
     isVendorStylesPreprocessed: false,
-    injectTaskDeps: null,
+    watchTaskDeps: [],
     wiredepExclusions: [],
     processedFileExtension: null,
     includeModernizr: false,

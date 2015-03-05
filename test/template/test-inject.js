@@ -23,23 +23,15 @@ describe('gulp-angular inject template', function () {
     model = mockModel();
   });
 
-  it('should insert inject task dependencies', function() {
-    model.injectTaskDeps = [];
-    var result = inject(model);
-    result.should.match(/gulp\.task\('inject', function/);
-
-    model.injectTaskDeps = ['\'a\'', '\'b\'', '\'c\''];
-    result = inject(model);
-    result.should.match(/gulp\.task\('inject', \['a', 'b', 'c'\], function/);
-  });
-
   it('should inject styles for src or tmp depending on the css preprocessor', function() {
     model.props.cssPreprocessor.key = 'none';
     var result = inject(model);
+    result.should.match(/gulp\.task\('inject', \['scripts'\], function/);
     result.should.match(/injectStyles = gulp\.src\(\[\n\s*options\.src/);
 
     model.props.cssPreprocessor.key = 'not none';
     result = inject(model);
+    result.should.match(/gulp\.task\('inject', \['scripts', 'styles'\], function/);
     result.should.match(/injectStyles = gulp\.src\(\[\n\s*options\.tmp.*\n\s*'!' \+ options\.tmp/);
   });
 

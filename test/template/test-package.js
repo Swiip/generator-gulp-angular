@@ -96,8 +96,8 @@ describe('gulp-angular package template', function () {
     model.props.jsPreprocessor.key = 'babel';
     model.props.jsPreprocessor.srcExtension = 'es6';
     result = packageJson(model);
-    result.should.match(/browserify"/);
-    result.should.match(/babelify/);
+    result.should.match(/gulp-webpack/);
+    result.should.match(/babel-loader/);
     result.should.not.match(/coffee/);
     result.should.not.match(/traceur/);
     result.should.not.match(/typescript/);
@@ -106,8 +106,8 @@ describe('gulp-angular package template', function () {
     model.props.jsPreprocessor.key = 'traceur';
     model.props.jsPreprocessor.srcExtension = 'es6';
     result = packageJson(model);
-    result.should.match(/browserify"/);
-    result.should.match(/gulp-traceur/);
+    result.should.match(/gulp-webpack/);
+    result.should.match(/traceur-loader/);
     result.should.not.match(/coffee/);
     result.should.not.match(/babel/);
     result.should.not.match(/typescript/);

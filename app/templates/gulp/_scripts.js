@@ -23,8 +23,6 @@ module.exports = function(options) {
       .pipe($.jshint.reporter('jshint-stylish'))
 <%   } if (props.jsPreprocessor.key !== 'none') { %>
       .pipe($.sourcemaps.init())
-<%   } if (props.jsPreprocessor.key === 'traceur') { %>
-      .pipe($.traceur()).on('error', options.errorHandler('Traceur'))
 <%   } if (props.jsPreprocessor.key === 'coffee') { %>
       .pipe($.coffeelint())
       .pipe($.coffeelint.reporter())
@@ -39,10 +37,7 @@ module.exports = function(options) {
 <%   } %>
 <%   if (props.jsPreprocessor.key === 'typescript') { %>
       .pipe($.toJson({filename: options.tmp + '/sortOutput.json', relative:true}))
-<%   } %>
-<%   if (props.jsPreprocessor.key === 'traceur') { %>
-      .pipe(gulp.dest(options.tmp + '/traceur'))
-<%   } else if (props.jsPreprocessor.key !== 'none') { %>
+<%   } if (props.jsPreprocessor.key !== 'none') { %>
       .pipe(gulp.dest(options.tmp + '/serve/'))
 <%   } %>
       .pipe(browserSync.reload({ stream: true }))
@@ -50,34 +45,42 @@ module.exports = function(options) {
   });
 <% } else { %>
   function webpack(watch, callback) {
-    return gulp.src(options.src + '/app/index.js')
-      .pipe($.webpack({
-        watch: watch,
-        module: {
-          preLoaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'jshint-loader'}],
+    var webpackOptions = {
+      watch: watch,
+      module: {
+        preLoaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'jshint-loader'}],
 <%   if (props.jsPreprocessor.key === 'babel') { %>
-          loaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}]
+        loaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}]
 <%   } if (props.jsPreprocessor.key === 'traceur') { %>
-          loaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'traceur-loader'}]
+        loaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'traceur-loader'}]
 <%   } %>
-        },
-        output: { filename: 'index.js' }
-      }, null, function(err, stats) {
-        if(err) {
-          options.errorHandler('Webpack')(err);
-        }
-        $.util.log(stats.toString({
-          colors: $.util.colors.supportsColor,
-          chunks: false,
-          hash: false,
-          version: false
-        }));
-        browserSync.reload();
-        if(watch) {
-          watch = false;
-          callback();
-        }
-      }))
+      },
+      output: { filename: 'index.js' }
+    };
+
+    if(watch) {
+      webpackOptions.devtool = 'inline-source-map';
+    }
+
+    var webpackChangeHandler = function(err, stats) {
+      if(err) {
+        options.errorHandler('Webpack')(err);
+      }
+      $.util.log(stats.toString({
+        colors: $.util.colors.supportsColor,
+        chunks: false,
+        hash: false,
+        version: false
+      }));
+      browserSync.reload();
+      if(watch) {
+        watch = false;
+        callback();
+      }
+    };
+
+    return gulp.src(options.src + '/app/index.js')
+      .pipe($.webpack(webpackOptions, null, webpackChangeHandler))
       .pipe(gulp.dest(options.tmp + '/serve/app'));
   }
 

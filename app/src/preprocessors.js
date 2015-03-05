@@ -47,8 +47,6 @@ module.exports = function(GulpAngularGenerator) {
     }
 
     this.watchTaskDeps.push('\'inject\'');
-
-    console.log('this.watchTaskDeps', this.watchTaskDeps);
   };
 
   /**

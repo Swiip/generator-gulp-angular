@@ -25,28 +25,13 @@ describe('gulp-angular scripts template', function () {
 
   it('should require the needed modules', function() {
     model.props.jsPreprocessor.key = 'none';
-    model.props.jsPreprocessor.srcExtension = 'js';
     var result = scripts(model);
     result.should.match(/var browserSync = require\('browser-sync'\);\n\nvar \$/);
 
     model.props.jsPreprocessor.key = 'typescript';
     result = scripts(model);
     result.should.match(/require\('mkdirp'\);/);
-    result.should.not.match(/browserify/);
     result.should.not.match(/babelify/);
-
-    model.props.jsPreprocessor.key = 'not babel';
-    model.props.jsPreprocessor.srcExtension = 'es6';
-    result = scripts(model);
-    result.should.match(/require\('browserify'\);/);
-    result.should.not.match(/mkdirp/);
-    result.should.not.match(/babelify/);
-
-    model.props.jsPreprocessor.key = 'babel';
-    result = scripts(model);
-    result.should.match(/require\('browserify'\);/);
-    result.should.match(/require\('babelify'\);/);
-    result.should.not.match(/mkdirp/);
   });
 
   it('should add tsd:install as dependencies for typescript', function() {
@@ -91,22 +76,22 @@ describe('gulp-angular scripts template', function () {
 
     model.props.jsPreprocessor.key = 'babel';
     model.props.jsPreprocessor.extension = 'js';
+    model.props.jsPreprocessor.srcExtension = 'es6';
     result = scripts(model);
-    result.should.match(/browserify\(\{ debug: true \}\)/);
-    result.should.match(/\.add\('\.\/' \+ options\.src \+ '\/app\/index\.js'\)/);
-    result.should.match(/\.transform\(babelify\)/);
-    result.should.not.match(/gulp\.src/);
+    result.should.match(/function webpack\(watch, callback\)/);
+    result.should.match(/loaders:.*loader: 'babel-loader'/);
+    result.should.match(/gulp\.task\('scripts:watch'/);
     result.should.not.match(/traceur/);
     result.should.not.match(/coffee/);
     result.should.not.match(/typescript/);
 
     model.props.jsPreprocessor.key = 'traceur';
     model.props.jsPreprocessor.extension = 'js';
+    model.props.jsPreprocessor.srcExtension = 'es6';
     result = scripts(model);
-    result.should.match(/gulp\.src\(options\.src \+ '[^\s]*\.js'\)/);
-    result.should.match(/\$\.jshint\(/);
-    result.should.match(/\$\.traceur\(/);
-    result.should.match(/gulp\.task\('browserify', \['scripts'\]/);
+    result.should.match(/function webpack\(watch, callback\)/);
+    result.should.match(/loaders:.*loader: 'traceur-loader'/);
+    result.should.match(/gulp\.task\('scripts:watch'/);
     result.should.not.match(/babel/);
     result.should.not.match(/coffee/);
     result.should.not.match(/typescript/);
