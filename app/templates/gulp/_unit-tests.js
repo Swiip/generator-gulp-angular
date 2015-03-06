@@ -41,12 +41,6 @@ module.exports = function(options) {
       }));
   }
 
-<% if (props.jsPreprocessor.key === 'traceur') { %>
-  gulp.task('test', ['browserify'], runTests.bind(this, true));
-  gulp.task('test:auto', ['browserify'], runTests.bind(this, false));
-<% } else { %>
   gulp.task('test', ['scripts'], runTests.bind(this, true));
   gulp.task('test:auto', ['scripts'], runTests.bind(this, false));
-<% } %>
-
 };

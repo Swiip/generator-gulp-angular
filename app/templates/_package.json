@@ -74,7 +74,11 @@
     "jshint-stylish": "~1.0.0",
     "wiredep": "~2.2.0",
     "karma-jasmine": "~0.3.1",
+<% if(props.jsPreprocessor.key === 'traceur') { %>
+    "karma-chrome-launcher": "~0.1.7",
+<% } else {%>
     "karma-phantomjs-launcher": "~0.1.4",
+<% } %>
     "require-dir": "~0.1.0",
     "browser-sync": "~2.1.4",
     "browser-sync-spa": "~1.0.1",

@@ -25,6 +25,8 @@
     "bower.json",
     "tsd.json",
 
+    "karma.conf.js",
+
     "e2e/main.po.js",
 
     "gulpfile.js",
