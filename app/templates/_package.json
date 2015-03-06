@@ -65,7 +65,7 @@
 <% } if (props.htmlPreprocessor.key === 'jade') { %>
     "jade": "~1.8.1",
 <% } if (props.htmlPreprocessor.key === 'haml') { %>
-    "hamljs": "~0.6.2",
+    "haml": "~0.4.3",
 <% } if (props.htmlPreprocessor.key === 'handlebars') { %>
     "handlebars": "~2.0.0",
 <% } %>

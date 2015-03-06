@@ -15,7 +15,7 @@ module.exports = function(options) {
 <% if (props.htmlPreprocessor.key === 'jade') { %>
       .pipe($.consolidate('jade', { basedir: options.src, doctype: 'html', pretty: '  ' })).on('error', options.errorHandler('Jade'))
 <% } else if (props.htmlPreprocessor.key === 'haml') { %>
-      .pipe($.consolidate('hamljs')).on('error', options.errorHandler('Haml'))
+      .pipe($.consolidate('haml')).on('error', options.errorHandler('Haml'))
 <% } else if (props.htmlPreprocessor.key === 'handlebars') { %>
       .pipe($.consolidate('handlebars')).on('error', options.errorHandler('Handlebars'))
 <% } %>
