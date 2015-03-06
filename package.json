@@ -30,7 +30,7 @@
     "chalk": "~1.0.0",
     "lodash": "~2.4.1",
     "slash": "~1.0.0",
-    "yeoman-generator": "~0.18.7",
+    "yeoman-generator": "~0.18.10",
     "yosay": "~1.0.0"
   },
   "devDependencies": {
