@@ -93,7 +93,7 @@ module.exports = {
     angularModules: _.pluck(model.angularModules.choices, 'value'),
     jQuery: model.jQuery.values['jquery 2'],
     resource: model.resource.values['angular-resource'],
-    router: model.router.values['angular-route'],
+    router: model.router.values['ui-router'],
     ui: model.ui.values.bootstrap,
     bootstrapComponents: model.bootstrapComponents.values['ui-bootstrap'],
     foundationComponents: model.foundationComponents.values.none,
