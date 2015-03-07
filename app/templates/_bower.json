@@ -33,7 +33,7 @@
 <% } if(props.ui.key === 'foundation') { %>
     "foundation": "~5.5.1",
 <% } if(props.ui.key === 'angular-material') { %>
-    "angular-material": "~0.7.1",
+    "angular-material": "~0.8.3",
 <% } if(props.bootstrapComponents.key === 'ui-bootstrap') { %>
     "angular-bootstrap": "~0.12.0",
 <% } if(props.bootstrapComponents.key === 'angular-strap') { %>
