@@ -59,7 +59,9 @@ yo gulp-angular [app-name]
 * `--advanced` prompt for advanced additional features, default is `false`
 
 
-All paths configuration are stored in `gulpfile.js`. Change `gulp.paths` in `gulpfile.js` if you want to config paths after the app is generated.
+Paths configuration are stored in `gulpfile.js`. Change `options.(src|dist|tmp|e2e)` in `gulpfile.js` if you want to config paths after the app is generated.
+
+**Warning**: The paths are also written in the `index.html` for the build with useref. If you want to change thes paths, you also have to change the paths there in order to have the build task working.
 
 ### Use Gulp tasks
 
