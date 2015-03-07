@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-<% if (props.ui.key !== 'none') { %>
     <!-- build:css({<%= props.paths.tmp %>/serve,<%= props.paths.src %>}) styles/vendor.css -->
 <%   if (isVendorStylesPreprocessed) { %>
     <link rel="stylesheet" href="app/vendor.css">
@@ -15,10 +14,9 @@
     <link rel="stylesheet" href="<%= computedPaths.appToBower %>/bower_components/bootstrap/dist/css/bootstrap.css">
 <%   } %>
     <!-- bower:css -->
-    <!-- run `gulp wiredep` to automaticaly populate bower styles dependencies -->
+    <!-- run `gulp inject` to automaticaly populate bower styles dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
-<% } %>
 
     <!-- build:css({<%= props.paths.tmp %>/serve,<%= props.paths.src %>}) styles/app.css -->
     <!-- inject:css -->
@@ -51,7 +49,7 @@
 
     <!-- build:js(<%= props.paths.src %>) scripts/vendor.js -->
     <!-- bower:js -->
-    <!-- run `gulp wiredep` to automaticaly populate bower script dependencies -->
+    <!-- run `gulp inject` to automaticaly populate bower script dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
 
