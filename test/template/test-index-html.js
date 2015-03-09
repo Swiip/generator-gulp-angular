@@ -31,18 +31,12 @@ describe('gulp-angular index js template', function () {
   });
 
   it('should insert the vendor build block depending of data', function() {
-    model.props.ui.key = 'none';
+    model.props.ui.key = 'bootstrap';
     model.props.paths.src = 'src';
     model.props.paths.tmp = 'tmp';
     model.computedPaths.appToBower = 'appToBower';
     model.isVendorStylesPreprocessed = false;
-
     var result = indexHtml(model);
-    result.should.not.match(/<!-- build:css\(.*?\) styles\/vendor\.css -->/);
-    result.should.not.match(/<!-- bower:css/);
-
-    model.props.ui.key = 'bootstrap';
-    result = indexHtml(model);
     result.should.match(/<!-- build:css\({tmp\/serve,src}\) styles\/vendor\.css -->/);
     result.should.match(/<!-- bower:css/);
     result.should.match(/href="appToBower\/bower_components/);
