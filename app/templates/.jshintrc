@@ -1,8 +1,5 @@
 {
-  "node": true,
-<% if(props.jsPreprocessor.srcExtension === 'es6') { %>
-  "esnext": true,
-<% } %>
+  "globalstrict": true,
   "bitwise": true,
   "camelcase": true,
   "curly": true,
@@ -32,10 +29,6 @@
     "beforeEach": false,
     "after": false,
     "afterEach": false,
-    "expect": false,
-    // Protractor
-    "browser": false,
-    "element": false,
-    "by": false
+    "expect": false
   }
 }

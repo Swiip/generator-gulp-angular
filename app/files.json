@@ -2,20 +2,24 @@
   "staticFiles": [
     ".bowerrc",
     ".editorconfig",
+    ".jshintrc",
+    "karma.conf.js",
+    "protractor.conf.js",
 
+    "e2e/.jshintrc",
+    "e2e/main.spec.js",
+
+    "gulp/.jshintrc",
     "gulp/e2e-tests.js",
     "gulp/proxy.js",
     "gulp/tsd.js",
+
     "src/favicon.ico",
     "src/404.html",
-    "src/assets/images/yeoman.png",
-    "karma.conf.js",
-    "protractor.conf.js",
-    "e2e/main.spec.js"
+    "src/assets/images/yeoman.png"
   ],
   "templates": [
     ".gitignore",
-    ".jshintrc",
 
     "package.json",
     "bower.json",
@@ -32,6 +36,7 @@
     "gulp/watch.js",
     "gulp/server.js",
     "gulp/unit-tests.js",
+
     "src/app/index.js",
     "src/index.html",
     "src/app/main/main.controller.js",

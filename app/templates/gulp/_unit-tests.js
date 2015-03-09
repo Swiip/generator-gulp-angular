@@ -38,7 +38,7 @@ module.exports = function(options) {
       .pipe($.karma({
         configFile: 'karma.conf.js',
         action: (singleRun)? 'run': 'watch'
-      }))
+      }));
   }
 
 <% if (props.jsPreprocessor.key === 'traceur') { %>

@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = require('gulp');
-var merge = require('merge-stream');
 
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
