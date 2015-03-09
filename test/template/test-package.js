@@ -139,7 +139,7 @@ describe('gulp-angular package template', function () {
 
     model.props.htmlPreprocessor.key = 'haml';
     result = packageJson(model);
-    result.should.match(/hamljs/);
+    result.should.match(/haml/);
     result.should.not.match(/jade/);
     result.should.not.match(/handlebars/);
 

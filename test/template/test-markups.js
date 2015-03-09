@@ -34,7 +34,7 @@ describe('gulp-angular markups template', function () {
 
     model.props.htmlPreprocessor.key = 'haml';
     result = markups(model);
-    result.should.match(/\$\.consolidate\('hamljs'\)/);
+    result.should.match(/\$\.consolidate\('haml'\)/);
 
     model.props.htmlPreprocessor.key = 'handlebars';
     result = markups(model);
