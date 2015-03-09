@@ -57,10 +57,25 @@ describe('gulp-angular unit tests template', function () {
     result.should.match(/task\('test', \['scripts'\], runTests\./);
     result.should.match(/task\('test:auto', \['scripts'\], runTests\./);
 
+    model.props.jsPreprocessor.key = 'babel';
+    result = unitTests(model);
+    result.should.match(/task\('test', \['scripts'\], runTests\./);
+    result.should.match(/task\('test:auto', \['scripts'\], runTests\./);
+
     model.props.jsPreprocessor.key = 'traceur';
     result = unitTests(model);
-    result.should.match(/task\('test', \['browserify'\], runTests\./);
-    result.should.match(/task\('test:auto', \['browserify'\], runTests\./);
+    result.should.match(/task\('test', \['scripts'\], runTests\./);
+    result.should.match(/task\('test:auto', \['scripts'\], runTests\./);
+
+    model.props.jsPreprocessor.key = 'coffee';
+    result = unitTests(model);
+    result.should.match(/task\('test', \['scripts'\], runTests\./);
+    result.should.match(/task\('test:auto', \['scripts'\], runTests\./);
+
+    model.props.jsPreprocessor.key = 'typescript';
+    result = unitTests(model);
+    result.should.match(/task\('test', \['scripts'\], runTests\./);
+    result.should.match(/task\('test:auto', \['scripts'\], runTests\./);
   });
 
 });
