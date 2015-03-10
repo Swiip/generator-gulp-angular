@@ -5,3 +5,4 @@ coverage/
 npm-debug.log
 .idea
 *.iml
+test/tmp

@@ -131,6 +131,7 @@ describe('gulp-angular generator ui script', function () {
   describe('select wiredep exclusions depending the choices', function () {
     it('should exclude bootstrap if angular-boostrap and scss', function() {
       generator.props = {
+        jQuery: { key: 'jquery1' },
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'angular-bootstrap' },
         cssPreprocessor: { extension: 'scss' }
@@ -142,6 +143,7 @@ describe('gulp-angular generator ui script', function () {
 
     it('should exclude only bootstrap.js if angular-boostrap and less', function() {
       generator.props = {
+        jQuery: { key: 'jquery1' },
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'angular-bootstrap' },
         cssPreprocessor: { extension: 'less' }
@@ -152,6 +154,7 @@ describe('gulp-angular generator ui script', function () {
 
     it('should exclude foundation if foundation', function() {
       generator.props = {
+        jQuery: { key: 'jquery1' },
         ui: { key: 'foundation' },
         foundationComponents: { key: 'angular-foundation' },
         cssPreprocessor: { extension: 'less' }
@@ -163,6 +166,7 @@ describe('gulp-angular generator ui script', function () {
 
     it('should exclude nothing if no ui', function() {
       generator.props = {
+        jQuery: { key: 'jquery1' },
         ui: { key: 'none' }
       };
       generator.computeWiredepExclusions();
@@ -171,6 +175,7 @@ describe('gulp-angular generator ui script', function () {
 
     it('should exclude nothing if bootstrap but nothing else', function() {
       generator.props = {
+        jQuery: { key: 'jquery1' },
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'official' },
         cssPreprocessor: { key: 'none' }
@@ -181,12 +186,24 @@ describe('gulp-angular generator ui script', function () {
 
     it('should exclude nothing if foundation but nothing else', function() {
       generator.props = {
+        jQuery: { key: 'jquery1' },
         ui: { key: 'foundation' },
         foundationComponents: { key: 'official' },
         cssPreprocessor: { key: 'none' }
       };
       generator.computeWiredepExclusions();
       generator.wiredepExclusions.length.should.be.equal(0);
+    });
+
+    it('should exclude jQuery if select "None"', function() {
+      generator.props = {
+        jQuery: { key: 'none' },
+        ui: { key: 'foundation' },
+        foundationComponents: { key: 'official' },
+        cssPreprocessor: { key: 'none' }
+      };
+      generator.computeWiredepExclusions();
+      generator.wiredepExclusions[0].should.be.equal('/jquery/');
     });
   });
 

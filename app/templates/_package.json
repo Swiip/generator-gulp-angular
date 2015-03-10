@@ -7,70 +7,89 @@
   },
   "devDependencies": {
     "gulp": "~3.8.10",
-    "gulp-autoprefixer": "~2.0.0",
-    "gulp-angular-templatecache": "~1.4.2",
-    "del": "~0.1.3",
-    "gulp-consolidate": "~0.1.2",
-    "gulp-csso": "~0.2.9",
-    "gulp-filter": "~1.0.2",
+    "gulp-autoprefixer": "~2.1.0",
+    "gulp-angular-templatecache": "~1.5.0",
+    "del": "~1.1.1",
+    "lodash": "~3.2.0",
+    "gulp-csso": "~1.0.0",
+    "gulp-filter": "~2.0.2",
     "gulp-flatten": "~0.0.4",
 <% if (imageMin) { %>
-    "gulp-imagemin": "~2.0.0",
+    "gulp-imagemin": "~2.2.0",
 <% } %>
     "gulp-jshint": "~1.9.0",
-    "gulp-load-plugins": "~0.7.1",
-    "gulp-size": "~1.1.0",
-    "gulp-uglify": "~1.0.1",
-    "gulp-useref": "~1.0.2",
+    "gulp-load-plugins": "~0.8.0",
+    "gulp-size": "~1.2.0",
+    "gulp-uglify": "~1.1.0",
+    "gulp-useref": "~1.1.0",
     "gulp-util": "~3.0.2",
-    "gulp-ng-annotate": "~0.3.6",
+    "gulp-ng-annotate": "~0.5.2",
     "gulp-replace": "~0.5.0",
     "gulp-rename": "~1.2.0",
-    "gulp-rev": "~2.0.1",
+    "gulp-rev": "~3.0.1",
     "gulp-rev-replace": "~0.3.1",
     "gulp-minify-html": "~0.1.7",
-    "gulp-inject": "~1.0.2",
-    "gulp-protractor": "~0.0.11",
+    "gulp-inject": "~1.1.1",
+    "gulp-protractor": "~0.0.12",
     "gulp-karma": "~0.0.4",
-<% if (props.cssPreprocessor.key !== 'none') { %>
-    "<%= props.cssPreprocessor.module %>": "<%= props.cssPreprocessor.version %>",
-<% } if (props.jsPreprocessor.key !== 'none') { %>
-    "<%= props.jsPreprocessor.module %>": "<%= props.jsPreprocessor.version %>",
     "gulp-sourcemaps": "~1.3.0",
+<% if (props.cssPreprocessor.key === 'node-sass') { %>
+    "gulp-sass": "~1.3.0",
+<% } if (props.cssPreprocessor.key === 'ruby-sass') { %>
+    "gulp-ruby-sass": "~0.7.1",
+<% } if (props.cssPreprocessor.key === 'less') { %>
+    "gulp-less": "~3.0.0",
+<% } if (props.cssPreprocessor.key === 'stylus') { %>
+    "gulp-stylus": "~2.0.0",
+<% } if (props.jsPreprocessor.key === 'coffee') { %>
+    "gulp-coffee": "~2.3.1",
+    "gulp-coffeelint": "~0.4.0",
 <% } if (props.jsPreprocessor.srcExtension === 'es6') { %>
-    "browserify": "~8.1.1",
-    "vinyl-buffer": "~1.0.0",
-    "vinyl-source-stream": "~1.0.0",
-<% } if (props.jsPreprocessor.key === '6to5') { %>
-    "6to5ify": "~3.1.2",
+    "gulp-webpack": "~1.2.0",
+    "jshint-loader": "~0.8.3",
+<% } if (props.jsPreprocessor.key === 'babel') { %>
+    "babel-loader": "~4.0.0",
+<% } if (props.jsPreprocessor.key === 'traceur') { %>
+    "traceur-loader": "~0.6.3",
 <% } if (props.jsPreprocessor.key === 'typescript') { %>
+    "gulp-typescript": "~2.4.0",
     "gulp-tslint": "~1.4.1",
     "gulp-to-json": "~1.0.1",
     "gulp-order": "~1.1.1",
     "mkdirp": "~0.5.0",
     "tsd": "~0.6.0-beta.5",
-<% } else { %>
+<% } else if (props.jsPreprocessor.srcExtension !== 'es6') { %>
     "gulp-angular-filesort": "~1.0.4",
-<% } if (props.jsPreprocessor.key === 'coffee') { %>
-    "gulp-coffeelint": "~0.4.0",
 <% } if (props.htmlPreprocessor.key !== 'none') { %>
-    "<%= props.htmlPreprocessor.module %>": "<%= props.htmlPreprocessor.version %>",
+    "gulp-consolidate": "~0.1.2",
+<% } if (props.htmlPreprocessor.key === 'jade') { %>
+    "jade": "~1.8.1",
+<% } if (props.htmlPreprocessor.key === 'haml') { %>
+    "haml": "~0.4.3",
+<% } if (props.htmlPreprocessor.key === 'handlebars') { %>
+    "handlebars": "~2.0.0",
 <% } %>
-    "main-bower-files": "~2.4.0",
+    "main-bower-files": "~2.5.0",
     "merge-stream": "~0.1.7",
     "jshint-stylish": "~1.0.0",
     "wiredep": "~2.2.0",
     "karma-jasmine": "~0.3.1",
+<% if(props.jsPreprocessor.key === 'traceur') { %>
+    "karma-chrome-launcher": "~0.1.7",
+<% } else {%>
     "karma-phantomjs-launcher": "~0.1.4",
+<% } %>
     "require-dir": "~0.1.0",
-    "browser-sync": "~1.7.1",
-    "http-proxy": "~1.7.0",
+    "browser-sync": "~2.1.4",
+    "browser-sync-spa": "~1.0.1",
+    "http-proxy": "~1.8.0",
     "chalk": "~0.5.1",
-    "protractor": "~1.4.0",
+    "protractor": "~1.7.0",
 <% if (qrCode) { %>
     "qrcode-terminal": "~0.9.5",
 <% } %>
-    "uglify-save-license": "~0.4.1"
+    "uglify-save-license": "~0.4.1",
+    "wrench": "~1.5.8"
   },
   "engines": {
     "node": ">=0.10.0"

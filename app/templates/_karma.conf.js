@@ -7,11 +7,20 @@ module.exports = function(config) {
 
     frameworks: ['jasmine'],
 
+<% if(props.jsPreprocessor.key === 'traceur') { %>
+    browsers : ['Chrome'],
+
+    plugins : [
+        'karma-chrome-launcher',
+        'karma-jasmine'
+    ]
+<% } else {%>
     browsers : ['PhantomJS'],
 
     plugins : [
         'karma-phantomjs-launcher',
         'karma-jasmine'
     ]
+<% } %>
   });
 };

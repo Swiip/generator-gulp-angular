@@ -11,21 +11,42 @@ function rejectWithRegexp(regexp) {
 module.exports = function(GulpAngularGenerator) {
 
   /**
+   * List files extension processed by the generator
+   */
+  GulpAngularGenerator.prototype.computeProcessedFileExtension = function computeProcessedFileExtension() {
+    this.processedFileExtension = [
+      'html',
+      'css',
+      'js',
+      this.props.cssPreprocessor.extension,
+      this.props.jsPreprocessor.extension,
+      this.props.htmlPreprocessor.extension
+    ];
+    if (this.imageMin) {
+      this.processedFileExtension = this.processedFileExtension.concat(['jpg', 'png', 'gif', 'svg']);
+    }
+    this.processedFileExtension = _.chain(this.processedFileExtension)
+      .uniq()
+      .filter(_.isString)
+      .value()
+      .join(',');
+  };
+
+  /**
    * Compute gulp inject task dependencies depending on js and css preprocessors
    */
-  GulpAngularGenerator.prototype.computeInjectTaskDeps = function computeInjectTaskDeps() {
-    this.injectTaskDeps = [];
-    if (this.props.cssPreprocessor.key !== 'none') {
-      this.injectTaskDeps.push('\'styles\'');
+  GulpAngularGenerator.prototype.computeWatchTaskDeps = function computeInjectTaskDeps() {
+    this.watchTaskDeps = [];
+
+    if (this.props.jsPreprocessor.srcExtension === 'es6') {
+      this.watchTaskDeps.push('\'scripts:watch\'');
     }
 
-    if (this.props.jsPreprocessor.key !== 'none') {
-      if (this.props.jsPreprocessor.key === 'traceur') {
-        this.injectTaskDeps.push('\'browserify\'');
-      } else {
-        this.injectTaskDeps.push('\'scripts\'');
-      }
+    if (this.props.htmlPreprocessor.key !== 'none') {
+      this.watchTaskDeps.push('\'markups\'');
     }
+
+    this.watchTaskDeps.push('\'inject\'');
   };
 
   /**
@@ -36,10 +57,6 @@ module.exports = function(GulpAngularGenerator) {
   GulpAngularGenerator.prototype.rejectFiles = function rejectFiles() {
       if(this.props.cssPreprocessor.key === 'none') {
         rejectWithRegexp.call(this, /styles\.js/);
-      }
-
-      if(this.props.jsPreprocessor.key === 'none') {
-        rejectWithRegexp.call(this, /scripts\.js/);
       }
 
       if(this.props.jsPreprocessor.key !== 'typescript') {
@@ -56,6 +73,14 @@ module.exports = function(GulpAngularGenerator) {
    * Copy additional lint files if needed
    */
   GulpAngularGenerator.prototype.lintCopies = function lintCopies() {
+    if(this.props.jsPreprocessor.srcExtension === 'es6') {
+      this.files.push({
+        src: 'src/.jshintrc',
+        dest: 'src/.jshintrc',
+        template: false
+      });
+    }
+
     if(this.props.jsPreprocessor.key === 'coffee') {
       this.files.push({
         src: 'coffeelint.json',

@@ -1,24 +1,57 @@
 'use strict';
 
 var gulp = require('gulp');
+<% if (props.cssPreprocessor.key === 'none') { %>
+var browserSync = require('browser-sync');
+<% } %>
 
-var paths = gulp.paths;
+function isOnlyChange(event) {
+  return event.type === 'changed';
+}
 
-<% if (props.htmlPreprocessor.key === 'none') { %>
-gulp.task('watch', ['inject'], function () {
+module.exports = function(options) {
+  gulp.task('watch', [<%= watchTaskDeps.join(', ') %>], function () {
+
+    gulp.watch([options.src + '/*.html', 'bower.json'], ['inject']);
+
+<% if (props.cssPreprocessor.extension === 'css') { %>
+    gulp.watch(options.src + '/{app,components}/**/*.css', function(event) {
 <% } else { %>
-gulp.task('watch', ['markups', 'inject'], function () {
+    gulp.watch([
+      options.src + '/{app,components}/**/*.css',
+      options.src + '/{app,components}/**/*.<%= props.cssPreprocessor.extension %>'
+    ], function(event) {
 <% } %>
-  gulp.watch([
-    paths.src + '/*.html',
-    paths.src + '/{app,components}/**/*.<%= props.cssPreprocessor.extension %>',
-    paths.src + '/{app,components}/**/*.js',
-<% if (props.jsPreprocessor.extension !== 'js') { %>
-    paths.src + '/{app,components}/**/*.<%= props.jsPreprocessor.extension %>',
+      if(isOnlyChange(event)) {
+<% if (props.cssPreprocessor.key === 'none') { %>
+        browserSync.reload(event.path);
+<% } else { %>
+        gulp.start('styles');
 <% } %>
-    'bower.json'
-  ], ['inject']);
+      } else {
+        gulp.start('inject');
+      }
+    });
+
+<% if (props.jsPreprocessor.srcExtension !== 'es6') { %>
+<%   if (props.jsPreprocessor.extension === 'js') { %>
+    gulp.watch(options.src + '/{app,components}/**/*.js', function(event) {
+<%   } else { %>
+    gulp.watch([
+      options.src + '/{app,components}/**/*.js',
+      options.src + '/{app,components}/**/*.<%= props.jsPreprocessor.extension %>'
+    ], function(event) {
+<%   } %>
+      if(isOnlyChange(event)) {
+        gulp.start('scripts');
+      } else {
+        gulp.start('inject');
+      }
+    });
+<% } %>
+
 <% if (props.htmlPreprocessor.key !== 'none') { %>
-  gulp.watch(paths.src + '/{app,components}/**/*.<%= props.htmlPreprocessor.extension %>', ['markups']);
+    gulp.watch(options.src + '/{app,components}/**/*.<%= props.htmlPreprocessor.extension %>', ['markups']);
 <% } %>
-});
+  });
+};

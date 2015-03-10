@@ -10,15 +10,7 @@
 
 Offers you a Yeoman generator to initiate a Web application with the following workflow:
 
-<img height="100" align="left" src="https://raw.githubusercontent.com/yeoman/yeoman.io/master/app/assets/img/bullet-yo.gif">
-
-<img height="100" align="left" src="https://raw.github.com/gulpjs/artwork/master/gulp.png">
-
-<img height="100" align="left" src="http://bower.io/img/bower-logo.png">
-
-<img height="100" align="left" src="https://s3.amazonaws.com/media-p.slid.es/uploads/hugojosefson/images/86267/angularjs-logo.png">
-
-<br><br><br><br>
+![Logo](app/templates/src/assets/images/generator-gulp-angular-logo-200x200.png)
 
 ## Why generator-gulp-angular ?
 
@@ -67,7 +59,9 @@ yo gulp-angular [app-name]
 * `--advanced` prompt for advanced additional features, default is `false`
 
 
-All paths configuration are stored in `gulpfile.js`. Change `gulp.paths` in `gulpfile.js` if you want to config paths after the app is generated.
+Paths configuration are stored in `gulpfile.js`. Change `options.(src|dist|tmp|e2e)` in `gulpfile.js` if you want to config paths after the app is generated.
+
+**Warning**: The paths are also written in the `index.html` for the build with useref. If you want to change these paths, you also have to change the paths there in order to have the build task working.
 
 ### Use Gulp tasks
 
@@ -143,7 +137,7 @@ The root directory generated for a app with name `gulpAngular` :
 * *UI Framework*: Bootstrap, Foundation, Angular Material, none (depends on the chosen CSS preprocessor)
 * *UI directives* : UI Bootstrap, Angular Strap, official Bootstrap JavaScript, Angular Foundation, official Foundation JavaScript, none (depends on the UI framework)
 * *CSS pre-processor*: Less, Sass with Ruby and Node, Stylus, none
-* *JS preprocessor*: CoffeeScript, TypeScript, ECMAScript 6 (Traceur and 6to5), none
+* *JS preprocessor*: CoffeeScript, TypeScript, ECMAScript 6 (Traceur and Babel), none
 * *HTML preprocessor*: Jade, Haml, Handlebars, none
 * **TODO** Script loader: Require, Browserify, none
 * **TODO** Test framework: Jasmine, Mocha, Qunit

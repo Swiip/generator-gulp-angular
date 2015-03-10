@@ -1,28 +1,26 @@
 'use strict';
 
 var gulp = require('gulp');
-
-var paths = gulp.paths;
+var browserSync = require('browser-sync');
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('markups', function() {
-  function renameToHtml(path) {
-    path.extname = '.html';
-  }
+module.exports = function(options) {
+  gulp.task('markups', function() {
+    function renameToHtml(path) {
+      path.extname = '.html';
+    }
 
-  return gulp.src(paths.src + '/{app,components}/**/*.<%= props.htmlPreprocessor.extension %>')
+    return gulp.src(options.src + '/{app,components}/**/*.<%= props.htmlPreprocessor.extension %>')
 <% if (props.htmlPreprocessor.key === 'jade') { %>
-    .pipe($.consolidate('jade', { basedir: paths.src, doctype: 'html', pretty: '  ' }))
+      .pipe($.consolidate('jade', { basedir: options.src, doctype: 'html', pretty: '  ' })).on('error', options.errorHandler('Jade'))
 <% } else if (props.htmlPreprocessor.key === 'haml') { %>
-    .pipe($.consolidate('hamljs'))
+      .pipe($.consolidate('haml')).on('error', options.errorHandler('Haml'))
 <% } else if (props.htmlPreprocessor.key === 'handlebars') { %>
-    .pipe($.consolidate('handlebars'))
+      .pipe($.consolidate('handlebars')).on('error', options.errorHandler('Handlebars'))
 <% } %>
-    .on('error', function handleError(err) {
-      console.error(err.toString());
-      this.emit('end');
-    })
-    .pipe($.rename(renameToHtml))
-    .pipe(gulp.dest(paths.tmp + '/serve/'));
-});
+      .pipe($.rename(renameToHtml))
+      .pipe(gulp.dest(options.tmp + '/serve/'))
+      .pipe(browserSync.reload({ stream: true }));
+  });
+};

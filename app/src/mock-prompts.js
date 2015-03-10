@@ -55,19 +55,11 @@ model.jQuery.choices.forEach(function(choice) {
 });
 
 model.resource.choices.forEach(function(choice) {
-  var title = choice.value.name;
-  if(title === null) {
-    title = 'None';
-  }
-  model.resource.values[title.toLowerCase()] = choice.value;
+  model.resource.values[choice.value.key] = choice.value;
 });
 
 model.router.choices.forEach(function(choice) {
-  var title = choice.value.name;
-  if(title === null) {
-    title = 'None';
-  }
-  model.router.values[title.toLowerCase()] = choice.value;
+  model.router.values[choice.value.key] = choice.value;
 });
 
 model.ui.choices.forEach(function(choice) {
@@ -101,15 +93,12 @@ module.exports = {
     angularModules: _.pluck(model.angularModules.choices, 'value'),
     jQuery: model.jQuery.values['jquery 2'],
     resource: model.resource.values['angular-resource'],
-    router: model.router.values['angular-route'],
+    router: model.router.values['ui-router'],
     ui: model.ui.values.bootstrap,
     bootstrapComponents: model.bootstrapComponents.values['ui-bootstrap'],
     foundationComponents: model.foundationComponents.values.none,
     cssPreprocessor: model.cssPreprocessor.values['node-sass'],
     jsPreprocessor: model.jsPreprocessor.values.none,
     htmlPreprocessor: model.htmlPreprocessor.values.none
-  },
-  libRegexp: function(name, version) {
-    return new RegExp('"' + name + '": "' + version + '"');
   }
 };
