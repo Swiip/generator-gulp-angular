@@ -1,9 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
-<% if (props.cssPreprocessor.key === 'none') { %>
 var browserSync = require('browser-sync');
-<% } %>
 
 function isOnlyChange(event) {
   return event.type === 'changed';
@@ -52,6 +50,10 @@ module.exports = function(options) {
 
 <% if (props.htmlPreprocessor.key !== 'none') { %>
     gulp.watch(options.src + '/{app,components}/**/*.<%= props.htmlPreprocessor.extension %>', ['markups']);
+
 <% } %>
+    gulp.watch(options.src + '/{app,components}/**/*.html', function(event) {
+      browserSync.reload(event.path);
+    });
   });
 };
