@@ -22,6 +22,7 @@
     "angular": false,
     // Angular Mocks
     "inject": false,
+    "module": false,
     // JASMINE
     "describe": false,
     "it": false,
