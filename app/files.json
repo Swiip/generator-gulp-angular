@@ -2,7 +2,7 @@
   "staticFiles": [
     ".bowerrc",
     ".editorconfig",
-    ".jshintrc",
+
     "karma.conf.js",
     "protractor.conf.js",
 
@@ -20,6 +20,7 @@
   ],
   "templates": [
     ".gitignore",
+    ".jshintrc",
 
     "package.json",
     "bower.json",

@@ -20,7 +20,7 @@ module.exports = function(options) {
     ], { read: false });
 <% } %>
 
-<% if (props.jsPreprocessor.srcExtension === 'ts') { %>
+<% if (props.jsPreprocessor.key === 'typescript') { %>
     var sortOutput = require('../' + options.tmp + '/sortOutput.json');
 <% } %>
 
