@@ -100,7 +100,7 @@ describe('gulp-angular generator inception tests', function () {
   describe('with [jQuery 1, $http, ngMaterial, Stylus, TypeScript, handlebars]', function () {
     before(function() {
       return inception.prepare({}, {
-        jQuery: prompts.jQuery.none,
+        jQuery: prompts.jQuery.values['jquery 1'],
         ui: prompts.ui.values['angular-material'],
         cssPreprocessor: prompts.cssPreprocessor.values.stylus,
         jsPreprocessor: prompts.jsPreprocessor.values.typescript,
