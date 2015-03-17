@@ -18,8 +18,8 @@ module.exports = function(GulpAngularGenerator) {
     } else {
       this.routerHtml = this.fs.read(this.templatePath(routerPartialSrc));
       this.routerHtml = this.routerHtml.replace(
-        /^<div class="container">/,
-        '<div class="container" ng-controller="MainCtrl">'
+        /^<div ([^>]*)>/,
+        '<div $1 ng-controller="MainCtrl">'
       );
 
       this.routerHtml = this.routerHtml.replace(/\n/g, '\n    ');
