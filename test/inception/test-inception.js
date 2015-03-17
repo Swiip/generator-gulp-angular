@@ -76,7 +76,7 @@ describe('gulp-angular generator inception tests', function () {
         ui: prompts.ui.values.bootstrap,
         bootstrapComponents: prompts.bootstrapComponents.values['ui-bootstrap'],
         cssPreprocessor: prompts.cssPreprocessor.values.less,
-        jsPreprocessor: prompts.jsPreprocessor.values['babel'],
+        jsPreprocessor: prompts.jsPreprocessor.values.babel,
         htmlPreprocessor: prompts.htmlPreprocessor.values.haml
       }).then(function(generator) {
         gulpAngular = generator;
@@ -105,6 +105,32 @@ describe('gulp-angular generator inception tests', function () {
         cssPreprocessor: prompts.cssPreprocessor.values.stylus,
         jsPreprocessor: prompts.jsPreprocessor.values.typescript,
         htmlPreprocessor: prompts.htmlPreprocessor.values.handlebars
+      }).then(function(generator) {
+        gulpAngular = generator;
+      });
+    });
+
+    it('should pass build', function () {
+      return inception.run(gulpAngular, 'build').should.be.fulfilled;
+    });
+    it('should pass test', function () {
+      return inception.run(gulpAngular, 'test').should.be.fulfilled;
+    });
+    it('should pass protractor', function () {
+      return inception.run(gulpAngular, 'protractor').should.be.fulfilled;
+    });
+    it('should pass protractor:dist', function () {
+      return inception.run(gulpAngular, 'protractor:dist').should.be.fulfilled;
+    });
+  });
+
+  describe('with [no jquery, $http, Bootstrap, AngularStrap, ruby-sass, Traceur]', function () {
+    before(function() {
+      return inception.prepare({}, {
+        ui: prompts.ui.values.bootstrap,
+        bootstrapComponents: prompts.bootstrapComponents.values['angular-strap'],
+        cssPreprocessor: prompts.cssPreprocessor.values['ruby-sass'],
+        jsPreprocessor: prompts.jsPreprocessor.values.traceur
       }).then(function(generator) {
         gulpAngular = generator;
       });

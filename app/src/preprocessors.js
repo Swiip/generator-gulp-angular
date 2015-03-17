@@ -73,14 +73,6 @@ module.exports = function(GulpAngularGenerator) {
    * Copy additional lint files if needed
    */
   GulpAngularGenerator.prototype.lintCopies = function lintCopies() {
-    if(this.props.jsPreprocessor.srcExtension === 'es6') {
-      this.files.push({
-        src: 'src/.jshintrc',
-        dest: 'src/.jshintrc',
-        template: false
-      });
-    }
-
     if(this.props.jsPreprocessor.key === 'coffee') {
       this.files.push({
         src: 'coffeelint.json',

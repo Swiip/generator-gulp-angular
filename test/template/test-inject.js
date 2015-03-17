@@ -36,11 +36,11 @@ describe('gulp-angular inject template', function () {
   });
 
   it('should create sortOutput.json for typescript', function() {
-    model.props.jsPreprocessor.srcExtension = null;
+    model.props.jsPreprocessor.key = null;
     var result = inject(model);
     result.should.not.match(/sortOutput\.json/);
 
-    model.props.jsPreprocessor.srcExtension = 'ts';
+    model.props.jsPreprocessor.key = 'typescript';
     result = inject(model);
     result.should.match(/var sortOutput = require/);
   });

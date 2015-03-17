@@ -23,6 +23,16 @@ describe('gulp-angular unit tests template', function () {
     model = mockModel();
   });
 
+  it('should configure wiredep with wiredep exclusions', function() {
+    model.wiredepExclusions = [];
+    var result = unitTests(model);
+    result.should.not.match(/exclude:/);
+
+    model.wiredepExclusions = ['\'a\'', '\'b\''];
+    result = unitTests(model);
+    result.should.match(/exclude: \['a', 'b'\]/);
+  });
+
   it('should add options for each css preprocessors', function() {
     model.props.jsPreprocessor.key = 'none';
     var result = unitTests(model);
@@ -32,50 +42,45 @@ describe('gulp-angular unit tests template', function () {
     model.props.jsPreprocessor.extension = 'js';
     result = unitTests(model);
     result.should.match(/options\.tmp \+ '\/serve\/app\/index\.js/);
-    result.should.match(/options\.src \+ '[^\s]*spec\.js/);
-    result.should.match(/options\.src \+ '[^\s]*mock\.js/);
 
     model.props.jsPreprocessor.key = 'typescript';
     model.props.jsPreprocessor.extension = 'ts';
     result = unitTests(model);
     result.should.match(/options\.tmp \+ '\/serve[^\s]*!\(index\)\.js/);
     result.should.match(/options\.tmp \+ '\/serve[^\s]*index\.js/);
-    result.should.match(/options\.src \+ '[^\s]*spec\.js/);
-    result.should.match(/options\.src \+ '[^\s]*mock\.js/);
 
     model.props.jsPreprocessor.key = 'coffee';
     model.props.jsPreprocessor.extension = 'coffee';
     result = unitTests(model);
     result.should.match(/options\.tmp \+ '\/serve[^\s]*\.js/);
-    result.should.match(/options\.src \+ '[^\s]*spec\.js/);
-    result.should.match(/options\.src \+ '[^\s]*mock\.js/);
   });
 
-  it('should select the right deps for the test tasks', function() {
-    model.props.jsPreprocessor.key = 'none';
+  it('should create sortOutput.json for typescript', function() {
+    model.props.jsPreprocessor.key = null;
     var result = unitTests(model);
-    result.should.match(/task\('test', \['scripts'\], runTests\./);
-    result.should.match(/task\('test:auto', \['scripts'\], runTests\./);
-
-    model.props.jsPreprocessor.key = 'babel';
-    result = unitTests(model);
-    result.should.match(/task\('test', \['scripts'\], runTests\./);
-    result.should.match(/task\('test:auto', \['scripts'\], runTests\./);
-
-    model.props.jsPreprocessor.key = 'traceur';
-    result = unitTests(model);
-    result.should.match(/task\('test', \['scripts'\], runTests\./);
-    result.should.match(/task\('test:auto', \['scripts'\], runTests\./);
-
-    model.props.jsPreprocessor.key = 'coffee';
-    result = unitTests(model);
-    result.should.match(/task\('test', \['scripts'\], runTests\./);
-    result.should.match(/task\('test:auto', \['scripts'\], runTests\./);
+    result.should.not.match(/sortOutput\.json/);
 
     model.props.jsPreprocessor.key = 'typescript';
     result = unitTests(model);
-    result.should.match(/task\('test', \['scripts'\], runTests\./);
-    result.should.match(/task\('test:auto', \['scripts'\], runTests\./);
+    result.should.match(/var sortOutput = require/);
+  });
+
+  it('should choose the right way to sort inject files', function() {
+    model.props.jsPreprocessor.key = 'typescript';
+    var result = unitTests(model);
+    result.should.match(/\{ read: false \}\)\n.*\$\.order/);
+    result.should.not.match(/angularFilesort/);
+
+    model.props.jsPreprocessor.key = 'coffee';
+    model.props.jsPreprocessor.extension = 'coffee';
+    result = unitTests(model);
+    result.should.match(/\$\.angularFilesort\(\)/);
+    result.should.not.match(/order/);
+
+    model.props.jsPreprocessor.extension = 'js';
+    result = unitTests(model);
+    result.should.not.match(/angularFilesort/);
+    result.should.not.match(/order/);
   });
 
 });
