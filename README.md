@@ -8,7 +8,7 @@
 [![Gitter](http://img.shields.io/badge/Gitter-room-brightgreen.svg?style=flat)](https://gitter.im/Swiip/generator-gulp-angular)
 [![Gratipay](http://img.shields.io/gratipay/Swiip.svg?style=flat)](https://gratipay.com/Swiip/)
 
-Offers you a Yeoman generator to initiate a Web application with the following workflow:
+Offers you a Yeoman generator to initiate a Web application with Angular powered by GulpJS.
 
 ![Logo](app/templates/src/assets/images/generator-gulp-angular-logo-200x200.png)
 
@@ -139,14 +139,8 @@ The root directory generated for a app with name `gulpAngular` :
 * *CSS pre-processor*: Less, Sass with Ruby and Node, Stylus, none
 * *JS preprocessor*: CoffeeScript, TypeScript, ECMAScript 6 (Traceur and Babel), none
 * *HTML preprocessor*: Jade, Haml, Handlebars, none
-* **TODO** Script loader: Require, Browserify, none
+* **TODO** Script loader: Require, Webpack, none
 * **TODO** Test framework: Jasmine, Mocha, Qunit
-
-## Known issue
-
-Protractor tests are not stable with PhantomJS, at least not on my Mac. I'm getting unpredictable disconnections between webdriverjs and phantomjs.
-
-I tried many configurations for Protractor without success, any hint would be appreciated.
 
 ## Changelog
 
