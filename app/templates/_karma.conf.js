@@ -7,6 +7,18 @@ module.exports = function(config) {
 
     frameworks: ['jasmine'],
 
+<% if(props.jsPreprocessor.key === 'coffee') { %>
+    coffeePreprocessor: {
+      options: {
+        bare: true,
+        sourceMap: true
+      },
+      transformPath: function(path) {
+        return path.replace(/\.coffee$/, '.js');
+      }
+    },
+<% } %>
+
     ngHtml2JsPreprocessor: {
       stripPrefix: 'src/',
       moduleName: 'gulpAngular'
@@ -24,10 +36,16 @@ module.exports = function(config) {
       'karma-phantomjs-launcher',
 <% } %>
       'karma-jasmine',
+<% if(props.jsPreprocessor.key === 'coffee') { %>
+      'karma-coffee-preprocessor',
+<% } %>
       'karma-ng-html2js-preprocessor'
     ],
 
     preprocessors: {
+<% if(props.jsPreprocessor.key === 'coffee') { %>
+      'src/**/*.coffee': ['coffee'],
+<% } %>
       'src/**/*.html': ['ng-html2js']
     }
   };

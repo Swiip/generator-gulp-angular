@@ -33,7 +33,7 @@ describe('gulp-angular unit tests template', function () {
     result.should.match(/exclude: \['a', 'b'\]/);
   });
 
-  it('should add options for each css preprocessors', function() {
+  it('should add options for each js preprocessors', function() {
     model.props.jsPreprocessor.key = 'none';
     var result = unitTests(model);
     result.should.match(/options\.src \+ '[^\s]*\.js/);
@@ -52,7 +52,7 @@ describe('gulp-angular unit tests template', function () {
     model.props.jsPreprocessor.key = 'coffee';
     model.props.jsPreprocessor.extension = 'coffee';
     result = unitTests(model);
-    result.should.match(/options\.tmp \+ '\/serve[^\s]*\.js/);
+    result.should.match(/options\.src \+ '\/[^\s]*\.coffee/);
   });
 
   it('should create sortOutput.json for typescript', function() {

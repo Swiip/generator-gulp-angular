@@ -32,6 +32,8 @@ module.exports = function(options) {
     var srcFiles = [
 <% if (props.jsPreprocessor.key === 'none') { %>
       options.src + '/{app,components}/**/*.js'
+<% } else if (props.jsPreprocessor.key === 'coffee') { %>
+      options.src + '/{app,components}/**/*.coffee'
 <% } else if (props.jsPreprocessor.extension === 'js') { %>
       options.tmp + '/serve/app/index.js'
 <% } else if (props.jsPreprocessor.key === 'typescript') { %>
