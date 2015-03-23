@@ -44,6 +44,6 @@
     "src/index.html",
     "src/app/main/main.controller.js",
     "src/app/main/main.controller.spec.js",
-    "src/components/navbar/navbar.controller.js"
+    "src/app/components/navbar/navbar.controller.js"
   ]
 }
