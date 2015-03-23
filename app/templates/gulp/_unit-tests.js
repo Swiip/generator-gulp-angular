@@ -70,7 +70,8 @@ module.exports = function(options) {
       karma.server.start({
         configFile: __dirname + '/../karma.conf.js',
         files: files,
-        singleRun: singleRun
+        singleRun: singleRun,
+        autoWatch: !singleRun
       }, done);
     });
   }
