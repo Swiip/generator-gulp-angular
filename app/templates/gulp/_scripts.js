@@ -17,7 +17,7 @@ module.exports = function(options) {
 <%   } else { %>
   gulp.task('scripts', function () {
 <%   } %>
-    return gulp.src(options.src + '/{app,components}/**/*.<%= props.jsPreprocessor.extension %>')
+    return gulp.src(options.src + '/{app}/**/*.<%= props.jsPreprocessor.extension %>')
 <%   if (props.jsPreprocessor.extension === 'js') { %>
       .pipe($.jshint())
       .pipe($.jshint.reporter('jshint-stylish'))

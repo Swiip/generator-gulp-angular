@@ -13,8 +13,8 @@ module.exports = function(options) {
   gulp.task('partials', ['markups'], function () {
 <% } %>
     return gulp.src([
-      options.src + '/{app,components}/**/*.html',
-      options.tmp + '/serve/{app,components}/**/*.html'
+      options.src + '/app/**/*.html',
+      options.tmp + '/serve/app/**/*.html'
     ])
       .pipe($.minifyHtml({
         empty: true,
@@ -22,7 +22,8 @@ module.exports = function(options) {
         quotes: true
       }))
       .pipe($.angularTemplatecache('templateCacheHtml.js', {
-        module: '<%= appName %>'
+        module: '<%= appName %>',
+        root: 'app'
       }))
       .pipe(gulp.dest(options.tmp + '/partials/'));
   });

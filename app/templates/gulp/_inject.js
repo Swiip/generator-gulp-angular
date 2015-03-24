@@ -10,13 +10,13 @@ module.exports = function(options) {
 <% if (props.cssPreprocessor.key !== 'none') { %>
   gulp.task('inject', ['scripts', 'styles'], function () {
     var injectStyles = gulp.src([
-      options.tmp + '/serve/{app,components}/**/*.css',
+      options.tmp + '/serve/app/**/*.css',
       '!' + options.tmp + '/serve/app/vendor.css'
     ], { read: false });
 <% } else { %>
   gulp.task('inject', ['scripts'], function () {
     var injectStyles = gulp.src([
-      options.src + '/{app,components}/**/*.css'
+      options.src + '/app/**/*.css'
     ], { read: false });
 <% } %>
 
@@ -26,14 +26,14 @@ module.exports = function(options) {
 
     var injectScripts = gulp.src([
 <% if (props.jsPreprocessor.key === 'none') { %>
-      options.src + '/{app,components}/**/*.js',
+      options.src + '/app/**/*.js',
 <% } else if (props.jsPreprocessor.extension === 'js') { %>
-      options.tmp + '/serve/{app,components}/**/*.js',
+      options.tmp + '/serve/app/**/*.js',
 <% } else { %>
-      '{' + options.src + ',' + options.tmp + '/serve}/{app,components}/**/*.js',
+      '{' + options.src + ',' + options.tmp + '/serve}/app/**/*.js',
 <% } %>
-      '!' + options.src + '/{app,components}/**/*.spec.js',
-      '!' + options.src + '/{app,components}/**/*.mock.js'
+      '!' + options.src + '/app/**/*.spec.js',
+      '!' + options.src + '/app/**/*.mock.js'
 <% if (props.jsPreprocessor.srcExtension === 'ts') { %>
     ], { read: false })
     .pipe($.order(sortOutput, {base: options.tmp + '/serve'}));

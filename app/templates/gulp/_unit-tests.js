@@ -31,14 +31,14 @@ module.exports = function(options) {
 
     var srcFiles = [
 <% if (props.jsPreprocessor.key === 'none') { %>
-      options.src + '/{app,components}/**/*.js'
+      options.src + '/app/**/*.js'
 <% } else if (props.jsPreprocessor.extension === 'js') { %>
       options.tmp + '/serve/app/index.js'
 <% } else if (props.jsPreprocessor.key === 'typescript') { %>
-      options.tmp + '/serve/{app,components}/**/!(index).js',
-      options.tmp + '/serve/{app,components}/**/index.js'
+      options.tmp + '/serve/app/**/!(index).js',
+      options.tmp + '/serve/app/**/index.js'
 <% } else { %>
-      options.tmp + '/serve/{app,components}/**/*.js'
+      options.tmp + '/serve/app/**/*.js'
 <% } %>
     ].concat(specFiles.map(function(file) {
       return '!' + file;
