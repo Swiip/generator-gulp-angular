@@ -17,7 +17,7 @@ module.exports = function(options) {
 <%   } else { %>
   gulp.task('scripts', function () {
 <%   } %>
-    return gulp.src(options.src + '/{app}/**/*.<%= props.jsPreprocessor.extension %>')
+    return gulp.src(options.src + '/app/**/*.<%= props.jsPreprocessor.extension %>')
 <%   if (props.jsPreprocessor.extension === 'js') { %>
       .pipe($.jshint())
       .pipe($.jshint.reporter('jshint-stylish'))
@@ -38,7 +38,7 @@ module.exports = function(options) {
 <%   if (props.jsPreprocessor.key === 'typescript') { %>
       .pipe($.toJson({filename: options.tmp + '/sortOutput.json', relative:true}))
 <%   } if (props.jsPreprocessor.key !== 'none') { %>
-      .pipe(gulp.dest(options.tmp + '/serve/'))
+      .pipe(gulp.dest(options.tmp + '/serve/app'))
 <%   } %>
       .pipe(browserSync.reload({ stream: true }))
       .pipe($.size());
