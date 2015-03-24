@@ -36,7 +36,7 @@ module.exports = function(options) {
       '!' + options.src + '/app/**/*.mock.js'
 <% if (props.jsPreprocessor.srcExtension === 'ts') { %>
     ], { read: false })
-    .pipe($.order(sortOutput, {base: options.tmp + '/serve'}));
+    .pipe($.order(sortOutput, {base: options.tmp + '/serve/app'}));
 <% } else if (props.jsPreprocessor.srcExtension !== 'es6') { %>
     ])
     .pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'));

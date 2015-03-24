@@ -50,7 +50,7 @@ module.exports = function(options) {
 
 <% if (props.jsPreprocessor.key === 'typescript') { %>
     gulp.src(srcFiles, { read: false })
-      .pipe($.order(sortOutput, {base: options.tmp + '/serve'}))
+      .pipe($.order(sortOutput, {base: options.tmp + '/serve/app'}))
 <% } else if (props.jsPreprocessor.extension !== 'js') { %>
     gulp.src(srcFiles)
       .pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'))
