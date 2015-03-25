@@ -83,6 +83,10 @@ The root directory generated for a app with name `gulpAngular` :
 <pre>
 ├──  src/
 │   ├──  app/
+│   │   ├──  components/
+│   │   │   └──  navbar/
+│   │   │   │   ├──  navbar.controller.js
+│   │   │   │   └──  navbar.html
 │   │   ├──  main/
 │   │   │   ├──  main.controller.js
 │   │   │   ├──  main.controller.spec.js
@@ -92,10 +96,6 @@ The root directory generated for a app with name `gulpAngular` :
 │   │   └──  vendor.(css|less|scss)
 │   ├──  assets/
 │   │   └──  images/
-│   ├──  components/
-│   │   └──  navbar/
-│   │   │   ├──  navbar.controller.js
-│   │   │   └──  navbar.html
 │   ├──  404.html
 │   ├──  favico.ico
 │   └──  index.html
