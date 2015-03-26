@@ -21,6 +21,8 @@
     ".gitignore",
     ".jshintrc",
 
+    "README.md",
+
     "package.json",
     "bower.json",
     "tsd.json",
