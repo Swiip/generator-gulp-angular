@@ -9,6 +9,7 @@ Please contribute to this repository if any of the following is true:
 Before you submit your issue search the archive, maybe your question was already answered.
 
 Because we create a generator you should be specific as possible in your requests. Providing the following information will increase the chances of your issue being dealt with quickly:
+* Any sample code **SHOULD BE** included in [code blocks](https://help.github.com/articles/github-flavored-markdown/#fenced-code-blocks)
 * **.yo-rc.json** - A copy of your `.yo-rc.json` is highly appreciated.
 * **Generator Version** - is it a regression?
 * **Overview of the Issue** - if an error is being thrown a non-minified stack trace helps
