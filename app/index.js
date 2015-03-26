@@ -15,6 +15,8 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
       required: false
     });
 
+    this.version = require('../package.json').version;
+
     this.props = {};
   },
 
