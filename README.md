@@ -1,23 +1,20 @@
-# generator-gulp-angular
+# generator-gulp-angular ![Logo](app/templates/src/assets/images/generator-gulp-angular-logo.png)
 
 [![Build Status](https://img.shields.io/travis/Swiip/generator-gulp-angular/master.svg?style=flat)](http://travis-ci.org/Swiip/generator-gulp-angular)
 [![Coverage Status](http://img.shields.io/coveralls/Swiip/generator-gulp-angular.svg?style=flat)](https://coveralls.io/r/Swiip/generator-gulp-angular?branch=master)
 [![Dependencies](http://img.shields.io/david/Swiip/generator-gulp-angular.svg?style=flat)](https://david-dm.org/eleven-labs/generator-gulp-angular)
-[![Download Month](http://img.shields.io/npm/dm/generator-gulp-angular.svg?style=flat)](https://www.npmjs.org/package/generator-gulp-angular)
 [![NPM Version](http://img.shields.io/npm/v/generator-gulp-angular.svg?style=flat)](https://www.npmjs.org/package/generator-gulp-angular)
+[![Download Month](http://img.shields.io/npm/dm/generator-gulp-angular.svg?style=flat)](https://www.npmjs.org/package/generator-gulp-angular)
+
 [![Gitter](http://img.shields.io/badge/Gitter-room-brightgreen.svg?style=flat)](https://gitter.im/Swiip/generator-gulp-angular)
-[![Gratipay](http://img.shields.io/gratipay/Swiip.svg?style=flat)](https://gratipay.com/Swiip/)
 
-Offers you a Yeoman generator to initiate a Web application with Angular powered by GulpJS.
-
-![Logo](app/templates/src/assets/images/generator-gulp-angular-logo-200x200.png)
+Offers you a Yeoman generator to initiate a Web application with Angular powered by Gulp.
 
 ## Why generator-gulp-angular ?
 
 This generator combines the best features of other generators like [generator-angular](https://github.com/yeoman/generator-angular), [ngTailor](https://github.com/lauterry/generator-ngtailor) and [generator-gulp-webapp](https://github.com/yeoman/generator-gulp-webapp) into an optimal workflow for starting applications with AngularJS powered by Gulp!
 
 generator-gulp-angular scaffolds an AngularJS application with a full-featured gulpfile.js, giving you immediate out-of-the-box access to all tasks for modern web development.
-
 
 My intention is to create a generator that gives users total control over their development toolbox so they can immediately start projects with their preferred tools, such as specific UI frameworks or JavaScript preprocessors.
 
@@ -130,15 +127,17 @@ The root directory generated for a app with name `gulpAngular` :
 * **TODO** lazy : don't process files which haven't changed when possible
 
 ## Questions the generator will ask
-* *jQuery*: jQuery 1.x, 2.x, Zepto, none
+
+* *Angular version*: 1.3.x, 1.2.x
 * *Angular modules*: animate, cookies, touch, sanitize
+* *jQuery*: 2.x, 1.x, Zepto, none
 * *Resource handler*: ngResource, Restangular, none
-* *Router*: ngRoute, UI Router, none
-* *UI Framework*: Bootstrap, Foundation, Angular Material, none (depends on the chosen CSS preprocessor)
-* *UI directives* : UI Bootstrap, Angular Strap, official Bootstrap JavaScript, Angular Foundation, official Foundation JavaScript, none (depends on the UI framework)
-* *CSS pre-processor*: Less, Sass with Ruby and Node, Stylus, none
-* *JS preprocessor*: CoffeeScript, TypeScript, ECMAScript 6 (Traceur and Babel), none
-* *HTML preprocessor*: Jade, Haml, Handlebars, none
+* *Router*: UI Router, ngRoute, none
+* *UI framework*: Bootstrap, Angular Material, Foundation, none
+* *UI directives* : Angular UI Bootstrap, Angular Strap, Bootstrap jQuery, Angular Foundation, Foundation Jquery, none (depends on the UI framework)
+* *CSS pre-processor*: Sass with Node or Ruby, Less, Stylus, none
+* *JS preprocessor*: none, ES6 Babel, ES6 Traceur, CoffeeScript, TypeScript
+* *HTML preprocessor*: none, Jade, Haml, Handlebars
 * **TODO** Script loader: Require, Webpack, none
 * **TODO** Test framework: Jasmine, Mocha, Qunit
 
