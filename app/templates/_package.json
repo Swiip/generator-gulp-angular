@@ -76,6 +76,8 @@
     "karma-jasmine": "~0.3.1",
 <% if(props.jsPreprocessor.key === 'traceur') { %>
     "karma-chrome-launcher": "~0.1.7",
+<% } if (props.jsPreprocessor.key === 'coffee') { %>
+    "karma-coffee-preprocessor": "~0.2.1",
 <% } else { %>
     "karma-phantomjs-launcher": "~0.1.4",
 <% } %>
