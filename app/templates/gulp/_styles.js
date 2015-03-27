@@ -11,8 +11,7 @@ module.exports = function(options) {
     var lessOptions = {
       options: [
         'bower_components',
-        options.src + '/app',
-        options.src + '/components'
+        options.src + '/app'
       ]
     };
 <% } if (props.cssPreprocessor.extension === 'scss') { %>
@@ -22,7 +21,7 @@ module.exports = function(options) {
 <% } %>
 
     var injectFiles = gulp.src([
-      options.src + '/{app,components}/**/*.<%= props.cssPreprocessor.extension %>',
+      options.src + '/app/**/*.<%= props.cssPreprocessor.extension %>',
       '!' + options.src + '/app/index.<%= props.cssPreprocessor.extension %>',
       '!' + options.src + '/app/vendor.<%= props.cssPreprocessor.extension %>'
     ], { read: false });
@@ -30,7 +29,6 @@ module.exports = function(options) {
     var injectOptions = {
       transform: function(filePath) {
         filePath = filePath.replace(options.src + '/app/', '');
-        filePath = filePath.replace(options.src + '/components/', '../components/');
         return '@import \'' + filePath + '\';';
       },
       starttag: '// injector',

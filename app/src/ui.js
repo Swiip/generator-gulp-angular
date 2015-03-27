@@ -41,8 +41,8 @@ module.exports = function(GulpAngularGenerator) {
    */
   GulpAngularGenerator.prototype.uiFiles = function uiFiles() {
     this.files.push({
-      src: 'src/components/navbar/__' + this.props.ui.key + '-navbar.html',
-      dest: 'src/components/navbar/navbar.html',
+      src: 'src/app/components/navbar/__' + this.props.ui.key + '-navbar.html',
+      dest: 'src/app/components/navbar/navbar.html',
       template: false
     });
 

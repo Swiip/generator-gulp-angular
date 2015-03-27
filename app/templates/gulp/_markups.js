@@ -11,7 +11,7 @@ module.exports = function(options) {
       path.extname = '.html';
     }
 
-    return gulp.src(options.src + '/{app,components}/**/*.<%= props.htmlPreprocessor.extension %>')
+    return gulp.src(options.src + '/app/**/*.<%= props.htmlPreprocessor.extension %>')
 <% if (props.htmlPreprocessor.key === 'jade') { %>
       .pipe($.consolidate('jade', { basedir: options.src, doctype: 'html', pretty: '  ' })).on('error', options.errorHandler('Jade'))
 <% } else if (props.htmlPreprocessor.key === 'haml') { %>
