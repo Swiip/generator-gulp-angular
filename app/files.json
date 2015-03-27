@@ -15,7 +15,6 @@
     "gulp/tsd.js",
 
     "src/favicon.ico",
-    "src/404.html",
     "src/assets/images/yeoman.png"
   ],
   "templates": [
