@@ -20,7 +20,7 @@ module.exports = function(options) {
       .pipe($.consolidate('handlebars')).on('error', options.errorHandler('Handlebars'))
 <% } %>
       .pipe($.rename(renameToHtml))
-      .pipe(gulp.dest(options.tmp + '/serve/'))
+      .pipe(gulp.dest(options.tmp + '/serve/app/'))
       .pipe(browserSync.reload({ stream: true }));
   });
 };
