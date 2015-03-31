@@ -83,7 +83,7 @@
     "concat-stream": "~1.4.7",
     "require-dir": "~0.1.0",
     "browser-sync": "~2.1.4",
-    "browser-sync-spa": "~1.0.1",
+    "browser-sync-spa": "~1.0.2",
     "http-proxy": "~1.8.0",
     "chalk": "~0.5.1",
     "protractor": "~1.7.0",
