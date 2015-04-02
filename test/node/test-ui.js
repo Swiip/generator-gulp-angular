@@ -139,7 +139,7 @@ describe('gulp-angular generator ui script', function () {
         cssPreprocessor: { extension: 'scss' }
       };
       generator.computeWiredepExclusions();
-      generator.wiredepExclusions[0].should.be.equal('/bootstrap-sass-official/');
+      generator.wiredepExclusions[0].should.be.equal('/bootstrap-sass-official\\/.*\\.js/');
       generator.wiredepExclusions[1].should.be.equal('/bootstrap\\.css/');
     });
 

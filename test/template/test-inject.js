@@ -77,14 +77,4 @@ describe('gulp-angular inject template', function () {
     result.should.not.match(/order/);
   });
 
-  it('should configure wiredep with wiredep exclusions', function() {
-    model.wiredepExclusions = [];
-    var result = inject(model);
-    result.should.not.match(/exclude:/);
-
-    model.wiredepExclusions = ['\'a\'', '\'b\''];
-    result = inject(model);
-    result.should.match(/exclude: \['a', 'b'\]/);
-  });
-
 });

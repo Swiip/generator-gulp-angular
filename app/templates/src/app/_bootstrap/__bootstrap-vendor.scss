@@ -1,8 +1,6 @@
 $icon-font-path: "../<%= computedPaths.appToBower %>/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 
-@import '../<%= computedPaths.appToBower %>/bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
-
 /* Do not remove this comments bellow. It's the markers used by wiredep to inject
    sass dependencies when defined in the bower.json of your dependencies */
-// injector
-// endinjector
+// bower:scss
+// endbower

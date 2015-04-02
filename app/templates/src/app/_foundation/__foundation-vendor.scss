@@ -1,6 +1,8 @@
+/* The import of foundation is made manually because there is still no links of the
+   sass version in theit bower.json... */
 @import '../<%= computedPaths.appToBower %>/bower_components/foundation/scss/foundation';
 
 /* Do not remove this comments bellow. It's the markers used by wiredep to inject
    sass dependencies when defined in the bower.json of your dependencies */
-// injector
-// endinjector
+// bower:scss
+// endbower

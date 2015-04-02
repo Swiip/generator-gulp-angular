@@ -5,6 +5,8 @@ var browserSync = require('browser-sync');
 
 var $ = require('gulp-load-plugins')();
 
+var wiredep = require('wiredep').stream;
+
 module.exports = function(options) {
   gulp.task('styles', function () {
 <% if (props.cssPreprocessor.key === 'less') { %>
@@ -37,6 +39,7 @@ module.exports = function(options) {
     };
 
     var indexFilter = $.filter('index.<%= props.cssPreprocessor.extension %>');
+    var vendorFilter = $.filter('vendor.<%= props.cssPreprocessor.extension %>');
 <% if (props.cssPreprocessor.key === 'ruby-sass') { %>
     var cssFilter = $.filter('**/*.css');
 <% } %>
@@ -45,28 +48,31 @@ module.exports = function(options) {
       options.src + '/app/index.<%= props.cssPreprocessor.extension %>',
       options.src + '/app/vendor.<%= props.cssPreprocessor.extension %>'
     ])
-    .pipe(indexFilter)
-    .pipe($.inject(injectFiles, injectOptions))
-    .pipe(indexFilter.restore())
+      .pipe(indexFilter)
+      .pipe($.inject(injectFiles, injectOptions))
+      .pipe(indexFilter.restore())
+      .pipe(vendorFilter)
+      .pipe(wiredep(options.wiredep))
+      .pipe(vendorFilter.restore())
 <% if (props.cssPreprocessor.key === 'ruby-sass') { %>
-    .pipe($.rubySass(sassOptions)).on('error', options.errorHandler('RubySass'))
-    .pipe(cssFilter)
-    .pipe($.sourcemaps.init({ loadMaps: true }))
+      .pipe($.rubySass(sassOptions)).on('error', options.errorHandler('RubySass'))
+      .pipe(cssFilter)
+      .pipe($.sourcemaps.init({ loadMaps: true }))
 <% } else { %>
-    .pipe($.sourcemaps.init())
+      .pipe($.sourcemaps.init())
 <% } if (props.cssPreprocessor.key === 'less') { %>
-    .pipe($.less(lessOptions)).on('error', options.errorHandler('Less'))
+      .pipe($.less(lessOptions)).on('error', options.errorHandler('Less'))
 <% } else if (props.cssPreprocessor.key === 'node-sass') { %>
-    .pipe($.sass(sassOptions)).on('error', options.errorHandler('Sass'))
+      .pipe($.sass(sassOptions)).on('error', options.errorHandler('Sass'))
 <% } else if (props.cssPreprocessor.key === 'stylus') { %>
-    .pipe($.stylus()).on('error', options.errorHandler('Stylus'))
+      .pipe($.stylus()).on('error', options.errorHandler('Stylus'))
 <% } %>
-    .pipe($.autoprefixer()).on('error', options.errorHandler('Autoprefixer'))
-    .pipe($.sourcemaps.write())
+      .pipe($.autoprefixer()).on('error', options.errorHandler('Autoprefixer'))
+      .pipe($.sourcemaps.write())
 <% if (props.cssPreprocessor.key === 'ruby-sass') { %>
-    .pipe(cssFilter.restore())
+      .pipe(cssFilter.restore())
 <% } %>
-    .pipe(gulp.dest(options.tmp + '/serve/app/'))
-    .pipe(browserSync.reload({ stream: true }));
+      .pipe(gulp.dest(options.tmp + '/serve/app/'))
+      .pipe(browserSync.reload({ stream: true }));
   });
 };

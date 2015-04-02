@@ -80,7 +80,7 @@ module.exports = function(GulpAngularGenerator) {
     if (this.props.ui.key === 'bootstrap') {
       if(this.props.bootstrapComponents.key !== 'official') {
         if(this.props.cssPreprocessor.extension === 'scss') {
-          this.wiredepExclusions.push('/bootstrap-sass-official/');
+          this.wiredepExclusions.push('/bootstrap-sass-official\\/.*\\.js/');
         } else {
           this.wiredepExclusions.push('/bootstrap\\.js/');
         }

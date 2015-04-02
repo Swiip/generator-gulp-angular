@@ -35,4 +35,14 @@ describe('gulp-angular gulpfile template', function () {
     result.should.match(/e2e: 'test\/e2e\/dir'/);
   });
 
+  it('should configure wiredep with wiredep exclusions', function() {
+    model.wiredepExclusions = [];
+    var result = gulpfile(model);
+    result.should.not.match(/exclude:/);
+
+    model.wiredepExclusions = ['\'a\'', '\'b\''];
+    result = gulpfile(model);
+    result.should.match(/exclude: \['a', 'b'\]/);
+  });
+
 });

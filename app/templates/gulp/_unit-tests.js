@@ -11,14 +11,11 @@ var _ = require('lodash');
 
 module.exports = function(options) {
   function listFiles(callback) {
-    var bowerDeps = wiredep({
-      directory: 'bower_components',
-<% if(wiredepExclusions.length > 0) { %>
-      exclude: [<%= wiredepExclusions.join(', ') %>],
-<% } %>
+    var wiredepOptions = _.extend({}, options.wiredep, {
       dependencies: true,
       devDependencies: true
     });
+    var bowerDeps = wiredep(wiredepOptions);
 
     var specFiles = [
       options.src + '/**/*.spec.js',
