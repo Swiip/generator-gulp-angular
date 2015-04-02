@@ -60,7 +60,7 @@ module.exports = function(GulpAngularGenerator) {
       template: false
     });
 
-    if(this.props.ui.key !== 'none') {
+    if(this.props.cssPreprocessor.key !== 'none') {
       this.files.push({
         src: 'src/app/_' + this.props.ui.key + '/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension,
         dest: 'src/app/vendor.' + this.props.cssPreprocessor.extension,
