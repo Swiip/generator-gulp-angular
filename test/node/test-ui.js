@@ -111,7 +111,7 @@ describe('gulp-angular generator ui script', function () {
       generator.files = [];
       generator.uiFiles();
       generator.files[0].src.should.be.equal('src/app/components/navbar/__none-navbar.html');
-      generator.files[1].src.should.be.equal('src/app/__none-index.scss');
+      generator.files[1].src.should.be.equal('src/app/_none/__none-index.scss');
       generator.files.length.should.be.equal(2);
     });
 
