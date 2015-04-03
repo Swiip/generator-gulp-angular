@@ -19,8 +19,8 @@ module.exports = function(options) {
       options.src + '/app/**/*.css'
     ], { read: false });
 <% } %>
-
 <% if (props.jsPreprocessor.key === 'typescript') { %>
+
     var sortOutput = require('../' + options.tmp + '/sortOutput.json');
 <% } %>
 
@@ -49,17 +49,10 @@ module.exports = function(options) {
       addRootSlash: false
     };
 
-    var wiredepOptions = {
-      directory: 'bower_components'
-<% if(wiredepExclusions.length > 0) { %>,
-      exclude: [<%= wiredepExclusions.join(', ') %>]
-<% } %>
-    };
-
     return gulp.src(options.src + '/*.html')
       .pipe($.inject(injectStyles, injectOptions))
       .pipe($.inject(injectScripts, injectOptions))
-      .pipe(wiredep(wiredepOptions))
+      .pipe(wiredep(options.wiredep))
       .pipe(gulp.dest(options.tmp + '/serve'));
 
   });

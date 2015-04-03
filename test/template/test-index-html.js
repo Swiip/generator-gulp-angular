@@ -31,24 +31,16 @@ describe('gulp-angular index js template', function () {
   });
 
   it('should insert the vendor build block depending of data', function() {
-    model.props.ui.key = 'bootstrap';
+    model.props.cssPreprocessor.key = 'none';
     model.props.paths.src = 'src';
     model.props.paths.tmp = 'tmp';
-    model.computedPaths.appToBower = 'appToBower';
-    model.isVendorStylesPreprocessed = false;
     var result = indexHtml(model);
     result.should.match(/<!-- build:css\({tmp\/serve,src}\) styles\/vendor\.css -->/);
-    result.should.match(/<!-- bower:css/);
-    result.should.match(/href="appToBower\/bower_components/);
+    result.should.not.match(/<link rel="stylesheet" href="app\/vendor\.css">/);
 
-    model.props.ui.key = 'foundation';
+    model.props.cssPreprocessor.key = 'notnone';
     result = indexHtml(model);
-    result.should.not.match(/href="appToBower\/bower_components/);
-
-    model.isVendorStylesPreprocessed = true;
-    result = indexHtml(model);
-    result.should.not.match(/href="appToBower\/bower_components/);
-    result.should.match(/href="app\/vendor.css"/);
+    result.should.match(/<link rel="stylesheet" href="app\/vendor\.css">/);
   });
 
   it('should insert modernizr if selected', function() {

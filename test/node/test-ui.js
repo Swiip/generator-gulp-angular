@@ -105,13 +105,12 @@ describe('gulp-angular generator ui script', function () {
       generator.props = {
         router: { module: null },
         ui: { key: 'none' },
-        cssPreprocessor: { extension: 'scss' }
+        cssPreprocessor: { key: 'none', extension: 'css' }
       };
-      generator.isVendorStylesPreprocessed = true;
       generator.files = [];
       generator.uiFiles();
       generator.files[0].src.should.be.equal('src/app/components/navbar/__none-navbar.html');
-      generator.files[1].src.should.be.equal('src/app/__none-index.scss');
+      generator.files[1].src.should.be.equal('src/app/_none/__none-index.css');
       generator.files.length.should.be.equal(2);
     });
 
@@ -119,11 +118,14 @@ describe('gulp-angular generator ui script', function () {
       generator.props = {
         router: { module: 'ngRoute' },
         ui: { key: 'bootstrap' },
-        cssPreprocessor: { extension: 'scss' }
+        cssPreprocessor: { key: 'notnone', extension: 'scss' }
       };
-      generator.isVendorStylesPreprocessed = true;
       generator.files = [];
       generator.uiFiles();
+      generator.files[0].src.should.be.equal('src/app/components/navbar/__bootstrap-navbar.html');
+      generator.files[1].src.should.be.equal('src/app/main/__bootstrap.html');
+      generator.files[2].src.should.be.equal('src/app/_bootstrap/__bootstrap-index.scss');
+      generator.files[3].src.should.be.equal('src/app/_bootstrap/__bootstrap-vendor.scss');
       generator.files.length.should.be.equal(4);
     });
   });
@@ -137,7 +139,7 @@ describe('gulp-angular generator ui script', function () {
         cssPreprocessor: { extension: 'scss' }
       };
       generator.computeWiredepExclusions();
-      generator.wiredepExclusions[0].should.be.equal('/bootstrap-sass-official/');
+      generator.wiredepExclusions[0].should.be.equal('/bootstrap-sass-official\\/.*\\.js/');
       generator.wiredepExclusions[1].should.be.equal('/bootstrap\\.css/');
     });
 

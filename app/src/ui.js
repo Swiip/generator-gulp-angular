@@ -55,14 +55,14 @@ module.exports = function(GulpAngularGenerator) {
     }
 
     this.files.push({
-      src: 'src/app/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension,
+      src: 'src/app/_' + this.props.ui.key + '/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension,
       dest: 'src/app/index.' + this.props.cssPreprocessor.extension,
       template: false
     });
 
-    if(this.isVendorStylesPreprocessed && this.props.ui.key !== 'none') {
+    if(this.props.cssPreprocessor.key !== 'none') {
       this.files.push({
-        src: 'src/app/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension,
+        src: 'src/app/_' + this.props.ui.key + '/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension,
         dest: 'src/app/vendor.' + this.props.cssPreprocessor.extension,
         template: true
       });
@@ -80,7 +80,7 @@ module.exports = function(GulpAngularGenerator) {
     if (this.props.ui.key === 'bootstrap') {
       if(this.props.bootstrapComponents.key !== 'official') {
         if(this.props.cssPreprocessor.extension === 'scss') {
-          this.wiredepExclusions.push('/bootstrap-sass-official/');
+          this.wiredepExclusions.push('/bootstrap-sass-official\\/.*\\.js/');
         } else {
           this.wiredepExclusions.push('/bootstrap\\.js/');
         }

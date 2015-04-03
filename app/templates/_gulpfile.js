@@ -2,7 +2,6 @@
 
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var _ = require('lodash');
 var wrench = require('wrench');
 
 var options = {
@@ -15,6 +14,12 @@ var options = {
       gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
       this.emit('end');
     };
+  },
+  wiredep: {
+    directory: 'bower_components'
+<% if(wiredepExclusions.length > 0) { %>,
+    exclude: [<%= wiredepExclusions.join(', ') %>]
+<% } %>
   }
 };
 

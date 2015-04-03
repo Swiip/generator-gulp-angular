@@ -11,10 +11,10 @@ module.exports = function(GulpAngularGenerator) {
 
     if (this.props.router.module === 'ngRoute') {
       this.routerHtml = '<div ng-view></div>';
-      this.routerJs = this.fs.read(this.templatePath('src/app/__ngroute.' + this.props.jsPreprocessor.extension));
+      this.routerJs = this.fs.read(this.templatePath('src/app/_ngroute/__ngroute.' + this.props.jsPreprocessor.extension));
     } else if (this.props.router.module === 'ui.router') {
       this.routerHtml = '<div ui-view></div>';
-      this.routerJs = this.fs.read(this.templatePath('src/app/__uirouter.' + this.props.jsPreprocessor.extension));
+      this.routerJs = this.fs.read(this.templatePath('src/app/_uirouter/__uirouter.' + this.props.jsPreprocessor.extension));
     } else {
       this.routerHtml = this.fs.read(this.templatePath(routerPartialSrc));
       this.routerHtml = this.routerHtml.replace(

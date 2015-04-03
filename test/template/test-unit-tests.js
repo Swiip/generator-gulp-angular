@@ -23,16 +23,6 @@ describe('gulp-angular unit tests template', function () {
     model = mockModel();
   });
 
-  it('should configure wiredep with wiredep exclusions', function() {
-    model.wiredepExclusions = [];
-    var result = unitTests(model);
-    result.should.not.match(/exclude:/);
-
-    model.wiredepExclusions = ['\'a\'', '\'b\''];
-    result = unitTests(model);
-    result.should.match(/exclude: \['a', 'b'\]/);
-  });
-
   it('should add options for each css preprocessors', function() {
     model.props.jsPreprocessor.key = 'none';
     var result = unitTests(model);
