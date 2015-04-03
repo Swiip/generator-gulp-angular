@@ -1,13 +1,13 @@
 
-  .config(config);
+    .config(config);
 
-function config($stateProvider, $urlRouterProvider) {
-  $stateProvider
-    .state('home', {
-      url: '/',
-      templateUrl: 'app/main/main.html',
-      controller: 'MainCtrl'
-    });
+  function config($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('home', {
+        url: '/',
+        templateUrl: 'app/main/main.html',
+        controller: 'MainCtrl'
+      });
 
-  $urlRouterProvider.otherwise('/');
-}
+    $urlRouterProvider.otherwise('/');
+  }
