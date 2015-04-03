@@ -28,7 +28,7 @@ describe('gulp-angular generator techs script', function () {
     generator.props = {
       router: { module: 'ngRoute' },
       ui: { key: 'testUi' },
-      jsPreprocessor: { extension: 'testExtension' }
+      jsPreprocessor: { srcExtension: 'testExtension' }
     };
     read.withArgs('template/src/app/_ngroute/__ngroute.testExtension')
       .returns('my test content 1');
