@@ -14,7 +14,7 @@
   </div>
 
   <div class="row">
-    <div class="large-4 columns" ng-repeat="awesomeThing in awesomeThings | orderBy:'rank'">
+    <div class="large-4 columns" ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
       <div class="th">
         <img class="right" ng-src="assets/images/{{awesomeThing.logo}}" alt="{{awesomeThing.title}}">
         <div class="caption">

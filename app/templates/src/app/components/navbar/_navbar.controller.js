@@ -5,7 +5,8 @@
     .module('<%= appName %>')
     .controller('NavbarCtrl', NavbarCtrl);
 
-  function NavbarCtrl($scope) {
-    $scope.date = new Date();
+  function NavbarCtrl() {
+    var vm = this;
+    vm.date = new Date();
   }
 })();
