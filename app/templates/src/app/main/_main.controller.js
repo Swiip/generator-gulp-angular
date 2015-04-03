@@ -7,6 +7,7 @@
 
   function MainCtrl() {
     var vm = this;
+
     vm.awesomeThings = <%= technologies %>;
 
     angular.forEach(vm.awesomeThings, function(awesomeThing) {
