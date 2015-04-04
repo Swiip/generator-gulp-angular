@@ -1,1 +1,1 @@
-### App generate at <%= new Date() %>/
+### App generated at <%= new Date() %>/
