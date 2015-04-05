@@ -3,7 +3,6 @@
     ".bowerrc",
     ".editorconfig",
 
-    "karma.conf.js",
     "protractor.conf.js",
 
     "e2e/.jshintrc",
