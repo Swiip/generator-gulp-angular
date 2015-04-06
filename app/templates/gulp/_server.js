@@ -6,13 +6,15 @@ var browserSyncSpa = require('browser-sync-spa');
 
 var util = require('util');
 
-var middleware = require('./proxy');
+
 
 module.exports = function(options) {
 <% if(qrCode) { %>
 
   var qrcode = require('qrcode-terminal');
 <% } %>
+
+  var middleware = require('./proxy')(options);
 
   function browserSyncInit(baseDir, browser) {
     browser = browser === undefined ? 'default' : browser;
