@@ -7,7 +7,7 @@ module <%= appName %> {
   'use strict';
 
   angular.module('<%= appName %>', [<%= modulesDependencies %>])
-    .controller('MainCtrl', MainCtrl)
-    .controller('NavbarCtrl', NavbarCtrl)
+    .controller('MainController', MainController)
+    .controller('NavbarController', NavbarController)
 <%= routerJs %>;
 }

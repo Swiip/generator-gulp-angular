@@ -3,10 +3,10 @@
 
   angular
     .module('<%= appName %>')
-    .controller('MainCtrl', MainCtrl);
+    .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainCtrl() {
+  function MainController() {
     var vm = this;
 
     vm.awesomeThings = <%= technologies %>;

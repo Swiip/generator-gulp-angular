@@ -3,10 +3,10 @@
 
   angular
     .module('<%= appName %>')
-    .controller('NavbarCtrl', NavbarCtrl);
+    .controller('NavbarController', NavbarController);
 
   /** @ngInject */
-  function NavbarCtrl() {
+  function NavbarController() {
     var vm = this;
 
     vm.date = new Date();
