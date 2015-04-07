@@ -26,10 +26,13 @@ module.exports = function(options) {
 
     var injectScripts = gulp.src([
 <% if (props.jsPreprocessor.key === 'none') { %>
+      options.src + '/app/**/*.module.js',
       options.src + '/app/**/*.js',
 <% } else if (props.jsPreprocessor.extension === 'js') { %>
+      options.tmp + '/serve/app/**/*.module.js',
       options.tmp + '/serve/app/**/*.js',
 <% } else { %>
+      '{' + options.src + ',' + options.tmp + '/serve}/app/**/*.module.js',
       '{' + options.src + ',' + options.tmp + '/serve}/app/**/*.js',
 <% } %>
       '!' + options.src + '/app/**/*.spec.js',
