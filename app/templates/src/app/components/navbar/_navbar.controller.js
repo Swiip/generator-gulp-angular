@@ -5,6 +5,7 @@
     .module('<%= appName %>')
     .controller('NavbarCtrl', NavbarCtrl);
 
+  /** @ngInject */
   function NavbarCtrl() {
     var vm = this;
 
