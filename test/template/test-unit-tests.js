@@ -31,13 +31,13 @@ describe('gulp-angular unit tests template', function () {
     model.props.jsPreprocessor.key = 'babel';
     model.props.jsPreprocessor.extension = 'js';
     result = unitTests(model);
-    result.should.match(/options\.tmp \+ '\/serve\/app\/index\.js/);
+    result.should.match(/options\.tmp \+ '\/serve\/app\/index\.module\.js/);
 
     model.props.jsPreprocessor.key = 'typescript';
     model.props.jsPreprocessor.extension = 'ts';
     result = unitTests(model);
-    result.should.match(/options\.tmp \+ '\/serve[^\s]*!\(index\)\.js/);
-    result.should.match(/options\.tmp \+ '\/serve[^\s]*index\.js/);
+    result.should.match(/options\.tmp \+ '\/serve[^\s]*!\(index\.module\)\.js/);
+    result.should.match(/options\.tmp \+ '\/serve[^\s]*index\.module\.js/);
 
     model.props.jsPreprocessor.key = 'coffee';
     model.props.jsPreprocessor.extension = 'coffee';

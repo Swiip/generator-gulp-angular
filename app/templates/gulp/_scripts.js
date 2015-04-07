@@ -55,7 +55,7 @@ module.exports = function(options) {
         loaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'traceur-loader'}]
 <%   } %>
       },
-      output: { filename: 'index.js' }
+      output: { filename: 'index.module.js' }
     };
 
     if(watch) {
@@ -79,7 +79,7 @@ module.exports = function(options) {
       }
     };
 
-    return gulp.src(options.src + '/app/index.js')
+    return gulp.src(options.src + '/app/index.module.js')
       .pipe($.webpack(webpackOptions, null, webpackChangeHandler))
       .pipe(gulp.dest(options.tmp + '/serve/app'));
   }

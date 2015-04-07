@@ -30,10 +30,10 @@ module.exports = function(options) {
 <% if (props.jsPreprocessor.key === 'none') { %>
       options.src + '/app/**/*.js'
 <% } else if (props.jsPreprocessor.extension === 'js') { %>
-      options.tmp + '/serve/app/index.js'
+      options.tmp + '/serve/app/index.module.js'
 <% } else if (props.jsPreprocessor.key === 'typescript') { %>
-      options.tmp + '/serve/app/**/!(index).js',
-      options.tmp + '/serve/app/**/index.js'
+      options.tmp + '/serve/app/**/!(index.module).js',
+      options.tmp + '/serve/app/**/index.module.js'
 <% } else { %>
       options.tmp + '/serve/app/**/*.js'
 <% } %>

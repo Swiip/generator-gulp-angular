@@ -16,10 +16,10 @@ describe('gulp-angular index js template', function () {
 
   before(function() {
     return q.all([
-      templateTools.load('src/app/_index.js'),
-      templateTools.load('src/app/_index.es6'),
-      templateTools.load('src/app/_index.coffee'),
-      templateTools.load('src/app/_index.ts')
+      templateTools.load('src/app/_index.module.js'),
+      templateTools.load('src/app/_index.module.es6'),
+      templateTools.load('src/app/_index.module.coffee'),
+      templateTools.load('src/app/_index.module.ts')
     ]).then(function(modules) {
       indexJs = modules[0];
       indexEs6 = modules[1];
