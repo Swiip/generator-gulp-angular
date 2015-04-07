@@ -10,7 +10,7 @@ describe('controllers', function(){
   }));
 
   it('should define more than 5 awesome things', inject(function($controller) {
-<% if (props.jsPreprocessor.key === 'none') { %>
+<% if (props.jsPreprocessor.key === 'none' || props.jsPreprocessor.srcExtension === 'es6') { %>
     var vm = $controller('MainController', {
       $scope: scope
     });
