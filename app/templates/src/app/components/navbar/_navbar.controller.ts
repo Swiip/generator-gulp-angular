@@ -5,7 +5,7 @@ module <%= appName %> {
     date: Date
   }
 
-  export class NavbarCtrl {
+  export class NavbarController {
     /* @ngInject */
     constructor ($scope: INavbarScope) {
       $scope.date = new Date();

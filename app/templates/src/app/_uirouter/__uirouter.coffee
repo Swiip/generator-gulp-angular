@@ -4,6 +4,6 @@
       .state "home",
         url: "/",
         templateUrl: "app/main/main.html",
-        controller: "MainCtrl"
+        controller: "MainController"
 
     $urlRouterProvider.otherwise '/'

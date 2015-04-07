@@ -19,11 +19,11 @@ module.exports = function(GulpAngularGenerator) {
       this.routerHtml = this.fs.read(this.templatePath(routerPartialSrc));
       this.routerHtml = this.routerHtml.replace(
         /^<div ([^>]*)>/,
-        '<div $1 ng-controller="MainCtrl as main">'
+        '<div $1 ng-controller="MainController as main">'
       );
 
       this.routerHtml = this.routerHtml.replace(/\n/g, '\n    ');
-      this.routerJs = '';
+      this.routerJs = ';';
     }
   };
 

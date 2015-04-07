@@ -1,9 +1,9 @@
 'use strict';
 
-import MainCtrl from './main/main.controller';
-import NavbarCtrl from '../app/components/navbar/navbar.controller';
+import MainController from './main/main.controller';
+import NavbarController from '../app/components/navbar/navbar.controller';
 
 angular.module('<%= appName %>', [<%= modulesDependencies %>])
-  .controller('MainCtrl', MainCtrl)
-  .controller('NavbarCtrl', NavbarCtrl)
+  .controller('MainController', MainController)
+  .controller('NavbarController', NavbarController)
 <%= routerJs %>;

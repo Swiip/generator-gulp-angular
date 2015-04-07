@@ -1,6 +1,6 @@
 'use strict';
 
-class MainCtrl {
+class MainController {
   constructor ($scope) {
     $scope.awesomeThings = <%= technologies %>;
     $scope.awesomeThings.forEach(function(awesomeThing) {
@@ -9,6 +9,6 @@ class MainCtrl {
   }
 }
 
-MainCtrl.$inject = ['$scope'];
+MainController.$inject = ['$scope'];
 
-export default MainCtrl;
+export default MainController;

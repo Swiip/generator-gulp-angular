@@ -1,3 +1,3 @@
 angular.module "<%= appName %>"
-  .controller "NavbarCtrl", ($scope) ->
+  .controller "NavbarController", ($scope) ->
     $scope.date = new Date()
