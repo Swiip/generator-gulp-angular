@@ -15,11 +15,13 @@ function listFiles() {
   return wiredep(wiredepOptions).js
     .concat([
 <% if (props.jsPreprocessor.key === 'none') { %>
+      path.join(conf.paths.src, '/app/**/*.module.js'),
       path.join(conf.paths.src, '/app/**/*.js'),
 <% } else if (props.jsPreprocessor.key === 'coffee') { %>
+      path.join(conf.paths.tmp, '/serve/app/**/*.module.js'),
       path.join(conf.paths.tmp, '/serve/app/**/*.js'),
 <% } else { %>
-      path.join(conf.paths.tmp, '/serve/app/index.js'),
+      path.join(conf.paths.tmp, '/serve/app/index.module.js'),
 <% } %>
       path.join(conf.paths.src, '/**/*.spec.js'),
       path.join(conf.paths.src, '/**/*.mock.js')
