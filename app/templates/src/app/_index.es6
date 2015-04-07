@@ -1,5 +1,3 @@
-'use strict';
-
 import MainController from './main/main.controller';
 import NavbarController from '../app/components/navbar/navbar.controller';
 
