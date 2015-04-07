@@ -1,11 +1,11 @@
-'use strict';
-
 class NavbarController {
-  constructor ($scope) {
-    $scope.date = new Date();
+  constructor () {
+    'ngInject';
+
+    let vm = this;
+
+    vm.date = new Date();
   }
 }
-
-NavbarController.$inject = ['$scope'];
 
 export default NavbarController;
