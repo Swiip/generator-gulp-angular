@@ -6,6 +6,7 @@ var browserSync = require('browser-sync');
 var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep').stream;
+var _ = require('lodash');
 
 module.exports = function(options) {
   gulp.task('styles', function () {
@@ -52,7 +53,7 @@ module.exports = function(options) {
       .pipe($.inject(injectFiles, injectOptions))
       .pipe(indexFilter.restore())
       .pipe(vendorFilter)
-      .pipe(wiredep(options.wiredep))
+      .pipe(wiredep(_.extend({}, options.wiredep)))
       .pipe(vendorFilter.restore())
 <% if (props.cssPreprocessor.key === 'ruby-sass') { %>
       .pipe($.rubySass(sassOptions)).on('error', options.errorHandler('RubySass'))
