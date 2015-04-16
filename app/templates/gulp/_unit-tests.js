@@ -28,6 +28,7 @@ module.exports = function(options) {
 
     var srcFiles = [
 <% if (props.jsPreprocessor.key === 'none') { %>
+      options.src + '/app/**/*.module.js',
       options.src + '/app/**/*.js'
 <% } else if (props.jsPreprocessor.extension === 'js') { %>
       options.tmp + '/serve/app/index.module.js'
@@ -35,6 +36,7 @@ module.exports = function(options) {
       options.tmp + '/serve/app/**/!(index.module).js',
       options.tmp + '/serve/app/**/index.module.js'
 <% } else { %>
+      options.src + '/serve/app/**/*.module.js',
       options.tmp + '/serve/app/**/*.js'
 <% } %>
     ].concat(specFiles.map(function(file) {

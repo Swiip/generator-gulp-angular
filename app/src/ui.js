@@ -50,7 +50,7 @@ module.exports = function(GulpAngularGenerator) {
       this.files.push({
         src: 'src/app/main/__' + this.props.ui.key + '.html',
         dest: 'src/app/main/main.html',
-        template: false
+        template: true
       });
     }
 
