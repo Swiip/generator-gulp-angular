@@ -12,6 +12,11 @@
       </div>
     </div>
   </div>
+<% if (props.jsPreprocessor.key === 'none') { %>
+  <div class="row">
+    <acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']" />
+  </div>
+<% } %>
 
   <div class="row">
     <div class="large-4 columns" ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">

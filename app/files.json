@@ -40,9 +40,12 @@
     "gulp/server.js",
 
     "src/app/index.module.js",
+    "src/app/constants.js",
     "src/index.html",
     "src/app/main/main.controller.js",
     "src/app/main/main.controller.spec.js",
+    "src/app/components/malarkey/malarkey.directive.js",
+    "src/app/components/githubAPI/githubAPI.service.js",
     "src/app/components/navbar/navbar.controller.js"
   ]
 }

@@ -11,6 +11,11 @@
       </p>
       <p><a class="btn" ng-href="#">Splendid!</a></p>
     </section>
+<% if (props.jsPreprocessor.key === 'none') { %>
+    <div class="row">
+      <acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']" />
+    </div>
+<% } %>
 
     <div class="techs" layout-align="center">
       <md-card ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
