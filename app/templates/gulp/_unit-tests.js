@@ -76,7 +76,7 @@ module.exports = function(options) {
   gulp.task('test', ['scripts'], function(done) {
     runTests(true, done);
   });
-  gulp.task('test:auto', ['watch'], function(done) {
+  gulp.task('test:auto', ['scripts'], function(done) {
     runTests(false, done);
   });
 };
