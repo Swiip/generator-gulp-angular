@@ -41,14 +41,7 @@ module.exports = function(options) {
       return '!' + file;
     }));
 
-<% if (props.jsPreprocessor.key === 'typescript') { %>
-    var sortOutput = require('../' + options.tmp + '/sortOutput.json');
-<% } %>
-
-<% if (props.jsPreprocessor.key === 'typescript') { %>
-    gulp.src(srcFiles, { read: false })
-      .pipe($.order(sortOutput, {base: options.tmp + '/serve/app'}))
-<% } else if (props.jsPreprocessor.extension !== 'js') { %>
+<% if (props.jsPreprocessor.key === 'none' || props.jsPreprocessor.key === 'coffee') { %>
     gulp.src(srcFiles)
       .pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'))
 <% } else { %>
@@ -79,4 +72,9 @@ module.exports = function(options) {
   gulp.task('test:auto', ['watch'], function(done) {
     runTests(false, done);
   });
+
+  return {
+    listFiles: listFiles,
+    runTests: runTests
+  }
 };

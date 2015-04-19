@@ -20,10 +20,6 @@ module.exports = function(options) {
       options.src + '/app/**/*.css'
     ], { read: false });
 <% } %>
-<% if (props.jsPreprocessor.key === 'typescript') { %>
-
-    var sortOutput = require('../' + options.tmp + '/sortOutput.json');
-<% } %>
 
     var injectScripts = gulp.src([
 <% if (props.jsPreprocessor.key === 'none') { %>
@@ -35,10 +31,7 @@ module.exports = function(options) {
 <% } %>
       '!' + options.src + '/app/**/*.spec.js',
       '!' + options.src + '/app/**/*.mock.js'
-<% if (props.jsPreprocessor.srcExtension === 'ts') { %>
-    ], { read: false })
-    .pipe($.order(sortOutput, {base: options.tmp + '/serve/app'}));
-<% } else if (props.jsPreprocessor.srcExtension !== 'es6') { %>
+<% if (props.jsPreprocessor.srcExtension === 'js' || props.jsPreprocessor.srcExtension === 'coffee') { %>
     ])
     .pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'));
 <% } else { %>

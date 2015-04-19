@@ -2,18 +2,17 @@
 
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
-<% if (props.jsPreprocessor.key === 'typescript') { %>
-var mkdirp = require('mkdirp');
-<% } %>
 
 var $ = require('gulp-load-plugins')();
 
 module.exports = function(options) {
 <% if (props.jsPreprocessor.srcExtension !== 'es6') { %>
 <%   if (props.jsPreprocessor.key === 'typescript') { %>
-  gulp.task('scripts', ['tsd:install'], function () {
-    mkdirp.sync(options.tmp);
+  var tsProject = $.typescript.createProject({
+    sortOutput: true
+  });
 
+  gulp.task('scripts', ['tsd:install'], function () {
 <%   } else { %>
   gulp.task('scripts', function () {
 <%   } %>
@@ -30,14 +29,10 @@ module.exports = function(options) {
 <%   } if (props.jsPreprocessor.key === 'typescript') { %>
       .pipe($.tslint())
       .pipe($.tslint.report('prose', { emitError: false }))
-      .pipe($.typescript({sortOutput: true})).on('error', options.errorHandler('TypeScript'))
-<%   } %>
-<%   if (props.jsPreprocessor.key !== 'none') { %>
-      .pipe($.sourcemaps.write())
-<%   } %>
-<%   if (props.jsPreprocessor.key === 'typescript') { %>
-      .pipe($.toJson({filename: options.tmp + '/sortOutput.json', relative:true}))
+      .pipe($.typescript(tsProject)).on('error', options.errorHandler('TypeScript'))
+      .pipe($.concat('index.js'))
 <%   } if (props.jsPreprocessor.key !== 'none') { %>
+      .pipe($.sourcemaps.write())
       .pipe(gulp.dest(options.tmp + '/serve/app'))
 <%   } %>
       .pipe(browserSync.reload({ stream: true }))
