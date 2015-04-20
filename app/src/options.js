@@ -2,7 +2,7 @@
 
 var path = require('path');
 
-var _ = require('lodash');
+var s = require('underscore.string');
 
 var options = require('../options.json');
 
@@ -27,7 +27,7 @@ module.exports = function(GulpAngularGenerator) {
    */
   GulpAngularGenerator.prototype.determineAppName = function determineAppName() {
     this.appName = this.appName || path.basename(process.cwd());
-    this.appName = _.camelize(_.slugify(_.humanize(this.appName)));
+    this.appName = s.camelize(s.slugify(s.humanize(this.appName)));
   };
 
 };
