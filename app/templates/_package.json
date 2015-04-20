@@ -86,7 +86,6 @@
     "browser-sync-spa": "~1.0.2",
     "http-proxy": "~1.8.0",
     "chalk": "~0.5.1",
-    "protractor": "~1.7.0",
 <% if (qrCode) { %>
     "qrcode-terminal": "~0.9.5",
 <% } %>
