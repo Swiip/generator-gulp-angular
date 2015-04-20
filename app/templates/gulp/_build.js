@@ -96,7 +96,7 @@ gulp.task('fonts', function () {
 gulp.task('other', function () {
   return gulp.src([
     path.join(conf.paths.src, '/**/*'),
-    path.join('!', conf.paths.src, '/**/*.{<%= processedFileExtension %>}')
+    path.join('!' + conf.paths.src, '/**/*.{<%= processedFileExtension %>}')
   ])
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
 });

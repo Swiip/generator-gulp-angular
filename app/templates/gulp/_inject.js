@@ -13,7 +13,7 @@ var _ = require('lodash');
 gulp.task('inject', ['scripts', 'styles'], function () {
   var injectStyles = gulp.src([
     path.join(conf.paths.tmp, '/serve/app/**/*.css'),
-    path.join('!', conf.paths.tmp, '/serve/app/vendor.css')
+    path.join('!' + conf.paths.tmp, '/serve/app/vendor.css')
   ], { read: false });
 <% } else { %>
 gulp.task('inject', ['scripts'], function () {
@@ -28,8 +28,8 @@ gulp.task('inject', ['scripts'], function () {
 <% } if (props.jsPreprocessor.key !== 'none') { %>
     path.join(conf.paths.tmp, '/serve/app/**/*.js'),
 <% } %>
-    path.join('!', conf.paths.src, '/app/**/*.spec.js'),
-    path.join('!', conf.paths.src, '/app/**/*.mock.js')
+    path.join('!' + conf.paths.src, '/app/**/*.spec.js'),
+    path.join('!' + conf.paths.src, '/app/**/*.mock.js')
 <% if (props.jsPreprocessor.srcExtension === 'js' || props.jsPreprocessor.srcExtension === 'coffee') { %>
   ])
   .pipe($.angularFilesort()).on('error', conf.errorHandler('AngularFilesort'));
