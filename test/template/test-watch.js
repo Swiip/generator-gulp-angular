@@ -33,13 +33,13 @@ describe('gulp-angular watch template', function () {
     model.props.cssPreprocessor.key = 'none';
     model.props.cssPreprocessor.extension = 'css';
     var result = watch(model);
-    result.should.match(/gulp\.watch\(.*\*\.css',/);
+    result.should.match(/gulp\.watch\(.*\*\.css'/);
     result.should.match(/browserSync\.reload/);
 
     model.props.cssPreprocessor.key = 'notnone';
     model.props.cssPreprocessor.extension = 'notcss';
     result = watch(model);
-    result.should.match(/gulp\.watch\(\[\n.*\.css',\n.*\.notcss'\n.*\],/);
+    result.should.match(/gulp\.watch\(\[\n.*\.css'.*\n.*\.notcss'.*\n.*\],/);
     result.should.match(/gulp\.start\('styles'\);/);
   });
 
@@ -48,21 +48,22 @@ describe('gulp-angular watch template', function () {
     model.props.jsPreprocessor.extension = 'js';
     model.props.jsPreprocessor.srcExtension = 'notes6';
     var result = watch(model);
-    result.should.match(/gulp\.watch\(.*\*\.js',/);
+    result.should.match(/gulp\.watch\(.*\*\.js'/);
     result.should.match(/gulp\.start\('scripts'\);/);
 
     model.props.jsPreprocessor.key = 'notnone';
     model.props.jsPreprocessor.extension = 'notjs';
     model.props.jsPreprocessor.srcExtension = 'notes6';
     result = watch(model);
-    result.should.match(/gulp\.watch\(\[\n.*\.js',\n.*\.notjs'\n.*\],/);
+    result.should.match(/gulp\.watch\(\[\n.*\.js'.*\n.*\.notjs'.*\n.*\],/);
     result.should.match(/gulp\.start\('scripts'\);/);
 
     model.props.jsPreprocessor.key = 'notnone';
     model.props.jsPreprocessor.extension = 'notjs';
     model.props.jsPreprocessor.srcExtension = 'es6';
     result = watch(model);
-    result.should.not.match(/options\.src \+ '\/\{app,components\}\/\*\*\/\*\.js/);
+    result.should.not.match(/gulp\.watch\(\[\n.*\.js'.*\n.*\.notjs'.*\n.*\],/);
+    result.should.not.match(/gulp\.start\('scripts'\);/);
   });
 
   it('should watch the html preprocessor extension files', function() {
@@ -74,7 +75,7 @@ describe('gulp-angular watch template', function () {
     model.props.htmlPreprocessor.key = 'not none';
     model.props.htmlPreprocessor.extension = 'nothtml';
     result = watch(model);
-    result.should.match(/gulp\.watch.*nothtml', \['markups'\]/);
+    result.should.match(/gulp\.watch.*nothtml'.*\['markups'\]/);
   });
 
 });

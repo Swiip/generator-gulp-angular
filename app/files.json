@@ -8,10 +8,12 @@
     "e2e/.jshintrc",
     "e2e/main.spec.js",
 
+    "gulpfile.js",
     "gulp/.jshintrc",
     "gulp/e2e-tests.js",
     "gulp/proxy.js",
     "gulp/tsd.js",
+    "gulp/unit-tests.js",
 
     "src/favicon.ico",
     "src/assets/images/yeoman.png"
@@ -28,7 +30,6 @@
 
     "e2e/main.po.js",
 
-    "gulpfile.js",
     "gulp/conf.js",
     "gulp/build.js",
     "gulp/inject.js",
@@ -37,7 +38,6 @@
     "gulp/styles.js",
     "gulp/watch.js",
     "gulp/server.js",
-    "gulp/unit-tests.js",
 
     "src/app/index.js",
     "src/index.html",

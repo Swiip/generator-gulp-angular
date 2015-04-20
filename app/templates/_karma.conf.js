@@ -35,11 +35,15 @@ module.exports = function(config) {
 
     autoWatch: false,
 
-<% if (props.jsPreprocessor.srcExtension === 'js' || props.jsPreprocessor.srcExtension === 'coffee') { %>
+<% if (props.jsPreprocessor.key === 'none' || props.jsPreprocessor.key === 'coffee') { %>
     frameworks: ['jasmine', 'angular-filesort'],
 
     angularFilesort: {
-      whitelist: ['src/**/!(*.html|*.spec|*.mock).js']
+<%   if (props.jsPreprocessor.key === 'none') { %>
+      whitelist: [path.join(conf.paths.src, '/**/!(*.html|*.spec|*.mock).js')]
+<%   } else { %>
+      whitelist: [path.join(conf.paths.tmp, '/**/!(*.html|*.spec|*.mock).js')]
+<%   } %>
     },
 <% } else { %>
     frameworks: ['jasmine'],
@@ -60,7 +64,7 @@ module.exports = function(config) {
 
     plugins : [
       'karma-phantomjs-launcher',
-<% } if (props.jsPreprocessor.srcExtension === 'js' || props.jsPreprocessor.srcExtension === 'coffee') { %>
+<% } if (props.jsPreprocessor.key === 'none' || props.jsPreprocessor.key === 'coffee') { %>
       'karma-angular-filesort',
 <% } %>
       'karma-jasmine',

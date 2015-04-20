@@ -27,54 +27,38 @@ describe('gulp-angular inject template', function () {
     model.props.cssPreprocessor.key = 'none';
     var result = inject(model);
     result.should.match(/gulp\.task\('inject', \['scripts'\], function/);
-    result.should.match(/injectStyles = gulp\.src\(\[\n\s*options\.src/);
+    result.should.match(/injectStyles = gulp\.src\(\[\n.*conf\.paths\.src/);
 
     model.props.cssPreprocessor.key = 'not none';
     result = inject(model);
     result.should.match(/gulp\.task\('inject', \['scripts', 'styles'\], function/);
-    result.should.match(/injectStyles = gulp\.src\(\[\n\s*options\.tmp.*\n\s*'!' \+ options\.tmp/);
-  });
-
-  it('should create sortOutput.json for typescript', function() {
-    model.props.jsPreprocessor.key = null;
-    var result = inject(model);
-    result.should.not.match(/sortOutput\.json/);
-
-    model.props.jsPreprocessor.key = 'typescript';
-    result = inject(model);
-    result.should.match(/var sortOutput = require/);
+    result.should.match(/injectStyles = gulp\.src\(\[\n.*conf\.paths\.tmp.*\n.*'!' \+ conf\.paths\.tmp/);
   });
 
   it('should inject scripts from src or tmp depending on the js preprocessor', function() {
-    model.props.jsPreprocessor.key = 'none';
-    model.props.jsPreprocessor.extension = 'js';
+    model.props.jsPreprocessor.srcExtension = 'not es6';
     var result = inject(model);
-    result.should.match(/injectScripts = gulp\.src\(\[\n\s*options\.src/);
+    result.should.match(/injectScripts = gulp\.src.*\n.*conf\.paths\.src/);
+
+    //Theoretical case only for coverage
+    model.props.jsPreprocessor.srcExtension = 'es6';
+    model.props.jsPreprocessor.key = 'none';
+    result = inject(model);
+    result.should.match(/injectScripts = gulp\.src.*\n.*'!' /);
 
     model.props.jsPreprocessor.key = 'not none';
     result = inject(model);
-    result.should.match(/injectScripts = gulp\.src\(\[\n\s*options\.tmp \+ '\/serve/);
-
-    model.props.jsPreprocessor.extension = 'not js';
-    result = inject(model);
-    result.should.match(/injectScripts = gulp\.src\(\[\n\s*'\{' \+ options\.src \+ ',' \+ options\.tmp \+ '\/serve/);
+    result.should.match(/injectScripts = gulp\.src.*\n.*conf\.paths\.tmp, '\/serve/);
   });
 
   it('should choose the right way to sort inject files', function() {
-    model.props.jsPreprocessor.srcExtension = 'ts';
-    var result = inject(model);
-    result.should.match(/\{ read: false \}\)\n.*\$\.order/);
-    result.should.not.match(/angularFilesort/);
-
     model.props.jsPreprocessor.srcExtension = 'coffee';
-    result = inject(model);
+    var result = inject(model);
     result.should.match(/\$\.angularFilesort\(\)/);
-    result.should.not.match(/order/);
 
     model.props.jsPreprocessor.srcExtension = 'es6';
     result = inject(model);
     result.should.not.match(/angularFilesort/);
-    result.should.not.match(/order/);
   });
 
 });
