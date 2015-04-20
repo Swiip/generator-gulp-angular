@@ -29,6 +29,7 @@
     "e2e/main.po.js",
 
     "gulpfile.js",
+    "gulp/conf.js",
     "gulp/build.js",
     "gulp/inject.js",
     "gulp/markups.js",
