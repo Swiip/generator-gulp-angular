@@ -36,10 +36,10 @@ describe('gulp-angular generator inception tests', function () {
     });
   });
 
-  describe('with [angular 1.2.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, angular-foundation, CSS, Coffee, Jade]', function () {
+  describe('with [angular 1.4.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, angular-foundation, CSS, Coffee, Jade]', function () {
     before(function() {
       return inception.prepare({}, {
-        angularVersion: prompts.angularVersion.values['1.2'],
+        angularVersion: prompts.angularVersion.values['1.4'],
         jQuery: prompts.jQuery.values['jquery 2'],
         resource: prompts.resource.values.restangular,
         router: prompts.router.values['ui-router'],

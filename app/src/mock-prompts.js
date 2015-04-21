@@ -37,7 +37,7 @@ questions.forEach(function(question) {
 });
 
 model.angularVersion.choices.forEach(function(choice) {
-  var title = choice.name.substring(0, choice.name.indexOf('.x '));
+  var title = choice.name.substring(0, 3);
   model.angularVersion.values[title] = choice.value;
 });
 
