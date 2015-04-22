@@ -1,6 +1,7 @@
 node_modules/
 bower_components/
 .sass-cache/
+.idea/
 <%= props.paths.tmp %>/
 <%= props.paths.dist %>/
 <% if (props.jsPreprocessor.key === 'typescript') { %>
