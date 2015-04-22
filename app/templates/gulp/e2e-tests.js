@@ -1,35 +1,34 @@
 'use strict';
 
+var path = require('path');
 var gulp = require('gulp');
-
-var $ = require('gulp-load-plugins')();
+var conf = require('./conf');
 
 var browserSync = require('browser-sync');
 
-module.exports = function(options) {
-  // Downloads the selenium webdriver
-  gulp.task('webdriver-update', $.protractor.webdriver_update);
+var $ = require('gulp-load-plugins')();
 
-  gulp.task('webdriver-standalone', $.protractor.webdriver_standalone);
+// Downloads the selenium webdriver
+gulp.task('webdriver-update', $.protractor.webdriver_update);
 
-  function runProtractor (done) {
+gulp.task('webdriver-standalone', $.protractor.webdriver_standalone);
 
-    gulp.src(options.e2e + '/**/*.js')
-      .pipe($.protractor.protractor({
-        configFile: 'protractor.conf.js'
-      }))
-      .on('error', function (err) {
-        // Make sure failed tests cause gulp to exit non-zero
-        throw err;
-      })
-      .on('end', function () {
-        // Close browser sync server
-        browserSync.exit();
-        done();
-      });
-  }
+function runProtractor (done) {
+  gulp.src(path.join(conf.paths.e2e, '/**/*.js'))
+    .pipe($.protractor.protractor({
+      configFile: 'protractor.conf.js'
+    }))
+    .on('error', function (err) {
+      // Make sure failed tests cause gulp to exit non-zero
+      throw err;
+    })
+    .on('end', function () {
+      // Close browser sync server
+      browserSync.exit();
+      done();
+    });
+}
 
-  gulp.task('protractor', ['protractor:src']);
-  gulp.task('protractor:src', ['serve:e2e', 'webdriver-update'], runProtractor);
-  gulp.task('protractor:dist', ['serve:e2e-dist', 'webdriver-update'], runProtractor);
-};
+gulp.task('protractor', ['protractor:src']);
+gulp.task('protractor:src', ['serve:e2e', 'webdriver-update'], runProtractor);
+gulp.task('protractor:dist', ['serve:e2e-dist', 'webdriver-update'], runProtractor);

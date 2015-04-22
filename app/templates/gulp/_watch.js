@@ -1,59 +1,60 @@
 'use strict';
 
+var path = require('path');
 var gulp = require('gulp');
+var conf = require('./conf');
+
 var browserSync = require('browser-sync');
 
 function isOnlyChange(event) {
   return event.type === 'changed';
 }
 
-module.exports = function(options) {
-  gulp.task('watch', [<%= watchTaskDeps.join(', ') %>], function () {
+gulp.task('watch', [<%= watchTaskDeps.join(', ') %>], function () {
 
-    gulp.watch([options.src + '/*.html', 'bower.json'], ['inject']);
+  gulp.watch([path.join(conf.paths.src, '/*.html'), 'bower.json'], ['inject']);
 
 <% if (props.cssPreprocessor.extension === 'css') { %>
-    gulp.watch(options.src + '/app/**/*.css', function(event) {
+  gulp.watch(path.join(conf.paths.src, '/app/**/*.css'), function(event) {
 <% } else { %>
-    gulp.watch([
-      options.src + '/app/**/*.css',
-      options.src + '/app/**/*.<%= props.cssPreprocessor.extension %>'
-    ], function(event) {
+  gulp.watch([
+    path.join(conf.paths.src, '/app/**/*.css'),
+    path.join(conf.paths.src, '/app/**/*.<%= props.cssPreprocessor.extension %>')
+  ], function(event) {
 <% } %>
-      if(isOnlyChange(event)) {
+    if(isOnlyChange(event)) {
 <% if (props.cssPreprocessor.key === 'none') { %>
-        browserSync.reload(event.path);
+      browserSync.reload(event.path);
 <% } else { %>
-        gulp.start('styles');
+      gulp.start('styles');
 <% } %>
-      } else {
-        gulp.start('inject');
-      }
-    });
+    } else {
+      gulp.start('inject');
+    }
+  });
 
 <% if (props.jsPreprocessor.srcExtension !== 'es6') { %>
 <%   if (props.jsPreprocessor.extension === 'js') { %>
-    gulp.watch(options.src + '/app/**/*.js', function(event) {
+  gulp.watch(path.join(conf.paths.src, '/app/**/*.js'), function(event) {
 <%   } else { %>
-    gulp.watch([
-      options.src + '/app/**/*.js',
-      options.src + '/app/**/*.<%= props.jsPreprocessor.extension %>'
-    ], function(event) {
+  gulp.watch([
+    path.join(conf.paths.src, '/app/**/*.js'),
+    path.join(conf.paths.src, '/app/**/*.<%= props.jsPreprocessor.extension %>')
+  ], function(event) {
 <%   } %>
-      if(isOnlyChange(event)) {
-        gulp.start('scripts');
-      } else {
-        gulp.start('inject');
-      }
-    });
+    if(isOnlyChange(event)) {
+      gulp.start('scripts');
+    } else {
+      gulp.start('inject');
+    }
+  });
 <% } %>
 
 <% if (props.htmlPreprocessor.key !== 'none') { %>
-    gulp.watch(options.src + '/app/**/*.<%= props.htmlPreprocessor.extension %>', ['markups']);
+  gulp.watch(path.join(conf.paths.src, '/app/**/*.<%= props.htmlPreprocessor.extension %>'), ['markups']);
 
 <% } %>
-    gulp.watch(options.src + '/app/**/*.html', function(event) {
-      browserSync.reload(event.path);
-    });
+  gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function(event) {
+    browserSync.reload(event.path);
   });
-};
+});
