@@ -51,7 +51,7 @@ module.exports = function(config) {
 
     ngHtml2JsPreprocessor: {
       stripPrefix: 'src/',
-      moduleName: 'gulpAngular'
+      moduleName: '<%= appName %>'
     },
 
 <% if(props.jsPreprocessor.key === 'traceur') { %>
