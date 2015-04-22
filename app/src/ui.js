@@ -92,7 +92,7 @@ module.exports = function(GulpAngularGenerator) {
       if(this.props.foundationComponents.key !== 'official') {
         this.wiredepExclusions.push('/foundation\\.js/');
       }
-      if(this.props.cssPreprocessor.key !== 'none') {
+      if(this.props.cssPreprocessor.extension === 'scss') {
         this.wiredepExclusions.push('/foundation\\.css/');
       }
     }
