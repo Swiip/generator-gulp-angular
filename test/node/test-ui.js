@@ -19,32 +19,6 @@ describe('gulp-angular generator ui script', function () {
     generator = new Generator();
   });
 
-  describe('choose bootstrap version depending of the css preprocessor', function () {
-    it('should keep name with sass', function() {
-      generator.props = {
-        ui: {
-          name: 'name-to-change',
-          key: 'bootstrap'
-        },
-        cssPreprocessor: { extension: 'scss' }
-      };
-      generator.handleBootstrapVersion();
-      generator.props.ui.name.should.be.equal('name-to-change');
-    });
-
-    it('should change name to bootstrap with less', function() {
-      generator.props = {
-        ui: {
-          name: 'name-to-change',
-          key: 'bootstrap'
-        },
-        cssPreprocessor: { extension: 'less' }
-      };
-      generator.handleBootstrapVersion();
-      generator.props.ui.name.should.be.equal('bootstrap');
-    });
-  });
-
   describe('set a flag when vendor styles can be preprocessed', function () {
     it('should set true for sass and bootstrap', function() {
       generator.props = {
