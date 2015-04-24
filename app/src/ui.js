@@ -3,16 +3,6 @@
 module.exports = function(GulpAngularGenerator) {
 
   /**
-   * Change the ui framework module name for bootstrap
-   * The Bower package to use is different if sass or another css preprocessor
-   */
-  GulpAngularGenerator.prototype.handleBootstrapVersion = function handleBootstrapVersion() {
-    if(this.props.ui.key.indexOf('bootstrap') !== -1 && this.props.cssPreprocessor.extension !== 'scss') {
-      this.props.ui.name = 'bootstrap';
-    }
-  };
-
-  /**
    * There is 2 ways of dealing with vendor styles
    * - If the vendor styles exist in the css preprocessor chosen,
    *   the best is to include directly the source files
@@ -92,7 +82,7 @@ module.exports = function(GulpAngularGenerator) {
       if(this.props.foundationComponents.key !== 'official') {
         this.wiredepExclusions.push('/foundation\\.js/');
       }
-      if(this.props.cssPreprocessor.key !== 'none') {
+      if(this.props.cssPreprocessor.extension === 'scss') {
         this.wiredepExclusions.push('/foundation\\.css/');
       }
     }
