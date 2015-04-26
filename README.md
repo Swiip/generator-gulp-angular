@@ -21,6 +21,8 @@ generator-gulp-angular scaffolds an AngularJS application with a full-featured g
 
 My intention is to create a generator that gives users total control over their development toolbox so they can immediately start projects with their preferred tools, such as specific UI frameworks or JavaScript preprocessors.
 
+This project is one of many things that you can use to get started on a new app.  For a comparison of the options and the trade-offs between them, please visit [this](http://www.dancancro.com/comparison-of-angularjs-application-starters) link.
+
 ## Usage
 
 ### Create your project
