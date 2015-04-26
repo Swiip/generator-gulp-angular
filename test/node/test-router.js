@@ -48,7 +48,7 @@ describe('gulp-angular generator techs script', function () {
       .returns('<div class="container">');
     generator.computeRouter();
     generator.routerHtml.should.match(/MainController/);
-    generator.routerJs.should.be.equal(';');
+    generator.routerJs.should.be.equal('');
   });
 
 });

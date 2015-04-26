@@ -23,7 +23,7 @@ module.exports = function(GulpAngularGenerator) {
       );
 
       this.routerHtml = this.routerHtml.replace(/\n/g, '\n    ');
-      this.routerJs = ';';
+      this.routerJs = '';
     }
   };
 
