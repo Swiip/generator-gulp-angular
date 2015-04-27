@@ -28,7 +28,7 @@ describe('gulp-angular generator techs script', function () {
     generator.props = {
       router: { module: 'ngRoute' },
       ui: { key: 'testUi' },
-      jsPreprocessor: { extension: 'testExtension' }
+      jsPreprocessor: { srcExtension: 'testExtension' }
     };
     read.withArgs('template/src/app/_ngroute/__ngroute.testExtension')
       .returns('my test content 1');
@@ -47,7 +47,7 @@ describe('gulp-angular generator techs script', function () {
     read.withArgs('template/src/app/main/__testUi.html')
       .returns('<div class="container">');
     generator.computeRouter();
-    generator.routerHtml.should.match(/MainCtrl/);
+    generator.routerHtml.should.match(/MainController/);
     generator.routerJs.should.be.equal('');
   });
 

@@ -39,7 +39,7 @@
     "gulp/watch.js",
     "gulp/server.js",
 
-    "src/app/index.js",
+    "src/app/index.module.js",
     "src/index.html",
     "src/app/main/main.controller.js",
     "src/app/main/main.controller.spec.js",

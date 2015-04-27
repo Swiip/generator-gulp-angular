@@ -1,6 +1,14 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('<%= appName %>')
-  .controller('NavbarCtrl', function ($scope) {
-    $scope.date = new Date();
-  });
+  angular
+    .module('<%= appName %>')
+    .controller('NavbarController', NavbarController);
+
+  /** @ngInject */
+  function NavbarController() {
+    var vm = this;
+
+    vm.date = new Date();
+  }
+})();

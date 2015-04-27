@@ -1,9 +1,18 @@
-'use strict';
+(function() {
+  'use strict';
 
-angular.module('<%= appName %>')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = <%= technologies %>;
-    angular.forEach($scope.awesomeThings, function(awesomeThing) {
+  angular
+    .module('<%= appName %>')
+    .controller('MainController', MainController);
+
+  /** @ngInject */
+  function MainController() {
+    var vm = this;
+
+    vm.awesomeThings = <%= technologies %>;
+
+    angular.forEach(vm.awesomeThings, function(awesomeThing) {
       awesomeThing.rank = Math.random();
     });
-  });
+  }
+})();

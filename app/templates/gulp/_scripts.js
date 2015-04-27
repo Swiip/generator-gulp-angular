@@ -15,9 +15,9 @@ var $ = require('gulp-load-plugins')();
   });
 
   gulp.task('scripts', ['tsd:install'], function () {
-<%   } else { %>
+<%   } else { %>
 gulp.task('scripts', function () {
-<%   } %>
+<%   } %>
   return gulp.src(path.join(conf.paths.src, '/app/**/*.<%= props.jsPreprocessor.extension %>'))
 <%   if (props.jsPreprocessor.extension === 'js') { %>
     .pipe($.jshint())
@@ -32,12 +32,12 @@ gulp.task('scripts', function () {
     .pipe($.tslint())
     .pipe($.tslint.report('prose', { emitError: false }))
     .pipe($.typescript(tsProject)).on('error', conf.errorHandler('TypeScript'))
-    .pipe($.concat('index.js'))
+    .pipe($.concat('index.module.js'))
 <%   } if (props.jsPreprocessor.key !== 'none') { %>
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')))
 <%   } %>
-    .pipe(browserSync.reload({ stream: true }))
+    .pipe(browserSync.reload({ stream: true }))
     .pipe($.size());
 });
 <% } else { %>
@@ -52,7 +52,7 @@ function webpack(watch, callback) {
       loaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'traceur-loader'}]
 <%   } %>
     },
-    output: { filename: 'index.js' }
+    output: { filename: 'index.module.js' }
   };
 
   if(watch) {
@@ -76,7 +76,7 @@ function webpack(watch, callback) {
     }
   };
 
-  return gulp.src(path.join(conf.paths.src, '/app/index.js'))
+  return gulp.src(path.join(conf.paths.src, '/app/index.module.js'))
     .pipe($.webpack(webpackOptions, null, webpackChangeHandler))
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')));
 }
@@ -88,4 +88,4 @@ gulp.task('scripts', function () {
 gulp.task('scripts:watch', ['scripts'], function (callback) {
   return webpack(true, callback);
 });
-<% } %>
+<% } %>

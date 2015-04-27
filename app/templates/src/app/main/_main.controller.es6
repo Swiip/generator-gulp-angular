@@ -1,14 +1,14 @@
-'use strict';
+class MainController {
+  constructor () {
+    'ngInject';
 
-class MainCtrl {
-  constructor ($scope) {
-    $scope.awesomeThings = <%= technologies %>;
-    $scope.awesomeThings.forEach(function(awesomeThing) {
+    let vm = this;
+
+    vm.awesomeThings = <%= technologies %>;
+    vm.awesomeThings.forEach((awesomeThing) => {
       awesomeThing.rank = Math.random();
     });
   }
 }
 
-MainCtrl.$inject = ['$scope'];
-
-export default MainCtrl;
+export default MainController;

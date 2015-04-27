@@ -26,15 +26,17 @@ describe('gulp-angular karma.conf template', function () {
   it('should add files in list files for each js preprocessors', function() {
     model.props.jsPreprocessor.key = 'none';
     var result = karmaConf(model);
+    result.should.match(/conf\.paths\.src, '[^\s]*\.module\.js'/);
     result.should.match(/conf\.paths\.src, '[^\s]*\.js'/);
 
     model.props.jsPreprocessor.key = 'coffee';
     result = karmaConf(model);
+    result.should.match(/conf\.paths\.tmp, '\/serve[^\s]*\.module\.js'/);
     result.should.match(/conf\.paths\.tmp, '\/serve[^\s]*\.js'/);
 
     model.props.jsPreprocessor.key = 'babel';
     result = karmaConf(model);
-    result.should.match(/conf\.paths\.tmp, '\/serve\/app\/index\.js/);
+    result.should.match(/conf\.paths\.tmp, '\/serve\/app\/index\.module\.js/);
   });
 
   it('should add and configure angular filesort if needed', function() {

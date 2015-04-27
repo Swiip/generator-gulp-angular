@@ -3,7 +3,8 @@
     $routeProvider
       .when('/', {
         templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainController',
+        controllerAs: 'main'
       })
       .otherwise({
         redirectTo: '/'
