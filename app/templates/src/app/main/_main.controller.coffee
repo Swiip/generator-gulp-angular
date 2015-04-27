@@ -1,7 +1,17 @@
 angular.module "<%= appName %>"
-  .controller "MainController", () ->
+  .controller "MainController", (webDevTec) ->
     vm = this
-    vm.awesomeThings = <%= technologies %>
-    angular.forEach vm.awesomeThings, (awesomeThing) ->
-      awesomeThing.rank = Math.random()
+    activate = ->
+      getWebDevTec()
+      return
+
+    getWebDevTec = ->
+      vm.awesomeThings = webDevTec.getTec()
+      angular.forEach vm.awesomeThings, (awesomeThing) ->
+        awesomeThing.rank = Math.random()
+        return
+      return
+
+    vm.awesomeThings = []
+    activate()
     return

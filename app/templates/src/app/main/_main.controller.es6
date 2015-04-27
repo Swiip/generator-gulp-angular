@@ -1,13 +1,24 @@
 class MainController {
-  constructor () {
+  constructor (webDevTec) {
     'ngInject';
 
     let vm = this;
 
-    vm.awesomeThings = <%= technologies %>;
-    vm.awesomeThings.forEach((awesomeThing) => {
-      awesomeThing.rank = Math.random();
-    });
+    vm.awesomeThings = [];
+
+    activate();
+
+    function activate() {
+      getWebDevTec();
+    }
+
+    function getWebDevTec() {
+      vm.awesomeThings = webDevTec.getTec();
+
+      angular.forEach(vm.awesomeThings, function(awesomeThing) {
+        awesomeThing.rank = Math.random();
+      });
+    }
   }
 }
 

@@ -6,13 +6,23 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController() {
+  function MainController(webDevTec) {
     var vm = this;
 
-    vm.awesomeThings = <%= technologies %>;
+    vm.awesomeThings = [];
 
-    angular.forEach(vm.awesomeThings, function(awesomeThing) {
-      awesomeThing.rank = Math.random();
-    });
+    activate();
+
+    function activate() {
+      getWebDevTec();
+    }
+
+    function getWebDevTec() {
+      vm.awesomeThings = webDevTec.getTec();
+
+      angular.forEach(vm.awesomeThings, function(awesomeThing) {
+        awesomeThing.rank = Math.random();
+      });
+    }
   }
 })();

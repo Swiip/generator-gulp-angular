@@ -36,10 +36,6 @@
       });
 
       watcher = scope.$watch('vm.contributors', function(current, original) {
-        console.log('watch vm.contributors');
-        console.log(current);
-        console.log(original);
-
         angular.forEach(vm.contributors, function(contributor) {
           typist.type(contributor.login).pause().delete();
         });
