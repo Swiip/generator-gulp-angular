@@ -1,4 +1,3 @@
-/* global malarkey:false */
 (function() {
   'use strict';
 
@@ -7,7 +6,7 @@
     .directive('acmeMalarkey', acmeMalarkey);
 
   /** @ngInject */
-  function acmeMalarkey() {
+  function acmeMalarkey(malarkey) {
     var directive = {
       restrict: 'E',
       scope: {
