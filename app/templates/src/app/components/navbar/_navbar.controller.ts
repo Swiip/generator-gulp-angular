@@ -4,11 +4,9 @@ module <%= appName %> {
   export class NavbarController {
     public date: Date;
 
-    /* @ngInject */
+    /** @ngInject */
     constructor () {
-      var vm = this;
-
-      vm.date = new Date();
+      this.date = new Date();
     }
   }
 

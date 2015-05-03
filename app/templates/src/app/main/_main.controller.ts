@@ -2,23 +2,23 @@ module <%= appName %> {
   'use strict';
 
   export class MainController {
-    public awesomeThings: Thing[];
+    public awesomeThings: ITecThing[];
+    public webDevTec: WebDevTecService;
 
     /* @ngInject */
     constructor (webDevTec: WebDevTecService) {
-      var vm = this;
+      this.awesomeThings = new Array();
+      this.webDevTec = webDevTec;
 
-      vm.awesomeThings = new Array();
+      this.activate();
+    }
 
-      activate();
+    activate() {
+      this.getWebDevTec();
+    }
 
-      function activate() {
-        getWebDevTec();
-      }
-
-      function getWebDevTec() {
-        vm.awesomeThings = webDevTec.getTec();
-      }
+    getWebDevTec() {
+      this.awesomeThings = this.webDevTec.tec;
     }
   }
 

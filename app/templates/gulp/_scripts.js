@@ -11,6 +11,7 @@ var $ = require('gulp-load-plugins')();
 <% if (props.jsPreprocessor.srcExtension !== 'es6') { %>
 <%   if (props.jsPreprocessor.key === 'typescript') { %>
   var tsProject = $.typescript.createProject({
+    target: 'es5',
     sortOutput: true
   });
 
