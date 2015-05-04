@@ -7,6 +7,7 @@
   },
   "devDependencies": {
     "gulp": "~3.8.10",
+    "bower": "~1.4.1",
     "gulp-autoprefixer": "~2.1.0",
     "gulp-angular-templatecache": "~1.5.0",
     "del": "~1.1.1",
