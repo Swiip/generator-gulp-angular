@@ -1,4 +1,4 @@
-<nav class="navbar navbar-static-top navbar-inverse" ng-controller="NavbarController as navbar">
+<nav class="navbar navbar-static-top navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="https://github.com/Swiip/generator-gulp-angular">
@@ -14,7 +14,7 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li>Current date: {{ navbar.date | date:'yyyy-MM-dd' }}</li>
+        <li>Current date: {{ vm.date | date:'yyyy-MM-dd' }}</li>
       </ul>
     </div>
   </div>
