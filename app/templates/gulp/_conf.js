@@ -16,7 +16,7 @@ exports.paths = {
   dist: '<%= props.paths.dist %>',
   tmp: '<%= props.paths.tmp %>',
   e2e: '<%= props.paths.e2e %>'
-}
+};
 
 /**
  *  Wiredep is the lib which inject bower dependencies in your project
@@ -28,7 +28,7 @@ exports.wiredep = {
 <% if(wiredepExclusions.length > 0) { %>,
   exclude: [<%= wiredepExclusions.join(', ') %>]
 <% } %>
-}
+};
 
 /**
  *  Common implementation for an error handler of a Gulp plugin
@@ -38,4 +38,4 @@ exports.errorHandler = function(title) {
     gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
     this.emit('end');
   };
-}
+};
