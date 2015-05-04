@@ -7,39 +7,67 @@
 
   /** @ngInject */
   function acmeMalarkey(malarkey) {
-    return {
+    var directive = {
       restrict: 'E',
       scope: {
         extraValues: '=',
       },
       template: '<div></div>',
       link: linkFunc,
-      controller: 'MalarkeyController',
+      controller: MalarkeyController,
       controllerAs: 'vm'
     };
-  }
 
-  function linkFunc(scope, el, attr, vm) {
-    var watcher;
-    var typist = malarkey(el[0], {
-      typeSpeed: 40,
-      deleteSpeed: 40,
-      pauseDelay: 800,
-      loop: true,
-      postfix: ' '
-    });
+    return directive;
 
-    angular.forEach(scope.extraValues, function(value) {
-      typist.type(value).pause().delete();
-    });
-
-    watcher = scope.$watch('vm.contributors', function(current, original) {
-      angular.forEach(vm.contributors, function(contributor) {
-        typist.type(contributor.login).pause().delete();
+    function linkFunc(scope, el, attr, vm) {
+      var watcher;
+      var typist = malarkey(el[0], {
+        typeSpeed: 40,
+        deleteSpeed: 40,
+        pauseDelay: 800,
+        loop: true,
+        postfix: ' '
       });
-    });
 
-    scope.$on('$destroy', watcher);
+      angular.forEach(scope.extraValues, function(value) {
+        typist.type(value).pause().delete();
+      });
+
+      watcher = scope.$watch('vm.contributors', function(current, original) {
+        angular.forEach(vm.contributors, function(contributor) {
+          typist.type(contributor.login).pause().delete();
+        });
+      });
+
+      scope.$on('$destroy', function () {
+        watcher();
+      });
+    }
+
+    /** @ngInject */
+    function MalarkeyController($log, githubApi) {
+      var vm = this;
+
+      vm.contributors = [];
+
+      activate();
+
+      function activate() {
+        return getContributors().then(function() {
+          $log.info('Activated Contributors View');
+        });
+      }
+
+      function getContributors() {
+        return githubApi.getContributors(10).then(function(data) {
+          vm.contributors = data;
+
+          return vm.contributors;
+        });
+      }
+    }
+
   }
 
 })();

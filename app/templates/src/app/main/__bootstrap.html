@@ -10,7 +10,8 @@
     </p>
     <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
   </div>
-<% if (props.jsPreprocessor.key === 'none') { %>
+<% if (props.jsPreprocessor.srcExtension === 'js'|| props.jsPreprocessor.srcExtension === 'ts') { %>
+
   <div class="row">
     <acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']" />
   </div>
