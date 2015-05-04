@@ -11,10 +11,18 @@ module.exports = function(GulpAngularGenerator) {
 
     if (this.props.router.module === 'ngRoute') {
       this.routerHtml = '<div ng-view></div>';
-      this.routerJs = this.fs.read(this.templatePath('src/app/_ngroute/__ngroute.' + this.props.jsPreprocessor.srcExtension));
+      this.files.push({
+        src: 'src/app/_ngroute/__ngroute.' + this.props.jsPreprocessor.srcExtension,
+        dest: 'src/app/index.route.' + this.props.jsPreprocessor.srcExtension,
+        template: true
+      });
     } else if (this.props.router.module === 'ui.router') {
       this.routerHtml = '<div ui-view></div>';
-      this.routerJs = this.fs.read(this.templatePath('src/app/_uirouter/__uirouter.' + this.props.jsPreprocessor.srcExtension));
+      this.files.push({
+        src: 'src/app/_uirouter/__uirouter.' + this.props.jsPreprocessor.srcExtension,
+        dest: 'src/app/index.route.' + this.props.jsPreprocessor.srcExtension,
+        template: true
+      });
     } else {
       this.routerHtml = this.fs.read(this.templatePath(routerPartialSrc));
       this.routerHtml = this.routerHtml.replace(
@@ -23,7 +31,6 @@ module.exports = function(GulpAngularGenerator) {
       );
 
       this.routerHtml = this.routerHtml.replace(/\n/g, '\n    ');
-      this.routerJs = '';
     }
   };
 
