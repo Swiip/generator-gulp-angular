@@ -49,16 +49,4 @@ describe('gulp-angular index js template', function () {
     result.should.match(testTs);
   });
 
-  it('should add router js code', function() {
-    model.routerJs = 'test value';
-    var result = indexJs(model);
-    result.should.match(/\]\)test value/);
-    result = indexEs6(model);
-    result.should.match(/\ntest value;/);
-    result = indexCoffee(model);
-    result.should.match(/\]test value/);
-    result = indexTs(model);
-    result.should.match(/\ntest value;/);
-  });
-
 });
