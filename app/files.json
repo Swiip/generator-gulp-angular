@@ -40,7 +40,9 @@
     "gulp/server.js",
 
     "src/app/index.module.js",
-    "src/app/constants.js",
+    "src/app/index.config.js",
+    "src/app/index.constants.js",
+    "src/app/index.run.js",
     "src/index.html",
     "src/app/main/main.controller.js",
     "src/app/main/main.controller.spec.js",
