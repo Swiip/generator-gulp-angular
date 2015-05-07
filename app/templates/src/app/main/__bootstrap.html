@@ -1,7 +1,7 @@
 <div class="container">
 
   <div>
-    <acme-navbar />
+    <acme-navbar creationDate="main.creationDate" />
   </div>
 
   <div class="jumbotron text-center">
@@ -10,7 +10,7 @@
       <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
       Always a pleasure scaffolding your apps.
     </p>
-    <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
+    <p><a class="btn btn-lg btn-success" ng-click="main.showToastr()">Splendid toastr</a></p>
   </div>
 <% if (props.jsPreprocessor.srcExtension === 'js'|| props.jsPreprocessor.srcExtension === 'ts') { %>
 

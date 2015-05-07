@@ -48,6 +48,8 @@
     "traceur-runtime": "~0.0.84",
 <% } %>
     "malarkey": "yuanqing/malarkey#~1.1.5",
+    "toastr": "~2.1.1",
+    "moment": "~2.10.2",
     "angular": "<%= props.angularVersion %>"
   },
   "devDependencies": {
