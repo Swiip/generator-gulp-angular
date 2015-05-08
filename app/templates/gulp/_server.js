@@ -6,7 +6,7 @@ var browserSyncSpa = require('browser-sync-spa');
 
 var util = require('util');
 
-var middleware = require('./proxy');
+var middleware = require('./proxy')();
 
 module.exports = function(options) {
 <% if(qrCode) { %>
