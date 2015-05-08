@@ -50,6 +50,12 @@ module.exports = function(GulpAngularGenerator) {
       template: false
     });
 
+    this.files.push({
+      src: 'src/app/components/malarkey/__' + this.props.ui.key + '-malarkey.' + this.props.cssPreprocessor.extension,
+      dest: 'src/app/components/malarkey/malarkey.' + this.props.cssPreprocessor.extension,
+      template: false
+    });
+
     if(this.props.cssPreprocessor.key !== 'none') {
       this.files.push({
         src: 'src/app/_' + this.props.ui.key + '/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension,

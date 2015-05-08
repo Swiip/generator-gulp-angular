@@ -50,6 +50,7 @@
     "malarkey": "yuanqing/malarkey#~1.1.5",
     "toastr": "~2.1.1",
     "moment": "~2.10.2",
+    "animate.css": "~3.2.6",
     "angular": "<%= props.angularVersion %>"
   },
   "devDependencies": {

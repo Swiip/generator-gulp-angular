@@ -30,6 +30,8 @@
         postfix: ' '
       });
 
+      el.addClass('acmeNavbar');
+
       angular.forEach(scope.extraValues, function(value) {
         typist.type(value).pause().delete();
       });
