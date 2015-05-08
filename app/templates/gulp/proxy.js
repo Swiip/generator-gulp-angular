@@ -55,13 +55,9 @@ function proxyMiddleware(req, res, next) {
   }
 }
 
-/*
- * This is where you activate or not your proxy.
- *
- * The first line activate if and the second one ignored it
- */
 
-//module.exports = [proxyMiddleware];
+//module.exports = ;
 module.exports = function() {
-  return [];
+ // return [proxyMiddleware]; //enable this line to run proxy
+  return []; // enable this line to not run proxy
 };
