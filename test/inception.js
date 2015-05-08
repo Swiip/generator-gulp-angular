@@ -48,6 +48,7 @@ function prepare(optionCase, promptCase) {
 function run(generator, task) {
   var deferred = q.defer();
 
+  generator.conflicter.force = true;
   generator.run(function () {
     var gulpProcess = spawn('node', ['node_modules/gulp/bin/gulp.js', task], {stdio: 'inherit'});
     gulpProcess.on('exit', function(returnCode) {
