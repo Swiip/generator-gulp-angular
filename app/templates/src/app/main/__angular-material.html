@@ -13,7 +13,7 @@
       </p>
       <p class="animated infinite" ng-class="main.classAnimation"><a class="btn" ng-click="main.showToastr()">Splendid toastr</a></p>
     </section>
-<% if (props.jsPreprocessor.srcExtension === 'js'|| props.jsPreprocessor.srcExtension === 'ts') { %>
+<% if (props.jsPreprocessor.srcExtension === 'js'|| props.jsPreprocessor.srcExtension === 'ts' || props.jsPreprocessor.srcExtension === 'coffee') { %>
 
     <div class="row">
       <acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']" />
