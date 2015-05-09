@@ -1,8 +1,17 @@
 angular.module "<%= appName %>"
-  .controller "MainController", (webDevTec) ->
+  .controller "MainController", ($timeout, webDevTec, toastr) ->
     vm = this
     activate = ->
       getWebDevTec()
+      $timeout (->
+        vm.classAnimation = 'rubberBand'
+        return
+      ), 4000
+      return
+
+    showToastr = ->
+      toastr.info 'Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>'
+      vm.classAnimation = ''
       return
 
     getWebDevTec = ->
@@ -13,5 +22,8 @@ angular.module "<%= appName %>"
       return
 
     vm.awesomeThings = []
+    vm.classAnimation = ''
+    vm.creationDate = <%= new Date().getTime() %>
+    vm.showToastr = showToastr
     activate()
     return

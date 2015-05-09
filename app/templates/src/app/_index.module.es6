@@ -7,5 +7,4 @@ angular.module('<%= appName %>', [<%= modulesDependencies %>])
   .constant('malarkey', malarkey)
   .controller('MainController', MainController)
   .controller('NavbarController', NavbarController)
-  .service('webDevTec', WebDevTecService)
-<%= routerJs %>;
+  .service('webDevTec', WebDevTecService);

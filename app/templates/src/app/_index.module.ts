@@ -17,6 +17,5 @@ module <%= appName %> {
     .service('githubApi', GithubApi)
     .directive('acmeMalarkey', acmeMalarkey)
     .controller('MainController', MainController)
-    .controller('NavbarController', NavbarController)
-<%= routerJs %>;
+    .controller('NavbarController', NavbarController);
 }
