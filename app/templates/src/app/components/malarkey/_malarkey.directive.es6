@@ -46,7 +46,7 @@ class MalarkeyDirective {
 }
 
 class MalarkeyController {
-  constructor ($log, githubApi) {
+  constructor ($log, githubContributor) {
     'ngInject';
 
     let vm = this;
@@ -62,7 +62,7 @@ class MalarkeyController {
     }
 
     function getContributors() {
-      return githubApi.getContributors(10).then(function(data) {
+      return githubContributor.getContributors(10).then(function(data) {
         vm.contributors = data;
 
         return vm.contributors;

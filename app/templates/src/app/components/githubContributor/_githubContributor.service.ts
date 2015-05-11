@@ -1,7 +1,7 @@
 module <%= appName %> {
   'use strict';
 
-  export class GithubApi {
+  export class GithubContributor {
     public apiHost: string = 'https://api.github.com/repos/Swiip/generator-gulp-angular';
 
     private $log: ng.ILogService;

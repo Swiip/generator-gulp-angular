@@ -1,4 +1,4 @@
-class GithubApiService {
+class GithubContributorService {
   constructor ($log, $http) {
     'ngInject';
     let apiHost = 'https://api.github.com/repos/Swiip/generator-gulp-angular';
@@ -30,4 +30,4 @@ class GithubApiService {
   }
 }
 
-export default GithubApiService;
+export default GithubContributorService;

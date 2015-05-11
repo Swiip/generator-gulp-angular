@@ -4,7 +4,7 @@
 /// <reference path="../app/components/navbar/navbar.controller.ts" />
 /// <reference path="../app/components/malarkey/malarkey.directive.ts" />
 /// <reference path="../app/components/webDevTec/webDevTec.service.ts" />
-/// <reference path="../app/components/githubApi/githubApi.service.ts" />
+/// <reference path="../app/components/githubContributor/githubContributor.service.ts" />
 
 declare var malarkey: any;
 
@@ -14,7 +14,7 @@ module <%= appName %> {
   angular.module('<%= appName %>', [<%= modulesDependencies %>])
     .constant('malarkey', malarkey)
     .service('webDevTec', WebDevTecService)
-    .service('githubApi', GithubApi)
+    .service('githubContributor', GithubContributor)
     .directive('acmeMalarkey', acmeMalarkey)
     .controller('MainController', MainController)
     .controller('NavbarController', NavbarController);

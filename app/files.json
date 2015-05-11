@@ -49,6 +49,6 @@
     "src/app/components/navbar/navbar.directive.js",
     "src/app/components/malarkey/malarkey.directive.js",
     "src/app/components/webDevTec/webDevTec.service.js",
-    "src/app/components/githubAPI/githubAPI.service.js"
+    "src/app/components/githubContributor/githubContributor.service.js"
   ]
 }

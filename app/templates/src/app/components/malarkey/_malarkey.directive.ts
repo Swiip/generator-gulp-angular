@@ -56,13 +56,13 @@ module <%= appName %> {
     public contributors: any[];
 
     private $log: ng.ILogService;
-    private githubApi: GithubApi;
+    private githubContributor: GithubContributor;
 
-    constructor($log: ng.ILogService, githubApi: GithubApi) {
+    constructor($log: ng.ILogService, githubContributor: GithubContributor) {
       this.contributors = [];
 
       this.$log = $log;
-      this.githubApi = githubApi;
+      this.githubContributor = githubContributor;
 
       this.activate();
     }
@@ -75,7 +75,7 @@ module <%= appName %> {
     }
 
     getContributors() {
-      return this.githubApi.getContributors(10)
+      return this.githubContributor.getContributors(10)
         .then((data: any) => {
           this.contributors = data;
           return this.contributors;

@@ -1,7 +1,7 @@
 angular.module "<%= appName %>"
   .directive 'acmeMalarkey', ->
 
-    MalarkeyController = ($log, githubApi) ->
+    MalarkeyController = ($log, githubContributor) ->
       vm = this
 
       activate = ->
@@ -10,7 +10,7 @@ angular.module "<%= appName %>"
           return
 
       getContributors = ->
-        githubApi.getContributors(10).then (data) ->
+        githubContributor.getContributors(10).then (data) ->
           vm.contributors = data
           vm.contributors
 
