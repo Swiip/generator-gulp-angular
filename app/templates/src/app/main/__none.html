@@ -12,12 +12,9 @@
     </p>
     <p class="animated infinite" ng-class="main.classAnimation"><a class="btn btn-lg btn-success" ng-click="main.showToastr()">Splendid toastr</a></p>
   </div>
-<% if (props.jsPreprocessor.srcExtension === 'js'|| props.jsPreprocessor.srcExtension === 'ts' || props.jsPreprocessor.srcExtension === 'coffee') { %>
 
   <div class="row">
     <acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']" />
-   </div>
-<% } %>
   </div>
 
   <div class="col" ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
