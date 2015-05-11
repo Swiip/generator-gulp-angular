@@ -1,10 +1,10 @@
 /* global malarkey:false */
 import MainController from './main/main.controller';
-import NavbarController from '../app/components/navbar/navbar.controller';
+import NavbarDirective from '../app/components/navbar/navbar.directive';
 import WebDevTecService from '../app/components/webDevTec/webDevTec.service';
 
 angular.module('<%= appName %>', [<%= modulesDependencies %>])
   .constant('malarkey', malarkey)
   .controller('MainController', MainController)
-  .controller('NavbarController', NavbarController)
+  .directive('acmeNavbar', NavbarDirective)
   .service('webDevTec', WebDevTecService);
