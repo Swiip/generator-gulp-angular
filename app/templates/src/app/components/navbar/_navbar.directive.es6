@@ -15,7 +15,6 @@ class NavbarDirective {
 
     return directive;
 
-
   }
 }
 
