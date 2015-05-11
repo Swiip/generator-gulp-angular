@@ -67,13 +67,6 @@ module.exports = function(GulpAngularGenerator) {
       if(this.props.htmlPreprocessor.key === 'none') {
         rejectWithRegexp.call(this, /markups\.js/);
       }
-
-      // TODO: Should be removed when these files are supported with jsPreproc
-      if(this.props.jsPreprocessor.key !== 'none') {
-        rejectWithRegexp.call(this, /malarkey\.directive\.js/);
-        rejectWithRegexp.call(this, /githubAPI\.service\.js/);
-        rejectWithRegexp.call(this, /constants\.js/);
-      }
   };
 
   /**
