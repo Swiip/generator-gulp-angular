@@ -11,12 +11,12 @@
         <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
         Always a pleasure scaffolding your apps.
       </p>
-      <p class="animated infinite" ng-class="main.classAnimation"><a class="btn" ng-click="main.showToastr()">Splendid toastr</a></p>
+      <md-button class="md-raised animated infinite" ng-class="main.classAnimation" ng-click="main.showToastr()">Splendid Toastr</md-button>
+      <p>
+        With ♥ thanks to the contributions of
+        <acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']" />
+      </p>
     </section>
-
-    <div class="row">
-      <acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']" />
-    </div>
 
     <div class="techs" layout-align="center">
       <md-card ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
@@ -30,11 +30,6 @@
         </div>
       </md-card>
     </div>
-    <footer>
-      <md-toolbar layout="row" layout-align="center center">
-        <p>With ♥ from <a href="https://twitter.com/Swiip">@Swiip</a></p>
-      </md-toolbar>
-    </footer>
   </md-content>
 
 </div>

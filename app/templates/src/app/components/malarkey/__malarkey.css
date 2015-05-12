@@ -1,9 +1,9 @@
-.acmeNavbar {
+.acme-malarkey {
   text-transform: capitalize;
   color: #cb3837;
 }
 
-.acmeNavbar:after {
+.acme-malarkey:after {
   animation: cursor-blink 0.4s linear infinite;
   content: "|";
   color: #cb3837;

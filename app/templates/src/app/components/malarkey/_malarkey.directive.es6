@@ -7,7 +7,7 @@ class MalarkeyDirective {
       scope: {
           extraValues: '='
       },
-      template: '<div></div>',
+      template: '<span></span>',
       link: linkFunc,
       controller: MalarkeyController,
       controllerAs: 'vm'
@@ -25,7 +25,7 @@ class MalarkeyDirective {
         postfix: ' '
       });
 
-      el.addClass('acmeNavbar');
+      el.addClass('acme-malarkey');
 
       angular.forEach(scope.extraValues, function(value) {
         typist.type(value).pause().delete();

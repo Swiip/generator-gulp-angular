@@ -26,7 +26,7 @@ angular.module "<%= appName %>"
         pauseDelay: 800
         loop: true
         postfix: ' ')
-      el.addClass 'acmeNavbar'
+      el.addClass 'acme-malarkey'
       angular.forEach scope.extraValues, (value) ->
         typist.type(value).pause().delete()
         return
@@ -44,7 +44,7 @@ angular.module "<%= appName %>"
     directive =
       restrict: 'E'
       scope: extraValues: '='
-      template: '<div></div>'
+      template: '<span></span>'
       link: linkFunc
       controller: MalarkeyController
       controllerAs: 'vm'

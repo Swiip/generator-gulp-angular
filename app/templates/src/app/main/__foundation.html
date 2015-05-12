@@ -10,13 +10,15 @@
         <h1>'Allo, 'Allo!</h1>
         <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
         <p>Always a pleasure scaffolding your apps.</p>
-        <p class="animated infinite" ng-class="main.classAnimation"><a class="button radius" ng-click="main.showToastr()">Splendid toastr</a></p>
+        <p class="animated infinite" ng-class="main.classAnimation">
+          <a href="#" class="button success" ng-click="main.showToastr()">Splendid Toastr</a>
+        </p>
+        <p>
+          With ♥ thanks to the contributions of
+          <acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']" />
+        </p>
       </div>
     </div>
-  </div>
-
-  <div class="row">
-    <acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']" />
   </div>
 
   <div class="row">
@@ -32,10 +34,4 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="large-12 columns">
-      <hr>
-      <p>With ♥ from <a href="https://twitter.com/Swiip">@Swiip</a></p>
-    </div>
-  </div>
 </div>
