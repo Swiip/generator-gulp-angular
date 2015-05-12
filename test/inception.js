@@ -38,8 +38,8 @@ function prepare(optionCase, promptCase) {
     );
     helpers.mockPrompt(gulpAngular, prompts);
 
-    /*gulpAngular.on('run', outputInTest.mute);
-    gulpAngular.on('end', outputInTest.unmute);*/
+    gulpAngular.on('run', outputInTest.mute);
+    gulpAngular.on('end', outputInTest.unmute);
 
     return gulpAngular;
   });

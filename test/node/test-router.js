@@ -28,20 +28,23 @@ describe('gulp-angular generator techs script', function () {
     generator.props = {
       router: { module: 'ngRoute' },
       ui: { key: 'testUi' },
-      jsPreprocessor: { srcExtension: 'testExtension' }
+      jsPreprocessor: {
+        srcExtension: 'testSrcExtension',
+        extension: 'testExtension'
+      }
     };
 
     generator.files = [];
     generator.computeRouter();
     generator.routerHtml.should.match(/ng-view/);
-    generator.files[0].src.should.equal('src/app/_ngroute/__ngroute.testExtension');
+    generator.files[0].src.should.equal('src/app/_ngroute/__ngroute.testSrcExtension');
     generator.files[0].dest.should.equal('src/app/index.route.testExtension');
 
     generator.files = [];
     generator.props.router.module = 'ui.router';
     generator.computeRouter();
     generator.routerHtml.should.match(/ui-view/);
-    generator.files[0].src.should.equal('src/app/_uirouter/__uirouter.testExtension');
+    generator.files[0].src.should.equal('src/app/_uirouter/__uirouter.testSrcExtension');
     generator.files[0].dest.should.equal('src/app/index.route.testExtension');
 
     generator.files = [];
