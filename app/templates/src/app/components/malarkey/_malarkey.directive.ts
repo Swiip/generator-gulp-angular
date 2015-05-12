@@ -31,6 +31,8 @@ module <%= appName %> {
       postfix: ' '
     });
 
+    el.addClass('acmeNavbar');
+
     angular.forEach(scope.extraValues, function(value: string) {
       typist.type(value).pause().delete();
     });
