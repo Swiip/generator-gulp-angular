@@ -14,7 +14,7 @@ describe('The main view', function () {
     expect(page.imgEl.getAttribute('alt')).toBe('I\'m Yeoman');
   });
 
-  it('list more than 5 awesome things', function () {
+  it('should list more than 5 awesome things', function () {
     expect(page.thumbnailEls.count()).toBeGreaterThan(5);
   });
 
