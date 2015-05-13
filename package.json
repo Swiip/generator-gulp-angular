@@ -19,7 +19,8 @@
     "pretest": "./scripts/prepare-test.sh",
     "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/node test/template && ./node_modules/.bin/mocha test/inception/test-inception.js -ig protractor --no-insight",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "update-shrinkwrap": "./scripts/update-test-shrinkwrap.sh"
+    "update-shrinkwrap": "./scripts/update-test-shrinkwrap.sh",
+    "deploy": "./scripts/deploy-boilerplate.sh"
   },
   "dependencies": {
     "chalk": "~1.1.1",
