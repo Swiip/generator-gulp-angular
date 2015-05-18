@@ -2,13 +2,11 @@ class WebDevTecService {
   constructor () {
     'ngInject';
 
-    let data = <%= technologies %>;
+    this.data = <%= technologies %>;
+  }
 
-    this.getTec = getTec;
-
-    function getTec() {
-      return data;
-    }
+  getTec() {
+    return this.data;
   }
 }
 

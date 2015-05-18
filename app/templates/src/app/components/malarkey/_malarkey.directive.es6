@@ -27,17 +27,17 @@ class MalarkeyDirective {
 
       el.addClass('acme-malarkey');
 
-      angular.forEach(scope.extraValues, function(value) {
+      angular.forEach(scope.extraValues, (value) => {
         typist.type(value).pause().delete();
       });
 
-      watcher = scope.$watch('vm.contributors', function() {
-        angular.forEach(vm.contributors, function(contributor) {
+      watcher = scope.$watch('vm.contributors', () => {
+        angular.forEach(vm.contributors, (contributor) => {
           typist.type(contributor.login).pause().delete();
         });
       });
 
-      scope.$on('$destroy', function () {
+      scope.$on('$destroy', () => {
         watcher();
       });
     }
@@ -56,13 +56,13 @@ class MalarkeyController {
     activate();
 
     function activate() {
-      return getContributors().then(function() {
+      return getContributors().then(() => {
         $log.info('Activated Contributors View');
       });
     }
 
     function getContributors() {
-      return githubContributor.getContributors(10).then(function(data) {
+      return githubContributor.getContributors(10).then((data) => {
         vm.contributors = data;
 
         return vm.contributors;

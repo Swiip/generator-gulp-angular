@@ -13,7 +13,7 @@ class MainController {
 
     function activate() {
       getWebDevTec();
-      $timeout(function() {
+      $timeout(() => {
         vm.classAnimation = 'rubberBand';
       }, 4000);
     }
@@ -26,7 +26,7 @@ class MainController {
     function getWebDevTec() {
       vm.awesomeThings = webDevTec.getTec();
 
-      angular.forEach(vm.awesomeThings, function(awesomeThing) {
+      angular.forEach(vm.awesomeThings, (awesomeThing) => {
         awesomeThing.rank = Math.random();
       });
     }
