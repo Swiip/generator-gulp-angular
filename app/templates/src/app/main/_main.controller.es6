@@ -8,7 +8,6 @@ class MainController {
     this.toastr = toastr;
 
     this.activate($timeout, webDevTec);
-
   }
 
   activate($timeout, webDevTec) {

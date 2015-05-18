@@ -7,7 +7,7 @@ class MalarkeyDirective {
       scope: {
           extraValues: '='
       },
-      template: '<span></span>',
+      template: '&nbsp;',
       link: linkFunc,
       controller: MalarkeyController,
       controllerAs: 'vm'
@@ -49,25 +49,24 @@ class MalarkeyController {
   constructor ($log, githubContributor) {
     'ngInject';
 
-    let vm = this;
+    this.$log = $log;
+    this.contributors = [];
 
-    vm.contributors = [];
+    this.activate(githubContributor);
+  }
 
-    activate();
+  activate(githubContributor) {
+    return this.getContributors(githubContributor).then(() => {
+      this.$log.info('Activated Contributors View');
+    });
+  }
 
-    function activate() {
-      return getContributors().then(() => {
-        $log.info('Activated Contributors View');
-      });
-    }
+  getContributors(githubContributor) {
+    return githubContributor.getContributors(10).then((data) => {
+      this.contributors = data;
 
-    function getContributors() {
-      return githubContributor.getContributors(10).then((data) => {
-        vm.contributors = data;
-
-        return vm.contributors;
-      });
-    }
+      return this.contributors;
+    });
   }
 }
 

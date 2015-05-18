@@ -14,7 +14,6 @@ class NavbarDirective {
     };
 
     return directive;
-
   }
 }
 
@@ -22,10 +21,8 @@ class NavbarController {
   constructor (moment) {
     'ngInject';
 
-    let vm = this;
-
-    // "vm.creation" is avaible by directive option "bindToController: true"
-    vm.relativeDate = moment(vm.creationDate).fromNow();
+    // "this.creation" is avaible by directive option "bindToController: true"
+    this.relativeDate = moment(this.creationDate).fromNow();
   }
 }
 

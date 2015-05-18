@@ -1,31 +1,26 @@
 class GithubContributorService {
   constructor ($log, $http) {
     'ngInject';
-    let apiHost = 'https://api.github.com/repos/Swiip/generator-gulp-angular';
 
-    let service = {
-      apiHost: apiHost,
-      getContributors: getContributors
-    };
+    this.$http = $http;
+    this.apiHost = 'https://api.github.com/repos/Swiip/generator-gulp-angular';
+  }
 
-    return service;
+  getContributors(limit) {
+    if (!limit) {
+      limit = 30;
+    }
 
-    function getContributors(limit) {
-      if (!limit) {
-        limit = 30;
-      }
+    return this.$http.get(this.apiHost + '/contributors?per_page=' + limit)
+      .then(getContributorsComplete)
+      .catch(getContributorsFailed);
 
-      return $http.get(apiHost + '/contributors?per_page=' + limit)
-        .then(getContributorsComplete)
-        .catch(getContributorsFailed);
+    function getContributorsComplete(response) {
+      return response.data;
+    }
 
-      function getContributorsComplete(response) {
-        return response.data;
-      }
-
-      function getContributorsFailed(error) {
-        $log.error('XHR Failed for getContributors.\n' + angular.toJson(error.data, true));
-      }
+    function getContributorsFailed(error) {
+      this.$log.error('XHR Failed for getContributors.\n' + angular.toJson(error.data, true));
     }
   }
 }
