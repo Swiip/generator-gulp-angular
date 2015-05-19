@@ -31,7 +31,7 @@
     "lodash": "~3.7.0",
     "slash": "~1.0.0",
     "underscore.string": "~3.0.3",
-    "yeoman-generator": "~0.19.2",
+    "yeoman-generator": "~0.20.1",
     "yosay": "~1.0.3"
   },
   "devDependencies": {

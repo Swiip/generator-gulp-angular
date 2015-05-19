@@ -4,19 +4,6 @@ var utils = require('./utils');
 
 var _ = require('lodash');
 
-/**
- * Process content with data with _.template
- * Add a home made preprocessing which removes lines where there is only a
- * template instruction
- */
-function processor(model) {
-  var data = _.extend({}, model, {_: _});
-  return function process(content) {
-    var src = content.toString().replace(/\n<%([^-=])/g, '<%$1');
-    return _.template(src)(data);
-  };
-}
-
 module.exports = function(GulpAngularGenerator) {
 
   /**
@@ -31,13 +18,18 @@ module.exports = function(GulpAngularGenerator) {
    * Pass through each files and actually copy them
    */
   GulpAngularGenerator.prototype.writeFiles = function writeFiles() {
-    var process = processor(this);
+    this.props.angularModulesObject = {};
+    this.props.angularModules.map(function (module) {
+      this[module.key] = module.module;
+    }, this.props.angularModulesObject);
+
+    var self = this;
 
     this.files.forEach(function(file) {
       var dest = utils.replacePrefix(file.dest, this.props.paths);
       try {
         if(file.template) {
-          this.fs.copy(this.templatePath(file.src), this.destinationPath(dest), { process: process });
+          this.fs.copyTpl(this.templatePath(file.src), this.destinationPath(dest), self);
         } else {
           this.fs.copy(this.templatePath(file.src), this.destinationPath(dest));
         }

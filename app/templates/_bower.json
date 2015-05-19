@@ -4,13 +4,13 @@
   "dependencies": {
 <% if (includeModernizr) { %>
     "modernizr": "~2.8.3",
-<% } if (_.findWhere(props.angularModules, { key: 'animate'})) { %>
+<% } if (props.angularModulesObject.animate) { %>
     "angular-animate": "<%= props.angularVersion %>",
-<% } if (_.findWhere(props.angularModules, { key: 'cookies'})) { %>
+<% } if (props.angularModulesObject.cookies) { %>
     "angular-cookies": "<%= props.angularVersion %>",
-<% } if (_.findWhere(props.angularModules, { key: 'touch'})) { %>
+<% } if (props.angularModulesObject.touch) { %>
     "angular-touch": "<%= props.angularVersion %>",
-<% } if (_.findWhere(props.angularModules, { key: 'sanitize'})) { %>
+<% } if (props.angularModulesObject.sanitize) { %>
     "angular-sanitize": "<%= props.angularVersion %>",
 <% } if (props.jQuery.key === 'jquery1') { %>
     "jquery": "~1.11.1",
