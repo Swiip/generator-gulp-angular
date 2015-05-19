@@ -46,7 +46,11 @@
     "angular-foundation": "~0.5.1",
 <% } if(props.jsPreprocessor.key === 'traceur') { %>
     "traceur-runtime": "~0.0.84",
-<% } %>
+<% } %>
+    "malarkey": "yuanqing/malarkey#~1.1.5",
+    "toastr": "~2.1.1",
+    "moment": "~2.10.2",
+    "animate.css": "~3.2.6",
     "angular": "<%= props.angularVersion %>"
   },
   "devDependencies": {

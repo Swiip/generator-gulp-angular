@@ -1,4 +1,4 @@
-
+angular.module "<%= appName %>"
   .config ($routeProvider) ->
     $routeProvider
       .when "/",

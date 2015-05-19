@@ -1,37 +1,37 @@
 module <%= appName %> {
   'use strict';
 
-  class Thing {
-    public rank: number;
-    public title: string;
-    public url: string;
-    public description: string;
-    public logo: string;
-
-    constructor(title: string, url: string, description: string, logo: string) {
-      this.title = title;
-      this.url = url;
-      this.description = description;
-      this.logo = logo;
-      this.rank = Math.random();
-    }
-  }
-
   export class MainController {
-    public awesomeThings: Thing[];
+    public awesomeThings: ITecThing[];
+    public webDevTec: WebDevTecService;
+    public classAnimation: string;
 
     /* @ngInject */
-    constructor () {
-      var vm = this;
+    constructor ($timeout: ng.ITimeoutService, webDevTec: WebDevTecService, toastr: Toastr) {
+      this.awesomeThings = new Array();
+      this.webDevTec = webDevTec;
+      this.classAnimation = '';
 
-      var awesomeThings = <%= technologies %>;
+      this.activate($timeout);
+    }
 
-      vm.awesomeThings = new Array<Thing>();
+    activate($timeout: ng.ITimeoutService) {
+      this.getWebDevTec();
 
-      awesomeThings.forEach(function(awesomeThing: Thing) {
-        vm.awesomeThings.push(awesomeThing);
-      });
+      var self = this;
+
+      $timeout(function() {
+        self.classAnimation = 'rubberBand';
+      }, 4000);
+    }
+
+    showToastr() {
+      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
+      this.classAnimation = '';
+    }
+
+    getWebDevTec() {
+      this.awesomeThings = this.webDevTec.tec;
     }
   }
-
 }

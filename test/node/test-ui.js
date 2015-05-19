@@ -85,10 +85,12 @@ describe('gulp-angular generator ui script', function () {
       generator.uiFiles();
       generator.files[0].src.should.be.equal('src/app/components/navbar/__none-navbar.html');
       generator.files[1].src.should.be.equal('src/app/_none/__none-index.css');
-      generator.files.length.should.be.equal(2);
+      generator.files[2].src.should.be.equal('src/app/components/malarkey/__malarkey.css');
+      generator.files[3].src.should.be.equal('src/app/components/navbar/__navbar.css');
+      generator.files.length.should.be.equal(4);
     });
 
-    it('should add 4 files when all options', function() {
+    it('should add 6 files when all options', function() {
       generator.props = {
         router: { module: 'ngRoute' },
         ui: { key: 'bootstrap' },
@@ -99,8 +101,10 @@ describe('gulp-angular generator ui script', function () {
       generator.files[0].src.should.be.equal('src/app/components/navbar/__bootstrap-navbar.html');
       generator.files[1].src.should.be.equal('src/app/main/__bootstrap.html');
       generator.files[2].src.should.be.equal('src/app/_bootstrap/__bootstrap-index.scss');
-      generator.files[3].src.should.be.equal('src/app/_bootstrap/__bootstrap-vendor.scss');
-      generator.files.length.should.be.equal(4);
+      generator.files[3].src.should.be.equal('src/app/components/malarkey/__malarkey.scss');
+      generator.files[4].src.should.be.equal('src/app/components/navbar/__navbar.scss');
+      generator.files[5].src.should.be.equal('src/app/_bootstrap/__bootstrap-vendor.scss');
+      generator.files.length.should.be.equal(6);
     });
   });
 
