@@ -12,16 +12,12 @@ class GithubContributorService {
     }
 
     return this.$http.get(this.apiHost + '/contributors?per_page=' + limit)
-      .then(getContributorsComplete)
-      .catch(getContributorsFailed);
-
-    function getContributorsComplete(response) {
-      return response.data;
-    }
-
-    function getContributorsFailed(error) {
-      this.$log.error('XHR Failed for getContributors.\n' + angular.toJson(error.data, true));
-    }
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        this.$log.error('XHR Failed for getContributors.\n' + angular.toJson(error.data, true));
+      });
   }
 }
 
