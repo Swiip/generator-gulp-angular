@@ -8,9 +8,9 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({<%= props.paths.tmp %>/serve,<%= props.paths.src %>}) styles/vendor.css -->
-<% if (props.cssPreprocessor.key !== 'none') { %>
+<% if (props.cssPreprocessor.key !== 'none') { -%>
     <link rel="stylesheet" href="app/vendor.css">
-<% } %>
+<% } -%>
     <!-- bower:css -->
     <!-- run `gulp inject` to automatically populate bower styles dependencies -->
     <!-- endbower -->
@@ -21,19 +21,19 @@
     <!-- css files will be automatically insert here -->
     <!-- endinject -->
     <!-- endbuild -->
-<% if (includeModernizr) { %>
+<% if (includeModernizr) { -%>
 
     <!-- build:js(<%= props.paths.src %>) scripts/modernizr.js -->
     <script src="<%= computedPaths.appToBower %>/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
-<% } %>
+<% } -%>
   </head>
   <body>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <%= routerHtml %>
+    <%- routerHtml %>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -51,11 +51,11 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-<% if (props.jsPreprocessor.srcExtension === 'es6') { %>
+<% if (props.jsPreprocessor.srcExtension === 'es6') { -%>
     <!-- build:js({<%= props.paths.tmp %>/serve,<%= props.paths.tmp %>/partials}) scripts/app.js -->
-<% } else { %>
+<% } else { -%>
     <!-- build:js({<%= props.paths.tmp %>/serve,<%= props.paths.tmp %>/partials,<%= props.paths.src %>}) scripts/app.js -->
-<% } %>
+<% } -%>
     <!-- inject:js -->
     <!-- js files will be automatically insert here -->
     <!-- endinject -->

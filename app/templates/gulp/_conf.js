@@ -24,10 +24,10 @@ exports.paths = {
  *  to inject css preprocessor deps and js files in karma
  */
 exports.wiredep = {
+<% if(wiredepExclusions.length > 0) { -%>
+  exclude: [<%= wiredepExclusions.join(', ') %>],
+<% } -%>
   directory: 'bower_components'
-<% if(wiredepExclusions.length > 0) { %>,
-  exclude: [<%= wiredepExclusions.join(', ') %>]
-<% } %>
 };
 
 /**

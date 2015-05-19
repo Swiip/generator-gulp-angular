@@ -8,11 +8,11 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
-<% if (props.htmlPreprocessor.key === 'none') { %>
+<% if (props.htmlPreprocessor.key === 'none') { -%>
 gulp.task('partials', function () {
-<% } else { %>
+<% } else { -%>
 gulp.task('partials', ['markups'], function () {
-<% } %>
+<% } -%>
   return gulp.src([
     path.join(conf.paths.src, '/app/**/*.html'),
     path.join(conf.paths.tmp, '/serve/app/**/*.html')
@@ -51,13 +51,13 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
-<% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'scss') { %>
+<% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'scss') { -%>
     .pipe($.replace('../<%= computedPaths.appToBower %>/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/', '../fonts/'))
-<% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'less') { %>
+<% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'less') { -%>
     .pipe($.replace('../<%= computedPaths.appToBower %>/bower_components/bootstrap/fonts/', '../fonts/'))
-<% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'styl') { %>
+<% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'styl') { -%>
     .pipe($.replace('../<%= computedPaths.appToBower %>/bower_components/bootstrap-stylus/fonts/', '../fonts/'))
-<% } %>
+<% } -%>
     .pipe($.csso())
     .pipe(cssFilter.restore())
     .pipe(assets.restore())
@@ -74,7 +74,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
     .pipe($.size({ title: path.join(conf.paths.dist, '/'), showFiles: true }));
 });
-<% if (imageMin) { %>
+<% if (imageMin) { -%>
 gulp.task('images', function () {
   return gulp.src(path.join(conf.paths.src, '/assets/images/**/*'))
     .pipe($.imagemin({
@@ -84,16 +84,16 @@ gulp.task('images', function () {
     }))
     .pipe(gulp.dest(path.join(conf.paths.dist, '/assets/images/')));
 });
-<% } %>
+<% } -%>
 
 // Only applies for fonts from bower dependencies
 // Custom fonts are handled by the "other" task
 gulp.task('fonts', function () {
-<% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'styl') { %>
+<% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'styl') { -%>
   return gulp.src($.mainBowerFiles().concat('bower_components/bootstrap-stylus/fonts/*'))
-<% } else { %>
+<% } else { -%>
   return gulp.src($.mainBowerFiles())
-<% } %>
+<% } -%>
     .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
     .pipe($.flatten())
     .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/')));
@@ -107,16 +107,16 @@ gulp.task('other', function () {
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
 });
 
-<% if (props.jsPreprocessor.key === 'typescript') { %>
+<% if (props.jsPreprocessor.key === 'typescript') { -%>
 gulp.task('clean', ['tsd:purge'], function (done) {
-<% } else { %>
+<% } else { -%>
 gulp.task('clean', function (done) {
-<% } %>
+<% } -%>
   $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')], done);
 });
 
-<% if (imageMin) { %>
+<% if (imageMin) { -%>
 gulp.task('build', ['html', 'images', 'fonts', 'other']);
-<% } else { %>
+<% } else { -%>
 gulp.task('build', ['html', 'fonts', 'other']);
-<% } %>
+<% } -%>

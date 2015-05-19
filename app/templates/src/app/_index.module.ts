@@ -18,7 +18,7 @@ declare var moment: moment.MomentStatic;
 module <%= appName %> {
   'use strict';
 
-  angular.module('<%= appName %>', [<%= modulesDependencies %>])
+  angular.module('<%= appName %>', [<%- modulesDependencies %>])
     .constant('malarkey', malarkey)
     .constant('toastr', toastr)
     .constant('moment', moment)

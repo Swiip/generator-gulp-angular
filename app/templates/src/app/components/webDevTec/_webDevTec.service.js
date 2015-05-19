@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function webDevTec() {
-    var data = <%= technologies %>;
+    var data = <%- technologies %>;
 
     this.getTec = getTec;
 

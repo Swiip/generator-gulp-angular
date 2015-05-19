@@ -18,7 +18,7 @@ module <%= appName %> {
 
     /** @ngInject */
     constructor () {
-      var rawData = <%= technologies %>;
+      var rawData = <%- technologies %>;
 
       this.data = rawData.map((awesomeThing: ITecThing) => {
         awesomeThing.rank = Math.random();

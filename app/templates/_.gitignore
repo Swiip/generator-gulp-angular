@@ -7,4 +7,4 @@ bower_components/
 <% if (props.jsPreprocessor.key === 'typescript') { %>
 typings/
 tsd.json
-<% } %>
+<% } -%>

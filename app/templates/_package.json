@@ -14,9 +14,9 @@
     "gulp-csso": "~1.0.0",
     "gulp-filter": "~2.0.2",
     "gulp-flatten": "~0.0.4",
-<% if (imageMin) { %>
+<% if (imageMin) { -%>
     "gulp-imagemin": "~2.2.0",
-<% } %>
+<% } -%>
     "gulp-jshint": "~1.9.0",
     "gulp-load-plugins": "~0.8.0",
     "gulp-size": "~1.2.0",
@@ -32,53 +32,53 @@
     "gulp-inject": "~1.1.1",
     "gulp-protractor": "~0.0.12",
     "gulp-sourcemaps": "~1.3.0",
-<% if (props.cssPreprocessor.key === 'node-sass') { %>
+<% if (props.cssPreprocessor.key === 'node-sass') { -%>
     "gulp-sass": "~1.3.0",
-<% } if (props.cssPreprocessor.key === 'ruby-sass') { %>
+<% } if (props.cssPreprocessor.key === 'ruby-sass') { -%>
     "gulp-ruby-sass": "~0.7.1",
-<% } if (props.cssPreprocessor.key === 'less') { %>
+<% } if (props.cssPreprocessor.key === 'less') { -%>
     "gulp-less": "~3.0.0",
-<% } if (props.cssPreprocessor.key === 'stylus') { %>
+<% } if (props.cssPreprocessor.key === 'stylus') { -%>
     "gulp-stylus": "~2.0.0",
-<% } if (props.jsPreprocessor.key === 'coffee') { %>
+<% } if (props.jsPreprocessor.key === 'coffee') { -%>
     "gulp-coffee": "~2.3.1",
     "gulp-coffeelint": "~0.4.0",
-<% } if (props.jsPreprocessor.srcExtension === 'es6') { %>
+<% } if (props.jsPreprocessor.srcExtension === 'es6') { -%>
     "gulp-webpack": "~1.2.0",
     "jshint-loader": "~0.8.3",
-<% } if (props.jsPreprocessor.key === 'babel') { %>
+<% } if (props.jsPreprocessor.key === 'babel') { -%>
     "babel-loader": "~4.0.0",
-<% } if (props.jsPreprocessor.key === 'traceur') { %>
+<% } if (props.jsPreprocessor.key === 'traceur') { -%>
     "traceur-loader": "~0.6.3",
-<% } if (props.jsPreprocessor.key === 'typescript') { %>
+<% } if (props.jsPreprocessor.key === 'typescript') { -%>
     "gulp-typescript": "~2.6.0",
     "gulp-tslint": "~1.4.1",
     "gulp-concat": "~2.5.2",
     "tsd": "~0.6.0-beta.5",
-<% } else if (props.jsPreprocessor.srcExtension !== 'es6') { %>
+<% } else if (props.jsPreprocessor.srcExtension !== 'es6') { -%>
     "gulp-angular-filesort": "~1.0.4",
-<% } if (props.htmlPreprocessor.key !== 'none') { %>
+<% } if (props.htmlPreprocessor.key !== 'none') { -%>
     "gulp-consolidate": "~0.1.2",
-<% } if (props.htmlPreprocessor.key === 'jade') { %>
+<% } if (props.htmlPreprocessor.key === 'jade') { -%>
     "jade": "~1.8.1",
-<% } if (props.htmlPreprocessor.key === 'haml') { %>
+<% } if (props.htmlPreprocessor.key === 'haml') { -%>
     "haml": "~0.4.3",
-<% } if (props.htmlPreprocessor.key === 'handlebars') { %>
+<% } if (props.htmlPreprocessor.key === 'handlebars') { -%>
     "handlebars": "~2.0.0",
-<% } %>
+<% } -%>
     "main-bower-files": "~2.5.0",
     "merge-stream": "~0.1.7",
     "jshint-stylish": "~1.0.0",
     "wiredep": "~2.2.0",
     "karma": "~0.12.31",
     "karma-jasmine": "~0.3.1",
-<% if(props.jsPreprocessor.key === 'traceur') { %>
+<% if(props.jsPreprocessor.key === 'traceur') { -%>
     "karma-chrome-launcher": "~0.1.7",
-<% } else { %>
+<% } else { -%>
     "karma-phantomjs-launcher": "~0.1.4",
-<% } if (props.jsPreprocessor.srcExtension === 'js' || props.jsPreprocessor.srcExtension === 'coffee') { %>
+<% } if (props.jsPreprocessor.srcExtension === 'js' || props.jsPreprocessor.srcExtension === 'coffee') { -%>
     "karma-angular-filesort": "~0.1.0",
-<% } %>
+<% } -%>
     "karma-ng-html2js-preprocessor": "~0.1.2",
     "concat-stream": "~1.4.7",
     "require-dir": "~0.1.0",
@@ -86,9 +86,9 @@
     "browser-sync-spa": "~1.0.2",
     "http-proxy": "~1.8.0",
     "chalk": "~0.5.1",
-<% if (qrCode) { %>
+<% if (qrCode) { -%>
     "qrcode-terminal": "~0.9.5",
-<% } %>
+<% } -%>
     "uglify-save-license": "~0.4.1",
     "wrench": "~1.5.8"
   },
