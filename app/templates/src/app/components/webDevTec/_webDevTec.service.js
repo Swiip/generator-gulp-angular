@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-      .module('<%= appName %>')
+      .module('<%- appName %>')
       .service('webDevTec', webDevTec);
 
   /** @ngInject */

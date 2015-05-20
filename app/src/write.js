@@ -18,18 +18,11 @@ module.exports = function(GulpAngularGenerator) {
    * Pass through each files and actually copy them
    */
   GulpAngularGenerator.prototype.writeFiles = function writeFiles() {
-    this.props.angularModulesObject = {};
-    this.props.angularModules.map(function (module) {
-      this[module.key] = module.module;
-    }, this.props.angularModulesObject);
-
-    var self = this;
-
     this.files.forEach(function(file) {
       var dest = utils.replacePrefix(file.dest, this.props.paths);
       try {
         if(file.template) {
-          this.fs.copyTpl(this.templatePath(file.src), this.destinationPath(dest), self);
+          this.fs.copyTpl(this.templatePath(file.src), this.destinationPath(dest), this);
         } else {
           this.fs.copy(this.templatePath(file.src), this.destinationPath(dest));
         }

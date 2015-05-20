@@ -53,7 +53,7 @@ module.exports = function(config) {
 
     ngHtml2JsPreprocessor: {
       stripPrefix: 'src/',
-      moduleName: '<%= appName %>'
+      moduleName: '<%- appName %>'
     },
 
 <% if(props.jsPreprocessor.key === 'traceur') { -%>

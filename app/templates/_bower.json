@@ -1,17 +1,17 @@
 {
-  "name": "<%= appName %>",
+  "name": "<%- appName %>",
   "version": "0.0.0",
   "dependencies": {
 <% if (includeModernizr) { -%>
     "modernizr": "~2.8.3",
-<% } if (props.angularModulesObject.animate) { -%>
-    "angular-animate": "<%= props.angularVersion %>",
-<% } if (props.angularModulesObject.cookies) { -%>
-    "angular-cookies": "<%= props.angularVersion %>",
-<% } if (props.angularModulesObject.touch) { -%>
-    "angular-touch": "<%= props.angularVersion %>",
-<% } if (props.angularModulesObject.sanitize) { -%>
-    "angular-sanitize": "<%= props.angularVersion %>",
+<% } if (angularModulesObject.animate) { -%>
+    "angular-animate": "<%- props.angularVersion %>",
+<% } if (angularModulesObject.cookies) { -%>
+    "angular-cookies": "<%- props.angularVersion %>",
+<% } if (angularModulesObject.touch) { -%>
+    "angular-touch": "<%- props.angularVersion %>",
+<% } if (angularModulesObject.sanitize) { -%>
+    "angular-sanitize": "<%- props.angularVersion %>",
 <% } if (props.jQuery.key === 'jquery1') { -%>
     "jquery": "~1.11.1",
 <% } if (props.jQuery.key === 'jquery2') { -%>
@@ -19,11 +19,11 @@
 <% } if (props.jQuery.key === 'zepto') { -%>
     "zeptojs": "~1.1.4",
 <% } if (props.resource.key === 'angular-resource') { -%>
-    "angular-resource": "<%= props.angularVersion %>",
+    "angular-resource": "<%- props.angularVersion %>",
 <% } if (props.resource.key === 'restangular') { -%>
     "restangular": "~1.4.0",
 <% } if (props.router.key === 'angular-route') { -%>
-    "angular-route": "<%= props.angularVersion %>",
+    "angular-route": "<%- props.angularVersion %>",
 <% } if (props.router.key === 'ui-router') { -%>
     "angular-ui-router": "~0.2.13",
 <% } if(props.ui.key === 'bootstrap') { -%>
@@ -51,10 +51,10 @@
     "toastr": "~2.1.1",
     "moment": "~2.10.2",
     "animate.css": "~3.2.6",
-    "angular": "<%= props.angularVersion %>"
+    "angular": "<%- props.angularVersion %>"
   },
   "devDependencies": {
-    "angular-mocks": "<%= props.angularVersion %>"
+    "angular-mocks": "<%- props.angularVersion %>"
   },
   "resolutions": {
 <% if (props.jQuery.key === 'jquery1') { -%>
@@ -62,6 +62,6 @@
 <% } if (props.jQuery.key === 'jquery2') { -%>
     "jquery": "~2.1.1",
 <% } -%>
-    "angular": "<%= props.angularVersion %>"
+    "angular": "<%- props.angularVersion %>"
   }
 }

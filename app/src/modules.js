@@ -28,4 +28,15 @@ module.exports = function(GulpAngularGenerator) {
       .join(', ');
   };
 
+  /**
+   * Simplify the model to simplify access to angular modules from the templates
+   */
+  GulpAngularGenerator.prototype.prepareAngularModules = function prepareAngularModules() {
+    this.angularModulesObject = {};
+
+    this.angularModules.forEach(function (module) {
+      this[module.key] = module.module;
+    }, this.angularModulesObject);
+  };
+
 };

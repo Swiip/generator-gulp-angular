@@ -7,8 +7,6 @@ var sinonChai = require('sinon-chai');
 chai.should();
 chai.use(sinonChai);
 
-var _ = require('lodash');
-
 var Generator = require('./mock-generator');
 var generator;
 
@@ -45,7 +43,6 @@ describe('gulp-angular generator writes script', function () {
 
   describe('actually write files from this.files', function () {
     it('should call fs.copy for each files and process the one with templates flag', function() {
-      var processor;
       generator.files = [ {
         src: 'test/path/file-1.js',
         dest: 'test/dest/path/file-1.js',
@@ -55,46 +52,26 @@ describe('gulp-angular generator writes script', function () {
         dest: 'test/dest/path/file-2.js',
         template: true
       } ];
-      generator.fs.copy = function(src, dest, options) {
-        if(!_.isUndefined(options) && _.isFunction(options.process)) {
-          processor = options.process;
-        }
-      };
       sinon.spy(generator.fs, 'copy');
+      sinon.spy(generator.fs, 'copyTpl');
       replacePrefix.returnsArg(0);
       generator.writeFiles();
-      generator.fs.copy.should.have.callCount(2);
+      generator.fs.copy.should.have.calledOnce;
       generator.fs.copy.should.have.been.calledWith(
         'template/test/path/file-1.js',
         'destination/test/dest/path/file-1.js'
       );
-      generator.fs.copy.should.have.been.calledWith(
+      generator.fs.copyTpl.should.have.calledOnce;
+      generator.fs.copyTpl.should.have.been.calledWith(
         'template/test/path/file-2.js',
         'destination/test/dest/path/file-2.js',
-        { process: processor }
+        generator
       );
-    });
-
-    it('should process with lodash template extended', function() {
-      var processor;
-      generator.files = [ { src: '', dest: '', template: true } ];
-      generator.testModel = { test1: 'test1', test2: 'test2', test3: true };
-      generator.fs.copy = function(src, dest, options) {
-        if(!_.isUndefined(options) && _.isFunction(options.process)) {
-          processor = options.process;
-        }
-      };
-      generator.writeFiles();
-      var testTemplate = 'test <%= testModel.test1 %>\n' +
-        '<%= testModel.test2 %>\n' +
-        '<% if(testModel.test3) { %>test<% } %>';
-      var testTemplateProcessed = processor(testTemplate);
-      testTemplateProcessed.should.be.equal('test test1\ntest2test');
     });
 
     it('should log error if the copy fail', function() {
       generator.files = [ { src: 'test/src', dest: '', template: true } ];
-      generator.fs.copy = function() {
+      generator.fs.copyTpl = function() {
         throw new Error('test error');
       };
       generator.writeFiles.bind(generator).should.throw(/test error/);

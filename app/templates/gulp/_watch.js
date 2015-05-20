@@ -19,7 +19,7 @@ gulp.task('watch', [<%- watchTaskDeps.join(', ') %>], function () {
 <% } else { -%>
   gulp.watch([
     path.join(conf.paths.src, '/app/**/*.css'),
-    path.join(conf.paths.src, '/app/**/*.<%= props.cssPreprocessor.extension %>')
+    path.join(conf.paths.src, '/app/**/*.<%- props.cssPreprocessor.extension %>')
   ], function(event) {
 <% } -%>
     if(isOnlyChange(event)) {
@@ -39,7 +39,7 @@ gulp.task('watch', [<%- watchTaskDeps.join(', ') %>], function () {
 <%   } else { -%>
   gulp.watch([
     path.join(conf.paths.src, '/app/**/*.js'),
-    path.join(conf.paths.src, '/app/**/*.<%= props.jsPreprocessor.extension %>')
+    path.join(conf.paths.src, '/app/**/*.<%- props.jsPreprocessor.extension %>')
   ], function(event) {
 <%   } -%>
     if(isOnlyChange(event)) {
@@ -51,7 +51,7 @@ gulp.task('watch', [<%- watchTaskDeps.join(', ') %>], function () {
 <% } -%>
 
 <% if (props.htmlPreprocessor.key !== 'none') { -%>
-  gulp.watch(path.join(conf.paths.src, '/app/**/*.<%= props.htmlPreprocessor.extension %>'), ['markups']);
+  gulp.watch(path.join(conf.paths.src, '/app/**/*.<%- props.htmlPreprocessor.extension %>'), ['markups']);
 
 <% } -%>
   gulp.watch(path.join(conf.paths.src, '/app/**/*.html'), function(event) {

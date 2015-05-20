@@ -13,7 +13,7 @@ gulp.task('markups', function() {
     path.extname = '.html';
   }
 
-  return gulp.src(path.join(conf.paths.src, '/app/**/*.<%= props.htmlPreprocessor.extension %>'))
+  return gulp.src(path.join(conf.paths.src, '/app/**/*.<%- props.htmlPreprocessor.extension %>'))
 <% if (props.htmlPreprocessor.key === 'jade') { -%>
     .pipe($.consolidate('jade', { basedir: conf.paths.src, doctype: 'html', pretty: '  ' })).on('error', conf.errorHandler('Jade'))
 <% } else if (props.htmlPreprocessor.key === 'haml') { -%>

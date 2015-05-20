@@ -23,7 +23,7 @@ gulp.task('partials', ['markups'], function () {
       quotes: true
     }))
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
-      module: '<%= appName %>',
+      module: '<%- appName %>',
       root: 'app'
     }))
     .pipe(gulp.dest(conf.paths.tmp + '/partials/'));
@@ -52,11 +52,11 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
 <% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'scss') { -%>
-    .pipe($.replace('../<%= computedPaths.appToBower %>/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/', '../fonts/'))
+    .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/', '../fonts/'))
 <% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'less') { -%>
-    .pipe($.replace('../<%= computedPaths.appToBower %>/bower_components/bootstrap/fonts/', '../fonts/'))
+    .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/bootstrap/fonts/', '../fonts/'))
 <% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'styl') { -%>
-    .pipe($.replace('../<%= computedPaths.appToBower %>/bower_components/bootstrap-stylus/fonts/', '../fonts/'))
+    .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/bootstrap-stylus/fonts/', '../fonts/'))
 <% } -%>
     .pipe($.csso())
     .pipe(cssFilter.restore())
@@ -102,7 +102,7 @@ gulp.task('fonts', function () {
 gulp.task('other', function () {
   return gulp.src([
     path.join(conf.paths.src, '/**/*'),
-    path.join('!' + conf.paths.src, '/**/*.{<%= processedFileExtension %>}')
+    path.join('!' + conf.paths.src, '/**/*.{<%- processedFileExtension %>}')
   ])
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
 });

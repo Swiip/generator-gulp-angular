@@ -26,9 +26,9 @@ gulp.task('styles', function () {
 <% } -%>
 
   var injectFiles = gulp.src([
-    path.join(conf.paths.src, '/app/**/*.<%= props.cssPreprocessor.extension %>'),
-    path.join('!' + conf.paths.src, '/app/index.<%= props.cssPreprocessor.extension %>'),
-    path.join('!' + conf.paths.src, '/app/vendor.<%= props.cssPreprocessor.extension %>')
+    path.join(conf.paths.src, '/app/**/*.<%- props.cssPreprocessor.extension %>'),
+    path.join('!' + conf.paths.src, '/app/index.<%- props.cssPreprocessor.extension %>'),
+    path.join('!' + conf.paths.src, '/app/vendor.<%- props.cssPreprocessor.extension %>')
   ], { read: false });
 
   var injectOptions = {
@@ -41,15 +41,15 @@ gulp.task('styles', function () {
     addRootSlash: false
   };
 
-  var indexFilter = $.filter('index.<%= props.cssPreprocessor.extension %>');
-  var vendorFilter = $.filter('vendor.<%= props.cssPreprocessor.extension %>');
+  var indexFilter = $.filter('index.<%- props.cssPreprocessor.extension %>');
+  var vendorFilter = $.filter('vendor.<%- props.cssPreprocessor.extension %>');
 <% if (props.cssPreprocessor.key === 'ruby-sass') { -%>
   var cssFilter = $.filter('**/*.css');
 <% } -%>
 
   return gulp.src([
-    path.join(conf.paths.src, '/app/index.<%= props.cssPreprocessor.extension %>'),
-    path.join(conf.paths.src, '/app/vendor.<%= props.cssPreprocessor.extension %>')
+    path.join(conf.paths.src, '/app/index.<%- props.cssPreprocessor.extension %>'),
+    path.join(conf.paths.src, '/app/vendor.<%- props.cssPreprocessor.extension %>')
   ])
     .pipe(indexFilter)
     .pipe($.inject(injectFiles, injectOptions))

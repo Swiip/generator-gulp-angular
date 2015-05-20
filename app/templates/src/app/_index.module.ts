@@ -1,4 +1,4 @@
-/// <reference path="../../<%= props.paths.tmp %>/typings/tsd.d.ts" />
+/// <reference path="../../<%- props.paths.tmp %>/typings/tsd.d.ts" />
 
 <% if (props.router.key !== 'none') { %>
 /// <reference path="index.route.ts" />
@@ -15,10 +15,10 @@ declare var malarkey: any;
 declare var toastr: Toastr;
 declare var moment: moment.MomentStatic;
 
-module <%= appName %> {
+module <%- appName %> {
   'use strict';
 
-  angular.module('<%= appName %>', [<%- modulesDependencies %>])
+  angular.module('<%- appName %>', [<%- modulesDependencies %>])
     .constant('malarkey', malarkey)
     .constant('toastr', toastr)
     .constant('moment', moment)

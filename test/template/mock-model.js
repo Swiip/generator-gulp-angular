@@ -20,6 +20,7 @@ module.exports = function() {
       pathToBower: null
     },
     modulesDependencies: null,
+    angularModulesObject: {},
     routerHtml: null,
     routerJs: null,
     isVendorStylesPreprocessed: false,

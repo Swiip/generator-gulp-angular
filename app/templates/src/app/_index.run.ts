@@ -1,4 +1,4 @@
-module <%= appName %> {
+module <%- appName %> {
   'use strict';
 
   export class RunBlock {

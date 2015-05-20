@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('<%= appName %>')
+    .module('<%- appName %>')
     .run(runBlock);
 
   /** @ngInject */

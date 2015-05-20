@@ -1,4 +1,4 @@
-angular.module "<%= appName %>"
+angular.module "<%- appName %>"
   .config ($logProvider, toastr) ->
     # Enable log
     $logProvider.debugEnabled true

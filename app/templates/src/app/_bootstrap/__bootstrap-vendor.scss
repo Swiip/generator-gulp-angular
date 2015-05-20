@@ -3,7 +3,7 @@
  *  The list of variables are listed here bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss
  */
 $navbar-inverse-link-color: #5AADBB;
-$icon-font-path: "../<%= computedPaths.appToBower %>/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+$icon-font-path: "../<%- computedPaths.appToBower %>/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 
 /**
  *  Do not remove this comments bellow. It's the markers used by wiredep to inject

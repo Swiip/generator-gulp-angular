@@ -20,7 +20,8 @@ module.exports = function() {
   this.fs = {
     exists: function() {},
     read: function() {},
-    copy: function() {}
+    copy: function() {},
+    copyTpl: function() {}
   };
   this.prompt = function() {};
   this.props = {};

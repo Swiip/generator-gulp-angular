@@ -19,7 +19,7 @@ var $ = require('gulp-load-plugins')();
 <%   } else { -%>
 gulp.task('scripts', function () {
 <%   } -%>
-  return gulp.src(path.join(conf.paths.src, '/app/**/*.<%= props.jsPreprocessor.extension %>'))
+  return gulp.src(path.join(conf.paths.src, '/app/**/*.<%- props.jsPreprocessor.extension %>'))
 <%   if (props.jsPreprocessor.extension === 'js') { -%>
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))

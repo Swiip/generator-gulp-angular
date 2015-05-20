@@ -10,7 +10,7 @@ import WebDevTecService from '../app/components/webDevTec/webDevTec.service';
 import NavbarDirective from '../app/components/navbar/navbar.directive';
 import MalarkeyDirective from '../app/components/malarkey/malarkey.directive';
 
-angular.module('<%= appName %>', [<%- modulesDependencies %>])
+angular.module('<%- appName %>', [<%- modulesDependencies %>])
   .constant('malarkey', malarkey)
   .constant('toastr', toastr)
   .constant('moment', moment)

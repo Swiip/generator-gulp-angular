@@ -1,4 +1,4 @@
-angular.module "<%= appName %>"
+angular.module "<%- appName %>"
   .directive 'acmeMalarkey', ->
 
     MalarkeyController = ($log, githubContributor) ->

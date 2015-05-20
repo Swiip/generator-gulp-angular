@@ -1,4 +1,4 @@
-angular.module "<%= appName %>"
+angular.module "<%- appName %>"
   .service "webDevTec", () ->
     data = <%- technologies %>
 
