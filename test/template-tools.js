@@ -1,12 +1,12 @@
 'use strict';
 /* jshint camelcase:false */
 
-var fs = require('fs');
+var fs = require('mz/fs');
+var Promise = require('bluebird');
 var path = require('path');
-var mkdirp = require('mkdirp');
+var mkdirp = Promise.promisify(require('mkdirp'));
 var beautify = require('js-beautify').js_beautify;
-var q = require('q');
-var readdir = require('recursive-readdir');
+var readdir = Promise.promisify(require('recursive-readdir'));
 var ejs = require('ejs');
 
 var templatesDir = path.join(__dirname, '../app/templates/');
@@ -41,14 +41,14 @@ function compile(fileName) {
   var destinationFilePath = compiledTemplatesDir + fileName + compiledTemplatesSuffix;
   var destinationDir = path.dirname(destinationFilePath);
 
-  return q.all([
-    q.nfcall(mkdirp, destinationDir),
-    q.nfcall(fs.readFile, sourceFilePath)
+  return Promise.all([
+    mkdirp(destinationDir),
+    fs.readFile(sourceFilePath)
   ]).then(function(results) {
     var content = results[1].toString();
     var sourceContent = sourceHeader + beautify(compileEjs(content), { indent_size: 2 }) + sourceFooter;
     sourceContent = sourceContent.replace('with(locals || {})', 'with(locals)');
-    return q.nfcall(fs.writeFile, destinationFilePath, sourceContent);
+    return fs.writeFile(destinationFilePath, sourceContent);
   });
 }
 
@@ -66,9 +66,9 @@ function load(fileName) {
 }
 
 function prepare() {
-  return q.nfcall(readdir, templatesDir)
+  return readdir(templatesDir)
     .then(function(files) {
-      return q.all(files.filter(function(file) {
+      return Promise.all(files.filter(function(file) {
         var basename = path.basename(file);
         return /^_[^_]/.test(basename);
       }).map(function(file) {
@@ -102,16 +102,16 @@ function deps() {
     return ejs.render(string, data);
   }
 
-  return q.all([
-    q.nfcall(mkdirp, depsDir),
-    q.nfcall(fs.readFile, packagePath),
-    q.nfcall(fs.readFile, bowerPath)
+  return Promise.all([
+    mkdirp(depsDir),
+    fs.readFile(packagePath),
+    fs.readFile(bowerPath)
   ]).then(function(results) {
     var packageFileContent = processTemplate(results[1]);
     var bowerFileContent = processTemplate(results[2]);
-    return q.all([
-      q.nfcall(fs.writeFile, packageDestinationPath, packageFileContent),
-      q.nfcall(fs.writeFile, bowerDestinationPath, bowerFileContent)
+    return Promise.all([
+      fs.writeFile(packageDestinationPath, packageFileContent),
+      fs.writeFile(bowerDestinationPath, bowerFileContent)
     ]);
   })
   .catch(function(error) {

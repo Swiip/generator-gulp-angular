@@ -6,7 +6,7 @@ var sinonChai = require('sinon-chai');
 chai.should();
 chai.use(sinonChai);
 
-var q = require('q');
+var Promise = require('bluebird');
 
 var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
@@ -15,7 +15,7 @@ describe('gulp-angular index js template', function () {
   var model, indexJs, indexEs6, indexCoffee, indexTs;
 
   before(function() {
-    return q.all([
+    return Promise.all([
       templateTools.load('src/app/_index.module.js'),
       templateTools.load('src/app/_index.module.es6'),
       templateTools.load('src/app/_index.module.coffee'),
