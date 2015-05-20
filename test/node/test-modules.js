@@ -47,4 +47,16 @@ describe('gulp-angular generator modules script', function () {
     generator.modulesDependencies.should.match(/testModule4/);
   });
 
+  it('should prepare an angular modules object', function() {
+    generator.props = {
+      angularModules: [
+        { key: 'test1', module: 'testAngularModule1' },
+        { key: 'test2', module: 'testAngularModule2' }
+      ]
+    };
+    generator.prepareAngularModules();
+    generator.angularModulesObject.test1.should.be.equal('testAngularModule1');
+    generator.angularModulesObject.test2.should.be.equal('testAngularModule2');
+  });
+
 });

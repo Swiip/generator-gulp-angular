@@ -4,7 +4,6 @@
 var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
-var _ = require('lodash');
 var beautify = require('js-beautify').js_beautify;
 var q = require('q');
 var readdir = require('recursive-readdir');
@@ -48,6 +47,7 @@ function compile(fileName) {
   ]).then(function(results) {
     var content = results[1].toString();
     var sourceContent = sourceHeader + beautify(compileEjs(content), { indent_size: 2 }) + sourceFooter;
+    sourceContent = sourceContent.replace('with(locals || {})', 'with(locals)');
     return q.nfcall(fs.writeFile, destinationFilePath, sourceContent);
   });
 }
@@ -98,8 +98,8 @@ function deps() {
       props: { angularVersion: angularVersion }
     };
 
-    var string = buffer.toString().replace(/<%[^=].*?%>/g, '');
-    return _.template(string)(data);
+    var string = buffer.toString().replace(/<%[^-].*?%>/g, '');
+    return ejs.render(string, data);
   }
 
   return q.all([

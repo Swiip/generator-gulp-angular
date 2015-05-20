@@ -64,7 +64,7 @@ module.exports = function(GulpAngularGenerator) {
         rejectWithRegexp.call(this, /tsd\.json/);
       }
 
-      if(this.props.jsPreprocessor.srcExtension === 'es6' || this.props.jsPreprocessor.srcExtension === 'ts') {
+      if(this.props.jsPreprocessor.srcExtension === 'es6' || this.props.jsPreprocessor.key === 'typescript') {
         rejectWithRegexp.call(this, /index\.constants\.js/);
       }
 

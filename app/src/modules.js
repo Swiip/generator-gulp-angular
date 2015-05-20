@@ -34,7 +34,7 @@ module.exports = function(GulpAngularGenerator) {
   GulpAngularGenerator.prototype.prepareAngularModules = function prepareAngularModules() {
     this.angularModulesObject = {};
 
-    this.angularModules.forEach(function (module) {
+    this.props.angularModules.forEach(function (module) {
       this[module.key] = module.module;
     }, this.angularModulesObject);
   };
