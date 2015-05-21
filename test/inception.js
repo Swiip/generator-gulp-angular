@@ -14,9 +14,9 @@ var mockOptions = require('../app/src/mock-options.js');
 var mockPrompts = require('../app/src/mock-prompts.js');
 
 var skipOptions = {
-  'skip-install': true,
-  'skip-welcome-message': true,
-  'skip-message': true
+  skipInstall: true,
+  skipWelcomeMessage: true,
+  skipMessage: true
 };
 
 var tempDir = path.join(__dirname, 'tmp/work');
