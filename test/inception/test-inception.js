@@ -127,6 +127,7 @@ describe('gulp-angular generator inception tests', function () {
   describe('with [no jquery, $http, Bootstrap, AngularStrap, ruby-sass, Traceur]', function () {
     before(function() {
       return inception.prepare({}, {
+        jQuery: prompts.jQuery.values['none'],
         ui: prompts.ui.values.bootstrap,
         bootstrapComponents: prompts.bootstrapComponents.values['angular-strap'],
         cssPreprocessor: prompts.cssPreprocessor.values['ruby-sass'],

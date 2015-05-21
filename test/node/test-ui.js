@@ -117,8 +117,9 @@ describe('gulp-angular generator ui script', function () {
         cssPreprocessor: { extension: 'scss' }
       };
       generator.computeWiredepExclusions();
-      generator.wiredepExclusions[0].should.be.equal('/bootstrap-sass-official\\/.*\\.js/');
-      generator.wiredepExclusions[1].should.be.equal('/bootstrap\\.css/');
+      generator.wiredepExclusions[0].should.be.equal('/bootstrap\.js$/');
+      generator.wiredepExclusions[1].should.be.equal('/bootstrap-sass-official\\/.*\\.js/');
+      generator.wiredepExclusions[2].should.be.equal('/bootstrap\\.css/');
     });
 
     it('should exclude only bootstrap.js if angular-boostrap and less', function() {
@@ -129,7 +130,8 @@ describe('gulp-angular generator ui script', function () {
         cssPreprocessor: { extension: 'less' }
       };
       generator.computeWiredepExclusions();
-      generator.wiredepExclusions[0].should.be.equal('/bootstrap\\.js/');
+      generator.wiredepExclusions[0].should.be.equal('/bootstrap\.js$/');
+      generator.wiredepExclusions[1].should.be.equal('/bootstrap\\.css/');
     });
 
     it('should exclude foundation if foundation and sass', function() {

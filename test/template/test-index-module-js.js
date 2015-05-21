@@ -49,7 +49,7 @@ describe('gulp-angular index js template', function () {
     result.should.match(testTs);
   });
 
-  it('should should add the router config when necessary', function() {
+  it('should add the router config when necessary', function() {
     model.props.router.key = 'not-none';
     var result = indexEs6(model);
     result.should.match(/.config\(routerConfig\)/);
