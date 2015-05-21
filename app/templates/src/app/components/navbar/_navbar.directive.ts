@@ -1,4 +1,4 @@
-module <%= appName %> {
+module <%- appName %> {
   'use strict';
 
   /** @ngInject */
@@ -22,7 +22,7 @@ module <%= appName %> {
     public relativeDate: string;
 
     constructor(moment: moment.MomentStatic) {
-      this.relativeDate = moment(<%= new Date().getTime() %>).fromNow();
+      this.relativeDate = moment(<%- new Date().getTime() %>).fromNow();
     }
   }
 }

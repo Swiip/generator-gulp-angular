@@ -1,4 +1,4 @@
-angular.module "<%= appName %>"
+angular.module "<%- appName %>"
   .factory 'githubContributor', ($log, $http) ->
     apiHost = 'https://api.github.com/repos/Swiip/generator-gulp-angular'
 

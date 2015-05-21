@@ -1,67 +1,67 @@
 {
-  "name": "<%= appName %>",
+  "name": "<%- appName %>",
   "version": "0.0.0",
   "dependencies": {
-<% if (includeModernizr) { %>
+<% if (includeModernizr) { -%>
     "modernizr": "~2.8.3",
-<% } if (_.findWhere(props.angularModules, { key: 'animate'})) { %>
-    "angular-animate": "<%= props.angularVersion %>",
-<% } if (_.findWhere(props.angularModules, { key: 'cookies'})) { %>
-    "angular-cookies": "<%= props.angularVersion %>",
-<% } if (_.findWhere(props.angularModules, { key: 'touch'})) { %>
-    "angular-touch": "<%= props.angularVersion %>",
-<% } if (_.findWhere(props.angularModules, { key: 'sanitize'})) { %>
-    "angular-sanitize": "<%= props.angularVersion %>",
-<% } if (props.jQuery.key === 'jquery1') { %>
+<% } if (angularModulesObject.animate) { -%>
+    "angular-animate": "<%- props.angularVersion %>",
+<% } if (angularModulesObject.cookies) { -%>
+    "angular-cookies": "<%- props.angularVersion %>",
+<% } if (angularModulesObject.touch) { -%>
+    "angular-touch": "<%- props.angularVersion %>",
+<% } if (angularModulesObject.sanitize) { -%>
+    "angular-sanitize": "<%- props.angularVersion %>",
+<% } if (props.jQuery.key === 'jquery1') { -%>
     "jquery": "~1.11.1",
-<% } if (props.jQuery.key === 'jquery2') { %>
+<% } if (props.jQuery.key === 'jquery2') { -%>
     "jquery": "~2.1.1",
-<% } if (props.jQuery.key === 'zepto') { %>
+<% } if (props.jQuery.key === 'zepto') { -%>
     "zeptojs": "~1.1.4",
-<% } if (props.resource.key === 'angular-resource') { %>
-    "angular-resource": "<%= props.angularVersion %>",
-<% } if (props.resource.key === 'restangular') { %>
+<% } if (props.resource.key === 'angular-resource') { -%>
+    "angular-resource": "<%- props.angularVersion %>",
+<% } if (props.resource.key === 'restangular') { -%>
     "restangular": "~1.4.0",
-<% } if (props.router.key === 'angular-route') { %>
-    "angular-route": "<%= props.angularVersion %>",
-<% } if (props.router.key === 'ui-router') { %>
+<% } if (props.router.key === 'angular-route') { -%>
+    "angular-route": "<%- props.angularVersion %>",
+<% } if (props.router.key === 'ui-router') { -%>
     "angular-ui-router": "~0.2.13",
-<% } if(props.ui.key === 'bootstrap') { %>
-<%   if(props.cssPreprocessor.extension === 'scss') { %>
+<% } if(props.ui.key === 'bootstrap') { -%>
+<%   if(props.cssPreprocessor.extension === 'scss') { -%>
     "bootstrap-sass-official": "~3.3.4",
-<%   } else if(props.cssPreprocessor.extension === 'styl') { %>
+<%   } else if(props.cssPreprocessor.extension === 'styl') { -%>
     "bootstrap-stylus": "~4.0.4",
-<%   } else { %>
+<%   } else { -%>
     "bootstrap": "~3.3.4",
-<%   } %>
-<% } if(props.ui.key === 'foundation') { %>
+<%   } -%>
+<% } if(props.ui.key === 'foundation') { -%>
     "foundation": "~5.5.1",
-<% } if(props.ui.key === 'angular-material') { %>
+<% } if(props.ui.key === 'angular-material') { -%>
     "angular-material": "~0.8.3",
-<% } if(props.bootstrapComponents.key === 'ui-bootstrap') { %>
+<% } if(props.bootstrapComponents.key === 'ui-bootstrap') { -%>
     "angular-bootstrap": "~0.12.0",
-<% } if(props.bootstrapComponents.key === 'angular-strap') { %>
+<% } if(props.bootstrapComponents.key === 'angular-strap') { -%>
     "angular-strap": "~2.1.6",
-<% } if(props.foundationComponents.key === 'angular-foundation') { %>
+<% } if(props.foundationComponents.key === 'angular-foundation') { -%>
     "angular-foundation": "~0.5.1",
-<% } if(props.jsPreprocessor.key === 'traceur') { %>
+<% } if(props.jsPreprocessor.key === 'traceur') { -%>
     "traceur-runtime": "~0.0.84",
-<% } %>
+<% } -%>
     "malarkey": "yuanqing/malarkey#~1.1.5",
     "toastr": "~2.1.1",
     "moment": "~2.10.2",
     "animate.css": "~3.2.6",
-    "angular": "<%= props.angularVersion %>"
+    "angular": "<%- props.angularVersion %>"
   },
   "devDependencies": {
-    "angular-mocks": "<%= props.angularVersion %>"
+    "angular-mocks": "<%- props.angularVersion %>"
   },
   "resolutions": {
-<% if (props.jQuery.key === 'jquery1') { %>
+<% if (props.jQuery.key === 'jquery1') { -%>
     "jquery": "~1.11.1",
-<% } if (props.jQuery.key === 'jquery2') { %>
+<% } if (props.jQuery.key === 'jquery2') { -%>
     "jquery": "~2.1.1",
-<% } %>
-    "angular": "<%= props.angularVersion %>"
+<% } -%>
+    "angular": "<%- props.angularVersion %>"
   }
 }

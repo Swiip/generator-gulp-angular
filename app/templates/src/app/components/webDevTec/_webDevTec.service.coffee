@@ -1,6 +1,6 @@
-angular.module "<%= appName %>"
+angular.module "<%- appName %>"
   .service "webDevTec", () ->
-    data = <%= technologies %>
+    data = <%- technologies %>
 
     getTec = ->
       data

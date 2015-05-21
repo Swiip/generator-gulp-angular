@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('<%= appName %>', [<%= modulesDependencies %>]);
+    .module('<%- appName %>', [<%- modulesDependencies %>]);
 
 })();

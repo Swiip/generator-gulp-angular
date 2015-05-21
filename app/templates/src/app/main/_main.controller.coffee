@@ -1,4 +1,4 @@
-angular.module "<%= appName %>"
+angular.module "<%- appName %>"
   .controller "MainController", ($timeout, webDevTec, toastr) ->
     vm = this
     activate = ->
@@ -23,7 +23,7 @@ angular.module "<%= appName %>"
 
     vm.awesomeThings = []
     vm.classAnimation = ''
-    vm.creationDate = <%= new Date().getTime() %>
+    vm.creationDate = <%- new Date().getTime() %>
     vm.showToastr = showToastr
     activate()
     return

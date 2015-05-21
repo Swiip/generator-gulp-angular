@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-      .module('<%= appName %>')
+      .module('<%- appName %>')
       .service('webDevTec', webDevTec);
 
   /** @ngInject */
   function webDevTec() {
-    var data = <%= technologies %>;
+    var data = <%- technologies %>;
 
     this.getTec = getTec;
 

@@ -14,15 +14,15 @@ function listFiles() {
 
   return wiredep(wiredepOptions).js
     .concat([
-<% if (props.jsPreprocessor.key === 'none') { %>
+<% if (props.jsPreprocessor.key === 'none') { -%>
       path.join(conf.paths.src, '/app/**/*.module.js'),
       path.join(conf.paths.src, '/app/**/*.js'),
-<% } else if (props.jsPreprocessor.key === 'coffee') { %>
+<% } else if (props.jsPreprocessor.key === 'coffee') { -%>
       path.join(conf.paths.tmp, '/serve/app/**/*.module.js'),
       path.join(conf.paths.tmp, '/serve/app/**/*.js'),
-<% } else { %>
+<% } else { -%>
       path.join(conf.paths.tmp, '/serve/app/index.module.js'),
-<% } %>
+<% } -%>
       path.join(conf.paths.src, '/**/*.spec.js'),
       path.join(conf.paths.src, '/**/*.mock.js')
     ]);
@@ -37,38 +37,38 @@ module.exports = function(config) {
 
     autoWatch: false,
 
-<% if (props.jsPreprocessor.key === 'none' || props.jsPreprocessor.key === 'coffee') { %>
+<% if (props.jsPreprocessor.key === 'none' || props.jsPreprocessor.key === 'coffee') { -%>
     frameworks: ['jasmine', 'angular-filesort'],
 
     angularFilesort: {
-<%   if (props.jsPreprocessor.key === 'none') { %>
+<%   if (props.jsPreprocessor.key === 'none') { -%>
       whitelist: [path.join(conf.paths.src, '/**/!(*.html|*.spec|*.mock).js')]
-<%   } else { %>
+<%   } else { -%>
       whitelist: [path.join(conf.paths.tmp, '/**/!(*.html|*.spec|*.mock).js')]
-<%   } %>
+<%   } -%>
     },
-<% } else { %>
+<% } else { -%>
     frameworks: ['jasmine'],
-<% } %>
+<% } -%>
 
     ngHtml2JsPreprocessor: {
       stripPrefix: 'src/',
-      moduleName: '<%= appName %>'
+      moduleName: '<%- appName %>'
     },
 
-<% if(props.jsPreprocessor.key === 'traceur') { %>
+<% if(props.jsPreprocessor.key === 'traceur') { -%>
     browsers : ['Chrome'],
 
     plugins : [
       'karma-chrome-launcher',
-<% } else { %>
+<% } else { -%>
     browsers : ['PhantomJS'],
 
     plugins : [
       'karma-phantomjs-launcher',
-<% } if (props.jsPreprocessor.key === 'none' || props.jsPreprocessor.key === 'coffee') { %>
+<% } if (props.jsPreprocessor.key === 'none' || props.jsPreprocessor.key === 'coffee') { -%>
       'karma-angular-filesort',
-<% } %>
+<% } -%>
       'karma-jasmine',
       'karma-ng-html2js-preprocessor'
     ],

@@ -1,4 +1,4 @@
-module <%= appName %> {
+module <%- appName %> {
   'use strict';
 
   export interface ITecThing {
@@ -18,7 +18,7 @@ module <%= appName %> {
 
     /** @ngInject */
     constructor () {
-      var rawData = <%= technologies %>;
+      var rawData = <%- technologies %>;
 
       this.data = rawData.map((awesomeThing: ITecThing) => {
         awesomeThing.rank = Math.random();

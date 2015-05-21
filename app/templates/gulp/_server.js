@@ -10,10 +10,10 @@ var browserSyncSpa = require('browser-sync-spa');
 var util = require('util');
 
 var middleware = require('./proxy');
-<% if(qrCode) { %>
+<% if(qrCode) { -%>
 
 var qrcode = require('qrcode-terminal');
-<% } %>
+<% } -%>
 
 function browserSyncInit(baseDir, browser) {
   browser = browser === undefined ? 'default' : browser;
@@ -38,13 +38,13 @@ function browserSyncInit(baseDir, browser) {
     startPath: '/',
     server: server,
     browser: browser
-<% if(qrCode) { %>
+<% if(qrCode) { -%>
   }, function(err, bs) {
     qrcode.generate(bs.options.get('urls').get('external'));
   });
-<% } else { %>
+<% } else { -%>
   });
-<% } %>
+<% } -%>
 }
 
 browserSync.use(browserSyncSpa({

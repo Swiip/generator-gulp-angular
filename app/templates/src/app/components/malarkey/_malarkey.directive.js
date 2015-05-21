@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('<%= appName %>')
+    .module('<%- appName %>')
     .directive('acmeMalarkey', acmeMalarkey);
 
   /** @ngInject */

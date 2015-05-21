@@ -1,9 +1,9 @@
 {
-<% if (props.jsPreprocessor.srcExtension === 'es6') { %>
+<% if (props.jsPreprocessor.srcExtension === 'es6') { -%>
   "esnext": true,
-<% } else { %>
+<% } else { -%>
   "strict": true,
-<% } %>
+<% } -%>
   "bitwise": true,
   "camelcase": true,
   "curly": true,
