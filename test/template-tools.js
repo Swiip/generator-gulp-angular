@@ -99,6 +99,7 @@ function deps() {
     };
 
     var string = buffer.toString().replace(/<%[^-].*?%>/g, '');
+    string = string.replace(/"gulp-imagemin".*/, '');
     return ejs.render(string, data);
   }
 
