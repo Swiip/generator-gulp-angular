@@ -38,7 +38,7 @@ npm install -g generator-gulp-angular
 mkdir my-new-project && cd $_
 ```
 
-##### Run `yo gulp-angular`, and select desired technologies: 
+##### Run `yo gulp-angular`, and select desired technologies:
 ```
 yo gulp-angular
 ```
@@ -104,26 +104,25 @@ The root directory generated with default paths configuration for application wi
 │   │   │   │   └──  malarkey.(scss|styl|less|css)
 │   │   │   │
 │   │   │   └──  navbar/
-│   │   │   │   ├──  navbar.directive.js
+│   │   │   │   ├──  navbar.directive.(js|ts|coffee)
 │   │   │   │   ├──  navbar.html
 │   │   │   │   └──  navbar.(scss|styl|less|css)
 │   │   │   │
 │   │   │   └──  webDevTec/
 │   │   │       └──  webDevTec.service.js
-│   │   │   
+│   │   │
 │   │   ├──  main/
-│   │   │   ├──  main.controller.js
+│   │   │   ├──  main.controller.(js|ts|coffee)
 │   │   │   ├──  main.controller.spec.js
 │   │   │   └──  main.html
-│   │   │   
-│   │   └──  index.config.js
-│   │   └──  index.constants.js
-│   │   └──  index.module.js
-│   │   └──  index.route.js
-│   │   └──  index.run.js
+│   │   │
+│   │   └──  index.config.(js|ts|coffee)
+│   │   └──  index.constants.(js|ts|coffee)
+│   │   └──  index.module.(js|ts|coffee)
+│   │   └──  index.route.(js|ts|coffee)
+│   │   └──  index.run.(js|ts|coffee)
 │   │   └──  index.(scss|styl|less|css)
-│   │   └──  vendor.(scss|styl|less|css)
-│   │
+|   |
 │   ├──  assets/
 │   │   └──  images/
 │   ├──  favico.ico
