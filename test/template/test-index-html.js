@@ -59,7 +59,7 @@ describe('gulp-angular index js template', function () {
   it('should insert routerHtml content', function() {
     model.routerHtml = 'router html content';
     var result = indexHtml(model);
-    result.should.match(/<body>[\s\S]*router html content[\s\S]*<script>/);
+    result.should.match(/[\s\S]*router html content[\s\S]*/);
   });
 
   it('should not look in src folder for app.js with es6', function() {
