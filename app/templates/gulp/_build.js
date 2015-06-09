@@ -100,10 +100,15 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('other', function () {
+  var fileFilter = $.filter(function (file) {
+    return file.stat.isFile();
+  });
+
   return gulp.src([
     path.join(conf.paths.src, '/**/*'),
     path.join('!' + conf.paths.src, '/**/*.{<%- processedFileExtension %>}')
   ])
+    .pipe(fileFilter)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
 });
 
