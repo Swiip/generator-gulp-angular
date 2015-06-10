@@ -33,11 +33,11 @@ function browserSyncInit(baseDir, browser) {
   /*
    * You can add a proxy to your backend by uncommenting the line bellow.
    * You just have to configure a context which will we redirected and the target url.
-   * All you "localhost/api" requests will be automatically proxified.
+   * Example: $http.get('/users') requests will be automatically proxified.
    *
-   * For more details and option, https://github.com/chimurai/http-proxy-middleware
+   * For more details and option, https://github.com/chimurai/http-proxy-middleware/blob/v0.0.5/README.md
    */
-  //server.middleware = proxyMiddleware('/api', {target: 'http://www.example.org'});;
+  // server.middleware = proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', proxyHost: 'jsonplaceholder.typicode.com'});
 
   browserSync.instance = browserSync.init({
     startPath: '/',
