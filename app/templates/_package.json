@@ -86,7 +86,7 @@
     "require-dir": "~0.3.0",
     "browser-sync": "~2.7.6",
     "browser-sync-spa": "~1.0.2",
-    "http-proxy": "~1.11.1",
+    "http-proxy-middleware": "~0.0.5",
     "chalk": "~1.0.0",
 <% if (qrCode) { -%>
     "qrcode-terminal": "~0.10.0",
