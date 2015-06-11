@@ -3,29 +3,6 @@
 module.exports = function(GulpAngularGenerator) {
 
   /**
-   * There is 2 ways of dealing with vendor styles
-   * - If the vendor styles exist in the css preprocessor chosen,
-   *   the best is to include directly the source files
-   * - If not, the vendor styles are simply added as standard css links
-   *
-   * isVendorStylesPreprocessed defines which solution has to be used
-   * regarding the ui framework and the css preprocessor chosen
-   */
-  GulpAngularGenerator.prototype.vendorStyles = function vendorStyles() {
-    this.isVendorStylesPreprocessed = false;
-
-    if(this.props.cssPreprocessor.extension === 'scss') {
-      if(this.props.ui.key === 'bootstrap' || this.props.ui.key === 'foundation') {
-        this.isVendorStylesPreprocessed = true;
-      }
-    } else if(this.props.cssPreprocessor.extension === 'less') {
-      if(this.props.ui.key === 'bootstrap') {
-        this.isVendorStylesPreprocessed = true;
-      }
-    }
-  };
-
-  /**
    * Add files of the navbar and the main view depending on the ui framework
    * and the css preprocessor
    */
