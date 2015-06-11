@@ -103,8 +103,7 @@ describe('gulp-angular generator ui script', function () {
       generator.files[2].src.should.be.equal('src/app/_bootstrap/__bootstrap-index.scss');
       generator.files[3].src.should.be.equal('src/app/components/malarkey/__malarkey.scss');
       generator.files[4].src.should.be.equal('src/app/components/navbar/__navbar.scss');
-      generator.files[5].src.should.be.equal('src/app/_bootstrap/__bootstrap-vendor.scss');
-      generator.files.length.should.be.equal(6);
+      generator.files.length.should.be.equal(5);
     });
   });
 

@@ -47,7 +47,7 @@ module.exports = function(GulpAngularGenerator) {
     this.files.push({
       src: 'src/app/_' + this.props.ui.key + '/__' + this.props.ui.key + '-index.' + this.props.cssPreprocessor.extension,
       dest: 'src/app/index.' + this.props.cssPreprocessor.extension,
-      template: false
+      template: true
     });
 
     this.files.push({
@@ -61,14 +61,6 @@ module.exports = function(GulpAngularGenerator) {
       dest: 'src/app/components/navbar/navbar.' + this.props.cssPreprocessor.extension,
       template: false
     });
-
-    if(this.props.cssPreprocessor.key !== 'none') {
-      this.files.push({
-        src: 'src/app/_' + this.props.ui.key + '/__' + this.props.ui.key + '-vendor.' + this.props.cssPreprocessor.extension,
-        dest: 'src/app/vendor.' + this.props.cssPreprocessor.extension,
-        template: true
-      });
-    }
   };
 
   /**
