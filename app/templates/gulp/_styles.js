@@ -33,7 +33,7 @@ gulp.task('styles', function () {
 
   var injectOptions = {
     transform: function(filePath) {
-      filePath = filePath.replace(path.join(conf.paths.src, '/app/'), '');
+      filePath = path.relative(path.join(conf.paths.src, '/app/'), filePath);
       return '@import \'' + filePath + '\';';
     },
     starttag: '// injector',
