@@ -38,6 +38,13 @@ module.exports = function(config) {
 
     autoWatch: false,
 
+    ngHtml2JsPreprocessor: {
+      stripPrefix: 'src/',
+      moduleName: '<%- appName %>'
+    },
+
+    logLevel: 'WARN',
+
 <% if (props.jsPreprocessor.key === 'none' || props.jsPreprocessor.key === 'coffee') { -%>
     frameworks: ['jasmine', 'angular-filesort'],
 
@@ -48,14 +55,28 @@ module.exports = function(config) {
       whitelist: [path.join(conf.paths.tmp, '/**/!(*.html|*.spec|*.mock).js')]
 <%   } -%>
     },
-<% } else { -%>
-    frameworks: ['jasmine'],
-<% } -%>
 
-    ngHtml2JsPreprocessor: {
-      stripPrefix: 'src/',
-      moduleName: '<%- appName %>'
+    reporters: ['progress', 'coverage'],
+
+    preprocessors: {
+      'src/**/*.html': ['ng-html2js'],
+<%   if (props.jsPreprocessor.key === 'none') { -%>
+      'src/**/!(*.spec).js': ['coverage']
+<%   } else { -%>
+      '.tmp/**/!(*.spec).js': ['coverage']
+<%   } -%>
     },
+
+    // optionally, configure the reporter
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    },
+<% } else { -%>
+    frameworks: ['jasmine'],
+
+    reporters: ['progress'],
+<% } -%>
 
 <% if(props.jsPreprocessor.key === 'traceur') { -%>
     browsers : ['Chrome'],
@@ -69,14 +90,11 @@ module.exports = function(config) {
       'karma-phantomjs-launcher',
 <% } if (props.jsPreprocessor.key === 'none' || props.jsPreprocessor.key === 'coffee') { -%>
       'karma-angular-filesort',
+      'karma-coverage',
 <% } -%>
       'karma-jasmine',
       'karma-ng-html2js-preprocessor'
-    ],
-
-    preprocessors: {
-      'src/**/*.html': ['ng-html2js']
-    }
+    ]
   };
 
   // This block is needed to execute Chrome on Travis
