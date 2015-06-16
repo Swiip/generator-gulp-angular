@@ -45,7 +45,7 @@ gulp.task('scripts', function () {
     .pipe(browserSync.reload({ stream: true }))
     .pipe($.size())
 <%   if (props.jsPreprocessor.key === 'none') { -%>
-    .pipe(gulp.dest(path.join(conf.paths.src, '/app/')));
+    .pipe(gulp.dest(path.join(conf.paths.tmp, '/app/')));
 <%   } -%>
 });
 <% } else { -%>
