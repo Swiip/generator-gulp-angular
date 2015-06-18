@@ -26,10 +26,10 @@
     "gulp-ng-annotate": "~1.0.0",
     "gulp-replace": "~0.5.3",
     "gulp-rename": "~1.2.2",
-    "gulp-rev": "~4.0.0",
-    "gulp-rev-replace": "~0.4.1",
+    "gulp-rev": "~5.0.0",
+    "gulp-rev-replace": "~0.4.2",
     "gulp-minify-html": "~1.0.3",
-    "gulp-inject": "~1.2.0",
+    "gulp-inject": "~1.3.1",
     "gulp-protractor": "~1.0.0",
     "gulp-sourcemaps": "~1.5.2",
 <% if (props.cssPreprocessor.key === 'node-sass') { -%>
@@ -39,7 +39,7 @@
 <% } if (props.cssPreprocessor.key === 'less') { -%>
     "gulp-less": "~3.0.3",
 <% } if (props.cssPreprocessor.key === 'stylus') { -%>
-    "gulp-stylus": "~2.0.3",
+    "gulp-stylus": "~2.0.5",
 <% } if (props.jsPreprocessor.key === 'coffee') { -%>
     "gulp-coffee": "~2.3.1",
     "gulp-coffeelint": "~0.5.0",
@@ -47,12 +47,12 @@
     "gulp-webpack": "~1.5.0",
     "jshint-loader": "~0.8.3",
 <% } if (props.jsPreprocessor.key === 'babel') { -%>
-    "babel-core": "~5.5.4",
+    "babel-core": "~5.5.8",
     "babel-loader": "~5.1.4",
 <% } if (props.jsPreprocessor.key === 'traceur') { -%>
     "traceur-loader": "~0.6.3",
 <% } if (props.jsPreprocessor.key === 'typescript') { -%>
-    "gulp-typescript": "~2.7.6",
+    "gulp-typescript": "~2.7.7",
     "gulp-tslint": "~2.0.0",
     "gulp-concat": "~2.5.2",
     "tsd": "~0.6.1",
@@ -61,7 +61,7 @@
 <% } if (props.htmlPreprocessor.key !== 'none') { -%>
     "gulp-consolidate": "~0.1.2",
 <% } if (props.htmlPreprocessor.key === 'jade') { -%>
-    "jade": "~1.10.0",
+    "jade": "~1.11.0",
 <% } if (props.htmlPreprocessor.key === 'haml') { -%>
     "haml": "~0.4.3",
 <% } if (props.htmlPreprocessor.key === 'handlebars') { -%>
@@ -81,9 +81,9 @@
     "karma-angular-filesort": "~0.1.0",
 <% } -%>
     "karma-ng-html2js-preprocessor": "~0.1.2",
-    "concat-stream": "~1.4.8",
+    "concat-stream": "~1.5.0",
     "require-dir": "~0.3.0",
-    "browser-sync": "~2.7.6",
+    "browser-sync": "~2.7.12",
     "browser-sync-spa": "~1.0.2",
     "http-proxy-middleware": "~0.0.5",
     "chalk": "~1.0.0",
