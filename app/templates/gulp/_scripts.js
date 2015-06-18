@@ -23,10 +23,6 @@ gulp.task('scripts', function () {
 <%   if (props.jsPreprocessor.extension === 'js') { -%>
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.jscs({
-      fix: true,
-      configPath: '.jscsrc'
-    }))
 <%   } if (props.jsPreprocessor.key !== 'none') { -%>
     .pipe($.sourcemaps.init())
 <%   } if (props.jsPreprocessor.key === 'coffee') { -%>
@@ -44,9 +40,6 @@ gulp.task('scripts', function () {
 <%   } -%>
     .pipe(browserSync.reload({ stream: true }))
     .pipe($.size())
-<%   if (props.jsPreprocessor.key === 'none') { -%>
-    .pipe(gulp.dest(path.join(conf.paths.src, '/app/')));
-<%   } -%>
 });
 <% } else { -%>
 function webpack(watch, callback) {

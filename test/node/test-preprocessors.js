@@ -94,14 +94,6 @@ describe('gulp-angular generator preprocessors script', function () {
   });
 
   describe('add lint configuration files for preprocessors different from es6', function() {
-    it('should add .jscsrc for none preprocessor', function() {
-      generator.props = {
-        jsPreprocessor: { key: 'none' }
-      };
-      generator.lintCopies();
-      generator.files[6].src.should.match(/jscsrc/);
-    });
-
     it('should add coffeelint for coffee preprocessor', function() {
       generator.props = {
         jsPreprocessor: { key: 'coffee' }
