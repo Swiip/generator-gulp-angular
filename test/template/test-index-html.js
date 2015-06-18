@@ -37,10 +37,6 @@ describe('gulp-angular index js template', function () {
     var result = indexHtml(model);
     result.should.match(/<!-- build:css\({tmp\/serve,src}\) styles\/vendor\.css -->/);
     result.should.not.match(/<link rel="stylesheet" href="app\/vendor\.css">/);
-
-    model.props.cssPreprocessor.key = 'notnone';
-    result = indexHtml(model);
-    result.should.match(/<link rel="stylesheet" href="app\/vendor\.css">/);
   });
 
   it('should insert modernizr if selected', function() {

@@ -19,61 +19,6 @@ describe('gulp-angular generator ui script', function () {
     generator = new Generator();
   });
 
-  describe('set a flag when vendor styles can be preprocessed', function () {
-    it('should set true for sass and bootstrap', function() {
-      generator.props = {
-        ui: { key: 'bootstrap' },
-        cssPreprocessor: { extension: 'scss' }
-      };
-      generator.vendorStyles();
-      generator.isVendorStylesPreprocessed.should.be.true;
-    });
-
-    it('should set true for sass and foundation', function() {
-      generator.props = {
-        ui: { key: 'foundation' },
-        cssPreprocessor: { extension: 'scss' }
-      };
-      generator.vendorStyles();
-      generator.isVendorStylesPreprocessed.should.be.true;
-    });
-
-    it('should set false for sass and no ui', function() {
-      generator.props = {
-        ui: { key: 'none' },
-        cssPreprocessor: { extension: 'scss' }
-      };
-      generator.vendorStyles();
-      generator.isVendorStylesPreprocessed.should.be.false;
-    });
-
-    it('should set true for less and bootstrap', function() {
-      generator.props = {
-        ui: { key: 'bootstrap' },
-        cssPreprocessor: { extension: 'less' }
-      };
-      generator.vendorStyles();
-      generator.isVendorStylesPreprocessed.should.be.true;
-    });
-
-    it('should set false for less and foundation', function() {
-      generator.props = {
-        ui: { key: 'foundation' },
-        cssPreprocessor: { extension: 'less' }
-      };
-      generator.vendorStyles();
-      generator.isVendorStylesPreprocessed.should.be.false;
-    });
-
-    it('should set false for no css', function() {
-      generator.props = {
-        cssPreprocessor: { extension: 'none' }
-      };
-      generator.vendorStyles();
-      generator.isVendorStylesPreprocessed.should.be.false;
-    });
-  });
-
   describe('add right files depending choices', function () {
     it('should add only navbar and index.scss for no router and no ui', function() {
       generator.props = {
@@ -103,8 +48,7 @@ describe('gulp-angular generator ui script', function () {
       generator.files[2].src.should.be.equal('src/app/_bootstrap/__bootstrap-index.scss');
       generator.files[3].src.should.be.equal('src/app/components/malarkey/__malarkey.scss');
       generator.files[4].src.should.be.equal('src/app/components/navbar/__navbar.scss');
-      generator.files[5].src.should.be.equal('src/app/_bootstrap/__bootstrap-vendor.scss');
-      generator.files.length.should.be.equal(6);
+      generator.files.length.should.be.equal(5);
     });
   });
 
