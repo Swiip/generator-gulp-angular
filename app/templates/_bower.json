@@ -56,6 +56,16 @@
   "devDependencies": {
     "angular-mocks": "<%- props.angularVersion %>"
   },
+<% if (props.cssPreprocessor.key === 'none' && props.ui.key === 'bootstrap') { -%>
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  },
+<% } -%>
   "resolutions": {
 <% if (props.jQuery.key === 'jquery1') { -%>
     "jquery": "~1.11.3",
