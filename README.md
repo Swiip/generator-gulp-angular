@@ -87,18 +87,17 @@ The root directory generated for a app with name `gulpAngular` :
 │   ├──  app/
 │   │   ├──  components/
 │   │   │   └──  navbar/
-│   │   │   │   ├──  navbar.controller.js
+│   │   │   │   ├──  navbar.controller.(js|coffe)
 │   │   │   │   └──  navbar.html
 │   │   ├──  main/
-│   │   │   ├──  main.controller.js
-│   │   │   ├──  main.controller.spec.js
+│   │   │   ├──  main.controller.(js|coffe)
+│   │   │   ├──  main.controller.spec.(js|coffe)
 │   │   │   └──  main.html
-│   │   └──  index.js
+│   │   └──  index.(js|coffe)
 │   │   └──  index.(css|less|scss)
 │   │   └──  vendor.(css|less|scss)
 │   ├──  assets/
 │   │   └──  images/
-│   ├──  404.html
 │   ├──  favico.ico
 │   └──  index.html
 ├──  gulp/
@@ -114,6 +113,31 @@ The root directory generated for a app with name `gulpAngular` :
 ├──  karma.conf.js
 ├──  package.json
 ├──  protractor.conf.js
+</pre>
+
+## Use HTML preprocessor
+To use any HTML preprocessor you should change the extension and content of some auto generated files from `.html` to `.(haml|jade|hbs)`.
+So the basic structure of your `src` folder should looks like this:
+<pre>
+...
+ src/
+├──  app/
+│   ├──  components/
+│   │   └──  navbar/
+│   │   │   ├──  navbar.controller.(js|coffe)
+│   │   │   └──  navbar.(haml|jade|hbs)
+│   ├──  main/
+│   │   ├──  main.controller.(js|coffe)
+│   │   ├──  main.controller.spec.(js|coffe)
+│   │   └──  main.(haml|jade|hbs)
+│   └──  index.(js|coffe)
+│   └──  index.(css|less|scss)
+│   └──  vendor.(css|less|scss)
+├──  assets/
+│   └──  images/
+├──  favico.ico
+└──  index.html
+...
 </pre>
 
 ## Features included in the gulpfile
