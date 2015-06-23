@@ -18,7 +18,11 @@
 > Gulp provide fast workspace with quick feedback.
 
 
-## Install
+## Usage
+
+More informations, options, parameters in the [usage documentation page](docs/usage.md)
+
+### Install
 
 ##### Install required tools `yo`, `gulp` and `bower`:
 ```
@@ -31,7 +35,7 @@ npm install -g generator-gulp-angular
 ```
 
 
-## Usage
+### Usage
 
 ##### Create a new directory, and go into:
 ```
@@ -44,103 +48,11 @@ yo gulp-angular
 ```
 
 
-## Options
+## Features
 
-##### Prompts
-* `--default` use our preferred configurations, default is `false`
-* `--advanced` print additional features, default is `false`
+More informations about how to use your new project is available in the [user guide](docs/user-guide.md) or if you want to know [how it works](docs/how-it-works.md).
 
-##### Paths folders (relative to cwd)
-* `--app-path='src'` set your application folder, default is `src`
-* `--dist-path='dist'` set your build target, default is `dist`
-* `--e2e-path='e2e'` set your e2e test specs, default is `e2e`
-* `--tmp-path='.tmp'` set your pre-processing folder, default is `.tmp`
-
-Paths configuration are stored in `gulpfile.js`. Change `options.(src|dist|tmp|e2e)` in `gulpfile.js` if you want to config paths after the app is generated.
-
-**Warning**: The paths are also written in the `index.html` for the build with useref. If you want to change these paths, you also have to change the paths there in order to have the build task working.
-
-
-## Generators
-
-##### App
-*  `yo gulp-angular [appName]`
-
-*Sets up a new AngularJS app, generating all the boilerplate you need to get started.
-Follow the prompts.*
-
-## Use Gulp tasks
-
-* `gulp` to build an optimized version of your application in `/dist`
-* `gulp serve` to launch a browser sync server on your source files
-* `gulp serve:dist` to launch a server on your optimized application
-* `gulp test` to launch your unit tests with Karma
-* `gulp test:auto` to launch your unit tests with Karma in watch mode
-* `gulp protractor` to launch your e2e tests with Protractor
-* `gulp protractor:dist` to launch your e2e tests with Protractor on the dist files
-
-More information on the gulp tasks in [this README.md](app/templates/gulp/README.md).
-
-
-## Directory structure
-
-[Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub)
-
-The root directory generated with default paths configuration for application with name `gulpAngular`:
-<pre>
-├──  bower_components/
-├──  e2e/
-├──  gulp/
-├──  nodes_modules/
-│
-├──  src/
-│   ├──  app/
-│   │   ├──  components/
-│   │   │   └──  githubContributor/
-│   │   │   │   └──  githubContributor.service.js
-│   │   │   │
-│   │   │   └──  malarkey/
-│   │   │   │   ├──  malarkey.directive.js
-│   │   │   │   └──  malarkey.(scss|styl|less|css)
-│   │   │   │
-│   │   │   └──  navbar/
-│   │   │   │   ├──  navbar.directive.(js|ts|coffee)
-│   │   │   │   ├──  navbar.html
-│   │   │   │   └──  navbar.(scss|styl|less|css)
-│   │   │   │
-│   │   │   └──  webDevTec/
-│   │   │       └──  webDevTec.service.js
-│   │   │
-│   │   ├──  main/
-│   │   │   ├──  main.controller.(js|ts|coffee)
-│   │   │   ├──  main.controller.spec.js
-│   │   │   └──  main.html
-│   │   │
-│   │   └──  index.config.(js|ts|coffee)
-│   │   └──  index.constants.(js|ts|coffee)
-│   │   └──  index.module.(js|ts|coffee)
-│   │   └──  index.route.(js|ts|coffee)
-│   │   └──  index.run.(js|ts|coffee)
-│   │   └──  index.(scss|styl|less|css)
-|   |
-│   ├──  assets/
-│   │   └──  images/
-│   ├──  favico.ico
-│   └──  index.html
-│
-├──  .bowerrc
-├──  .editorconfig
-├──  .gitignore
-├──  .jshintrc
-├──  bower.json
-├──  gulpfile.js
-├──  karma.conf.js
-├──  package.json
-└──  protractor.conf.js
-</pre>
-
-
-## Features included in the gulpfile
+### Features included in the gulpfile
 
 * *useref* : allow configuration of your files in comments of your HTML file
 * *ngAnnotate* : convert simple injection to complete syntax to be minification proof
@@ -154,10 +66,9 @@ The root directory generated with default paths configuration for application wi
 * *e2e test (protractor)* : out of the box e2e test configuration with protractor
 * *browser sync* : full-featured development web server with livereload and devices sync
 * *angular-templatecache* : all HTML partials will be converted to JS to be bundled in the application
-* **TODO** lazy : don't process files which haven't changed when possible
 
 
-## Questions the generator will ask
+### Questions the generator will ask
 
 * *Angular version*: 1.3.x, 1.2.x
 * *Angular modules*: animate, cookies, touch, sanitize
@@ -169,8 +80,7 @@ The root directory generated with default paths configuration for application wi
 * *CSS pre-processor*: Sass with Node or Ruby, Less, Stylus, none
 * *JS preprocessor*: none, ES6 Babel, ES6 Traceur, CoffeeScript, TypeScript
 * *HTML preprocessor*: none, Jade, Haml, Handlebars
-* **TODO** Script loader: Require, Webpack, none
-* **TODO** Test framework: Jasmine, Mocha, Qunit
+
 
 
 ## Changelog

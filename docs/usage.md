@@ -56,30 +56,48 @@ More information on the gulp tasks in [this README.md](app/templates/gulp/README
 
 [Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub)
 
-The root directory generated for a app with name `gulpAngular` :
+The root directory generated with default paths configuration for application with name `gulpAngular`:
 <pre>
+├──  bower_components/
+├──  e2e/
+├──  gulp/
+├──  nodes_modules/
+│
 ├──  src/
 │   ├──  app/
 │   │   ├──  components/
+│   │   │   └──  githubContributor/
+│   │   │   │   └──  githubContributor.service.js
+│   │   │   │
+│   │   │   └──  malarkey/
+│   │   │   │   ├──  malarkey.directive.js
+│   │   │   │   └──  malarkey.(scss|styl|less|css)
+│   │   │   │
 │   │   │   └──  navbar/
-│   │   │   │   ├──  navbar.controller.js
-│   │   │   │   └──  navbar.html
+│   │   │   │   ├──  navbar.directive.(js|ts|coffee)
+│   │   │   │   ├──  navbar.html
+│   │   │   │   └──  navbar.(scss|styl|less|css)
+│   │   │   │
+│   │   │   └──  webDevTec/
+│   │   │       └──  webDevTec.service.js
+│   │   │
 │   │   ├──  main/
-│   │   │   ├──  main.controller.js
+│   │   │   ├──  main.controller.(js|ts|coffee)
 │   │   │   ├──  main.controller.spec.js
 │   │   │   └──  main.html
-│   │   └──  index.js
-│   │   └──  index.(css|less|scss)
-│   │   └──  vendor.(css|less|scss)
+│   │   │
+│   │   └──  index.config.(js|ts|coffee)
+│   │   └──  index.constants.(js|ts|coffee)
+│   │   └──  index.module.(js|ts|coffee)
+│   │   └──  index.route.(js|ts|coffee)
+│   │   └──  index.run.(js|ts|coffee)
+│   │   └──  index.(scss|styl|less|css)
+|   |
 │   ├──  assets/
 │   │   └──  images/
-│   ├──  404.html
 │   ├──  favico.ico
 │   └──  index.html
-├──  gulp/
-├──  e2e/
-├──  bower_components/
-├──  nodes_modules/
+│
 ├──  .bowerrc
 ├──  .editorconfig
 ├──  .gitignore
@@ -88,7 +106,7 @@ The root directory generated for a app with name `gulpAngular` :
 ├──  gulpfile.js
 ├──  karma.conf.js
 ├──  package.json
-├──  protractor.conf.js
+└──  protractor.conf.js
 </pre>
 
 ## Features included in the gulpfile

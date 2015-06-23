@@ -5,6 +5,7 @@ Welcome to the documentation of the generator. The goal of the generator is to b
 But it can't and shouldn't match all the requirements of all projects. It's why it's generate a code that you have to make it yours and adapt it to your project.
 
 * [Usage](usage.md) - Installation, main gulp commands, options, parameters...
+* [User Guide](user-guide.md) - How to use your new project and beneficiate from all tools featured
 * [How it Works](how-it-works.md) - Description of all mechanisms in the build process.
 * [Suggestion box](suggestion-box.md) - Not a roadmap, just the list of all the ideas we have to add to the project
 
@@ -15,4 +16,5 @@ The community has written [recipes](recipes#recipes) for common use-cases that w
 
 ## Still got questions?
 
-Post an issue on [GitHub](https://github.com/Swiip/generator-gulp-angular/issues), or come chat with us in [Gitter](https://gitter.im/Swiip/generator-gulp-angular).
+If you have question about using your new project, come ask the community on [Gitter](https://gitter.im/Swiip/generator-gulp-angular).
+If you think you found an error in the generator, open an issue on  [GitHub](https://github.com/Swiip/generator-gulp-angular/issues).
