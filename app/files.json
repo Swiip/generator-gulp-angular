@@ -46,6 +46,7 @@
     "src/app/main/main.controller.js",
     "src/app/main/main.controller.spec.js",
     "src/app/components/navbar/navbar.directive.js",
+    "src/app/components/navbar/navbar.directive.spec.js",
     "src/app/components/malarkey/malarkey.directive.js",
     "src/app/components/webDevTec/webDevTec.service.js",
     "src/app/components/webDevTec/webDevTec.service.spec.js",
