@@ -1,4 +1,4 @@
-<md-toolbar layout="row" layout-align="center center" ng-controller="NavbarController as navbar">
+<md-toolbar layout="row" layout-align="center center">
 
   <md-button href="https://github.com/Swiip/generator-gulp-angular">Gulp Angular</md-button>
 
@@ -8,6 +8,6 @@
     <md-button href="#" class="md-raised">Contact</md-button>
   </section>
 
-  <md-button href="#">Current date: {{ navbar.date | date:'yyyy-MM-dd' }}</md-button>
+  <md-button class="acme-navbar-text">Application was created {{ vm.relativeDate }}.</md-button>
 
 </md-toolbar>

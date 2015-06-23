@@ -1,7 +1,11 @@
+(function() {
+  'use strict';
 
-    .config(config);
+  angular
+    .module('<%- appName %>')
+    .config(routeConfig);
 
-  function config($routeProvider) {
+  function routeConfig($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'app/main/main.html',
@@ -12,3 +16,5 @@
         redirectTo: '/'
       });
   }
+
+})();

@@ -89,7 +89,7 @@ model.htmlPreprocessor.choices.forEach(function(choice) {
 module.exports = {
   prompts: model,
   defaults: {
-    angularVersion: model.angularVersion.values['1.3'],
+    angularVersion: model.angularVersion.values['1.4'],
     angularModules: _.pluck(model.angularModules.choices, 'value'),
     jQuery: model.jQuery.values['jquery 2'],
     resource: model.resource.values['angular-resource'],

@@ -37,10 +37,6 @@ describe('gulp-angular index js template', function () {
     var result = indexHtml(model);
     result.should.match(/<!-- build:css\({tmp\/serve,src}\) styles\/vendor\.css -->/);
     result.should.not.match(/<link rel="stylesheet" href="app\/vendor\.css">/);
-
-    model.props.cssPreprocessor.key = 'notnone';
-    result = indexHtml(model);
-    result.should.match(/<link rel="stylesheet" href="app\/vendor\.css">/);
   });
 
   it('should insert modernizr if selected', function() {
@@ -59,7 +55,7 @@ describe('gulp-angular index js template', function () {
   it('should insert routerHtml content', function() {
     model.routerHtml = 'router html content';
     var result = indexHtml(model);
-    result.should.match(/<body>[\s\S]*router html content[\s\S]*<script>/);
+    result.should.match(/[\s\S]*router html content[\s\S]*/);
   });
 
   it('should not look in src folder for app.js with es6', function() {

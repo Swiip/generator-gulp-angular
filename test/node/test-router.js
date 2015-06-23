@@ -28,27 +28,32 @@ describe('gulp-angular generator techs script', function () {
     generator.props = {
       router: { module: 'ngRoute' },
       ui: { key: 'testUi' },
-      jsPreprocessor: { srcExtension: 'testExtension' }
+      jsPreprocessor: {
+        srcExtension: 'testSrcExtension',
+        extension: 'testExtension'
+      }
     };
-    read.withArgs('template/src/app/_ngroute/__ngroute.testExtension')
-      .returns('my test content 1');
+
+    generator.files = [];
     generator.computeRouter();
     generator.routerHtml.should.match(/ng-view/);
-    generator.routerJs.should.equal('my test content 1');
+    generator.files[0].src.should.equal('src/app/_ngroute/__ngroute.testSrcExtension');
+    generator.files[0].dest.should.equal('src/app/index.route.testExtension');
 
+    generator.files = [];
     generator.props.router.module = 'ui.router';
-    read.withArgs('template/src/app/_uirouter/__uirouter.testExtension')
-      .returns('my test content 2');
     generator.computeRouter();
     generator.routerHtml.should.match(/ui-view/);
-    generator.routerJs.should.equal('my test content 2');
+    generator.files[0].src.should.equal('src/app/_uirouter/__uirouter.testSrcExtension');
+    generator.files[0].dest.should.equal('src/app/index.route.testExtension');
 
-    generator.props.router.module = 'none';
+    generator.files = [];
     read.withArgs('template/src/app/main/__testUi.html')
       .returns('<div class="container">');
+    generator.props.router.module = 'none';
     generator.computeRouter();
     generator.routerHtml.should.match(/MainController/);
-    generator.routerJs.should.be.equal('');
+    generator.files.length.should.equal(0);
   });
 
 });

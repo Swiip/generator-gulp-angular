@@ -19,61 +19,6 @@ describe('gulp-angular generator ui script', function () {
     generator = new Generator();
   });
 
-  describe('set a flag when vendor styles can be preprocessed', function () {
-    it('should set true for sass and bootstrap', function() {
-      generator.props = {
-        ui: { key: 'bootstrap' },
-        cssPreprocessor: { extension: 'scss' }
-      };
-      generator.vendorStyles();
-      generator.isVendorStylesPreprocessed.should.be.true;
-    });
-
-    it('should set true for sass and foundation', function() {
-      generator.props = {
-        ui: { key: 'foundation' },
-        cssPreprocessor: { extension: 'scss' }
-      };
-      generator.vendorStyles();
-      generator.isVendorStylesPreprocessed.should.be.true;
-    });
-
-    it('should set false for sass and no ui', function() {
-      generator.props = {
-        ui: { key: 'none' },
-        cssPreprocessor: { extension: 'scss' }
-      };
-      generator.vendorStyles();
-      generator.isVendorStylesPreprocessed.should.be.false;
-    });
-
-    it('should set true for less and bootstrap', function() {
-      generator.props = {
-        ui: { key: 'bootstrap' },
-        cssPreprocessor: { extension: 'less' }
-      };
-      generator.vendorStyles();
-      generator.isVendorStylesPreprocessed.should.be.true;
-    });
-
-    it('should set false for less and foundation', function() {
-      generator.props = {
-        ui: { key: 'foundation' },
-        cssPreprocessor: { extension: 'less' }
-      };
-      generator.vendorStyles();
-      generator.isVendorStylesPreprocessed.should.be.false;
-    });
-
-    it('should set false for no css', function() {
-      generator.props = {
-        cssPreprocessor: { extension: 'none' }
-      };
-      generator.vendorStyles();
-      generator.isVendorStylesPreprocessed.should.be.false;
-    });
-  });
-
   describe('add right files depending choices', function () {
     it('should add only navbar and index.scss for no router and no ui', function() {
       generator.props = {
@@ -85,10 +30,12 @@ describe('gulp-angular generator ui script', function () {
       generator.uiFiles();
       generator.files[0].src.should.be.equal('src/app/components/navbar/__none-navbar.html');
       generator.files[1].src.should.be.equal('src/app/_none/__none-index.css');
-      generator.files.length.should.be.equal(2);
+      generator.files[2].src.should.be.equal('src/app/components/malarkey/__malarkey.css');
+      generator.files[3].src.should.be.equal('src/app/components/navbar/__navbar.css');
+      generator.files.length.should.be.equal(4);
     });
 
-    it('should add 4 files when all options', function() {
+    it('should add 6 files when all options', function() {
       generator.props = {
         router: { module: 'ngRoute' },
         ui: { key: 'bootstrap' },
@@ -99,8 +46,9 @@ describe('gulp-angular generator ui script', function () {
       generator.files[0].src.should.be.equal('src/app/components/navbar/__bootstrap-navbar.html');
       generator.files[1].src.should.be.equal('src/app/main/__bootstrap.html');
       generator.files[2].src.should.be.equal('src/app/_bootstrap/__bootstrap-index.scss');
-      generator.files[3].src.should.be.equal('src/app/_bootstrap/__bootstrap-vendor.scss');
-      generator.files.length.should.be.equal(4);
+      generator.files[3].src.should.be.equal('src/app/components/malarkey/__malarkey.scss');
+      generator.files[4].src.should.be.equal('src/app/components/navbar/__navbar.scss');
+      generator.files.length.should.be.equal(5);
     });
   });
 
@@ -113,8 +61,9 @@ describe('gulp-angular generator ui script', function () {
         cssPreprocessor: { extension: 'scss' }
       };
       generator.computeWiredepExclusions();
-      generator.wiredepExclusions[0].should.be.equal('/bootstrap-sass-official\\/.*\\.js/');
-      generator.wiredepExclusions[1].should.be.equal('/bootstrap\\.css/');
+      generator.wiredepExclusions[0].should.be.equal('/bootstrap\.js$/');
+      generator.wiredepExclusions[1].should.be.equal('/bootstrap-sass-official\\/.*\\.js/');
+      generator.wiredepExclusions[2].should.be.equal('/bootstrap\\.css/');
     });
 
     it('should exclude only bootstrap.js if angular-boostrap and less', function() {
@@ -125,7 +74,8 @@ describe('gulp-angular generator ui script', function () {
         cssPreprocessor: { extension: 'less' }
       };
       generator.computeWiredepExclusions();
-      generator.wiredepExclusions[0].should.be.equal('/bootstrap\\.js/');
+      generator.wiredepExclusions[0].should.be.equal('/bootstrap\.js$/');
+      generator.wiredepExclusions[1].should.be.equal('/bootstrap\\.css/');
     });
 
     it('should exclude foundation if foundation and sass', function() {

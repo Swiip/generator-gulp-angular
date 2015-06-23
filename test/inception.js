@@ -1,20 +1,22 @@
 'use strict';
 
-var fs = require('fs');
+var fs = require('mz/fs');
 var path = require('path');
-var spawn = require('cross-spawn');
-var q = require('q');
 var _ = require('lodash');
+var spawn = require('cross-spawn');
+var Promise = require('bluebird');
 var helpers = require('yeoman-generator').test;
+
+var testDirectory = Promise.promisify(helpers.testDirectory);
 
 var outputInTest = require('./mute');
 var mockOptions = require('../app/src/mock-options.js');
 var mockPrompts = require('../app/src/mock-prompts.js');
 
 var skipOptions = {
-  'skip-install': true,
-  'skip-welcome-message': true,
-  'skip-message': true
+  skipInstall: true,
+  skipWelcomeMessage: true,
+  skipMessage: true
 };
 
 var tempDir = path.join(__dirname, 'tmp/work');
@@ -24,10 +26,10 @@ function prepare(optionCase, promptCase) {
   var options = _.extend({}, _.cloneDeep(mockOptions.defaults), optionCase, skipOptions);
   var prompts = _.extend({}, _.cloneDeep(mockPrompts.defaults), promptCase);
 
-  return q.nfcall(helpers.testDirectory, tempDir).then(function() {
-    return q.all([
-      q.nfcall(fs.symlink, path.join(depsDir, 'node_modules'), path.join(tempDir, 'node_modules')),
-      q.nfcall(fs.symlink, path.join(depsDir, 'bower_components'), path.join(tempDir, 'bower_components'))
+  return testDirectory(tempDir).then(function() {
+    return Promise.all([
+      fs.symlink(path.join(depsDir, 'node_modules'), path.join(tempDir, 'node_modules')),
+      fs.symlink(path.join(depsDir, 'bower_components'), path.join(tempDir, 'bower_components'))
     ]);
   }).then(function() {
     var gulpAngular = helpers.createGenerator(
@@ -46,20 +48,19 @@ function prepare(optionCase, promptCase) {
 }
 
 function run(generator, task) {
-  var deferred = q.defer();
-
-  generator.run(function () {
-    var gulpProcess = spawn('node', ['node_modules/gulp/bin/gulp.js', task], {stdio: 'inherit'});
-    gulpProcess.on('exit', function(returnCode) {
-      if(returnCode === 0) {
-        deferred.resolve();
-      } else {
-        deferred.reject('Gulp returned with error code ' + returnCode);
-      }
+  return new Promise(function(resolve, reject) {
+    generator.conflicter.force = true;
+    generator.run(function () {
+      var gulpProcess = spawn('node', ['node_modules/gulp/bin/gulp.js', task], {stdio: 'inherit'});
+      gulpProcess.on('exit', function(returnCode) {
+        if(returnCode === 0) {
+          resolve();
+        } else {
+          reject('Gulp returned with error code ' + returnCode);
+        }
+      });
     });
   });
-
-  return deferred.promise;
 }
 
 module.exports = {

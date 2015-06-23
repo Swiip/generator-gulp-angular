@@ -1,61 +1,48 @@
 <!doctype html>
-<html<% if (includeModernizr) { %> class="no-js"<% } %> ng-app="<%= appName %>">
+<html<% if (includeModernizr) { %> class="no-js"<% } %> ng-app="<%- appName %>">
   <head>
     <meta charset="utf-8">
-    <title><%= appName %></title>
+    <title><%- appName %></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- build:css({<%= props.paths.tmp %>/serve,<%= props.paths.src %>}) styles/vendor.css -->
-<% if (props.cssPreprocessor.key !== 'none') { %>
-    <link rel="stylesheet" href="app/vendor.css">
-<% } %>
+    <!-- build:css({<%- props.paths.tmp %>/serve,<%- props.paths.src %>}) styles/vendor.css -->
     <!-- bower:css -->
     <!-- run `gulp inject` to automatically populate bower styles dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:css({<%= props.paths.tmp %>/serve,<%= props.paths.src %>}) styles/app.css -->
+    <!-- build:css({<%- props.paths.tmp %>/serve,<%- props.paths.src %>}) styles/app.css -->
     <!-- inject:css -->
     <!-- css files will be automatically insert here -->
     <!-- endinject -->
     <!-- endbuild -->
-<% if (includeModernizr) { %>
+<% if (includeModernizr) { -%>
 
-    <!-- build:js(<%= props.paths.src %>) scripts/modernizr.js -->
-    <script src="<%= computedPaths.appToBower %>/bower_components/modernizr/modernizr.js"></script>
+    <!-- build:js(<%- props.paths.src %>) scripts/modernizr.js -->
+    <script src="<%- computedPaths.appToBower %>/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
-<% } %>
+<% } -%>
   </head>
   <body>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <%= routerHtml %>
+    <%- routerHtml %>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='//www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
-
-    <!-- build:js(<%= props.paths.src %>) scripts/vendor.js -->
+    <!-- build:js(<%- props.paths.src %>) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- run `gulp inject` to automatically populate bower script dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
 
-<% if (props.jsPreprocessor.srcExtension === 'es6') { %>
-    <!-- build:js({<%= props.paths.tmp %>/serve,<%= props.paths.tmp %>/partials}) scripts/app.js -->
-<% } else { %>
-    <!-- build:js({<%= props.paths.tmp %>/serve,<%= props.paths.tmp %>/partials,<%= props.paths.src %>}) scripts/app.js -->
-<% } %>
+<% if (props.jsPreprocessor.srcExtension === 'es6') { -%>
+    <!-- build:js({<%- props.paths.tmp %>/serve,<%- props.paths.tmp %>/partials}) scripts/app.js -->
+<% } else { -%>
+    <!-- build:js({<%- props.paths.tmp %>/serve,<%- props.paths.tmp %>/partials,<%- props.paths.src %>}) scripts/app.js -->
+<% } -%>
     <!-- inject:js -->
     <!-- js files will be automatically insert here -->
     <!-- endinject -->

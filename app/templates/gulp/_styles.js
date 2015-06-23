@@ -12,69 +12,61 @@ var wiredep = require('wiredep').stream;
 var _ = require('lodash');
 
 gulp.task('styles', function () {
-<% if (props.cssPreprocessor.key === 'less') { %>
+<% if (props.cssPreprocessor.key === 'less') { -%>
   var lessOptions = {
     options: [
       'bower_components',
       path.join(conf.paths.src, '/app')
     ]
   };
-<% } if (props.cssPreprocessor.extension === 'scss') { %>
+<% } if (props.cssPreprocessor.extension === 'scss') { -%>
   var sassOptions = {
     style: 'expanded'
   };
-<% } %>
+<% } -%>
 
   var injectFiles = gulp.src([
-    path.join(conf.paths.src, '/app/**/*.<%= props.cssPreprocessor.extension %>'),
-    path.join('!' + conf.paths.src, '/app/index.<%= props.cssPreprocessor.extension %>'),
-    path.join('!' + conf.paths.src, '/app/vendor.<%= props.cssPreprocessor.extension %>')
+    path.join(conf.paths.src, '/app/**/*.<%- props.cssPreprocessor.extension %>'),
+    path.join('!' + conf.paths.src, '/app/index.<%- props.cssPreprocessor.extension %>')
   ], { read: false });
 
   var injectOptions = {
     transform: function(filePath) {
-      filePath = filePath.replace(path.join(conf.paths.src, '/app/'), '');
-      return '@import \'' + filePath + '\';';
+      filePath = filePath.replace(conf.paths.src + '/app/', '');
+      return '@import "' + filePath + '";';
     },
     starttag: '// injector',
     endtag: '// endinjector',
     addRootSlash: false
   };
 
-  var indexFilter = $.filter('index.<%= props.cssPreprocessor.extension %>');
-  var vendorFilter = $.filter('vendor.<%= props.cssPreprocessor.extension %>');
-<% if (props.cssPreprocessor.key === 'ruby-sass') { %>
+<% if (props.cssPreprocessor.key === 'ruby-sass') { -%>
   var cssFilter = $.filter('**/*.css');
-<% } %>
+<% } -%>
 
   return gulp.src([
-    path.join(conf.paths.src, '/app/index.<%= props.cssPreprocessor.extension %>'),
-    path.join(conf.paths.src, '/app/vendor.<%= props.cssPreprocessor.extension %>')
+    path.join(conf.paths.src, '/app/index.<%- props.cssPreprocessor.extension %>')
   ])
-    .pipe(indexFilter)
     .pipe($.inject(injectFiles, injectOptions))
-    .pipe(indexFilter.restore())
-    .pipe(vendorFilter)
     .pipe(wiredep(_.extend({}, conf.wiredep)))
-    .pipe(vendorFilter.restore())
-<% if (props.cssPreprocessor.key === 'ruby-sass') { %>
+<% if (props.cssPreprocessor.key === 'ruby-sass') { -%>
     .pipe($.rubySass(sassOptions)).on('error', conf.errorHandler('RubySass'))
     .pipe(cssFilter)
     .pipe($.sourcemaps.init({ loadMaps: true }))
-<% } else { %>
+<% } else { -%>
     .pipe($.sourcemaps.init())
-<% } if (props.cssPreprocessor.key === 'less') { %>
+<% } if (props.cssPreprocessor.key === 'less') { -%>
     .pipe($.less(lessOptions)).on('error', conf.errorHandler('Less'))
-<% } else if (props.cssPreprocessor.key === 'node-sass') { %>
+<% } else if (props.cssPreprocessor.key === 'node-sass') { -%>
     .pipe($.sass(sassOptions)).on('error', conf.errorHandler('Sass'))
-<% } else if (props.cssPreprocessor.key === 'stylus') { %>
+<% } else if (props.cssPreprocessor.key === 'stylus') { -%>
     .pipe($.stylus()).on('error', conf.errorHandler('Stylus'))
-<% } %>
+<% } -%>
     .pipe($.autoprefixer()).on('error', conf.errorHandler('Autoprefixer'))
     .pipe($.sourcemaps.write())
-<% if (props.cssPreprocessor.key === 'ruby-sass') { %>
+<% if (props.cssPreprocessor.key === 'ruby-sass') { -%>
     .pipe(cssFilter.restore())
-<% } %>
+<% } -%>
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app/')))
     .pipe(browserSync.reload({ stream: true }));
 });

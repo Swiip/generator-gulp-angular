@@ -1,38 +1,54 @@
 'use strict';
 /* jshint camelcase:false */
 
-var fs = require('fs');
+var fs = require('mz/fs');
+var Promise = require('bluebird');
 var path = require('path');
-var mkdirp = require('mkdirp');
-var _ = require('lodash');
+var mkdirp = Promise.promisify(require('mkdirp'));
 var beautify = require('js-beautify').js_beautify;
-var q = require('q');
-var readdir = require('recursive-readdir');
+var readdir = Promise.promisify(require('recursive-readdir'));
+var ejs = require('ejs');
 
 var templatesDir = path.join(__dirname, '../app/templates/');
 var depsDir = path.join(__dirname, 'tmp/deps/');
 var compiledTemplatesDir = path.join(__dirname, 'tmp/templates/');
 var compiledTemplatesSuffix = '-template.js';
-var sourceHeader = 'var _ = require(\'lodash\');\nmodule.exports = ';
+var sourceHeader = 'module.exports = function(locals) {\n';
+var sourceFooter = '\n};';
+
+/**
+ * That's not a code I'm very proud of.
+ * But it's the only way I found to get the same feature for EJS I had with lodash
+ * for getting the compiled JS code for the template
+ */
+function compileEjs(content) {
+  var savedConsoleLog = console.log;
+  var source;
+
+  console.log = function(src) {
+    source = src;
+  };
+
+  ejs.compile(content, { debug: true, compileDebug: false });
+
+  console.log = savedConsoleLog;
+
+  return source;
+}
 
 function compile(fileName) {
   var sourceFilePath = templatesDir + fileName;
   var destinationFilePath = compiledTemplatesDir + fileName + compiledTemplatesSuffix;
   var destinationDir = path.dirname(destinationFilePath);
 
-  return q.all([
-    q.nfcall(mkdirp, destinationDir),
-    q.nfcall(fs.readFile, sourceFilePath)
+  return Promise.all([
+    mkdirp(destinationDir),
+    fs.readFile(sourceFilePath)
   ]).then(function(results) {
-    var content = results[1].toString().replace(/\n<%([^-=])/g, '<%$1');
-    var sourceContent = sourceHeader + beautify(_.template(content).source, { indent_size: 2 })
-      // Underscore / Lodash templates have some inexistance checks
-      // It doesn't help tests and breaks covertures stats
-      // These fex regexp removes these checks for the tests
-      .replace(/function print\(\) {[\s\S]*?}/, '')
-      .replace(/obj \|\| \(obj = {}\);/, '')
-      .replace(/\(\(__t = (\(.*?\))\) == null \? '' : __t\)/g, '$1');
-    return q.nfcall(fs.writeFile, destinationFilePath, sourceContent);
+    var content = results[1].toString();
+    var sourceContent = sourceHeader + beautify(compileEjs(content), { indent_size: 2 }) + sourceFooter;
+    sourceContent = sourceContent.replace('with(locals || {})', 'with(locals)');
+    return fs.writeFile(destinationFilePath, sourceContent);
   });
 }
 
@@ -50,9 +66,9 @@ function load(fileName) {
 }
 
 function prepare() {
-  return q.nfcall(readdir, templatesDir)
+  return readdir(templatesDir)
     .then(function(files) {
-      return q.all(files.filter(function(file) {
+      return Promise.all(files.filter(function(file) {
         var basename = path.basename(file);
         return /^_[^_]/.test(basename);
       }).map(function(file) {
@@ -82,20 +98,21 @@ function deps() {
       props: { angularVersion: angularVersion }
     };
 
-    var string = buffer.toString().replace(/<%[^=].*?%>/g, '');
-    return _.template(string)(data);
+    var string = buffer.toString().replace(/<%[^-].*?%>/g, '');
+    string = string.replace(/"gulp-imagemin".*/, '');
+    return ejs.render(string, data);
   }
 
-  return q.all([
-    q.nfcall(mkdirp, depsDir),
-    q.nfcall(fs.readFile, packagePath),
-    q.nfcall(fs.readFile, bowerPath)
+  return Promise.all([
+    mkdirp(depsDir),
+    fs.readFile(packagePath),
+    fs.readFile(bowerPath)
   ]).then(function(results) {
     var packageFileContent = processTemplate(results[1]);
     var bowerFileContent = processTemplate(results[2]);
-    return q.all([
-      q.nfcall(fs.writeFile, packageDestinationPath, packageFileContent),
-      q.nfcall(fs.writeFile, bowerDestinationPath, bowerFileContent)
+    return Promise.all([
+      fs.writeFile(packageDestinationPath, packageFileContent),
+      fs.writeFile(bowerDestinationPath, bowerFileContent)
     ]);
   })
   .catch(function(error) {

@@ -1,8 +1,8 @@
 node_modules/
-tempGulpAngular/
 coverage/
 .DS_Store
 npm-debug.log
 .idea
 *.iml
 test/tmp
+.jshintignore

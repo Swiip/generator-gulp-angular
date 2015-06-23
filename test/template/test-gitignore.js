@@ -35,12 +35,10 @@ describe('gulp-angular gitignore template', function () {
     model.props.jsPreprocessor.key = 'none';
     var result = gitignore(model);
     result.should.not.match(/typings/);
-    result.should.not.match(/tsd\.json/);
 
     model.props.jsPreprocessor.key = 'typescript';
     result = gitignore(model);
     result.should.match(/typings/);
-    result.should.match(/tsd\.json/);
   });
 
 });

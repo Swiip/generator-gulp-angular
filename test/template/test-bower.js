@@ -8,6 +8,7 @@ chai.use(sinonChai);
 
 var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
+var angularModulesObject = { animate: true, cookies: true, touch: true, sanitize: true };
 
 describe('gulp-angular bower template', function () {
   var bower, model;
@@ -26,6 +27,7 @@ describe('gulp-angular bower template', function () {
   it('should put the right angular version and app name in the bower.json', function() {
     model.appName = 'testAppName';
     model.props.angularVersion = 'angular-test-version';
+    model.angularModulesObject = angularModulesObject;
     var result = bower(model);
     result.should.match(/"name": "testAppName"/);
     result.should.match(/"angular-animate": "angular-test-version"/);
@@ -43,6 +45,7 @@ describe('gulp-angular bower template', function () {
   });
 
   it('should add angular modules in bower when selected', function() {
+    model.angularModulesObject = angularModulesObject;
     var result = bower(model);
     result.should.match(/angular-animate/);
     result.should.match(/angular-cookies/);
@@ -174,4 +177,12 @@ describe('gulp-angular bower template', function () {
     result.should.match(/traceur-runtime/);
   });
 
+  it('should add overrides pprt for css bootstrap', function() {
+    model.props.ui.key = 'bootstrap';
+    model.props.cssPreprocessor.key = 'none';
+
+    var result = bower(model);
+    result.should.match(/overrides/);
+    result.should.match(/dist\/css\/bootstrap.css/);
+  });
 });

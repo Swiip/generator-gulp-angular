@@ -1,4 +1,4 @@
-<nav class="top-bar row" ng-controller="NavbarController as navbar">
+<nav class="top-bar row">
   <ul class="title-area">
     <li class="name">
       <h1><a href="https://github.com/Swiip/generator-gulp-angular">Gulp & Angular</a></h1>
@@ -11,8 +11,6 @@
       <li><a ng-href="#">About</a></li>
       <li><a ng-href="#">Contact</a></li>
     </ul>
-    <ul class="left">
-      <li><a ng-href="#">Current date: {{ navbar.date | date:'yyyy-MM-dd' }}</a></li>
-    </ul>
+    <p class="acme-navbar-text">Application was created {{ vm.relativeDate }}.</p>
   </section>
 </nav>

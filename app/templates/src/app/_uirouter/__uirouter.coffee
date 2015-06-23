@@ -1,4 +1,4 @@
-
+angular.module "<%- appName %>"
   .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
       .state "home",
