@@ -40,6 +40,17 @@
         expect(data[0]).toEqual(jasmine.any(Object));
       });
 
+      it('should define a limit per page as default value', function() {
+        $httpBackend.when('GET',  githubContributor.apiHost + '/contributors?per_page=30').respond(200, new Array(30));
+        var data;
+        githubContributor.getContributors().then(function(fetchedData) {
+          data = fetchedData;
+        });
+        $httpBackend.flush();
+        expect(data).toEqual(jasmine.any(Array));
+        expect(data.length === 30).toBeTruthy();
+      });
+
       it('should log a error', function() {
         $httpBackend.when('GET',  githubContributor.apiHost + '/contributors?per_page=1').respond(500);
         githubContributor.getContributors(1);
