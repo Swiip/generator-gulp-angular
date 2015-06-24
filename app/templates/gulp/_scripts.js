@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var conf = require('./conf');
 
 var browserSync = require('browser-sync');
+var webpack = require('webpack-stream');
 
 var $ = require('gulp-load-plugins')();
 
@@ -42,7 +43,7 @@ gulp.task('scripts', function () {
     .pipe($.size())
 });
 <% } else { -%>
-function webpack(watch, callback) {
+function webpackWrapper(watch, callback) {
   var webpackOptions = {
     watch: watch,
     module: {
@@ -78,15 +79,15 @@ function webpack(watch, callback) {
   };
 
   return gulp.src(path.join(conf.paths.src, '/app/index.module.js'))
-    .pipe($.webpack(webpackOptions, null, webpackChangeHandler))
+    .pipe(webpack(webpackOptions, null, webpackChangeHandler))
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')));
 }
 
 gulp.task('scripts', function () {
-  return webpack(false);
+  return webpackWrapper(false);
 });
 
 gulp.task('scripts:watch', ['scripts'], function (callback) {
-  return webpack(true, callback);
+  return webpackWrapper(true, callback);
 });
 <% } -%>
