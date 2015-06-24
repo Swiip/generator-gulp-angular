@@ -21,6 +21,7 @@ gulp.task('tsd:install', function () {
   dependencies.forEach(function (dependency) {
     query.addNamePattern(dependency);
   });
+  query.addNamePattern('karma-jasmine');
 
   var options = new tsd.Options();
   options.resolveDependencies = true;
