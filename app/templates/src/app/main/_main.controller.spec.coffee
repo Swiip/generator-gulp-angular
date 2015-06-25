@@ -1,4 +1,5 @@
 describe 'controllers', ->
+  # @todo Complete coverage test
   beforeEach module('<%- appName %>')
   it 'should define more than 5 awesome things', inject(($controller) ->
     vm = $controller('MainController')
