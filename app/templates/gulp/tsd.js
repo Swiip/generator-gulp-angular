@@ -30,6 +30,11 @@ gulp.task('tsd:install', function () {
 
   return tsdApi.readConfig()
     .then(function () {
+      // Include manually-defined definitions, for cases where TSD name doesn't match bower name:
+      tsdApi.context.config.getInstalled().forEach(function (inst) {
+        var def = tsd.Def.getFrom(inst.path);
+        query.addNamePattern(def.project + '/' + def.name);
+      });
       return tsdApi.select(query, options);
     })
     .then(function (selection) {
