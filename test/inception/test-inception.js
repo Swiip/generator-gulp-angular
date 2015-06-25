@@ -124,10 +124,11 @@ describe('gulp-angular generator inception tests', function () {
     });
   });
 
-  describe('with [no jquery, $http, Bootstrap, AngularStrap, ruby-sass, Traceur]', function () {
+  describe('with [$http, Bootstrap, AngularStrap, ruby-sass, Traceur]', function () {
     before(function() {
       return inception.prepare({}, {
-        jQuery: prompts.jQuery.values['none'],
+        // TODO replace Toastr by similar lib without jQuery dep (angular-toastr)
+        // jQuery: prompts.jQuery.values['none'],
         ui: prompts.ui.values.bootstrap,
         bootstrapComponents: prompts.bootstrapComponents.values['angular-strap'],
         cssPreprocessor: prompts.cssPreprocessor.values['ruby-sass'],
@@ -151,7 +152,7 @@ describe('gulp-angular generator inception tests', function () {
     });
   });
 
-  describe('with [src:src/angular/app e2e:tests/e2e dist:target/build/folder tmp:.tmp/folder] and default promps', function () {
+  describe('with [src:src/angular/app e2e:tests/e2e dist:target/build/folder tmp:.tmp/folder] and default prompts', function () {
     before(function() {
       return inception.prepare({
         'app-path': 'src/angular/app',
