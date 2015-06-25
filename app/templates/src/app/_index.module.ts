@@ -22,11 +22,11 @@ module <%- appName %> {
     .constant('malarkey', malarkey)
     .constant('toastr', toastr)
     .constant('moment', moment)
-    .config(Config)
+    .config(config)
 <% if (props.router.key !== 'none') { %>
-    .config(RouterConfig)
+    .config(routerConfig)
 <% } %>
-    .run(RunBlock)
+    .run(runBlock)
     .service('githubContributor', GithubContributor)
     .service('webDevTec', WebDevTecService)
     .controller('MainController', MainController)

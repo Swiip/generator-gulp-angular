@@ -2,7 +2,7 @@ module <%- appName %> {
   'use strict';
 
   /** @ngInject */
-  export function RouterConfig($routeProvider: ng.route.IRouteProvider) {
+  export function routerConfig($routeProvider: ng.route.IRouteProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'app/main/main.html',

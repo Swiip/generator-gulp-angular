@@ -2,7 +2,7 @@ module <%- appName %> {
   'use strict';
 
   /** @ngInject */
-  export function RouterConfig($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
+  export function routerConfig($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
     $stateProvider
       .state('home', {
         url: '/',

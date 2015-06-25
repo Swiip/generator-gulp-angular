@@ -2,7 +2,7 @@ module <%- appName %> {
   'use strict';
 
   /** @ngInject */
-  export function Config($logProvider: ng.ILogProvider, toastr: Toastr) {
+  export function config($logProvider: ng.ILogProvider, toastr: Toastr) {
     // enable log
     $logProvider.debugEnabled(true);
     // set options third-party lib
