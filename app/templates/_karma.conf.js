@@ -43,7 +43,7 @@ module.exports = function(config) {
     autoWatch: false,
 
     ngHtml2JsPreprocessor: {
-      stripPrefix: 'src/',
+      stripPrefix: conf.paths.src + '/',
       moduleName: '<%- appName %>'
     },
 
