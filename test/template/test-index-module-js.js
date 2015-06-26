@@ -54,13 +54,13 @@ describe('gulp-angular index js template', function () {
     var result = indexEs6(model);
     result.should.match(/.config\(routerConfig\)/);
     result = indexTs(model);
-    result.should.match(/.config\(RouterConfig\)/);
+    result.should.match(/.config\(routerConfig\)/);
 
     model.props.router.key = 'none';
     result = indexEs6(model);
     result.should.not.match(/.config\(routerConfig\)/);
     result = indexTs(model);
-    result.should.not.match(/.config\(RouterConfig\)/);
+    result.should.not.match(/.config\(routerConfig\)/);
   });
 
 });
