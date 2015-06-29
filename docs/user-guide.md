@@ -10,11 +10,11 @@ We're proud to say that this generator follow by the book the guidelines for the
 
 For the development phase, you've got the featured server behind the command `gulp serve` which support livereload of your modifications.
 
-It's usage is described in the chapters [Development server](#development-server) and [File watching & pre-processing](#file-watching-pre-processing)
+Its usage is described in the chapters [Development server](#development-server) and [File watching & pre-processing](#file-watching-pre-processing)
 
 ### `test`
 
-For testing a fully working test environment is shipped with some examples. It uses Karma (with `gulp test`) for the unit tests and Protractor for the end 2 end tests (with `gulp protractor`).
+For testing, a fully working test environment is shipped with some examples. It uses Karma (with `gulp test`) for the unit tests and Protractor for the end 2 end tests (with `gulp protractor`).
 
 More information in the [Test environment configured](#test-environment-configured) chapter.
 
@@ -121,7 +121,7 @@ Bower support linking dependency of CSS preprocessed files, the generated projec
 
 We do all that we can for the process of automatic injection to be as transparent as possible and works as you could imagine it will when you modify your project.
 
-Unfortunately there is always cases where the right inclusions are not done automatically. The most common case is the Bower dependency which don't defines the right files to include in its own descriptor.
+Unfortunately there is always cases where the right inclusions are not done automatically. The most common case is the Bower dependency which doesn't defines the right files to include in its own descriptor.
 
 It could not be obvious at the first look at the `src/index.html` you are still allowed to put your own `script` or `link` tag and load whatever you want! The key to do it right is to put your tags in the right place.
 

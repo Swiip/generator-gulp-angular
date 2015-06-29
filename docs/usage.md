@@ -50,7 +50,7 @@ Paths configuration are stored in `gulpfile.js`. Change `options.(src|dist|tmp|e
 * `gulp protractor` to launch your e2e tests with Protractor
 * `gulp protractor:dist` to launch your e2e tests with Protractor on the dist files
 
-More information on the gulp tasks in [this README.md](app/templates/gulp/README.md).
+More information on the gulp tasks in the [User Guide](user-guide.md).
 
 ## Directory structure
 
@@ -109,6 +109,9 @@ The root directory generated with default paths configuration for application wi
 └──  protractor.conf.js
 </pre>
 
+There is none at the generation but you can add `.jade`, `.haml` or `.hbs` (dependent of your HTML pre-processor choice) anywhere in the `src` folder and it will be compiled automatically. **Warning**, the first file of a type in a folder is often missed by the Gulp watch, try to relaunch Gulp if it happens.
+
+
 ## Features included in the gulpfile
 * *useref* : allow configuration of your files in comments of your HTML file
 * *ngAnnotate* : convert simple injection to complete syntax to be minification proof
@@ -123,6 +126,7 @@ The root directory generated with default paths configuration for application wi
 * *browser sync* : full-featured development web server with livereload and devices sync
 * *angular-templatecache* : all HTML partials will be converted to JS to be bundled in the application
 * **TODO** lazy : don't process files which haven't changed when possible
+
 
 ## Questions the generator will ask
 * *jQuery*: jQuery 1.x, 2.x, Zepto, none
