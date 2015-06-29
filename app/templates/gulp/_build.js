@@ -24,7 +24,7 @@ gulp.task('partials', ['markups'], function () {
     }))
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
       module: '<%- appName %>',
-      root: 'app'
+      root: '/app'
     }))
     .pipe(gulp.dest(conf.paths.tmp + '/partials/'));
 });
