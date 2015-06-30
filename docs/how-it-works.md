@@ -31,9 +31,9 @@ The task is organized by preparing first all settings of the injections the maki
 
 The 3 steps of injections are:
 
-- **Inject styles**: use of [gulp-inject](TODO) to list all the CSS files inside the head of the page.
-- **Inject scripts**: use of [gulp-inject](TODO) to list all the JS files inside the body of the page (bellow the app).
-- **Wiredep**: use of [wiredep](TODO) streams to add CSS and JS files of the Bower dependencies.
+- **Inject styles**: use of [gulp-inject](https://github.com/klei/gulp-inject) to list all the CSS files inside the head of the page.
+- **Inject scripts**: use of [gulp-inject](https://github.com/klei/gulp-inject) to list all the JS files inside the body of the page (bellow the app).
+- **Wiredep**: use of [wiredep](https://github.com/taptapship/wiredep) streams to add CSS and JS files of the Bower dependencies.
 
 ### Listing and ordering files for injection
 
@@ -43,9 +43,9 @@ As the script files has to be sorted in order to work. We use a magic script whi
 
 ### Locating places in the `index.html`
 
-[gulp-inject](TODO) put the `<script>` of `<link>` tags insides comments starting by `<!-- inject:css -->` or `<!-- inject:js -->` and ending by `<!-- endinject -->`.
+[gulp-inject](https://github.com/klei/gulp-inject) put the `<script>` of `<link>` tags insides comments starting by `<!-- inject:css -->` or `<!-- inject:js -->` and ending by `<!-- endinject -->`.
 
-[wiredep](TODO) put the `<script>` of `<link>` tags insides comments starting by `<!-- bower:css -->` or `<!-- bower:js -->` and ending by `<!-- endbower -->`.
+[wiredep](https://github.com/taptapship/wiredep) put the `<script>` of `<link>` tags insides comments starting by `<!-- bower:css -->` or `<!-- bower:js -->` and ending by `<!-- endbower -->`.
 
 Don't put anything inside this comments in your sources because the `inject` task will override it without warning you.
 
@@ -66,7 +66,7 @@ This task will launch the CoffeeLint analyze and the Coffee compilation and put 
 
 The `scripts` task has a dependency which is the installation of typings with the `tsd:install` gulp task. Once the typings ready, TSLint, TypeScript compilation and finally a concatenation of all JavaScript files produced in the right order are done.
 
-`tsd:install` is located in the `gulp/tsd.js` which is created only when choosing TypeScript. It will automatically download typings files for the dependency found in Bower with a popular library [TSD](TODO)
+`tsd:install` is located in the `gulp/tsd.js` which is created only when choosing TypeScript. It will automatically download typings files for the dependency found in Bower with a popular library [TSD](http://definitelytyped.org/tsd/)
 
 ### With ES6
 
@@ -85,7 +85,7 @@ This file exists only if you choose a style pre-processor.
 
 As all styles pre-processors handle themselves the inclusions of all dependency files, as an exception, the style task is part of the injection process.
 
-Like in the [`gulp/inject.js`](#gulp-inject-js), there is two kinds of injection, first, your files and the one from Bower dependencies. Still like in the standard injection, it's controlled by comments but this time in the format of the pre-processor: `// bower:(scss|less|styl)` -> `// endbower` & `// injector` -> `// endinjector`.
+Like in the [`gulp/inject.js`](#gulpinjectjs), there is two kinds of injection, first, your files and the one from Bower dependencies. Still like in the standard injection, it's controlled by comments but this time in the format of the pre-processor: `// bower:(scss|less|styl)` -> `// endbower` & `// injector` -> `// endinjector`.
 
 The injection is on step of the main Gulp stream for the styles. Once processed, the uniq file inside `.tmp/serve` will follow the standard injection process to be included in the `index.html`.
 
@@ -94,18 +94,18 @@ The injection is on step of the main Gulp stream for the styles. Once processed,
 All transformations are made in a single stream. As it includes injection and pre-processing, it could be disturbing because there is no work files but this is the magic and power of Gulp! If you intend to debug or understanding the process, the better way is to comment one or several transformations of the stream to look at single step.
 
 The stream by itself is composed of some very identifiable steps:
-- Injection with [gulp-inject](TODO)
-- Injection with [Wiredep](TODO)
+- Injection with [gulp-inject](https://github.com/klei/gulp-inject)
+- Injection with [Wiredep](https://github.com/taptapship/wiredep)
 - Start of sourcemap
 - Style pre-processing with one of the one supported: Sass, Less or Stylus
-- Autoprefixer with [gulp-autoprefixer](TODO)
+- Autoprefixer with [gulp-autoprefixer](https://github.com/sindresorhus/gulp-autoprefixer)
 - End of sourcemap
 - Writing files in `.tmp/serve`
 - Reloading files in Browser Sync if present
 
 ### Ruby Sass
 
-Ruby Sass (the original implementation) caused us some pains fitting in the process. The Gulp plugin is a bit "touchy" (it's not supporting Gulp sourcemap system for example) and the options are not the same as for [node-sass](TODO).
+Ruby Sass (the original implementation) caused us some pains fitting in the process. The Gulp plugin is a bit "touchy" (it's not supporting Gulp sourcemap system for example) and the options are not the same as for [node-sass](https://www.npmjs.com/package/node-sass).
 
 In order to have the sourcemaps working, there is some exceptions. The main trick is to ask Ruby Sass to generate its own sourcemaps and then, load them with Gulp with `$.sourcemaps.init({ loadMaps: true })` and continue the normal process.
 
@@ -116,7 +116,7 @@ The generator handles template pre-processing even if there is no "examples" in 
 
 When a HTML pre-processor is chosen, the `markups` task is inserted and works the same as `styles` and `scripts` one.
 
-The transformation is handled by [Consolidate](TODO) the reference library which also handle template processing inside [Express](TODO).
+The transformation is handled by [Consolidate](https://github.com/tj/consolidate.js) the reference library which also handle template processing inside [Express](http://expressjs.com/).
 
 ## `gulp/watch.js`
 
@@ -145,7 +145,7 @@ Two remarks could be made:
 
 ## `gulp/server.js`
 
-The generator ship a fully featured development server through the use of [Browser Sync](TODO). Don't hesitate to look at its website to know more about all its features and options.
+The generator ship a fully featured development server through the use of [Browser Sync](http://www.browsersync.io/). Don't hesitate to look at its website to know more about all its features and options.
 
 The `serve` task has as only goal to configure and launch it.
 
@@ -180,16 +180,16 @@ As we wanted to keep some useful tools from the generator. It's from the Karma c
 
 ### `karam.conf.js`
 
-The `listFiles` function at the start of the file use [wiredep](TODO) and the `gulp/conf.js` file to list the files of the project the same way the injection does. This way, the user should never has to change the file list in the Karma configuration.
+The `listFiles` function at the start of the file use [wiredep](https://github.com/taptapship/wiredep) and the `gulp/conf.js` file to list the files of the project the same way the injection does. This way, the user should never has to change the file list in the Karma configuration.
 
 Past that two Karma plugin are used:
-- [angularFilesort](TODO): to order script files like in the injection.
-- [ngHtml2JsPreprocessor](TODO): to be able to load templates inside tests which is needed in directive tests especially.
+- [angularFilesort](https://www.npmjs.com/package/karma-angular-filesort): to order script files like in the injection.
+- [ngHtml2JsPreprocessor](https://github.com/karma-runner/karma-ng-html2js-preprocessor): to be able to load templates inside tests which is needed in directive tests especially.
 
 
 ## `gulp/e2e-tests.js`
 
-The `protractor` task is build on top of the [gulp-protractor](TODO) plugin which handles the downloading and the launching of an embedded Webdriver with Protractor.
+The `protractor` task is build on top of the [gulp-protractor](https://github.com/mllrsohn/gulp-protractor) plugin which handles the downloading and the launching of an embedded Webdriver with Protractor.
 
 With a dependency on the task `serve:e2e` which launch the server without opening a browser on it, the server is started and a dependency on the initialization of Webdriver, the protractor tests can be launched.
 
@@ -209,13 +209,13 @@ As all files will be in the same stream, we use Gulp filters to filter a type of
 
 ### Partials
 
-One of the optimization is to mount all the partials or templates inside the script bundle in order to reduce the number of request at the loading. We do that in the `partials` task which use the [gulp-angularTemplatecache](TODO) plugin in order to transform the HTML files in valid JavaScript Angular desclaration.
+One of the optimization is to mount all the partials or templates inside the script bundle in order to reduce the number of request at the loading. We do that in the `partials` task which use the [gulp-angularTemplatecache](https://www.npmjs.com/package/gulp-angular-templatecache) plugin in order to transform the HTML files in valid JavaScript Angular desclaration.
 
-The Gulp stream load the HTML files from the sources, minify the code HTML, apply the AngularTemplateCache transformation and put them in a `.tmp/partials` to be injected in the main process with the same [gulp-inject](TODO) plugin already used.
+The Gulp stream load the HTML files from the sources, minify the code HTML, apply the AngularTemplateCache transformation and put them in a `.tmp/partials` to be injected in the main process with the same [gulp-inject](https://github.com/klei/gulp-inject) plugin already used.
 
 ### Useref
 
-[gulp-useref](TODO) is the backbone of the optimization process. Starting by the `index.html` it loads all the files using the `<!-- build:....` -> `<!-- endbuild -->` comments.
+[gulp-useref](https://github.com/jonkemp/gulp-useref) is the backbone of the optimization process. Starting by the `index.html` it loads all the files using the `<!-- build:....` -> `<!-- endbuild -->` comments.
 
 It adds all the files in the Gulp stream which ables us to filter them and apply transformations (line `.pipe(assets = $.useref.assets())`).
 
@@ -223,17 +223,17 @@ It also perform the concatenation and rewrite the `index.html` pointing on the n
 
 To understand where the files are located and how to call the targeted files, you have to look at the comments (not the Gulp file), basically, the syntax is: `<!-- build:{{type: css or js}}({{base path}}) {{target file path}} -->`.
 
-More information on [gulp-useref](TODO).
+More information on [gulp-useref](https://github.com/jonkemp/gulp-useref).
 
 ### Rev
 
 Another great feature of the generator is to rename your optimized files with the hashcode of the content. It prevent all problems of client caches which prevent them to reload new version of the files. With the content hashcode, only the files which has changed will change names.
 
-This feature is possible thanks to the [gulp-rev](TODO) which is used inside the main process. A second step [gulp-revReplace](TODO) is needed for the files to be renamed inside the new `index.html` created by Useref.
+This feature is possible thanks to the [gulp-rev](https://github.com/sindresorhus/gulp-rev) which is used inside the main process. A second step [gulp-revReplace](https://github.com/jamesknelson/gulp-rev-replace) is needed for the files to be renamed inside the new `index.html` created by Useref.
 
 ### Images
 
-Proposed as an advanced option, there is a task named `images` which can use [gulp-imagemin](TODO) to optimize your images before putting them in the `dist` folder.
+Proposed as an advanced option, there is a task named `images` which can use [gulp-imagemin](https://github.com/sindresorhus/gulp-imagemin) to optimize your images before putting them in the `dist` folder.
 
 It has been removed by default and put behind an advanced option because the NPM dependency is heavy and the image optimization slow so finally lots of people didn't want it anymore.
 
@@ -241,7 +241,7 @@ It has been removed by default and put behind an advanced option because the NPM
 
 Some Bower dependencies embed font files. To handle this particular case, there is `fonts` task which copies font files located by wiredep. This task only copy the in the `dist/font` directory.
 
-As we can't keep the original relative path of the font with the CSS file which include it, there is the need of replacing the link. It's why you find with some options the use of [gulp-replace](TODO) inside the main process. But this solution is **not generic** and could need to be duplicate with the use of others dependencies than default ones.
+As we can't keep the original relative path of the font with the CSS file which include it, there is the need of replacing the link. It's why you find with some options the use of [gulp-replace](https://github.com/lazd/gulp-replace) inside the main process. But this solution is **not generic** and could need to be duplicate with the use of others dependencies than default ones.
 
 ### Other
 

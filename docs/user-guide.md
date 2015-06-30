@@ -10,7 +10,7 @@ We're proud to say that this generator follow by the book the guidelines for the
 
 For the development phase, you've got the featured server behind the command `gulp serve` which support livereload of your modifications.
 
-Its usage is described in the chapters [Development server](#development-server) and [File watching & pre-processing](#file-watching-pre-processing)
+Its usage is described in the chapters [Development server](#development-server) and [File watching & pre-processing](#file-watching--pre-processing)
 
 ### `test`
 
@@ -42,7 +42,7 @@ Browser Sync is configured to serve your `src` folder. Or at least all the files
 
 For the pre-processed files (depending of your options, could be all your files). Browser Sync is configured to also served the `.tmp/serve` folder.
 
-With the [file watching and pre-processing](#file-watching-pre-processing) feature, your files will be automatically processed and put in that `.tmp/serve` folder and this process should be transparent.
+With the [file watching and pre-processing](#file-watching--pre-processing) feature, your files will be automatically processed and put in that `.tmp/serve` folder and this process should be transparent.
 
 If there is the same file in both directories, the one in `.tmp/serve` will be chosen.
 
@@ -50,7 +50,7 @@ Finally, your `bower_components` folder which contains your external dependencie
 
 ### Livereload of your sources
 
-When you launch your dev. server with `gulp serve`, it will launch Browser Sync but also the [file watching and pre-processing](#file-watching-pre-processing) feature.
+When you launch your dev. server with `gulp serve`, it will launch Browser Sync but also the [file watching and pre-processing](#file-watching--pre-processing) feature.
 
 When gulp detects a change, it will send a reload command to Browser Sync. Depending on which files has changed (html/js or css) it will reload the whole page or just reload the css and keep your page context up.
 
@@ -95,7 +95,7 @@ There is two types of file injection which will be performed, the injection of y
 
 ### Bower dependencies
 
-An external tool called [Wiredep](todo) is used in the generated project to list the Bower dependencies and inject them in the index.html.
+An external tool called [Wiredep](https://github.com/taptapship/wiredep) is used in the generated project to list the Bower dependencies and inject them in the index.html.
 
 You have to notice that in order to work correctly, your Bower dependencies should be listed in the `bower.json`, installed in the `bower_components` folder and contains a `bower.json` of their own listing the files to include in the property `main`.
 
@@ -105,7 +105,7 @@ A dependency wrongly installed or which doesn't link properly the files to inclu
 
 The generator is also abled to automatically write the `script` and `link` tags for your own source files. To do that, it look through the whole content of the `src` folder and inject all the files in the `index.html`.
 
-As the order of the files are important in JavaScript, the order is not chosen randomly. We use a script called [Angular FileSort](TODO) which will analyse your source code and reorder your files respecting the dependencies discovered through the Angular modules.
+As the order of the files are important in JavaScript, the order is not chosen randomly. We use a script called [Angular FileSort](https://github.com/klei/gulp-angular-filesort) which will analyse your source code and reorder your files respecting the dependencies discovered through the Angular modules.
 
 For the CSS, the order is not important. Unfortunately for the CSS pre-processors the order does matters but we don't have any ordering feature to solve the issue. The only element we can give is that the order is not random but depends on the folder structure and the file names and in most of the case it's possible to find a structure which will assure the files to be loaded in the right order.
 
@@ -137,9 +137,9 @@ As it is today the guideline, the tests files are placed directly in the source 
 
 The `karma.conf.js` file delivered with the project is plugged with the same features and configurations than the Gulp scripts. The [File injection](#file-injection) used to populate the `index.html` file is used with the same behaviors to parameter karma.
 
-By default, we chose to use [PhantomJS](TODO) as test browser, it's shipped inside the NPM install you performed after generating the files so you don't have to have it installed in global. There is an exception when you use Traceur as JS pre-processor as they are incompatible, we switch to Chrome.
+By default, we chose to use [PhantomJS](http://phantomjs.org/) as test browser, it's shipped inside the NPM install you performed after generating the files so you don't have to have it installed in global. There is an exception when you use Traceur as JS pre-processor as they are incompatible, we switch to Chrome.
 
-Still as default choice, the test framework is [Jasmine](TODO). It would be perfect if it was an option to choose another one in the generator but it's not the case at this point.
+Still as default choice, the test framework is [Jasmine](http://jasmine.github.io/). It would be perfect if it was an option to choose another one in the generator but it's not the case at this point.
 
 To allow tests to load HTML partials especially for the directives tests, we use a Karma plugin [karma-ng-html2js-preprocessor](https://github.com/karma-runner/karma-ng-html2js-preprocessor).
 
