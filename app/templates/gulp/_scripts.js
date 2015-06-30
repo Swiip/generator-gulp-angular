@@ -5,7 +5,9 @@ var gulp = require('gulp');
 var conf = require('./conf');
 
 var browserSync = require('browser-sync');
+<% if (props.jsPreprocessor.srcExtension === 'es6') { -%>
 var webpack = require('webpack-stream');
+<% } -%>
 
 var $ = require('gulp-load-plugins')();
 
