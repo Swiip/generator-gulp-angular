@@ -1,5 +1,6 @@
-angular.module "<%- appName %>"
+angular.module '<%- appName %>'
   .config ($logProvider, toastr) ->
+    'ngInject'
     # Enable log
     $logProvider.debugEnabled true
     # Set options third-party lib

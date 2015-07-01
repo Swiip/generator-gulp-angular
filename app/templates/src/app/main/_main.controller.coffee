@@ -1,5 +1,6 @@
-angular.module "<%- appName %>"
-  .controller "MainController", ($timeout, webDevTec, toastr) ->
+angular.module '<%- appName %>'
+  .controller 'MainController', ($timeout, webDevTec, toastr) ->
+    'ngInject'
     vm = this
     activate = ->
       getWebDevTec()
