@@ -1,5 +1,6 @@
-angular.module "<%- appName %>"
-  .service "webDevTec", () ->
+angular.module '<%- appName %>'
+  .service 'webDevTec', () ->
+    'ngInject'
     data = <%- technologies %>
 
     getTec = ->

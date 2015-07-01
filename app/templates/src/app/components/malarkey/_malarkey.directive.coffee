@@ -1,7 +1,8 @@
-angular.module "<%- appName %>"
+angular.module '<%- appName %>'
   .directive 'acmeMalarkey', ->
 
     MalarkeyController = ($log, githubContributor) ->
+      'ngInject'
       vm = this
 
       activate = ->
