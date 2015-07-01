@@ -1,6 +1,6 @@
 # Where to place third-party files?
 
-## #413
+## [#413](https://github.com/Swiip/generator-gulp-angular/issues/413)
 
 In `index.html` there are 2 types of auto-injected files during `gulp build` and `gulp serve`:
 * CSS part

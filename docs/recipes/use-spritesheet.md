@@ -1,6 +1,6 @@
-# Use of Spritesheet
+# Use spritesheets
 
-## #154
+## [#154](https://github.com/Swiip/generator-gulp-angular/issues/154)
 
 Yes! CSS3, font icons, svg are great tools! But unfortunately there are some layouts and and solutions we need to compress to reduce the number of requests.
 

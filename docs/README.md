@@ -13,6 +13,17 @@ But it can't and shouldn't match the requirements of all projects. It's why it g
 
 The community has written [recipes](recipes#recipes) for common use-cases that we chose not to add as a feature of the generator.
 
+- [Accessing 'bower_components' in .scss files without having to path ../../bower_components/](recipes/accessing-bower-components-scss.md)
+- [How to add fontawesome?](recipes/add-fontawesome.md)
+- [How to add gulp-react to a project?](recipes/add-gulp-react.md)
+- [Build without concat CSS files](recipes/build-without-concat-css.md)
+- [Is there a way to change the output directory of fonts, scripts and styles?](recipes/build-without-concat-css.md)
+- [How can I have an environment specific build?](recipes/build-without-concat-css.md)
+- [How can exclude some HTML files from being added to the Angular cache?](recipes/keep-some-html-files-in-dist.md)
+- [Where to place third-party files?](managing-third-party-files.md)
+- [How shall I properly upgrade my current project with the last version of the generator?](recipes/upgrade-my-current-project.md)
+- [Use spritesheets](recipes/use-spritesheet.md)
+
 
 ## Still got questions?
 

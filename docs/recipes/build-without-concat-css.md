@@ -1,6 +1,6 @@
 # Build without concat CSS files
 
-## #158
+## [#158](https://github.com/Swiip/generator-gulp-angular/issues/158)
 
 I created a mini gulp module to solve this problem. But, I think that can be better, so I don't uploaded the module yet. Basically I have app.js file, and constants with array of files to load. Something like this:
 ```js

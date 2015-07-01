@@ -1,6 +1,6 @@
 # How to add fontawesome?
 
-## #337
+## [#337](https://github.com/Swiip/generator-gulp-angular/issues/337)
 Awesome. It's all working now. The scss import looks like
 
 ```scss

@@ -1,6 +1,6 @@
-# How shall I properly upgrade my current project with the last version of the generator
+# How shall I properly upgrade my current project with the last version of the generator?
 
-## #547
+## [#547](https://github.com/Swiip/generator-gulp-angular/issues/547)
 
 there is no upgrade provide by yeoman.
 You should update the generator by `npm -g install generator-gulp-angular` and rerun `yo gulp-angular` in your current project.

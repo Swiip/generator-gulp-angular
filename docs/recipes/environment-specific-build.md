@@ -1,6 +1,6 @@
 # How can I have an environment specific build?
 
-## #460
+## [#460](https://github.com/Swiip/generator-gulp-angular/issues/460)
 
 Nope we don't have equivalent.
 But I think you can choose different Firebase more simply with [gulp-ng-constant](https://www.npmjs.com/package/gulp-ng-constant)

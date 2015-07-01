@@ -1,6 +1,6 @@
 # How to add gulp-react to a project?
 
-## #278
+## [#278](https://github.com/Swiip/generator-gulp-angular/issues/278)
 
 You need to create javascript files using `react()` first and write them to a temporary directory, and then inject them with wiredep, you can't do all in a single step.
 

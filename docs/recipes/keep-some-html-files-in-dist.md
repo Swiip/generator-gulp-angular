@@ -1,6 +1,6 @@
 # How can exclude some HTML files from being added to the Angular cache?
 
-## #295
+## [#295](https://github.com/Swiip/generator-gulp-angular/issues/295)
 
 1) Blacklist the .seo.html files during partials task
 2) Copy the seo files afterwards into dist
