@@ -29,6 +29,8 @@ gulp.task('inject', ['scripts'], function () {
 <% } if (props.jsPreprocessor.key !== 'none') { -%>
     path.join(conf.paths.tmp, '/serve/app/**/*.module.js'),
     path.join(conf.paths.tmp, '/serve/app/**/*.js'),
+    path.join('!' + conf.paths.tmp, '/serve/app/**/*.spec.js'),
+    path.join('!' + conf.paths.tmp, '/serve/app/**/*.mock.js'),
 <% } -%>
     path.join('!' + conf.paths.src, '/app/**/*.spec.js'),
     path.join('!' + conf.paths.src, '/app/**/*.mock.js')
