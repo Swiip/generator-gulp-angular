@@ -11,6 +11,6 @@ module <%- appName %> {
         controllerAs: 'main'
       });
 
-    $urlRouterProvider.otherwise('/');    
+    $urlRouterProvider.otherwise('/');
   }
 }
