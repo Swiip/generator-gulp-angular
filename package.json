@@ -21,8 +21,8 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
-    "chalk": "~1.0.0",
-    "lodash": "~3.9.3",
+    "chalk": "~1.1.0",
+    "lodash": "~3.10.0",
     "slash": "~1.0.0",
     "underscore.string": "~3.1.1",
     "yeoman-generator": "~0.20.1",
