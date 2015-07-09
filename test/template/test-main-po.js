@@ -1,5 +1,4 @@
 'use strict';
-/* jshint expr:true */
 
 var chai = require('chai');
 var sinonChai = require('sinon-chai');

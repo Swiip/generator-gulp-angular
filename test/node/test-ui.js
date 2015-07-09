@@ -1,5 +1,4 @@
 'use strict';
-/* jshint expr:true */
 
 var chai = require('chai');
 chai.should();
@@ -24,7 +23,7 @@ describe('gulp-angular generator ui script', function () {
       generator.props = {
         router: { module: null },
         ui: { key: 'none' },
-        cssPreprocessor: { key: 'none', extension: 'css' }
+        cssPreprocessor: { key: 'none', extension: 'css' }
       };
       generator.files = [];
       generator.uiFiles();
@@ -39,7 +38,7 @@ describe('gulp-angular generator ui script', function () {
       generator.props = {
         router: { module: 'ngRoute' },
         ui: { key: 'bootstrap' },
-        cssPreprocessor: { key: 'notnone', extension: 'scss' }
+        cssPreprocessor: { key: 'notnone', extension: 'scss' }
       };
       generator.files = [];
       generator.uiFiles();
@@ -58,7 +57,7 @@ describe('gulp-angular generator ui script', function () {
         jQuery: { key: 'jquery1' },
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'angular-bootstrap' },
-        cssPreprocessor: { extension: 'scss' }
+        cssPreprocessor: { extension: 'scss' }
       };
       generator.computeWiredepExclusions();
       generator.wiredepExclusions[0].should.be.equal('/bootstrap\.js$/');
@@ -71,7 +70,7 @@ describe('gulp-angular generator ui script', function () {
         jQuery: { key: 'jquery1' },
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'angular-bootstrap' },
-        cssPreprocessor: { extension: 'less' }
+        cssPreprocessor: { extension: 'less' }
       };
       generator.computeWiredepExclusions();
       generator.wiredepExclusions[0].should.be.equal('/bootstrap\.js$/');
@@ -83,7 +82,7 @@ describe('gulp-angular generator ui script', function () {
         jQuery: { key: 'jquery1' },
         ui: { key: 'foundation' },
         foundationComponents: { key: 'angular-foundation' },
-        cssPreprocessor: { extension: 'scss' }
+        cssPreprocessor: { extension: 'scss' }
       };
       generator.computeWiredepExclusions();
       generator.wiredepExclusions[0].should.be.equal('/foundation\\.js/');
@@ -95,7 +94,7 @@ describe('gulp-angular generator ui script', function () {
         jQuery: { key: 'jquery1' },
         ui: { key: 'foundation' },
         foundationComponents: { key: 'angular-foundation' },
-        cssPreprocessor: { extension: 'notscss' }
+        cssPreprocessor: { extension: 'notscss' }
       };
       generator.computeWiredepExclusions();
       generator.wiredepExclusions[0].should.be.equal('/foundation\\.js/');

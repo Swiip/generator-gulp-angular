@@ -4,7 +4,7 @@ require('yeoman-generator');
 var _ = require('lodash');
 var mockPrompts = require('../../app/src/mock-prompts');
 
-module.exports = function() {
+module.exports = function() {
   var props = _.extend(_.cloneDeep(mockPrompts.defaults), {
     paths: {
       src: null,
