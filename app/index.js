@@ -44,6 +44,7 @@ require('./src/techs')(GulpAngularGenerator);
 require('./src/ui')(GulpAngularGenerator);
 require('./src/router')(GulpAngularGenerator);
 require('./src/preprocessors')(GulpAngularGenerator);
+require('./src/bower')(GulpAngularGenerator);
 
 require('./src/write')(GulpAngularGenerator);
 
