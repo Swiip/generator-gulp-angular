@@ -58,7 +58,7 @@ gulp.task('html', ['inject', 'partials'], function () {
 <% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'styl') { -%>
     .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/bootstrap-stylus/fonts/', '../fonts/'))
 <% } -%>
-    .pipe($.minifyCss())
+    .pipe($.minifyCss({ processImport: false }))
     .pipe(cssFilter.restore())
     .pipe(assets.restore())
     .pipe($.useref())
