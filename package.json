@@ -37,6 +37,7 @@
     "coveralls": "~2.11.2",
     "cross-spawn": "~0.4.1",
     "ejs": "~2.3.1",
+    "eslint": "^0.24.0",
     "fixture-stdout": "~0.2.1",
     "istanbul": "~0.3.15",
     "js-beautify": "~1.5.6",

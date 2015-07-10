@@ -37,7 +37,7 @@ module.exports = function(GulpAngularGenerator) {
       .replace(/\n/g, '\n    ');
 
     usedTechs.forEach(function(value) {
-      var path ='src/assets/images/' + listTechs[value].logo;
+      var path = 'src/assets/images/' + listTechs[value].logo;
 
       this.files.push({
         src: path,

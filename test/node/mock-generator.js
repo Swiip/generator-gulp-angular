@@ -3,7 +3,7 @@
 require('yeoman-generator');
 var _ = require('lodash');
 
-module.exports = function() {
+module.exports = function() {
   this._ = _;
   this.log = function() {};
   this.async = function() {
