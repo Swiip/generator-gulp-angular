@@ -29,6 +29,7 @@ module.exports = function() {
     processedFileExtension: null,
     includeModernizr: false,
     imageMin: false,
-    qrCode: false
+    qrCode: false,
+    bowerOverrides: null
   });
 };

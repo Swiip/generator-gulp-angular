@@ -94,7 +94,8 @@ function deps() {
   function processTemplate(buffer) {
     var data = {
       appName: 'appName',
-      props: { angularVersion: angularVersion }
+      props: { angularVersion: angularVersion },
+      bowerOverrides: null
     };
 
     var string = buffer.toString().replace(/<%[^-].*?%>/g, '');
