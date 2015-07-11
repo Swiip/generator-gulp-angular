@@ -95,7 +95,7 @@ function deps() {
     var data = {
       appName: 'appName',
       props: { angularVersion: angularVersion },
-      bowerOverrides: null
+      bowerOverrides: '{}'
     };
 
     var string = buffer.toString().replace(/<%[^-].*?%>/g, '');
