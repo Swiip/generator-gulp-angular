@@ -133,6 +133,13 @@
       },
       {
         "value": {
+          "key": "new-router",
+          "module": "ngNewRouter"
+        },
+        "name": "Angular 2 new router which is compatible with Angular 1 (experimental)"
+      },
+      {
+        "value": {
           "key": "none",
           "module": null
         },

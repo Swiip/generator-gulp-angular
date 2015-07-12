@@ -58,6 +58,12 @@ module.exports = function(GulpAngularGenerator) {
       }
     }
 
+    if (this.props.router.key === 'new-router') {
+      bowerOverrides['angular-new-router'] = {
+        main: [ 'dist/router.es5.js' ]
+      };
+    }
+
     if (_.isEmpty(bowerOverrides)) {
       this.bowerOverrides = null;
     } else {

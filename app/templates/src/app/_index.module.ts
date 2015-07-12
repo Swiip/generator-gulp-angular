@@ -14,16 +14,23 @@ import { acmeMalarkey } from '../app/components/malarkey/malarkey.directive';
 declare var malarkey: any;
 declare var moment: moment.MomentStatic;
 
-angular.module('<%- appName %>', [<%- modulesDependencies %>])
-  .constant('malarkey', malarkey)
-  .constant('moment', moment)
-  .config(config)
+module <%- appName %> {
+  'use strict';
+
+  angular.module('<%- appName %>', [<%- modulesDependencies %>])
+    .constant('malarkey', malarkey)
+    .constant('moment', moment)
+    .config(config)
 <% if (props.router.key !== 'none') { -%>
-  .config(routerConfig)
+    .config(routerConfig)
 <% } -%>
-  .run(runBlock)
-  .service('githubContributor', GithubContributor)
-  .service('webDevTec', WebDevTecService)
-  .controller('MainController', MainController)
-  .directive('acmeNavbar', acmeNavbar)
-  .directive('acmeMalarkey', acmeMalarkey);
+    .run(runBlock)
+    .service('githubContributor', GithubContributor)
+    .service('webDevTec', WebDevTecService)
+<% if (props.router.key === 'new-router') { -%>
+    .controller('RouterController', RouterController)
+<% } -%>
+    .controller('MainController', MainController)
+    .directive('acmeNavbar', acmeNavbar)
+    .directive('acmeMalarkey', acmeMalarkey);
+}

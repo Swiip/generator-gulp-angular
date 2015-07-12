@@ -26,6 +26,8 @@
     "angular-route": "<%- props.angularVersion %>",
 <% } if (props.router.key === 'ui-router') { -%>
     "angular-ui-router": "~0.2.15",
+<% } if (props.router.key === 'new-router') { -%>
+    "angular-new-router": "~0.5.3",
 <% } if(props.ui.key === 'bootstrap') { -%>
 <%   if(props.cssPreprocessor.extension === 'scss') { -%>
     "bootstrap-sass": "~3.3.4",
