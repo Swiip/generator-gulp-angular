@@ -176,12 +176,14 @@ describe('gulp-angular bower template', function () {
     result.should.match(/traceur-runtime/);
   });
 
-  it('should add overrides pprt for css bootstrap', function() {
-    model.props.ui.key = 'bootstrap';
-    model.props.cssPreprocessor.key = 'none';
-
+  it('should add overrides if needed', function() {
+    model.bowerOverrides = null;
     var result = bower(model);
-    result.should.match(/overrides/);
-    result.should.match(/dist\/css\/bootstrap.css/);
+    result.should.not.match(/overrides/);
+
+    model.bowerOverrides = 'test value';
+    result = bower(model);
+    result.should.match(/"overrides": test value,/);
   });
+
 });
