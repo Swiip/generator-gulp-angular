@@ -11,7 +11,8 @@ var generator;
 
 var router = require('../../app/src/router.js');
 
-describe('gulp-angular generator techs script', function () {
+describe('gulp-angular generator router script', function () {
+  var read;
 
   before(function() {
     router(Generator);
@@ -19,13 +20,9 @@ describe('gulp-angular generator techs script', function () {
 
   beforeEach(function() {
     generator = new Generator();
-  });
-
-  it('should prepare router files and html depending choices', function() {
-    var read = sinon.stub(generator.fs, 'read');
 
     generator.props = {
-      router: { module: 'ngRoute' },
+      router: { key: 'angular-route' },
       ui: { key: 'testUi' },
       jsPreprocessor: {
         srcExtension: 'testSrcExtension',
@@ -33,23 +30,41 @@ describe('gulp-angular generator techs script', function () {
       }
     };
 
+    read = sinon.stub(generator.fs, 'read');
+  });
+
+  it('should prepare router files and html for angular route', function() {
     generator.files = [];
     generator.computeRouter();
     generator.routerHtml.should.match(/ng-view/);
     generator.files[0].src.should.equal('src/app/_ngroute/__ngroute.testSrcExtension');
     generator.files[0].dest.should.equal('src/app/index.route.testExtension');
+  });
 
+  it('should prepare router files and html for UI Router', function() {
     generator.files = [];
-    generator.props.router.module = 'ui.router';
+    generator.props.router.key = 'ui-router';
     generator.computeRouter();
     generator.routerHtml.should.match(/ui-view/);
     generator.files[0].src.should.equal('src/app/_uirouter/__uirouter.testSrcExtension');
     generator.files[0].dest.should.equal('src/app/index.route.testExtension');
+  });
 
+  it('should prepare router files and html for angular new router', function() {
+    generator.files = [];
+    generator.props.router.key = 'new-router';
+    generator.computeRouter();
+    generator.routerHtml.should.match(/ng-viewport/);
+    generator.routerHtml.should.match(/RouterController/);
+    generator.files[0].src.should.equal('src/app/_newrouter/__newrouter.testSrcExtension');
+    generator.files[0].dest.should.equal('src/app/index.route.testExtension');
+  });
+
+  it('should prepare router files and html for not router', function() {
     generator.files = [];
     read.withArgs('template/src/app/main/__testUi.html')
       .returns('<div class="container">');
-    generator.props.router.module = 'none';
+    generator.props.router.key = 'none';
     generator.computeRouter();
     generator.routerHtml.should.match(/MainController/);
     generator.files.length.should.equal(0);

@@ -23,7 +23,7 @@ angular.module('<%- appName %>', [<%- modulesDependencies %>])
   .run(runBlock)
   .service('githubContributor', GithubContributorService)
   .service('webDevTec', WebDevTecService)
-<% if (props.router.key !== 'none') { -%>
+<% if (props.router.key === 'new-router') { -%>
   .controller('RouterController', RouterController)
 <% } -%>
   .controller('MainController', MainController)

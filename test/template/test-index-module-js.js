@@ -48,18 +48,32 @@ describe('gulp-angular index js template', function () {
     result.should.match(testTs);
   });
 
-  it('should add the router config when necessary', function() {
+  it('should not add the router config for no router', function() {
+    model.props.router.key = 'none';
+    var result = indexEs6(model);
+    result.should.not.match(/\.config\(routerConfig\)/);
+    result.should.not.match(/RouterController/);
+    result = indexTs(model);
+    result.should.not.match(/\.config\(routerConfig\)/);
+    result.should.not.match(/RouterController/);
+  });
+
+  it('should add the router config when a router is chosen', function() {
     model.props.router.key = 'not-none';
     var result = indexEs6(model);
-    result.should.match(/.config\(routerConfig\)/);
+    result.should.match(/\.config\(routerConfig\)/);
+    result.should.not.match(/RouterController/);
     result = indexTs(model);
-    result.should.match(/.config\(routerConfig\)/);
+    result.should.match(/\.config\(routerConfig\)/);
+    result.should.not.match(/RouterController/);
+  });
 
-    model.props.router.key = 'none';
-    result = indexEs6(model);
-    result.should.not.match(/.config\(routerConfig\)/);
+  it('should add the router controller for the angular new router', function() {
+    model.props.router.key = 'new-router';
+    var result = indexEs6(model);
+    result.should.match(/\.controller\('RouterController', RouterController\)/);
     result = indexTs(model);
-    result.should.not.match(/.config\(routerConfig\)/);
+    result.should.match(/\.controller\('RouterController', RouterController\)/);
   });
 
 });

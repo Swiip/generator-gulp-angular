@@ -28,7 +28,8 @@ describe('gulp-angular generator bower script', function () {
 
     it('should return null if bootstrap is not selected', function() {
       generator.props = {
-        ui: { key: 'notbootstrap' }
+        ui: { key: 'notbootstrap' },
+        router: { key: 'notnewrouter' }
       };
       generator.prepareBowerOverrides();
       expect(generator.bowerOverrides).to.be.null;
@@ -38,7 +39,8 @@ describe('gulp-angular generator bower script', function () {
       generator.props = {
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'official' },
-        cssPreprocessor: { key: 'something' }
+        cssPreprocessor: { key: 'something' },
+        router: { key: 'notnewrouter' }
       };
       generator.prepareBowerOverrides();
       var bootstrapMain = JSON.parse(generator.bowerOverrides).bootstrap.main;
@@ -51,7 +53,8 @@ describe('gulp-angular generator bower script', function () {
       generator.props = {
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'something' },
-        cssPreprocessor: { key: 'none' }
+        cssPreprocessor: { key: 'none' },
+        router: { key: 'notnewrouter' }
       };
       generator.prepareBowerOverrides();
       var bootstrapMain = JSON.parse(generator.bowerOverrides).bootstrap.main;
@@ -94,7 +97,8 @@ describe('gulp-angular generator bower script', function () {
       generator.props = {
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'something' },
-        cssPreprocessor: { key: 'less' }
+        cssPreprocessor: { key: 'less' },
+        router: { key: 'notnewrouter' }
       };
       generator.prepareBowerOverrides();
       var bootstrapMain = JSON.parse(generator.bowerOverrides).bootstrap.main;
@@ -103,15 +107,28 @@ describe('gulp-angular generator bower script', function () {
       allFonts(bootstrapMain);
     });
 
+    it('should add new router js file', function() {
+      generator.props = {
+        ui: { key: 'notbootstrap' },
+        router: { key: 'new-router' }
+      };
+      generator.prepareBowerOverrides();
+      var routerMain = JSON.parse(generator.bowerOverrides)['angular-new-router'].main;
+      var first = routerMain.shift();
+      first.should.match(/router\.es5\.js/);
+    });
+
     it('should keep indent in bower.json', function() {
       generator.props = {
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'something' },
-        cssPreprocessor: { key: 'something' }
+        cssPreprocessor: { key: 'something' },
+        router: { key: 'notnewrouter' }
       };
       generator.prepareBowerOverrides();
       generator.bowerOverrides.should.match(/^{.*\n {4}/);
     });
+
   });
 
   describe('select wiredep exclusions depending the choices', function () {
