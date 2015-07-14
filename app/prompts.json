@@ -17,7 +17,7 @@
   {
     "type": "checkbox",
     "name": "angularModules",
-    "message": "Which Angular's modules would you want to have? (ngRoute and ngResource will be addressed after)",
+    "message": "What Angular modules would you like to have? (ngRoute and ngResource will be addressed after)",
     "choices": [
       {
         "value": {
@@ -56,7 +56,7 @@
   {
     "type": "list",
     "name": "jQuery",
-    "message": "Would you need jQuery or perhaps Zepto?",
+    "message": "Do you need jQuery or perhaps Zepto?",
     "choices": [
       {
         "value": {
@@ -115,7 +115,7 @@
   {
     "type": "list",
     "name": "router",
-    "message": "Would you like to use a router ?",
+    "message": "Would you like to use a router?",
     "choices": [
       {
         "value": {
@@ -178,7 +178,7 @@
   {
     "type": "list",
     "name": "bootstrapComponents",
-    "message": "How do you want to implements your Bootstrap components?",
+    "message": "How do you want to implement your Bootstrap components?",
     "choices": [
       {
         "value": {
@@ -213,7 +213,7 @@
   {
     "type": "list",
     "name": "foundationComponents",
-    "message": "How do you want to implements your Foundation components?",
+    "message": "How do you want to implement your Foundation components?",
     "choices": [
       {
         "value": {
@@ -330,7 +330,7 @@
   {
     "type": "list",
     "name": "htmlPreprocessor",
-    "message": "Which html template engine would you want?",
+    "message": "Which HTML template engine would you want?",
     "choices": [
       {
         "value": {
