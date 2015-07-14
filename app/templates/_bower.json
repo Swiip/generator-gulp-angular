@@ -17,7 +17,7 @@
 <% } if (props.jQuery.key === 'jquery2') { -%>
     "jquery": "~2.1.4",
 <% } if (props.jQuery.key === 'zepto') { -%>
-    "zeptojs": "~1.1.6",
+    "zepto": "~1.1.6",
 <% } if (props.resource.key === 'angular-resource') { -%>
     "angular-resource": "<%- props.angularVersion %>",
 <% } if (props.resource.key === 'restangular') { -%>

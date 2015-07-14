@@ -174,6 +174,17 @@ describe('gulp-angular generator bower script', function () {
       generator.computeWiredepExclusions();
       generator.wiredepExclusions[0].should.be.equal('/jquery/');
     });
+
+    it('should exclude jQuery with Zepto', function() {
+      generator.props = {
+        jQuery: { key: 'zepto' },
+        ui: { key: 'foundation' },
+        foundationComponents: { key: 'official' },
+        cssPreprocessor: { key: 'none' }
+      };
+      generator.computeWiredepExclusions();
+      generator.wiredepExclusions[0].should.be.equal('/jquery/');
+    });
   });
 
 });
