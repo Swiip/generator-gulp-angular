@@ -10,14 +10,20 @@ module.exports = function(GulpAngularGenerator) {
     var routerPartialSrc = 'src/app/main/__' + this.props.ui.key + '.html';
 
     if (this.props.router.module === 'ngRoute') {
-      this.routerHtml = '<div ng-view></div>';
+      this.routerHtml = '<div ng-view'
+      if(this.props.ui.key === 'mdl')
+        this.routerHtml += ' class="mdl-layout__container"'
+      this.routerHtml += '></div>';
       this.files.push({
         src: 'src/app/_ngroute/__ngroute.' + this.props.jsPreprocessor.srcExtension,
         dest: 'src/app/index.route.' + this.props.jsPreprocessor.extension,
         template: true
       });
     } else if (this.props.router.module === 'ui.router') {
-      this.routerHtml = '<div ui-view></div>';
+      this.routerHtml = '<div ui-view' 
+      if(this.props.ui.key === 'mdl')
+        this.routerHtml += ' class="mdl-layout__container"'
+      this.routerHtml += '></div>';
       this.files.push({
         src: 'src/app/_uirouter/__uirouter.' + this.props.jsPreprocessor.srcExtension,
         dest: 'src/app/index.route.' + this.props.jsPreprocessor.extension,
