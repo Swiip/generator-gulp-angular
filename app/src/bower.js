@@ -50,7 +50,7 @@ module.exports = function(GulpAngularGenerator) {
    */
   GulpAngularGenerator.prototype.computeWiredepExclusions = function computeWiredepExclusions() {
     this.wiredepExclusions = [];
-    if (this.props.jQuery.key === 'none') {
+    if (this.props.jQuery.key === 'none' || this.props.jQuery.key === 'zepto') {
       this.wiredepExclusions.push('/jquery/');
     }
     if (this.props.ui.key === 'bootstrap') {
