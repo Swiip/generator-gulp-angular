@@ -13,18 +13,40 @@ module.exports = function(GulpAngularGenerator) {
     var bowerOverrides = {};
 
     if (this.props.ui.key === 'bootstrap') {
-      bowerOverrides.bootstrap = {
-        main: [
-          'dist/fonts/glyphicons-halflings-regular.eot',
-          'dist/fonts/glyphicons-halflings-regular.svg',
-          'dist/fonts/glyphicons-halflings-regular.ttf',
-          'dist/fonts/glyphicons-halflings-regular.woff',
-          'dist/fonts/glyphicons-halflings-regular.woff2'
-        ]
-      };
 
-      if (this.props.bootstrapComponents.key === 'official') {
-        bowerOverrides.bootstrap.main.unshift('dist/js/bootstrap.js');
+      if (this.props.cssPreprocessor.extension === 'scss') {
+
+        bowerOverrides['bootstrap-sass-official'] = {
+          main: [
+            'assets/stylesheets/_bootstrap.scss',
+            'assets/fonts/bootstrap/glyphicons-halflings-regular.eot',
+            'assets/fonts/bootstrap/glyphicons-halflings-regular.svg',
+            'assets/fonts/bootstrap/glyphicons-halflings-regular.ttf',
+            'assets/fonts/bootstrap/glyphicons-halflings-regular.woff',
+            'assets/fonts/bootstrap/glyphicons-halflings-regular.woff2'
+          ]
+        };
+
+        if (this.props.bootstrapComponents.key === 'official') {
+          bowerOverrides['bootstrap-sass-official'].main.unshift('assets/javascripts/bootstrap.js');
+        }
+
+      } else {
+
+        bowerOverrides.bootstrap = {
+          main: [
+            'dist/fonts/glyphicons-halflings-regular.eot',
+            'dist/fonts/glyphicons-halflings-regular.svg',
+            'dist/fonts/glyphicons-halflings-regular.ttf',
+            'dist/fonts/glyphicons-halflings-regular.woff',
+            'dist/fonts/glyphicons-halflings-regular.woff2'
+          ]
+        };
+
+        if (this.props.bootstrapComponents.key === 'official') {
+          bowerOverrides.bootstrap.main.unshift('dist/js/bootstrap.js');
+        }
+
       }
 
       if (this.props.cssPreprocessor.key === 'none') {
