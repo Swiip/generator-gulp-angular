@@ -1,4 +1,4 @@
-# generator-gulp-angular ![Logo](app/templates/src/assets/images/generator-gulp-angular-logo.png)
+# generator-gulp-angular
 
 [![Build Status](https://img.shields.io/travis/Swiip/generator-gulp-angular/master.svg?style=flat)](http://travis-ci.org/Swiip/generator-gulp-angular)
 [![Coverage Status](http://img.shields.io/coveralls/Swiip/generator-gulp-angular.svg?style=flat)](https://coveralls.io/r/Swiip/generator-gulp-angular?branch=master)
@@ -35,7 +35,7 @@ npm install -g generator-gulp-angular
 ```
 
 
-### Usage
+### Run
 
 ##### Create a new directory, and go into:
 ```
@@ -47,40 +47,21 @@ mkdir my-new-project && cd $_
 yo gulp-angular
 ```
 
+## Documentation
 
-## Features
-
-More informations about how to use your new project is available in the [user guide](docs/user-guide.md) or if you want to know [how it works](docs/how-it-works.md).
-
-### Features included in the gulpfile
-
-* *useref* : allow configuration of your files in comments of your HTML file
-* *ngAnnotate* : convert simple injection to complete syntax to be minification proof
-* *uglify* : optimize all your JavaScript
-* *csso* : optimize all your CSS
-* *rev* : add a hash in the file names to prevent browser cache problems
-* *watch* : watch your source files and recompile them automatically
-* *jshint* : JavaScript code linter
-* *imagemin* : all your images will be optimized at build
-* *Unit test (karma)* : out of the box unit test configuration with karma
-* *e2e test (protractor)* : out of the box e2e test configuration with protractor
-* *browser sync* : full-featured development web server with livereload and devices sync
-* *angular-templatecache* : all HTML partials will be converted to JS to be bundled in the application
+* [docs/README](docs/README.md)
+* More informations about how to use your new project is available in the [docs/user-guide](docs/user-guide.md)
+* If you want to know: [docs/how-it-works](docs/how-it-works.md).
 
 
-### Questions the generator will ask
+## Features included in the gulpfile
 
-* *Angular version*: 1.3.x, 1.2.x
-* *Angular modules*: animate, cookies, touch, sanitize
-* *jQuery*: 2.x, 1.x, Zepto, none
-* *Resource handler*: ngResource, Restangular, none
-* *Router*: UI Router, ngRoute, none
-* *UI framework*: Bootstrap, Angular Material, Foundation, none
-* *UI directives* : Angular UI Bootstrap, Angular Strap, Bootstrap jQuery, Angular Foundation, Foundation Jquery, none (depends on the UI framework)
-* *CSS pre-processor*: Sass with Node or Ruby, Less, Stylus, none
-* *JS preprocessor*: none, ES6 Babel, ES6 Traceur, CoffeeScript, TypeScript
-* *HTML preprocessor*: none, Jade, Haml, Handlebars
+[List features included](docs/usage.md#features-included-in-the-gulpfile)
 
+
+## Questions the generator will ask
+
+[Questions the generator will ask](docs/usage.md#questions-the-generator-will-ask)
 
 
 ## Changelog
