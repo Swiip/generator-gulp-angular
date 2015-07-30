@@ -71,7 +71,7 @@ If you want more detail about the proxy middleware, look at the external lib whi
 
 ## File watching & pre-processing
 
-When you run the dev. server or if you manually launch the `watch` task, Gulp will watch your changes on the files in the `src` folder. It will ables Gulp to launch all processings on your file as soon as you hit save.
+When you run the dev. server or if you manually launch the `watch` task, Gulp will watch your changes on the files in the `src` folder. This enables Gulp to launch all processings on your file as soon as you hit save.
 
 All processings are watching your `src` directory and put their results in the `.tmp/serve` folder. **There is no automatic process featured in the generator which will modify your files in the `src` folder**. The processed version of the files are written at the same path as the original file with often a new file extension.
 
