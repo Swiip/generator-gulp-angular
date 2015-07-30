@@ -103,7 +103,7 @@ A dependency wrongly installed or which doesn't link properly the files to inclu
 
 ### Your source code
 
-The generator is also abled to automatically write the `script` and `link` tags for your own source files. To do that, it look through the whole content of the `src` folder and inject all the files in the `index.html`.
+The generator is also abled to automatically write the `script` and `link` tags for your own source files. To do that, it looks through the whole content of the `src` folder and inject all the files in the `index.html`.
 
 As the order of the files are important in JavaScript, the order is not chosen randomly. We use a script called [Angular FileSort](https://github.com/klei/gulp-angular-filesort) which will analyse your source code and reorder your files respecting the dependencies discovered through the Angular modules.
 
@@ -157,4 +157,4 @@ The optimization process is configured (through the comments in `index.html`) to
 
 All the HTML partials found in the sources are transformed in JavaScript with the plugin [gulp-angular-templatecache](https://github.com/miickel/gulp-angular-templatecache) and put in the sources bundle in a way which should be totally transparent for the Angular app.
 
-All the "other" files witch are not processed by any mechanism should be copied in the `dist` folder with the same path by the task `other`.
+All the "other" files which are not processed by any mechanism should be copied in the `dist` folder with the same path by the task `other`.
