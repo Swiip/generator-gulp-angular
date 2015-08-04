@@ -5,11 +5,11 @@
 
     "protractor.conf.js",
 
-    "e2e/.jshintrc",
+    "e2e/.eslintrc",
     "e2e/main.spec.js",
 
     "gulpfile.js",
-    "gulp/.jshintrc",
+    "gulp/.eslintrc",
     "gulp/e2e-tests.js",
     "gulp/tsd.js",
     "gulp/unit-tests.js",
@@ -19,7 +19,7 @@
   ],
   "templates": [
     ".gitignore",
-    ".jshintrc",
+    ".eslintrc",
 
     "package.json",
     "bower.json",

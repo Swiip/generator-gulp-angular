@@ -56,7 +56,7 @@ The `scripts` task is launched at build, dev and test time and at the watch of a
 
 ### With no JS preprocessor
 
-When you don't have JS preprocessor, the `scripts` task goal is to pass the linter (currently JSHint) on your code.
+When you don't have JS preprocessor, the `scripts` task goal is to pass the linter (ESLint) on your code.
 
 ### With Coffee
 

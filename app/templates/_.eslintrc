@@ -1,0 +1,21 @@
+{
+  "extends": "eslint:recommended",
+  "plugins": ["angular"],
+  "env": {
+<% if (props.jsPreprocessor.srcExtension === 'es6') { -%>
+    "es6": true,
+<% } -%>
+    "browser": true,
+    "jasmine": true
+  },
+<% if (props.jsPreprocessor.srcExtension === 'es6') { -%>
+  "ecmaFeatures": {
+    "modules": true
+  },
+<% } -%>
+  "globals": {
+    "angular": true,
+    "module": true,
+    "inject": true
+  }
+}

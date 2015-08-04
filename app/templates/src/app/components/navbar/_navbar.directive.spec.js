@@ -23,7 +23,7 @@
       el = angular.element('<acme-navbar creation-date="' + timeInMs + '"></acme-navbar>');
 
       $compile(el)($rootScope.$new());
-      $rootScope.$digest();
+      $rootScope.$apply();
       vm = el.isolateScope().vm;
       // ctrl = el.controller('acmeNavbar');
     }));

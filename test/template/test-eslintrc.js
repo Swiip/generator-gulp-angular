@@ -8,13 +8,13 @@ chai.use(sinonChai);
 var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
 
-describe('gulp-angular jshint template', function () {
-  var jshint, model;
+describe('gulp-angular eslint template', function () {
+  var eslint, model;
 
   before(function() {
-    return templateTools.load('_.jshintrc')
+    return templateTools.load('_.eslintrc')
       .then(function(templateModule) {
-        jshint = templateModule;
+        eslint = templateModule;
       });
   });
 
@@ -24,12 +24,14 @@ describe('gulp-angular jshint template', function () {
 
   it('should add esnext for es6 js prepro', function() {
     model.props.jsPreprocessor.srcExtension = 'notes6';
-    var result = jshint(model);
-    result.should.not.match(/esnext/);
+    var result = eslint(model);
+    result.should.not.match(/es6/);
+    result.should.not.match(/ecmaFeatures/);
 
     model.props.jsPreprocessor.srcExtension = 'es6';
-    result = jshint(model);
-    result.should.match(/"esnext": true/);
+    result = eslint(model);
+    result.should.match(/"es6": true/);
+    result.should.match(/"ecmaFeatures": {/);
   });
 
 });

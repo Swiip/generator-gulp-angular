@@ -101,7 +101,7 @@ The root directory generated with default paths configuration for application wi
 ├──  .bowerrc
 ├──  .editorconfig
 ├──  .gitignore
-├──  .jshintrc
+├──  .eslintrc
 ├──  bower.json
 ├──  gulpfile.js
 ├──  karma.conf.js
@@ -119,7 +119,7 @@ There is none at the generation but you can add `.jade`, `.haml` or `.hbs` (depe
 * *csso* : optimize all your CSS
 * *rev* : add a hash in the file names to prevent browser cache problems
 * *watch* : watch your source files and recompile them automatically
-* *jshint* : JavaScript code linter
+* *eslint* : The pluggable linting utility for JavaScript
 * *imagemin* : all your images will be optimized at build
 * *Unit test (karma)* : out of the box unit test configuration with karma
 * *e2e test (protractor)* : out of the box e2e test configuration with protractor

@@ -3,7 +3,7 @@
   "version": "0.13.0-dev",
   "preferGlobal": true,
   "description": "Yeoman generator for AngularJS with Gulp",
-  "keywords": "yeoman-generator, angular, gulp, restangular, ui-router, bootstrap, angular-material, foundation, sass, less, es6, babel, traceur, typescript, coffeescript, jade, haml, webpack, jshint",
+  "keywords": "yeoman-generator, angular, gulp, restangular, ui-router, bootstrap, angular-material, foundation, sass, less, es6, babel, traceur, typescript, coffeescript, jade, haml, webpack, eslint",
   "license": "MIT",
   "author": "Matthieu Lux & Mehdy Dara",
   "contributors": [

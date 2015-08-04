@@ -1,5 +1,4 @@
 {
-  "extends": "../.jshintrc",
   "globals": {
     "browser": false,
     "element": false,

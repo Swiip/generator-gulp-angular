@@ -24,8 +24,8 @@ gulp.task('scripts', function () {
 <%   } -%>
   return gulp.src(path.join(conf.paths.src, '/app/**/*.<%- props.jsPreprocessor.extension %>'))
 <%   if (props.jsPreprocessor.extension === 'js') { -%>
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
+    .pipe($.eslint())
+    .pipe($.eslint.format())
 <%   } if (props.jsPreprocessor.key !== 'none') { -%>
     .pipe($.sourcemaps.init())
 <%   } if (props.jsPreprocessor.key === 'coffee') { -%>
@@ -49,7 +49,7 @@ function webpackWrapper(watch, callback) {
   var webpackOptions = {
     watch: watch,
     module: {
-      preLoaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'jshint-loader'}],
+      preLoaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'eslint-loader'}],
 <%   if (props.jsPreprocessor.key === 'babel') { -%>
       loaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}]
 <%   } if (props.jsPreprocessor.key === 'traceur') { -%>
