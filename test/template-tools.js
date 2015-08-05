@@ -1,5 +1,4 @@
 'use strict';
-/* jshint camelcase:false */
 
 var fs = require('mz/fs');
 var Promise = require('bluebird');
@@ -46,7 +45,7 @@ function compile(fileName) {
     fs.readFile(sourceFilePath)
   ]).then(function(results) {
     var content = results[1].toString();
-    var sourceContent = sourceHeader + beautify(compileEjs(content), { indent_size: 2 }) + sourceFooter;
+    var sourceContent = sourceHeader + beautify(compileEjs(content), { 'indent_size': 2 }) + sourceFooter;
     sourceContent = sourceContent.replace('with(locals || {})', 'with(locals)');
     return fs.writeFile(destinationFilePath, sourceContent);
   });
@@ -95,7 +94,8 @@ function deps() {
   function processTemplate(buffer) {
     var data = {
       appName: 'appName',
-      props: { angularVersion: angularVersion }
+      props: { angularVersion: angularVersion },
+      bowerOverrides: '{}'
     };
 
     var string = buffer.toString().replace(/<%[^-].*?%>/g, '');

@@ -1,13 +1,9 @@
 'use strict';
-/* jshint expr:true */
 
 var chai = require('chai');
-var sinon = require('sinon');
 var sinonChai = require('sinon-chai');
 chai.should();
 chai.use(sinonChai);
-
-var _ = require('lodash');
 
 var Generator = require('./mock-generator');
 var generator;
@@ -34,7 +30,7 @@ describe('gulp-angular generator modules script', function () {
       router: { module: 'testModule1' },
       ui: { module: 'testModule2' },
       bootstrapComponents: { module: 'testModule3' },
-      foundationComponents: { module: 'testModule4' },
+      foundationComponents: { module: 'testModule4' }
     };
     generator.computeModules();
     generator.modulesDependencies.should.match(/\', \'/);

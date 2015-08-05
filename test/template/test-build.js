@@ -1,5 +1,4 @@
 'use strict';
-/* jshint expr:true */
 
 var chai = require('chai');
 var sinonChai = require('sinon-chai');
@@ -40,7 +39,7 @@ describe('gulp-angular build template', function () {
   });
 
   it('should replace bootstrap font paths', function() {
-    model.computedPaths.appToBower = 'appToBower'
+    model.computedPaths.appToBower = 'appToBower';
     model.props.ui.key = 'none';
     model.props.cssPreprocessor.extension = 'css';
     var result = build(model);

@@ -11,7 +11,7 @@
     "gulp-angular-templatecache": "~1.6.0",
     "del": "~1.2.0",
     "lodash": "~3.9.3",
-    "gulp-csso": "~1.0.0",
+    "gulp-minify-css": "~1.2.0",
     "gulp-filter": "~2.0.2",
     "gulp-flatten": "~0.0.4",
 <% if (imageMin) { -%>

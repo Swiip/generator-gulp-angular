@@ -1,5 +1,4 @@
 'use strict';
-/* jshint expr:true */
 
 var inception = require('../inception');
 

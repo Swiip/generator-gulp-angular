@@ -31,7 +31,7 @@ function browserSyncInit(baseDir, browser) {
   };
 
   /*
-   * You can add a proxy to your backend by uncommenting the line bellow.
+   * You can add a proxy to your backend by uncommenting the line below.
    * You just have to configure a context which will we redirected and the target url.
    * Example: $http.get('/users') requests will be automatically proxified.
    *

@@ -2,7 +2,7 @@
   {
     "type": "checkbox",
     "name": "advancedFeatures",
-    "message": "Do you want include these features?",
+    "message": "Do you want to include these features?",
     "choices": [
       {
         "value": "modernizr",

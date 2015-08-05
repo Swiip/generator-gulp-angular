@@ -1,156 +1,102 @@
-# generator-gulp-angular
+# generator-gulp-angular ![Logo](app/templates/src/assets/images/generator-gulp-angular-logo.png)
 
 [![Build Status](https://img.shields.io/travis/Swiip/generator-gulp-angular/master.svg?style=flat)](http://travis-ci.org/Swiip/generator-gulp-angular)
 [![Coverage Status](http://img.shields.io/coveralls/Swiip/generator-gulp-angular.svg?style=flat)](https://coveralls.io/r/Swiip/generator-gulp-angular?branch=master)
 [![Dependencies](http://img.shields.io/david/Swiip/generator-gulp-angular.svg?style=flat)](https://david-dm.org/eleven-labs/generator-gulp-angular)
-[![Download Month](http://img.shields.io/npm/dm/generator-gulp-angular.svg?style=flat)](https://www.npmjs.org/package/generator-gulp-angular)
 [![NPM Version](http://img.shields.io/npm/v/generator-gulp-angular.svg?style=flat)](https://www.npmjs.org/package/generator-gulp-angular)
+[![Download Month](http://img.shields.io/npm/dm/generator-gulp-angular.svg?style=flat)](https://www.npmjs.org/package/generator-gulp-angular)
+
 [![Gitter](http://img.shields.io/badge/Gitter-room-brightgreen.svg?style=flat)](https://gitter.im/Swiip/generator-gulp-angular)
-[![Gratipay](http://img.shields.io/gratipay/Swiip.svg?style=flat)](https://gratipay.com/Swiip/)
 
-Offers you a Yeoman generator to initiate a Web application with Angular powered by GulpJS.
+> Yeoman generator for AngularJS + Gulp.
 
-![Logo](app/templates/src/assets/images/generator-gulp-angular-logo-200x200.png)
+> Lets you quickly set up a project with:
+> * your favorite technologies
+> * web best pratices.
+> * guidelines powered by Google.
 
-## Why generator-gulp-angular ?
+> Gulp provide fast workspace with quick feedback.
 
-This generator combines the best features of other generators like [generator-angular](https://github.com/yeoman/generator-angular), [ngTailor](https://github.com/lauterry/generator-ngtailor) and [generator-gulp-webapp](https://github.com/yeoman/generator-gulp-webapp) into an optimal workflow for starting applications with AngularJS powered by Gulp!
-
-generator-gulp-angular scaffolds an AngularJS application with a full-featured gulpfile.js, giving you immediate out-of-the-box access to all tasks for modern web development.
-
-
-My intention is to create a generator that gives users total control over their development toolbox so they can immediately start projects with their preferred tools, such as specific UI frameworks or JavaScript preprocessors.
-
-This project is one of many things that you can use to get started on a new app.  For a comparison of the options and the trade-offs between them, please visit [this](http://www.dancancro.com/comparison-of-angularjs-application-starters) link.
 
 ## Usage
 
-### Create your project
+More informations, options, parameters in the [usage documentation page](docs/usage.md)
 
-Install the required tools: `yo`, `gulp`, `bower`
+### Install
+
+##### Install required tools `yo`, `gulp` and `bower`:
 ```
 npm install -g yo gulp bower
 ```
 
-Install `generator-gulp-angular`:
+##### Install `generator-gulp-angular`:
 ```
 npm install -g generator-gulp-angular
 ```
 
-Make a new directory, and `cd` into it:
+
+### Run
+
+##### Create a new directory, and go into:
 ```
 mkdir my-new-project && cd $_
 ```
 
-Run `yo gulp-angular`, optionally passing an app name:
+##### Run `yo gulp-angular`, and select desired technologies:
 ```
-yo gulp-angular [app-name]
+yo gulp-angular
 ```
 
-### Yo options
-`yo gulp-angular --help` or `yo gulp-angular -h` for help. All options are not required. If not provided, default values will be used.
+## Documentation
 
-* `--app-path='src'` customize Angular's app folder, relative to cwd, default is `src`
-* `--dist-path='dist'` customize build target folder, relative to cwd, default is `dist`
-* `--e2e-path='e2e'` customize e2e test specs folder, relative to cwd, default is `e2e`
-* `--tmp-path='.tmp'` customize pre-processing temp folder, relative to cwd, default is `.tmp`
-* `--skip-install` do not run `bower install` and `npm install` after generating the app, default is `false` (not skip)
-* `--skip-welcome-message` skip yo welcome messages, default is `false` (not skip)
-* `--skip-message` skip install messages, default is `false` (not skip)
-* `--default` use default configurations, default is `false`
-* `--advanced` prompt for advanced additional features, default is `false`
+* [docs/README](docs/README.md)
+* More informations about how to use your new project is available in the [docs/user-guide](docs/user-guide.md)
+* If you want to know: [docs/how-it-works](docs/how-it-works.md).
 
 
-Paths configuration are stored in `gulpfile.js`. Change `options.(src|dist|tmp|e2e)` in `gulpfile.js` if you want to config paths after the app is generated.
+## Features
 
-**Warning**: The paths are also written in the `index.html` for the build with useref. If you want to change these paths, you also have to change the paths there in order to have the build task working.
+![Logo](docs/assets/gulp.png)
+![Logo](docs/assets/angular.png)
+![Logo](docs/assets/bootstrap.png)
+![Logo](docs/assets/materialdesign.png)
+![Logo](docs/assets/foundation.png)
+![Logo](docs/assets/bower.png)
+![Logo](docs/assets/webpack.png)
+![Logo](docs/assets/karma.png)
+![Logo](docs/assets/istanbul.png)
+![Logo](docs/assets/browsersync.png)
+![Logo](docs/assets/jasmine.png)
+![Logo](docs/assets/protractor.png)
 
-### Use Gulp tasks
+![Logo](docs/assets/babel.png)
+![Logo](docs/assets/coffeescript.png)
+![Logo](docs/assets/typescript.png)
+![Logo](docs/assets/traceur.png)
+![Logo](docs/assets/sass.png)
+![Logo](docs/assets/less.png)
+![Logo](docs/assets/stylus.png)
+![Logo](docs/assets/jade.png)
+![Logo](docs/assets/haml.png)
+![Logo](docs/assets/handlebars.png)
 
-* `gulp` or `gulp build` to build an optimized version of your application in `/dist`
-* `gulp serve` to launch a browser sync server on your source files
-* `gulp serve:dist` to launch a server on your optimized application
-* `gulp test` to launch your unit tests with Karma
-* `gulp test:auto` to launch your unit tests with Karma in watch mode
-* `gulp protractor` to launch your e2e tests with Protractor
-* `gulp protractor:dist` to launch your e2e tests with Protractor on the dist files
+[List features included](docs/usage.md#features-included-in-the-gulpfile)
 
-More information on the gulp tasks in [this README.md](app/templates/gulp/README.md).
-
-## Directory structure
-
-[Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub)
-
-The root directory generated for a app with name `gulpAngular` :
-<pre>
-├──  src/
-│   ├──  app/
-│   │   ├──  components/
-│   │   │   └──  navbar/
-│   │   │   │   ├──  navbar.controller.js
-│   │   │   │   └──  navbar.html
-│   │   ├──  main/
-│   │   │   ├──  main.controller.js
-│   │   │   ├──  main.controller.spec.js
-│   │   │   └──  main.html
-│   │   └──  index.js
-│   │   └──  index.(css|less|scss)
-│   │   └──  vendor.(css|less|scss)
-│   ├──  assets/
-│   │   └──  images/
-│   ├──  404.html
-│   ├──  favico.ico
-│   └──  index.html
-├──  gulp/
-├──  e2e/
-├──  bower_components/
-├──  nodes_modules/
-├──  .bowerrc
-├──  .editorconfig
-├──  .gitignore
-├──  .jshintrc
-├──  bower.json
-├──  gulpfile.js
-├──  karma.conf.js
-├──  package.json
-├──  protractor.conf.js
-</pre>
-
-## Features included in the gulpfile
-* *useref* : allow configuration of your files in comments of your HTML file
-* *ngAnnotate* : convert simple injection to complete syntax to be minification proof
-* *uglify* : optimize all your JavaScript
-* *csso* : optimize all your CSS
-* *rev* : add a hash in the file names to prevent browser cache problems
-* *watch* : watch your source files and recompile them automatically
-* *jshint* : JavaScript code linter
-* *imagemin* : all your images will be optimized at build
-* *Unit test (karma)* : out of the box unit test configuration with karma
-* *e2e test (protractor)* : out of the box e2e test configuration with protractor
-* *browser sync* : full-featured development web server with livereload and devices sync
-* *angular-templatecache* : all HTML partials will be converted to JS to be bundled in the application
-* **TODO** lazy : don't process files which haven't changed when possible
 
 ## Questions the generator will ask
-* *jQuery*: jQuery 1.x, 2.x, Zepto, none
-* *Angular modules*: animate, cookies, touch, sanitize
-* *Resource handler*: ngResource, Restangular, none
-* *Router*: ngRoute, UI Router, none
-* *UI Framework*: Bootstrap, Foundation, Angular Material, none (depends on the chosen CSS preprocessor)
-* *UI directives* : UI Bootstrap, Angular Strap, official Bootstrap JavaScript, Angular Foundation, official Foundation JavaScript, none (depends on the UI framework)
-* *CSS pre-processor*: Less, Sass with Ruby and Node, Stylus, none
-* *JS preprocessor*: CoffeeScript, TypeScript, ECMAScript 6 (Traceur and Babel), none
-* *HTML preprocessor*: Jade, Haml, Handlebars, none
-* **TODO** Script loader: Require, Webpack, none
-* **TODO** Test framework: Jasmine, Mocha, Qunit
+
+[Questions the generator will ask](docs/usage.md#questions-the-generator-will-ask)
+
 
 ## Changelog
 
 [All changes listed in the GitHub releases](https://github.com/Swiip/generator-gulp-angular/releases)
 
+
 ## Contributing
 
 [Guidelines](CONTRIBUTING.md)
+
 
 ## License
 

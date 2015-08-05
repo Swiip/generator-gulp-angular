@@ -1,5 +1,4 @@
 'use strict';
-/* jshint expr:true */
 
 var chai = require('chai');
 var sinon = require('sinon');
@@ -36,7 +35,7 @@ describe('gulp-angular generator prompts script', function () {
 
     it('should use default props if option is set', function() {
       sinon.spy(generator, 'log');
-      generator.options['default'] = true;
+      generator.options.default = true;
       generator.defaultOption();
       generator.props.should.be.deep.equal(mockPrompts.defaults);
       var logLines = 3 + _.flatten(_.values(generator.props)).length;

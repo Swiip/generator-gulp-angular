@@ -47,10 +47,13 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(assets = $.useref.assets())
     .pipe($.rev())
     .pipe(jsFilter)
+    .pipe($.sourcemaps.init())
     .pipe($.ngAnnotate())
     .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
+    .pipe($.sourcemaps.write('maps'))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
+    .pipe($.sourcemaps.init())
 <% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'scss') { -%>
     .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/', '../fonts/'))
 <% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'less') { -%>
@@ -58,7 +61,8 @@ gulp.task('html', ['inject', 'partials'], function () {
 <% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'styl') { -%>
     .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/bootstrap-stylus/fonts/', '../fonts/'))
 <% } -%>
-    .pipe($.csso())
+    .pipe($.minifyCss({ processImport: false }))
+    .pipe($.sourcemaps.write('maps'))
     .pipe(cssFilter.restore())
     .pipe(assets.restore())
     .pipe($.useref())
@@ -73,8 +77,9 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(htmlFilter.restore())
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
     .pipe($.size({ title: path.join(conf.paths.dist, '/'), showFiles: true }));
-});
+  });
 <% if (imageMin) { -%>
+
 gulp.task('images', function () {
   return gulp.src(path.join(conf.paths.src, '/assets/images/**/*'))
     .pipe($.imagemin({
