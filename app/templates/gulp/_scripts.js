@@ -80,7 +80,11 @@ function webpackWrapper(watch, callback) {
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')));
 }
 
+<%   if (props.jsPreprocessor.key === 'typescript') { -%>
 gulp.task('scripts', ['tsd:install'], function () {
+<%   } else { %>
+gulp.task('scripts', function () {
+<%   } %>
   return webpackWrapper(false);
 });
 
