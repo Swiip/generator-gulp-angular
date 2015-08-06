@@ -16,7 +16,7 @@ module.exports = function(GulpAngularGenerator) {
 
       if (this.props.cssPreprocessor.extension === 'scss') {
 
-        bowerOverrides['bootstrap-sass-official'] = {
+        bowerOverrides['bootstrap-sass'] = {
           main: [
             'assets/stylesheets/_bootstrap.scss',
             'assets/fonts/bootstrap/glyphicons-halflings-regular.eot',
@@ -28,7 +28,7 @@ module.exports = function(GulpAngularGenerator) {
         };
 
         if (this.props.bootstrapComponents.key === 'official') {
-          bowerOverrides['bootstrap-sass-official'].main.unshift('assets/javascripts/bootstrap.js');
+          bowerOverrides['bootstrap-sass'].main.unshift('assets/javascripts/bootstrap.js');
         }
 
       } else {
@@ -79,7 +79,7 @@ module.exports = function(GulpAngularGenerator) {
       if(this.props.bootstrapComponents.key !== 'official') {
         this.wiredepExclusions.push('/bootstrap\.js$/');
         if(this.props.cssPreprocessor.extension === 'scss') {
-          this.wiredepExclusions.push('/bootstrap-sass-official\\/.*\\.js/');
+          this.wiredepExclusions.push('/bootstrap-sass\\/.*\\.js/');
         }
       }
       if(this.props.cssPreprocessor.key !== 'none') {
