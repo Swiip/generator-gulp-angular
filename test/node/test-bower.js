@@ -94,7 +94,7 @@ describe('gulp-angular generator bower script', function () {
       };
       generator.computeWiredepExclusions();
       generator.wiredepExclusions[0].should.be.equal('/bootstrap\.js$/');
-      generator.wiredepExclusions[1].should.be.equal('/bootstrap-sass-official\\/.*\\.js/');
+      generator.wiredepExclusions[1].should.be.equal('/bootstrap-sass\\/.*\\.js/');
       generator.wiredepExclusions[2].should.be.equal('/bootstrap\\.css/');
     });
 

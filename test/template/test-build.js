@@ -49,7 +49,7 @@ describe('gulp-angular build template', function () {
     model.props.ui.key = 'bootstrap';
     model.props.cssPreprocessor.extension = 'scss';
     result = build(model);
-    result.should.match(/\$\.replace\('\.\.\/appToBower\/bower_components\/bootstrap-sass-official/);
+    result.should.match(/\$\.replace\('\.\.\/appToBower\/bower_components\/bootstrap-sass/);
 
     model.props.cssPreprocessor.extension = 'less';
     result = build(model);
