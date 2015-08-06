@@ -27,12 +27,10 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.key = 'not typescript';
     var result = scripts(model);
     result.should.match(/gulp\.task\('scripts', function/);
-    result.should.not.match(/typescript\.createProject/);
 
     model.props.jsPreprocessor.key = 'typescript';
     result = scripts(model);
     result.should.match(/gulp\.task\('scripts', \['tsd:install'\]/);
-    result.should.match(/tsProject = \$\.typescript\.createProject/);
   });
 
   it('should add the right js preprocessor process', function() {
@@ -56,9 +54,9 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.key = 'typescript';
     model.props.jsPreprocessor.extension = 'ts';
     result = scripts(model);
-    result.should.match(/gulp\.src.*conf\.paths\.src, '.*\.ts'/);
-    result.should.match(/\$\.tslint\(/);
-    result.should.match(/\$\.typescript\(/);
+    result.should.match(/function webpackWrapper\(watch, callback\)/);
+    result.should.match(/loaders:.*loader: 'awesome-typescript-loader'/);
+    result.should.match(/gulp\.task\('scripts:watch'/);
     result.should.not.match(/babel/);
     result.should.not.match(/traceur/);
     result.should.not.match(/coffee/);

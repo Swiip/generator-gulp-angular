@@ -23,11 +23,6 @@ gulp.task('scripts', function () {
     .pipe($.coffeelint())
     .pipe($.coffeelint.reporter())
     .pipe($.coffee()).on('error', conf.errorHandler('CoffeeScript'))
-<%   } if (props.jsPreprocessor.key === 'typescript') { -%>
-    .pipe($.tslint())
-    .pipe($.tslint.report('prose', { emitError: false }))
-    .pipe($.typescript(tsProject)).on('error', conf.errorHandler('TypeScript'))
-    .pipe($.concat('index.module.js'))
 <%   } if (props.jsPreprocessor.key !== 'none') { -%>
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')))
