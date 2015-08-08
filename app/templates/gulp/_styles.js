@@ -27,6 +27,7 @@ gulp.task('styles', function () {
 
   var injectFiles = gulp.src([
     path.join(conf.paths.src, '/app/**/*.<%- props.cssPreprocessor.extension %>'),
+    path.join('!' + conf.paths.src, '/app/**/*_.<%- props.cssPreprocessor.extension %>'),
     path.join('!' + conf.paths.src, '/app/index.<%- props.cssPreprocessor.extension %>')
   ], { read: false });
 
