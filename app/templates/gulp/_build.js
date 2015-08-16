@@ -37,9 +37,9 @@ gulp.task('html', ['inject', 'partials'], function () {
     addRootSlash: false
   };
 
-  var htmlFilter = $.filter('*.html');
-  var jsFilter = $.filter('**/*.js');
-  var cssFilter = $.filter('**/*.css');
+  var htmlFilter = $.filter('*.html', { restore: true });
+  var jsFilter = $.filter('**/*.js', { restore: true });
+  var cssFilter = $.filter('**/*.css', { restore: true });
   var assets;
 
   return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
@@ -51,7 +51,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.ngAnnotate())
     .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
     .pipe($.sourcemaps.write('maps'))
-    .pipe(jsFilter.restore())
+    .pipe(jsFilter.restore)
     .pipe(cssFilter)
     .pipe($.sourcemaps.init())
 <% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'scss') { -%>
@@ -63,7 +63,7 @@ gulp.task('html', ['inject', 'partials'], function () {
 <% } -%>
     .pipe($.minifyCss({ processImport: false }))
     .pipe($.sourcemaps.write('maps'))
-    .pipe(cssFilter.restore())
+    .pipe(cssFilter.restore)
     .pipe(assets.restore())
     .pipe($.useref())
     .pipe($.revReplace())
@@ -74,7 +74,7 @@ gulp.task('html', ['inject', 'partials'], function () {
       quotes: true,
       conditionals: true
     }))
-    .pipe(htmlFilter.restore())
+    .pipe(htmlFilter.restore)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
     .pipe($.size({ title: path.join(conf.paths.dist, '/'), showFiles: true }));
   });
