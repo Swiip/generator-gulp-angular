@@ -45,4 +45,4 @@ exports.errorHandler = function(title) {
 /**
  * Port used by browsersync
  */
-exports.port = 4000;
+exports.port = 3000;
