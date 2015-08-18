@@ -41,8 +41,3 @@ exports.errorHandler = function(title) {
     this.emit('end');
   };
 };
-
-/**
- * Port used by browsersync
- */
-exports.port = 3000;
