@@ -41,7 +41,7 @@ gulp.task('styles', function () {
   };
 
 <% if (props.cssPreprocessor.key === 'ruby-sass') { -%>
-  var cssFilter = $.filter('**/*.css');
+  var cssFilter = $.filter('**/*.css', { restore: true });
 <% } -%>
 
   return gulp.src([
@@ -65,7 +65,7 @@ gulp.task('styles', function () {
     .pipe($.autoprefixer()).on('error', conf.errorHandler('Autoprefixer'))
     .pipe($.sourcemaps.write())
 <% if (props.cssPreprocessor.key === 'ruby-sass') { -%>
-    .pipe(cssFilter.restore())
+    .pipe(cssFilter.restore)
 <% } -%>
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app/')))
     .pipe(browserSync.reload({ stream: true }));
