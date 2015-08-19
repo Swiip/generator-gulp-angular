@@ -20,6 +20,8 @@ module.exports = function(GulpAngularGenerator) {
       this.props.foundationComponents.module
     ]);
 
+    ngModules.push('toastr');
+
     this.modulesDependencies = ngModules
       .filter(_.isString)
       .map(function (dependency) {
