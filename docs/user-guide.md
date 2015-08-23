@@ -40,7 +40,7 @@ If you have a backend server to address, keep the development server and either 
 
 Browser Sync is configured to serve your `src` folder. Or at least all the files not transformed in `src`.
 
-For the pre-processed files (depending of your options, could be all your files). Browser Sync is configured to also served the `.tmp/serve` folder.
+For the pre-processed files (depending of your options, could be all your files). Browser Sync is configured to also serve the `.tmp/serve` folder.
 
 With the [file watching and pre-processing](#file-watching--pre-processing) feature, your files will be automatically processed and put in that `.tmp/serve` folder and this process should be transparent.
 
