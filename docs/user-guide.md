@@ -32,7 +32,7 @@ All the details about how to use it are in the [File injection](#file-injection)
 
 The generator is shipped with the awesome [Browser Sync](http://www.browsersync.io/) as development server.
 
-The recomanded development process is to serve locally your web resources to be more reactive and be able to have features like automatic reload of your page when you make a modification.
+The recommended development process is to serve locally your web resources to be more reactive and be able to have features like automatic reload of your page when you make a modification.
 
 If you have a backend server to address, keep the development server and either launch your request with complete URLs but you'll have to handle [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) or you can use the embedded proxy feature which can redirect your request from the development server to your backend transparently without dealing with CORS.
 
@@ -40,7 +40,7 @@ If you have a backend server to address, keep the development server and either 
 
 Browser Sync is configured to serve your `src` folder. Or at least all the files not transformed in `src`.
 
-For the pre-processed files (depending of your options, could be all your files). Browser Sync is configured to also served the `.tmp/serve` folder.
+For the pre-processed files (depending of your options, could be all your files). Browser Sync is configured to also serve the `.tmp/serve` folder.
 
 With the [file watching and pre-processing](#file-watching--pre-processing) feature, your files will be automatically processed and put in that `.tmp/serve` folder and this process should be transparent.
 
@@ -143,7 +143,7 @@ Still as default choice, the test framework is [Jasmine](http://jasmine.github.i
 
 To allow tests to load HTML partials especially for the directives tests, we use a Karma plugin [karma-ng-html2js-preprocessor](https://github.com/karma-runner/karma-ng-html2js-preprocessor).
 
-Other than that, we try to use as less Karma plugins as possible because they often duplicate process we already have inside Gulp. For sake of coherence and stability we're searching for a process centralized in Gulp and not duplicated in Karam or other tools like perhaps Webpack.
+Other than that, we try to use as less Karma plugins as possible because they often duplicate process we already have inside Gulp. For sake of coherence and stability we're searching for a process centralized in Gulp and not duplicated in Karma or other tools like perhaps Webpack.
 
 ## Optimization process
 

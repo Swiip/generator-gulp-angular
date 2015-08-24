@@ -126,7 +126,6 @@ describe('gulp-angular generator inception tests', function () {
   describe('with [$http, Bootstrap, AngularStrap, ruby-sass, Traceur]', function () {
     before(function() {
       return inception.prepare({}, {
-        // TODO replace Toastr by similar lib without jQuery dep (angular-toastr)
         // jQuery: prompts.jQuery.values['none'],
         ui: prompts.ui.values.bootstrap,
         bootstrapComponents: prompts.bootstrapComponents.values['angular-strap'],

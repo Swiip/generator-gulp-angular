@@ -15,14 +15,6 @@ html {
   padding: 0.2em 0;
 }
 
-.thumbnail {
-  height: 200px;
-}
-
-.thumbnail img.pull-right {
-  width: 50px;
-}
-
 md-toolbar.md-default-theme {
   background-color: black;
 }
@@ -51,5 +43,5 @@ section.jumbotron h1 {
 
 .techs md-card img.pull-right {
   float: right;
-  width: 50px;
+  width: 100px;
 }

@@ -60,6 +60,36 @@ describe('gulp-angular generator bower script', function () {
       allFonts(bootstrapMain);
     });
 
+    it('should add fonts and css for bootstrap and scss prepro', function() {
+      generator.props = {
+        ui: { key: 'bootstrap' },
+        bootstrapComponents: { key: 'official' },
+        cssPreprocessor: { key: 'notnone', extension: 'scss' }
+      };
+      generator.prepareBowerOverrides();
+      var bootstrapMain = JSON.parse(generator.bowerOverrides)['bootstrap-sass'].main;
+      bootstrapMain.length.should.be.equal(7);
+      var first = bootstrapMain.shift();
+      first.should.match(/bootstrap\.js/);
+      var second = bootstrapMain.shift();
+      second.should.match(/_bootstrap\.scss/);
+      allFonts(bootstrapMain);
+    });
+
+    it('should add fonts and css for bootstrap and scss prepro', function() {
+      generator.props = {
+        ui: { key: 'bootstrap' },
+        bootstrapComponents: { key: 'something' },
+        cssPreprocessor: { key: 'notnone', extension: 'scss' }
+      };
+      generator.prepareBowerOverrides();
+      var bootstrapMain = JSON.parse(generator.bowerOverrides)['bootstrap-sass'].main;
+      bootstrapMain.length.should.be.equal(6);
+      var first = bootstrapMain.shift();
+      first.should.match(/_bootstrap\.scss/);
+      allFonts(bootstrapMain);
+    });
+
     it('should add fonts and css for bootstrap and less as css prepro', function() {
       generator.props = {
         ui: { key: 'bootstrap' },
@@ -94,7 +124,7 @@ describe('gulp-angular generator bower script', function () {
       };
       generator.computeWiredepExclusions();
       generator.wiredepExclusions[0].should.be.equal('/bootstrap\.js$/');
-      generator.wiredepExclusions[1].should.be.equal('/bootstrap-sass-official\\/.*\\.js/');
+      generator.wiredepExclusions[1].should.be.equal('/bootstrap-sass\\/.*\\.js/');
       generator.wiredepExclusions[2].should.be.equal('/bootstrap\\.css/');
     });
 

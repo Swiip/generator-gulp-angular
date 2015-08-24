@@ -12,7 +12,7 @@
     "del": "~1.2.0",
     "lodash": "~3.9.3",
     "gulp-minify-css": "~1.2.0",
-    "gulp-filter": "~2.0.2",
+    "gulp-filter": "~3.0.0",
     "gulp-flatten": "~0.0.4",
 <% if (imageMin) { -%>
     "gulp-imagemin": "~2.2.0",

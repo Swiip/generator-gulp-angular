@@ -20,7 +20,7 @@ The community has written [recipes](recipes#recipes) for common use-cases that w
 - [Is there a way to change the output directory of fonts, scripts and styles?](recipes/build-without-concat-css.md)
 - [How can I have an environment specific build?](recipes/build-without-concat-css.md)
 - [How can exclude some HTML files from being added to the Angular cache?](recipes/keep-some-html-files-in-dist.md)
-- [Where to place third-party files?](managing-third-party-files.md)
+- [Where to place third-party files?](recipes/managing-third-party-files.md)
 - [How shall I properly upgrade my current project with the last version of the generator?](recipes/upgrade-my-current-project.md)
 - [Use spritesheets](recipes/use-spritesheet.md)
 

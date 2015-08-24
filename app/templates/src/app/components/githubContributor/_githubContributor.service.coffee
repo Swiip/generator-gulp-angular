@@ -3,7 +3,7 @@ angular.module '<%- appName %>'
     'ngInject'
     apiHost = 'https://api.github.com/repos/Swiip/generator-gulp-angular'
 
-    getContributors = (limit) ->
+    getContributors = (limit=30) ->
 
       getContributorsComplete = (response) ->
         response.data
@@ -12,8 +12,6 @@ angular.module '<%- appName %>'
         $log.error 'XHR Failed for getContributors.\n' + angular.toJson(error.data, true)
         return
 
-      if !limit
-        limit = 30
       $http.get(apiHost + '/contributors?per_page=' + limit).then(getContributorsComplete).catch getContributorsFailed
 
     service =

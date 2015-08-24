@@ -4,13 +4,14 @@ export class MainController {
   public awesomeThings: ITecThing[];
   public webDevTec: WebDevTecService;
   public classAnimation: string;
+  public toastr;
 
   /* @ngInject */
-  constructor ($timeout: ng.ITimeoutService, webDevTec: WebDevTecService, toastr: Toastr) {
+  constructor ($timeout: ng.ITimeoutService, webDevTec: WebDevTecService, toastr) {
     this.awesomeThings = new Array();
     this.webDevTec = webDevTec;
     this.classAnimation = '';
-
+    this.toastr = toastr;
     this.activate($timeout);
   }
 
@@ -25,7 +26,7 @@ export class MainController {
   }
 
   showToastr() {
-    toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
+    this.toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
     this.classAnimation = '';
   }
 
