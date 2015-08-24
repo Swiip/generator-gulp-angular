@@ -158,7 +158,7 @@ describe('gulp-angular bower template', function () {
     result.should.not.match(/material/);
 
     model.props.ui.key = 'mdl';
-    result = bower(model)
+    result = bower(model);
     result.should.match(/"material-design-lite"/);
     result.should.not.match(/bootstrap/);
     result.should.not.match(/foundation/);
