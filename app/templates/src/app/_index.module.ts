@@ -12,7 +12,6 @@
 /// <reference path="../app/components/githubContributor/githubContributor.service.ts" />
 
 declare var malarkey: any;
-declare var toastr: Toastr;
 declare var moment: moment.MomentStatic;
 
 module <%- appName %> {
@@ -20,7 +19,6 @@ module <%- appName %> {
 
   angular.module('<%- appName %>', [<%- modulesDependencies %>])
     .constant('malarkey', malarkey)
-    .constant('toastr', toastr)
     .constant('moment', moment)
     .config(config)
 <% if (props.router.key !== 'none') { %>

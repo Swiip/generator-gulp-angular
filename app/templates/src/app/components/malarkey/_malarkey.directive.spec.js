@@ -26,7 +26,7 @@
       el = angular.element('<acme-malarkey extra-values="[\'Poney\', \'Monkey\']"></acme-malarkey>');
 
       $compile(el)($rootScope.$new());
-      $rootScope.$apply();
+      $rootScope.$digest();
       vm = el.isolateScope().vm;
     }));
 

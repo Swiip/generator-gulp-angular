@@ -32,7 +32,7 @@ All the details about how to use it are in the [File injection](#file-injection)
 
 The generator is shipped with the awesome [Browser Sync](http://www.browsersync.io/) as development server.
 
-The recomanded development process is to serve locally your web resources to be more reactive and be able to have features like automatic reload of your page when you make a modification.
+The recommended development process is to serve locally your web resources to be more reactive and be able to have features like automatic reload of your page when you make a modification.
 
 If you have a backend server to address, keep the development server and either launch your request with complete URLs but you'll have to handle [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) or you can use the embedded proxy feature which can redirect your request from the development server to your backend transparently without dealing with CORS.
 
@@ -40,7 +40,7 @@ If you have a backend server to address, keep the development server and either 
 
 Browser Sync is configured to serve your `src` folder. Or at least all the files not transformed in `src`.
 
-For the pre-processed files (depending of your options, could be all your files). Browser Sync is configured to also served the `.tmp/serve` folder.
+For the pre-processed files (depending of your options, could be all your files). Browser Sync is configured to also serve the `.tmp/serve` folder.
 
 With the [file watching and pre-processing](#file-watching--pre-processing) feature, your files will be automatically processed and put in that `.tmp/serve` folder and this process should be transparent.
 
@@ -71,7 +71,7 @@ If you want more detail about the proxy middleware, look at the external lib whi
 
 ## File watching & pre-processing
 
-When you run the dev. server or if you manually launch the `watch` task, Gulp will watch your changes on the files in the `src` folder. It will ables Gulp to launch all processings on your file as soon as you hit save.
+When you run the dev. server or if you manually launch the `watch` task, Gulp will watch your changes on the files in the `src` folder. This enables Gulp to launch all processings on your file as soon as you hit save.
 
 All processings are watching your `src` directory and put their results in the `.tmp/serve` folder. **There is no automatic process featured in the generator which will modify your files in the `src` folder**. The processed version of the files are written at the same path as the original file with often a new file extension.
 
@@ -103,7 +103,7 @@ A dependency wrongly installed or which doesn't link properly the files to inclu
 
 ### Your source code
 
-The generator is also abled to automatically write the `script` and `link` tags for your own source files. To do that, it look through the whole content of the `src` folder and inject all the files in the `index.html`.
+The generator is also abled to automatically write the `script` and `link` tags for your own source files. To do that, it looks through the whole content of the `src` folder and inject all the files in the `index.html`.
 
 As the order of the files are important in JavaScript, the order is not chosen randomly. We use a script called [Angular FileSort](https://github.com/klei/gulp-angular-filesort) which will analyse your source code and reorder your files respecting the dependencies discovered through the Angular modules.
 
@@ -143,7 +143,7 @@ Still as default choice, the test framework is [Jasmine](http://jasmine.github.i
 
 To allow tests to load HTML partials especially for the directives tests, we use a Karma plugin [karma-ng-html2js-preprocessor](https://github.com/karma-runner/karma-ng-html2js-preprocessor).
 
-Other than that, we try to use as less Karma plugins as possible because they often duplicate process we already have inside Gulp. For sake of coherence and stability we're searching for a process centralized in Gulp and not duplicated in Karam or other tools like perhaps Webpack.
+Other than that, we try to use as less Karma plugins as possible because they often duplicate process we already have inside Gulp. For sake of coherence and stability we're searching for a process centralized in Gulp and not duplicated in Karma or other tools like perhaps Webpack.
 
 ## Optimization process
 
@@ -157,4 +157,4 @@ The optimization process is configured (through the comments in `index.html`) to
 
 All the HTML partials found in the sources are transformed in JavaScript with the plugin [gulp-angular-templatecache](https://github.com/miickel/gulp-angular-templatecache) and put in the sources bundle in a way which should be totally transparent for the Angular app.
 
-All the "other" files witch are not processed by any mechanism should be copied in the `dist` folder with the same path by the task `other`.
+All the "other" files which are not processed by any mechanism should be copied in the `dist` folder with the same path by the task `other`.

@@ -12,13 +12,13 @@
     "del": "~1.2.0",
     "lodash": "~3.9.3",
     "gulp-minify-css": "~1.2.0",
-    "gulp-filter": "~2.0.2",
+    "gulp-filter": "~3.0.0",
     "gulp-flatten": "~0.0.4",
 <% if (imageMin) { -%>
     "gulp-imagemin": "~2.2.0",
 <% } -%>
     "gulp-eslint": "~1.0.0",
-    "eslint-plugin-angular": "~0.2.2",
+    "eslint-plugin-angular": "~0.7.0",
     "gulp-load-plugins": "~0.10.0",
     "gulp-size": "~1.2.1",
     "gulp-uglify": "~1.2.0",
@@ -46,7 +46,7 @@
     "gulp-coffeelint": "~0.5.0",
 <% } if (props.jsPreprocessor.srcExtension === 'es6') { -%>
     "webpack-stream": "~2.0.0",
-    "eslint-loader": "~0.14.2",
+    "eslint-loader": "~1.0.0",
 <% } if (props.jsPreprocessor.key === 'babel') { -%>
     "babel-core": "~5.5.8",
     "babel-loader": "~5.1.4",
