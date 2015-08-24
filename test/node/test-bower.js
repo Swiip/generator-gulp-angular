@@ -67,7 +67,7 @@ describe('gulp-angular generator bower script', function () {
         cssPreprocessor: { key: 'notnone', extension: 'scss' }
       };
       generator.prepareBowerOverrides();
-      var bootstrapMain = JSON.parse(generator.bowerOverrides)['bootstrap-sass-official'].main;
+      var bootstrapMain = JSON.parse(generator.bowerOverrides)['bootstrap-sass'].main;
       bootstrapMain.length.should.be.equal(7);
       var first = bootstrapMain.shift();
       first.should.match(/bootstrap\.js/);
@@ -83,7 +83,7 @@ describe('gulp-angular generator bower script', function () {
         cssPreprocessor: { key: 'notnone', extension: 'scss' }
       };
       generator.prepareBowerOverrides();
-      var bootstrapMain = JSON.parse(generator.bowerOverrides)['bootstrap-sass-official'].main;
+      var bootstrapMain = JSON.parse(generator.bowerOverrides)['bootstrap-sass'].main;
       bootstrapMain.length.should.be.equal(6);
       var first = bootstrapMain.shift();
       first.should.match(/_bootstrap\.scss/);
