@@ -28,7 +28,7 @@
     "angular-ui-router": "~0.2.15",
 <% } if(props.ui.key === 'bootstrap') { -%>
 <%   if(props.cssPreprocessor.extension === 'scss') { -%>
-    "bootstrap-sass-official": "~3.3.4",
+    "bootstrap-sass": "~3.3.4",
 <%   } else if(props.cssPreprocessor.extension === 'styl') { -%>
     "bootstrap-stylus": "~4.0.4",
 <%   } else { -%>
