@@ -38,6 +38,8 @@
     "foundation": "~5.5.2",
 <% } if(props.ui.key === 'angular-material') { -%>
     "angular-material": "~0.9.7",
+<% } if(props.ui.key === 'mdl') { -%>
+    "material-design-lite": "~1.0.1",
 <% } if(props.bootstrapComponents.key === 'ui-bootstrap') { -%>
     "angular-bootstrap": "~0.13.0",
 <% } if(props.bootstrapComponents.key === 'angular-strap') { -%>

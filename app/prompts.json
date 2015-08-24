@@ -161,6 +161,14 @@
       },
       {
         "value": {
+          "key": "mdl",
+          "module": null
+        },
+        "name": "Material Design Lite, light-weight implementation of Google's Material Design"
+      },
+
+      {
+        "value": {
           "key": "foundation",
           "module": null
         },

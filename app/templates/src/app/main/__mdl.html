@@ -1,0 +1,45 @@
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header" data-upgraded=",MaterialLayout">
+  <div class="mdl-layout__header mdl-layout__header--waterfall mdl-color--black">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">
+        Gulp Angular
+      </span>
+      <div class="navigation-container">
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link mdl-typeography--text-uppercase" href="">Home</a>
+          <a class="mdl-navigation__link mdl-typeography--text-uppercase" href="">About</a>
+          <a class="mdl-navigation__link mdl-typeography--text-uppercase" href="">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="mdl-layout__content mdl-color--grey-100">
+    <section class="jumbotron">
+      <h1>'Allo, 'Allo!</h1>
+      <p class="lead">
+        <img src="assets/images/yeoman.png" alt="I'm Yeoman"><br>
+        Always a pleasure scaffolding your apps.
+      </p>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" ng-class="main.classAnimation" ng-click="main.showToastr()">Splendid Toastr</button>
+      <p>
+        With ♥ thanks to the contributions of<acme-malarkey extra-values="['Yeoman', 'Gulp', 'Angular']"></acme-malarkey>
+      </p>
+    </section>
+
+    <div class="mdl-grid">
+      <div
+        class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet mdl-cell--12-phone mdl-card mdl-shadow--2dp"
+        ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'"
+      >
+        <div class="thumbnail">
+          <img class="pull-right" ng-src="assets/images/{{ awesomeThing.logo }}" alt="{{ awesomeThing.title }}" />
+          <div class="caption">
+            <h3>{{ awesomeThing.title }}</h3>
+            <p>{{ awesomeThing.description }}</p>
+            <p><a ng-href="{{ awesomeThing.url }}">{{ awesomeThing.url }}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
