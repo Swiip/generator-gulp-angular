@@ -32,7 +32,7 @@ All the details about how to use it are in the [File injection](#file-injection)
 
 The generator is shipped with the awesome [Browser Sync](http://www.browsersync.io/) as development server.
 
-The recomanded development process is to serve locally your web resources to be more reactive and be able to have features like automatic reload of your page when you make a modification.
+The recommended development process is to serve locally your web resources to be more reactive and be able to have features like automatic reload of your page when you make a modification.
 
 If you have a backend server to address, keep the development server and either launch your request with complete URLs but you'll have to handle [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) or you can use the embedded proxy feature which can redirect your request from the development server to your backend transparently without dealing with CORS.
 
