@@ -33,6 +33,11 @@ describe('gulp-angular karma.conf template', function () {
     result.should.match(/conf\.paths\.tmp, '\/serve[^\s]*\.module\.js'/);
     result.should.match(/conf\.paths\.tmp, '\/serve[^\s]*\.js'/);
 
+    model.props.jsPreprocessor.key = 'typescript';
+    result = karmaConf(model);
+    result.should.match(/conf\.paths\.tmp, '\/serve\/app\/index\.module\.js/);
+    result.should.match(/conf\.paths\.src, '\/\*\*\/\*\.spec\.\{js,ts\}/);
+
     model.props.jsPreprocessor.key = 'babel';
     result = karmaConf(model);
     result.should.match(/conf\.paths\.tmp, '\/serve\/app\/index\.module\.js/);
