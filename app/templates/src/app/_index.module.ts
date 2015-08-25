@@ -1,7 +1,9 @@
 /// <reference path="../../<%- props.paths.tmp %>/typings/tsd.d.ts" />
 
 import { config } from './index.config';
-<% if (props.router.key !== 'none') { -%>
+<% if (props.router.key === 'new-router') { -%>
+import { routerConfig, RouterController } from './index.route';
+<% } else if (props.router.key !== 'none') { -%>
 import { routerConfig } from './index.route';
 <% } -%>
 import { runBlock } from './index.run';
