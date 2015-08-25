@@ -10,7 +10,7 @@
     var directive = {
       restrict: 'E',
       scope: {
-        extraValues: '=',
+        extraValues: '='
       },
       template: '&nbsp;',
       link: linkFunc,

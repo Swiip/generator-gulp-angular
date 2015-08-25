@@ -23,8 +23,8 @@ gulp.task('config', function () {
 module.exports = function(options) {
   gulp.task('scripts', ['config'], function () {
     return gulp.src(options.src + '/app/**/*.js')
-      .pipe($.jshint())
-      .pipe($.jshint.reporter('jshint-stylish'))
+      .pipe($.eslint())
+      .pipe($.eslint.format())
       .pipe(browserSync.reload({ stream: true }))
       .pipe($.size());
   });

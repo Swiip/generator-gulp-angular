@@ -15,8 +15,8 @@ var $ = require('gulp-load-plugins')();
 gulp.task('scripts', function () {
   return gulp.src(path.join(conf.paths.src, '/app/**/*.<%- props.jsPreprocessor.extension %>'))
 <%   if (props.jsPreprocessor.extension === 'js') { -%>
-    .pipe($.jshint())
-    .pipe($.jshint.reporter('jshint-stylish'))
+    .pipe($.eslint())
+    .pipe($.eslint.format())
 <%   } if (props.jsPreprocessor.key !== 'none') { -%>
     .pipe($.sourcemaps.init())
 <%   } if (props.jsPreprocessor.key === 'coffee') { -%>
@@ -39,7 +39,7 @@ function webpackWrapper(watch, callback) {
     watch: watch,
     module: {
 <%   if (props.jsPreprocessor.extension === 'js') { -%>
-      preLoaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'jshint-loader'}],
+      preLoaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'eslint-loader'}],
 <%   } if (props.jsPreprocessor.key === 'typescript') { -%>
       preLoaders: [{ test: /\.ts$/, exclude: /node_modules/, loader: 'tslint-loader'}],
 <%   } -%>
