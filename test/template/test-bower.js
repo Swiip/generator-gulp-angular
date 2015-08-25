@@ -105,16 +105,25 @@ describe('gulp-angular bower template', function () {
     var result = bower(model);
     result.should.not.match(/angular-route/);
     result.should.not.match(/angular-ui-router/);
+    result.should.not.match(/angular-new-router/);
 
     model.props.router.key = 'angular-route';
     result = bower(model);
-    result.should.match(/angular-route/);
     result.should.not.match(/angular-ui-router/);
+    result.should.not.match(/angular-new-router/);
+    result.should.match(/angular-route/);
 
     model.props.router.key = 'ui-router';
     result = bower(model);
     result.should.not.match(/angular-route/);
+    result.should.not.match(/angular-new-router/);
     result.should.match(/angular-ui-router/);
+
+    model.props.router.key = 'new-router';
+    result = bower(model);
+    result.should.not.match(/angular-route/);
+    result.should.not.match(/angular-ui-router/);
+    result.should.match(/angular-new-router/);
   });
 
   it('should add the right ui lib', function() {
