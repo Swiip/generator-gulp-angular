@@ -3,10 +3,10 @@
 
   angular
     .module('<%- appName %>')
-    .config(routeConfig);
+    .config(routerConfig);
 
   /** @ngInject */
-  function routeConfig($stateProvider, $urlRouterProvider) {
+  function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
         url: '/',

@@ -1,8 +1,11 @@
 /* global malarkey:false, moment:false */
+
 import config from './index.config';
-<% if (props.router.key !== 'none') { %>
+<% if (props.router.key === 'new-router') { -%>
+import { routerConfig, RouterController } from './index.route';
+<% } else if (props.router.key !== 'none') { -%>
 import routerConfig from './index.route';
-<% } %>
+<% } -%>
 import runBlock from './index.run';
 import MainController from './main/main.controller';
 import GithubContributorService from '../app/components/githubContributor/githubContributor.service';
@@ -14,12 +17,15 @@ angular.module('<%- appName %>', [<%- modulesDependencies %>])
   .constant('malarkey', malarkey)
   .constant('moment', moment)
   .config(config)
-<% if (props.router.key !== 'none') { %>
+<% if (props.router.key !== 'none') { -%>
   .config(routerConfig)
-<% } %>
+<% } -%>
   .run(runBlock)
   .service('githubContributor', GithubContributorService)
   .service('webDevTec', WebDevTecService)
+<% if (props.router.key === 'new-router') { -%>
+  .controller('RouterController', RouterController)
+<% } -%>
   .controller('MainController', MainController)
   .directive('acmeNavbar', () => new NavbarDirective())
   .directive('acmeMalarkey', () => new MalarkeyDirective(malarkey));

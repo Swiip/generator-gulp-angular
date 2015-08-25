@@ -96,10 +96,11 @@ describe('gulp-angular generator inception tests', function () {
     });
   });
 
-  describe('with [jQuery 1, $http, ngMaterial, Stylus, TypeScript, handlebars]', function () {
+  describe('with [jQuery 1, $http, new router, ngMaterial, Stylus, TypeScript, handlebars]', function () {
     before(function() {
       return inception.prepare({}, {
         jQuery: prompts.jQuery.values['jquery 1'],
+        router: prompts.router.values['new-router'],
         ui: prompts.ui.values['angular-material'],
         cssPreprocessor: prompts.cssPreprocessor.values.stylus,
         jsPreprocessor: prompts.jsPreprocessor.values.typescript,
