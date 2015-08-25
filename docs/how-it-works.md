@@ -77,7 +77,7 @@ As Webpack as a good watch feature, 2 tasks are produced: `scripts` and `scripts
 
 ## `gulp/styles.js`
 
-The `scripts` task is launched at build, dev and test time and at the watch of any change on a style file. It's this task which will trigger a Browser Sync reload when needed.
+The `styles` task is launched at build, dev and test time and at the watch of any change on a style file. It's this task which will trigger a Browser Sync reload when needed.
 
 This file exists only if you choose a style pre-processor.
 
