@@ -44,8 +44,9 @@
 <% } if (props.jsPreprocessor.key === 'coffee') { -%>
     "gulp-coffee": "~2.3.1",
     "gulp-coffeelint": "~0.5.0",
-<% } if (props.jsPreprocessor.srcExtension === 'es6') { -%>
+<% } if (props.jsPreprocessor.srcExtension === 'es6' || props.jsPreprocessor.key === 'typescript') { -%>
     "webpack-stream": "~2.0.0",
+<% } if (props.jsPreprocessor.srcExtension === 'es6') { -%>
     "eslint-loader": "~1.0.0",
 <% } if (props.jsPreprocessor.key === 'babel') { -%>
     "babel-core": "~5.5.8",
@@ -53,9 +54,9 @@
 <% } if (props.jsPreprocessor.key === 'traceur') { -%>
     "traceur-loader": "~0.6.3",
 <% } if (props.jsPreprocessor.key === 'typescript') { -%>
-    "gulp-typescript": "~2.7.7",
-    "gulp-tslint": "~2.0.0",
-    "gulp-concat": "~2.5.2",
+    "typescript": "~1.5.3",
+    "awesome-typescript-loader": "~0.11.2",
+    "tslint-loader": "~1.0.1",
     "tsd": "~0.6.1",
 <% } else if (props.jsPreprocessor.srcExtension !== 'es6') { -%>
     "gulp-angular-filesort": "~1.1.1",

@@ -1,33 +1,29 @@
 /// <reference path="../../<%- props.paths.tmp %>/typings/tsd.d.ts" />
 
-<% if (props.router.key !== 'none') { %>
-/// <reference path="index.route.ts" />
-<% } %>
-/// <reference path="index.config.ts" />
-/// <reference path="index.run.ts" />
-/// <reference path="main/main.controller.ts" />
-/// <reference path="../app/components/navbar/navbar.directive.ts" />
-/// <reference path="../app/components/malarkey/malarkey.directive.ts" />
-/// <reference path="../app/components/webDevTec/webDevTec.service.ts" />
-/// <reference path="../app/components/githubContributor/githubContributor.service.ts" />
+import { config } from './index.config';
+<% if (props.router.key !== 'none') { -%>
+import { routerConfig } from './index.route';
+<% } -%>
+import { runBlock } from './index.run';
+import { MainController } from './main/main.controller';
+import { GithubContributor } from '../app/components/githubContributor/githubContributor.service';
+import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
+import { acmeNavbar } from '../app/components/navbar/navbar.directive';
+import { acmeMalarkey } from '../app/components/malarkey/malarkey.directive';
 
 declare var malarkey: any;
 declare var moment: moment.MomentStatic;
 
-module <%- appName %> {
-  'use strict';
-
-  angular.module('<%- appName %>', [<%- modulesDependencies %>])
-    .constant('malarkey', malarkey)
-    .constant('moment', moment)
-    .config(config)
-<% if (props.router.key !== 'none') { %>
-    .config(routerConfig)
-<% } %>
-    .run(runBlock)
-    .service('githubContributor', GithubContributor)
-    .service('webDevTec', WebDevTecService)
-    .controller('MainController', MainController)
-    .directive('acmeNavbar', acmeNavbar)
-    .directive('acmeMalarkey', acmeMalarkey);
-}
+angular.module('<%- appName %>', [<%- modulesDependencies %>])
+  .constant('malarkey', malarkey)
+  .constant('moment', moment)
+  .config(config)
+<% if (props.router.key !== 'none') { -%>
+  .config(routerConfig)
+<% } -%>
+  .run(runBlock)
+  .service('githubContributor', GithubContributor)
+  .service('webDevTec', WebDevTecService)
+  .controller('MainController', MainController)
+  .directive('acmeNavbar', acmeNavbar)
+  .directive('acmeMalarkey', acmeMalarkey);

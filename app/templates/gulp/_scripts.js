@@ -5,23 +5,14 @@ var gulp = require('gulp');
 var conf = require('./conf');
 
 var browserSync = require('browser-sync');
-<% if (props.jsPreprocessor.srcExtension === 'es6') { -%>
+<% if (props.jsPreprocessor.srcExtension === 'es6' || props.jsPreprocessor.key === 'typescript') { -%>
 var webpack = require('webpack-stream');
 <% } -%>
 
 var $ = require('gulp-load-plugins')();
 
-<% if (props.jsPreprocessor.srcExtension !== 'es6') { -%>
-<%   if (props.jsPreprocessor.key === 'typescript') { -%>
-  var tsProject = $.typescript.createProject({
-    target: 'es5',
-    sortOutput: true
-  });
-
-  gulp.task('scripts', ['tsd:install'], function () {
-<%   } else { -%>
+<% if (props.jsPreprocessor.srcExtension !== 'es6' && props.jsPreprocessor.key !== 'typescript') { -%>
 gulp.task('scripts', function () {
-<%   } -%>
   return gulp.src(path.join(conf.paths.src, '/app/**/*.<%- props.jsPreprocessor.extension %>'))
 <%   if (props.jsPreprocessor.extension === 'js') { -%>
     .pipe($.eslint())
@@ -32,11 +23,6 @@ gulp.task('scripts', function () {
     .pipe($.coffeelint())
     .pipe($.coffeelint.reporter())
     .pipe($.coffee()).on('error', conf.errorHandler('CoffeeScript'))
-<%   } if (props.jsPreprocessor.key === 'typescript') { -%>
-    .pipe($.tslint())
-    .pipe($.tslint.report('prose', { emitError: false }))
-    .pipe($.typescript(tsProject)).on('error', conf.errorHandler('TypeScript'))
-    .pipe($.concat('index.module.js'))
 <%   } if (props.jsPreprocessor.key !== 'none') { -%>
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')))
@@ -47,13 +33,22 @@ gulp.task('scripts', function () {
 <% } else { -%>
 function webpackWrapper(watch, callback) {
   var webpackOptions = {
+<%   if (props.jsPreprocessor.key === 'typescript') { -%>
+    resolve: { extensions: ['', '.ts'] },
+<%   } -%>
     watch: watch,
     module: {
+<%   if (props.jsPreprocessor.extension === 'js') { -%>
       preLoaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'eslint-loader'}],
+<%   } if (props.jsPreprocessor.key === 'typescript') { -%>
+      preLoaders: [{ test: /\.ts$/, exclude: /node_modules/, loader: 'tslint-loader'}],
+<%   } -%>
 <%   if (props.jsPreprocessor.key === 'babel') { -%>
       loaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}]
 <%   } if (props.jsPreprocessor.key === 'traceur') { -%>
       loaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'traceur-loader'}]
+<%   } if (props.jsPreprocessor.key === 'typescript') { -%>
+      loaders: [{ test: /\.ts$/, exclude: /node_modules/, loader: 'awesome-typescript-loader'}]
 <%   } -%>
     },
     output: { filename: 'index.module.js' }
@@ -80,12 +75,16 @@ function webpackWrapper(watch, callback) {
     }
   };
 
-  return gulp.src(path.join(conf.paths.src, '/app/index.module.js'))
+  return gulp.src(path.join(conf.paths.src, '/app/index.module.<%- props.jsPreprocessor.extension %>'))
     .pipe(webpack(webpackOptions, null, webpackChangeHandler))
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')));
 }
 
+<%   if (props.jsPreprocessor.key === 'typescript') { -%>
+gulp.task('scripts', ['tsd:install'], function () {
+<%   } else { %>
 gulp.task('scripts', function () {
+<%   } %>
   return webpackWrapper(false);
 });
 

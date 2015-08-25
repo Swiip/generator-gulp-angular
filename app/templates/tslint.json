@@ -71,10 +71,7 @@
       ["catchClause", "noSpace"],
       ["indexSignature", "space"]
     ],
-    "use-strict": [true,
-      "check-module",
-      "check-function"
-    ],
+    "use-strict": false,
     "variable-name": false,
     "whitespace": [true,
       "check-branch",
