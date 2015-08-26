@@ -1,5 +1,9 @@
 <!doctype html>
+<% if (props.jsPreprocessor.srcExtension !== 'es6' && props.jsPreprocessor.key !== 'typescript') { -%>
 <html<% if (includeModernizr) { %> class="no-js"<% } %> ng-app="<%- appName %>">
+<% } else { -%>
+<html<% if (includeModernizr) { %> class="no-js"<% } %> ng-app="<%- appName %>" ng-strict-di>
+<% } -%>
   <head>
     <meta charset="utf-8">
     <title><%- appName %></title>
