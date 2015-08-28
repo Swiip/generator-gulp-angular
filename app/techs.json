@@ -29,6 +29,12 @@
         "description": "The Angular reference implementation of the Google's Material Design specification.",
         "logo": "angular-material.png"
     },
+    "material-design-lite": {
+        "title": "Material Design Lite",
+        "url": "http://www.getmdl.io/",
+        "description": "Add a Material Design look and feel to your websites.",
+        "logo": "material-design-lite.png"
+    },
     "browsersync": {
         "title": "BrowserSync",
         "url": "http://browsersync.io/",

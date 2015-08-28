@@ -151,6 +151,34 @@ describe('gulp-angular generator inception tests', function () {
     });
   });
 
+  describe('with [none, ngResource, new router, ngMaterial, NodeSass, Javascript, HTML]', function () {
+    before(function() {
+      return inception.prepare({}, {
+        jQuery: prompts.jQuery.values.none,
+        router: prompts.router.values['new-router'],
+        ui: prompts.ui.values['material-design-lite'],
+        cssPreprocessor: prompts.cssPreprocessor.values['node-sass'],
+        jsPreprocessor: prompts.jsPreprocessor.values.none,
+        htmlPreprocessor: prompts.htmlPreprocessor.values.none
+      }).then(function(generator) {
+        gulpAngular = generator;
+      });
+    });
+
+    it('should pass build', function () {
+      return inception.run(gulpAngular, 'build').should.be.fulfilled;
+    });
+    it('should pass test', function () {
+      return inception.run(gulpAngular, 'test').should.be.fulfilled;
+    });
+    it('should pass protractor', function () {
+      return inception.run(gulpAngular, 'protractor').should.be.fulfilled;
+    });
+    it('should pass protractor:dist', function () {
+      return inception.run(gulpAngular, 'protractor:dist').should.be.fulfilled;
+    });
+  });
+
   describe('with [src:src/angular/app e2e:tests/e2e dist:target/build/folder tmp:.tmp/folder] and default prompts', function () {
     before(function() {
       return inception.prepare({

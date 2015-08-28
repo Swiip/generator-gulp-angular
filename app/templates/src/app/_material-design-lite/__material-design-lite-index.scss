@@ -1,0 +1,103 @@
+/**
+ *  Do not remove the comments below. It's the markers used by wiredep to inject
+ *  sass dependencies when defined in the bower.json of your dependencies
+ */
+// bower:scss
+// endbower
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
+       url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.woff) format('woff'),
+       url(../../bower_components/material-design-iconfont/iconfont/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+main {
+  padding: 20px;
+  background: #fafafa;
+}
+.acme-card-wide {
+  &.mdl-card {
+    width: 100%;
+  }
+
+  > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+    background: url('../assets/images/yeoman.png') center / cover;
+    background-size: 110px;
+    background-repeat: no-repeat;
+  }
+
+  > .mdl-card__title > .mdl-card__title-text {
+    color: #000;
+  }
+
+  > .mdl-card__menu {
+    color: #000;
+  }
+
+  > .mdl-card__actions {
+    text-align: center;
+  }
+}
+
+.acme-card-square {
+  &.mdl-card {
+    width: 100%;
+    min-height: 200px;
+  }
+
+  > .mdl-card__title {
+    color: #fff;
+    background: #283593;
+  }
+
+  > .mdl-card__media {
+    color: #fff;
+    background: none;
+    text-align: center;
+    img {
+      height: 100px;
+    }
+  }
+}
+
+/**
+ *  Do not remove the comment below. It's the markers used by gulp-inject to inject
+ *  all your sass files automatically
+ */
+// injector
+// endinjector
