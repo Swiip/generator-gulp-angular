@@ -49,6 +49,17 @@ describe('gulp-angular index js template', function () {
     result = indexHtml(model);
     result.should.match(/<!-- build:js\(src\) scripts\/modernizr.js -->/);
     result.should.match(/<html class="no-js"/);
+
+    model.props.jsPreprocessor.key = 'typescript';
+    model.includeModernizr = false;
+    result = indexHtml(model);
+    result.should.not.match(/<!-- build:js\(src\) scripts\/modernizr.js -->/);
+    result.should.not.match(/<html class="no-js"/);
+
+    model.includeModernizr = true;
+    result = indexHtml(model);
+    result.should.match(/<!-- build:js\(src\) scripts\/modernizr.js -->/);
+    result.should.match(/<html class="no-js"/);
   });
 
   it('should insert routerHtml content', function() {
