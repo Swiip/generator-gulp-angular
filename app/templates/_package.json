@@ -63,7 +63,7 @@
     "tsd": "~0.6.1",
 <% } else if (props.jsPreprocessor.srcExtension !== 'es6') { -%>
     "gulp-angular-filesort": "~1.1.1",
-<% } if (props.htmlPreprocessor.key !== 'none') { -%>
+<% } if (props.htmlPreprocessor.key !== 'noHtmlPrepro') { -%>
     "gulp-consolidate": "~0.1.2",
 <% } if (props.htmlPreprocessor.key === 'jade') { -%>
     "jade": "~1.11.0",

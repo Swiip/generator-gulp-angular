@@ -33,7 +33,7 @@ describe('gulp-angular scripts template', function () {
   });
 
   it('should add the right js preprocessor process', function() {
-    model.props.jsPreprocessor.key = 'none';
+    model.props.jsPreprocessor.key = 'noJsPrepro';
     var result = scripts(model);
     result.should.not.match(/babel/);
     result.should.not.match(/coffee/);

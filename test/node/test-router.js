@@ -64,7 +64,7 @@ describe('gulp-angular generator router script', function () {
     generator.files = [];
     read.withArgs('template/src/app/main/__testUi.html')
       .returns('<div class="container">');
-    generator.props.router.key = 'none';
+    generator.props.router.key = 'noRouter';
     generator.computeRouter();
     generator.routerHtml.should.match(/MainController/);
     generator.files.length.should.equal(0);

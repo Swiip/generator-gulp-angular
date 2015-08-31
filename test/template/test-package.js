@@ -43,7 +43,7 @@ describe('gulp-angular package template', function () {
   });
 
   it('should add right dependencies depending css preprocessor selected', function() {
-    model.props.cssPreprocessor.key = 'none';
+    model.props.cssPreprocessor.key = 'noCssPrepro';
     var result = packageJson(model);
     result.should.not.match(/sass/);
     result.should.not.match(/less/);
@@ -75,7 +75,7 @@ describe('gulp-angular package template', function () {
   });
 
   it('should add right dependencies depending js preprocessor selected', function() {
-    model.props.jsPreprocessor.key = 'none';
+    model.props.jsPreprocessor.key = 'noJsPrepro';
     model.props.jsPreprocessor.srcExtension = 'js';
     var result = packageJson(model);
     result.should.not.match(/coffee/);
@@ -124,7 +124,7 @@ describe('gulp-angular package template', function () {
   });
 
   it('should add right dependencies depending html preprocessor selected', function() {
-    model.props.htmlPreprocessor.key = 'none';
+    model.props.htmlPreprocessor.key = 'noHtmlPrepro';
     var result = packageJson(model);
     result.should.not.match(/jade/);
     result.should.not.match(/haml/);

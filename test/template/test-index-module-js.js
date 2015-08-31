@@ -49,7 +49,7 @@ describe('gulp-angular index js template', function () {
   });
 
   it('should not add the router config for no router', function() {
-    model.props.router.key = 'none';
+    model.props.router.key = 'noRouter';
     var result = indexEs6(model);
     result.should.not.match(/\.config\(routerConfig\)/);
     result.should.not.match(/RouterController/);

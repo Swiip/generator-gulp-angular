@@ -9,7 +9,7 @@ var $ = require('gulp-load-plugins')();
 var wiredep = require('wiredep').stream;
 var _ = require('lodash');
 
-<% if (props.cssPreprocessor.key !== 'none') { -%>
+<% if (props.cssPreprocessor.key !== 'noCssPrepro') { -%>
 gulp.task('inject', ['scripts', 'styles'], function () {
   var injectStyles = gulp.src([
     path.join(conf.paths.tmp, '/serve/app/**/*.css'),

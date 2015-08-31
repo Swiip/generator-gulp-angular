@@ -23,7 +23,7 @@ describe('gulp-angular markups template', function () {
   });
 
   it('should select the right template engine for consolidate', function() {
-    model.props.htmlPreprocessor.key = 'none';
+    model.props.htmlPreprocessor.key = 'noHtmlPrepro';
     var result = markups(model);
     result.should.not.match(/consolidate/);
 

@@ -3,7 +3,7 @@
 import { config } from './index.config';
 <% if (props.router.key === 'new-router') { -%>
 import { routerConfig, RouterController } from './index.route';
-<% } else if (props.router.key !== 'none') { -%>
+<% } else if (props.router.key !== 'noRouter') { -%>
 import { routerConfig } from './index.route';
 <% } -%>
 import { runBlock } from './index.run';
@@ -23,7 +23,7 @@ module <%- appName %> {
     .constant('malarkey', malarkey)
     .constant('moment', moment)
     .config(config)
-<% if (props.router.key !== 'none') { -%>
+<% if (props.router.key !== 'noRouter') { -%>
     .config(routerConfig)
 <% } -%>
     .run(runBlock)

@@ -62,7 +62,7 @@ describe('gulp-angular bower template', function () {
   });
 
   it('should add the right jquery', function() {
-    model.props.jQuery.key = 'none';
+    model.props.jQuery.key = 'jqLite';
     var result = bower(model);
     result.should.not.match(/jquery/);
     result.should.not.match(/zepto/);
@@ -84,7 +84,7 @@ describe('gulp-angular bower template', function () {
   });
 
   it('should add the right resource lib', function() {
-    model.props.resource.key = 'none';
+    model.props.resource.key = '$http';
     var result = bower(model);
     result.should.not.match(/angular-resource/);
     result.should.not.match(/restangular/);
@@ -101,7 +101,7 @@ describe('gulp-angular bower template', function () {
   });
 
   it('should add the right router lib', function() {
-    model.props.router.key = 'none';
+    model.props.router.key = 'noRouter';
     var result = bower(model);
     result.should.not.match(/angular-route/);
     result.should.not.match(/angular-ui-router/);
@@ -127,9 +127,9 @@ describe('gulp-angular bower template', function () {
   });
 
   it('should add the right ui lib', function() {
-    model.props.ui.key = 'none';
-    model.props.bootstrapComponents.key = 'none';
-    model.props.foundationComponents.key = 'none';
+    model.props.ui.key = 'noUI';
+    model.props.bootstrapComponents.key = 'noBootstrapComponents';
+    model.props.foundationComponents.key = 'noFoundationComponents';
     model.props.cssPreprocessor.extension = 'scss';
     var result = bower(model);
     result.should.not.match(/bootstrap/);
@@ -175,7 +175,7 @@ describe('gulp-angular bower template', function () {
     result.should.not.match(/material-design-lite/);
     result.should.not.match(/material-design-iconfont/);
 
-    model.props.bootstrapComponents.key = 'none';
+    model.props.bootstrapComponents.key = 'noBootstrapComponents';
     model.props.cssPreprocessor.extension = 'styl';
     result = bower(model);
     result.should.match(/bootstrap-stylus/);
@@ -196,7 +196,7 @@ describe('gulp-angular bower template', function () {
   });
 
   it('should add traceur runtime when needed', function() {
-    model.props.jsPreprocessor.key = 'none';
+    model.props.jsPreprocessor.key = 'noJsPrepro';
     var result = bower(model);
     result.should.not.match(/traceur/);
 

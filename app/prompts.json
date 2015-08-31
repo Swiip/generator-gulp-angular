@@ -78,7 +78,7 @@
       },
       {
         "value": {
-          "key": "none"
+          "key": "jqLite"
         },
         "name": "None (Angular will use its own jqLite)"
       }
@@ -105,7 +105,7 @@
       },
       {
         "value": {
-          "key": "none",
+          "key": "$http",
           "module": null
         },
         "name": "None, $http is enough!"
@@ -140,7 +140,7 @@
       },
       {
         "value": {
-          "key": "none",
+          "key": "noRouter",
           "module": null
         },
         "name": "None"
@@ -182,7 +182,7 @@
       },
       {
         "value": {
-          "key": "none",
+          "key": "noUI",
           "module": null
         },
         "name": "None"
@@ -217,7 +217,7 @@
       },
       {
         "value": {
-          "key": "none",
+          "key": "noBootstrapComponents",
           "module": null
         },
         "name": "No JavaScript, just CSS"
@@ -245,7 +245,7 @@
       },
       {
         "value": {
-          "key": "none",
+          "key": "noFoundationComponents",
           "module": null
         },
         "name": "No JavaScript, just CSS"
@@ -287,7 +287,7 @@
       },
       {
         "value": {
-          "key": "none",
+          "key": "noCssPrepro",
           "extension": "css"
         },
         "name": "None, only the good old CSS"
@@ -301,7 +301,7 @@
     "choices": [
       {
         "value": {
-          "key": "none",
+          "key": "noJsPrepro",
           "extension": "js",
           "srcExtension": "js"
         },
@@ -348,7 +348,7 @@
     "choices": [
       {
         "value": {
-          "key": "none",
+          "key": "noHtmlPrepro",
           "extension": "html"
         },
         "name": "None, I like to code in standard HTML."

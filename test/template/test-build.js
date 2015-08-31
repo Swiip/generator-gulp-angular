@@ -23,7 +23,7 @@ describe('gulp-angular build template', function () {
   });
 
   it('should add markups as dependency task if there is an htlm preprocessor', function() {
-    model.props.htmlPreprocessor.key = 'none';
+    model.props.htmlPreprocessor.key = 'noHtmlPrepro';
     var result = build(model);
     result.should.match(/gulp\.task\('partials', function/);
 
@@ -40,7 +40,7 @@ describe('gulp-angular build template', function () {
 
   it('should replace bootstrap font paths', function() {
     model.computedPaths.appToBower = 'appToBower';
-    model.props.ui.key = 'none';
+    model.props.ui.key = 'noUI';
     model.props.cssPreprocessor.extension = 'css';
     var result = build(model);
     result.should.not.match(/\$\.replace/);
@@ -81,7 +81,7 @@ describe('gulp-angular build template', function () {
   });
 
   it('should add tsd:purge in clean dependencies for typescript', function() {
-    model.props.jsPreprocessor.key = 'none';
+    model.props.jsPreprocessor.key = 'noJsPrepro';
     var result = build(model);
     result.should.not.match(/tsd:purge/);
 
