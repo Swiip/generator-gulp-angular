@@ -168,6 +168,13 @@
       },
       {
         "value": {
+          "key": "material-design-lite",
+          "module": null
+        },
+        "name": "Material Design Lite, add a Material Design look and feel to your websites."
+      },
+      {
+        "value": {
           "key": "foundation",
           "module": null
         },

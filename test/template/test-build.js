@@ -61,6 +61,15 @@ describe('gulp-angular build template', function () {
     result.should.match(/mainBowerFiles\(\).concat\('bower_components\/bootstrap-stylus\/fonts\/\*'\)/);
   });
 
+  it('should replace material-design-iconfont font paths', function() {
+    model.computedPaths.appToBower = 'appToBower';
+    model.props.ui.key = 'material-design-lite';
+    var result = build(model);
+    result = build(model);
+    result.should.match(/\$\.replace\('\.\.\/appToBower\/bower_components\/material-design-iconfont\/iconfont\//);
+    result.should.match(/mainBowerFiles\(\).concat\('bower_components\/material-design-iconfont\/iconfont\/\*'\)/);
+  });
+
   it('should use image min if selected', function() {
     model.imageMin = false;
     var result = build(model);
