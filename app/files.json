@@ -32,6 +32,7 @@
 
     "gulp/conf.js",
     "gulp/build.js",
+    "gulp/env-config.js",
     "gulp/inject.js",
     "gulp/markups.js",
     "gulp/scripts.js",
@@ -43,6 +44,7 @@
     "src/app/index.config.js",
     "src/app/index.constants.js",
     "src/app/index.run.js",
+    "src/app/env_configs/config-default.json",
     "src/index.html",
     "src/app/main/main.controller.js",
     "src/app/main/main.controller.spec.js",

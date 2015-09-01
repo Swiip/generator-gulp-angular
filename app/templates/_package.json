@@ -25,6 +25,7 @@
     "gulp-useref": "~1.2.0",
     "gulp-util": "~3.0.5",
     "gulp-ng-annotate": "~1.0.0",
+    "gulp-ng-constant": "^0.3.0",
     "gulp-replace": "~0.5.3",
     "gulp-rename": "~1.2.2",
     "gulp-rev": "~5.0.0",
@@ -93,7 +94,8 @@
     "qrcode-terminal": "~0.10.0",
 <% } -%>
     "uglify-save-license": "~0.4.1",
-    "wrench": "~1.5.8"
+    "wrench": "~1.5.8",
+    "yargs": "^3.14.0"
   },
   "engines": {
     "node": ">=0.10.0"
