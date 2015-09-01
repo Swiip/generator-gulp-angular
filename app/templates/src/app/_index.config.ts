@@ -1,4 +1,5 @@
-export /** @ngInject */ function config($logProvider: ng.ILogProvider, toastrConfig) {
+/** @ngInject */
+export function config($logProvider: ng.ILogProvider, toastrConfig) {
   // enable log
   $logProvider.debugEnabled(true);
   // set options third-party lib
