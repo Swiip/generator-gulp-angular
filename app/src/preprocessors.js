@@ -74,7 +74,7 @@ module.exports = function(GulpAngularGenerator) {
       }
 
       if(this.props.jsPreprocessor.key !== 'none') {
-        rejectWithRegexp.call(this, /spec\.js/);
+        rejectWithRegexp.call(this, /^(?!^e2e\/).*spec\.js/);
       }
   };
 

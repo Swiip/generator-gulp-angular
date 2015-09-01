@@ -53,8 +53,8 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.key = 'typescript';
     model.props.jsPreprocessor.extension = 'ts';
     result = scripts(model);
-    result.should.match(/function webpackWrapper\(watch, callback\)/);
-    result.should.match(/loaders:.*loader: 'awesome-typescript-loader'/);
+    result.should.match(/function webpackWrapper\(watch, test, callback\)/);
+    result.should.match(/loaders:.*loaders: \['ng-annotate', 'awesome-typescript-loader'/);
     result.should.match(/gulp\.task\('scripts:watch'/);
     result.should.not.match(/babel/);
     result.should.not.match(/traceur/);
@@ -64,8 +64,8 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.extension = 'js';
     model.props.jsPreprocessor.srcExtension = 'es6';
     result = scripts(model);
-    result.should.match(/function webpackWrapper\(watch, callback\)/);
-    result.should.match(/loaders:.*loader: 'babel-loader'/);
+    result.should.match(/function webpackWrapper\(watch, test, callback\)/);
+    result.should.match(/loaders:.*loaders: \['ng-annotate', 'babel-loader'/);
     result.should.match(/gulp\.task\('scripts:watch'/);
     result.should.not.match(/traceur/);
     result.should.not.match(/coffee/);
@@ -75,8 +75,8 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.extension = 'js';
     model.props.jsPreprocessor.srcExtension = 'es6';
     result = scripts(model);
-    result.should.match(/function webpackWrapper\(watch, callback\)/);
-    result.should.match(/loaders:.*loader: 'traceur-loader'/);
+    result.should.match(/function webpackWrapper\(watch, test, callback\)/);
+    result.should.match(/loaders:.*loaders: \['ng-annotate', 'traceur-loader'/);
     result.should.match(/gulp\.task\('scripts:watch'/);
     result.should.not.match(/babel/);
     result.should.not.match(/coffee/);

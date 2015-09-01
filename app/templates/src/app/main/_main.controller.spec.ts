@@ -6,7 +6,7 @@
    */
   describe('controllers', function(){
 
-    beforeEach(module('<%- appName %>'));
+    beforeEach(angular.mock.module('<%- appName %>'));
 
     it('should define more than 5 awesome things', inject(function($controller) {
       var vm = $controller('MainController');

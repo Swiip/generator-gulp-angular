@@ -24,7 +24,9 @@
     "gulp-uglify": "~1.2.0",
     "gulp-useref": "~1.2.0",
     "gulp-util": "~3.0.5",
+<% if (props.jsPreprocessor.srcExtension !== 'es6' && props.jsPreprocessor.key !== 'typescript') { -%>
     "gulp-ng-annotate": "~1.0.0",
+<% } -%>
     "gulp-replace": "~0.5.3",
     "gulp-rename": "~1.2.2",
     "gulp-rev": "~5.0.0",
@@ -46,6 +48,7 @@
     "gulp-coffeelint": "~0.5.0",
 <% } if (props.jsPreprocessor.srcExtension === 'es6' || props.jsPreprocessor.key === 'typescript') { -%>
     "webpack-stream": "~2.0.0",
+    "ng-annotate-loader": "0.0.6",
 <% } if (props.jsPreprocessor.srcExtension === 'es6') { -%>
     "eslint-loader": "~1.0.0",
 <% } if (props.jsPreprocessor.key === 'babel') { -%>

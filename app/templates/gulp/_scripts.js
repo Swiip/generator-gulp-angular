@@ -31,7 +31,7 @@ gulp.task('scripts', function () {
     .pipe($.size())
 });
 <% } else { -%>
-function webpackWrapper(watch, callback) {
+function webpackWrapper(watch, test, callback) {
   var webpackOptions = {
 <%   if (props.jsPreprocessor.key === 'typescript') { -%>
     resolve: { extensions: ['', '.ts'] },
@@ -44,11 +44,11 @@ function webpackWrapper(watch, callback) {
       preLoaders: [{ test: /\.ts$/, exclude: /node_modules/, loader: 'tslint-loader'}],
 <%   } -%>
 <%   if (props.jsPreprocessor.key === 'babel') { -%>
-      loaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}]
+      loaders: [{ test: /\.js$/, exclude: /node_modules/, loaders: ['ng-annotate', 'babel-loader']}]
 <%   } if (props.jsPreprocessor.key === 'traceur') { -%>
-      loaders: [{ test: /\.js$/, exclude: /node_modules/, loader: 'traceur-loader'}]
+      loaders: [{ test: /\.js$/, exclude: /node_modules/, loaders: ['ng-annotate', 'traceur-loader']}]
 <%   } if (props.jsPreprocessor.key === 'typescript') { -%>
-      loaders: [{ test: /\.ts$/, exclude: /node_modules/, loader: 'awesome-typescript-loader'}]
+      loaders: [{ test: /\.ts$/, exclude: /node_modules/, loaders: ['ng-annotate', 'awesome-typescript-loader']}]
 <%   } -%>
     },
     output: { filename: 'index.module.js' }
@@ -75,20 +75,33 @@ function webpackWrapper(watch, callback) {
     }
   };
 
-  return gulp.src(path.join(conf.paths.src, '/app/index.module.<%- props.jsPreprocessor.extension %>'))
+  var sources = [ path.join(conf.paths.src, '/app/index.module.<%- props.jsPreprocessor.extension %>') ];
+  if (test) {
+    sources.push(path.join(conf.paths.src, '/app/**/*.spec.<%- props.jsPreprocessor.extension %>'));
+  }
+
+  return gulp.src(sources)
     .pipe(webpack(webpackOptions, null, webpackChangeHandler))
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')));
 }
 
 <%   if (props.jsPreprocessor.key === 'typescript') { -%>
 gulp.task('scripts', ['tsd:install'], function () {
-<%   } else { %>
+<%   } else { -%>
 gulp.task('scripts', function () {
-<%   } %>
-  return webpackWrapper(false);
+<%   } -%>
+  return webpackWrapper(false, false);
 });
 
 gulp.task('scripts:watch', ['scripts'], function (callback) {
-  return webpackWrapper(true, callback);
+  return webpackWrapper(true, false, callback);
+});
+
+gulp.task('scripts:test', function () {
+  return webpackWrapper(false, true);
+});
+
+gulp.task('scripts:test-watch', ['scripts'], function (callback) {
+  return webpackWrapper(true, true, callback);
 });
 <% } -%>

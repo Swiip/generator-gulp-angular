@@ -13,7 +13,6 @@
     "gulp/.eslintrc",
     "gulp/e2e-tests.js",
     "gulp/tsd.js",
-    "gulp/unit-tests.js",
 
     "src/favicon.ico",
     "src/assets/images/yeoman.png"
@@ -38,6 +37,7 @@
     "gulp/styles.js",
     "gulp/watch.js",
     "gulp/server.js",
+    "gulp/unit-tests.js",
 
     "src/app/index.module.js",
     "src/app/index.config.js",
