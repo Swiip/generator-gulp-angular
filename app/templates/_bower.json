@@ -12,6 +12,10 @@
     "angular-touch": "<%- props.angularVersion %>",
 <% } if (angularModulesObject.sanitize) { -%>
     "angular-sanitize": "<%- props.angularVersion %>",
+<% } if (angularModulesObject.messages) { -%>
+    "angular-messages": "<%- props.angularVersion %>",
+<% } if (angularModulesObject.aria) { -%>
+    "angular-aria": "<%- props.angularVersion %>",
 <% } if (props.jQuery.key === 'jquery1') { -%>
     "jquery": "~1.11.3",
 <% } if (props.jQuery.key === 'jquery2') { -%>
