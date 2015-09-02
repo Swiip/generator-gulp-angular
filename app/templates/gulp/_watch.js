@@ -23,7 +23,7 @@ gulp.task('watch', [<%- watchTaskDeps.join(', ') %>], function () {
   ], function(event) {
 <% } -%>
     if(isOnlyChange(event)) {
-<% if (props.cssPreprocessor.key === 'none') { -%>
+<% if (props.cssPreprocessor.key === 'noCssPrepro') { -%>
       browserSync.reload(event.path);
 <% } else { -%>
       gulp.start('styles');
@@ -50,7 +50,7 @@ gulp.task('watch', [<%- watchTaskDeps.join(', ') %>], function () {
   });
 <% } -%>
 
-<% if (props.htmlPreprocessor.key !== 'none') { -%>
+<% if (props.htmlPreprocessor.key !== 'noHtmlPrepro') { -%>
   gulp.watch(path.join(conf.paths.src, '/app/**/*.<%- props.htmlPreprocessor.extension %>'), ['markups']);
 
 <% } -%>

@@ -44,7 +44,7 @@ describe('gulp-angular generator inception tests', function () {
         router: prompts.router.values['ui-router'],
         ui: prompts.ui.values.foundation,
         foundationComponents: prompts.foundationComponents.values['angular-foundation'],
-        cssPreprocessor: prompts.cssPreprocessor.values.none,
+        cssPreprocessor: prompts.cssPreprocessor.values.noCssPrepro,
         jsPreprocessor: prompts.jsPreprocessor.values.coffee,
         htmlPreprocessor: prompts.htmlPreprocessor.values.jade
       }).then(function(generator) {
@@ -70,8 +70,8 @@ describe('gulp-angular generator inception tests', function () {
     before(function() {
       return inception.prepare({}, {
         jQuery: prompts.jQuery.values['zeptojs 1.1'],
-        resource: prompts.resource.values.none,
-        router: prompts.router.values.none,
+        resource: prompts.resource.values['$http'],
+        router: prompts.router.values.noRouter,
         ui: prompts.ui.values.bootstrap,
         bootstrapComponents: prompts.bootstrapComponents.values['ui-bootstrap'],
         cssPreprocessor: prompts.cssPreprocessor.values.less,

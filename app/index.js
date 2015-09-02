@@ -3,6 +3,9 @@
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
+var Insight = require('insight');
+
+var pkg = require('../package.json');
 
 var GulpAngularGenerator = yeoman.generators.Base.extend({
 
@@ -15,7 +18,12 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
       required: false
     });
 
-    this.version = require('../package.json').version;
+    this.version = pkg.version;
+
+    this.insight = new Insight({
+        trackingCode: 'UA-66934495-1',
+        pkg: pkg
+    });
 
     this.props = {};
   },

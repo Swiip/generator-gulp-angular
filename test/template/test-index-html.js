@@ -30,7 +30,7 @@ describe('gulp-angular index js template', function () {
   });
 
   it('should insert the vendor build block depending of data', function() {
-    model.props.cssPreprocessor.key = 'none';
+    model.props.cssPreprocessor.key = 'noCssPrepro';
     model.props.paths.src = 'src';
     model.props.paths.tmp = 'tmp';
     var result = indexHtml(model);

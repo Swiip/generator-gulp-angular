@@ -96,9 +96,9 @@ module.exports = {
     router: model.router.values['ui-router'],
     ui: model.ui.values.bootstrap,
     bootstrapComponents: model.bootstrapComponents.values['ui-bootstrap'],
-    foundationComponents: model.foundationComponents.values.none,
+    foundationComponents: model.foundationComponents.values.noFoundationComponents,
     cssPreprocessor: model.cssPreprocessor.values['node-sass'],
-    jsPreprocessor: model.jsPreprocessor.values.none,
-    htmlPreprocessor: model.htmlPreprocessor.values.none
+    jsPreprocessor: model.jsPreprocessor.values.noJsPrepro,
+    htmlPreprocessor: model.htmlPreprocessor.values.noHtmlPrepro
   }
 };

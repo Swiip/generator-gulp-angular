@@ -17,13 +17,13 @@ gulp.task('scripts', function () {
 <%   if (props.jsPreprocessor.extension === 'js') { -%>
     .pipe($.eslint())
     .pipe($.eslint.format())
-<%   } if (props.jsPreprocessor.key !== 'none') { -%>
+<%   } if (props.jsPreprocessor.key !== 'noJsPrepro') { -%>
     .pipe($.sourcemaps.init())
 <%   } if (props.jsPreprocessor.key === 'coffee') { -%>
     .pipe($.coffeelint())
     .pipe($.coffeelint.reporter())
     .pipe($.coffee()).on('error', conf.errorHandler('CoffeeScript'))
-<%   } if (props.jsPreprocessor.key !== 'none') { -%>
+<%   } if (props.jsPreprocessor.key !== 'noJsPrepro') { -%>
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')))
 <%   } -%>

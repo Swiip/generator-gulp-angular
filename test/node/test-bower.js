@@ -53,7 +53,7 @@ describe('gulp-angular generator bower script', function () {
       generator.props = {
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'something' },
-        cssPreprocessor: { key: 'none' },
+        cssPreprocessor: { key: 'noCssPrepro' },
         router: { key: 'notnewrouter' }
       };
       generator.prepareBowerOverrides();
@@ -185,7 +185,7 @@ describe('gulp-angular generator bower script', function () {
     it('should exclude nothing if no ui', function() {
       generator.props = {
         jQuery: { key: 'jquery1' },
-        ui: { key: 'none' }
+        ui: { key: 'noUI' }
       };
       generator.computeWiredepExclusions();
       generator.wiredepExclusions.length.should.be.equal(0);
@@ -196,7 +196,7 @@ describe('gulp-angular generator bower script', function () {
         jQuery: { key: 'jquery1' },
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'official' },
-        cssPreprocessor: { key: 'none' }
+        cssPreprocessor: { key: 'noCssPrepro' }
       };
       generator.computeWiredepExclusions();
       generator.wiredepExclusions.length.should.be.equal(0);
@@ -207,7 +207,7 @@ describe('gulp-angular generator bower script', function () {
         jQuery: { key: 'jquery1' },
         ui: { key: 'foundation' },
         foundationComponents: { key: 'official' },
-        cssPreprocessor: { key: 'none' }
+        cssPreprocessor: { key: 'noCssPrepro' }
       };
       generator.computeWiredepExclusions();
       generator.wiredepExclusions.length.should.be.equal(0);
@@ -215,10 +215,10 @@ describe('gulp-angular generator bower script', function () {
 
     it('should exclude jQuery if select "None"', function() {
       generator.props = {
-        jQuery: { key: 'none' },
+        jQuery: { key: 'jqLite' },
         ui: { key: 'foundation' },
         foundationComponents: { key: 'official' },
-        cssPreprocessor: { key: 'none' }
+        cssPreprocessor: { key: 'noCssPrepro' }
       };
       generator.computeWiredepExclusions();
       generator.wiredepExclusions[0].should.be.equal('/jquery/');
@@ -229,7 +229,7 @@ describe('gulp-angular generator bower script', function () {
         jQuery: { key: 'zepto' },
         ui: { key: 'foundation' },
         foundationComponents: { key: 'official' },
-        cssPreprocessor: { key: 'none' }
+        cssPreprocessor: { key: 'noCssPrepro' }
       };
       generator.computeWiredepExclusions();
       generator.wiredepExclusions[0].should.be.equal('/jquery/');

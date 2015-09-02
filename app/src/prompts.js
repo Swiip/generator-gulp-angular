@@ -16,6 +16,20 @@ function logChoice(prompt, prop) {
 module.exports = function(GulpAngularGenerator) {
 
   /**
+   * Check Insight config
+   */
+  GulpAngularGenerator.prototype.checkInsight = function checkInsight() {
+
+    if (this.insight.optOut === undefined) {
+      var done = this.async();
+
+      this.insight.track('downloaded');
+
+      this.insight.askPermission(null, done);
+    }
+  };
+
+  /**
    * Check if the default option is set, if it is, use defaults props and log them
    */
   GulpAngularGenerator.prototype.defaultOption = function defaultOption() {
@@ -135,6 +149,19 @@ module.exports = function(GulpAngularGenerator) {
 
       done();
     }.bind(this));
+  };
+
+  /**
+   * Send anonymously report usage statistics by Insight
+   */
+  GulpAngularGenerator.prototype.sendInsight = function sendInsight() {
+    var keyValues = [];
+    _.forEach(this.props, function(aProp) {
+      if (aProp.key) {
+        keyValues.push(aProp.key);
+      }
+    });
+    this.insight.track.apply(this.insight, keyValues);
   };
 
 };

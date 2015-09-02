@@ -23,7 +23,7 @@ describe('gulp-angular styles template', function () {
   });
 
   it('should add options for each css preprocessors', function() {
-    model.props.cssPreprocessor.key = 'none';
+    model.props.cssPreprocessor.key = 'noCssPrepro';
     model.props.cssPreprocessor.extension = 'css';
     var result = styles(model);
     result.should.not.match(/lessOptions/);
@@ -43,7 +43,7 @@ describe('gulp-angular styles template', function () {
   });
 
   it('should process files with the right preprocessor', function() {
-    model.props.cssPreprocessor.key = 'none';
+    model.props.cssPreprocessor.key = 'noCssPrepro';
     model.props.cssPreprocessor.extension = 'css';
     var result = styles(model);
     result.should.match(/conf\.paths\.src, '\/app\/index\.css/);

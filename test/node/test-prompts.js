@@ -25,6 +25,33 @@ describe('gulp-angular generator prompts script', function () {
     generator = new Generator();
   });
 
+  describe('check and ask for Insight', function () {
+
+    it('should ask permission', function() {
+      generator.insight = {
+        optOut: undefined,
+        track: sinon.stub(),
+        askPermission: sinon.stub()
+      };
+
+      generator.checkInsight();
+      generator.insight.track.should.have.been.called;
+      generator.insight.askPermission.should.have.been.called;
+    });
+
+    it('should ignore if permission is already asked', function() {
+      generator.insight = {
+        optOut: false,
+        track: sinon.stub(),
+        askPermission: sinon.stub()
+      };
+
+      generator.checkInsight();
+      generator.insight.track.should.have.not.been.called;
+      generator.insight.askPermission.should.have.not.been.called;
+    });
+  });
+
   describe('handle default option', function () {
     it('should ignore default if option not set', function() {
       sinon.spy(generator, 'log');
@@ -70,7 +97,7 @@ describe('gulp-angular generator prompts script', function () {
 
   describe('ask for all standard questions', function () {
     it('should ask all questions', function() {
-      sinon.stub(generator, 'prompt').callsArgWith(1, { ui: { key: 'none' } });
+      sinon.stub(generator, 'prompt').callsArgWith(1, { ui: { key: 'noUI' } });
       generator.askQuestions();
       generator.prompt.should.have.been.called;
       generator.props.bootstrapComponents.should.be.an('object');
@@ -124,6 +151,20 @@ describe('gulp-angular generator prompts script', function () {
       generator.includeModernizr.should.be.true;
       generator.imageMin.should.be.true;
       generator.qrCode.should.be.true;
+    });
+  });
+
+  describe('send anonymously report usage statistics by Insight', function () {
+
+    it('should success', function() {
+      generator.insight = {
+        track: sinon.spy()
+      };
+      generator.props = mockPrompts.defaults;
+
+      generator.sendInsight();
+      generator.insight.track.should.have.been.called;
+
     });
   });
 

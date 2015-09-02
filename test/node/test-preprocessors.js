@@ -50,7 +50,7 @@ describe('gulp-angular generator preprocessors script', function () {
     it('should be inject if no es6 or html prepro', function() {
       generator.props = {
         jsPreprocessor: { srcExtension: 'notes6' },
-        htmlPreprocessor: { key: 'none' }
+        htmlPreprocessor: { key: 'noHtmlPrepro' }
       };
       generator.computeWatchTaskDeps();
       generator.watchTaskDeps.length.should.be.equal(1);
@@ -73,9 +73,9 @@ describe('gulp-angular generator preprocessors script', function () {
   describe('reject files depending on preprocessors choices', function() {
     it('should reject preprocessors gulp files if no preprocessors', function() {
       generator.props = {
-        cssPreprocessor: { key: 'none' },
-        jsPreprocessor: { key: 'none' },
-        htmlPreprocessor: { key: 'none' }
+        cssPreprocessor: { key: 'noCssPrepro' },
+        jsPreprocessor: { key: 'noJsPrepro' },
+        htmlPreprocessor: { key: 'noHtmlPrepro' }
       };
       generator.rejectFiles();
       generator.files.length.should.be.equal(2);

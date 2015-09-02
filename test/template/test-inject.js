@@ -23,7 +23,7 @@ describe('gulp-angular inject template', function () {
   });
 
   it('should inject styles for src or tmp depending on the css preprocessor', function() {
-    model.props.cssPreprocessor.key = 'none';
+    model.props.cssPreprocessor.key = 'noCssPrepro';
     var result = inject(model);
     result.should.match(/gulp\.task\('inject', \['scripts'\], function/);
     result.should.match(/injectStyles = gulp\.src\(\[\n.*conf\.paths\.src/);

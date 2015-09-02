@@ -42,7 +42,7 @@ module.exports = function(GulpAngularGenerator) {
       this.watchTaskDeps.push('\'scripts:watch\'');
     }
 
-    if (this.props.htmlPreprocessor.key !== 'none') {
+    if (this.props.htmlPreprocessor.key !== 'noHtmlPrepro') {
       this.watchTaskDeps.push('\'markups\'');
     }
 
@@ -55,7 +55,7 @@ module.exports = function(GulpAngularGenerator) {
    * depending on options. This step reject these files.
    */
   GulpAngularGenerator.prototype.rejectFiles = function rejectFiles() {
-      if(this.props.cssPreprocessor.key === 'none') {
+      if(this.props.cssPreprocessor.key === 'noCssPrepro') {
         rejectWithRegexp.call(this, /styles\.js/);
       }
 
@@ -69,11 +69,11 @@ module.exports = function(GulpAngularGenerator) {
         rejectWithRegexp.call(this, /index\.constants\.js/);
       }
 
-      if(this.props.htmlPreprocessor.key === 'none') {
+      if(this.props.htmlPreprocessor.key === 'noHtmlPrepro') {
         rejectWithRegexp.call(this, /markups\.js/);
       }
 
-      if(this.props.jsPreprocessor.key !== 'none') {
+      if(this.props.jsPreprocessor.key !== 'noJsPrepro') {
         rejectWithRegexp.call(this, /^(?!^e2e\/).*spec\.js/);
       }
   };

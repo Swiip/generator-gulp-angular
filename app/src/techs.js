@@ -23,7 +23,7 @@ module.exports = function(GulpAngularGenerator) {
     ])
       .filter(_.isString)
       .filter(function(tech) {
-        return tech !== 'default' && tech !== 'css' && tech !== 'official' && tech !== 'none';
+        return listTechs[tech] !== undefined;
       });
 
     var techsContent = _.map(usedTechs, function(value) {

@@ -22,13 +22,13 @@ describe('gulp-angular generator ui script', function () {
     it('should add only navbar and index.scss for no router and no ui', function() {
       generator.props = {
         router: { module: null },
-        ui: { key: 'none' },
-        cssPreprocessor: { key: 'none', extension: 'css' }
+        ui: { key: 'noUI' },
+        cssPreprocessor: { key: 'noCssPrepro', extension: 'css' }
       };
       generator.files = [];
       generator.uiFiles();
-      generator.files[0].src.should.be.equal('src/app/components/navbar/__none-navbar.html');
-      generator.files[1].src.should.be.equal('src/app/_none/__none-index.css');
+      generator.files[0].src.should.be.equal('src/app/components/navbar/__noUI-navbar.html');
+      generator.files[1].src.should.be.equal('src/app/_noUI/__noUI-index.css');
       generator.files[2].src.should.be.equal('src/app/components/malarkey/__malarkey.css');
       generator.files[3].src.should.be.equal('src/app/components/navbar/__navbar.css');
       generator.files.length.should.be.equal(4);

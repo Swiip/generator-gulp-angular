@@ -49,7 +49,7 @@ module.exports = function(GulpAngularGenerator) {
 
       }
 
-      if (this.props.cssPreprocessor.key === 'none') {
+      if (this.props.cssPreprocessor.key === 'noCssPrepro') {
         bowerOverrides.bootstrap.main.unshift('dist/css/bootstrap.css');
       }
 
@@ -78,7 +78,7 @@ module.exports = function(GulpAngularGenerator) {
    */
   GulpAngularGenerator.prototype.computeWiredepExclusions = function computeWiredepExclusions() {
     this.wiredepExclusions = [];
-    if (this.props.jQuery.key === 'none' || this.props.jQuery.key === 'zepto') {
+    if (this.props.jQuery.key === 'jqLite' || this.props.jQuery.key === 'zepto') {
       this.wiredepExclusions.push('/jquery/');
     }
     if (this.props.ui.key === 'bootstrap') {
@@ -88,7 +88,7 @@ module.exports = function(GulpAngularGenerator) {
           this.wiredepExclusions.push('/bootstrap-sass\\/.*\\.js/');
         }
       }
-      if(this.props.cssPreprocessor.key !== 'none') {
+      if(this.props.cssPreprocessor.key !== 'noCssPrepro') {
         this.wiredepExclusions.push('/bootstrap\\.css/');
       }
     } else if (this.props.ui.key === 'foundation') {

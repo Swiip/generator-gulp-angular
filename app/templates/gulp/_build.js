@@ -8,7 +8,7 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
-<% if (props.htmlPreprocessor.key === 'none') { -%>
+<% if (props.htmlPreprocessor.key === 'noHtmlPrepro') { -%>
 gulp.task('partials', function () {
 <% } else { -%>
 gulp.task('partials', ['markups'], function () {
