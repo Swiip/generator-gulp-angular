@@ -4,13 +4,15 @@ export class MainController {
   public awesomeThings: ITecThing[];
   public webDevTec: WebDevTecService;
   public classAnimation: string;
-  public toastr;
+  public creationDate: number;
+  public toastr: any;
 
   /* @ngInject */
-  constructor ($timeout: ng.ITimeoutService, webDevTec: WebDevTecService, toastr) {
+  constructor ($timeout: ng.ITimeoutService, webDevTec: WebDevTecService, toastr: any) {
     this.awesomeThings = new Array();
     this.webDevTec = webDevTec;
     this.classAnimation = '';
+    this.creationDate = <%- new Date().getTime() %>;
     this.toastr = toastr;
     this.activate($timeout);
   }
