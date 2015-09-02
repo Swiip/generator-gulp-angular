@@ -24,13 +24,8 @@ function listFiles() {
       path.join(conf.paths.tmp, '/serve/app/**/*.js'),
       path.join(conf.paths.tmp, '/**/*.spec.js'),
       path.join(conf.paths.tmp, '/**/*.mock.js'),
-<% } else if (props.jsPreprocessor.key === 'typescript') { -%>
-      path.join(conf.paths.tmp, '/serve/app/index.module.js'),
-      path.join(conf.paths.src, '/**/*.mock.{js,ts}'),
 <% } else { -%>
       path.join(conf.paths.tmp, '/serve/app/index.module.js'),
-      path.join(conf.paths.src, '/**/*.spec.js'),
-      path.join(conf.paths.src, '/**/*.mock.js'),
 <% } -%>
       path.join(conf.paths.src, '/**/*.html')
     ]);

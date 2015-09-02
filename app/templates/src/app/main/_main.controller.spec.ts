@@ -1,14 +1,12 @@
-/**
- * @todo Write test in TypeScript
- */
+import { MainController } from './main.controller';
+
 describe('controllers', () => {
 
-  beforeEach(angular.mock.module('<%- appName %>'));
+  beforeEach(angular.mock.module('gulpAngular'));
 
   it('should define more than 5 awesome things', inject(($controller: ng.IControllerService) => {
-    var vm = $controller('MainController');
+    const vm: MainController = $controller('MainController');
 
-    expect(angular.isArray(vm.awesomeThings)).toBeTruthy();
     expect(vm.awesomeThings.length > 5).toBeTruthy();
   }));
 });

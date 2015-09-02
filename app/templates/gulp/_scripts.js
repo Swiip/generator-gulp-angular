@@ -97,7 +97,7 @@ gulp.task('scripts:watch', ['scripts'], function (callback) {
   return webpackWrapper(true, false, callback);
 });
 
-gulp.task('scripts:test', function () {
+gulp.task('scripts:test', ['tsd:install'], function () {
   return webpackWrapper(false, true);
 });
 
