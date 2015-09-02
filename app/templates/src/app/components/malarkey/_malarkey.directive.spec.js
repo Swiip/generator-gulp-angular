@@ -17,10 +17,7 @@
       $log = _$log_;
 
       spyOn(githubContributor, 'getContributors').and.callFake(function() {
-        var deferred = $q.defer();
-        deferred.resolve([{}, {}, {}, {}, {}, {}]);
-
-        return deferred.promise;
+        return $q.when([{}, {}, {}, {}, {}, {}]);
       });
 
       el = angular.element('<acme-malarkey extra-values="[\'Poney\', \'Monkey\']"></acme-malarkey>');
