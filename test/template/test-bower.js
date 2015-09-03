@@ -7,7 +7,7 @@ chai.use(sinonChai);
 
 var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
-var angularModulesObject = { animate: true, cookies: true, touch: true, sanitize: true };
+var angularModulesObject = { animate: true, cookies: true, touch: true, sanitize: true, messages: true, aria: true };
 
 describe('gulp-angular bower template', function () {
   var bower, model;
@@ -33,6 +33,8 @@ describe('gulp-angular bower template', function () {
     result.should.match(/"angular-cookies": "angular-test-version"/);
     result.should.match(/"angular-touch": "angular-test-version"/);
     result.should.match(/"angular-sanitize": "angular-test-version"/);
+    result.should.match(/"angular-messages": "angular-test-version"/);
+    result.should.match(/"angular-aria": "angular-test-version"/);
     result.should.match(/"angular-resource": "angular-test-version"/);
     result.should.match(/"angular": "angular-test-version"/);
   });
@@ -50,6 +52,8 @@ describe('gulp-angular bower template', function () {
     result.should.match(/angular-cookies/);
     result.should.match(/angular-touch/);
     result.should.match(/angular-sanitize/);
+    result.should.match(/angular-messages/);
+    result.should.match(/angular-aria/);
   });
 
   it('should not add angular modules in bower when not selected', function() {
@@ -59,6 +63,8 @@ describe('gulp-angular bower template', function () {
     result.should.not.match(/angular-cookies/);
     result.should.not.match(/angular-touch/);
     result.should.not.match(/angular-sanitize/);
+    result.should.not.match(/angular-messages/);
+    result.should.not.match(/angular-aria/);
   });
 
   it('should add the right jquery', function() {

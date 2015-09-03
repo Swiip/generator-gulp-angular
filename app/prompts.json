@@ -50,6 +50,22 @@
         },
         "name": "angular-sanitize.js (to securely parse and manipulate HTML)",
         "checked": true
+      },
+      {
+        "value": {
+          "key": "messages",
+          "module": "ngMessages"
+        },
+        "name": "angular-messages.js (enhanced support for displaying messages within templates)",
+        "checked": true
+      },
+      {
+        "value": {
+          "key": "aria",
+          "module": "ngAria"
+        },
+        "name": "angular-aria.js (support for common ARIA attributes)",
+        "checked": true
       }
     ]
   },
