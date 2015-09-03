@@ -1,24 +1,53 @@
-# How can I have an environment specific build?
+# How can I build for a specific environment?
 
-## [#460](https://github.com/Swiip/generator-gulp-angular/issues/460)
+## [#460](https://github.com/Swiip/generator-gulp-angular/issues/460) [#650](https://github.com/Swiip/generator-gulp-angular/issues/650)
 
-Nope we don't have equivalent.
-But I think you can choose different Firebase more simply with [gulp-ng-constant](https://www.npmjs.com/package/gulp-ng-constant)
+`generator-gulp-angular` does not yet have a way to build for different environments.
 
+One way to do this is with [gulp-ng-constant](https://www.npmjs.com/package/gulp-ng-constant):
 
-#### 1) create a new task `config`
+#### 1) Create a new gulp task called `config`.
+
+This reads in the configuration in either `config.json` or `configDev.json`, based on the `NODE_ENV` environment variable and generates an Angular module with the contents to be included in your application.
+
 ```javascript
 gulp.task('config', function () {
   var configPath = 'config.json';
-  if (process.env.NODE_ENV === 'test') {
-    configPath = 'configTest.json';
+  if (process.env.NODE_ENV === 'dev') {
+    configPath = 'configDev.json';
   }
   return gulp.src(configPath)
     .pipe($.ngConstant())
     .pipe(gulp.dest('src/app/'));
 });
 ```
-#### 2) add config as a dependency of scripts
+
+*configDev.json*
+```json
+{
+  "name": "myApp.config",
+  "constants": {
+    "config": {
+      "apiBase": "https://localhost/v1"
+    }
+  }
+}
+```
+
+*config.json*
+```json
+{
+  "name": "myApp.config",
+  "constants": {
+    "config": {
+      "apiBase": "https://api.example.com/v1"
+    }
+  }
+}
+```
+
+#### 2) Add the `config` gulp task as a dependency of `scripts`.
+
 ```javascript
 module.exports = function(options) {
   gulp.task('scripts', ['config'], function () {
@@ -30,12 +59,19 @@ module.exports = function(options) {
   });
 };
 ```
-#### 3) use the module constante created in your app
 
-#### 4) run gulp with environnement variable
-```
-$ NODE_ENV=test gulp serve
-$ NODE_ENV=test gulp
+#### 3) Use the generated module in your app.
+
+```javascript
+angular.module('myApp', ['myApp.config'])
+  .service('apiService', ['config', function (config) {
+    this.base = config.apiBase;
+  });
 ```
 
-Anyway if you use gulp-preprocess, PR is welcome (to add in advanced option)
+#### 4) Run gulp with environment variable to build for the `dev` environment.
+
+```bash
+$ NODE_ENV=dev gulp serve
+$ NODE_ENV=dev gulp
+```
