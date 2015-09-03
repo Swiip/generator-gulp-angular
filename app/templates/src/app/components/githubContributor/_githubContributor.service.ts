@@ -10,12 +10,12 @@ export class GithubContributor {
     this.$http = $http;
   }
 
-  getContributors(limit: number = 30) {
+  getContributors(limit: number = 30): ng.IPromise<any[]> {
     return this.$http.get(this.apiHost + '/contributors?per_page=' + limit)
-      .then((response: any) => {
+      .then((response: any): any => {
         return response.data;
       })
-      .catch((error: any) => {
+      .catch((error: any): any => {
         this.$log.error('XHR Failed for getContributors.\n', error.data);
       });
   }
