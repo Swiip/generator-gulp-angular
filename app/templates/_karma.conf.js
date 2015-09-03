@@ -88,12 +88,13 @@ module.exports = function(config) {
   };
 
   var preprocessors = {};
+  var pathSrcHtml = path.join(conf.paths.src, '/**/*.html');
+  preprocessors[pathSrcHtml] = ['ng-html2js'];
+
 <% if (props.jsPreprocessor.key === 'noJsPrepro') { -%>
   var pathSrcJs = path.join(conf.paths.src, '/**/!(*.spec).js');
-  var pathSrcHtml = path.join(conf.paths.src, '/**/*.html');
 
   preprocessors[pathSrcJs] = ['coverage'];
-  preprocessors[pathSrcHtml] = ['ng-html2js'];
 <% } else if (props.jsPreprocessor.key === 'coffee') { -%>
   var pathTmpJs = path.join(conf.paths.tmp, '/**/!(*.spec).js');
 
