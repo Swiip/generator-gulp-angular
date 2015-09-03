@@ -8,7 +8,7 @@ describe('service webDevTec', () => {
     expect(webDevTec).not.toEqual(null);
   }));
 
-  it('get tect should return array of object', inject((webDevTec: WebDevTecService) => {
+  it('get tec should return array of object', inject((webDevTec: WebDevTecService) => {
     expect(webDevTec.tec.length > 5).toBeTruthy();
 
     webDevTec.tec.forEach((tecThing: ITecThing) => {

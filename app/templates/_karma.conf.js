@@ -69,7 +69,6 @@ module.exports = function(config) {
 <%   } -%>
     },
 
-    // optionally, configure the reporter
     coverageReporter: {
       type : 'html',
       dir : 'coverage/'
@@ -78,6 +77,10 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
     reporters: ['progress'],
+
+    preprocessors: {
+      'src/**/*.html': ['ng-html2js']
+    },
 <% } -%>
 
 <% if(props.jsPreprocessor.key === 'traceur') { -%>
