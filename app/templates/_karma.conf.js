@@ -88,7 +88,7 @@ module.exports = function(config) {
   };
 
   var preprocessors = {};
-<% if (props.jsPreprocessor.key === 'none') { -%>
+<% if (props.jsPreprocessor.key === 'noJsPrepro') { -%>
   var pathSrcJs = path.join(conf.paths.src, '/**/!(*.spec).js');
   var pathSrcHtml = path.join(conf.paths.src, '/**/*.html');
 
