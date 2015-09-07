@@ -80,14 +80,10 @@ describe('gulp-angular build template', function () {
     result.should.match(/\$\.imagemin/);
   });
 
-  it('should add tsd:purge in clean dependencies for typescript', function() {
-    model.props.jsPreprocessor.key = 'noJsPrepro';
-    var result = build(model);
-    result.should.not.match(/tsd:purge/);
-
+  it('should specify directory paths in clean task for typescript', function() {
     model.props.jsPreprocessor.key = 'typescript';
-    result = build(model);
-    result.should.match(/'clean', \['tsd:purge'\],/);
+    var result = build(model);
+    result.should.match(/conf.paths.tmp, '\/partials'/);
+    result.should.match(/conf.paths.tmp, '\/serve'/);
   });
-
 });

@@ -87,12 +87,6 @@ describe('gulp-angular tsd template', function () {
     result.should.match(/angularjs\/angular-route.d.ts/);
   });
 
-  it('should insert new router Angular definition', function() {
-    model.props.router.key = 'new-router';
-    var result = tsd(model);
-    result.should.match(/angular2\/router.d.ts/);
-  });
-
   it('should insert Bootstrap definition', function() {
     model.props.ui.key = 'bootstrap';
     model.props.bootstrapComponents = 'official';

@@ -123,9 +123,9 @@ describe('gulp-angular generator writes script', function () {
           key: 'typescript'
         }
       };
-      generator.spawnCommand = sinon.stub();
+      generator.spawnCommandSync = sinon.stub();
       generator.install();
-      generator.spawnCommand.should.have.been.calledWith('tsd', ['install', '-so']);
+      generator.spawnCommandSync.should.have.been.calledWith('tsd', ['install', '-so']);
     });
   });
 

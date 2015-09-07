@@ -22,16 +22,6 @@ describe('gulp-angular scripts template', function () {
     model = mockModel();
   });
 
-  it('should add tsd:install as dependencies for typescript', function() {
-    model.props.jsPreprocessor.key = 'not typescript';
-    var result = scripts(model);
-    result.should.match(/gulp\.task\('scripts', function/);
-
-    model.props.jsPreprocessor.key = 'typescript';
-    result = scripts(model);
-    result.should.match(/gulp\.task\('scripts', \['tsd:install'\]/);
-  });
-
   it('should add the right js preprocessor process', function() {
     model.props.jsPreprocessor.key = 'noJsPrepro';
     var result = scripts(model);
