@@ -12,7 +12,6 @@
     "gulpfile.js",
     "gulp/.eslintrc",
     "gulp/e2e-tests.js",
-    "gulp/tsd.js",
 
     "src/favicon.ico",
     "src/assets/images/yeoman.png"

@@ -39,6 +39,10 @@ module.exports = function(GulpAngularGenerator) {
       skipInstall: this.options['skip-install'],
       skipMessage: this.options['skip-message']
     });
+
+    if (this.props.jsPreprocessor.key === 'typescript') {
+      this.spawnCommand('tsd', ['install', '-so']);
+    }
   };
 
 };
