@@ -84,6 +84,10 @@ describe('gulp-angular generator writes script', function () {
         'skip-install': false,
         'skip-message': false
       };
+      generator.props = {
+        jsPreprocessor: 'noJsPrepro'
+      };
+
       sinon.spy(generator, 'installDependencies');
       generator.install();
       generator.installDependencies.should.have.been.calledWith({
@@ -97,12 +101,31 @@ describe('gulp-angular generator writes script', function () {
         'skip-install': true,
         'skip-message': true
       };
+      generator.props = {
+        jsPreprocessor: 'noJsPrepro'
+      };
+
       sinon.spy(generator, 'installDependencies');
       generator.install();
       generator.installDependencies.should.have.been.calledWith({
         skipInstall: true,
         skipMessage: true
       });
+    });
+
+    it('should call TSD install with Typescript preprocessor', function() {
+      generator.options = {
+        'skip-install': false,
+        'skip-message': false
+      };
+      generator.props = {
+        jsPreprocessor: {
+          key: 'typescript'
+        }
+      };
+      generator.spawnCommandSync = sinon.stub();
+      generator.install();
+      generator.spawnCommandSync.should.have.been.calledWith('tsd', ['install', '-so']);
     });
   });
 

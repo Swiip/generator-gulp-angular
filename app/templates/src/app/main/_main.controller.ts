@@ -17,6 +17,7 @@ export class MainController {
     this.activate($timeout);
   }
 
+  /** @ngInject */
   activate($timeout: ng.ITimeoutService) {
     this.getWebDevTec();
 

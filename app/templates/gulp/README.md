@@ -49,10 +49,6 @@ Gulp tasks which start a server for development or e2e tests.
 
 Compile your styles with your CSS preprocessor. Use injection in the index.*
 
-## tsd.js
-
-Typescript specific tasks to generate Typescript descriptors.
-
 ## unit-tests.js
 
 Task for launching the unit tests with Karma from Gulp.

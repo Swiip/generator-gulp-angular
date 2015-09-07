@@ -123,12 +123,12 @@ gulp.task('other', function () {
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
 });
 
-<% if (props.jsPreprocessor.key === 'typescript') { -%>
-gulp.task('clean', ['tsd:purge'], function (done) {
-<% } else { -%>
 gulp.task('clean', function (done) {
-<% } -%>
+<% if (props.jsPreprocessor.key === 'typescript') { -%>
+  $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/partials'), path.join(conf.paths.tmp, '/serve')], done);
+<% } else { -%>
   $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')], done);
+<% } -%>
 });
 
 <% if (imageMin) { -%>

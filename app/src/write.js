@@ -35,10 +35,15 @@ module.exports = function(GulpAngularGenerator) {
    * Launch npm and bower installs unless they are skipped
    */
   GulpAngularGenerator.prototype.install = function install() {
+
     this.installDependencies({
       skipInstall: this.options['skip-install'],
       skipMessage: this.options['skip-message']
     });
+
+    if (this.props.jsPreprocessor.key === 'typescript') {
+      this.spawnCommandSync('tsd', ['install', '-so']);
+    }
   };
 
 };
