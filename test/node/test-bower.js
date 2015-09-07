@@ -138,7 +138,7 @@ describe('gulp-angular generator bower script', function () {
       generator.props = {
         jQuery: { key: 'jquery1' },
         ui: { key: 'bootstrap' },
-        bootstrapComponents: { key: 'angular-bootstrap' },
+        bootstrapComponents: { key: 'ui-bootstrap' },
         cssPreprocessor: { extension: 'scss' }
       };
       generator.computeWiredepExclusions();
@@ -151,7 +151,7 @@ describe('gulp-angular generator bower script', function () {
       generator.props = {
         jQuery: { key: 'jquery1' },
         ui: { key: 'bootstrap' },
-        bootstrapComponents: { key: 'angular-bootstrap' },
+        bootstrapComponents: { key: 'ui-bootstrap' },
         cssPreprocessor: { extension: 'less' }
       };
       generator.computeWiredepExclusions();
