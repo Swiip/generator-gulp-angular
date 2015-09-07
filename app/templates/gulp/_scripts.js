@@ -97,7 +97,11 @@ gulp.task('scripts:watch', ['scripts'], function (callback) {
   return webpackWrapper(true, false, callback);
 });
 
+<%   if (props.jsPreprocessor.key === 'typescript') { -%>
+gulp.task('scripts:test', ['tsd:install'], function () {
+<%   } else { -%>
 gulp.task('scripts:test', function () {
+<%   } -%>
   return webpackWrapper(false, true);
 });
 

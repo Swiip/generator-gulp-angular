@@ -127,7 +127,6 @@ describe('gulp-angular generator inception tests', function () {
   describe('with [$http, Bootstrap, AngularStrap, ruby-sass, Traceur]', function () {
     before(function() {
       return inception.prepare({}, {
-        // jQuery: prompts.jQuery.values['none'],
         ui: prompts.ui.values.bootstrap,
         bootstrapComponents: prompts.bootstrapComponents.values['angular-strap'],
         cssPreprocessor: prompts.cssPreprocessor.values['ruby-sass'],
@@ -154,12 +153,12 @@ describe('gulp-angular generator inception tests', function () {
   describe('with [none, ngResource, new router, ngMaterial, NodeSass, Javascript, HTML]', function () {
     before(function() {
       return inception.prepare({}, {
-        jQuery: prompts.jQuery.values.none,
+        jQuery: prompts.jQuery.values.jqLite,
         router: prompts.router.values['new-router'],
         ui: prompts.ui.values['material-design-lite'],
         cssPreprocessor: prompts.cssPreprocessor.values['node-sass'],
-        jsPreprocessor: prompts.jsPreprocessor.values.none,
-        htmlPreprocessor: prompts.htmlPreprocessor.values.none
+        jsPreprocessor: prompts.jsPreprocessor.values.noJsPrepro,
+        htmlPreprocessor: prompts.htmlPreprocessor.values.noHtmlPrepro
       }).then(function(generator) {
         gulpAngular = generator;
       });

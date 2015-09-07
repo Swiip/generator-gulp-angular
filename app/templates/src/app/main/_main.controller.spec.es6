@@ -1,18 +1,32 @@
-(function() {
-  'use strict';
+describe('controllers', () => {
+  let vm;
 
-  /**
-   * @todo Write test in ES6
-   */
-  describe('controllers', function(){
+  beforeEach(angular.mock.module('<%- appName %>'));
 
-    beforeEach(angular.mock.module('<%- appName %>'));
+  beforeEach(inject(($controller, webDevTec, toastr) => {
+    spyOn(webDevTec, 'getTec').and.returnValue([{}, {}, {}, {}, {}]);
+    spyOn(toastr, 'info').and.callThrough();
 
-    it('should define more than 5 awesome things', inject(function($controller) {
-      var vm = $controller('MainController');
+    vm = $controller('MainController');
+  }));
 
-      expect(angular.isArray(vm.awesomeThings)).toBeTruthy();
-      expect(vm.awesomeThings.length > 5).toBeTruthy();
-    }));
+  it('should have a timestamp creation date', () => {
+    expect(vm.creationDate).toEqual(jasmine.any(Number));
   });
-})();
+
+  it('should define animate class after delaying timeout', inject($timeout => {
+    $timeout.flush();
+    expect(vm.classAnimation).toEqual('rubberBand');
+  }));
+
+  it('should show a Toastr info and stop animation when invoke showToastr()', inject(toastr => {
+    vm.showToastr();
+    expect(toastr.info).toHaveBeenCalled();
+    expect(vm.classAnimation).toEqual('');
+  }));
+
+  it('should define more than 5 awesome things', () => {
+    expect(angular.isArray(vm.awesomeThings)).toBeTruthy();
+    expect(vm.awesomeThings.length === 5).toBeTruthy();
+  });
+});

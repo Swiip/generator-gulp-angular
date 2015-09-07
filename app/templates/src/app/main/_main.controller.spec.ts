@@ -1,18 +1,34 @@
-(function() {
-  'use strict';
+import { MainController } from './main.controller';
+import { WebDevTecService } from '../components/webDevTec/webDevTec.service';
 
-  /**
-   * @todo Write test in TypeScript
-   */
-  describe('controllers', function(){
+describe('controllers', () => {
+  let mainController: MainController;
 
-    beforeEach(angular.mock.module('<%- appName %>'));
+  beforeEach(angular.mock.module('<%- appName %>'));
 
-    it('should define more than 5 awesome things', inject(function($controller) {
-      var vm = $controller('MainController');
+  beforeEach(inject(($controller: ng.IControllerService, webDevTec: WebDevTecService, toastr: any) => {
+    webDevTec.data = [null, null, null, null, null];
+    spyOn(toastr, 'info').and.callThrough();
 
-      expect(angular.isArray(vm.awesomeThings)).toBeTruthy();
-      expect(vm.awesomeThings.length > 5).toBeTruthy();
-    }));
+    mainController = $controller('MainController');
+  }));
+
+  it('should have a timestamp creation date', () => {
+    expect(mainController.creationDate > 0).toBeTruthy();
   });
-})();
+
+  it('should define animate class after delaying timeout ', inject(($timeout: ng.ITimeoutService) => {
+    $timeout.flush();
+    expect(mainController.classAnimation).toEqual('rubberBand');
+  }));
+
+  it('should show a Toastr info and stop animation when invoke showToastr()', inject((toastr: any) => {
+    mainController.showToastr();
+    expect(toastr.info).toHaveBeenCalled();
+    expect(mainController.classAnimation).toEqual('');
+  }));
+
+  it('should define more than 5 awesome things', () => {
+    expect(mainController.awesomeThings.length === 5).toBeTruthy();
+  });
+});

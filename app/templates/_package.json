@@ -83,8 +83,8 @@
     "karma-phantomjs-launcher": "~0.2.0",
 <% } if (props.jsPreprocessor.srcExtension === 'js' || props.jsPreprocessor.srcExtension === 'coffee') { -%>
     "karma-angular-filesort": "~0.1.0",
-    "karma-coverage": "~0.4.1",
 <% } -%>
+    "karma-coverage": "~0.4.1",
     "karma-ng-html2js-preprocessor": "~0.1.2",
     "concat-stream": "~1.5.0",
     "require-dir": "~0.3.0",

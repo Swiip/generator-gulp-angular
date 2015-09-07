@@ -24,14 +24,8 @@ function listFiles() {
       path.join(conf.paths.tmp, '/serve/app/**/*.js'),
       path.join(conf.paths.tmp, '/**/*.spec.js'),
       path.join(conf.paths.tmp, '/**/*.mock.js'),
-<% } else if (props.jsPreprocessor.key === 'typescript') { -%>
-      path.join(conf.paths.tmp, '/serve/app/index.module.js'),
-      path.join(conf.paths.src, '/**/*.spec.{js,ts}'),
-      path.join(conf.paths.src, '/**/*.mock.{js,ts}'),
 <% } else { -%>
       path.join(conf.paths.tmp, '/serve/app/index.module.js'),
-      path.join(conf.paths.src, '/**/*.spec.js'),
-      path.join(conf.paths.src, '/**/*.mock.js'),
 <% } -%>
       path.join(conf.paths.src, '/**/*.html')
     ]);
@@ -63,27 +57,8 @@ module.exports = function(config) {
       whitelist: [path.join(conf.paths.tmp, '/**/!(*.html|*.spec|*.mock).js')]
 <%   } -%>
     },
-
-    reporters: ['progress', 'coverage'],
-
-    preprocessors: {
-      'src/**/*.html': ['ng-html2js'],
-<%   if (props.jsPreprocessor.key === 'noJsPrepro') { -%>
-      'src/**/!(*.spec).js': ['coverage']
-<%   } else { -%>
-      '.tmp/**/!(*.spec).js': ['coverage']
-<%   } -%>
-    },
-
-    // optionally, configure the reporter
-    coverageReporter: {
-      type : 'html',
-      dir : 'coverage/'
-    },
 <% } else { -%>
     frameworks: ['jasmine'],
-
-    reporters: ['progress'],
 <% } -%>
 
 <% if(props.jsPreprocessor.key === 'traceur') { -%>
@@ -98,12 +73,39 @@ module.exports = function(config) {
       'karma-phantomjs-launcher',
 <% } if (props.jsPreprocessor.key === 'noJsPrepro' || props.jsPreprocessor.key === 'coffee') { -%>
       'karma-angular-filesort',
-      'karma-coverage',
 <% } -%>
+      'karma-coverage',
       'karma-jasmine',
       'karma-ng-html2js-preprocessor'
-    ]
+    ],
+
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    },
+
+    reporters: ['progress', 'coverage']
   };
+
+  var preprocessors = {};
+  var pathSrcHtml = path.join(conf.paths.src, '/**/*.html');
+  preprocessors[pathSrcHtml] = ['ng-html2js'];
+
+<% if (props.jsPreprocessor.key === 'noJsPrepro') { -%>
+  var pathSrcJs = path.join(conf.paths.src, '/**/!(*.spec).js');
+
+  preprocessors[pathSrcJs] = ['coverage'];
+<% } else if (props.jsPreprocessor.key === 'coffee') { -%>
+  var pathTmpJs = path.join(conf.paths.tmp, '/**/!(*.spec).js');
+
+  preprocessors[pathTmpJs] = ['coverage'];
+<% } else { -%>
+  var pathTmpJs = path.join(conf.paths.tmp, '/serve/app/index.module.js');
+
+  preprocessors[pathTmpJs] = ['coverage'];
+<% } -%>
+
+  configuration.preprocessors = preprocessors;
 
   // This block is needed to execute Chrome on Travis
   // If you ever plan to use Chrome and Travis, you can keep it

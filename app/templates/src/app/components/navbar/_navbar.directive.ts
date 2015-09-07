@@ -15,10 +15,11 @@ export function acmeNavbar(): ng.IDirective {
 }
 
 /** @ngInject */
-class NavbarController {
+export class NavbarController {
   public relativeDate: string;
+  public creationDate: number;
 
   constructor(moment: moment.MomentStatic) {
-    this.relativeDate = moment(<%- new Date().getTime() %>).fromNow();
+    this.relativeDate = moment(this.creationDate).fromNow();
   }
 }
