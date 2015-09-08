@@ -147,10 +147,10 @@ describe('gulp-angular bower template', function () {
     model.props.ui.key = 'angular-material';
     result = bower(model);
     result.should.match(/angular-material/);
+    result.should.match(/material-design-iconfont/);
     result.should.not.match(/boostrap/);
     result.should.not.match(/foundation/);
     result.should.not.match(/material-design-lite/);
-    result.should.not.match(/material-design-iconfont/);
 
     model.props.ui.key = 'material-design-lite';
     result = bower(model);
