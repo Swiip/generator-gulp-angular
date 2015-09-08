@@ -44,6 +44,7 @@
     "foundation": "~5.5.2",
 <% } if(props.ui.key === 'angular-material') { -%>
     "angular-material": "~0.9.7",
+    "material-design-iconfont": "~0.0.2",
 <% } if(props.ui.key === 'material-design-lite') { -%>
     "material-design-lite": "~1.0.4",
     "material-design-iconfont": "~0.0.2",
