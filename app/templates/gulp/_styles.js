@@ -68,5 +68,5 @@ gulp.task('styles', function () {
     .pipe(cssFilter.restore)
 <% } -%>
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app/')))
-    .pipe(browserSync.reload({ stream: true }));
+    .pipe(browserSync.reload({ stream: true }));
 });

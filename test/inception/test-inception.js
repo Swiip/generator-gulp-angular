@@ -39,7 +39,7 @@ describe('gulp-angular generator inception tests', function () {
     before(function() {
       return inception.prepare({}, {
         angularVersion: prompts.angularVersion.values['1.3'],
-        jQuery: prompts.jQuery.values['jquery 2'],
+        jQuery: prompts.jQuery.values['jquery2'],
         resource: prompts.resource.values.restangular,
         router: prompts.router.values['ui-router'],
         ui: prompts.ui.values.foundation,
@@ -69,7 +69,7 @@ describe('gulp-angular generator inception tests', function () {
   describe('with [ZeptoJS 1.1.x, $http, Bootstrap, LESS, ES6 with Babel, hamljs]', function () {
     before(function() {
       return inception.prepare({}, {
-        jQuery: prompts.jQuery.values['zeptojs 1.1'],
+        jQuery: prompts.jQuery.values['zepto'],
         resource: prompts.resource.values['$http'],
         router: prompts.router.values.noRouter,
         ui: prompts.ui.values.bootstrap,
@@ -99,7 +99,7 @@ describe('gulp-angular generator inception tests', function () {
   describe('with [jQuery 1, $http, new router, ngMaterial, Stylus, TypeScript, handlebars]', function () {
     before(function() {
       return inception.prepare({}, {
-        jQuery: prompts.jQuery.values['jquery 1'],
+        jQuery: prompts.jQuery.values['jquery1'],
         router: prompts.router.values['new-router'],
         ui: prompts.ui.values['angular-material'],
         cssPreprocessor: prompts.cssPreprocessor.values.stylus,
@@ -150,9 +150,10 @@ describe('gulp-angular generator inception tests', function () {
     });
   });
 
-  describe('with [none, ngResource, new router, ngMaterial, NodeSass, Javascript, HTML]', function () {
+  describe('with [AngularJS 1.4, jqLite, ngResource, new router, MDL, NodeSass, Javascript, HTML]', function () {
     before(function() {
       return inception.prepare({}, {
+        angularVersion: prompts.angularVersion.values['1.4'],
         jQuery: prompts.jQuery.values.jqLite,
         router: prompts.router.values['new-router'],
         ui: prompts.ui.values['material-design-lite'],
