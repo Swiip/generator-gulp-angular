@@ -46,11 +46,6 @@ model.angularModules.choices.forEach(function(choice) {
 });
 
 model.jQuery.choices.forEach(function(choice) {
-  var title = choice.name.substring(0, choice.name.indexOf(' ('));
-  var xIndex = choice.name.indexOf('.x');
-  if(xIndex > 0) {
-    title = title.substring(0, xIndex);
-  }
   model.jQuery.values[choice.value.key] = choice.value;
 });
 
