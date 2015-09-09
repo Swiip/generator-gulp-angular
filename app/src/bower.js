@@ -83,13 +83,13 @@ module.exports = function(GulpAngularGenerator) {
     }
     if (this.props.ui.key === 'bootstrap') {
       if(this.props.bootstrapComponents.key !== 'official') {
-        this.wiredepExclusions.push('/bootstrap\.js$/');
+        this.wiredepExclusions.push('/\\\/bootstrap\\.js$/');
         if(this.props.cssPreprocessor.extension === 'scss') {
-          this.wiredepExclusions.push('/bootstrap-sass\\/.*\\.js/');
+          this.wiredepExclusions.push('/\\\/bootstrap-sass\\/.*\\.js/');
         }
       }
       if(this.props.cssPreprocessor.key !== 'noCssPrepro') {
-        this.wiredepExclusions.push('/bootstrap\\.css/');
+        this.wiredepExclusions.push('/\\\/bootstrap\\.css/');
       }
     } else if (this.props.ui.key === 'foundation') {
       if(this.props.foundationComponents.key !== 'official') {
