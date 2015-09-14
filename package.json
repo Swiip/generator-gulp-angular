@@ -18,7 +18,6 @@
   "scripts": {
     "pretest": "./scripts/prepare-test.sh",
     "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/node test/template && ./node_modules/.bin/mocha test/inception/test-inception.js -ig protractor --no-insight",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "update-shrinkwrap": "./scripts/update-test-shrinkwrap.sh",
     "deploy": "./scripts/deploy-boilerplate.sh"
   },
@@ -37,7 +36,6 @@
     "chai": "~3.2.0",
     "chai-as-promised": "~5.1.0",
     "commander": "~2.8.1",
-    "coveralls": "~2.11.4",
     "cross-spawn": "~2.0.0",
     "ejs": "~2.3.4",
     "eslint": "^1.3.1",
