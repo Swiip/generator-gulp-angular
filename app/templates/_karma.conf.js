@@ -6,6 +6,15 @@ var conf = require('./gulp/conf');
 var _ = require('lodash');
 var wiredep = require('wiredep');
 
+var pathSrcHtml = [
+<% if (props.htmlPreprocessor.key === 'noHtmlPrepro') { -%>
+  path.join(conf.paths.src, '/**/*.html')
+<% } else { -%>
+  path.join(conf.paths.tmp, '/serve/app/**/*.html'),
+  path.join(conf.paths.src, '/**/*.html')
+<% } -%>
+];
+
 function listFiles() {
   var wiredepOptions = _.extend({}, conf.wiredep, {
     dependencies: true,
@@ -27,8 +36,8 @@ function listFiles() {
 <% } else { -%>
       path.join(conf.paths.tmp, '/serve/app/index.module.js'),
 <% } -%>
-      path.join(conf.paths.src, '/**/*.html')
-    ]);
+    ])
+    .concat(pathSrcHtml);
 }
 
 module.exports = function(config) {
@@ -88,8 +97,10 @@ module.exports = function(config) {
   };
 
   var preprocessors = {};
-  var pathSrcHtml = path.join(conf.paths.src, '/**/*.html');
-  preprocessors[pathSrcHtml] = ['ng-html2js'];
+
+  pathSrcHtml.forEach(function(path) {
+    preprocessors[path] = ['ng-html2js'];
+  });
 
 <% if (props.jsPreprocessor.key === 'noJsPrepro') { -%>
   var pathSrcJs = path.join(conf.paths.src, '/**/!(*.spec).js');
