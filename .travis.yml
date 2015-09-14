@@ -3,6 +3,7 @@ sudo: false
 node_js:
   - '0.10'
   - '0.12'
+  - stable
   - iojs
 
 env:
@@ -19,6 +20,7 @@ cache:
 matrix:
   fast_finish: true
   allow_failures:
+    - node_js: stable
     - node_js: iojs
 
 install:
