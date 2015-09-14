@@ -84,26 +84,26 @@ module.exports = function(config) {
       dir : 'coverage/'
     },
 
-    reporters: ['progress', 'coverage']
+    reporters: ['progress']
   };
 
   var preprocessors = {};
   var pathSrcHtml = path.join(conf.paths.src, '/**/*.html');
   preprocessors[pathSrcHtml] = ['ng-html2js'];
 
+  if (config.singleRun) {
 <% if (props.jsPreprocessor.key === 'noJsPrepro') { -%>
-  var pathSrcJs = path.join(conf.paths.src, '/**/!(*.spec).js');
-
-  preprocessors[pathSrcJs] = ['coverage'];
+    var pathSrcJs = path.join(conf.paths.src, '/**/!(*.spec).js');
+    preprocessors[pathSrcJs] = ['coverage'];
 <% } else if (props.jsPreprocessor.key === 'coffee') { -%>
-  var pathTmpJs = path.join(conf.paths.tmp, '/**/!(*.spec).js');
-
-  preprocessors[pathTmpJs] = ['coverage'];
+    var pathTmpJs = path.join(conf.paths.tmp, '/**/!(*.spec).js');
+    preprocessors[pathTmpJs] = ['coverage'];
 <% } else { -%>
-  var pathTmpJs = path.join(conf.paths.tmp, '/serve/app/index.module.js');
-
-  preprocessors[pathTmpJs] = ['coverage'];
+    var pathTmpJs = path.join(conf.paths.tmp, '/serve/app/index.module.js');
+    preprocessors[pathTmpJs] = ['coverage'];
 <% } -%>
+    configuration.resporters.push('coverage');
+  }
 
   configuration.preprocessors = preprocessors;
 
