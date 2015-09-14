@@ -5,6 +5,12 @@ node_js:
   - '0.12'
   - iojs
 
+env:
+  global:
+    - secure: CxEg2hSOUgwATFFAbD5ycalZdVvaKSTGIVyVYGze7NCqNaDhaXr1VSfrdfu+GrPp6+cYPhBB8Rr0LaweyZPqiVEHFWBtUiOjl5PShOazyiCNTX6ZQUCTHYQVkoIyKYhP/WVzmy6MfhCnuSkA129EeQ6dVUr/8NlIW2/N8PgU018=
+    - GH_OWNER: zckrs
+    - GH_PROJECT_NAME: gulp-angular-boilerplate
+
 cache:
   directories:
     - node_modules
@@ -37,3 +43,4 @@ script:
 
 after_success:
   - npm run coveralls
+  - npm run deploy
