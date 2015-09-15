@@ -4,70 +4,72 @@ You've just generated a brand new project which is full of useful features, here
 
 ## Yeoman Workflow
 
-We're proud to say that this generator follow by the book the guidelines for the Yeoman generators.
+We're proud to say that this generator follows the Yeoman generator guidelines by the book.
 
 ### `serve`
 
-For the development phase, you've got the featured server behind the command `gulp serve` which support livereload of your modifications.
+For the development phase, the command `gulp serve` launches a server which supports live reload of your modifications.
 
 Its usage is described in the chapters [Development server](#development-server) and [File watching & pre-processing](#file-watching--pre-processing)
 
 ### `test`
 
-For testing, a fully working test environment is shipped with some examples. It uses Karma (with `gulp test`) for the unit tests and Protractor for the end 2 end tests (with `gulp protractor`).
+For testing, a fully working test environment is shipped with some examples. It uses Karma (with `gulp test`) for the unit tests, and Protractor for the end-to-end tests (with `gulp protractor`).
 
 More information in the [Test environment configured](#test-environment-configured) chapter.
 
 ### `build`
 
-The generator brings a top of the art optimization process behind the command `gulp build` or simply `gulp`. It's fully described in the [Optimization process](#optimization-process) chapter.
+The generator brings a state of the art optimization process with the command `gulp build` or simply `gulp`. It's fully described in the [Optimization process](#optimization-process) chapter.
 
 ### `inject`
 
-This generator go further than the guidelines of Yeoman by shipping a fully working file injection process which is able to write automatically all of your `script` and `link` tags of your `index.html`
+This generator goes further than the Yeoman guidelines by shipping a fully working file injection process which is able to automatically write all of your `script` and `link` tags in your `index.html`
 
-All the details about how to use it are in the [File injection](#file-injection) chapter.
+All the details about how to use injection are in the [File injection](#file-injection) chapter.
 
 ## Development server
 
-The generator is shipped with the awesome [Browser Sync](http://www.browsersync.io/) as development server.
+The generator is shipped with the awesome [Browser Sync](http://www.browsersync.io/) as the development server.
 
-The recommended development process is to serve locally your web resources to be more reactive and be able to have features like automatic reload of your page when you make a modification.
+The recommended development process is to serve your web resources locally to be more reactive and be able to have features like automatic reload of your page when you make a modification.
 
-If you have a backend server to address, keep the development server and either launch your request with complete URLs but you'll have to handle [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) or you can use the embedded proxy feature which can redirect your request from the development server to your backend transparently without dealing with CORS.
+If you have a backend server to address, keep the development server and either:
+  - launch your request with complete URLs (but you'll have to handle [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)) 
+  - or you can use the embedded proxy feature which can redirect your request from the development server to your backend transparently without dealing with CORS.
 
 ### Serve you `src` folder
 
 Browser Sync is configured to serve your `src` folder. Or at least all the files not transformed in `src`.
 
-For the pre-processed files (depending of your options, could be all your files). Browser Sync is configured to also serve the `.tmp/serve` folder.
+For the pre-processed files (depending of your options, could be all your files), Browser Sync is configured to also serve the `.tmp/serve` folder.
 
-With the [file watching and pre-processing](#file-watching--pre-processing) feature, your files will be automatically processed and put in that `.tmp/serve` folder and this process should be transparent.
+With the [file watching and pre-processing](#file-watching--pre-processing) feature, your files will be automatically processed and put in the `.tmp/serve` folder. This process should be transparent.
 
-If there is the same file in both directories, the one in `.tmp/serve` will be chosen.
+If the same file is in both directories, the one in `.tmp/serve` will be chosen.
 
-Finally, your `bower_components` folder which contains your external dependencies from Bower (and is not located inside the `src` folder) will be served with the `bower_components` alias at the root of the server.
+Finally, your `bower_components` folder, which contains your external dependencies from Bower (and is not located inside the `src` folder), will be served with the `bower_components` alias at the root of the server.
 
-### Livereload of your sources
+### Live reload of your sources
 
-When you launch your dev. server with `gulp serve`, it will launch Browser Sync but also the [file watching and pre-processing](#file-watching--pre-processing) feature.
+When you launch your dev. server with `gulp serve`, it will launch Browser Sync along with the [file watching and pre-processing](#file-watching--pre-processing) feature.
 
-When gulp detects a change, it will send a reload command to Browser Sync. Depending on which files has changed (html/js or css) it will reload the whole page or just reload the css and keep your page context up.
+When gulp detects a change, it will send a reload command to Browser Sync. Depending on which files have changed (html/js or css) it will reload the whole page or just reload the css and keep your page context up.
 
 ### The proxy feature
 
-As said in introduction, what's considered as a good process is to keep using the dev. server even if you also have the backend running on your computer.
+As mentioned in the introduction, it's considered a good process to keep using the dev server even if you also have a backend running on your computer.
 
-At this point, your application will have to launch requests both to request static files of the front end project and dynamic routes of your backend.
+At this point, your application will have to launch requests both to request static files of the front end project, and dynamic routes of your backend.
 
-The cleaner way to address this need is to add a proxy feature to the Browser Sync server. This feature is inactive by default as we can't know about your backend configuration but it's in comments and easy to start. Look into `gulp/serve.js`, you've got a line in comments :
+The cleaner way to address this need is to add a proxy feature to the Browser Sync server. This feature is inactive by default as we can't know about your backend configuration, but it's in the comments and easy to start. Look in `gulp/serve.js`, you've got a line in the comments:
 ```javascript
 server.middleware = proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', proxyHost: 'jsonplaceholder.typicode.com'});
 ```
 
-Replace the parameters with your needs, relaunch the server and you should be able to target your backend through the domain and port of Browser Sync.
+Replace the parameters with your needs, relaunch the server, and you should be able to target your backend through Browser Sync's domain and port.
 
-If you want more detail about the proxy middleware, look at the external lib which provide the feature: https://github.com/chimurai/http-proxy-middleware
+If you want more detail about the proxy middleware, look at the external lib which provides the feature: https://github.com/chimurai/http-proxy-middleware
 
 ## File watching & pre-processing
 
