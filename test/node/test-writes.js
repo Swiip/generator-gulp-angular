@@ -129,4 +129,17 @@ describe('gulp-angular generator writes script', function () {
     });
   });
 
+  describe('end message', function () {
+    it('should log into console', function() {
+      generator.props = {
+        paths: {
+          dist: 'dist'
+        }
+      };
+      sinon.spy(generator, 'log');
+      generator.end();
+      generator.log.should.have.been.called;
+    });
+  });
+
 });
