@@ -1,5 +1,6 @@
 'use strict';
 
+var chalk = require('chalk');
 var utils = require('./utils');
 
 module.exports = function(GulpAngularGenerator) {
@@ -44,6 +45,23 @@ module.exports = function(GulpAngularGenerator) {
     if (this.props.jsPreprocessor.key === 'typescript') {
       this.spawnCommandSync('tsd', ['install', '-so']);
     }
+  };
+
+  /**
+   * End message
+   */
+  GulpAngularGenerator.prototype.end = function end() {
+
+    this.log('It\'s time to use Gulp tasks:');
+    this.log('- `$ ' + chalk.yellow.bold('gulp') + '` to build an optimized version of your application in folder ' + this.props.paths.dist );
+    this.log('- `$ ' + chalk.yellow.bold('gulp serve') + '` to start BrowserSync server on your source files with live reload');
+    this.log('- `$ ' + chalk.yellow.bold('gulp serve:dist') + '` to start BrowserSync server on your optimized application without live reload');
+    this.log('- `$ ' + chalk.yellow.bold('gulp test') + '` to run your unit tests with Karma');
+    this.log('- `$ ' + chalk.yellow.bold('gulp test:auto') + '` to run your unit tests with Karma in watch mode');
+    this.log('- `$ ' + chalk.yellow.bold('gulp protractor') + '` to launch your e2e tests with Protractor');
+    this.log('- `$ ' + chalk.yellow.bold('gulp protractor:dist') + '` to launch your e2e tests with Protractor on the dist files');
+    this.log('\nMore details are available in docs and recipes');
+    this.log('https://github.com/Swiip/generator-gulp-angular/tree/master/docs');
   };
 
 };
