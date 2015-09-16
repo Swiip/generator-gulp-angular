@@ -1,4 +1,4 @@
-function config ($logProvider, toastrConfig) {
+export function config ($logProvider, toastrConfig) {
   'ngInject';
   // Enable log
   $logProvider.debugEnabled(true);
@@ -10,5 +10,3 @@ function config ($logProvider, toastrConfig) {
   toastrConfig.preventDuplicates = true;
   toastrConfig.progressBar = true;
 }
-
-export default config;
