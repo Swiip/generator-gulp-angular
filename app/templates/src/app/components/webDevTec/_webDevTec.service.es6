@@ -1,4 +1,4 @@
-class WebDevTecService {
+export class WebDevTecService {
   constructor () {
     'ngInject';
 
@@ -9,5 +9,3 @@ class WebDevTecService {
     return this.data;
   }
 }
-
-export default WebDevTecService;

@@ -1,4 +1,4 @@
-class MainController {
+export class MainController {
   constructor ($timeout, webDevTec, toastr) {
     'ngInject';
 
@@ -30,5 +30,3 @@ class MainController {
     this.classAnimation = '';
   }
 }
-
-export default MainController;
