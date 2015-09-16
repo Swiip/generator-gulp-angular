@@ -87,25 +87,13 @@ module.exports = function(config) {
     reporters: ['progress']
   };
 
-  var preprocessors = {};
+  // This is the default preprocessors configuration for a usage with Karma cli
+  // The coverage preprocessor in added in gulp/unit-test.js only for single tests
+  // It was not possible to do it there because karma doesn't let us now if we are
+  // running a single test or not
   var pathSrcHtml = path.join(conf.paths.src, '/**/*.html');
-  preprocessors[pathSrcHtml] = ['ng-html2js'];
-
-  if (config.singleRun) {
-<% if (props.jsPreprocessor.key === 'noJsPrepro') { -%>
-    var pathSrcJs = path.join(conf.paths.src, '/**/!(*.spec).js');
-    preprocessors[pathSrcJs] = ['coverage'];
-<% } else if (props.jsPreprocessor.key === 'coffee') { -%>
-    var pathTmpJs = path.join(conf.paths.tmp, '/**/!(*.spec).js');
-    preprocessors[pathTmpJs] = ['coverage'];
-<% } else { -%>
-    var pathTmpJs = path.join(conf.paths.tmp, '/serve/app/index.module.js');
-    preprocessors[pathTmpJs] = ['coverage'];
-<% } -%>
-    configuration.resporters.push('coverage');
-  }
-
-  configuration.preprocessors = preprocessors;
+  configuration.preprocessors = {};
+  configuration.preprocessors[pathSrcHtml] = ['ng-html2js'];
 
   // This block is needed to execute Chrome on Travis
   // If you ever plan to use Chrome and Travis, you can keep it
