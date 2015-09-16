@@ -27,18 +27,17 @@ Before you submit your pull request consider the following guidelines:
 
 **Test**  
 Please add unit tests for every new feature or bug fix and make sure all tests pass before submitting pull requests. Generator tests are written in [Mocha](http://mochajs.org).  [Karma](http://karma-runner.github.io/0.12/index.html) and [Protractor](http://angular.github.io/protractor) are used to run unit tests and e2e tests on generated app.
-* Run `./node_modules/mocha/bin/_mocha ./test/*.js` to execute all tests instead of `npm test`. Currently all protractor tests in (2) are excluded from `npm test` due to Travis issue. 
-* Add tests into (1) and (2) if there are changes in generated project's structure. 
-* Feel free to create new test file for new generator features. Use `mute.js` to generate nice test reports.
+* Run `./node_modules/mocha/bin/_mocha ./test/*.js` to execute all tests instead of `npm test`. Currently all protractor tests in (2) are excluded from `npm test` due to Travis issue.
+* Add tests into (1) and (2) if there are changes in generated project's structure.
+* Feel free to create new test file for new generator features.
 
-  | Test Files | Functionality 
-  |:-- |:-- 
-  | (1) `test-files-generate.mocha.js` | Test generated app files' content. 
+  | Test Files | Functionality
+  |:-- |:--
+  | (1) `test-files-generate.mocha.js` | Test generated app files' content.
   | (2) `test-gulp-task-inception.mocha.js` | Test `gulp build`, `gulp protractor` & `gulp test` on generated app. This verifies gulp task logic and dependencies.
-  | (3) `test-options.mocha.js` | Test default options. 
-  | (4) `mute.js` | Mute Yeoman during tests. 
-  | (5) `test-import-gen.js` | Test generator directory. 
-  | (6) `test-utils.js` | Unit tests for utils.js. 
+  | (3) `test-options.mocha.js` | Test default options.
+  | (4) `test-import-gen.js` | Test generator directory.
+  | (5) `test-utils.js` | Unit tests for utils.js.
 
 **Style Guide**  
 Please brief yourself on [Idiomatic.js](https://github.com/rwldrn/idiomatic.js) style guide with two space indent.

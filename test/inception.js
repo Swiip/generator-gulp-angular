@@ -9,7 +9,6 @@ var helpers = require('yeoman-generator').test;
 
 var testDirectory = Promise.promisify(helpers.testDirectory);
 
-var outputInTest = require('./mute');
 var mockOptions = require('../app/src/mock-options.js');
 var mockPrompts = require('../app/src/mock-prompts.js');
 
@@ -39,9 +38,6 @@ function prepare(optionCase, promptCase) {
       options
     );
     helpers.mockPrompt(gulpAngular, prompts);
-
-    // gulpAngular.on('run', outputInTest.mute);
-    // gulpAngular.on('end', outputInTest.unmute);
 
     return gulpAngular;
   });
