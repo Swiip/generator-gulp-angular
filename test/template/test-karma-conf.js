@@ -42,6 +42,18 @@ describe('gulp-angular karma.conf template', function () {
     result.should.match(/conf\.paths\.tmp, '\/serve\/app\/index\.module\.js/);
   });
 
+  it('should add files in list files for each html preprocessors', function() {
+    model.props.htmlPreprocessor.key = 'noHtmlPrepro';
+    var result = karmaConf(model);
+    result.should.match(/conf\.paths\.src, '[^\s]*\.html'/);
+    result.should.not.match(/conf\.paths\.tmp, '\/serve[^\s]*\.html'/);
+
+    model.props.htmlPreprocessor.key = 'jade';
+    result = karmaConf(model);
+    result.should.match(/conf\.paths\.src, '[^\s]*\.html'/);
+    result.should.match(/conf\.paths\.tmp, '\/serve[^\s]*\.html'/);
+  });
+
   it('should add and configure angular filesort if needed', function() {
     model.props.jsPreprocessor.key = 'babel';
     var result = karmaConf(model);

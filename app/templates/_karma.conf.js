@@ -6,6 +6,15 @@ var conf = require('./gulp/conf');
 var _ = require('lodash');
 var wiredep = require('wiredep');
 
+var pathSrcHtml = [
+<% if (props.htmlPreprocessor.key === 'noHtmlPrepro') { -%>
+  path.join(conf.paths.src, '/**/*.html')
+<% } else { -%>
+  path.join(conf.paths.tmp, '/serve/app/**/*.html'),
+  path.join(conf.paths.src, '/**/*.html')
+<% } -%>
+];
+
 function listFiles() {
   var wiredepOptions = _.extend({}, conf.wiredep, {
     dependencies: true,
@@ -27,8 +36,8 @@ function listFiles() {
 <% } else { -%>
       path.join(conf.paths.tmp, '/serve/app/index.module.js'),
 <% } -%>
-      path.join(conf.paths.src, '/**/*.html')
-    ]);
+    ])
+    .concat(pathSrcHtml);
 }
 
 module.exports = function(config) {
@@ -91,9 +100,10 @@ module.exports = function(config) {
   // The coverage preprocessor in added in gulp/unit-test.js only for single tests
   // It was not possible to do it there because karma doesn't let us now if we are
   // running a single test or not
-  var pathSrcHtml = path.join(conf.paths.src, '/**/*.html');
   configuration.preprocessors = {};
-  configuration.preprocessors[pathSrcHtml] = ['ng-html2js'];
+  pathSrcHtml.forEach(function(path) {
+    configuration.preprocessors[path] = ['ng-html2js'];
+  });
 
   // This block is needed to execute Chrome on Travis
   // If you ever plan to use Chrome and Travis, you can keep it

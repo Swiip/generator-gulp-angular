@@ -204,5 +204,4 @@ describe('gulp-angular generator inception tests', function () {
       return inception.run(gulpAngular, 'protractor:dist').should.be.fulfilled;
     });
   });
-
 });
