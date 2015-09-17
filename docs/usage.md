@@ -133,7 +133,7 @@ There is none at the generation but you can add `.jade`, `.haml` or `.hbs` (depe
 * *Angular modules*: animate, cookies, touch, sanitize
 * *Resource handler*: ngResource, Restangular, none
 * *Router*: ngRoute, UI Router, none
-* *UI Framework*: Bootstrap, Foundation, Angular Material, none (depends on the chosen CSS preprocessor)
+* *UI Framework*: Bootstrap, Foundation, Angular Material, Material Design Lite, none (depends on the chosen CSS preprocessor)
 * *UI directives* : UI Bootstrap, Angular Strap, official Bootstrap JavaScript, Angular Foundation, official Foundation JavaScript, none (depends on the UI framework)
 * *CSS pre-processor*: Less, Sass with Ruby and Node, Stylus, none
 * *JS preprocessor*: CoffeeScript, TypeScript, ECMAScript 6 (Traceur and Babel), none
