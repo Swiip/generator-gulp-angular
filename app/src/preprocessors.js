@@ -38,7 +38,7 @@ module.exports = function(GulpAngularGenerator) {
   GulpAngularGenerator.prototype.computeWatchTaskDeps = function computeInjectTaskDeps() {
     this.watchTaskDeps = [];
 
-    if (this.props.jsPreprocessor.srcExtension === 'es6') {
+    if (this.props.jsPreprocessor.srcExtension === 'es6' || this.props.jsPreprocessor.srcExtension === 'ts') {
       this.watchTaskDeps.push('\'scripts:watch\'');
     }
 
