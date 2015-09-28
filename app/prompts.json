@@ -117,7 +117,7 @@
           "key": "restangular",
           "module": "restangular"
         },
-        "name": "Restangular, an alternative service to handles RESTful requests"
+        "name": "Restangular, an alternative service to handle RESTful requests"
       },
       {
         "value": {
