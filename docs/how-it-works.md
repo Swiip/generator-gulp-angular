@@ -191,7 +191,7 @@ Our objective are to allow user to use Karma without Gulp if needed. Most of the
 
 As we wanted to keep some useful tools from the generator. It's from the Karma configuration file that some tools or configuration of the generator which are called.
 
-### `karam.conf.js`
+### `karma.conf.js`
 
 The `listFiles` function at the start of the file use [wiredep](https://github.com/taptapship/wiredep) and the `gulp/conf.js` file to list the files of the project the same way the injection does. This way, the user should never has to change the file list in the Karma configuration.
 
