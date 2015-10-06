@@ -10,7 +10,7 @@ var pathSrcHtml = [
 <% if (props.htmlPreprocessor.key === 'noHtmlPrepro') { -%>
   path.join(conf.paths.src, '/**/*.html')
 <% } else { -%>
-  path.join(conf.paths.tmp, '/serve/app/**/*.html'),
+  path.join(conf.paths.tmp, '/serve/**/*.html'),
   path.join(conf.paths.src, '/**/*.html')
 <% } -%>
 ];
@@ -55,7 +55,7 @@ function runTests (singleRun, done) {
 }
 
 <% if (props.jsPreprocessor.srcExtension !== 'es6' && props.jsPreprocessor.key !== 'typescript') { -%>
-gulp.task('test', ['scripts'], function(done) {
+gulp.task('test', ['scripts'<% if (props.htmlPreprocessor.key !== 'noHtmlPrepro') { %>, 'markups'<% } %>], function(done) {
   runTests(true, done);
 });
 
@@ -63,7 +63,7 @@ gulp.task('test:auto', ['watch'], function(done) {
   runTests(false, done);
 });
 <% } else { -%>
-gulp.task('test', ['scripts:test'], function(done) {
+gulp.task('test', ['scripts:test'<% if (props.htmlPreprocessor.key !== 'noHtmlPrepro') { %>, 'markups'<% } %>], function(done) {
   runTests(true, done);
 });
 

@@ -10,7 +10,7 @@ var pathSrcHtml = [
 <% if (props.htmlPreprocessor.key === 'noHtmlPrepro') { -%>
   path.join(conf.paths.src, '/**/*.html')
 <% } else { -%>
-  path.join(conf.paths.tmp, '/serve/app/**/*.html'),
+  path.join(conf.paths.tmp, '/serve/**/*.html'),
   path.join(conf.paths.src, '/**/*.html')
 <% } -%>
 ];
@@ -50,7 +50,11 @@ module.exports = function(config) {
     autoWatch: false,
 
     ngHtml2JsPreprocessor: {
+<% if (props.htmlPreprocessor.key === 'noHtmlPrepro') { -%>
       stripPrefix: conf.paths.src + '/',
+<% } else { -%>
+      stripPrefix: '(' + conf.paths.src + '/|' + conf.paths.tmp + '/serve/)',
+<% } -%>
       moduleName: '<%- appName %>'
     },
 

@@ -80,6 +80,7 @@
     "karma-chrome-launcher": "~0.2.0",
 <% } else { -%>
     "karma-phantomjs-launcher": "~0.2.1",
+    "phantomjs": "~1.9.18",
 <% } if (props.jsPreprocessor.srcExtension === 'js' || props.jsPreprocessor.srcExtension === 'coffee') { -%>
     "karma-angular-filesort": "~1.0.0",
 <% } -%>
