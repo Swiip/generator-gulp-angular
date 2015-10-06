@@ -32,7 +32,7 @@ The task is organized by preparing first all settings of the injections the maki
 The 3 steps of injections are:
 
 - **Inject styles**: use of [gulp-inject](https://github.com/klei/gulp-inject) to list all the CSS files inside the head of the page.
-- **Inject scripts**: use of [gulp-inject](https://github.com/klei/gulp-inject) to list all the JS files inside the body of the page (bellow the app).
+- **Inject scripts**: use of [gulp-inject](https://github.com/klei/gulp-inject) to list all the JS files inside the body of the page (below the app).
 - **Wiredep**: use of [wiredep](https://github.com/taptapship/wiredep) streams to add CSS and JS files of the Bower dependencies.
 
 ### Listing and ordering files for injection
