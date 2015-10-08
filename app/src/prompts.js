@@ -83,7 +83,7 @@ module.exports = function(GulpAngularGenerator) {
 
   /**
    * Ask all questions from prompts.json
-   * Add conditional tests on those depending on first resonses
+   * Add conditional tests on those depending on first responses
    * Complete responses with null answers for questions not asked
    */
   GulpAngularGenerator.prototype.askQuestions = function askQuestions() {
