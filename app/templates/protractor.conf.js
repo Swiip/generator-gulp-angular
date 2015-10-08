@@ -12,7 +12,7 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome'
   },
-  
+
   baseUrl: 'http://localhost:3000',
 
   // Spec patterns are relative to the current working directory when
