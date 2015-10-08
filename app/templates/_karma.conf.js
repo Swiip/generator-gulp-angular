@@ -3,7 +3,7 @@
 var path = require('path');
 var conf = require('./gulp/conf');
 
-var _ = require('lodash');
+var assign = require('lodash.assign');
 var wiredep = require('wiredep');
 
 var pathSrcHtml = [
@@ -16,7 +16,7 @@ var pathSrcHtml = [
 ];
 
 function listFiles() {
-  var wiredepOptions = _.extend({}, conf.wiredep, {
+  var wiredepOptions = assign({}, conf.wiredep, {
     dependencies: true,
     devDependencies: true
   });
