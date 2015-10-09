@@ -101,7 +101,7 @@ module.exports = function(config) {
   };
 
   // This is the default preprocessors configuration for a usage with Karma cli
-  // The coverage preprocessor in added in gulp/unit-test.js only for single tests
+  // The coverage preprocessor is added in gulp/unit-test.js only for single tests
   // It was not possible to do it there because karma doesn't let us now if we are
   // running a single test or not
   configuration.preprocessors = {};
