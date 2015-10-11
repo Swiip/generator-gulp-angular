@@ -9,7 +9,7 @@ var browserSync = require('browser-sync');
 var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep').stream;
-var _ = require('lodash');
+var assign = require('lodash.assign');
 
 gulp.task('styles', function () {
 <% if (props.cssPreprocessor.key === 'less') { -%>
@@ -48,7 +48,7 @@ gulp.task('styles', function () {
     path.join(conf.paths.src, '/app/index.<%- props.cssPreprocessor.extension %>')
   ])
     .pipe($.inject(injectFiles, injectOptions))
-    .pipe(wiredep(_.extend({}, conf.wiredep)))
+    .pipe(wiredep(assign({}, conf.wiredep)))
 <% if (props.cssPreprocessor.key === 'ruby-sass') { -%>
     .pipe($.rubySass(sassOptions)).on('error', conf.errorHandler('RubySass'))
     .pipe(cssFilter)
