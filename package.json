@@ -17,7 +17,7 @@
   "repository": "Swiip/generator-gulp-angular",
   "scripts": {
     "pretest": "./scripts/prepare-test.sh",
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/node test/template && ./node_modules/.bin/mocha test/inception/test-inception.js -ig protractor --no-insight",
+    "test": "istanbul cover _mocha -- test/node test/template && mocha test/inception/test-inception.js -ig protractor --no-insight",
     "update-shrinkwrap": "./scripts/update-test-shrinkwrap.sh",
     "deploy": "./scripts/deploy-boilerplate.sh"
   },
