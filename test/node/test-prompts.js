@@ -17,17 +17,17 @@ var mockPrompts = require('../../app/src/mock-prompts.js');
 
 describe('gulp-angular generator prompts script', function () {
 
-  before(function() {
+  before(function () {
     prompts(Generator);
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     generator = new Generator();
   });
 
   describe('check and ask for Insight', function () {
 
-    it('should ask permission', function() {
+    it('should ask permission', function () {
       generator.insight = {
         optOut: undefined,
         track: sinon.stub(),
@@ -39,7 +39,7 @@ describe('gulp-angular generator prompts script', function () {
       generator.insight.askPermission.should.have.been.called;
     });
 
-    it('should ignore if permission is already asked', function() {
+    it('should ignore if permission is already asked', function () {
       generator.insight = {
         optOut: false,
         track: sinon.stub(),
@@ -53,14 +53,14 @@ describe('gulp-angular generator prompts script', function () {
   });
 
   describe('handle default option', function () {
-    it('should ignore default if option not set', function() {
+    it('should ignore default if option not set', function () {
       sinon.spy(generator, 'log');
       generator.defaultOption();
       generator.props.should.be.deep.equal({});
       generator.log.should.have.not.been.called;
     });
 
-    it('should use default props if option is set', function() {
+    it('should use default props if option is set', function () {
       sinon.spy(generator, 'log');
       generator.options.default = true;
       generator.defaultOption();
@@ -71,14 +71,14 @@ describe('gulp-angular generator prompts script', function () {
   });
 
   describe('check and ask for .yo-rc', function () {
-    it('should ignore .yo-rc if not found', function() {
+    it('should ignore .yo-rc if not found', function () {
       sinon.stub(generator.config, 'get').returns(null);
       sinon.spy(generator, 'prompt');
       generator.checkYoRc();
       generator.prompt.should.have.not.been.called;
     });
 
-    it('should ask to use .yo-rc if found and do nothing if refused', function() {
+    it('should ask to use .yo-rc if found and do nothing if refused', function () {
       sinon.stub(generator.config, 'get').returns(mockPrompts.defaults);
       sinon.stub(generator, 'prompt').callsArgWith(1, { skipConfig: false });
       generator.checkYoRc();
@@ -86,7 +86,7 @@ describe('gulp-angular generator prompts script', function () {
       generator.props.should.be.deep.equal({});
     });
 
-    it('should ask to use .yo-rc if found and use them if accepted', function() {
+    it('should ask to use .yo-rc if found and use them if accepted', function () {
       sinon.stub(generator.config, 'get').returns(mockPrompts.defaults);
       sinon.stub(generator, 'prompt').callsArgWith(1, { skipConfig: true });
       generator.checkYoRc();
@@ -96,7 +96,7 @@ describe('gulp-angular generator prompts script', function () {
   });
 
   describe('ask for all standard questions', function () {
-    it('should ask all questions', function() {
+    it('should ask all questions', function () {
       sinon.stub(generator, 'prompt').callsArgWith(1, { ui: { key: 'noUI' } });
       generator.askQuestions();
       generator.prompt.should.have.been.called;
@@ -104,26 +104,26 @@ describe('gulp-angular generator prompts script', function () {
       generator.props.foundationComponents.should.be.an('object');
     });
 
-    it('should not override bootstrapComponents if bootstrap', function() {
+    it('should not override bootstrapComponents if bootstrap', function () {
       sinon.stub(generator, 'prompt').callsArgWith(1, { ui: { key: 'bootstrap' } });
       generator.askQuestions();
       chai.expect(generator.props.bootstrapComponents).to.be.undefined;
     });
 
-    it('should not override foundationComponents if foundation', function() {
+    it('should not override foundationComponents if foundation', function () {
       sinon.stub(generator, 'prompt').callsArgWith(1, { ui: { key: 'foundation' } });
       generator.askQuestions();
       chai.expect(generator.props.foundationComponents).to.be.undefined;
     });
 
-    it('should skip all if skipConfig', function() {
+    it('should skip all if skipConfig', function () {
       generator.skipConfig = true;
       sinon.spy(generator, 'prompt');
       generator.askQuestions();
       generator.prompt.should.not.have.been.called;
     });
 
-    it('should set when functions which check for ui choice', function() {
+    it('should set when functions which check for ui choice', function () {
       generator.askQuestions();
       var whenBootstrap = _.findWhere(promptsJson, {name: 'bootstrapComponents'}).when;
       var whenFoundation = _.findWhere(promptsJson, {name: 'foundationComponents'}).when;
@@ -135,14 +135,14 @@ describe('gulp-angular generator prompts script', function () {
   });
 
   describe('ask for advanced questions', function () {
-    it('should set advanced flags event if non advanced mode', function() {
+    it('should set advanced flags event if non advanced mode', function () {
       generator.askAdvancedQuestions();
       generator.includeModernizr.should.be.false;
       generator.imageMin.should.be.false;
       generator.qrCode.should.be.false;
     });
 
-    it('should ask advanced questions when advanced mode', function() {
+    it('should ask advanced questions when advanced mode', function () {
       generator.options.advanced = true;
       sinon.stub(generator, 'prompt').callsArgWith(1, {
         advancedFeatures: ['modernizr', 'imagemin', 'qrcode']
@@ -156,7 +156,7 @@ describe('gulp-angular generator prompts script', function () {
 
   describe('send anonymously report usage statistics by Insight', function () {
 
-    it('should success', function() {
+    it('should success', function () {
       generator.insight = {
         track: sinon.spy()
       };

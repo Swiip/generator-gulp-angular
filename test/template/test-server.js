@@ -9,20 +9,21 @@ var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
 
 describe('gulp-angular server template', function () {
-  var server, model;
+  var server;
+  var model;
 
-  before(function() {
+  before(function () {
     return templateTools.load('gulp/_server.js')
-      .then(function(templateModule) {
+      .then(function (templateModule) {
         server = templateModule;
       });
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     model = mockModel();
   });
 
-  it('should use qrCode module if selected', function() {
+  it('should use qrCode module if selected', function () {
     model.qrCode = false;
     var result = server(model);
     result.should.not.match(/qrcode/);

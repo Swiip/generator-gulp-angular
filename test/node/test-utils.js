@@ -10,11 +10,11 @@ describe('gulp-angular generator utils', function () {
   describe('normalizePath', function () {
     var realSep;
 
-    before(function() {
+    before(function () {
       realSep = path.sep;
     });
 
-    after(function() {
+    after(function () {
       path.sep = realSep;
     });
 

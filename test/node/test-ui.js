@@ -10,16 +10,16 @@ var ui = require('../../app/src/ui.js');
 
 describe('gulp-angular generator ui script', function () {
 
-  before(function() {
+  before(function () {
     ui(Generator);
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     generator = new Generator();
   });
 
   describe('add right files depending choices', function () {
-    it('should add only navbar and index.scss for no router and no ui', function() {
+    it('should add only navbar and index.scss for no router and no ui', function () {
       generator.props = {
         router: { module: null },
         ui: { key: 'noUI' },
@@ -34,7 +34,7 @@ describe('gulp-angular generator ui script', function () {
       generator.files.length.should.be.equal(4);
     });
 
-    it('should add 6 files when all options', function() {
+    it('should add 6 files when all options', function () {
       generator.props = {
         router: { module: 'ngRoute' },
         ui: { key: 'bootstrap' },

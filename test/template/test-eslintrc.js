@@ -9,20 +9,21 @@ var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
 
 describe('gulp-angular eslint template', function () {
-  var eslint, model;
+  var eslint;
+  var model;
 
-  before(function() {
+  before(function () {
     return templateTools.load('_.eslintrc')
-      .then(function(templateModule) {
+      .then(function (templateModule) {
         eslint = templateModule;
       });
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     model = mockModel();
   });
 
-  it('should add esnext for es6 js prepro', function() {
+  it('should add esnext for es6 js prepro', function () {
     model.props.jsPreprocessor.srcExtension = 'notes6';
     var result = eslint(model);
     result.should.not.match(/es6/);

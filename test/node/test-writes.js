@@ -14,25 +14,26 @@ var utils = require('../../app/src/utils.js');
 var write = require('../../app/src/write.js');
 
 describe('gulp-angular generator writes script', function () {
-  var replacePrefix, consoleError;
+  var replacePrefix;
+  var consoleError;
 
-  before(function() {
+  before(function () {
     write(Generator);
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     generator = new Generator();
     replacePrefix = sinon.stub(utils, 'replacePrefix');
     consoleError = sinon.stub(console, 'error');
   });
 
-  afterEach(function() {
+  afterEach(function () {
     replacePrefix.restore();
     consoleError.restore();
   });
 
   describe('write yo rc', function () {
-    it('should call this.config.set with the config', function() {
+    it('should call this.config.set with the config', function () {
       generator.props = { test: 'value' };
       sinon.spy(generator.config, 'set');
       generator.writeYoRc();
@@ -41,8 +42,8 @@ describe('gulp-angular generator writes script', function () {
   });
 
   describe('actually write files from this.files', function () {
-    it('should call fs.copy for each files and process the one with templates flag', function() {
-      generator.files = [ {
+    it('should call fs.copy for each files and process the one with templates flag', function () {
+      generator.files = [{
         src: 'test/path/file-1.js',
         dest: 'test/dest/path/file-1.js',
         template: false
@@ -50,7 +51,7 @@ describe('gulp-angular generator writes script', function () {
         src: 'test/path/file-2.js',
         dest: 'test/dest/path/file-2.js',
         template: true
-      } ];
+      }];
       sinon.spy(generator.fs, 'copy');
       sinon.spy(generator.fs, 'copyTpl');
       replacePrefix.returnsArg(0);
@@ -68,9 +69,9 @@ describe('gulp-angular generator writes script', function () {
       );
     });
 
-    it('should log error if the copy fail', function() {
-      generator.files = [ { src: 'test/src', dest: '', template: true } ];
-      generator.fs.copyTpl = function() {
+    it('should log error if the copy fail', function () {
+      generator.files = [{ src: 'test/src', dest: '', template: true }];
+      generator.fs.copyTpl = function () {
         throw new Error('test error');
       };
       generator.writeFiles.bind(generator).should.throw(/test error/);
@@ -79,7 +80,7 @@ describe('gulp-angular generator writes script', function () {
   });
 
   describe('launch installations depending of options', function () {
-    it('should call installDependencies with false when options are set to false', function() {
+    it('should call installDependencies with false when options are set to false', function () {
       generator.options = {
         'skip-install': false,
         'skip-message': false
@@ -96,7 +97,7 @@ describe('gulp-angular generator writes script', function () {
       });
     });
 
-    it('should call installDependencies with true by default', function() {
+    it('should call installDependencies with true by default', function () {
       generator.options = {
         'skip-install': true,
         'skip-message': true
@@ -113,7 +114,7 @@ describe('gulp-angular generator writes script', function () {
       });
     });
 
-    it('should call TSD install with Typescript preprocessor', function() {
+    it('should call TSD install with Typescript preprocessor', function () {
       generator.options = {
         'skip-install': false,
         'skip-message': false
@@ -130,7 +131,7 @@ describe('gulp-angular generator writes script', function () {
   });
 
   describe('end message', function () {
-    it('should log into console', function() {
+    it('should log into console', function () {
       generator.props = {
         paths: {
           dist: 'dist'

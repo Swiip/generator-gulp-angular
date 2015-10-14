@@ -9,20 +9,21 @@ var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
 
 describe('gulp-angular karma.conf template', function () {
-  var karmaConf, model;
+  var karmaConf;
+  var model;
 
-  before(function() {
+  before(function () {
     return templateTools.load('_karma.conf.js')
-      .then(function(templateModule) {
+      .then(function (templateModule) {
         karmaConf = templateModule;
       });
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     model = mockModel();
   });
 
-  it('should add files in list files for each js preprocessors', function() {
+  it('should add files in list files for each js preprocessors', function () {
     model.props.jsPreprocessor.key = 'noJsPrepro';
     var result = karmaConf(model);
     result.should.match(/conf\.paths\.src, '[^\s]*\.module\.js'/);
@@ -42,7 +43,7 @@ describe('gulp-angular karma.conf template', function () {
     result.should.match(/conf\.paths\.tmp, '\/serve\/app\/index\.module\.js/);
   });
 
-  it('should add files in list files for each html preprocessors', function() {
+  it('should add files in list files for each html preprocessors', function () {
     model.props.htmlPreprocessor.key = 'noHtmlPrepro';
     var result = karmaConf(model);
     result.should.match(/conf\.paths\.src, '[^\s]*\.html'/);
@@ -54,7 +55,7 @@ describe('gulp-angular karma.conf template', function () {
     result.should.match(/conf\.paths\.tmp, '\/serve[^\s]*\.html'/);
   });
 
-  it('should add and configure angular filesort if needed', function() {
+  it('should add and configure angular filesort if needed', function () {
     model.props.jsPreprocessor.key = 'babel';
     var result = karmaConf(model);
     result.should.match(/frameworks: \['jasmine'\]/);
@@ -73,7 +74,7 @@ describe('gulp-angular karma.conf template', function () {
     result.should.match(/'karma-angular-filesort'/);
   });
 
-  it('should replace phantom with chrome for traceur', function() {
+  it('should replace phantom with chrome for traceur', function () {
     model.props.jsPreprocessor.key = 'noJsPrepro';
     var result = karmaConf(model);
     result.should.match(/browsers : \['PhantomJS'\]/);

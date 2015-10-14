@@ -11,22 +11,22 @@ var bower = require('../../app/src/bower.js');
 
 describe('gulp-angular generator bower script', function () {
 
-  before(function() {
+  before(function () {
     bower(Generator);
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     generator = new Generator();
   });
 
   describe('select bower overrides depending the choices', function () {
     function allFonts(array) {
-      array.forEach(function(line) {
+      array.forEach(function (line) {
         line.should.match(/\.(eot|svg|ttf|woff|woff2)$/);
       });
     }
 
-    it('should return null if bootstrap is not selected', function() {
+    it('should return null if bootstrap is not selected', function () {
       generator.props = {
         ui: { key: 'notbootstrap' },
         router: { key: 'notnewrouter' }
@@ -35,7 +35,7 @@ describe('gulp-angular generator bower script', function () {
       expect(generator.bowerOverrides).to.be.null;
     });
 
-    it('should add fonts and js for bootstrap and official js', function() {
+    it('should add fonts and js for bootstrap and official js', function () {
       generator.props = {
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'official' },
@@ -49,7 +49,7 @@ describe('gulp-angular generator bower script', function () {
       allFonts(bootstrapMain);
     });
 
-    it('should add fonts and css for bootstrap and no css prepro', function() {
+    it('should add fonts and css for bootstrap and no css prepro', function () {
       generator.props = {
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'something' },
@@ -63,7 +63,7 @@ describe('gulp-angular generator bower script', function () {
       allFonts(bootstrapMain);
     });
 
-    it('should add fonts and css for bootstrap and scss prepro', function() {
+    it('should add fonts and css for bootstrap and scss prepro', function () {
       generator.props = {
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'official' },
@@ -80,7 +80,7 @@ describe('gulp-angular generator bower script', function () {
       allFonts(bootstrapMain);
     });
 
-    it('should add fonts and css for bootstrap and scss prepro', function() {
+    it('should add fonts and css for bootstrap and scss prepro', function () {
       generator.props = {
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'something' },
@@ -95,7 +95,7 @@ describe('gulp-angular generator bower script', function () {
       allFonts(bootstrapMain);
     });
 
-    it('should add fonts and css for bootstrap and less as css prepro', function() {
+    it('should add fonts and css for bootstrap and less as css prepro', function () {
       generator.props = {
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'something' },
@@ -109,7 +109,7 @@ describe('gulp-angular generator bower script', function () {
       allFonts(bootstrapMain);
     });
 
-    it('should add new router js file', function() {
+    it('should add new router js file', function () {
       generator.props = {
         ui: { key: 'notbootstrap' },
         router: { key: 'new-router' }
@@ -120,7 +120,7 @@ describe('gulp-angular generator bower script', function () {
       first.should.match(/router\.es5\.js/);
     });
 
-    it('should keep indent in bower.json', function() {
+    it('should keep indent in bower.json', function () {
       generator.props = {
         ui: { key: 'bootstrap' },
         bootstrapComponents: { key: 'something' },
@@ -134,7 +134,7 @@ describe('gulp-angular generator bower script', function () {
   });
 
   describe('select wiredep exclusions depending the choices', function () {
-    it('should exclude bootstrap if angular-boostrap and scss', function() {
+    it('should exclude bootstrap if angular-boostrap and scss', function () {
       generator.props = {
         jQuery: { key: 'jquery1' },
         ui: { key: 'bootstrap' },
@@ -147,7 +147,7 @@ describe('gulp-angular generator bower script', function () {
       generator.wiredepExclusions[2].should.be.equal('/\\/bootstrap\\.css/');
     });
 
-    it('should exclude only bootstrap.js if angular-boostrap and less', function() {
+    it('should exclude only bootstrap.js if angular-boostrap and less', function () {
       generator.props = {
         jQuery: { key: 'jquery1' },
         ui: { key: 'bootstrap' },
@@ -159,7 +159,7 @@ describe('gulp-angular generator bower script', function () {
       generator.wiredepExclusions[1].should.be.equal('/\\/bootstrap\\.css/');
     });
 
-    it('should exclude foundation if foundation and sass', function() {
+    it('should exclude foundation if foundation and sass', function () {
       generator.props = {
         jQuery: { key: 'jquery1' },
         ui: { key: 'foundation' },
@@ -171,7 +171,7 @@ describe('gulp-angular generator bower script', function () {
       generator.wiredepExclusions[1].should.be.equal('/foundation\\.css/');
     });
 
-    it('should exclude foundation if foundation and not sass', function() {
+    it('should exclude foundation if foundation and not sass', function () {
       generator.props = {
         jQuery: { key: 'jquery1' },
         ui: { key: 'foundation' },
@@ -182,7 +182,7 @@ describe('gulp-angular generator bower script', function () {
       generator.wiredepExclusions[0].should.be.equal('/foundation\\.js/');
     });
 
-    it('should exclude nothing if no ui', function() {
+    it('should exclude nothing if no ui', function () {
       generator.props = {
         jQuery: { key: 'jquery1' },
         ui: { key: 'noUI' }
@@ -191,7 +191,7 @@ describe('gulp-angular generator bower script', function () {
       generator.wiredepExclusions.length.should.be.equal(0);
     });
 
-    it('should exclude nothing if bootstrap but nothing else', function() {
+    it('should exclude nothing if bootstrap but nothing else', function () {
       generator.props = {
         jQuery: { key: 'jquery1' },
         ui: { key: 'bootstrap' },
@@ -202,7 +202,7 @@ describe('gulp-angular generator bower script', function () {
       generator.wiredepExclusions.length.should.be.equal(0);
     });
 
-    it('should exclude nothing if foundation but nothing else', function() {
+    it('should exclude nothing if foundation but nothing else', function () {
       generator.props = {
         jQuery: { key: 'jquery1' },
         ui: { key: 'foundation' },
@@ -213,7 +213,7 @@ describe('gulp-angular generator bower script', function () {
       generator.wiredepExclusions.length.should.be.equal(0);
     });
 
-    it('should exclude jQuery if select "None"', function() {
+    it('should exclude jQuery if select "None"', function () {
       generator.props = {
         jQuery: { key: 'jqLite' },
         ui: { key: 'foundation' },
@@ -224,7 +224,7 @@ describe('gulp-angular generator bower script', function () {
       generator.wiredepExclusions[0].should.be.equal('/jquery/');
     });
 
-    it('should exclude jQuery with Zepto', function() {
+    it('should exclude jQuery with Zepto', function () {
       generator.props = {
         jQuery: { key: 'zepto' },
         ui: { key: 'foundation' },

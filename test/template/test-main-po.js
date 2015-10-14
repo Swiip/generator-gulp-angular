@@ -9,20 +9,21 @@ var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
 
 describe('gulp-angular gitignore template', function () {
-  var mainPo, model;
+  var mainPo;
+  var model;
 
-  before(function() {
+  before(function () {
     return templateTools.load('e2e/_main.po.js')
-      .then(function(templateModule) {
+      .then(function (templateModule) {
         mainPo = templateModule;
       });
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     model = mockModel();
   });
 
-  it('should choose the right css class depending of the ui framework', function() {
+  it('should choose the right css class depending of the ui framework', function () {
     model.props.ui.key = 'bootstrap';
     var result = mainPo(model);
     result.should.match(/by\.css\('\.jumbotron'\)/);

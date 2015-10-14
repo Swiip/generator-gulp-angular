@@ -14,21 +14,21 @@ var optionsJson = require('../../app/options.json');
 
 describe('gulp-angular generator options script', function () {
 
-  before(function() {
+  before(function () {
     options(Generator);
     sinon.stub(process, 'cwd').returns('test directory-pathName');
   });
 
-  after(function() {
+  after(function () {
     process.cwd.restore();
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     generator = new Generator();
   });
 
   describe('run generator.option for each option from options.json', function () {
-    it('should call option() same times as entries in options.json', function() {
+    it('should call option() same times as entries in options.json', function () {
       sinon.spy(generator, 'option');
       generator.defineOptions();
       generator.option.should.have.callCount(optionsJson.length);
@@ -36,12 +36,12 @@ describe('gulp-angular generator options script', function () {
   });
 
   describe('define appName', function () {
-    it('should define from current directory', function() {
+    it('should define from current directory', function () {
       generator.determineAppName();
       generator.appName.should.be.equal('testDirectoryPathName');
     });
 
-    it('should define from options if set', function() {
+    it('should define from options if set', function () {
       generator.appName = 'appNameFromOption';
       generator.determineAppName();
       generator.appName.should.be.equal('appNameFromOption');

@@ -9,26 +9,27 @@ var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
 
 describe('gulp-angular watch template', function () {
-  var watch, model;
+  var watch;
+  var model;
 
-  before(function() {
+  before(function () {
     return templateTools.load('gulp/_watch.js')
-      .then(function(templateModule) {
+      .then(function (templateModule) {
         watch = templateModule;
       });
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     model = mockModel();
   });
 
-  it('should insert watch task dependencies', function() {
+  it('should insert watch task dependencies', function () {
     model.watchTaskDeps = ['\'a\'', '\'b\'', '\'c\''];
     var result = watch(model);
     result.should.match(/gulp\.task\('watch', \['a', 'b', 'c'\], function/);
   });
 
-  it('should watch the css preprocessor extension files and launch the styles task', function() {
+  it('should watch the css preprocessor extension files and launch the styles task', function () {
     model.props.cssPreprocessor.key = 'noCssPrepro';
     model.props.cssPreprocessor.extension = 'css';
     var result = watch(model);
@@ -42,7 +43,7 @@ describe('gulp-angular watch template', function () {
     result.should.match(/gulp\.start\('styles'\);/);
   });
 
-  it('should watch the js preprocessor extension files', function() {
+  it('should watch the js preprocessor extension files', function () {
     model.props.jsPreprocessor.key = 'noJsPrepro';
     model.props.jsPreprocessor.extension = 'js';
     model.props.jsPreprocessor.srcExtension = 'notes6';
@@ -65,7 +66,7 @@ describe('gulp-angular watch template', function () {
     result.should.not.match(/gulp\.start\('scripts'\);/);
   });
 
-  it('should watch the html preprocessor extension files', function() {
+  it('should watch the html preprocessor extension files', function () {
     model.props.htmlPreprocessor.key = 'noHtmlPrepro';
     model.props.htmlPreprocessor.extension = 'html';
     var result = watch(model);

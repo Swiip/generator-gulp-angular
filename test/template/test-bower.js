@@ -10,20 +10,21 @@ var mockModel = require('./mock-model');
 var angularModulesObject = { animate: true, cookies: true, touch: true, sanitize: true, messages: true, aria: true };
 
 describe('gulp-angular bower template', function () {
-  var bower, model;
+  var bower;
+  var model;
 
-  before(function() {
+  before(function () {
     return templateTools.load('_bower.json')
-      .then(function(templateModule) {
+      .then(function (templateModule) {
         bower = templateModule;
       });
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     model = mockModel();
   });
 
-  it('should put the right angular version and app name in the bower.json', function() {
+  it('should put the right angular version and app name in the bower.json', function () {
     model.appName = 'testAppName';
     model.props.angularVersion = 'angular-test-version';
     model.angularModulesObject = angularModulesObject;
@@ -39,13 +40,13 @@ describe('gulp-angular bower template', function () {
     result.should.match(/"angular": "angular-test-version"/);
   });
 
-  it('should add modernizr if selected', function() {
+  it('should add modernizr if selected', function () {
     model.includeModernizr = true;
     var result = bower(model);
     result.should.match(/modernizr/);
   });
 
-  it('should add angular modules in bower when selected', function() {
+  it('should add angular modules in bower when selected', function () {
     model.angularModulesObject = angularModulesObject;
     var result = bower(model);
     result.should.match(/angular-animate/);
@@ -56,7 +57,7 @@ describe('gulp-angular bower template', function () {
     result.should.match(/angular-aria/);
   });
 
-  it('should not add angular modules in bower when not selected', function() {
+  it('should not add angular modules in bower when not selected', function () {
     model.props.angularModules = [];
     var result = bower(model);
     result.should.not.match(/angular-animate/);
@@ -67,7 +68,7 @@ describe('gulp-angular bower template', function () {
     result.should.not.match(/angular-aria/);
   });
 
-  it('should add the right jquery', function() {
+  it('should add the right jquery', function () {
     model.props.jQuery.key = 'jqLite';
     var result = bower(model);
     result.should.not.match(/jquery/);
@@ -89,7 +90,7 @@ describe('gulp-angular bower template', function () {
     result.should.not.match(/jquery/);
   });
 
-  it('should add the right resource lib', function() {
+  it('should add the right resource lib', function () {
     model.props.resource.key = '$http';
     var result = bower(model);
     result.should.not.match(/angular-resource/);
@@ -106,7 +107,7 @@ describe('gulp-angular bower template', function () {
     result.should.match(/restangular/);
   });
 
-  it('should add the right router lib', function() {
+  it('should add the right router lib', function () {
     model.props.router.key = 'noRouter';
     var result = bower(model);
     result.should.not.match(/angular-route/);
@@ -132,7 +133,7 @@ describe('gulp-angular bower template', function () {
     result.should.match(/angular-new-router/);
   });
 
-  it('should add the right ui lib', function() {
+  it('should add the right ui lib', function () {
     model.props.ui.key = 'noUI';
     model.props.bootstrapComponents.key = 'noBootstrapComponents';
     model.props.foundationComponents.key = 'noFoundationComponents';
@@ -201,7 +202,7 @@ describe('gulp-angular bower template', function () {
     result.should.not.match(/material-design-iconfont/);
   });
 
-  it('should add traceur runtime when needed', function() {
+  it('should add traceur runtime when needed', function () {
     model.props.jsPreprocessor.key = 'noJsPrepro';
     var result = bower(model);
     result.should.not.match(/traceur/);
@@ -211,7 +212,7 @@ describe('gulp-angular bower template', function () {
     result.should.match(/traceur-runtime/);
   });
 
-  it('should add overrides if needed', function() {
+  it('should add overrides if needed', function () {
     model.bowerOverrides = null;
     var result = bower(model);
     result.should.not.match(/overrides/);

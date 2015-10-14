@@ -4,9 +4,9 @@ var _ = require('lodash');
 
 var listTechs = require('../techs.json');
 
-var alwaysUsedTechs = [ 'angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor' ];
+var alwaysUsedTechs = ['angular', 'browsersync', 'gulp', 'jasmine', 'karma', 'protractor'];
 
-module.exports = function(GulpAngularGenerator) {
+module.exports = function (GulpAngularGenerator) {
 
   /**
    * Format list techs used to generate app included in main view of sample
@@ -22,11 +22,11 @@ module.exports = function(GulpAngularGenerator) {
       this.props.htmlPreprocessor.key
     ])
       .filter(_.isString)
-      .filter(function(tech) {
+      .filter(function (tech) {
         return listTechs[tech] !== undefined;
       });
 
-    var techsContent = _.map(usedTechs, function(value) {
+    var techsContent = _.map(usedTechs, function (value) {
       return listTechs[value];
     });
 
@@ -36,7 +36,7 @@ module.exports = function(GulpAngularGenerator) {
       .replace(/"/g, '\'')
       .replace(/\n/g, '\n    ');
 
-    usedTechs.forEach(function(value) {
+    usedTechs.forEach(function (value) {
       var path = 'src/assets/images/' + listTechs[value].logo;
 
       this.files.push({

@@ -7,7 +7,7 @@ var utils = require('./utils.js');
 
 var pathOptions = ['app-path', 'dist-path', 'e2e-path', 'tmp-path'];
 
-module.exports = function(GulpAngularGenerator) {
+module.exports = function (GulpAngularGenerator) {
 
   /**
    * Check paths options to refuse absolutes ones and normalize them

@@ -9,20 +9,21 @@ var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
 
 describe('gulp-angular conf template', function () {
-  var conf, model;
+  var conf;
+  var model;
 
-  before(function() {
+  before(function () {
     return templateTools.load('gulp/_conf.js')
-      .then(function(templateModule) {
+      .then(function (templateModule) {
         conf = templateModule;
       });
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     model = mockModel();
   });
 
-  it('should exports directories', function() {
+  it('should exports directories', function () {
     model.props.paths.src = 'test/src/dir';
     model.props.paths.tmp = 'test/tmp/dir';
     model.props.paths.dist = 'test/dist/dir';
@@ -35,7 +36,7 @@ describe('gulp-angular conf template', function () {
     result.should.match(/e2e: 'test\/e2e\/dir'/);
   });
 
-  it('should configure wiredep with wiredep exclusions', function() {
+  it('should configure wiredep with wiredep exclusions', function () {
     model.wiredepExclusions = [];
     var result = conf(model);
     result.should.not.match(/exclude:/);

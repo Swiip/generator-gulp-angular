@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = function(GulpAngularGenerator) {
+module.exports = function (GulpAngularGenerator) {
 
   /**
    * Configure routing by defining what to add in the index.html and what in the app.js

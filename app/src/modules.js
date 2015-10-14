@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 
-module.exports = function(GulpAngularGenerator) {
+module.exports = function (GulpAngularGenerator) {
 
   /**
    * Compute Angular's module to load and format the dependency list to insert

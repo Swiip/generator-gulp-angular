@@ -3,7 +3,7 @@
 var chalk = require('chalk');
 var utils = require('./utils');
 
-module.exports = function(GulpAngularGenerator) {
+module.exports = function (GulpAngularGenerator) {
 
   /**
    * Write computed props in the .yo-rc.json
@@ -17,16 +17,16 @@ module.exports = function(GulpAngularGenerator) {
    * Pass through each files and actually copy them
    */
   GulpAngularGenerator.prototype.writeFiles = function writeFiles() {
-    this.files.forEach(function(file) {
+    this.files.forEach(function (file) {
       var dest = utils.replacePrefix(file.dest, this.props.paths);
       try {
-        if(file.template) {
+        if (file.template) {
           this.fs.copyTpl(this.templatePath(file.src), this.destinationPath(dest), this);
         } else {
           this.fs.copy(this.templatePath(file.src), this.destinationPath(dest));
         }
       } catch (error) {
-        console.error('Template processing error on file', file.src);
+        console.error('Template processing error on file', file.src); // eslint-disable-line no-console
         throw error;
       }
     }, this);
@@ -53,7 +53,7 @@ module.exports = function(GulpAngularGenerator) {
   GulpAngularGenerator.prototype.end = function end() {
 
     this.log('It\'s time to use Gulp tasks:');
-    this.log('- `$ ' + chalk.yellow.bold('gulp') + '` to build an optimized version of your application in folder ' + this.props.paths.dist );
+    this.log('- `$ ' + chalk.yellow.bold('gulp') + '` to build an optimized version of your application in folder ' + this.props.paths.dist);
     this.log('- `$ ' + chalk.yellow.bold('gulp serve') + '` to start BrowserSync server on your source files with live reload');
     this.log('- `$ ' + chalk.yellow.bold('gulp serve:dist') + '` to start BrowserSync server on your optimized application without live reload');
     this.log('- `$ ' + chalk.yellow.bold('gulp test') + '` to run your unit tests with Karma');

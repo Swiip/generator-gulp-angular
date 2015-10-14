@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 
-module.exports = function(GulpAngularGenerator) {
+module.exports = function (GulpAngularGenerator) {
 
   /**
    * Prepare Bower overrides property to fix external bower.json with missing
@@ -60,7 +60,7 @@ module.exports = function(GulpAngularGenerator) {
 
     if (this.props.router.key === 'new-router') {
       bowerOverrides['angular-new-router'] = {
-        main: [ 'dist/router.es5.js' ]
+        main: ['dist/router.es5.js']
       };
     }
 
@@ -82,20 +82,20 @@ module.exports = function(GulpAngularGenerator) {
       this.wiredepExclusions.push('/jquery/');
     }
     if (this.props.ui.key === 'bootstrap') {
-      if(this.props.bootstrapComponents.key !== 'official') {
+      if (this.props.bootstrapComponents.key !== 'official') {
         this.wiredepExclusions.push('/\\\/bootstrap\\.js$/');
-        if(this.props.cssPreprocessor.extension === 'scss') {
+        if (this.props.cssPreprocessor.extension === 'scss') {
           this.wiredepExclusions.push('/\\\/bootstrap-sass\\/.*\\.js/');
         }
       }
-      if(this.props.cssPreprocessor.key !== 'noCssPrepro') {
+      if (this.props.cssPreprocessor.key !== 'noCssPrepro') {
         this.wiredepExclusions.push('/\\\/bootstrap\\.css/');
       }
     } else if (this.props.ui.key === 'foundation') {
-      if(this.props.foundationComponents.key !== 'official') {
+      if (this.props.foundationComponents.key !== 'official') {
         this.wiredepExclusions.push('/foundation\\.js/');
       }
-      if(this.props.cssPreprocessor.extension === 'scss') {
+      if (this.props.cssPreprocessor.extension === 'scss') {
         this.wiredepExclusions.push('/foundation\\.css/');
       }
     }

@@ -9,20 +9,21 @@ var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
 
 describe('gulp-angular styles template', function () {
-  var styles, model;
+  var styles;
+  var model;
 
-  before(function() {
+  before(function () {
     return templateTools.load('gulp/_styles.js')
-      .then(function(templateModule) {
+      .then(function (templateModule) {
         styles = templateModule;
       });
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     model = mockModel();
   });
 
-  it('should add options for each css preprocessors', function() {
+  it('should add options for each css preprocessors', function () {
     model.props.cssPreprocessor.key = 'noCssPrepro';
     model.props.cssPreprocessor.extension = 'css';
     var result = styles(model);
@@ -42,7 +43,7 @@ describe('gulp-angular styles template', function () {
     result.should.not.match(/lessOptions/);
   });
 
-  it('should process files with the right preprocessor', function() {
+  it('should process files with the right preprocessor', function () {
     model.props.cssPreprocessor.key = 'noCssPrepro';
     model.props.cssPreprocessor.extension = 'css';
     var result = styles(model);
