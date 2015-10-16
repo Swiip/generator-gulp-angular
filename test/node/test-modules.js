@@ -12,15 +12,15 @@ var modules = require('../../app/src/modules.js');
 
 describe('gulp-angular generator modules script', function () {
 
-  before(function() {
+  before(function () {
     modules(Generator);
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     generator = new Generator();
   });
 
-  it('should compute angular modules selected in a list', function() {
+  it('should compute angular modules selected in a list', function () {
     generator.props = {
       angularModules: [
         { module: 'testAngularModule1' },
@@ -44,7 +44,7 @@ describe('gulp-angular generator modules script', function () {
     generator.modulesDependencies.should.match(/toastr/);
   });
 
-  it('should prepare an angular modules object', function() {
+  it('should prepare an angular modules object', function () {
     generator.props = {
       angularModules: [
         { key: 'test1', module: 'testAngularModule1' },

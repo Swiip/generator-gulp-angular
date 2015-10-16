@@ -12,18 +12,18 @@ var Generator = require('../../app/index.js');
 
 describe('gulp-angular generator index script', function () {
 
-  beforeEach(function() {
-    Generator.prototype.log = function() {};
+  beforeEach(function () {
+    Generator.prototype.log = function () {};
     sinon.stub(yeoman.generators.Base, 'apply');
   });
 
-  afterEach(function() {
+  afterEach(function () {
     delete Generator.prototype.log;
     yeoman.generators.Base.apply.restore();
   });
 
   describe('constructor', function () {
-    it('should launch yeoman Base and init argument and props', function() {
+    it('should launch yeoman Base and init argument and props', function () {
       var argument = sinon.stub();
       var context = { argument: argument };
       Generator.prototype.constructor.call(context);
@@ -34,7 +34,7 @@ describe('gulp-angular generator index script', function () {
   });
 
   describe('info', function () {
-    it('should log a yosay if no option', function() {
+    it('should log a yosay if no option', function () {
       var log = sinon.spy();
       Generator.prototype.info.call({
         log: log,
@@ -43,7 +43,7 @@ describe('gulp-angular generator index script', function () {
       log.should.have.been.called;
     });
 
-    it('should skip yosay if the right option is set', function() {
+    it('should skip yosay if the right option is set', function () {
       var log = sinon.spy();
       Generator.prototype.info.call({
         log: log,

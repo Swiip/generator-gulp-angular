@@ -13,7 +13,7 @@ function logChoice(prompt, prop) {
   this.log('\t*', choice.name);
 }
 
-module.exports = function(GulpAngularGenerator) {
+module.exports = function (GulpAngularGenerator) {
 
   /**
    * Check Insight config
@@ -39,10 +39,10 @@ module.exports = function(GulpAngularGenerator) {
       this.log('__________________________');
       this.log('You use ' + chalk.green('--default') + ' option:');
 
-      _.forEach(this.props, function(propOrProps, key) {
+      _.forEach(this.props, function (propOrProps, key) {
         var prompt = _.find(prompts, {name: key});
-        if(_.isArray(propOrProps)) {
-          propOrProps.forEach(function(prop) {
+        if (_.isArray(propOrProps)) {
+          propOrProps.forEach(function (prop) {
             logChoice.call(this, prompt, prop);
           }, this);
         } else {
@@ -60,7 +60,7 @@ module.exports = function(GulpAngularGenerator) {
   GulpAngularGenerator.prototype.checkYoRc = function checkYoRc() {
     var done = this.async();
 
-    if(this.config.get('props') && !this.options.default) {
+    if (this.config.get('props') && !this.options.default) {
       this.prompt([{
         type: 'confirm',
         name: 'skipConfig',
@@ -69,7 +69,7 @@ module.exports = function(GulpAngularGenerator) {
       }], function (answers) {
         this.skipConfig = answers.skipConfig;
 
-        if(answers.skipConfig) {
+        if (answers.skipConfig) {
           this.props = _.merge(this.props, this.config.get('props'));
         }
 
@@ -93,16 +93,16 @@ module.exports = function(GulpAngularGenerator) {
 
     var done = this.async();
 
-    _.findWhere(prompts, {name: 'bootstrapComponents'}).when = function(props) {
+    _.findWhere(prompts, {name: 'bootstrapComponents'}).when = function (props) {
       return props.ui.key === 'bootstrap';
     };
 
-    _.findWhere(prompts, {name: 'foundationComponents'}).when = function(props) {
+    _.findWhere(prompts, {name: 'foundationComponents'}).when = function (props) {
       return props.ui.key === 'foundation';
     };
 
     this.prompt(prompts, function (props) {
-      if(props.ui.key !== 'bootstrap') {
+      if (props.ui.key !== 'bootstrap') {
         props.bootstrapComponents = {
           name: null,
           version: null,
@@ -111,7 +111,7 @@ module.exports = function(GulpAngularGenerator) {
         };
       }
 
-      if(props.ui.key !== 'foundation') {
+      if (props.ui.key !== 'foundation') {
         props.foundationComponents = {
           name: null,
           version: null,
@@ -143,9 +143,9 @@ module.exports = function(GulpAngularGenerator) {
     this.prompt(advancedPrompts, function (props) {
       this.props.advancedFeatures = props.advancedFeatures;
 
-      this.includeModernizr = (this.props.advancedFeatures.indexOf('modernizr') >= 0);
-      this.imageMin = (this.props.advancedFeatures.indexOf('imagemin') >= 0);
-      this.qrCode = (this.props.advancedFeatures.indexOf('qrcode') >= 0);
+      this.includeModernizr = this.props.advancedFeatures.indexOf('modernizr') >= 0;
+      this.imageMin = this.props.advancedFeatures.indexOf('imagemin') >= 0;
+      this.qrCode = this.props.advancedFeatures.indexOf('qrcode') >= 0;
 
       done();
     }.bind(this));
@@ -156,7 +156,7 @@ module.exports = function(GulpAngularGenerator) {
    */
   GulpAngularGenerator.prototype.sendInsight = function sendInsight() {
     var keyValues = [];
-    _.forEach(this.props, function(aProp) {
+    _.forEach(this.props, function (aProp) {
       if (aProp.key) {
         keyValues.push(aProp.key);
       }

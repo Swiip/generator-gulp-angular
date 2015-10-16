@@ -12,11 +12,11 @@ var preprocessors = require('../../app/src/preprocessors.js');
 
 describe('gulp-angular generator preprocessors script', function () {
 
-  before(function() {
+  before(function () {
     preprocessors(Generator);
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     generator = new Generator();
 
     generator.files = [
@@ -28,8 +28,8 @@ describe('gulp-angular generator preprocessors script', function () {
     ];
   });
 
-  describe('compute file extension processed by the generator', function() {
-    it('should clean up the list and join with ,', function() {
+  describe('compute file extension processed by the generator', function () {
+    it('should clean up the list and join with ,', function () {
       generator.props = {
         cssPreprocessor: { extension: null },
         jsPreprocessor: { extension: 'js' },
@@ -45,8 +45,8 @@ describe('gulp-angular generator preprocessors script', function () {
     });
   });
 
-  describe('compute dependencies for the gulp watch task', function() {
-    it('should be inject if no es6 or html prepro', function() {
+  describe('compute dependencies for the gulp watch task', function () {
+    it('should be inject if no es6 or html prepro', function () {
       generator.props = {
         jsPreprocessor: { srcExtension: 'notes6' },
         htmlPreprocessor: { key: 'noHtmlPrepro' }
@@ -56,7 +56,7 @@ describe('gulp-angular generator preprocessors script', function () {
       generator.watchTaskDeps[0].should.be.equal('\'inject\'');
     });
 
-    it('should be inject, scripts:watch and markups when needed', function() {
+    it('should be inject, scripts:watch and markups when needed', function () {
       generator.props = {
         jsPreprocessor: { srcExtension: 'es6' },
         htmlPreprocessor: { key: 'notnone' }
@@ -69,8 +69,8 @@ describe('gulp-angular generator preprocessors script', function () {
     });
   });
 
-  describe('reject files depending on preprocessors choices', function() {
-    it('should reject preprocessors gulp files if no preprocessors', function() {
+  describe('reject files depending on preprocessors choices', function () {
+    it('should reject preprocessors gulp files if no preprocessors', function () {
       generator.props = {
         cssPreprocessor: { key: 'noCssPrepro' },
         jsPreprocessor: { key: 'noJsPrepro' },
@@ -80,7 +80,7 @@ describe('gulp-angular generator preprocessors script', function () {
       generator.files.length.should.be.equal(2);
     });
 
-    it('should reject nothing if there is preprocessors including TypeScript', function() {
+    it('should reject nothing if there is preprocessors including TypeScript', function () {
       generator.props = {
         cssPreprocessor: { key: 'not none' },
         jsPreprocessor: { key: 'typescript' },
@@ -91,8 +91,8 @@ describe('gulp-angular generator preprocessors script', function () {
     });
   });
 
-  describe('add lint configuration files for preprocessors different from es6', function() {
-    it('should add coffeelint for coffee preprocessor', function() {
+  describe('add lint configuration files for preprocessors different from es6', function () {
+    it('should add coffeelint for coffee preprocessor', function () {
       generator.props = {
         jsPreprocessor: { key: 'coffee' }
       };
@@ -100,7 +100,7 @@ describe('gulp-angular generator preprocessors script', function () {
       generator.files[5].src.should.match(/coffeelint/);
     });
 
-    it('should add tslint for typescript preprocessor', function() {
+    it('should add tslint for typescript preprocessor', function () {
       generator.props = {
         jsPreprocessor: { key: 'typescript' }
       };
@@ -109,21 +109,21 @@ describe('gulp-angular generator preprocessors script', function () {
     });
   });
 
-  describe('add travis files', function() {
-    it('should not add file if there is no travis env', function() {
+  describe('add travis files', function () {
+    it('should not add file if there is no travis env', function () {
       process.env.TRAVIS = 'false';
       generator.travisCopies();
       generator.files.length.should.be.equal(5);
     });
 
-    it('should not add file if travis but no typescript', function() {
+    it('should not add file if travis but no typescript', function () {
       process.env.TRAVIS = 'true';
       generator.props = { jsPreprocessor: { key: 'not typescript' } };
       generator.travisCopies();
       generator.files.length.should.be.equal(5);
     });
 
-    it('should add file if travis and typescript', function() {
+    it('should add file if travis and typescript', function () {
       process.env.TRAVIS = 'true';
       generator.props = { jsPreprocessor: { key: 'typescript' } };
       generator.travisCopies();

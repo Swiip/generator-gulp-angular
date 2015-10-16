@@ -10,17 +10,18 @@ var files = require('../files.json');
  * Look for the js preprocessor equivalent file and use it if exist
  */
 function resolvePaths(template) {
-  return function(file) {
-    var src = file, dest = file;
+  return function (file) {
+    var src = file;
+    var dest = file;
 
-    if(template) {
+    if (template) {
       var basename = path.basename(file);
       src = file.replace(basename, '_' + basename);
     }
 
-    if(src.match(/\.js$/)) {
+    if (src.match(/\.js$/)) {
       var preprocessorFile = this.sourceRoot() + '/' + src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
-      if(this.fs.exists(preprocessorFile)) {
+      if (this.fs.exists(preprocessorFile)) {
         src = src.replace(/\.js$/, '.' + this.props.jsPreprocessor.srcExtension);
         dest = dest.replace(/\.js$/, '.' + this.props.jsPreprocessor.extension);
       }
@@ -34,7 +35,7 @@ function resolvePaths(template) {
   };
 }
 
-module.exports = function(GulpAngularGenerator) {
+module.exports = function (GulpAngularGenerator) {
 
   /**
    * Prepare all files from files.json and add them to `this.files` as

@@ -6,13 +6,13 @@ var s = require('underscore.string');
 
 var options = require('../options.json');
 
-module.exports = function(GulpAngularGenerator) {
+module.exports = function (GulpAngularGenerator) {
 
   /**
    * Declares options in the generator (only used for the help messages)
    */
   GulpAngularGenerator.prototype.defineOptions = function defineOptions() {
-    options.forEach(function(option) {
+    options.forEach(function (option) {
       this.option(option.name, {
         type: global[option.type],
         required: option.required,

@@ -23,28 +23,29 @@ var pathsConf = {
 };
 
 describe('gulp-angular generator paths script', function () {
-  var isAbsolutePath, normalizePath;
+  var isAbsolutePath;
+  var normalizePath;
 
-  before(function() {
+  before(function () {
     paths(Generator);
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     generator = new Generator();
-    _.forEach(pathsConf, function(value, key) {
+    _.forEach(pathsConf, function (value, key) {
       generator.options[key] = 'path/' + key;
     });
     isAbsolutePath = sinon.stub(utils, 'isAbsolutePath');
     normalizePath = sinon.stub(utils, 'normalizePath');
   });
 
-  afterEach(function() {
+  afterEach(function () {
     isAbsolutePath.restore();
     normalizePath.restore();
   });
 
   describe('check each paths', function () {
-    it('should log error if path is absolute', function() {
+    it('should log error if path is absolute', function () {
       isAbsolutePath.returns(true);
       normalizePath.returns('test');
       sinon.spy(generator.env, 'error');
@@ -54,7 +55,7 @@ describe('gulp-angular generator paths script', function () {
       generator.env.error.should.have.been.callCount(4);
     });
 
-    it('should log nothing if path is absolute', function() {
+    it('should log nothing if path is absolute', function () {
       isAbsolutePath.returns(false);
       normalizePath.returns('test');
       sinon.spy(generator.env, 'error');
@@ -66,16 +67,16 @@ describe('gulp-angular generator paths script', function () {
   });
 
   describe('store paths in the props', function () {
-    it('should store same values as in options', function() {
+    it('should store same values as in options', function () {
       generator.storePaths();
-      _.forEach(pathsConf, function(value, key) {
+      _.forEach(pathsConf, function (value, key) {
         generator.props.paths[value].should.be.equal(generator.options[key]);
       });
     });
   });
 
   describe('compute paths', function () {
-    it('should add as many .. as src sub folders', function() {
+    it('should add as many .. as src sub folders', function () {
       generator.props = { paths: { src: 'test/path' } };
       generator.computePaths();
       generator.computedPaths.appToBower.should.be.equal('../..');

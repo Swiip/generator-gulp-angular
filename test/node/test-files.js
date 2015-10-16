@@ -17,20 +17,20 @@ var savedFilesJson = _.cloneDeep(filesJson);
 
 describe('gulp-angular generator files script', function () {
 
-  before(function() {
+  before(function () {
     files(Generator);
   });
 
-  after(function() {
+  after(function () {
     filesJson.staticFiles = savedFilesJson.staticFiles;
     filesJson.templates = savedFilesJson.templates;
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     generator = new Generator();
   });
 
-  it('should add each files in generator.files', function() {
+  it('should add each files in generator.files', function () {
     filesJson.staticFiles = [
       'test/path/preprocessed.js',
       'test/path/not/preprocessed.js',

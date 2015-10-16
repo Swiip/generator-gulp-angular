@@ -21,8 +21,8 @@ var GulpAngularGenerator = yeoman.generators.Base.extend({
     this.version = pkg.version;
 
     this.insight = new Insight({
-        trackingCode: 'UA-66934495-1',
-        pkg: pkg
+      trackingCode: 'UA-66934495-2',
+      pkg: pkg
     });
 
     this.props = {};

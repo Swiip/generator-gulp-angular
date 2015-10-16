@@ -9,20 +9,21 @@ var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
 
 describe('gulp-angular markups template', function () {
-  var markups, model;
+  var markups;
+  var model;
 
-  before(function() {
+  before(function () {
     return templateTools.load('gulp/_markups.js')
-      .then(function(templateModule) {
+      .then(function (templateModule) {
         markups = templateModule;
       });
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     model = mockModel();
   });
 
-  it('should select the right template engine for consolidate', function() {
+  it('should select the right template engine for consolidate', function () {
     model.props.htmlPreprocessor.key = 'noHtmlPrepro';
     var result = markups(model);
     result.should.not.match(/consolidate/);

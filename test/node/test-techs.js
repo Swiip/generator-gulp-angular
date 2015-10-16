@@ -13,22 +13,22 @@ var techsJson = require('../../app/techs.json');
 
 describe('gulp-angular generator techs script', function () {
 
-  before(function() {
+  before(function () {
     techs(Generator);
     techsJson['tech-name-1'] = { logo: 'logo-name-1' };
     techsJson['tech-name-2'] = { logo: 'logo-name-2' };
   });
 
-  after(function() {
+  after(function () {
     delete techsJson['tech-name-1'];
     delete techsJson['tech-name-2'];
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     generator = new Generator();
   });
 
-  it('should add tech logo copies and prepare json definition', function() {
+  it('should add tech logo copies and prepare json definition', function () {
     generator.props = {
       jQuery: { name: 'tech-name-1' },
       ui: { key: 'tech-name-2' },

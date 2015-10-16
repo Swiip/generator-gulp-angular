@@ -14,11 +14,11 @@ var router = require('../../app/src/router.js');
 describe('gulp-angular generator router script', function () {
   var read;
 
-  before(function() {
+  before(function () {
     router(Generator);
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     generator = new Generator();
 
     generator.props = {
@@ -33,7 +33,7 @@ describe('gulp-angular generator router script', function () {
     read = sinon.stub(generator.fs, 'read');
   });
 
-  it('should prepare router files and html for angular route', function() {
+  it('should prepare router files and html for angular route', function () {
     generator.files = [];
     generator.computeRouter();
     generator.routerHtml.should.match(/ng-view/);
@@ -41,7 +41,7 @@ describe('gulp-angular generator router script', function () {
     generator.files[0].dest.should.equal('src/app/index.route.testExtension');
   });
 
-  it('should prepare router files and html for UI Router', function() {
+  it('should prepare router files and html for UI Router', function () {
     generator.files = [];
     generator.props.router.key = 'ui-router';
     generator.computeRouter();
@@ -50,7 +50,7 @@ describe('gulp-angular generator router script', function () {
     generator.files[0].dest.should.equal('src/app/index.route.testExtension');
   });
 
-  it('should prepare router files and html for angular new router', function() {
+  it('should prepare router files and html for angular new router', function () {
     generator.files = [];
     generator.props.router.key = 'new-router';
     generator.computeRouter();
@@ -60,7 +60,7 @@ describe('gulp-angular generator router script', function () {
     generator.files[0].dest.should.equal('src/app/index.route.testExtension');
   });
 
-  it('should prepare router files and html for not router', function() {
+  it('should prepare router files and html for not router', function () {
     generator.files = [];
     read.withArgs('template/src/app/main/__testUi.html')
       .returns('<div class="container">');

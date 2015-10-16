@@ -1,3 +1,4 @@
+/*eslint no-console: 0*/
 'use strict';
 
 var fs = require('mz/fs');
@@ -24,7 +25,7 @@ function compileEjs(content) {
   var savedConsoleLog = console.log;
   var source;
 
-  console.log = function(src) {
+  console.log = function (src) {
     source = src;
   };
 
@@ -43,9 +44,9 @@ function compile(fileName) {
   return Promise.all([
     mkdirp(destinationDir),
     fs.readFile(sourceFilePath)
-  ]).then(function(results) {
+  ]).then(function (results) {
     var content = results[1].toString();
-    var sourceContent = sourceHeader + beautify(compileEjs(content), { 'indent_size': 2 }) + sourceFooter;
+    var sourceContent = sourceHeader + beautify(compileEjs(content), { indent_size: 2 }) + sourceFooter; // eslint-disable-line camelcase
     sourceContent = sourceContent.replace('with(locals || {})', 'with(locals)');
     return fs.writeFile(destinationFilePath, sourceContent);
   });
@@ -59,24 +60,24 @@ function load(fileName) {
   var destinationFilePath = path.join(compiledTemplatesDir, fileName + compiledTemplatesSuffix);
 
   return compile(fileName)
-    .then(function() {
+    .then(function () {
       return require(destinationFilePath);
     });
 }
 
 function prepare() {
   return readdir(templatesDir)
-    .then(function(files) {
-      return Promise.all(files.filter(function(file) {
+    .then(function (files) {
+      return Promise.all(files.filter(function (file) {
         var basename = path.basename(file);
         return /^_[^_]/.test(basename);
-      }).map(function(file) {
+      }).map(function (file) {
         return path.relative(templatesDir, file);
-      }).map(function(file) {
+      }).map(function (file) {
         return compile(file);
       }));
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log('Prepare failed', error);
     });
 }
@@ -107,7 +108,7 @@ function deps() {
     mkdirp(depsDir),
     fs.readFile(packagePath),
     fs.readFile(bowerPath)
-  ]).then(function(results) {
+  ]).then(function (results) {
     var packageFileContent = processTemplate(results[1]);
     var bowerFileContent = processTemplate(results[2]);
     return Promise.all([
@@ -115,7 +116,7 @@ function deps() {
       fs.writeFile(bowerDestinationPath, bowerFileContent)
     ]);
   })
-  .catch(function(error) {
+  .catch(function (error) {
     console.log('Deps failed', error);
   });
 }

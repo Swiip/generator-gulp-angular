@@ -13,7 +13,7 @@ var mockOptions = {
   defaults: {}
 };
 
-options.forEach(function(option) {
+options.forEach(function (option) {
   mockOptions.defaults[option.name] = option.defaults;
 });
 

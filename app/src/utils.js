@@ -43,7 +43,7 @@ function isAbsolutePath(str) {
 function replacePrefix(filePath, folderPairs) {
   var bestMatch = '';
 
-  _.forEach(folderPairs, function(destFolder, sourceFolder) {
+  _.forEach(folderPairs, function (destFolder, sourceFolder) {
     if (filePath.indexOf(sourceFolder) === 0 && sourceFolder.length > bestMatch.length) {
       bestMatch = sourceFolder;
     }
@@ -51,8 +51,7 @@ function replacePrefix(filePath, folderPairs) {
 
   if (bestMatch.length) {
     return filePath.replace(bestMatch, folderPairs[bestMatch]);
-  }
-  else {
+  } else {
     return filePath;
   }
 }

@@ -9,26 +9,27 @@ var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
 
 describe('gulp-angular package template', function () {
-  var packageJson, model;
+  var packageJson;
+  var model;
 
-  before(function() {
+  before(function () {
     return templateTools.load('_package.json')
-      .then(function(templateModule) {
+      .then(function (templateModule) {
         packageJson = templateModule;
       });
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     model = mockModel();
   });
 
-  it('should put the right app name in the package.json', function() {
+  it('should put the right app name in the package.json', function () {
     model.appName = 'testAppName';
     var result = packageJson(model);
     result.should.match(/"name": "testAppName"/);
   });
 
-  it('should add imageMin and/or qrCode if selected', function() {
+  it('should add imageMin and/or qrCode if selected', function () {
     model.imageMin = true;
     model.qrCode = true;
     var result = packageJson(model);
@@ -42,7 +43,7 @@ describe('gulp-angular package template', function () {
     result.should.not.match(/qrcode-terminal/);
   });
 
-  it('should add right dependencies depending css preprocessor selected', function() {
+  it('should add right dependencies depending css preprocessor selected', function () {
     model.props.cssPreprocessor.key = 'noCssPrepro';
     var result = packageJson(model);
     result.should.not.match(/sass/);
@@ -74,7 +75,7 @@ describe('gulp-angular package template', function () {
     result.should.not.match(/less/);
   });
 
-  it('should add right dependencies depending js preprocessor selected', function() {
+  it('should add right dependencies depending js preprocessor selected', function () {
     model.props.jsPreprocessor.key = 'noJsPrepro';
     model.props.jsPreprocessor.srcExtension = 'js';
     var result = packageJson(model);
@@ -123,7 +124,7 @@ describe('gulp-angular package template', function () {
     result.should.not.match(/traceur/);
   });
 
-  it('should add right dependencies depending html preprocessor selected', function() {
+  it('should add right dependencies depending html preprocessor selected', function () {
     model.props.htmlPreprocessor.key = 'noHtmlPrepro';
     var result = packageJson(model);
     result.should.not.match(/jade/);

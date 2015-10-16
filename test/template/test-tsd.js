@@ -9,27 +9,28 @@ var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
 
 describe('gulp-angular tsd template', function () {
-  var tsd, model;
+  var tsd;
+  var model;
 
-  before(function() {
+  before(function () {
     return templateTools.load('_tsd.json')
-      .then(function(templateModule) {
+      .then(function (templateModule) {
         tsd = templateModule;
       });
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     model = mockModel();
   });
 
-  it('should insert tmp directory', function() {
+  it('should insert tmp directory', function () {
     model.props.paths.tmp = 'test/tmp/dir';
     var result = tsd(model);
     result.should.match(/"path": "test\/tmp\/dir/);
     result.should.match(/"bundle": "test\/tmp\/dir/);
   });
 
-  it('should insert default definitions', function() {
+  it('should insert default definitions', function () {
     model.props.paths.tmp = 'test/tmp/dir';
     var result = tsd(model);
     result.should.match(/angularjs\/angular.d.ts/);
@@ -39,7 +40,7 @@ describe('gulp-angular tsd template', function () {
     result.should.match(/moment\/moment-node.d.ts/);
   });
 
-  it('should insert angular modules definitions', function() {
+  it('should insert angular modules definitions', function () {
     model.angularModulesObject = {
       animate: true,
       cookies: true,
@@ -51,63 +52,63 @@ describe('gulp-angular tsd template', function () {
     result.should.match(/angularjs\/angular-sanitize.d.ts/);
   });
 
-  it('should insert jQuery definition', function() {
+  it('should insert jQuery definition', function () {
     model.props.jQuery.key = 'jquery2';
     var result = tsd(model);
     result.should.match(/jquery\/jquery.d.ts/);
   });
 
-  it('should insert Zepto definition', function() {
+  it('should insert Zepto definition', function () {
     model.props.jQuery.key = 'zepto';
     var result = tsd(model);
     result.should.match(/zepto\/zepto.d.ts/);
   });
 
-  it('should insert ngResource definition', function() {
+  it('should insert ngResource definition', function () {
     model.props.resource.key = 'angular-resource';
     var result = tsd(model);
     result.should.match(/angularjs\/angular-resource.d.ts/);
   });
 
-  it('should insert Restangular definition', function() {
+  it('should insert Restangular definition', function () {
     model.props.resource.key = 'restangular';
     var result = tsd(model);
     result.should.match(/restangular\/restangular.d.ts/);
   });
 
-  it('should insert UI-Router definition', function() {
+  it('should insert UI-Router definition', function () {
     model.props.router.key = 'ui-router';
     var result = tsd(model);
     result.should.match(/angular-ui-router\/angular-ui-router.d.ts/);
   });
 
-  it('should insert ngRoute definition', function() {
+  it('should insert ngRoute definition', function () {
     model.props.router.key = 'angular-route';
     var result = tsd(model);
     result.should.match(/angularjs\/angular-route.d.ts/);
   });
 
-  it('should insert Bootstrap definition', function() {
+  it('should insert Bootstrap definition', function () {
     model.props.ui.key = 'bootstrap';
     model.props.bootstrapComponents = 'official';
     var result = tsd(model);
     result.should.match(/bootstrap\/bootstrap.d.ts/);
   });
 
-  it('should insert Foundation definition', function() {
+  it('should insert Foundation definition', function () {
     model.props.ui.key = 'foundation';
     model.props.foundationComponents = 'official';
     var result = tsd(model);
     result.should.match(/foundation\/foundation.d.ts/);
   });
 
-  it('should insert Angular-Mateiral definition', function() {
+  it('should insert Angular-Mateiral definition', function () {
     model.props.ui.key = 'angular-material';
     var result = tsd(model);
     result.should.match(/angular-material\/angular-material.d.ts/);
   });
 
-  it('should insert UI-Bootstrap definition', function() {
+  it('should insert UI-Bootstrap definition', function () {
     model.props.ui.key = 'angular-material';
     var result = tsd(model);
     result.should.match(/angular-ui-bootstrap\/angular-ui-bootstrap.d.ts/);

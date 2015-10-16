@@ -9,20 +9,21 @@ var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
 
 describe('gulp-angular inject template', function () {
-  var inject, model;
+  var inject;
+  var model;
 
-  before(function() {
+  before(function () {
     return templateTools.load('gulp/_inject.js')
-      .then(function(templateModule) {
+      .then(function (templateModule) {
         inject = templateModule;
       });
   });
 
-  beforeEach(function() {
+  beforeEach(function () {
     model = mockModel();
   });
 
-  it('should inject styles for src or tmp depending on the css preprocessor', function() {
+  it('should inject styles for src or tmp depending on the css preprocessor', function () {
     model.props.cssPreprocessor.key = 'noCssPrepro';
     var result = inject(model);
     result.should.match(/gulp\.task\('inject', \['scripts'\], function/);
@@ -34,7 +35,7 @@ describe('gulp-angular inject template', function () {
     result.should.match(/injectStyles = gulp\.src\(\[\n.*conf\.paths\.tmp.*\n.*'!' \+ conf\.paths\.tmp/);
   });
 
-  it('should inject scripts from src or tmp depending on the js preprocessor', function() {
+  it('should inject scripts from src or tmp depending on the js preprocessor', function () {
     model.props.jsPreprocessor.srcExtension = 'js';
     var result = inject(model);
     result.should.match(/injectScripts[\s\S]*conf\.paths\.src[\s\S]*var injectOptions/);
@@ -56,7 +57,7 @@ describe('gulp-angular inject template', function () {
     result.should.match(/injectScripts[\s\S]*conf\.paths\.tmp[\s\S]*var injectOptions/);
   });
 
-  it('should choose the right way to sort inject files', function() {
+  it('should choose the right way to sort inject files', function () {
     model.props.jsPreprocessor.srcExtension = 'coffee';
     var result = inject(model);
     result.should.match(/\$\.angularFilesort\(\)/);

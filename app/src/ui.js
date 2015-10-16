@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(GulpAngularGenerator) {
+module.exports = function (GulpAngularGenerator) {
 
   /**
    * Add files of the navbar and the main view depending on the ui framework
@@ -13,7 +13,7 @@ module.exports = function(GulpAngularGenerator) {
       template: false
     });
 
-    if(this.props.router.module !== null) {
+    if (this.props.router.module !== null) {
       this.files.push({
         src: 'src/app/main/__' + this.props.ui.key + '.html',
         dest: 'src/app/main/main.html',
