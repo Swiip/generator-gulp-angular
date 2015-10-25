@@ -117,6 +117,7 @@ There is none at the generation but you can add `.jade`, `.haml` or `.hbs` (depe
 * *ngAnnotate* : convert simple injection to complete syntax to be minification proof
 * *uglify* : optimize all your JavaScript
 * *csso* : optimize all your CSS
+* *autoprefixer* : add vendor prefixes to CSS
 * *rev* : add a hash in the file names to prevent browser cache problems
 * *watch* : watch your source files and recompile them automatically
 * *eslint* : The pluggable linting utility for JavaScript
