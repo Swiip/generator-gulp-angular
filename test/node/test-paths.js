@@ -11,9 +11,9 @@ var _ = require('lodash');
 var Generator = require('./mock-generator');
 var generator;
 
-var utils = require('../../app/src/utils.js');
+var utils = require('../../generators/app/src/utils.js');
 
-var paths = require('../../app/src/paths.js');
+var paths = require('../../generators/app/src/paths.js');
 
 var pathsConf = {
   'app-path': 'src',

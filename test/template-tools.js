@@ -9,7 +9,7 @@ var beautify = require('js-beautify').js_beautify;
 var readdir = Promise.promisify(require('recursive-readdir'));
 var ejs = require('ejs');
 
-var templatesDir = path.join(__dirname, '../app/templates/');
+var templatesDir = path.join(__dirname, '../generators/app/templates/');
 var depsDir = path.join(__dirname, 'tmp/deps/');
 var compiledTemplatesDir = path.join(__dirname, 'tmp/templates/');
 var compiledTemplatesSuffix = '-template.js';
@@ -83,7 +83,7 @@ function prepare() {
 }
 
 function deps() {
-  var prompts = require('../app/src/mock-prompts');
+  var prompts = require('../generators/app/src/mock-prompts');
   var angularVersion = prompts.defaults.angularVersion;
   var packageFileName = 'package.json';
   var packagePath = templatesDir + '_' + packageFileName;

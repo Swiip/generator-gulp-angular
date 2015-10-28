@@ -5,7 +5,7 @@ var yosay = require('yosay');
 var chalk = require('chalk');
 var Insight = require('insight');
 
-var pkg = require('../package.json');
+var pkg = require('../../package.json');
 
 var GulpAngularGenerator = yeoman.generators.Base.extend({
 

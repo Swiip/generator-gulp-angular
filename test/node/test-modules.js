@@ -8,7 +8,7 @@ chai.use(sinonChai);
 var Generator = require('./mock-generator');
 var generator;
 
-var modules = require('../../app/src/modules.js');
+var modules = require('../../generators/app/src/modules.js');
 
 describe('gulp-angular generator modules script', function () {
 

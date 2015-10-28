@@ -8,7 +8,7 @@ chai.use(sinonChai);
 
 var yeoman = require('yeoman-generator');
 
-var Generator = require('../../app/index.js');
+var Generator = require('../../generators/app/index.js');
 
 describe('gulp-angular generator index script', function () {
 

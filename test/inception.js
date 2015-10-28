@@ -9,8 +9,8 @@ var helpers = require('yeoman-generator').test;
 
 var testDirectory = Promise.promisify(helpers.testDirectory);
 
-var mockOptions = require('../app/src/mock-options.js');
-var mockPrompts = require('../app/src/mock-prompts.js');
+var mockOptions = require('../generators/app/src/mock-options.js');
+var mockPrompts = require('../generators/app/src/mock-prompts.js');
 
 var skipOptions = {
   skipInstall: true,
@@ -33,7 +33,7 @@ function prepare(optionCase, promptCase) {
   }).then(function () {
     var gulpAngular = helpers.createGenerator(
       'gulp-angular:app',
-      ['../../../app'],
+      ['../../../generators/app'],
       false,
       options
     );

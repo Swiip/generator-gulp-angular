@@ -11,8 +11,8 @@ var _ = require('lodash');
 var Generator = require('./mock-generator');
 var generator;
 
-var files = require('../../app/src/files.js');
-var filesJson = require('../../app/files.json');
+var files = require('../../generators/app/src/files.js');
+var filesJson = require('../../generators/app/files.json');
 var savedFilesJson = _.cloneDeep(filesJson);
 
 describe('gulp-angular generator files script', function () {

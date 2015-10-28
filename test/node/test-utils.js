@@ -4,7 +4,7 @@ require('chai').should();
 
 var path = require('path');
 
-var utils = require('../../app/src/utils');
+var utils = require('../../generators/app/src/utils');
 
 describe('gulp-angular generator utils', function () {
   describe('normalizePath', function () {
