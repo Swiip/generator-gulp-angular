@@ -50,9 +50,6 @@
     "sinon-chai": "~2.8.0",
     "wrench": "1.5.8"
   },
-  "peerDependencies": {
-    "yo": ">=1.0.0"
-  },
   "engines": {
     "node": ">=0.10.0"
   }
