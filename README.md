@@ -1,4 +1,4 @@
-# generator-gulp-angular ![Logo](app/templates/src/assets/images/generator-gulp-angular-logo.png)
+# generator-gulp-angular ![Logo](generators/app/templates/src/assets/images/generator-gulp-angular-logo.png)
 
 [![Build Status](https://img.shields.io/travis/Swiip/generator-gulp-angular/master.svg?style=flat-square)](http://travis-ci.org/Swiip/generator-gulp-angular)
 [![Coverage Status](https://img.shields.io/codecov/c/github/Swiip/generator-gulp-angular.svg?style=flat-square)](http://codecov.io/github/Swiip/generator-gulp-angular?branch=master)

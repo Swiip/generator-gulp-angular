@@ -1,4 +1,4 @@
 node_modules/
-app/templates/
+generators/app/templates/
 test/tmp/
 coverage/
