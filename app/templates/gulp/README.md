@@ -33,10 +33,6 @@ Inject task which link project files in the `index.html` and write the result in
 
 Compile your markups files (when you use a HTML preprocessor).
 
-## proxy.js
-
-Optional implementation of a proxy which ables to address your backend server through BrowserSync (and avoir CORS).
-
 ## scripts.js
 
 Compile your scripts with your JS preprocessor if you have one. Run the linter. If you use ES6, will also use Browserify to bundle the files.
