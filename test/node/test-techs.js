@@ -8,8 +8,8 @@ chai.use(sinonChai);
 var Generator = require('./mock-generator');
 var generator;
 
-var techs = require('../../app/src/techs.js');
-var techsJson = require('../../app/techs.json');
+var techs = require('../../generators/app/src/techs.js');
+var techsJson = require('../../generators/app/techs.json');
 
 describe('gulp-angular generator techs script', function () {
 

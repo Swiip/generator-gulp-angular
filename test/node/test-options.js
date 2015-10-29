@@ -9,8 +9,8 @@ chai.use(sinonChai);
 var Generator = require('./mock-generator');
 var generator;
 
-var options = require('../../app/src/options.js');
-var optionsJson = require('../../app/options.json');
+var options = require('../../generators/app/src/options.js');
+var optionsJson = require('../../generators/app/options.json');
 
 describe('gulp-angular generator options script', function () {
 

@@ -9,7 +9,7 @@ chai.use(sinonChai);
 var Generator = require('./mock-generator');
 var generator;
 
-var router = require('../../app/src/router.js');
+var router = require('../../generators/app/src/router.js');
 
 describe('gulp-angular generator router script', function () {
   var read;

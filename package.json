@@ -13,7 +13,7 @@
   "files": [
     "app"
   ],
-  "main": "app/index.js",
+  "main": "index.js",
   "repository": "Swiip/generator-gulp-angular",
   "scripts": {
     "pretest": "./scripts/prepare-test.sh",

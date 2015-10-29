@@ -6,7 +6,7 @@ chai.should();
 var Generator = require('./mock-generator');
 var generator;
 
-var ui = require('../../app/src/ui.js');
+var ui = require('../../generators/app/src/ui.js');
 
 describe('gulp-angular generator ui script', function () {
 

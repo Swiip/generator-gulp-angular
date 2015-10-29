@@ -7,7 +7,7 @@ var chaiAsPromised = require('chai-as-promised');
 chai.should();
 chai.use(chaiAsPromised);
 
-var prompts = require('../../app/src/mock-prompts.js').prompts;
+var prompts = require('../../generators/app/src/mock-prompts.js').prompts;
 
 describe('gulp-angular generator inception tests', function () {
   var gulpAngular;

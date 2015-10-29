@@ -9,9 +9,9 @@ chai.use(sinonChai);
 var Generator = require('./mock-generator');
 var generator;
 
-var utils = require('../../app/src/utils.js');
+var utils = require('../../generators/app/src/utils.js');
 
-var write = require('../../app/src/write.js');
+var write = require('../../generators/app/src/write.js');
 
 describe('gulp-angular generator writes script', function () {
   var replacePrefix;

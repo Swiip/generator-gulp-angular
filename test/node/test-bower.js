@@ -7,7 +7,7 @@ var expect = chai.expect;
 var Generator = require('./mock-generator');
 var generator;
 
-var bower = require('../../app/src/bower.js');
+var bower = require('../../generators/app/src/bower.js');
 
 describe('gulp-angular generator bower script', function () {
 

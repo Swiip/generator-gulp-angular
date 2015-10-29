@@ -11,9 +11,9 @@ var _ = require('lodash');
 var Generator = require('./mock-generator');
 var generator;
 
-var prompts = require('../../app/src/prompts.js');
-var promptsJson = require('../../app/prompts.json');
-var mockPrompts = require('../../app/src/mock-prompts.js');
+var prompts = require('../../generators/app/src/prompts.js');
+var promptsJson = require('../../generators/app/prompts.json');
+var mockPrompts = require('../../generators/app/src/mock-prompts.js');
 
 describe('gulp-angular generator prompts script', function () {
 
