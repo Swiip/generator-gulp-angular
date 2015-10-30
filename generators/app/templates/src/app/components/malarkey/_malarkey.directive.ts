@@ -55,15 +55,10 @@ export interface IContributor {
 /** @ngInject */
 export class MalarkeyController {
   public contributors: any[];
-  public malarkey: any;
 
-  private githubContributor: GithubContributor;
 
-  constructor(private $log: angular.ILogService, githubContributor: GithubContributor, malarkey: any) {
+  constructor(private $log: angular.ILogService, private githubContributor: GithubContributor, private malarkey: any) {
     this.contributors = [];
-
-    this.githubContributor = githubContributor;
-    this.malarkey = malarkey;
 
     this.activate();
   }
