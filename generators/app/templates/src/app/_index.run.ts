@@ -1,4 +1,4 @@
 /** @ngInject */
-export function runBlock($log: ng.ILogService) {
+export function runBlock($log: angular.ILogService) {
   $log.debug('runBlock end');
 }

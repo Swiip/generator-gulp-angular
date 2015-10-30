@@ -6,13 +6,13 @@ import { NavbarController } from './navbar.directive';
  * Test should check if MomentJS have been called
  */
 describe('directive navbar', function() {
-  let element: ng.IAugmentedJQuery;
+  let element: angular.IAugmentedJQuery;
   let navbarController: NavbarController;
   let timeInMs: number;
 
   beforeEach(angular.mock.module('<%- appName %>'));
 
-  beforeEach(inject(($compile: ng.ICompileService, $rootScope: ng.IRootScopeService) => {
+  beforeEach(inject(($compile: angular.ICompileService, $rootScope: angular.IRootScopeService) => {
     const currentDate: Date = new Date();
     timeInMs = currentDate.setHours(currentDate.getHours() - 24);
 

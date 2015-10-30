@@ -6,7 +6,7 @@ describe('controllers', () => {
 
   beforeEach(angular.mock.module('<%- appName %>'));
 
-  beforeEach(inject(($controller: ng.IControllerService, webDevTec: WebDevTecService, toastr: any) => {
+  beforeEach(inject(($controller: angular.IControllerService, webDevTec: WebDevTecService, toastr: any) => {
     webDevTec.data = [null, null, null, null, null];
     spyOn(toastr, 'info').and.callThrough();
 
@@ -17,7 +17,7 @@ describe('controllers', () => {
     expect(mainController.creationDate > 0).toBeTruthy();
   });
 
-  it('should define animate class after delaying timeout ', inject(($timeout: ng.ITimeoutService) => {
+  it('should define animate class after delaying timeout ', inject(($timeout: angular.ITimeoutService) => {
     $timeout.flush();
     expect(mainController.classAnimation).toEqual('rubberBand');
   }));

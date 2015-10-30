@@ -8,12 +8,12 @@ import { GithubContributor } from '../githubContributor/githubContributor.servic
  * (malarkey usage, addClass, $watch, $destroy)
  */
 describe('directive malarkey', () => {
-  let element: ng.IAugmentedJQuery;
+  let element: angular.IAugmentedJQuery;
   let malarkeyController: MalarkeyController;
 
   beforeEach(angular.mock.module('<%- appName %>'));
 
-  beforeEach(inject(($compile: ng.ICompileService, $rootScope: ng.IRootScopeService, githubContributor: GithubContributor, $q: ng.IQService) => {
+  beforeEach(inject(($compile: angular.ICompileService, $rootScope: angular.IRootScopeService, githubContributor: GithubContributor, $q: angular.IQService) => {
     spyOn(githubContributor, 'getContributors').and.callFake(() => {
       return  $q.when([{}, {}, {}, {}, {}, {}]);
     });
@@ -37,7 +37,7 @@ describe('directive malarkey', () => {
     expect(malarkeyController.contributors.length).toEqual(6);
   });
 
-  it('should log a info', inject(($log: ng.ILogService) => {
+  it('should log a info', inject(($log: angular.ILogService) => {
     expect($log.info.logs).toEqual(jasmine.stringMatching('Activated Contributors View'));
   }));
 });
