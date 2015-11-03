@@ -95,7 +95,8 @@
     "qrcode-terminal": "~0.10.0",
 <% } -%>
     "uglify-save-license": "~0.4.1",
-    "wrench": "~1.5.8"
+    "wrench": "~1.5.8",
+    "better-console": "^0.2.4"
   },
   "engines": {
     "node": ">=0.10.0"
