@@ -44,7 +44,7 @@ function webpackWrapper(watch, test, callback) {
       preLoaders: [{ test: /\.ts$/, exclude: /node_modules/, loader: 'tslint-loader'}],
 <%   } -%>
 <%   if (props.jsPreprocessor.key === 'babel') { -%>
-      loaders: [{ test: /\.js$/, exclude: /node_modules/, loaders: ['ng-annotate', 'babel-loader?presets[]=es2015']}]
+      loaders: [{ test: /\.js$/, exclude: /node_modules/, loaders: ['ng-annotate', 'babel?presets[]=es2015']}]
 <%   } if (props.jsPreprocessor.key === 'traceur') { -%>
       loaders: [{ test: /\.js$/, exclude: /node_modules/, loaders: ['ng-annotate', 'traceur-loader']}]
 <%   } if (props.jsPreprocessor.key === 'typescript') { -%>
