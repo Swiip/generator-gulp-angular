@@ -53,9 +53,9 @@
 <% } if (props.jsPreprocessor.srcExtension === 'es6') { -%>
     "eslint-loader": "~1.1.0",
 <% } if (props.jsPreprocessor.key === 'babel') { -%>
-    "babel-core": "~6.0.20",
+    "babel-core": "~6.1.2",
     "babel-loader": "~6.0.1",
-    "babel-preset-es2015": "~6.0.15",
+    "babel-preset-es2015": "~6.1.2",
 <% } if (props.jsPreprocessor.key === 'traceur') { -%>
     "traceur-loader": "~0.6.3",
 <% } if (props.jsPreprocessor.key === 'typescript') { -%>
