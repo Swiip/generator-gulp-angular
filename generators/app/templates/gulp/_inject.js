@@ -9,6 +9,10 @@ var $ = require('gulp-load-plugins')();
 var wiredep = require('wiredep').stream;
 var _ = require('lodash');
 
+gulp.task('inject-reload', ['inject'], function() {
+  browserSync.reload();
+});
+
 <% if (props.cssPreprocessor.key !== 'noCssPrepro') { -%>
 gulp.task('inject', ['scripts', 'styles'], function () {
   var injectStyles = gulp.src([

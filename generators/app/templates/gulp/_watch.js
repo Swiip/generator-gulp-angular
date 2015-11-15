@@ -12,7 +12,7 @@ function isOnlyChange(event) {
 
 gulp.task('watch', [<%- watchTaskDeps.join(', ') %>], function () {
 
-  gulp.watch([path.join(conf.paths.src, '/*.html'), 'bower.json'], ['inject']);
+  gulp.watch([path.join(conf.paths.src, '/*.html'), 'bower.json'], ['inject-reload']);
 
 <% if (props.cssPreprocessor.extension === 'css') { -%>
   gulp.watch(path.join(conf.paths.src, '/app/**/*.css'), function(event) {
@@ -26,10 +26,10 @@ gulp.task('watch', [<%- watchTaskDeps.join(', ') %>], function () {
 <% if (props.cssPreprocessor.key === 'noCssPrepro') { -%>
       browserSync.reload(event.path);
 <% } else { -%>
-      gulp.start('styles');
+      gulp.start('styles-reload');
 <% } -%>
     } else {
-      gulp.start('inject');
+      gulp.start('inject-reload');
     }
   });
 
@@ -43,9 +43,9 @@ gulp.task('watch', [<%- watchTaskDeps.join(', ') %>], function () {
   ], function(event) {
 <%   } -%>
     if(isOnlyChange(event)) {
-      gulp.start('scripts');
+      gulp.start('scripts-reload');
     } else {
-      gulp.start('inject');
+      gulp.start('inject-reload');
     }
   });
 <% } -%>
