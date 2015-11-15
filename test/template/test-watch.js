@@ -56,14 +56,14 @@ describe('gulp-angular watch template', function () {
     model.props.jsPreprocessor.srcExtension = 'notes6';
     result = watch(model);
     result.should.match(/gulp\.watch\(\[\n.*\.js'.*\n.*\.notjs'.*\n.*\],/);
-    result.should.match(/gulp\.start\('scripts'\);/);
+    result.should.match(/gulp\.start\('scripts-reload'\);/);
 
     model.props.jsPreprocessor.key = 'notnone';
     model.props.jsPreprocessor.extension = 'notjs';
     model.props.jsPreprocessor.srcExtension = 'es6';
     result = watch(model);
     result.should.not.match(/gulp\.watch\(\[\n.*\.js'.*\n.*\.notjs'.*\n.*\],/);
-    result.should.not.match(/gulp\.start\('scripts'\);/);
+    result.should.not.match(/gulp\.start\('scripts-reload'\);/);
   });
 
   it('should watch the html preprocessor extension files', function () {
