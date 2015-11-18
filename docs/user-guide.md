@@ -35,7 +35,7 @@ The generator is shipped with the awesome [Browser Sync](http://www.browsersync.
 The recommended development process is to serve your web resources locally to be more reactive and be able to have features like automatic reload of your page when you make a modification.
 
 If you have a backend server to address, keep the development server and either:
-  - launch your request with complete URLs (but you'll have to handle [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)) 
+  - launch your request with complete URLs (but you'll have to handle [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing))
   - or you can use the embedded proxy feature which can redirect your request from the development server to your backend transparently without dealing with CORS.
 
 ### Serve you `src` folder
@@ -64,7 +64,7 @@ At this point, your application will have to launch requests both to request sta
 
 The cleaner way to address this need is to add a proxy feature to the Browser Sync server. This feature is inactive by default as we can't know about your backend configuration, but it's in the comments and easy to start. Look in `gulp/server.js`, you've got a line in the comments:
 ```javascript
-server.middleware = proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', proxyHost: 'jsonplaceholder.typicode.com'});
+server.middleware = proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', changeOrigin: true});
 ```
 
 Replace the parameters with your needs, relaunch the server, and you should be able to target your backend through Browser Sync's domain and port.
