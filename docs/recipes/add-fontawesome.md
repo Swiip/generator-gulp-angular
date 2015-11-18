@@ -8,7 +8,7 @@ $fa-font-path: "../../bower_components/fontawesome/fonts";
 @import "../../bower_components/fontawesome/scss/font-awesome.scss";
 ```
 
-and I had to add a step to the `html` pipeline
+Add a step to the `html` pipeline in `gulp/build.js`:
 
 ```js
 .pipe($.replace('../../bower_components/fontawesome/fonts', '../fonts'))
