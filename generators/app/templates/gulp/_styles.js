@@ -12,10 +12,13 @@ var wiredep = require('wiredep').stream;
 var _ = require('lodash');
 
 gulp.task('styles-reload', ['styles'], function() {
-  browserSync.reload();
+  return buildStyles()
+    .pipe(browserSync.reload({ stream: true }));
 });
 
-gulp.task('styles', function () {
+gulp.task('styles', buildStyles())
+
+var buildStyles = function() {
 <% if (props.cssPreprocessor.key === 'less') { -%>
   var lessOptions = {
     options: [
@@ -72,4 +75,4 @@ gulp.task('styles', function () {
     .pipe(cssFilter.restore)
 <% } -%>
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app/')));
-});
+};

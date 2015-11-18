@@ -11,12 +11,17 @@ var webpack = require('webpack-stream');
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('scripts-reload', ['scripts'], function() {
-  browserSync.reload();
-});
+
 
 <% if (props.jsPreprocessor.srcExtension !== 'es6' && props.jsPreprocessor.key !== 'typescript') { -%>
-gulp.task('scripts', function () {
+gulp.task('scripts-reload', ['scripts'], function() {
+  return buildScripts()
+    .pipe(browserSync.reload({ stream: true }));
+});
+
+gulp.task('scripts', buildScripts());
+
+function buildScripts() {
   return gulp.src(path.join(conf.paths.src, '/app/**/*.<%- props.jsPreprocessor.extension %>'))
 <%   if (props.jsPreprocessor.extension === 'js') { -%>
     .pipe($.eslint())
@@ -32,7 +37,7 @@ gulp.task('scripts', function () {
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')))
 <%   } -%>
     .pipe($.size())
-});
+};
 <% } else { -%>
 function webpackWrapper(watch, test, callback) {
   var webpackOptions = {
