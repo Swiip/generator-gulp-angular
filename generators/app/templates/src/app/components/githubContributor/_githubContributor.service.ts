@@ -1,16 +1,12 @@
 export class GithubContributor {
   public apiHost: string = 'https://api.github.com/repos/Swiip/generator-gulp-angular';
 
-  private $log: ng.ILogService;
-  private $http: ng.IHttpService;
-
   /** @ngInject */
-  constructor($log: ng.ILogService, $http: ng.IHttpService) {
-    this.$log = $log;
-    this.$http = $http;
+  constructor(private $log: angular.ILogService, private $http: angular.IHttpService) {
+
   }
 
-  getContributors(limit: number = 30): ng.IPromise<any[]> {
+  getContributors(limit: number = 30): angular.IPromise<any[]> {
     return this.$http.get(this.apiHost + '/contributors?per_page=' + limit)
       .then((response: any): any => {
         return response.data;

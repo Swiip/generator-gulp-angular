@@ -8,7 +8,7 @@ export class MainController {
   public toastr: any;
 
   /* @ngInject */
-  constructor ($timeout: ng.ITimeoutService, webDevTec: WebDevTecService, toastr: any) {
+  constructor ($timeout: angular.ITimeoutService, webDevTec: WebDevTecService, toastr: any) {
     this.awesomeThings = new Array();
     this.webDevTec = webDevTec;
     this.classAnimation = '';
@@ -18,7 +18,7 @@ export class MainController {
   }
 
   /** @ngInject */
-  activate($timeout: ng.ITimeoutService) {
+  activate($timeout: angular.ITimeoutService) {
     this.getWebDevTec();
 
     var self = this;

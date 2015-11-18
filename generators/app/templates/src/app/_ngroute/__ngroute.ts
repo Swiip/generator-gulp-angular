@@ -1,5 +1,5 @@
 /** @ngInject */
-export function routerConfig($routeProvider: ng.route.IRouteProvider) {
+export function routerConfig($routeProvider: angular.route.IRouteProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'app/main/main.html',

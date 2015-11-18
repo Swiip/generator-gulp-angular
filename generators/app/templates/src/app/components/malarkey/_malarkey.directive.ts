@@ -1,11 +1,11 @@
 import { GithubContributor } from '../githubContributor/githubContributor.service';
 
-interface IProjectsScope extends ng.IScope {
+interface IProjectsScope extends angular.IScope {
   extraValues: any[];
 }
 
 /** @ngInject */
-export function acmeMalarkey(malarkey: any): ng.IDirective {
+export function acmeMalarkey(malarkey: any): angular.IDirective {
 
   return {
     restrict: 'E',
@@ -55,17 +55,10 @@ export interface IContributor {
 /** @ngInject */
 export class MalarkeyController {
   public contributors: any[];
-  public malarkey: any;
 
-  private $log: ng.ILogService;
-  private githubContributor: GithubContributor;
 
-  constructor($log: ng.ILogService, githubContributor: GithubContributor, malarkey: any) {
+  constructor(private $log: angular.ILogService, private githubContributor: GithubContributor, private malarkey: any) {
     this.contributors = [];
-
-    this.$log = $log;
-    this.githubContributor = githubContributor;
-    this.malarkey = malarkey;
 
     this.activate();
   }
