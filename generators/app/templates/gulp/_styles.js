@@ -11,6 +11,10 @@ var $ = require('gulp-load-plugins')();
 var wiredep = require('wiredep').stream;
 var _ = require('lodash');
 
+gulp.task('styles-reload', ['styles'], function() {
+  browserSync.reload();
+});
+
 gulp.task('styles', function () {
 <% if (props.cssPreprocessor.key === 'less') { -%>
   var lessOptions = {
@@ -67,6 +71,5 @@ gulp.task('styles', function () {
 <% if (props.cssPreprocessor.key === 'ruby-sass') { -%>
     .pipe(cssFilter.restore)
 <% } -%>
-    .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app/')))
-    .pipe(browserSync.reload({ stream: true }));
+    .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app/')));
 });
