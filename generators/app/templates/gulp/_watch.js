@@ -3,6 +3,7 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
+var console = require('better-console');
 
 var browserSync = require('browser-sync');
 
@@ -43,6 +44,7 @@ gulp.task('watch', [<%- watchTaskDeps.join(', ') %>], function () {
   ], function(event) {
 <%   } -%>
     if(isOnlyChange(event)) {
+      console.clear();
       gulp.start('scripts');
     } else {
       gulp.start('inject');
