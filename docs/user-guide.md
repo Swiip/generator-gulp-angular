@@ -62,7 +62,7 @@ As mentioned in the introduction, it's considered a good process to keep using t
 
 At this point, your application will have to launch requests both to request static files of the front end project, and dynamic routes of your backend.
 
-The cleaner way to address this need is to add a proxy feature to the Browser Sync server. This feature is inactive by default as we can't know about your backend configuration, but it's in the comments and easy to start. Look in `gulp/serve.js`, you've got a line in the comments:
+The cleaner way to address this need is to add a proxy feature to the Browser Sync server. This feature is inactive by default as we can't know about your backend configuration, but it's in the comments and easy to start. Look in `gulp/server.js`, you've got a line in the comments:
 ```javascript
 server.middleware = proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', proxyHost: 'jsonplaceholder.typicode.com'});
 ```
