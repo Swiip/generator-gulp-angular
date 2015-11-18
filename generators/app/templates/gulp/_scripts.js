@@ -12,14 +12,15 @@ var webpack = require('webpack-stream');
 var $ = require('gulp-load-plugins')();
 
 
-
 <% if (props.jsPreprocessor.srcExtension !== 'es6' && props.jsPreprocessor.key !== 'typescript') { -%>
-gulp.task('scripts-reload', ['scripts'], function() {
+gulp.task('scripts-reload', function() {
   return buildScripts()
     .pipe(browserSync.reload({ stream: true }));
 });
 
-gulp.task('scripts', buildScripts());
+gulp.task('scripts', function() {
+  return buildScripts();
+});
 
 function buildScripts() {
   return gulp.src(path.join(conf.paths.src, '/app/**/*.<%- props.jsPreprocessor.extension %>'))

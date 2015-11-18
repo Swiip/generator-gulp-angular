@@ -16,7 +16,9 @@ gulp.task('styles-reload', ['styles'], function() {
     .pipe(browserSync.reload({ stream: true }));
 });
 
-gulp.task('styles', buildStyles())
+gulp.task('styles', function() {
+  return buildStyles();
+});
 
 var buildStyles = function() {
 <% if (props.cssPreprocessor.key === 'less') { -%>
