@@ -13,7 +13,7 @@ var _ = require('lodash');
 
 gulp.task('styles-reload', ['styles'], function() {
   return buildStyles()
-    .pipe(browserSync.reload({ stream: true }));
+    .pipe(browserSync.stream());
 });
 
 gulp.task('styles', function() {

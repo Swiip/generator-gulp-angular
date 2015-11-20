@@ -15,7 +15,7 @@ var $ = require('gulp-load-plugins')();
 <% if (props.jsPreprocessor.srcExtension !== 'es6' && props.jsPreprocessor.key !== 'typescript') { -%>
 gulp.task('scripts-reload', function() {
   return buildScripts()
-    .pipe(browserSync.reload({ stream: true }));
+    .pipe(browserSync.stream());
 });
 
 gulp.task('scripts', function() {
