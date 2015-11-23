@@ -21,7 +21,7 @@ function listFiles() {
     devDependencies: true
   });
 
-  return wiredep(wiredepOptions).js
+  var patterns = wiredep(wiredepOptions).js
     .concat([
 <% if (props.jsPreprocessor.key === 'noJsPrepro') { -%>
       path.join(conf.paths.src, '/app/**/*.module.js'),
@@ -38,6 +38,19 @@ function listFiles() {
 <% } -%>
     ])
     .concat(pathSrcHtml);
+
+  var files = patterns.map(function(pattern) {
+    return {
+      pattern: pattern
+    };
+  });
+  files.push({
+    pattern: path.join(conf.paths.src, '/assets/**/*'),
+    included: false,
+    served: true,
+    watched: false
+  });
+  return files;
 }
 
 module.exports = function(config) {
@@ -97,7 +110,11 @@ module.exports = function(config) {
       dir : 'coverage/'
     },
 
-    reporters: ['progress']
+    reporters: ['progress'],
+
+    proxies: {
+      '/assets/': path.join('/base/', conf.paths.src, '/assets/')
+    }
   };
 
   // This is the default preprocessors configuration for a usage with Karma cli
