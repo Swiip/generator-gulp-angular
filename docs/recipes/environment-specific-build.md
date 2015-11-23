@@ -54,7 +54,7 @@ module.exports = function(options) {
     return gulp.src(options.src + '/app/**/*.js')
       .pipe($.eslint())
       .pipe($.eslint.format())
-      .pipe(browserSync.reload({ stream: true }))
+      .pipe(browserSync.stream())
       .pipe($.size());
   });
 };
