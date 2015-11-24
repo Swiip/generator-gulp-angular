@@ -11,7 +11,8 @@
     "Mehdy Dara <mdara@eleven-labs.com> (http://eleven-labs.com/)"
   ],
   "files": [
-    "app"
+    "index.js",
+    "generators"
   ],
   "main": "index.js",
   "repository": "Swiip/generator-gulp-angular",
