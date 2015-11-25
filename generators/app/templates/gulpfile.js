@@ -1,7 +1,7 @@
 /**
  *  Welcome to your gulpfile!
- *  The gulp tasks are splitted in several files in the gulp directory
- *  because putting all here was really too long
+ *  The gulp tasks are split into several files in the gulp directory
+ *  because putting it all here was too long
  */
 
 'use strict';
