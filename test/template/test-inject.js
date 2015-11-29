@@ -23,15 +23,31 @@ describe('gulp-angular inject template', function () {
     model = mockModel();
   });
 
+  it('should add markups as dependency task if there is an htlm preprocessor', function () {
+    model.props.htmlPreprocessor.key = 'noHtmlPrepro';
+    var result = inject(model);
+    result.should.match(/gulp\.task\('partials', function/);
+
+    model.props.htmlPreprocessor.key = 'jade';
+    result = inject(model);
+    result.should.match(/gulp\.task\('partials', \['markups'\], function/);
+  });
+
+  it('should configure template cache with app name', function () {
+    model.appName = 'testAppName';
+    var result = inject(model);
+    result.should.match(/module: 'testAppName'/);
+  });
+
   it('should inject styles for src or tmp depending on the css preprocessor', function () {
     model.props.cssPreprocessor.key = 'noCssPrepro';
     var result = inject(model);
-    result.should.match(/gulp\.task\('inject', \['scripts'\], function/);
+    result.should.match(/gulp\.task\('inject', \['scripts', 'partials'\], function/);
     result.should.match(/injectStyles = gulp\.src\(\[\n.*conf\.paths\.src/);
 
     model.props.cssPreprocessor.key = 'not none';
     result = inject(model);
-    result.should.match(/gulp\.task\('inject', \['scripts', 'styles'\], function/);
+    result.should.match(/gulp\.task\('inject', \['scripts', 'styles', 'partials'\], function/);
     result.should.match(/injectStyles = gulp\.src\(\[\n.*conf\.paths\.tmp.*\n.*'!' \+ conf\.paths\.tmp/);
   });
 

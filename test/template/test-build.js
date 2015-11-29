@@ -23,21 +23,6 @@ describe('gulp-angular build template', function () {
     model = mockModel();
   });
 
-  it('should add markups as dependency task if there is an htlm preprocessor', function () {
-    model.props.htmlPreprocessor.key = 'noHtmlPrepro';
-    var result = build(model);
-    result.should.match(/gulp\.task\('partials', function/);
-
-    model.props.htmlPreprocessor.key = 'jade';
-    result = build(model);
-    result.should.match(/gulp\.task\('partials', \['markups'\], function/);
-  });
-
-  it('should configure template cache with app name', function () {
-    model.appName = 'testAppName';
-    var result = build(model);
-    result.should.match(/module: 'testAppName'/);
-  });
 
   it('should replace bootstrap font paths', function () {
     model.computedPaths.appToBower = 'appToBower';
