@@ -57,7 +57,7 @@ export class MalarkeyController {
   public contributors: any[];
 
 
-  constructor(private $log: angular.ILogService, private githubContributor: GithubContributor, private malarkey: any) {
+  constructor(private $log: angular.ILogService, private githubContributor: GithubContributor, public malarkey: any) {
     this.contributors = [];
 
     this.activate();
