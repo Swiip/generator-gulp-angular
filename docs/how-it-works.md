@@ -43,9 +43,9 @@ As the script files has to be sorted in order to work. We use a magic script whi
 
 ### Locating places in the `index.html`
 
-[gulp-inject](https://github.com/klei/gulp-inject) put the `<script>` of `<link>` tags insides comments starting by `<!-- inject:css -->` or `<!-- inject:js -->` and ending by `<!-- endinject -->`.
+[gulp-inject](https://github.com/klei/gulp-inject) put the `<script>` and `<link>` tags insides comments starting by `<!-- inject:css -->` or `<!-- inject:js -->` and ending by `<!-- endinject -->`.
 
-[wiredep](https://github.com/taptapship/wiredep) put the `<script>` of `<link>` tags insides comments starting by `<!-- bower:css -->` or `<!-- bower:js -->` and ending by `<!-- endbower -->`.
+[wiredep](https://github.com/taptapship/wiredep) put the `<script>` and `<link>` tags insides comments starting by `<!-- bower:css -->` or `<!-- bower:js -->` and ending by `<!-- endbower -->`.
 
 Don't put anything inside this comments in your sources because the `inject` task will override it without warning you.
 
