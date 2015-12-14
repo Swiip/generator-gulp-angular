@@ -55,15 +55,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
     .pipe($.sourcemaps.init())
-<% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'scss') { -%>
-    .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/bootstrap-sass/assets/fonts/bootstrap/', '../fonts/'))
-<% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'less') { -%>
-    .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/bootstrap/fonts/', '../fonts/'))
-<% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'styl') { -%>
-    .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/bootstrap-stylus/fonts/', '../fonts/'))
-<% } else if (props.ui.key === 'material-design-lite' || props.ui.key === 'angular-material') { -%>
-    .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/material-design-iconfont/iconfont/', '../fonts/'))
-<% } -%>
+    .pipe($.replace(/(?:\.\.\/)*bower_components\/.*?\/([^\/]*?\.(?:eot|svg|ttf|woff2|woff))/g, '../fonts/$1'))
     .pipe($.minifyCss({ processImport: false }))
     .pipe($.rev())
     .pipe($.sourcemaps.write('maps'))

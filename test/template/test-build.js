@@ -44,21 +44,11 @@ describe('gulp-angular build template', function () {
     model.props.ui.key = 'noUI';
     model.props.cssPreprocessor.extension = 'css';
     var result = build(model);
-    result.should.not.match(/\$\.replace/);
     result.should.match(/mainBowerFiles\(\)\)/);
 
     model.props.ui.key = 'bootstrap';
-    model.props.cssPreprocessor.extension = 'scss';
-    result = build(model);
-    result.should.match(/\$\.replace\('\.\.\/appToBower\/bower_components\/bootstrap-sass/);
-
-    model.props.cssPreprocessor.extension = 'less';
-    result = build(model);
-    result.should.match(/\$\.replace\('\.\.\/appToBower\/bower_components\/bootstrap\//);
-
     model.props.cssPreprocessor.extension = 'styl';
     result = build(model);
-    result.should.match(/\$\.replace\('\.\.\/appToBower\/bower_components\/bootstrap-stylus\//);
     result.should.match(/mainBowerFiles\(\).concat\('bower_components\/bootstrap-stylus\/fonts\/\*'\)/);
   });
 
@@ -67,7 +57,6 @@ describe('gulp-angular build template', function () {
     model.props.ui.key = 'material-design-lite';
     var result = build(model);
     result = build(model);
-    result.should.match(/\$\.replace\('\.\.\/appToBower\/bower_components\/material-design-iconfont\/iconfont\//);
     result.should.match(/mainBowerFiles\(\).concat\('bower_components\/material-design-iconfont\/iconfont\/\*'\)/);
   });
 
