@@ -26,7 +26,8 @@ var buildStyles = function() {
     paths: [
       'bower_components',
       path.join(conf.paths.src, '/app')
-    ]
+    ],
+    relativeUrls : true
   };
 <% } if (props.cssPreprocessor.extension === 'scss') { -%>
   var sassOptions = {
