@@ -20,7 +20,8 @@ gulp.task('partials', ['markups'], function () {
     .pipe($.minifyHtml({
       empty: true,
       spare: true,
-      quotes: true
+      quotes: true,
+      loose:  true
     }))
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
       module: '<%- appName %>',
@@ -74,7 +75,8 @@ gulp.task('html', ['inject', 'partials'], function () {
       empty: true,
       spare: true,
       quotes: true,
-      conditionals: true
+      conditionals: true,
+      loose:  true
     }))
     .pipe(htmlFilter.restore)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
