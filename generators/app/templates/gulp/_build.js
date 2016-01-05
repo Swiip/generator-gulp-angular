@@ -65,7 +65,7 @@ gulp.task('html', ['inject', 'partials'], function () {
 <% } else if (props.ui.key === 'material-design-lite' || props.ui.key === 'angular-material') { -%>
     .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/material-design-iconfont/iconfont/', '../fonts/'))
 <% } -%>
-    .pipe($.cssnano({ processImport: false }))
+    .pipe($.cssnano())
     .pipe($.rev())
     .pipe($.sourcemaps.write('maps'))
     .pipe(cssFilter.restore)
