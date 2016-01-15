@@ -7,11 +7,7 @@ export class GithubContributorService {
     this.apiHost = 'https://api.github.com/repos/Swiip/generator-gulp-angular';
   }
 
-  getContributors(limit) {
-    if (!limit) {
-      limit = 30;
-    }
-
+  getContributors(limit=30) {
     return this.$http.get(this.apiHost + '/contributors?per_page=' + limit)
       .then((response) => {
         return response.data;
