@@ -4,7 +4,7 @@ angular.module '<%- appName %>'
     NavbarController = (moment) ->
       'ngInject'
       vm = this
-      # "vm.creation" is avaible by directive option "bindToController: true"
+      # "vm.creation" is available by directive option "bindToController: true"
       vm.relativeDate = moment(vm.creationDate).fromNow()
       return
 
