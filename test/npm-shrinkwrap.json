@@ -6121,10 +6121,10 @@
       "from": "tryor@>=0.1.2 <0.2.0",
       "resolved": "https://registry.npmjs.org/tryor/-/tryor-0.1.2.tgz"
     },
-    "tsd": {
-      "version": "0.6.5",
-      "from": "tsd@>=0.6.5 <0.7.0",
-      "resolved": "https://registry.npmjs.org/tsd/-/tsd-0.6.5.tgz",
+    "typings": {
+      "version": "0.6.6",
+      "from": "typings@>=0.6.6 <0.7.0",
+      "resolved": "https://registry.npmjs.org/typings/-/typings-0.6.6.tgz",
       "dependencies": {
         "bl": {
           "version": "0.9.4",

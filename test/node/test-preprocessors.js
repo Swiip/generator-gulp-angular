@@ -24,7 +24,7 @@ describe('gulp-angular generator preprocessors script', function () {
       { src: 'gulp/scripts.js' },
       { src: 'gulp/markups.js' },
       { src: 'index.constants.js' },
-      { src: 'tsd.json' }
+      { src: 'typings.json' }
     ];
   });
 
@@ -128,7 +128,7 @@ describe('gulp-angular generator preprocessors script', function () {
       generator.props = { jsPreprocessor: { key: 'typescript' } };
       generator.travisCopies();
       generator.files.length.should.be.equal(6);
-      generator.files[5].src.should.match(/tsdrc/);
+      generator.files[5].src.should.match(/typingsrc/);
     });
   });
 

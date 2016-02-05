@@ -64,9 +64,10 @@ This task will launch the CoffeeLint analyze and the Coffee compilation and put 
 
 ### With TypeScript
 
-The `scripts` task has a dependency which is the installation of typings with the `tsd:install` gulp task. Once the typings ready, TSLint, TypeScript compilation and finally a concatenation of all JavaScript files produced in the right order are done.
+The `scripts` task has a dependency which is the installation of typings with the `typings:install` gulp task. Once the typings ready, TSLint, TypeScript compilation and finally a concatenation of all JavaScript files produced in the right order are done.
 
-`tsd:install` is located in the `gulp/tsd.js` which is created only when choosing TypeScript. It will automatically download typings files for the dependency found in Bower with a popular library [TSD](http://definitelytyped.org/tsd/)
+`typings:install` is located in the `gulp/typings.js` which is created only when choosing TypeScript. It will automatically download typings files for the 
+dependency found in Bower with a popular library [Typings](https://github.com/typings/typings)
 
 ### With ES6
 
