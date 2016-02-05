@@ -3,7 +3,7 @@
   "repo": "borisyankov/DefinitelyTyped",
   "ref": "master",
   "path": "<%- props.paths.tmp %>/typings",
-  "bundle": "<%- props.paths.tmp %>/typings/tsd.d.ts",
+  "bundle": "<%- props.paths.tmp %>/typings/main.d.ts",
   "installed": {
 <% if (angularModulesObject.animate) { -%>
     "angularjs/angular-animate.d.ts": {

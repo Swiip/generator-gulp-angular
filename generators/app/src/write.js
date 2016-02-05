@@ -43,7 +43,7 @@ module.exports = function (GulpAngularGenerator) {
     });
 
     if (this.props.jsPreprocessor.key === 'typescript') {
-      this.spawnCommandSync('tsd', ['install', '-so']);
+      this.spawnCommandSync('typings', ['install', '-s']);
     }
   };
 

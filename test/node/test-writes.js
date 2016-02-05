@@ -114,7 +114,7 @@ describe('gulp-angular generator writes script', function () {
       });
     });
 
-    it('should call TSD install with Typescript preprocessor', function () {
+    it('should call Typings install with Typescript preprocessor', function () {
       generator.options = {
         'skip-install': false,
         'skip-message': false
@@ -126,7 +126,7 @@ describe('gulp-angular generator writes script', function () {
       };
       generator.spawnCommandSync = sinon.stub();
       generator.install();
-      generator.spawnCommandSync.should.have.been.calledWith('tsd', ['install', '-so']);
+      generator.spawnCommandSync.should.have.been.calledWith('typings', ['install', '-s']);
     });
   });
 

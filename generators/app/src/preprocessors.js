@@ -60,7 +60,7 @@ module.exports = function (GulpAngularGenerator) {
     }
 
     if (this.props.jsPreprocessor.key !== 'typescript') {
-      rejectWithRegexp.call(this, /tsd\.json/);
+      rejectWithRegexp.call(this, /typings\.json/);
       rejectWithRegexp.call(this, /tsconfig\.json/);
     }
 
@@ -108,8 +108,8 @@ module.exports = function (GulpAngularGenerator) {
       if (this.props.jsPreprocessor.key === 'typescript') {
 
         this.files.push({
-          src: '.tsdrc',
-          dest: '.tsdrc',
+          src: '.typingsrc',
+          dest: '.typingsrc',
           template: false
         });
       }
