@@ -36,3 +36,4 @@ function runProtractor (done) {
 gulp.task('protractor', ['protractor:src']);
 gulp.task('protractor:src', ['serve:e2e', 'webdriver-update'], runProtractor);
 gulp.task('protractor:dist', ['serve:e2e-dist', 'webdriver-update'], runProtractor);
+gulp.task('protractor:dev', [], runProtractor); // Runs e2e tests on a running 'gulp serve:e2e' instance
