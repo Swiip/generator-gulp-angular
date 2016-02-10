@@ -59,7 +59,7 @@
     "traceur-loader": "~0.6.3",
 <% } if (props.jsPreprocessor.key === 'typescript') { -%>
     "typescript": "~1.6.2",
-    "awesome-typescript-loader": "~0.14.0",
+    "ts-loader": "~0.8.0",
     "tslint-loader": "~1.0.2",
     "tsd": "~0.6.5",
 <% } else if (props.jsPreprocessor.srcExtension !== 'es6') { -%>
