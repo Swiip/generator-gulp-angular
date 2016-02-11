@@ -270,10 +270,10 @@
       "from": "autoprefixer@>=6.0.0 <7.0.0",
       "resolved": "https://registry.npmjs.org/autoprefixer/-/autoprefixer-6.0.3.tgz"
     },
-    "awesome-typescript-loader": {
-      "version": "0.14.0",
-      "from": "awesome-typescript-loader@>=0.14.0 <0.15.0",
-      "resolved": "https://registry.npmjs.org/awesome-typescript-loader/-/awesome-typescript-loader-0.14.0.tgz"
+    "ts-loader": {
+      "version": "0.8.0",
+      "from": "ts-loader@>=0.8.0 <0.9.0",
+      "resolved": "https://registry.npmjs.org/ts-loader/-/ts-loader-0.8.0.tgz"
     },
     "aws-sign2": {
       "version": "0.6.0",
