@@ -140,7 +140,7 @@ describe('gulp-angular bower template', function () {
     model.props.cssPreprocessor.extension = 'scss';
     var result = bower(model);
     result.should.not.match(/bootstrap/);
-    result.should.not.match(/foundation/);
+    result.should.not.match(/foundation-sites/);
     result.should.not.match(/angular-material/);
     result.should.not.match(/material-design-lite/);
     result.should.not.match(/material-design-iconfont/);
@@ -150,7 +150,7 @@ describe('gulp-angular bower template', function () {
     result.should.match(/angular-material/);
     result.should.match(/material-design-iconfont/);
     result.should.not.match(/boostrap/);
-    result.should.not.match(/foundation/);
+    result.should.not.match(/foundation-sites/);
     result.should.not.match(/material-design-lite/);
 
     model.props.ui.key = 'material-design-lite';
@@ -159,7 +159,7 @@ describe('gulp-angular bower template', function () {
     result.should.match(/material-design-iconfont/);
     result.should.not.match(/boostrap/);
     result.should.not.match(/angular-material/);
-    result.should.not.match(/foundation/);
+    result.should.not.match(/foundation-sites/);
 
     model.props.ui.key = 'bootstrap';
     model.props.bootstrapComponents.key = 'ui-bootstrap';
@@ -167,7 +167,7 @@ describe('gulp-angular bower template', function () {
     result.should.match(/bootstrap-sass/);
     result.should.match(/angular-bootstrap/);
     result.should.not.match(/"bootstrap"/);
-    result.should.not.match(/foundation/);
+    result.should.not.match(/foundation-sites/);
     result.should.not.match(/angular-material/);
     result.should.not.match(/material-design-lite/);
     result.should.not.match(/material-design-iconfont/);
@@ -177,7 +177,7 @@ describe('gulp-angular bower template', function () {
     result = bower(model);
     result.should.match(/"bootstrap"/);
     result.should.match(/angular-strap/);
-    result.should.not.match(/foundation/);
+    result.should.not.match(/foundation-sites/);
     result.should.not.match(/angular-material/);
     result.should.not.match(/material-design-lite/);
     result.should.not.match(/material-design-iconfont/);
@@ -186,7 +186,7 @@ describe('gulp-angular bower template', function () {
     model.props.cssPreprocessor.extension = 'styl';
     result = bower(model);
     result.should.match(/bootstrap-stylus/);
-    result.should.not.match(/foundation/);
+    result.should.not.match(/foundation-sites/);
     result.should.not.match(/angular-material/);
     result.should.not.match(/material-design-lite/);
     result.should.not.match(/material-design-iconfont/);
