@@ -17,11 +17,11 @@ gulp.task('partials', ['markups'], function () {
     path.join(conf.paths.src, '/app/**/*.html'),
     path.join(conf.paths.tmp, '/serve/app/**/*.html')
   ])
-    .pipe($.minifyHtml({
-      empty: true,
-      spare: true,
-      quotes: true,
-      loose:  true
+    .pipe($.htmlmin({
+      removeEmptyAttributes: true,
+      removeAttributeQuotes: true,
+      collapseBooleanAttributes: true,
+      collapseWhitespace: true
     }))
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
       module: '<%- appName %>',
@@ -65,18 +65,17 @@ gulp.task('html', ['inject', 'partials'], function () {
 <% } else if (props.ui.key === 'material-design-lite' || props.ui.key === 'angular-material') { -%>
     .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/material-design-iconfont/iconfont/', '../fonts/'))
 <% } -%>
-    .pipe($.minifyCss({ processImport: false }))
+    .pipe($.cssnano())
     .pipe($.rev())
     .pipe($.sourcemaps.write('maps'))
     .pipe(cssFilter.restore)
     .pipe($.revReplace())
     .pipe(htmlFilter)
-    .pipe($.minifyHtml({
-      empty: true,
-      spare: true,
-      quotes: true,
-      conditionals: true,
-      loose:  true
+    .pipe($.htmlmin({
+      removeEmptyAttributes: true,
+      removeAttributeQuotes: true,
+      collapseBooleanAttributes: true,
+      collapseWhitespace: true
     }))
     .pipe(htmlFilter.restore)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
