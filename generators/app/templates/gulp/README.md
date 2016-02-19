@@ -35,7 +35,7 @@ Compile your markups files (when you use a HTML preprocessor).
 
 ## scripts.js
 
-Compile your scripts with your JS preprocessor if you have one. Run the linter. If you use ES6, will also use Browserify to bundle the files.
+Compile your scripts with your JS preprocessor if you have one. Run the linter. If you use ES6 or Typescript, will also use Webpack to bundle the files.
 
 ## server.js
 
