@@ -1,15 +1,22 @@
 # How to add fontawesome?
 
 ## [#337](https://github.com/Swiip/generator-gulp-angular/issues/337)
-Awesome. It's all working now. The scss import looks like
 
-```scss
-$fa-font-path: "../../bower_components/fontawesome/fonts";
-@import "../../bower_components/fontawesome/scss/font-awesome.scss";
+First, you need install fontawesome through bower
+```bash
+bower install fontawesome
 ```
 
-Add a step to the `html` pipeline in `gulp/build.js`:
+Next, you need add to your scss file this lines (please, check the paths if you
+change location of generator main.scss file):
+
+```scss
+$fa-font-path: "../../bower_components/font-awesome/fonts";
+@import "../../bower_components/font-awesome/scss/font-awesome.scss";
+```
+
+Finally, you need add this pipeline in `gulp/build.js`, in `html` task:
 
 ```js
-.pipe($.replace('../../bower_components/fontawesome/fonts', '../fonts'))
+.pipe($.replace('../../bower_components/font-awesome/fonts', '../fonts'))
 ```
