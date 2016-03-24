@@ -61,7 +61,7 @@
     "typescript": "~1.6.2",
     "ts-loader": "~0.8.0",
     "tslint-loader": "~1.0.2",
-    "tsd": "~0.6.5",
+    "typings": "~0.7.9",
 <% } else if (props.jsPreprocessor.srcExtension !== 'es6') { -%>
     "gulp-angular-filesort": "~1.1.1",
 <% } if (props.htmlPreprocessor.key !== 'noHtmlPrepro') { -%>
