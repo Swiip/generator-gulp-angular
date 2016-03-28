@@ -77,7 +77,7 @@ describe('gulp-angular generator preprocessors script', function () {
         htmlPreprocessor: { key: 'noHtmlPrepro' }
       };
       generator.rejectFiles();
-      generator.files.length.should.be.equal(2);
+      generator.files.length.should.be.equal(3);
     });
 
     it('should reject nothing if there is preprocessors including TypeScript', function () {

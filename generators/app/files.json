@@ -22,7 +22,7 @@
 
     "package.json",
     "bower.json",
-    "tsd.json",
+    "typings.json",
 
     "karma.conf.js",
 

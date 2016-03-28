@@ -194,7 +194,7 @@ describe('gulp-angular bower template', function () {
     model.props.ui.key = 'foundation';
     model.props.foundationComponents.key = 'angular-foundation';
     result = bower(model);
-    result.should.match(/"foundation"/);
+    result.should.match(/"foundation-sites"/);
     result.should.match(/angular-foundation/);
     result.should.not.match(/bootstrap/);
     result.should.not.match(/angular-material/);
