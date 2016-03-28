@@ -55,7 +55,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.sourcemaps.write('maps'))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
-    .pipe($.sourcemaps.init())
+    // .pipe($.sourcemaps.init())
 <% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'scss') { -%>
     .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/bootstrap-sass/assets/fonts/bootstrap/', '../fonts/'))
 <% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'less') { -%>
@@ -67,7 +67,7 @@ gulp.task('html', ['inject', 'partials'], function () {
 <% } -%>
     .pipe($.cssnano())
     .pipe($.rev())
-    .pipe($.sourcemaps.write('maps'))
+    // .pipe($.sourcemaps.write('maps'))
     .pipe(cssFilter.restore)
     .pipe($.revReplace())
     .pipe(htmlFilter)
