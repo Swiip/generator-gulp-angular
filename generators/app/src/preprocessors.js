@@ -98,22 +98,4 @@ module.exports = function (GulpAngularGenerator) {
     }
   };
 
-  /**
-   * Copy additional files for Travis
-   */
-  GulpAngularGenerator.prototype.travisCopies = function travisCopies() {
-    if (process.env.TRAVIS === 'true') {
-
-      // Avoid rate limit by GithubAPI
-      if (this.props.jsPreprocessor.key === 'typescript') {
-
-        this.files.push({
-          src: '.tsdrc',
-          dest: '.tsdrc',
-          template: false
-        });
-      }
-    }
-  };
-
 };
