@@ -18,8 +18,6 @@ cache:
 
 matrix:
   fast_finish: true
-  allow_failures:
-    - node_js: stable
 
 install:
   # Check the size of caches
