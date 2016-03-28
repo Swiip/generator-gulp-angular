@@ -41,9 +41,9 @@
     "bootstrap": "~3.3.5",
 <%   } -%>
 <% } if(props.ui.key === 'foundation') { -%>
-    "foundation": "~5.5.2",
+    "foundation-sites": "^6.1.2",
 <% } if(props.ui.key === 'angular-material') { -%>
-    "angular-material": "~0.11.2",
+    "angular-material": "~1.0.0",
     "material-design-iconfont": "~0.0.2",
 <% } if(props.ui.key === 'material-design-lite') { -%>
     "material-design-lite": "~1.0.4",

@@ -60,7 +60,7 @@ module.exports = function (GulpAngularGenerator) {
     }
 
     if (this.props.jsPreprocessor.key !== 'typescript') {
-      rejectWithRegexp.call(this, /tsd\.json/);
+      rejectWithRegexp.call(this, /typings\.json/);
       rejectWithRegexp.call(this, /tsconfig\.json/);
     }
 
@@ -95,24 +95,6 @@ module.exports = function (GulpAngularGenerator) {
         dest: 'tslint.json',
         template: false
       });
-    }
-  };
-
-  /**
-   * Copy additional files for Travis
-   */
-  GulpAngularGenerator.prototype.travisCopies = function travisCopies() {
-    if (process.env.TRAVIS === 'true') {
-
-      // Avoid rate limit by GithubAPI
-      if (this.props.jsPreprocessor.key === 'typescript') {
-
-        this.files.push({
-          src: '.tsdrc',
-          dest: '.tsdrc',
-          template: false
-        });
-      }
     }
   };
 

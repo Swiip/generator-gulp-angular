@@ -117,7 +117,7 @@ describe('gulp-angular package template', function () {
     model.props.jsPreprocessor.srcExtension = 'ts';
     result = packageJson(model);
     result.should.match(/webpack-stream/);
-    result.should.match(/typescript-loader/);
+    result.should.match(/ts-loader/);
     result.should.match(/tslint-loader/);
     result.should.not.match(/coffee/);
     result.should.not.match(/babel/);

@@ -23,6 +23,7 @@ The community has written [recipes](recipes#recipes) for common use-cases that w
 - [Where to place third-party files?](recipes/managing-third-party-files.md)
 - [How shall I properly upgrade my current project with the last version of the generator?](recipes/upgrade-my-current-project.md)
 - [Use spritesheets](recipes/use-spritesheet.md)
+- [Multiple modules](recipes/multiple-modules.md)
 
 
 ## Still got questions?

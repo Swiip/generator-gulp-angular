@@ -17,11 +17,11 @@ gulp.task('partials', ['markups'], function () {
     path.join(conf.paths.src, '/app/**/*.html'),
     path.join(conf.paths.tmp, '/serve/app/**/*.html')
   ])
-    .pipe($.minifyHtml({
-      empty: true,
-      spare: true,
-      quotes: true,
-      loose:  true
+    .pipe($.htmlmin({
+      removeEmptyAttributes: true,
+      removeAttributeQuotes: true,
+      collapseBooleanAttributes: true,
+      collapseWhitespace: true
     }))
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
       module: '<%- appName %>',
@@ -55,7 +55,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.sourcemaps.write('maps'))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
-    .pipe($.sourcemaps.init())
+    // .pipe($.sourcemaps.init())
 <% if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'scss') { -%>
     .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/bootstrap-sass/assets/fonts/bootstrap/', '../fonts/'))
 <% } else if (props.ui.key === 'bootstrap' && props.cssPreprocessor.extension === 'less') { -%>
@@ -65,18 +65,17 @@ gulp.task('html', ['inject', 'partials'], function () {
 <% } else if (props.ui.key === 'material-design-lite' || props.ui.key === 'angular-material') { -%>
     .pipe($.replace('../<%- computedPaths.appToBower %>/bower_components/material-design-iconfont/iconfont/', '../fonts/'))
 <% } -%>
-    .pipe($.minifyCss({ processImport: false }))
+    .pipe($.cssnano())
     .pipe($.rev())
-    .pipe($.sourcemaps.write('maps'))
+    // .pipe($.sourcemaps.write('maps'))
     .pipe(cssFilter.restore)
     .pipe($.revReplace())
     .pipe(htmlFilter)
-    .pipe($.minifyHtml({
-      empty: true,
-      spare: true,
-      quotes: true,
-      conditionals: true,
-      loose:  true
+    .pipe($.htmlmin({
+      removeEmptyAttributes: true,
+      removeAttributeQuotes: true,
+      collapseBooleanAttributes: true,
+      collapseWhitespace: true
     }))
     .pipe(htmlFilter.restore)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
@@ -105,7 +104,7 @@ gulp.task('fonts', function () {
 <% } else { -%>
   return gulp.src($.mainBowerFiles())
 <% } -%>
-    .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
+    .pipe($.filter('**/*.{eot,otf,svg,ttf,woff,woff2}'))
     .pipe($.flatten())
     .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/')));
 });

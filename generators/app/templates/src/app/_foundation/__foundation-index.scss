@@ -2,13 +2,14 @@
  *  If you want to override some foundation settings, you have to change values here.
  *  The list of settings values are listed here bower_components/foundation/scss/foundation/_settings.scss
  */
-$topbar-bg-color: #5AADBB;
+$topbar-background: #5AADBB;
 
 /**
  *  The import of foundation is made manually because there is still no links of the
  *  sass version in their bower.json...
  */
-@import '../<%- computedPaths.appToBower %>/bower_components/foundation/scss/foundation';
+@import '../../bower_components/foundation-sites/scss/foundation';
+@include foundation-everything;
 
 /**
  *  Do not remove the comments below. It's the markers used by wiredep to inject
@@ -28,7 +29,7 @@ $topbar-bg-color: #5AADBB;
   margin-top: 50px;
 }
 
-.th {
+.thumbnail {
   width: 100%;
   height: 200px;
 

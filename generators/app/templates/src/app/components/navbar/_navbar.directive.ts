@@ -17,6 +17,7 @@ export function acmeNavbar(): angular.IDirective {
 /** @ngInject */
 export class NavbarController {
   public relativeDate: string;
+  // "this.creationDate" is initialized by directive option "bindToController: true"
   public creationDate: number;
 
   constructor(moment: moment.MomentStatic) {

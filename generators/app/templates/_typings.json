@@ -1,0 +1,39 @@
+{
+  "name": "<%- appName %>",
+  "version": false,
+  "ambientDependencies": {
+<% if (angularModulesObject.animate) { -%>
+    "angular-animate": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular-animate.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+<% } if (angularModulesObject.cookies) { -%>
+    "angular-cookies": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular-cookies.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+<% } if (angularModulesObject.sanitize) { -%>
+    "angular-sanitize": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular-sanitize.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+<% } -%>
+    "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+<% if (props.jQuery.key === 'zepto') { -%>
+    "zepto": "github:DefinitelyTyped/DefinitelyTyped/zepto/zepto.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+<% } if (props.resource.key === 'angular-resource') { -%>
+    "angular-resource": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular-resource.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+<% } if (props.resource.key === 'restangular') { -%>
+    "restangular": "github:DefinitelyTyped/DefinitelyTyped/restangular/restangular.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+<% } if (props.router.key === 'ui-router') { -%>
+    "angular-ui-router": "github:DefinitelyTyped/DefinitelyTyped/angular-ui-router/angular-ui-router.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+<% } if (props.router.key === 'angular-route') { -%>
+    "angular-route": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular-route.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+<% } if(props.ui.key === 'bootstrap' && props.bootstrapComponents === 'official') { -%>
+    "bootstrap": "github:DefinitelyTyped/DefinitelyTyped/bootstrap/bootstrap.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+<% } if(props.ui.key === 'foundation' && props.foundationComponents === 'official') { -%>
+    "foundation": "github:DefinitelyTyped/DefinitelyTyped/foundation/foundation.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+<% } if(props.ui.key === 'angular-material') { -%>
+    "angular-material": "github:DefinitelyTyped/DefinitelyTyped/angular-material/angular-material.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+<% } if(props.bootstrapComponents.key === 'ui-bootstrap') { -%>
+    "ui-bootstrap": "github:DefinitelyTyped/DefinitelyTyped/angular-ui-bootstrap/angular-ui-bootstrap.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+<% } -%>
+    "angular-mocks": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular-mocks.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+    "angular": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+    "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+    "karma-jasmine": "github:DefinitelyTyped/DefinitelyTyped/karma-jasmine/karma-jasmine.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+    "moment-node": "github:DefinitelyTyped/DefinitelyTyped/moment/moment-node.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+    "moment": "github:DefinitelyTyped/DefinitelyTyped/moment/moment.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2"
+  }
+}

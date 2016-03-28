@@ -57,7 +57,7 @@ function webpackWrapper(watch, test, callback) {
 <%   } if (props.jsPreprocessor.key === 'traceur') { -%>
       loaders: [{ test: /\.js$/, exclude: /node_modules/, loaders: ['ng-annotate', 'traceur-loader']}]
 <%   } if (props.jsPreprocessor.key === 'typescript') { -%>
-      loaders: [{ test: /\.ts$/, exclude: /node_modules/, loaders: ['ng-annotate', 'awesome-typescript-loader']}]
+      loaders: [{ test: /\.ts$/, exclude: /node_modules/, loaders: ['ng-annotate', 'ts-loader']}]
 <%   } -%>
     },
     output: { filename: 'index.module.js' }
