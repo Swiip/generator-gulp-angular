@@ -84,7 +84,7 @@ module.exports = function(config) {
 <%   } -%>
     },
 <% } else { -%>
-    frameworks: ['jasmine'],
+    frameworks: ['phantomjs-shim', 'jasmine'],
 <% } -%>
 
 <% if(props.jsPreprocessor.key === 'traceur') { -%>
@@ -97,6 +97,7 @@ module.exports = function(config) {
 
     plugins : [
       'karma-phantomjs-launcher',
+      'karma-phantomjs-shim',
 <% } if (props.jsPreprocessor.key === 'noJsPrepro' || props.jsPreprocessor.key === 'coffee') { -%>
       'karma-angular-filesort',
 <% } -%>
