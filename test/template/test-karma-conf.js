@@ -58,18 +58,18 @@ describe('gulp-angular karma.conf template', function () {
   it('should add and configure angular filesort if needed', function () {
     model.props.jsPreprocessor.key = 'babel';
     var result = karmaConf(model);
-    result.should.match(/frameworks: \['jasmine'\]/);
+    result.should.match(/frameworks: \['phantomjs-shim', 'jasmine'\]/);
     result.should.not.match(/'karma-angular-filesort'/);
 
     model.props.jsPreprocessor.key = 'noJsPrepro';
     result = karmaConf(model);
-    result.should.match(/frameworks: \['jasmine', 'angular-filesort'\]/);
+    result.should.match(/frameworks: \['phantomjs-shim', 'jasmine', 'angular-filesort'\]/);
     result.should.match(/whitelist: \[[^\s]*conf\.paths\.src/);
     result.should.match(/'karma-angular-filesort'/);
 
     model.props.jsPreprocessor.key = 'coffee';
     result = karmaConf(model);
-    result.should.match(/frameworks: \['jasmine', 'angular-filesort'\]/);
+    result.should.match(/frameworks: \['phantomjs-shim', 'jasmine', 'angular-filesort'\]/);
     result.should.match(/whitelist: \[[^\s]*conf\.paths\.tmp/);
     result.should.match(/'karma-angular-filesort'/);
   });
