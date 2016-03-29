@@ -56,7 +56,7 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.srcExtension = 'es6';
     result = scripts(model);
     result.should.match(/function webpackWrapper\(watch, test, callback\)/);
-    result.should.match(/loaders:.*loaders: \['ng-annotate', 'babel-loader'/);
+    result.should.match(/loaders:.*loaders: \['ng-annotate', 'babel-loader\?presets\[]=es2015'/);
     result.should.match(/gulp\.task\('scripts:watch'/);
     result.should.not.match(/traceur/);
     result.should.not.match(/coffee/);
