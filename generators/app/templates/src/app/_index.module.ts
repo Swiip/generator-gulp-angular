@@ -1,4 +1,4 @@
-/// <reference path="../../<%- props.paths.tmp %>/typings/tsd.d.ts" />
+/// <reference path="../../typings/main.d.ts" />
 
 import { config } from './index.config';
 <% if (props.router.key === 'new-router') { -%>

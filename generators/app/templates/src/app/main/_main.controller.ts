@@ -21,7 +21,7 @@ export class MainController {
   activate($timeout: angular.ITimeoutService) {
     this.getWebDevTec();
 
-    $timeout(()=> {
+    $timeout(() => {
       this.classAnimation = 'rubberBand';
     }, 4000);
   }
