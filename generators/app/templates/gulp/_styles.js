@@ -31,7 +31,8 @@ var buildStyles = function() {
   };
 <% } if (props.cssPreprocessor.extension === 'scss') { -%>
   var sassOptions = {
-    style: 'expanded'
+    style: 'expanded',
+    precision: 10
   };
 <% } -%>
 
