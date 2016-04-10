@@ -139,5 +139,6 @@ There is none at the generation but you can add `.jade`, `.haml` or `.hbs` (depe
 * *CSS pre-processor*: Less, Sass with Ruby and Node, Stylus, none
 * *JS preprocessor*: CoffeeScript, TypeScript, ECMAScript 6 (Traceur and Babel), none
 * *HTML preprocessor*: Jade, Haml, Handlebars, none
+* *Protractor framework*: Jasmine, Cucumber
 * **TODO** Script loader: Require, Webpack, none
 * **TODO** Test framework: Jasmine, Mocha, Qunit

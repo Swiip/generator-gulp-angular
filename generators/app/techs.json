@@ -157,5 +157,11 @@
       "url": "http://handlebarsjs.com/",
       "description": "Handlebars provides the power necessary to let you build semantic templates effectively with no frustration.",
       "logo": "handlebars.png"
+    },
+    "cucumber": {
+      "title": "Cucumber",
+      "url": "https://cucumber.io/",
+      "description": "Cucumber, the popular Behaviour-Driven Development tool, brought to your JavaScript stack.",
+      "logo": "cucumber.png"
     }
 }

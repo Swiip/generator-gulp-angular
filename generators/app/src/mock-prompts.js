@@ -24,7 +24,8 @@ var questions = [
   'foundationComponents',
   'cssPreprocessor',
   'jsPreprocessor',
-  'htmlPreprocessor'
+  'htmlPreprocessor',
+  'protractorFramework'
 ];
 
 var model = {};
@@ -81,6 +82,10 @@ model.htmlPreprocessor.choices.forEach(function (choice) {
   model.htmlPreprocessor.values[choice.value.key] = choice.value;
 });
 
+model.protractorFramework.choices.forEach(function (choice) {
+  model.protractorFramework.values[choice.value.key] = choice.value;
+});
+
 module.exports = {
   prompts: model,
   defaults: {
@@ -94,6 +99,7 @@ module.exports = {
     foundationComponents: model.foundationComponents.values.noFoundationComponents,
     cssPreprocessor: model.cssPreprocessor.values['node-sass'],
     jsPreprocessor: model.jsPreprocessor.values.noJsPrepro,
-    htmlPreprocessor: model.htmlPreprocessor.values.noHtmlPrepro
+    htmlPreprocessor: model.htmlPreprocessor.values.noHtmlPrepro,
+    protractorFramework: model.protractorFramework.values.jasmine,
   }
 };

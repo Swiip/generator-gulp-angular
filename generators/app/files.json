@@ -4,14 +4,12 @@
     ".editorconfig",
 
     "tsconfig.json",
-    "protractor.conf.js",
 
     "e2e/.eslintrc",
-    "e2e/main.spec.js",
+    "e2e/main.feature",
 
     "gulpfile.js",
     "gulp/.eslintrc",
-    "gulp/e2e-tests.js",
 
     "src/favicon.ico",
     "src/assets/images/yeoman.png"
@@ -25,10 +23,13 @@
     "typings.json",
 
     "karma.conf.js",
+    "protractor.conf.js",
 
+    "e2e/main.spec.js",
     "e2e/main.po.js",
 
     "gulp/conf.js",
+    "gulp/e2e-tests.js",
     "gulp/build.js",
     "gulp/inject.js",
     "gulp/markups.js",

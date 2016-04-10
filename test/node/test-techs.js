@@ -36,7 +36,8 @@ describe('gulp-angular generator techs script', function () {
       foundationComponents: { key: 'noFoundationComponents' },
       cssPreprocessor: { extension: 'default' },
       jsPreprocessor: { extension: 'css' },
-      htmlPreprocessor: { extension: 'official' }
+      htmlPreprocessor: { extension: 'official' },
+      protractorFramework: { extension: 'js' }
     };
     generator.files = [];
     generator.computeTechs();

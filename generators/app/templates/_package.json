@@ -78,6 +78,12 @@
     "wiredep": "~2.2.2",
     "karma": "~0.13.10",
     "karma-jasmine": "~0.3.6",
+<% if (props.protractorFramework.key === 'cucumber') { -%>
+    "cucumber": "~0.10.2",
+    "protractor-cucumber-framework": "~0.5.0",
+    "chai": "~3.5.0",
+    "chai-as-promised": "~5.3.0",
+<% } -%>
 <% if(props.jsPreprocessor.key === 'traceur') { -%>
     "karma-chrome-launcher": "~0.2.1",
 <% } else { -%>

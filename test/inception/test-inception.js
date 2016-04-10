@@ -35,7 +35,7 @@ describe('gulp-angular generator inception tests', function () {
     });
   });
 
-  describe('with [angular 1.3.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, angular-foundation, CSS, Coffee, Jade]', function () {
+  describe('with [angular 1.3.x, jQuery 2.x.x, Restangular, UI-Router, Foundation, angular-foundation, CSS, Coffee, Jade, cucmber]', function () {
     before(function () {
       return inception.prepare({}, {
         angularVersion: prompts.angularVersion.values['1.3'],
@@ -46,7 +46,8 @@ describe('gulp-angular generator inception tests', function () {
         foundationComponents: prompts.foundationComponents.values['angular-foundation'],
         cssPreprocessor: prompts.cssPreprocessor.values.noCssPrepro,
         jsPreprocessor: prompts.jsPreprocessor.values.coffee,
-        htmlPreprocessor: prompts.htmlPreprocessor.values.jade
+        htmlPreprocessor: prompts.htmlPreprocessor.values.jade,
+        protractorFramework: prompts.protractorFramework.values.cucumber
       }).then(function (generator) {
         gulpAngular = generator;
       });

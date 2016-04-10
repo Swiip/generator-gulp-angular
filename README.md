@@ -64,6 +64,7 @@ yo gulp-angular
 ![Logo](docs/assets/bower.png)
 ![Logo](docs/assets/webpack.png)
 ![Logo](docs/assets/karma.png)
+![Logo](docs/assets/cucumber.png)
 ![Logo](docs/assets/istanbul.png)
 ![Logo](docs/assets/browsersync.png)
 ![Logo](docs/assets/jasmine.png)

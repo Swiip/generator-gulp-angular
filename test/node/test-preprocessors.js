@@ -24,7 +24,8 @@ describe('gulp-angular generator preprocessors script', function () {
       { src: 'gulp/scripts.js' },
       { src: 'gulp/markups.js' },
       { src: 'index.constants.js' },
-      { src: 'tsd.json' }
+      { src: 'tsd.json' },
+      { src: 'e2e/main.feature' }
     ];
   });
 
@@ -33,12 +34,14 @@ describe('gulp-angular generator preprocessors script', function () {
       generator.props = {
         cssPreprocessor: { extension: null },
         jsPreprocessor: { extension: 'js' },
-        htmlPreprocessor: { extension: 'jade' }
+        htmlPreprocessor: { extension: 'jade' },
+        protractorFramework: { extension: 'feature' }
       };
       generator.imageMin = true;
       generator.computeProcessedFileExtension();
-      generator.processedFileExtension.should.be.equal('html,css,js,jade,jpg,png,gif,svg');
+      generator.processedFileExtension.should.be.equal('html,css,js,jade,feature,jpg,png,gif,svg');
 
+      generator.props.protractorFramework.extension = 'js';
       generator.imageMin = false;
       generator.computeProcessedFileExtension();
       generator.processedFileExtension.should.be.equal('html,css,js,jade');
@@ -74,7 +77,8 @@ describe('gulp-angular generator preprocessors script', function () {
       generator.props = {
         cssPreprocessor: { key: 'noCssPrepro' },
         jsPreprocessor: { key: 'noJsPrepro' },
-        htmlPreprocessor: { key: 'noHtmlPrepro' }
+        htmlPreprocessor: { key: 'noHtmlPrepro' },
+        protractorFramework: { key: 'jasmine' }
       };
       generator.rejectFiles();
       generator.files.length.should.be.equal(3);
@@ -84,10 +88,11 @@ describe('gulp-angular generator preprocessors script', function () {
       generator.props = {
         cssPreprocessor: { key: 'not none' },
         jsPreprocessor: { key: 'typescript' },
-        htmlPreprocessor: { key: 'not none' }
+        htmlPreprocessor: { key: 'not none' },
+        protractorFramework: { key: 'cucumber' }
       };
       generator.rejectFiles();
-      generator.files.length.should.be.equal(4);
+      generator.files.length.should.be.equal(5);
     });
   });
 
@@ -97,7 +102,7 @@ describe('gulp-angular generator preprocessors script', function () {
         jsPreprocessor: { key: 'coffee' }
       };
       generator.lintCopies();
-      generator.files[5].src.should.match(/coffeelint/);
+      generator.files[6].src.should.match(/coffeelint/);
     });
 
     it('should add tslint for typescript preprocessor', function () {
@@ -105,7 +110,7 @@ describe('gulp-angular generator preprocessors script', function () {
         jsPreprocessor: { key: 'typescript' }
       };
       generator.lintCopies();
-      generator.files[5].src.should.match(/tslint/);
+      generator.files[6].src.should.match(/tslint/);
     });
   });
 });
