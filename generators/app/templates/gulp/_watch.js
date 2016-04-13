@@ -42,11 +42,13 @@ gulp.task('watch', [<%- watchTaskDeps.join(', ') %>], function () {
     path.join(conf.paths.src, '/app/**/*.<%- props.jsPreprocessor.extension %>')
   ], function(event) {
 <%   } -%>
+    conf._gulpWatchEvent = event;
     if(isOnlyChange(event)) {
       gulp.start('scripts-reload');
     } else {
       gulp.start('inject-reload');
     }
+    delete conf._gulpWatchEvent;
   });
 <% } -%>
 

@@ -74,4 +74,16 @@ describe('gulp-angular scripts template', function () {
     result.should.not.match(/typescript/);
   });
 
+  it('should add match to browserSync options when not using a js preprocessor', function () {
+    model.props.jsPreprocessor.key = 'noJsPrepro';
+    var result = scripts(model);
+    result.should.match(/bsOptions\.match/);
+  });
+
+  it('should not add match to browserSync options when using a js preprocessor', function () {
+    model.props.jsPreprocessor.key = 'babel';
+    var result = scripts(model);
+    result.should.not.match(/bsOptions\.match/);
+  });
+
 });
