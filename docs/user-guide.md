@@ -105,7 +105,7 @@ A dependency wrongly installed or which doesn't link properly the files to inclu
 
 ### Your source code
 
-The generator is also abled to automatically write the `script` and `link` tags for your own source files. To do that, it looks through the whole content of the `src` folder and inject all the files in the `index.html`.
+The generator is also able to automatically write the `script` and `link` tags for your own source files. To do that, it looks through the whole content of the `src` folder and inject all the files in the `index.html`.
 
 As the order of the files are important in JavaScript, the order is not chosen randomly. We use a script called [Angular FileSort](https://github.com/klei/gulp-angular-filesort) which will analyse your source code and reorder your files respecting the dependencies discovered through the Angular modules.
 
@@ -113,7 +113,7 @@ For the CSS, the order is not important. Unfortunately for the CSS pre-processor
 
 ### CSS pre-processor injection
 
-When you use a CSS pre-processor, the inject process for your style files is a bit different. It's in the pre-processor file that you want the injection and not in the `injex.html` and it's what the injection will do.
+When you use a CSS pre-processor, the inject process for your style files is a bit different. It's in the pre-processor file that you want the injection and not in the `index.html` and it's what the injection will do.
 
 In this special case, the "injection" will not be performed in the `inject` task or in the `index.html` file but directly in the `styles` task. You'll find comments in your `index.(scss|less|styl)` file which locate the position to add include statements with the syntax of the pre-processor.
 
@@ -135,7 +135,7 @@ In the `index.html` file, you'll find two types of comments, some for the build 
 
 One of the goals of the generator is to bring to you a test environment already configured so you have only to write your tests.
 
-As it is today the guideline, the tests files are placed directly in the source folder next to the file you want to test. The distinction used to separate source and test is on the file extension: `*.spec.js` and `*.mock.js`.
+As it is today's guideline, the tests files are placed directly in the source folder next to the file you want to test. The distinction used to separate source and test is on the file extension: `*.spec.js` and `*.mock.js`.
 
 The `karma.conf.js` file delivered with the project is plugged with the same features and configurations than the Gulp scripts. The [File injection](#file-injection) used to populate the `index.html` file is used with the same behaviors to parameter karma.
 
