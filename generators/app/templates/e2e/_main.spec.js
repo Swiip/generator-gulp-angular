@@ -18,16 +18,14 @@ module.exports = function () {
     done();
   });
 
-  this.Then(/^I should see the jumbotron with correct data$/, function (done) {
+  this.Then(/^I should see the jumbotron with correct data$/, function () {
     expect(page.h1El.getText()).to.eventually.equal('\'Allo, \'Allo!');
     expect(page.imgEl.getAttribute('src')).to.eventually.have.string('assets/images/yeoman.png');
-    expect(page.imgEl.getAttribute('alt')).to.eventually.equal('I\'m Yeoman');
-    done();
+    return expect(page.imgEl.getAttribute('alt')).to.eventually.equal('I\'m Yeoman');
   });
 
-  this.Then(/^I should see a list of more than (\d+) awesome things$/, function (itemNumber, done) {
-    expect(page.thumbnailEls.count()).to.eventually.be.at.least(itemNumber);
-    done();
+  this.Then(/^I should see a list of more than (\d+) awesome things$/, function (itemNumber) {
+    return expect(page.thumbnailEls.count()).to.eventually.be.at.least(itemNumber);
   });
 };
 <% } else { -%>
