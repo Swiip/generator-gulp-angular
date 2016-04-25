@@ -6890,11 +6890,6 @@
       "from": "wrappy@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/wrappy/-/wrappy-1.0.1.tgz"
     },
-    "wrench": {
-      "version": "1.5.8",
-      "from": "wrench@>=1.5.8 <1.6.0",
-      "resolved": "https://registry.npmjs.org/wrench/-/wrench-1.5.8.tgz"
-    },
     "write": {
       "version": "0.2.1",
       "from": "write@>=0.2.1 <0.3.0",
