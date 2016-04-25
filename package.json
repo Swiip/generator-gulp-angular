@@ -48,8 +48,7 @@
     "mz": "~2.0.0",
     "recursive-readdir": "~1.2.1",
     "sinon": "~1.17.1",
-    "sinon-chai": "~2.8.0",
-    "wrench": "1.5.8"
+    "sinon-chai": "~2.8.0"
   },
   "engines": {
     "node": ">=0.10.0"
