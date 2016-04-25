@@ -131,6 +131,18 @@ In the `index.html` file, you'll find two types of comments, some for the build 
 
 **The key is to put your tags inside the build blocks to be part of the optimization process but outside of the inject blocks which will be overriden**.
 
+*Example*:
+```html
+    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <link rel="stylesheet" href="../custom-theme/style.css">
+    <!-- bower:css -->
+    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+```
+
+Note, that the `custom-theme` folder also needs to be added to `gulp/server.js:browserSyncInit`'s list of routes. Otherwise, it won't be loaded via server.
+
 ## Test environment configured
 
 One of the goals of the generator is to bring to you a test environment already configured so you have only to write your tests.
