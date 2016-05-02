@@ -2,9 +2,10 @@
 
 ## [#337](https://github.com/Swiip/generator-gulp-angular/issues/337)
 
-First, you need install fontawesome through bower
+First, you need install Font Awesome through bower:
+
 ```bash
-bower install fontawesome
+bower install font-awesome
 ```
 
 Next, you need add to your scss file this lines (please, check the paths if you
