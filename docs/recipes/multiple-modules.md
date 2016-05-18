@@ -1,4 +1,4 @@
-# Use spritesheets
+# Multiple Modules
 
 ## [#737](https://github.com/Swiip/generator-gulp-angular/issues/737)
 
