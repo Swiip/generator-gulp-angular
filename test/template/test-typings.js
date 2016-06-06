@@ -104,6 +104,6 @@ describe('gulp-angular typings template', function () {
   it('should insert UI-Bootstrap definition', function () {
     model.props.ui.key = 'angular-material';
     var result = typings(model);
-    result.should.match(/angular-ui-bootstrap\/angular-ui-bootstrap.d.ts/);
+    result.should.match(/angular-bootstrap\/angular-bootstrap.d.ts/);
   });
 });
