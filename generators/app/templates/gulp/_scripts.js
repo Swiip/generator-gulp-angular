@@ -14,8 +14,14 @@ var $ = require('gulp-load-plugins')();
 
 <% if (props.jsPreprocessor.srcExtension !== 'es6' && props.jsPreprocessor.key !== 'typescript') { -%>
 gulp.task('scripts-reload', function() {
+  var bsOptions = {once: true};
+<%   if (props.jsPreprocessor.key === 'noJsPrepro') { -%>
+  if (conf._gulpWatchEvent) {
+    bsOptions.match = conf._gulpWatchEvent.path;
+  }
+<%   } -%>
   return buildScripts()
-    .pipe(browserSync.stream());
+    .pipe(browserSync.stream(bsOptions));
 });
 
 gulp.task('scripts', function() {
