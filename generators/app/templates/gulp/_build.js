@@ -38,9 +38,9 @@ gulp.task('html', ['inject', 'partials'], function () {
     addRootSlash: false
   };
 
-  var htmlFilter = $.filter('*.html', { restore: true });
-  var jsFilter = $.filter('**/*.js', { restore: true });
-  var cssFilter = $.filter('**/*.css', { restore: true });
+  var htmlFilter = $.filter(path.join(conf.paths.tmp, '/serve/*.html'), {restore: true});
+  var jsFilter = $.filter(path.join(conf.paths.tmp, '/serve/**/*.js'), {restore: true});
+  var cssFilter = $.filter(path.join(conf.paths.tmp, '/serve/**/*.css'), {restore: true});
 
   return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
     .pipe($.inject(partialsInjectFile, partialsInjectOptions))
