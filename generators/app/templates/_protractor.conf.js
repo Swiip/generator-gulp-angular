@@ -17,11 +17,25 @@ exports.config = {
 
   // Spec patterns are relative to the current working directory when
   // protractor is called.
-  specs: [paths.e2e + '/**/*.js'],
+  specs: [paths.e2e + '/**/*.<%- props.protractorFramework.extension %>'],
 
+<% if (props.protractorFramework.key === 'cucumber') { -%>
+  framework: 'custom',
+  // path relative to the current config file
+  frameworkPath: require.resolve('protractor-cucumber-framework'),
+
+  // relevant cucumber command line options
+  cucumberOpts: {
+    require: [
+      paths.e2e + '/**/*.js'
+    ],
+    format: "pretty"
+  }
+<% } else { -%>
   // Options to be passed to Jasmine-node.
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000
   }
+<% } -%>
 };

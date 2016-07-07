@@ -391,5 +391,26 @@
         "name": "Handlebars (*.hbs)"
       }
     ]
+  },
+  {
+    "type": "list",
+    "name": "protractorFramework",
+    "message": "Which Protractor test framework do you want?",
+    "choices": [
+      {
+        "value": {
+          "key": "jasmine",
+          "extension": "js"
+        },
+        "name": "None, Use the default protractor framework (Jasmine)."
+      },
+      {
+        "value": {
+          "key": "cucumber",
+          "extension": "feature"
+        },
+        "name": "Cucumber, a BDD testing framework that uses feature tests."
+      }
+    ]
   }
 ]

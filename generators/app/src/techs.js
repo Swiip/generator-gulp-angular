@@ -19,7 +19,8 @@ module.exports = function (GulpAngularGenerator) {
       this.props.foundationComponents.key,
       this.props.cssPreprocessor.key,
       this.props.jsPreprocessor.key,
-      this.props.htmlPreprocessor.key
+      this.props.htmlPreprocessor.key,
+      this.props.protractorFramework.key
     ])
       .filter(_.isString)
       .filter(function (tech) {

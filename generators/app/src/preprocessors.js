@@ -20,7 +20,8 @@ module.exports = function (GulpAngularGenerator) {
       'js',
       this.props.cssPreprocessor.extension,
       this.props.jsPreprocessor.extension,
-      this.props.htmlPreprocessor.extension
+      this.props.htmlPreprocessor.extension,
+      this.props.protractorFramework.extension
     ];
     if (this.imageMin) {
       this.processedFileExtension = this.processedFileExtension.concat(['jpg', 'png', 'gif', 'svg']);
@@ -75,6 +76,11 @@ module.exports = function (GulpAngularGenerator) {
     if (this.props.jsPreprocessor.key !== 'noJsPrepro') {
       rejectWithRegexp.call(this, /^(?!^e2e\/).*spec\.js/);
     }
+
+    if (this.props.protractorFramework.key !== 'cucumber') {
+      rejectWithRegexp.call(this, /main\.feature/);
+    }
+
   };
 
   /**

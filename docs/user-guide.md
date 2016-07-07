@@ -14,7 +14,7 @@ Its usage is described in the chapters [Development server](#development-server)
 
 ### `test`
 
-For testing, a fully working test environment is shipped with some examples. It uses Karma (with `gulp test`) for the unit tests, and Protractor for the end-to-end tests (with `gulp protractor`).
+For testing, a fully working test environment is shipped with some examples. It uses Karma (with `gulp test`) for the unit tests, and Protractor for the [end-to-end tests](#end-to-end-tests) (with `gulp protractor`).
 
 More information in the [Test environment configured](#test-environment-configured) chapter.
 
@@ -158,6 +158,12 @@ Still as default choice, the test framework is [Jasmine](http://jasmine.github.i
 To allow tests to load HTML partials especially for the directives tests, we use a Karma plugin [karma-ng-html2js-preprocessor](https://github.com/karma-runner/karma-ng-html2js-preprocessor).
 
 Other than that, we try to use as less Karma plugins as possible because they often duplicate process we already have inside Gulp. For sake of coherence and stability we're searching for a process centralized in Gulp and not duplicated in Karma or other tools like perhaps Webpack.
+
+## End to end tests
+
+The generator provides end to end testing using [Protractor](https://angular.github.io/protractor/#/). By default, Protractor uses the Jasmine test framework for its testing interface. There is an option to change the testing framework to [Cucumber](https://cucumber.io/), a BBD testing framework that uses human readable feature tests to drive assertions.
+
+When the Cucumber options is selected, the [Chai](http://chaijs.com/) library loaded for assertions in your end-to-end tests.
 
 ## Optimization process
 
