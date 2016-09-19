@@ -1,7 +1,7 @@
 {
   "name": "<%- appName %>",
   "version": false,
-  "ambientDependencies": {
+  "globalDependencies": {
 <% if (angularModulesObject.animate) { -%>
     "angular-animate": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular-animate.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
 <% } if (angularModulesObject.cookies) { -%>
@@ -27,7 +27,7 @@
 <% } if(props.ui.key === 'angular-material') { -%>
     "angular-material": "github:DefinitelyTyped/DefinitelyTyped/angular-material/angular-material.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
 <% } if(props.bootstrapComponents.key === 'ui-bootstrap') { -%>
-    "ui-bootstrap": "github:DefinitelyTyped/DefinitelyTyped/angular-bootstrap/angular-bootstrap.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
+    "angular-ui-bootstrap": "registry:dt/angular-ui-bootstrap#0.13.3+20160919090501",
 <% } -%>
     "angular-mocks": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular-mocks.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
     "angular": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular.d.ts#bb051830df88f5a55dcf06b7fe85bf6b62cc97f2",
