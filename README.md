@@ -1,12 +1,7 @@
-## Launching [Fountain](http://fountainjs.io/) generators beta
-
-The team is proud to present the next evolution of the Yeoman gulp-angular as a new project called [FountainJS](http://fountainjs.io/).
-
-It covers Angular 1 like today but go way farther with support for Angular 2, React, SystemJS and Webpack!
-
-Check it out right now at [http://fountainjs.io/](http://fountainjs.io/).
-
 # generator-gulp-angular ![Logo](generators/app/templates/src/assets/images/generator-gulp-angular-logo.png)
+
+[![Unmaintained](https://img.shields.io/badge/generator-unmaintained-red.svg?style=flat-square)](https://github.com/Swiip/generator-gulp-angular/pull/1155)
+[![Outdated](https://img.shields.io/badge/generator-outdated-red.svg?style=flat-square)](https://github.com/Swiip/generator-gulp-angular/pull/1155)
 
 [![Build Status](https://img.shields.io/travis/Swiip/generator-gulp-angular/master.svg?style=flat-square)](http://travis-ci.org/Swiip/generator-gulp-angular)
 [![Coverage Status](https://img.shields.io/codecov/c/github/Swiip/generator-gulp-angular.svg?style=flat-square)](http://codecov.io/github/Swiip/generator-gulp-angular?branch=master)
@@ -23,6 +18,18 @@ Check it out right now at [http://fountainjs.io/](http://fountainjs.io/).
 
 > Gulp provide fast workspace with quick feedback.
 
+# **Unmaintained**, **Outdated** ? :pensive:
+Yup, this generator works but is unmaintained and outdated [for various reasons](https://github.com/Swiip/generator-gulp-angular/pull/1155).
+
+But don't panic **the most important features and more are present** in our next iteration called [FountainJS](http://fountainjs.io/).
+
+<p align="center">
+  <a href="http://fountainjs.io/">
+    <img alt="FountainJS" src="http://fountainjs.io/assets/imgs/fountain.png" width="200">
+  </a>
+</p>
+
+A tutorial is present in the [Yeoman codelab](http://yeoman.io/codelab/). :kissing_heart:
 
 ## Usage
 
