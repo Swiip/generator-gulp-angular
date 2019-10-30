@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "bluebird": "~2.10.2",
-    "bower": "~1.5.3",
+    "bower": "~1.8.8",
     "chai": "~3.3.0",
     "chai-as-promised": "~5.1.0",
     "commander": "~2.8.1",
