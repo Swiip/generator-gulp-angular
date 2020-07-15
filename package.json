@@ -25,7 +25,7 @@
   "dependencies": {
     "chalk": "~1.1.1",
     "insight": "~0.7.0",
-    "lodash": "~3.10.1",
+    "lodash": "~4.17.19",
     "slash": "~1.0.0",
     "underscore.string": "~3.2.2",
     "yeoman-generator": "~0.20.3",
