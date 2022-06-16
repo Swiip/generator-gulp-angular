@@ -13,7 +13,7 @@
 
 > Lets you quickly set up a project with:
 > * your favorite technologies
-> * web best pratices.
+> * web best practices.
 > * guidelines powered by Google.
 
 > Gulp provide fast workspace with quick feedback.
@@ -33,7 +33,7 @@ A tutorial is present in the [Yeoman codelab](http://yeoman.io/codelab/). :kissi
 
 ## Usage
 
-More informations, options, parameters in the [usage documentation page](docs/usage.md)
+More information, options, parameters in the [usage documentation page](docs/usage.md)
 
 ### Install
 
@@ -63,7 +63,7 @@ yo gulp-angular
 ## Documentation
 
 * [docs/README](docs/README.md)
-* More informations about how to use your new project is available in the [docs/user-guide](docs/user-guide.md)
+* More information about how to use your new project is available in the [docs/user-guide](docs/user-guide.md)
 * If you want to know: [docs/how-it-works](docs/how-it-works.md).
 
 
@@ -114,3 +114,4 @@ yo gulp-angular
 ## License
 
 MIT
+
